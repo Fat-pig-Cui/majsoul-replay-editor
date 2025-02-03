@@ -8572,6 +8572,10 @@ function randompaishan(paishanhead = "", paishanback = "", reddora) {
         cnt[35] = cnt[36] = cnt[37] = 0;
     }
 
+    // 万象修罗
+    if (is_wanxiangxiuluo())
+        cnt[0] = 4;
+
     for (let j = 0; j < all_tiles.length; j++) {
         for (let i = 0; i < all_tiles[j].length; i++)
             if (all_tiles[j][i].length > 2 && all_tiles[j][i][2] === tile_suf && !is_tianming())

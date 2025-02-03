@@ -40,12 +40,11 @@ for (let cnt = 0; cnt < 69; cnt++) {
         for (let i = seat; i < seat + playercnt; i++) {
             let tmp_seat = i % playercnt;
             let tmp_tingpais = calctingpai(tmp_seat);
-            for (let j = 0; j < tmp_tingpais.length; j++) {
-                if (tile === tmp_tingpais[j].tile){
+            for (let j = 0; j < tmp_tingpais.length; j++)
+                if (equaltile(tile, tmp_tingpais[j].tile)) {
                     is_fangchong = true;
                     break;
                 }
-            }
             if (is_fangchong)
                 break;
         }
