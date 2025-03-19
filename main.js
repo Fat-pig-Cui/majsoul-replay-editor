@@ -2397,186 +2397,213 @@ function edit(x) {
     }
 
     // code.js 文件 263712 行 : GameMgr.Inst.checkPaiPu
-    GameMgr.Inst.checkPaiPu = function (game_uuid, account_id, paipu_config) {
-        // 添加下面6行
-        if (cfg.item_definition.view.get(get_mjp_id()) !== undefined)
-            uiscript.UI_Sushe.now_mjp_id = get_mjp_id();
-        if (cfg.item_definition.view.get(get_mjpsurface_id()) !== undefined)
-            uiscript.UI_Sushe.now_mjp_surface_id = get_mjpsurface_id();
+    GameMgr.Inst.checkPaiPu = function (game_uuid, account_id, paipu_config, is_maka) {
+        try {
+            // 添加下面6行
+            if (cfg.item_definition.view.get(get_mjp_id()) !== undefined)
+                uiscript.UI_Sushe.now_mjp_id = get_mjp_id();
+            if (cfg.item_definition.view.get(get_mjpsurface_id()) !== undefined)
+                uiscript.UI_Sushe.now_mjp_surface_id = get_mjpsurface_id();
 
-        var O = GameMgr;
-        var N = this;
-        return game_uuid = game_uuid.trim(),
-            app.Log.log('checkPaiPu game_uuid:' + game_uuid + ' account_id:' + account_id['toString']() + ' paipu_config:' + paipu_config),
-            this['duringPaipu'] ? (app.Log['Error']('已经在看牌谱了'),
-                void 0) : (this['duringPaipu'] = !0,
-                uiscript['UI_Loading'].Inst.show(uiscript['ELoadingType']['EEnterMJ']),
-                O.Inst['onLoadStart']('paipu'),
-            2 & paipu_config && (game_uuid = game['Tools']['DecodePaipuUUID'](game_uuid)),
-                this['record_uuid'] = game_uuid,
-                app['NetAgent']['sendReq2Lobby']('Lobby', 'fetchGameRecord', {
-                    game_uuid: game_uuid,
-                    client_version_string: this['getClientVersion']()
-                }, function (q, _) {
-                    if (q || _['error']) {
-                        uiscript['UIMgr'].Inst['showNetReqError']('fetchGameRecord', q, _);
-                        var h = 0.12;
-                        uiscript['UI_Loading'].Inst['setProgressVal'](h);
-                        var t = function () {
-                            return h += 0.06,
-                                uiscript['UI_Loading'].Inst['setProgressVal'](Math.min(1, h)),
-                                h >= 1.1 ? (uiscript['UI_Loading'].Inst['close'](null),
-                                    uiscript['UIMgr'].Inst['showLobby'](),
-                                    Laya['timer']['clear'](this, t),
-                                    void 0) : void 0;
-                        };
-                        Laya['timer'].loop(50, N, t),
-                            N['duringPaipu'] = !1;
-                    } else {
-                        uiscript['UI_Activity_SevenDays']['task_done'](3),
-                            uiscript['UI_Loading'].Inst['setProgressVal'](0.1);
-                        var X = _.head
-                            , m = [null, null, null, null]
-                            , y = game['Tools']['strOfLocalization'](2003)
-                            , w = X['config'].mode;
-                        app['NetAgent']['sendReq2Lobby']('Lobby', 'readGameRecord', {
-                            game_uuid: game_uuid,
-                            client_version_string: N['getClientVersion']()
-                        }, function () {
-                        }),
-                        w['extendinfo'] && (y = game['Tools']['strOfLocalization'](2004)),
-                        w['detail_rule'] && w['detail_rule']['ai_level'] && (1 === w['detail_rule']['ai_level'] && (y = game['Tools']['strOfLocalization'](2003)),
-                        2 === w['detail_rule']['ai_level'] && (y = game['Tools']['strOfLocalization'](2004)));
-                        var A = !1;
-                        X['end_time'] ? (N['record_end_time'] = X['end_time'],
-                        X['end_time'] > 1576112400 && (A = !0)) : N['record_end_time'] = -1,
-                            N['record_start_time'] = X['start_time'] ? X['start_time'] : -1;
-                        for (var l = 0; l < X['accounts']['length']; l++) {
-                            var r = X['accounts'][l];
-                            if (r['character']) {
-                                var i = r['character']
-                                    , Q = {};
-                                if (A) {
-                                    var u = r['views'];
-                                    if (u)
-                                        for (var j = 0; j < u['length']; j++)
-                                            Q[u[j].slot] = u[j]['item_id'];
-                                } else {
-                                    var a = i['views'];
-                                    if (a)
-                                        for (var j = 0; j < a['length']; j++) {
-                                            var I = a[j].slot
-                                                , E = a[j]['item_id']
-                                                , R = I - 1;
-                                            Q[R] = E;
-                                        }
-                                }
-                                var H = [];
-                                for (var Z in Q)
-                                    H.push({
-                                        slot: parseInt(Z),
-                                        item_id: Q[Z],
-                                        type: 0,
-                                        item_id_list: []
-                                    });
-                                r['views'] = H,
-                                    m[r.seat] = r;
-                            } else
-                                r['character'] = {
-                                    charid: r['avatar_id'],
-                                    level: 0,
-                                    exp: 0,
-                                    views: [],
-                                    skin: cfg['item_definition']['character'].get(r['avatar_id'])['init_skin'],
-                                    is_upgraded: !1,
-                                    rewarded_level: [],
-                                    extra_emoji: null
-                                },
-                                    r['avatar_id'] = r['character'].skin,
-                                    r['views'] = [],
-                                    m[r.seat] = r;
-                        }
-                        for (var B = game['GameUtility']['get_default_ai_skin'](), e = game['GameUtility']['get_default_ai_character'](), l = 0; l < m['length']; l++)
-                            null == m[l] && (m[l] = {
-                                nickname: y,
-                                avatar_id: B,
-                                level: {
-                                    id: 10101
-                                },
-                                level3: {
-                                    id: 20101
-                                },
-                                character: {
-                                    charid: e,
-                                    level: 0,
-                                    exp: 0,
-                                    views: [],
-                                    skin: B,
-                                    is_upgraded: !1
-                                }
-                            });
-                        // 修改的地方: 本来是 m, 现在套上了 player_datas 函数
-                        // 本来是X['config'], 现在是 x.config
-                        // 修改 account_id 主要是为了强制修改一开始的主视角为东起, 防止一些bug
-                        let new_player_datas = player_datas(m);
-                        account_id = new_player_datas[0].account_id;
+            is_maka = false;
 
-                        var P = Laya['Handler']['create'](N, function (O) {
-                            game['Scene_Lobby'].Inst['active'] && (game['Scene_Lobby'].Inst['active'] = !1),
-                                game['Scene_MJ'].Inst['openMJRoom'](x.config, new_player_datas, Laya['Handler']['create'](N, function () {
-                                    N['duringPaipu'] = !1,
-                                        view['DesktopMgr'].Inst['paipu_config'] = paipu_config,
-                                        view['DesktopMgr'].Inst['initRoom'](JSON['parse'](JSON['stringify'](x.config)), new_player_datas, account_id, view['EMJMode']['paipu'], Laya['Handler']['create'](N, function () {
-                                            // 添加下面2行
-                                            if (typeof (editfunction2) !== "undefined")
-                                                editfunction2();
-                                            if (x.config.mode.mode > 20)
-                                                view.DesktopMgr.Inst.rule_mode = view.ERuleMode.Liqi2;
-                                            uiscript['UI_Replay'].Inst['initData'](O),
-                                                // 添加下面1行
-                                                // editgame(x),
-                                                uiscript['UI_Replay'].Inst['enable'] = !0,
-                                                Laya['timer'].once(1000, N, function () {
-                                                    N['EnterMJ']();
-                                                }),
-                                                Laya['timer'].once(1500, N, function () {
-                                                    view['DesktopMgr']['player_link_state'] = [view['ELink_State']['READY'], view['ELink_State']['READY'], view['ELink_State']['READY'], view['ELink_State']['READY']],
-                                                        uiscript['UI_DesktopInfo'].Inst['refreshLinks'](),
-                                                        uiscript['UI_Loading'].Inst['close']();
-                                                }),
-                                                Laya['timer'].once(1000, N, function () {
-                                                    uiscript['UI_Replay'].Inst['nextStep'](!0);
-                                                });
-                                        }));
-                                }), Laya['Handler']['create'](N, function (O) {
-                                    return uiscript['UI_Loading'].Inst['setProgressVal'](0.1 + 0.9 * O);
-                                }, null, !1));
-                        })
-                            , z = {};
-                        if (z['record'] = X,
-                        _.data && _.data['length'])
-                            z.game = net['MessageWrapper']['decodeMessage'](_.data),
-                                P['runWith'](z);
-                        else {
-                            var b = _['data_url'];
-                            b['startsWith']('http') || (b = O['prefix_url'] + b),
-                                game['LoadMgr']['httpload'](b, 'arraybuffer', !1, Laya['Handler']['create'](N, function (O) {
-                                    if (O['success']) {
-                                        var K = new Laya.Byte();
-                                        K['writeArrayBuffer'](O.data);
-                                        var U = net['MessageWrapper']['decodeMessage'](K['getUint8Array'](0, K['length']));
-                                        z.game = U,
-                                            P['runWith'](z);
-                                    } else
-                                        uiscript['UIMgr'].Inst['ShowErrorInfo'](game['Tools']['strOfLocalization'](2005) + _['data_url']),
-                                            uiscript['UI_Loading'].Inst['close'](null),
-                                            uiscript['UIMgr'].Inst['showLobby'](),
-                                            N['duringPaipu'] = !1;
-                                }));
+            var H = GameMgr;
+
+            var W = this;
+            return void 0 === is_maka && (is_maka = !1),
+                game_uuid = game_uuid.trim(),
+                app.Log.log('checkPaiPu game_uuid:' + game_uuid + ' account_id:' + account_id['toString']() + ' paipu_config:' + paipu_config),
+                this['duringPaipu'] ? (app.Log['Error']('已经在看牌谱了'),
+                    void 0) : (this['duringPaipu'] = !0,
+                    uiscript['UI_Loading'].Inst.show(uiscript['ELoadingType']['EEnterMJ']),
+                    H.Inst['onLoadStart']('paipu'),
+                2 & paipu_config && (game_uuid = game['Tools']['DecodePaipuUUID'](game_uuid)),
+                    this['record_uuid'] = game_uuid,
+                    app['NetAgent']['sendReq2Lobby']('Lobby', 'fetchGameRecord', {
+                        game_uuid: game_uuid,
+                        client_version_string: this['getClientVersion']()
+                    }, function (l, n) {
+                        if (l || n['error']) {
+                            uiscript['UIMgr'].Inst['showNetReqError']('fetchGameRecord', l, n);
+                            var y = 0.12;
+                            uiscript['UI_Loading'].Inst['setProgressVal'](y);
+                            var f = function () {
+                                return y += 0.06,
+                                    uiscript['UI_Loading'].Inst['setProgressVal'](Math.min(1, y)),
+                                    y >= 1.1 ? (uiscript['UI_Loading'].Inst['close'](null),
+                                        uiscript['UIMgr'].Inst['showLobby'](),
+                                        Laya['timer']['clear'](this, f),
+                                        void 0) : void 0;
+                            };
+                            Laya['timer'].loop(50, W, f),
+                                W['duringPaipu'] = !1;
+                        } else {
+                            uiscript['UI_Activity_SevenDays']['task_done'](3),
+                                uiscript['UI_Loading'].Inst['setProgressVal'](0.1);
+                            var I = n.head
+                                , z = [null, null, null, null]
+                                , r = game['Tools']['strOfLocalization'](2003)
+                                , w = I['config'].mode;
+                            app['NetAgent']['sendReq2Lobby']('Lobby', 'readGameRecord', {
+                                game_uuid: game_uuid,
+                                client_version_string: W['getClientVersion']()
+                            }, function () {
+                            }),
+                            w['extendinfo'] && (r = game['Tools']['strOfLocalization'](2004)),
+                            w['detail_rule'] && w['detail_rule']['ai_level'] && (1 === w['detail_rule']['ai_level'] && (r = game['Tools']['strOfLocalization'](2003)),
+                            2 === w['detail_rule']['ai_level'] && (r = game['Tools']['strOfLocalization'](2004)));
+                            var YY = !1;
+                            I['end_time'] ? (W['record_end_time'] = I['end_time'],
+                            I['end_time'] > 1576112400 && (YY = !0)) : W['record_end_time'] = -1,
+                                W['record_start_time'] = I['start_time'] ? I['start_time'] : -1;
+                            for (var a = __spreadArray(__spreadArray([], I['accounts'], !0), I['robots'] || [], !0), q = 0; q < a['length']; q++) {
+                                var c = a[q];
+                                if (c['character']) {
+                                    var K = c['character']
+                                        , G = {};
+                                    if (YY) {
+                                        var M = c['views'];
+                                        if (M)
+                                            for (var Y = 0; Y < M['length']; Y++)
+                                                G[M[Y].slot] = M[Y]['item_id'];
+                                    } else {
+                                        var s = K['views'];
+                                        if (s)
+                                            for (var Y = 0; Y < s['length']; Y++) {
+                                                var E = s[Y].slot
+                                                    , Z = s[Y]['item_id']
+                                                    , m = E - 1;
+                                                G[m] = Z;
+                                            }
+                                    }
+                                    var R = [];
+                                    for (var _ in G)
+                                        R.push({
+                                            slot: parseInt(_),
+                                            item_id: G[_],
+                                            type: 0,
+                                            item_id_list: []
+                                        });
+                                    c['views'] = R,
+                                    game['Tools'].isAI(c['account_id']) && (c['avatar_id'] = c['character'].skin,
+                                        c['level'] = c['level'] || {
+                                            id: 10101,
+                                            score: 0
+                                        },
+                                        c['level3'] = c['level'] || {
+                                            id: 20101,
+                                            score: 0
+                                        },
+                                        c['nickname'] = c['nickname'] || r),
+                                        z[c.seat] = c;
+                                } else
+                                    c['character'] = {
+                                        charid: c['avatar_id'],
+                                        level: 0,
+                                        exp: 0,
+                                        views: [],
+                                        skin: cfg['item_definition']['character'].get(c['avatar_id'])['init_skin'],
+                                        is_upgraded: !1,
+                                        rewarded_level: [],
+                                        extra_emoji: null
+                                    },
+                                        c['avatar_id'] = c['character'].skin,
+                                        c['views'] = [],
+                                        z[c.seat] = c;
+                            }
+                            for (var Q = game['GameUtility']['get_default_ai_skin'](), U = game['GameUtility']['get_default_ai_character'](), q = 0; q < z['length']; q++)
+                                null == z[q] && (z[q] = {
+                                    nickname: r,
+                                    avatar_id: Q,
+                                    level: {
+                                        id: 10101
+                                    },
+                                    level3: {
+                                        id: 20101
+                                    },
+                                    character: {
+                                        charid: U,
+                                        level: 0,
+                                        exp: 0,
+                                        views: [],
+                                        skin: Q,
+                                        is_upgraded: !1
+                                    }
+                                });
+                            var X = [];
+                            X = X['concat'](n.head['accounts']);
+
+                            // 修改的地方: 本来是 openMJRoom 的第二个参数(单个字母), 现在套上了 player_datas 函数
+                            // 本来是 openMJRoom 的第一个参数(如 X['config']), 现在是 x.config
+                            // 修改 account_id 主要是为了强制修改一开始的主视角为东起, 防止一些bug
+                            let new_player_datas = player_datas(z);
+                            X = new_player_datas;
+                            account_id = new_player_datas[0].account_id;
+
+                            var C = Laya['Handler']['create'](W, function (H) {
+                                var XX = function () {
+                                    game['Scene_Lobby'].Inst['active'] && (game['Scene_Lobby'].Inst['active'] = !1),
+                                        game['Scene_MJ'].Inst['openMJRoom'](x.config, new_player_datas, Laya['Handler']['create'](W, function () {
+                                            W['duringPaipu'] = !1,
+                                                view['DesktopMgr'].Inst['paipu_config'] = paipu_config,
+                                                view['DesktopMgr'].Inst['initRoom'](JSON['parse'](JSON['stringify'](x.config)), new_player_datas, account_id, view['EMJMode']['paipu'], Laya['Handler']['create'](W, function () {
+                                                    // 添加下面4行
+                                                    if (typeof (editfunction2) !== "undefined")
+                                                        editfunction2();
+                                                    if (x.config.mode.mode > 20)
+                                                        view.DesktopMgr.Inst.rule_mode = view.ERuleMode.Liqi2;
+                                                    uiscript['UI_Replay'].Inst['initMaka'](false, false),
+                                                    uiscript['UI_Replay'].Inst['initData'](H),
+                                                        // 添加下面1行
+                                                        // editgame(x),
+                                                        uiscript['UI_Replay'].Inst['enable'] = !0,
+                                                        Laya['timer'].once(1000, W, function () {
+                                                            W['EnterMJ']();
+                                                        }),
+                                                        Laya['timer'].once(1500, W, function () {
+                                                            view['DesktopMgr']['player_link_state'] = [view['ELink_State']['READY'], view['ELink_State']['READY'], view['ELink_State']['READY'], view['ELink_State']['READY']],
+                                                                uiscript['UI_DesktopInfo'].Inst['refreshLinks'](),
+                                                                uiscript['UI_Loading'].Inst['close']();
+                                                        }),
+                                                        Laya['timer'].once(1000, W, function () {
+                                                            uiscript['UI_Replay'].Inst['nextStep'](!0);
+                                                        });
+                                                }));
+                                        }), Laya['Handler']['create'](W, function (H) {
+                                            return uiscript['UI_Loading'].Inst['setProgressVal'](0.1 + 0.9 * H);
+                                        }, null, !1));
+                                };
+                                XX();
+                            })
+                                , B = {};
+                            if (B['record'] = I,
+                            n.data && n.data['length'])
+                                B.game = net['MessageWrapper']['decodeMessage'](n.data),
+                                    C['runWith'](B);
+                            else {
+                                var O = n['data_url'];
+                                O['startsWith']('http') || (O = H['prefix_url'] + O),
+                                    game['LoadMgr']['httpload'](O, 'arraybuffer', !1, Laya['Handler']['create'](W, function (H) {
+                                        if (H['success']) {
+                                            var N = new Laya.Byte();
+                                            N['writeArrayBuffer'](H.data);
+                                            var e = net['MessageWrapper']['decodeMessage'](N['getUint8Array'](0, N['length']));
+                                            B.game = e,
+                                                C['runWith'](B);
+                                        } else
+                                            uiscript['UIMgr'].Inst['ShowErrorInfo'](game['Tools']['strOfLocalization'](2005) + n['data_url']),
+                                                uiscript['UI_Loading'].Inst['close'](null),
+                                                uiscript['UIMgr'].Inst['showLobby'](),
+                                                W['duringPaipu'] = !1;
+                                    }));
+                            }
                         }
-                    }
-                }),
-                void 0)
+                    }),
+                    void 0);
+        } catch (e) {
+            console.error(e);
+            checkPaiPu.call(this, game_uuid, account_id, paipu_config, is_maka);
+        }
     }
 }
 
@@ -2587,8 +2614,8 @@ function canceledit() {
             return initData.call(this, data);
         }
     if (checkPaiPu !== undefined)
-        GameMgr.Inst.checkPaiPu = function (game_uuid, account_id, paipu_config) {
-            return checkPaiPu.call(this, game_uuid, account_id, paipu_config);
+        GameMgr.Inst.checkPaiPu = function (game_uuid, account_id, paipu_config, is_maka) {
+            return checkPaiPu.call(this, game_uuid, account_id, paipu_config, is_maka);
         }
     if (load_my_desktop_view !== undefined)
         game.Scene_MJ.prototype._load_my_desktop_view = function (K, U) {
