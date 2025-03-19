@@ -79,6 +79,8 @@ paishan = randompaishan("", "7z....");
 roundbegin();
 hupai();
 
+gotoju(0, 0, 0);
+
 // 第2局
 hupaioneplayer = function (seat) {
     let fans = [
@@ -128,6 +130,8 @@ tiles3 = "1112340678999s";
 paishan = randompaishan("", "7z....");
 roundbegin();
 hupai();
+
+gotoju(0, 0, 0);
 
 // 第3局
 hupaioneplayer = function (seat) {
@@ -179,6 +183,8 @@ paishan = randompaishan("", "7z....");
 roundbegin();
 hupai();
 
+gotoju(0, 0, 0);
+
 // 第4局
 hupaioneplayer = function (seat) {
     let fans = [
@@ -222,6 +228,8 @@ paishan = randompaishan("", "7z....");
 roundbegin();
 hupai();
 
+gotoju(0, 0, 0);
+
 // 第5局
 hupaioneplayer = function (seat) {
     let fans = [
@@ -264,6 +272,8 @@ tiles3 = "1112340678999s";
 paishan = randompaishan("", "7z....");
 roundbegin();
 hupai();
+
+gotoju(0, 0, 0);
 
 // 第6局
 hupaioneplayer = function (seat) {
@@ -310,6 +320,8 @@ tiles3 = "1112340678999s";
 paishan = randompaishan("", "7z....");
 roundbegin();
 hupai();
+
+gotoju(0, 0, 0);
 
 // 第7局
 hupaioneplayer = function (seat) {

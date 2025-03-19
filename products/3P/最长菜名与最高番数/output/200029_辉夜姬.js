@@ -4,11 +4,11 @@ loadproject();
 // 最后一局子家的最长菜名(15条55番)
 
 editdata.player_datas[0].nickname = "辉夜姬-契约";
-editdata.player_datas[1].nickname = "择芳意";
-editdata.player_datas[2].nickname = "氤氲浮光";
+editdata.player_datas[1].nickname = "氤氲浮光";
+editdata.player_datas[2].nickname = "罗裳曼影";
 editdata.player_datas[0].avatar_id = 402902;
-editdata.player_datas[1].avatar_id = 402904;
-editdata.player_datas[2].avatar_id = 402905;
+editdata.player_datas[1].avatar_id = 402905;
+editdata.player_datas[2].avatar_id = 402906;
 
 // 称号-神社贵宾
 editdata.player_datas[0].title = editdata.player_datas[1].title = editdata.player_datas[2].title = 600038;

@@ -5008,7 +5008,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "400001": {
         "id": 400001,
@@ -5066,7 +5067,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "400101": {
         "id": 400101,
@@ -5124,7 +5126,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "400102": {
         "id": 400102,
@@ -5182,7 +5185,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "400103": {
         "id": 400103,
@@ -5240,7 +5244,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "400104": {
         "id": 400104,
@@ -5298,7 +5303,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "400105": {
         "id": 400105,
@@ -5356,7 +5362,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "400106": {
         "id": 400106,
@@ -5414,7 +5421,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "400201": {
         "id": 400201,
@@ -5472,7 +5480,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "400202": {
         "id": 400202,
@@ -5530,7 +5539,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "400203": {
         "id": 400203,
@@ -5588,7 +5598,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "400206": {
         "id": 400206,
@@ -5646,7 +5657,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "400207": {
         "id": 400207,
@@ -5704,7 +5716,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "400208": {
         "id": 400208,
@@ -5762,7 +5775,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "400301": {
         "id": 400301,
@@ -5820,7 +5834,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "400302": {
         "id": 400302,
@@ -5878,7 +5893,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "400303": {
         "id": 400303,
@@ -5936,7 +5952,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "400304": {
         "id": 400304,
@@ -5994,7 +6011,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "400305": {
         "id": 400305,
@@ -6052,7 +6070,8 @@ SKIN = {
         "click": 8000,
         "greeting_init": 11000,
         "click2": 8000,
-        "celebrate_idle": 8000
+        "celebrate_idle": 8000,
+        "illust_data": ""
     },
     "400306": {
         "id": 400306,
@@ -6110,7 +6129,8 @@ SKIN = {
         "click": 11033,
         "greeting_init": 16000,
         "click2": 8000,
-        "celebrate_idle": 5333
+        "celebrate_idle": 5333,
+        "illust_data": ""
     },
     "400401": {
         "id": 400401,
@@ -6168,7 +6188,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "400402": {
         "id": 400402,
@@ -6226,7 +6247,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "400403": {
         "id": 400403,
@@ -6284,7 +6306,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "400404": {
         "id": 400404,
@@ -6342,7 +6365,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "400405": {
         "id": 400405,
@@ -6400,7 +6424,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "400406": {
         "id": 400406,
@@ -6458,7 +6483,8 @@ SKIN = {
         "click": 8000,
         "greeting_init": 12000,
         "click2": 0,
-        "celebrate_idle": 8000
+        "celebrate_idle": 8000,
+        "illust_data": ""
     },
     "400407": {
         "id": 400407,
@@ -6516,7 +6542,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "400501": {
         "id": 400501,
@@ -6574,7 +6601,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "400502": {
         "id": 400502,
@@ -6632,7 +6660,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "400503": {
         "id": 400503,
@@ -6690,7 +6719,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "400504": {
         "id": 400504,
@@ -6748,7 +6778,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "400505": {
         "id": 400505,
@@ -6806,7 +6837,8 @@ SKIN = {
         "click": 6666,
         "greeting_init": 10000,
         "click2": 8000,
-        "celebrate_idle": 6666
+        "celebrate_idle": 6666,
+        "illust_data": ""
     },
     "400506": {
         "id": 400506,
@@ -6864,7 +6896,8 @@ SKIN = {
         "click": 10666,
         "greeting_init": 15000,
         "click2": 8000,
-        "celebrate_idle": 8000
+        "celebrate_idle": 8000,
+        "illust_data": ""
     },
     "400507": {
         "id": 400507,
@@ -6922,7 +6955,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "400601": {
         "id": 400601,
@@ -6980,7 +7014,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "400602": {
         "id": 400602,
@@ -7038,7 +7073,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "400603": {
         "id": 400603,
@@ -7096,7 +7132,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "400604": {
         "id": 400604,
@@ -7154,7 +7191,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "400605": {
         "id": 400605,
@@ -7212,7 +7250,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "400606": {
         "id": 400606,
@@ -7270,7 +7309,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "400701": {
         "id": 400701,
@@ -7328,7 +7368,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "400702": {
         "id": 400702,
@@ -7386,7 +7427,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "400703": {
         "id": 400703,
@@ -7444,7 +7486,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "400704": {
         "id": 400704,
@@ -7502,7 +7545,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "400705": {
         "id": 400705,
@@ -7560,7 +7604,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "400706": {
         "id": 400706,
@@ -7618,7 +7663,8 @@ SKIN = {
         "click": 11333,
         "greeting_init": 9000,
         "click2": 0,
-        "celebrate_idle": 8000
+        "celebrate_idle": 8000,
+        "illust_data": ""
     },
     "400707": {
         "id": 400707,
@@ -7676,7 +7722,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "400708": {
         "id": 400708,
@@ -7734,7 +7781,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "400801": {
         "id": 400801,
@@ -7792,7 +7840,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "400802": {
         "id": 400802,
@@ -7850,7 +7899,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "400803": {
         "id": 400803,
@@ -7908,7 +7958,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "400804": {
         "id": 400804,
@@ -7966,7 +8017,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "400805": {
         "id": 400805,
@@ -8024,7 +8076,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "400806": {
         "id": 400806,
@@ -8082,7 +8135,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "400901": {
         "id": 400901,
@@ -8140,7 +8194,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "400902": {
         "id": 400902,
@@ -8198,7 +8253,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "400903": {
         "id": 400903,
@@ -8256,7 +8312,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "400904": {
         "id": 400904,
@@ -8314,7 +8371,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "400905": {
         "id": 400905,
@@ -8372,7 +8430,8 @@ SKIN = {
         "click": 8000,
         "greeting_init": 12040,
         "click2": 0,
-        "celebrate_idle": 8000
+        "celebrate_idle": 8000,
+        "illust_data": ""
     },
     "400906": {
         "id": 400906,
@@ -8430,7 +8489,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "401001": {
         "id": 401001,
@@ -8488,7 +8548,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "401002": {
         "id": 401002,
@@ -8546,7 +8607,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "401003": {
         "id": 401003,
@@ -8604,7 +8666,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "401004": {
         "id": 401004,
@@ -8662,7 +8725,8 @@ SKIN = {
         "click": 10666,
         "greeting_init": 7000,
         "click2": 0,
-        "celebrate_idle": 5333
+        "celebrate_idle": 5333,
+        "illust_data": ""
     },
     "401101": {
         "id": 401101,
@@ -8720,7 +8784,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "401102": {
         "id": 401102,
@@ -8778,7 +8843,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "401103": {
         "id": 401103,
@@ -8836,7 +8902,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "401104": {
         "id": 401104,
@@ -8894,7 +8961,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "401105": {
         "id": 401105,
@@ -8952,7 +9020,8 @@ SKIN = {
         "click": 4000,
         "greeting_init": 11000,
         "click2": 0,
-        "celebrate_idle": 8000
+        "celebrate_idle": 8000,
+        "illust_data": ""
     },
     "401201": {
         "id": 401201,
@@ -9010,7 +9079,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "401202": {
         "id": 401202,
@@ -9068,7 +9138,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "401203": {
         "id": 401203,
@@ -9126,7 +9197,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "401204": {
         "id": 401204,
@@ -9184,7 +9256,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "401205": {
         "id": 401205,
@@ -9242,7 +9315,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "401301": {
         "id": 401301,
@@ -9300,7 +9374,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "401302": {
         "id": 401302,
@@ -9358,7 +9433,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "401303": {
         "id": 401303,
@@ -9416,7 +9492,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "401304": {
         "id": 401304,
@@ -9474,7 +9551,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "401305": {
         "id": 401305,
@@ -9532,7 +9610,8 @@ SKIN = {
         "click": 4666,
         "greeting_init": 12960,
         "click2": 0,
-        "celebrate_idle": 10666
+        "celebrate_idle": 10666,
+        "illust_data": ""
     },
     "401306": {
         "id": 401306,
@@ -9590,7 +9669,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "401401": {
         "id": 401401,
@@ -9648,7 +9728,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "401402": {
         "id": 401402,
@@ -9706,7 +9787,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "401403": {
         "id": 401403,
@@ -9764,7 +9846,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "401404": {
         "id": 401404,
@@ -9822,7 +9905,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "401405": {
         "id": 401405,
@@ -9880,7 +9964,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "401501": {
         "id": 401501,
@@ -9938,7 +10023,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "401502": {
         "id": 401502,
@@ -9996,7 +10082,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "401503": {
         "id": 401503,
@@ -10054,7 +10141,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "401601": {
         "id": 401601,
@@ -10112,7 +10200,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "401602": {
         "id": 401602,
@@ -10170,7 +10259,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "401603": {
         "id": 401603,
@@ -10228,7 +10318,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "401604": {
         "id": 401604,
@@ -10286,7 +10377,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "401605": {
         "id": 401605,
@@ -10344,7 +10436,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "401606": {
         "id": 401606,
@@ -10402,7 +10495,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "401607": {
         "id": 401607,
@@ -10460,7 +10554,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "401701": {
         "id": 401701,
@@ -10518,7 +10613,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "401702": {
         "id": 401702,
@@ -10576,7 +10672,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "401706": {
         "id": 401706,
@@ -10634,7 +10731,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "401707": {
         "id": 401707,
@@ -10692,7 +10790,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "401708": {
         "id": 401708,
@@ -10750,7 +10849,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "401709": {
         "id": 401709,
@@ -10808,7 +10908,8 @@ SKIN = {
         "click": 7500,
         "greeting_init": 14000,
         "click2": 8000,
-        "celebrate_idle": 3333
+        "celebrate_idle": 3333,
+        "illust_data": ""
     },
     "401801": {
         "id": 401801,
@@ -10866,7 +10967,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "401802": {
         "id": 401802,
@@ -10924,7 +11026,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "401803": {
         "id": 401803,
@@ -10982,7 +11085,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "401804": {
         "id": 401804,
@@ -11040,7 +11144,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "401805": {
         "id": 401805,
@@ -11098,7 +11203,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "401901": {
         "id": 401901,
@@ -11156,7 +11262,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "401902": {
         "id": 401902,
@@ -11214,7 +11321,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "401903": {
         "id": 401903,
@@ -11272,7 +11380,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "401904": {
         "id": 401904,
@@ -11330,7 +11439,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "401905": {
         "id": 401905,
@@ -11388,7 +11498,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "401906": {
         "id": 401906,
@@ -11446,7 +11557,8 @@ SKIN = {
         "click": 5333,
         "greeting_init": 12000,
         "click2": 8000,
-        "celebrate_idle": 5333
+        "celebrate_idle": 5333,
+        "illust_data": ""
     },
     "402001": {
         "id": 402001,
@@ -11504,7 +11616,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "402002": {
         "id": 402002,
@@ -11562,7 +11675,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "402003": {
         "id": 402003,
@@ -11620,7 +11734,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "402004": {
         "id": 402004,
@@ -11678,7 +11793,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "402005": {
         "id": 402005,
@@ -11736,7 +11852,8 @@ SKIN = {
         "click": 6000,
         "greeting_init": 9000,
         "click2": 0,
-        "celebrate_idle": 6000
+        "celebrate_idle": 6000,
+        "illust_data": ""
     },
     "402006": {
         "id": 402006,
@@ -11794,7 +11911,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "402101": {
         "id": 402101,
@@ -11852,7 +11970,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "402102": {
         "id": 402102,
@@ -11910,7 +12029,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "402103": {
         "id": 402103,
@@ -11968,7 +12088,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "402104": {
         "id": 402104,
@@ -12026,7 +12147,8 @@ SKIN = {
         "click": 8000,
         "greeting_init": 8000,
         "click2": 0,
-        "celebrate_idle": 8000
+        "celebrate_idle": 8000,
+        "illust_data": ""
     },
     "402105": {
         "id": 402105,
@@ -12084,7 +12206,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "402201": {
         "id": 402201,
@@ -12142,7 +12265,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "402202": {
         "id": 402202,
@@ -12200,7 +12324,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "402203": {
         "id": 402203,
@@ -12258,7 +12383,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "402301": {
         "id": 402301,
@@ -12316,7 +12442,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "402302": {
         "id": 402302,
@@ -12374,7 +12501,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "402303": {
         "id": 402303,
@@ -12432,7 +12560,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "402304": {
         "id": 402304,
@@ -12490,7 +12619,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "402401": {
         "id": 402401,
@@ -12548,7 +12678,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "402402": {
         "id": 402402,
@@ -12606,7 +12737,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "402403": {
         "id": 402403,
@@ -12664,7 +12796,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "402404": {
         "id": 402404,
@@ -12722,7 +12855,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "402405": {
         "id": 402405,
@@ -12780,7 +12914,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "402406": {
         "id": 402406,
@@ -12838,7 +12973,8 @@ SKIN = {
         "click": 13333,
         "greeting_init": 12000,
         "click2": 8000,
-        "celebrate_idle": 13333
+        "celebrate_idle": 13333,
+        "illust_data": ""
     },
     "402501": {
         "id": 402501,
@@ -12896,7 +13032,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "402502": {
         "id": 402502,
@@ -12954,7 +13091,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "402503": {
         "id": 402503,
@@ -13012,7 +13150,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "402504": {
         "id": 402504,
@@ -13070,7 +13209,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "402601": {
         "id": 402601,
@@ -13128,7 +13268,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "402602": {
         "id": 402602,
@@ -13186,7 +13327,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "402603": {
         "id": 402603,
@@ -13244,7 +13386,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "402604": {
         "id": 402604,
@@ -13302,7 +13445,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "402605": {
         "id": 402605,
@@ -13360,7 +13504,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "402701": {
         "id": 402701,
@@ -13418,7 +13563,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "402702": {
         "id": 402702,
@@ -13476,7 +13622,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "402703": {
         "id": 402703,
@@ -13534,7 +13681,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "402704": {
         "id": 402704,
@@ -13592,7 +13740,8 @@ SKIN = {
         "click": 8000,
         "greeting_init": 10000,
         "click2": 8000,
-        "celebrate_idle": 8000
+        "celebrate_idle": 8000,
+        "illust_data": ""
     },
     "402705": {
         "id": 402705,
@@ -13650,7 +13799,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "402801": {
         "id": 402801,
@@ -13708,7 +13858,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "402802": {
         "id": 402802,
@@ -13766,7 +13917,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "402803": {
         "id": 402803,
@@ -13824,7 +13976,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "402804": {
         "id": 402804,
@@ -13882,7 +14035,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "402805": {
         "id": 402805,
@@ -13940,7 +14094,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "402901": {
         "id": 402901,
@@ -13998,7 +14153,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": "huiyeji"
     },
     "402902": {
         "id": 402902,
@@ -14056,7 +14212,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": "huiyeji_0"
     },
     "402903": {
         "id": 402903,
@@ -14114,7 +14271,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": "huiyeji_sd"
     },
     "402904": {
         "id": 402904,
@@ -14162,17 +14320,18 @@ SKIN = {
         "half_width": 2570,
         "half_height": 1261,
         "spine_type": 1,
-        "spine_width": 7068,
-        "spine_height": 9370,
-        "pivot_x": 4100,
-        "pivot_y": 7050,
+        "spine_width": 6858,
+        "spine_height": 5000,
+        "pivot_x": 3990,
+        "pivot_y": 7032,
         "idle": 4000,
-        "greeting": 4667,
+        "greeting": 4666,
         "celebrate": 8333,
         "click": 4333,
         "greeting_init": 8000,
         "click2": 0,
-        "celebrate_idle": 4000
+        "celebrate_idle": 4000,
+        "illust_data": "huiyeji_cj"
     },
     "402905": {
         "id": 402905,
@@ -14230,7 +14389,67 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": "huiyeji_wq"
+    },
+    "402906": {
+        "id": 402906,
+        "type": 12,
+        "name_chs": "罗裳曼影",
+        "desc_chs": "罗裳曼影活动限定\\n“宴会礼仪？愚蠢！凡俗的约束，对神明通通无效！倒是汝……呜嘻嘻，今晚剩下的时间，汝都要在此陪伴妾身哦。尽心服侍可爱的神明，这才是汝最该遵守的礼仪嘛！”",
+        "character_id": 200029,
+        "lock_tips_chs": "活动限定",
+        "path": "extendRes/charactor/huiyeji_LF",
+        "exchange_item_id": 0,
+        "exchange_item_num": 0,
+        "direction": 1,
+        "no_reverse": 0,
+        "lock_reverse": 0,
+        "offset_x": 0,
+        "offset_y": 0,
+        "spot_scale": "0",
+        "effective_time": "",
+        "lobby_offset": "",
+        "liaoshe_offset": "",
+        "shop_offset": "",
+        "win_offset": "",
+        "gameend_offset": "",
+        "starup_offset": "",
+        "treasure_offset": "",
+        "ck_full_0_offset": "",
+        "ck_full_1_offset": "",
+        "ck_full_2_offset": "",
+        "ck_full_3_offset": "",
+        "ck_full_single_offset": "",
+        "ck_half_0_offset": "",
+        "ck_half_1_offset": "",
+        "ck_half_2_offset": "",
+        "ck_half_3_offset": "",
+        "ck_half_single_offset": "",
+        "smallhead_x": 0,
+        "smallhead_y": 0,
+        "smallhead_width": 0,
+        "full_x": 0,
+        "full_y": 0,
+        "full_width": 0,
+        "full_height": 0,
+        "half_x": 0,
+        "half_y": 0,
+        "half_width": 0,
+        "half_height": 0,
+        "spine_type": 0,
+        "spine_width": 0,
+        "spine_height": 0,
+        "pivot_x": 0,
+        "pivot_y": 0,
+        "idle": 0,
+        "greeting": 0,
+        "celebrate": 0,
+        "click": 0,
+        "greeting_init": 0,
+        "click2": 0,
+        "celebrate_idle": 0,
+        "illust_data": "huiyeji_lf"
     },
     "403001": {
         "id": 403001,
@@ -14288,7 +14507,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "403002": {
         "id": 403002,
@@ -14346,7 +14566,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "403003": {
         "id": 403003,
@@ -14404,7 +14625,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "403004": {
         "id": 403004,
@@ -14462,7 +14684,8 @@ SKIN = {
         "click": 8333,
         "greeting_init": 14000,
         "click2": 8000,
-        "celebrate_idle": 6666
+        "celebrate_idle": 6666,
+        "illust_data": ""
     },
     "403101": {
         "id": 403101,
@@ -14520,7 +14743,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "403102": {
         "id": 403102,
@@ -14578,7 +14802,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "403103": {
         "id": 403103,
@@ -14636,7 +14861,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "403104": {
         "id": 403104,
@@ -14694,7 +14920,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "403201": {
         "id": 403201,
@@ -14752,7 +14979,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "403202": {
         "id": 403202,
@@ -14810,7 +15038,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "403203": {
         "id": 403203,
@@ -14868,7 +15097,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "403204": {
         "id": 403204,
@@ -14926,7 +15156,8 @@ SKIN = {
         "click": 6667,
         "greeting_init": 6667,
         "click2": 0,
-        "celebrate_idle": 6667
+        "celebrate_idle": 6667,
+        "illust_data": ""
     },
     "403205": {
         "id": 403205,
@@ -14984,7 +15215,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "403206": {
         "id": 403206,
@@ -15042,7 +15274,8 @@ SKIN = {
         "click": 14400,
         "greeting_init": 12000,
         "click2": 8000,
-        "celebrate_idle": 8000
+        "celebrate_idle": 8000,
+        "illust_data": ""
     },
     "403301": {
         "id": 403301,
@@ -15100,7 +15333,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "403302": {
         "id": 403302,
@@ -15158,7 +15392,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "403303": {
         "id": 403303,
@@ -15216,7 +15451,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "403304": {
         "id": 403304,
@@ -15274,7 +15510,8 @@ SKIN = {
         "click": 13366,
         "greeting_init": 15000,
         "click2": 8000,
-        "celebrate_idle": 13333
+        "celebrate_idle": 13333,
+        "illust_data": ""
     },
     "403401": {
         "id": 403401,
@@ -15332,7 +15569,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "403402": {
         "id": 403402,
@@ -15390,7 +15628,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "403403": {
         "id": 403403,
@@ -15448,7 +15687,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "403404": {
         "id": 403404,
@@ -15506,7 +15746,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "403501": {
         "id": 403501,
@@ -15564,7 +15805,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "403502": {
         "id": 403502,
@@ -15622,7 +15864,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "403503": {
         "id": 403503,
@@ -15680,7 +15923,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "403504": {
         "id": 403504,
@@ -15738,7 +15982,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "403601": {
         "id": 403601,
@@ -15796,7 +16041,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "403602": {
         "id": 403602,
@@ -15854,7 +16100,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "403603": {
         "id": 403603,
@@ -15912,7 +16159,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "403604": {
         "id": 403604,
@@ -15970,7 +16218,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "403701": {
         "id": 403701,
@@ -16028,7 +16277,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "403702": {
         "id": 403702,
@@ -16086,7 +16336,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "403703": {
         "id": 403703,
@@ -16144,7 +16395,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "403704": {
         "id": 403704,
@@ -16202,7 +16454,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "403801": {
         "id": 403801,
@@ -16260,7 +16513,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "403802": {
         "id": 403802,
@@ -16318,7 +16572,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "403803": {
         "id": 403803,
@@ -16376,7 +16631,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "403804": {
         "id": 403804,
@@ -16434,7 +16690,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "403805": {
         "id": 403805,
@@ -16492,7 +16749,8 @@ SKIN = {
         "click": 12166,
         "greeting_init": 12000,
         "click2": 8000,
-        "celebrate_idle": 7333
+        "celebrate_idle": 7333,
+        "illust_data": ""
     },
     "403806": {
         "id": 403806,
@@ -16550,7 +16808,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "403901": {
         "id": 403901,
@@ -16608,7 +16867,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "403902": {
         "id": 403902,
@@ -16666,7 +16926,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "403903": {
         "id": 403903,
@@ -16724,7 +16985,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "403904": {
         "id": 403904,
@@ -16782,7 +17044,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "404001": {
         "id": 404001,
@@ -16840,7 +17103,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "404002": {
         "id": 404002,
@@ -16898,7 +17162,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "404003": {
         "id": 404003,
@@ -16956,7 +17221,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "404101": {
         "id": 404101,
@@ -17014,7 +17280,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "404102": {
         "id": 404102,
@@ -17072,7 +17339,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "404103": {
         "id": 404103,
@@ -17130,7 +17398,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "404201": {
         "id": 404201,
@@ -17188,7 +17457,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "404202": {
         "id": 404202,
@@ -17246,7 +17516,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "404203": {
         "id": 404203,
@@ -17304,7 +17575,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "404301": {
         "id": 404301,
@@ -17362,7 +17634,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "404302": {
         "id": 404302,
@@ -17420,7 +17693,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "404303": {
         "id": 404303,
@@ -17478,7 +17752,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "404401": {
         "id": 404401,
@@ -17536,7 +17811,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "404402": {
         "id": 404402,
@@ -17594,7 +17870,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "404403": {
         "id": 404403,
@@ -17652,7 +17929,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "404404": {
         "id": 404404,
@@ -17710,7 +17988,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "404405": {
         "id": 404405,
@@ -17768,7 +18047,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "404501": {
         "id": 404501,
@@ -17826,7 +18106,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "404502": {
         "id": 404502,
@@ -17884,7 +18165,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "404503": {
         "id": 404503,
@@ -17942,7 +18224,8 @@ SKIN = {
         "click": 8000,
         "greeting_init": 8000,
         "click2": 0,
-        "celebrate_idle": 8000
+        "celebrate_idle": 8000,
+        "illust_data": ""
     },
     "404504": {
         "id": 404504,
@@ -18000,7 +18283,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "404505": {
         "id": 404505,
@@ -18058,7 +18342,8 @@ SKIN = {
         "click": 14000,
         "greeting_init": 20000,
         "click2": 8000,
-        "celebrate_idle": 5333
+        "celebrate_idle": 5333,
+        "illust_data": ""
     },
     "404601": {
         "id": 404601,
@@ -18116,7 +18401,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "404602": {
         "id": 404602,
@@ -18174,7 +18460,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "404603": {
         "id": 404603,
@@ -18232,7 +18519,8 @@ SKIN = {
         "click": 3166,
         "greeting_init": 10000,
         "click2": 0,
-        "celebrate_idle": 6666
+        "celebrate_idle": 6666,
+        "illust_data": ""
     },
     "404604": {
         "id": 404604,
@@ -18290,7 +18578,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "404701": {
         "id": 404701,
@@ -18348,7 +18637,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "404702": {
         "id": 404702,
@@ -18406,7 +18696,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "404703": {
         "id": 404703,
@@ -18464,7 +18755,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "404704": {
         "id": 404704,
@@ -18522,7 +18814,8 @@ SKIN = {
         "click": 9667,
         "greeting_init": 13000,
         "click2": 0,
-        "celebrate_idle": 8000
+        "celebrate_idle": 8000,
+        "illust_data": ""
     },
     "404801": {
         "id": 404801,
@@ -18580,7 +18873,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "404802": {
         "id": 404802,
@@ -18638,7 +18932,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "404803": {
         "id": 404803,
@@ -18696,7 +18991,8 @@ SKIN = {
         "click": 3166,
         "greeting_init": 10000,
         "click2": 0,
-        "celebrate_idle": 8000
+        "celebrate_idle": 8000,
+        "illust_data": ""
     },
     "404804": {
         "id": 404804,
@@ -18754,7 +19050,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "404805": {
         "id": 404805,
@@ -18812,7 +19109,8 @@ SKIN = {
         "click": 12666,
         "greeting_init": 15000,
         "click2": 8000,
-        "celebrate_idle": 8000
+        "celebrate_idle": 8000,
+        "illust_data": ""
     },
     "404901": {
         "id": 404901,
@@ -18870,7 +19168,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "404902": {
         "id": 404902,
@@ -18928,7 +19227,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "404903": {
         "id": 404903,
@@ -18986,7 +19286,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "404904": {
         "id": 404904,
@@ -19044,7 +19345,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "405001": {
         "id": 405001,
@@ -19102,7 +19404,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "405002": {
         "id": 405002,
@@ -19160,7 +19463,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "405003": {
         "id": 405003,
@@ -19218,7 +19522,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "405101": {
         "id": 405101,
@@ -19276,7 +19581,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "405102": {
         "id": 405102,
@@ -19334,7 +19640,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "405103": {
         "id": 405103,
@@ -19392,7 +19699,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "405201": {
         "id": 405201,
@@ -19450,7 +19758,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "405202": {
         "id": 405202,
@@ -19508,7 +19817,8 @@ SKIN = {
         "click": 8000,
         "greeting_init": 6000,
         "click2": 8000,
-        "celebrate_idle": 8000
+        "celebrate_idle": 8000,
+        "illust_data": ""
     },
     "405301": {
         "id": 405301,
@@ -19566,7 +19876,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "405302": {
         "id": 405302,
@@ -19624,7 +19935,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "405303": {
         "id": 405303,
@@ -19682,7 +19994,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "405401": {
         "id": 405401,
@@ -19740,7 +20053,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "405402": {
         "id": 405402,
@@ -19798,7 +20112,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "405403": {
         "id": 405403,
@@ -19856,7 +20171,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "405404": {
         "id": 405404,
@@ -19914,7 +20230,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "405501": {
         "id": 405501,
@@ -19972,7 +20289,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "405502": {
         "id": 405502,
@@ -20030,7 +20348,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "405503": {
         "id": 405503,
@@ -20088,7 +20407,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "405601": {
         "id": 405601,
@@ -20146,7 +20466,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "405602": {
         "id": 405602,
@@ -20204,7 +20525,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "405603": {
         "id": 405603,
@@ -20262,7 +20584,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "405701": {
         "id": 405701,
@@ -20320,7 +20643,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "405702": {
         "id": 405702,
@@ -20378,7 +20702,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "405703": {
         "id": 405703,
@@ -20436,7 +20761,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "405801": {
         "id": 405801,
@@ -20494,7 +20820,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "405802": {
         "id": 405802,
@@ -20552,7 +20879,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "405803": {
         "id": 405803,
@@ -20610,7 +20938,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "405901": {
         "id": 405901,
@@ -20668,7 +20997,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "405902": {
         "id": 405902,
@@ -20726,7 +21056,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "405903": {
         "id": 405903,
@@ -20784,7 +21115,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "405904": {
         "id": 405904,
@@ -20842,7 +21174,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "405905": {
         "id": 405905,
@@ -20900,7 +21233,8 @@ SKIN = {
         "click": 4333,
         "greeting_init": 13000,
         "click2": 8000,
-        "celebrate_idle": 2666
+        "celebrate_idle": 2666,
+        "illust_data": ""
     },
     "406001": {
         "id": 406001,
@@ -20958,7 +21292,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "406002": {
         "id": 406002,
@@ -21016,7 +21351,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "406003": {
         "id": 406003,
@@ -21074,7 +21410,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "406004": {
         "id": 406004,
@@ -21132,7 +21469,8 @@ SKIN = {
         "click": 7333,
         "greeting_init": 15000,
         "click2": 8000,
-        "celebrate_idle": 10666
+        "celebrate_idle": 10666,
+        "illust_data": ""
     },
     "406101": {
         "id": 406101,
@@ -21190,7 +21528,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "406102": {
         "id": 406102,
@@ -21248,7 +21587,8 @@ SKIN = {
         "click": 12633,
         "greeting_init": 10000,
         "click2": 16000,
-        "celebrate_idle": 16000
+        "celebrate_idle": 16000,
+        "illust_data": ""
     },
     "406201": {
         "id": 406201,
@@ -21306,7 +21646,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "406202": {
         "id": 406202,
@@ -21364,7 +21705,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "406203": {
         "id": 406203,
@@ -21422,7 +21764,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "406301": {
         "id": 406301,
@@ -21480,7 +21823,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "406302": {
         "id": 406302,
@@ -21538,7 +21882,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "406303": {
         "id": 406303,
@@ -21596,7 +21941,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "406401": {
         "id": 406401,
@@ -21654,7 +22000,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "406402": {
         "id": 406402,
@@ -21712,7 +22059,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "406403": {
         "id": 406403,
@@ -21770,7 +22118,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "406501": {
         "id": 406501,
@@ -21828,7 +22177,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "406502": {
         "id": 406502,
@@ -21886,7 +22236,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "406503": {
         "id": 406503,
@@ -21944,7 +22295,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "406601": {
         "id": 406601,
@@ -22002,7 +22354,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "406602": {
         "id": 406602,
@@ -22060,7 +22413,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "406603": {
         "id": 406603,
@@ -22118,7 +22472,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "406604": {
         "id": 406604,
@@ -22176,7 +22531,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "406605": {
         "id": 406605,
@@ -22234,7 +22590,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "406701": {
         "id": 406701,
@@ -22292,7 +22649,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "406702": {
         "id": 406702,
@@ -22350,7 +22708,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "406703": {
         "id": 406703,
@@ -22408,7 +22767,8 @@ SKIN = {
         "click": 8000,
         "greeting_init": 15000,
         "click2": 8000,
-        "celebrate_idle": 8000
+        "celebrate_idle": 8000,
+        "illust_data": ""
     },
     "406801": {
         "id": 406801,
@@ -22466,7 +22826,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "406802": {
         "id": 406802,
@@ -22524,7 +22885,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "406803": {
         "id": 406803,
@@ -22582,7 +22944,8 @@ SKIN = {
         "click": 10000,
         "greeting_init": 13000,
         "click2": 8000,
-        "celebrate_idle": 3333
+        "celebrate_idle": 3333,
+        "illust_data": ""
     },
     "406804": {
         "id": 406804,
@@ -22640,7 +23003,8 @@ SKIN = {
         "click": 8000,
         "greeting_init": 13000,
         "click2": 8000,
-        "celebrate_idle": 5333
+        "celebrate_idle": 5333,
+        "illust_data": ""
     },
     "406901": {
         "id": 406901,
@@ -22698,7 +23062,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "406902": {
         "id": 406902,
@@ -22756,7 +23121,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "406903": {
         "id": 406903,
@@ -22814,7 +23180,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "407001": {
         "id": 407001,
@@ -22872,7 +23239,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "407002": {
         "id": 407002,
@@ -22930,7 +23298,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "407003": {
         "id": 407003,
@@ -22988,7 +23357,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "407101": {
         "id": 407101,
@@ -23046,7 +23416,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "407102": {
         "id": 407102,
@@ -23104,7 +23475,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "407103": {
         "id": 407103,
@@ -23162,7 +23534,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "407201": {
         "id": 407201,
@@ -23220,7 +23593,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "407202": {
         "id": 407202,
@@ -23278,7 +23652,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "407203": {
         "id": 407203,
@@ -23336,7 +23711,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "407301": {
         "id": 407301,
@@ -23394,7 +23770,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "407302": {
         "id": 407302,
@@ -23452,7 +23829,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "407303": {
         "id": 407303,
@@ -23510,7 +23888,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "407401": {
         "id": 407401,
@@ -23568,7 +23947,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "407402": {
         "id": 407402,
@@ -23626,7 +24006,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "407403": {
         "id": 407403,
@@ -23684,7 +24065,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "407501": {
         "id": 407501,
@@ -23742,7 +24124,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "407502": {
         "id": 407502,
@@ -23800,7 +24183,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "407503": {
         "id": 407503,
@@ -23858,7 +24242,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "407601": {
         "id": 407601,
@@ -23916,7 +24301,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "407602": {
         "id": 407602,
@@ -23974,7 +24360,8 @@ SKIN = {
         "click": 6666,
         "greeting_init": 10000,
         "click2": 13333,
-        "celebrate_idle": 6666
+        "celebrate_idle": 6666,
+        "illust_data": ""
     },
     "407701": {
         "id": 407701,
@@ -24032,7 +24419,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "407702": {
         "id": 407702,
@@ -24090,7 +24478,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "407703": {
         "id": 407703,
@@ -24148,7 +24537,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "407801": {
         "id": 407801,
@@ -24206,7 +24596,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "407802": {
         "id": 407802,
@@ -24264,7 +24655,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "407901": {
         "id": 407901,
@@ -24322,7 +24714,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "407902": {
         "id": 407902,
@@ -24380,7 +24773,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "407903": {
         "id": 407903,
@@ -24438,7 +24832,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "408001": {
         "id": 408001,
@@ -24496,7 +24891,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "408002": {
         "id": 408002,
@@ -24554,7 +24950,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "408003": {
         "id": 408003,
@@ -24612,7 +25009,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "408101": {
         "id": 408101,
@@ -24670,7 +25068,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "408102": {
         "id": 408102,
@@ -24728,7 +25127,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "408103": {
         "id": 408103,
@@ -24786,7 +25186,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "408201": {
         "id": 408201,
@@ -24844,7 +25245,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "408202": {
         "id": 408202,
@@ -24902,7 +25304,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "408203": {
         "id": 408203,
@@ -24960,7 +25363,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "408301": {
         "id": 408301,
@@ -25018,7 +25422,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "408302": {
         "id": 408302,
@@ -25076,7 +25481,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "408401": {
         "id": 408401,
@@ -25134,7 +25540,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "408402": {
         "id": 408402,
@@ -25192,7 +25599,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "408403": {
         "id": 408403,
@@ -25250,7 +25658,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "408501": {
         "id": 408501,
@@ -25308,7 +25717,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "408502": {
         "id": 408502,
@@ -25366,7 +25776,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "408601": {
         "id": 408601,
@@ -25424,7 +25835,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "408602": {
         "id": 408602,
@@ -25482,7 +25894,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "408603": {
         "id": 408603,
@@ -25540,7 +25953,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "408701": {
         "id": 408701,
@@ -25598,7 +26012,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "408702": {
         "id": 408702,
@@ -25656,7 +26071,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "408703": {
         "id": 408703,
@@ -25714,7 +26130,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "408801": {
         "id": 408801,
@@ -25772,7 +26189,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "408802": {
         "id": 408802,
@@ -25830,7 +26248,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "408803": {
         "id": 408803,
@@ -25888,7 +26307,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "408901": {
         "id": 408901,
@@ -25946,7 +26366,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "408902": {
         "id": 408902,
@@ -26004,7 +26425,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "408903": {
         "id": 408903,
@@ -26062,7 +26484,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "409001": {
         "id": 409001,
@@ -26120,7 +26543,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "409002": {
         "id": 409002,
@@ -26178,7 +26602,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "409101": {
         "id": 409101,
@@ -26236,7 +26661,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "409102": {
         "id": 409102,
@@ -26294,7 +26720,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "409201": {
         "id": 409201,
@@ -26352,7 +26779,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "409202": {
         "id": 409202,
@@ -26410,7 +26838,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "409301": {
         "id": 409301,
@@ -26468,7 +26897,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": "laiya"
     },
     "409302": {
         "id": 409302,
@@ -26526,7 +26956,67 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": "laiya_0"
+    },
+    "409303": {
+        "id": 409303,
+        "type": 12,
+        "name_chs": "罗裳曼影",
+        "desc_chs": "罗裳曼影活动限定\\n“欢迎来到魔女的收藏室，{name}。好奇心旺盛的孩子……老师并不讨厌哦。无论你看上哪件藏品，我都会耐心为你讲解。嗯？你对这里的主人更感兴趣？这份淘气，很有被教育的价值呢……”",
+        "character_id": 200093,
+        "lock_tips_chs": "活动限定",
+        "path": "extendRes/charactor/laiya_LF",
+        "exchange_item_id": 0,
+        "exchange_item_num": 0,
+        "direction": 1,
+        "no_reverse": 0,
+        "lock_reverse": 0,
+        "offset_x": 0,
+        "offset_y": 0,
+        "spot_scale": "0",
+        "effective_time": "",
+        "lobby_offset": "",
+        "liaoshe_offset": "",
+        "shop_offset": "",
+        "win_offset": "",
+        "gameend_offset": "",
+        "starup_offset": "",
+        "treasure_offset": "",
+        "ck_full_0_offset": "",
+        "ck_full_1_offset": "",
+        "ck_full_2_offset": "",
+        "ck_full_3_offset": "",
+        "ck_full_single_offset": "",
+        "ck_half_0_offset": "",
+        "ck_half_1_offset": "",
+        "ck_half_2_offset": "",
+        "ck_half_3_offset": "",
+        "ck_half_single_offset": "",
+        "smallhead_x": 0,
+        "smallhead_y": 0,
+        "smallhead_width": 0,
+        "full_x": 0,
+        "full_y": 0,
+        "full_width": 0,
+        "full_height": 0,
+        "half_x": 0,
+        "half_y": 0,
+        "half_width": 0,
+        "half_height": 0,
+        "spine_type": 0,
+        "spine_width": 0,
+        "spine_height": 0,
+        "pivot_x": 0,
+        "pivot_y": 0,
+        "idle": 0,
+        "greeting": 0,
+        "celebrate": 0,
+        "click": 0,
+        "greeting_init": 0,
+        "click2": 0,
+        "celebrate_idle": 0,
+        "illust_data": "laiya_lf"
     },
     "409401": {
         "id": 409401,
@@ -26584,7 +27074,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "409402": {
         "id": 409402,
@@ -26642,7 +27133,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "409501": {
         "id": 409501,
@@ -26700,7 +27192,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "409502": {
         "id": 409502,
@@ -26758,7 +27251,8 @@ SKIN = {
         "click": 13333,
         "greeting_init": 13000,
         "click2": 12000,
-        "celebrate_idle": 8000
+        "celebrate_idle": 8000,
+        "illust_data": ""
     },
     "409601": {
         "id": 409601,
@@ -26816,7 +27310,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "409602": {
         "id": 409602,
@@ -26874,7 +27369,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "409801": {
         "id": 409801,
@@ -26932,7 +27428,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "409802": {
         "id": 409802,
@@ -26990,7 +27487,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "409901": {
         "id": 409901,
@@ -27048,7 +27546,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "409902": {
         "id": 409902,
@@ -27106,7 +27605,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "40010001": {
         "id": 40010001,
@@ -27164,7 +27664,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "40010002": {
         "id": 40010002,
@@ -27222,7 +27723,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "40010003": {
         "id": 40010003,
@@ -27280,7 +27782,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "40010101": {
         "id": 40010101,
@@ -27338,7 +27841,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "40010102": {
         "id": 40010102,
@@ -27396,7 +27900,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "40010103": {
         "id": 40010103,
@@ -27454,7 +27959,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "40010201": {
         "id": 40010201,
@@ -27512,7 +28018,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "40010202": {
         "id": 40010202,
@@ -27570,7 +28077,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "40010203": {
         "id": 40010203,
@@ -27628,7 +28136,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "40010301": {
         "id": 40010301,
@@ -27686,7 +28195,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "40010302": {
         "id": 40010302,
@@ -27744,7 +28254,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "40010303": {
         "id": 40010303,
@@ -27802,7 +28313,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "40010701": {
         "id": 40010701,
@@ -27860,7 +28372,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     },
     "40010702": {
         "id": 40010702,
@@ -27918,7 +28431,8 @@ SKIN = {
         "click": 0,
         "greeting_init": 0,
         "click2": 0,
-        "celebrate_idle": 0
+        "celebrate_idle": 0,
+        "illust_data": ""
     }
 }
 
@@ -44850,6 +45364,48 @@ ITEM = {
         "cross_view": 0,
         "database_cache": 0
     },
+    "307268": {
+        "id": 307268,
+        "sort": 15068,
+        "name_chs": "纵夜旋音-2025",
+        "name_chs_t2": "",
+        "desc_func_chs": "点击仓库-插画更换",
+        "desc_chs": "听闻午夜钟声响起，仙女的魔法就会失效。但魔女的力量可是无穷无尽的。这位雀士，看来你的舞伴该换人了呢……",
+        "desc_chs_t2": "",
+        "icon": "extendRes/loading_cg/250201_thumb.jpg",
+        "icon_transparent": "",
+        "category": 8,
+        "type": 12,
+        "is_unique": 1,
+        "max_stack": 0,
+        "access": "",
+        "accessinfo": 0,
+        "func": "",
+        "iargs": [
+            250201,
+            0,
+            0,
+            0,
+            0,
+            0
+        ],
+        "sargs": [
+            "",
+            ""
+        ],
+        "can_sell": 0,
+        "sell_reward_id": 0,
+        "sell_reward_count": 0,
+        "item_expire": "2025-03-12 05:00:00",
+        "expire_desc_chs": "2025-03-12 05:00:00",
+        "expire_desc_chs_t": "2025-03-12 05:00:00",
+        "expire_desc_jp": "2025/03/12 5:59 まで",
+        "expire_desc_en": "2025-03-11 14:00:00 (UTC-7)",
+        "expire_desc_kr": "2025.03.12 06:00(GMT+9)",
+        "region_limit": 0,
+        "cross_view": 0,
+        "database_cache": 0
+    },
     "307401": {
         "id": 307401,
         "sort": 16201,
@@ -47641,6 +48197,48 @@ ITEM = {
         "func": "",
         "iargs": [
             250103,
+            0,
+            0,
+            0,
+            0,
+            0
+        ],
+        "sargs": [
+            "",
+            ""
+        ],
+        "can_sell": 0,
+        "sell_reward_id": 0,
+        "sell_reward_count": 0,
+        "item_expire": "",
+        "expire_desc_chs": "",
+        "expire_desc_chs_t": "",
+        "expire_desc_jp": "",
+        "expire_desc_en": "",
+        "expire_desc_kr": "",
+        "region_limit": 0,
+        "cross_view": 0,
+        "database_cache": 0
+    },
+    "307468": {
+        "id": 307468,
+        "sort": 15068,
+        "name_chs": "纵夜旋音-2025",
+        "name_chs_t2": "",
+        "desc_func_chs": "点击仓库-插画更换",
+        "desc_chs": "听闻午夜钟声响起，仙女的魔法就会失效。但魔女的力量可是无穷无尽的。这位雀士，看来你的舞伴该换人了呢……",
+        "desc_chs_t2": "",
+        "icon": "extendRes/loading_cg/250201_thumb.jpg",
+        "icon_transparent": "",
+        "category": 8,
+        "type": 12,
+        "is_unique": 1,
+        "max_stack": 0,
+        "access": "",
+        "accessinfo": 0,
+        "func": "",
+        "iargs": [
+            250201,
             0,
             0,
             0,
@@ -57744,6 +58342,48 @@ ITEM = {
         "cross_view": 1,
         "database_cache": 0
     },
+    "30550024": {
+        "id": 30550024,
+        "sort": 5070,
+        "name_chs": "双聖の眷属たち",
+        "name_chs_t2": "",
+        "desc_func_chs": "点击寮舍-装扮更换",
+        "desc_chs": "年に二回行われる双聖戦の上位入賞者たちが使用できるアイコンフレーム（有効期限：2026年3月1日00：00まで）",
+        "desc_chs_t2": "",
+        "icon": "extendRes/items2/headframe_ssz.jpg",
+        "icon_transparent": "",
+        "category": 5,
+        "type": 5,
+        "is_unique": 1,
+        "max_stack": 0,
+        "access": "",
+        "accessinfo": 0,
+        "func": "",
+        "iargs": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+        ],
+        "sargs": [
+            "",
+            ""
+        ],
+        "can_sell": 0,
+        "sell_reward_id": 0,
+        "sell_reward_count": 0,
+        "item_expire": "2026-03-01 00:00:00",
+        "expire_desc_chs": "2026年3月1日00：00まで",
+        "expire_desc_chs_t": "2026年3月1日00：00まで",
+        "expire_desc_jp": "2026年3月1日00：00まで",
+        "expire_desc_en": "2026年3月1日00：00まで",
+        "expire_desc_kr": "2026年3月1日00：00まで",
+        "region_limit": 0,
+        "cross_view": 0,
+        "database_cache": 0
+    },
     "30557001": {
         "id": 30557001,
         "sort": 6027,
@@ -57959,7 +58599,7 @@ ITEM = {
         "sort": 6032,
         "name_chs": "闘魂杯王者",
         "name_chs_t2": "",
-        "desc_func_chs": "「第4期闘魂杯」優勝賞品",
+        "desc_func_chs": "「第5期闘魂杯」優勝賞品",
         "desc_chs": "",
         "desc_chs_t2": "",
         "icon": "extendRes/title/2301dhb_item.jpg",
@@ -57986,12 +58626,12 @@ ITEM = {
         "can_sell": 0,
         "sell_reward_id": 0,
         "sell_reward_count": 0,
-        "item_expire": "2025-03-01 23:00:00",
-        "expire_desc_chs": "2025年3月1日まで",
-        "expire_desc_chs_t": "2025年3月1日まで",
-        "expire_desc_jp": "2025年3月1日まで",
-        "expire_desc_en": "2025年3月1日まで",
-        "expire_desc_kr": "2025年3月1日まで",
+        "item_expire": "2026-03-01 23:00:00",
+        "expire_desc_chs": "2026年3月1日まで",
+        "expire_desc_chs_t": "2026年3月1日まで",
+        "expire_desc_jp": "2026年3月1日まで",
+        "expire_desc_en": "2026年3月1日まで",
+        "expire_desc_kr": "2026年3月1日まで",
         "region_limit": 0,
         "cross_view": 0,
         "database_cache": 0
@@ -58748,6 +59388,90 @@ ITEM = {
         "expire_desc_jp": "2026年02月01日まで",
         "expire_desc_en": "2026年02月01日まで",
         "expire_desc_kr": "2026年02月01日まで",
+        "region_limit": 0,
+        "cross_view": 0,
+        "database_cache": 0
+    },
+    "30557025": {
+        "id": 30557025,
+        "sort": 6051,
+        "name_chs": "あやまらないよ！",
+        "name_chs_t2": "",
+        "desc_func_chs": "にじさんじ麻雀杯2025優勝記念",
+        "desc_chs": "",
+        "desc_chs_t2": "",
+        "icon": "extendRes/title/25njsj_item.jpg",
+        "icon_transparent": "",
+        "category": 7,
+        "type": 11,
+        "is_unique": 1,
+        "max_stack": 0,
+        "access": "",
+        "accessinfo": 0,
+        "func": "",
+        "iargs": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+        ],
+        "sargs": [
+            "",
+            ""
+        ],
+        "can_sell": 0,
+        "sell_reward_id": 0,
+        "sell_reward_count": 0,
+        "item_expire": "2026-03-01 00:00:00",
+        "expire_desc_chs": "2026年03月01日まで",
+        "expire_desc_chs_t": "2026年03月01日まで",
+        "expire_desc_jp": "2026年03月01日まで",
+        "expire_desc_en": "2026年03月01日まで",
+        "expire_desc_kr": "2026年03月01日まで",
+        "region_limit": 0,
+        "cross_view": 0,
+        "database_cache": 0
+    },
+    "30557026": {
+        "id": 30557026,
+        "sort": 6052,
+        "name_chs": "双聖戦優勝",
+        "name_chs_t2": "",
+        "desc_func_chs": "双聖戦優勝記念称号",
+        "desc_chs": "",
+        "desc_chs_t2": "",
+        "icon": "extendRes/title/25sszy_item.jpg",
+        "icon_transparent": "",
+        "category": 7,
+        "type": 11,
+        "is_unique": 1,
+        "max_stack": 0,
+        "access": "",
+        "accessinfo": 0,
+        "func": "",
+        "iargs": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+        ],
+        "sargs": [
+            "",
+            ""
+        ],
+        "can_sell": 0,
+        "sell_reward_id": 0,
+        "sell_reward_count": 0,
+        "item_expire": "2026-03-01 00:00:00",
+        "expire_desc_chs": "2026年3月1日00：00まで",
+        "expire_desc_chs_t": "2026年3月1日00：00まで",
+        "expire_desc_jp": "2026年3月1日00：00まで",
+        "expire_desc_en": "2026年3月1日00：00まで",
+        "expire_desc_kr": "2026年3月1日00：00まで",
         "region_limit": 0,
         "cross_view": 0,
         "database_cache": 0
@@ -60063,6 +60787,48 @@ ITEM = {
         "desc_chs": "爆竹辞岁，春风送暖。嬉笑连连，年年有余。",
         "desc_chs_t2": "",
         "icon": "extendRes/items2/tablecloth_25chunjie2.jpg",
+        "icon_transparent": "",
+        "category": 5,
+        "type": 6,
+        "is_unique": 1,
+        "max_stack": 0,
+        "access": "",
+        "accessinfo": 0,
+        "func": "",
+        "iargs": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+        ],
+        "sargs": [
+            "",
+            ""
+        ],
+        "can_sell": 0,
+        "sell_reward_id": 0,
+        "sell_reward_count": 0,
+        "item_expire": "",
+        "expire_desc_chs": "",
+        "expire_desc_chs_t": "",
+        "expire_desc_jp": "",
+        "expire_desc_en": "",
+        "expire_desc_kr": "",
+        "region_limit": 0,
+        "cross_view": 0,
+        "database_cache": 0
+    },
+    "30580017": {
+        "id": 30580017,
+        "sort": 10036,
+        "name_chs": "작탁: 리치 마작",
+        "name_chs_t2": "",
+        "desc_func_chs": "点击寮舍-装扮更换",
+        "desc_chs": "[작혼: 리치 마작] 대회 라이브 스트리밍 전용 작탁.",
+        "desc_chs_t2": "",
+        "icon": "extendRes/items2/tablecloth_25krsaishi.jpg",
         "icon_transparent": "",
         "category": 5,
         "type": 6,
@@ -64632,6 +65398,90 @@ ITEM = {
         "cross_view": 0,
         "database_cache": 0
     },
+    "30900084": {
+        "id": 30900084,
+        "sort": 20156,
+        "name_chs": "魔女秘录",
+        "name_chs_t2": "",
+        "desc_func_chs": "活动限定道具",
+        "desc_chs": "忘忧夜话活动限定道具，书中传来甜蜜的蛊惑声，你一次次前往魔女小姐笔下描绘的舞会秘境……",
+        "desc_chs_t2": "",
+        "icon": "extendRes/items2/25lifu1.jpg",
+        "icon_transparent": "extendRes/items2/25lifu1_0.png",
+        "category": 6,
+        "type": 0,
+        "is_unique": 0,
+        "max_stack": 0,
+        "access": "",
+        "accessinfo": 0,
+        "func": "",
+        "iargs": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+        ],
+        "sargs": [
+            "",
+            ""
+        ],
+        "can_sell": 0,
+        "sell_reward_id": 0,
+        "sell_reward_count": 0,
+        "item_expire": "",
+        "expire_desc_chs": "",
+        "expire_desc_chs_t": "",
+        "expire_desc_jp": "",
+        "expire_desc_en": "",
+        "expire_desc_kr": "",
+        "region_limit": 0,
+        "cross_view": 0,
+        "database_cache": 0
+    },
+    "30900085": {
+        "id": 30900085,
+        "sort": 20157,
+        "name_chs": "时影绘卷",
+        "name_chs_t2": "",
+        "desc_func_chs": "活动限定道具",
+        "desc_chs": "忘忧夜话活动限定道具，蕴含魔力的画作，一旦开启就会陷入绘者创造的绮境……做好准备哦。",
+        "desc_chs_t2": "",
+        "icon": "extendRes/items2/25lifu2.jpg",
+        "icon_transparent": "extendRes/items2/25lifu2_0.png",
+        "category": 6,
+        "type": 0,
+        "is_unique": 0,
+        "max_stack": 0,
+        "access": "",
+        "accessinfo": 0,
+        "func": "",
+        "iargs": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+        ],
+        "sargs": [
+            "",
+            ""
+        ],
+        "can_sell": 0,
+        "sell_reward_id": 0,
+        "sell_reward_count": 0,
+        "item_expire": "",
+        "expire_desc_chs": "",
+        "expire_desc_chs_t": "",
+        "expire_desc_jp": "",
+        "expire_desc_en": "",
+        "expire_desc_kr": "",
+        "region_limit": 0,
+        "cross_view": 0,
+        "database_cache": 0
+    },
     "30910001": {
         "id": 30910001,
         "sort": 90060,
@@ -67463,11 +68313,11 @@ TITLE = {
         "name_jp": "闘魂杯王者",
         "name_en": "闘魂杯王者",
         "name_kr": "闘魂杯王者",
-        "desc_chs": "「第4期闘魂杯」優勝賞品",
-        "desc_chs_t": "「第4期闘魂杯」優勝賞品",
-        "desc_jp": "「第4期闘魂杯」優勝賞品",
-        "desc_en": "「第4期闘魂杯」優勝賞品",
-        "desc_kr": "「第4期闘魂杯」優勝賞品",
+        "desc_chs": "「第5期闘魂杯」優勝賞品",
+        "desc_chs_t": "「第5期闘魂杯」優勝賞品",
+        "desc_jp": "「第5期闘魂杯」優勝賞品",
+        "desc_en": "「第5期闘魂杯」優勝賞品",
+        "desc_kr": "「第5期闘魂杯」優勝賞品",
         "icon": "extendRes/title/2301dhb.png",
         "icon_item": "extendRes/title/2301dhb_item.jpg",
         "priority": 1025,
@@ -68074,6 +68924,54 @@ TITLE = {
         "unlock_type": 0,
         "unlock_param": [
             0,
+            0,
+            0,
+            0
+        ],
+        "cross_view": 0
+    },
+    "600114": {
+        "id": 600114,
+        "name_chs": "あやまらないよ！",
+        "name_chs_t": "あやまらないよ！",
+        "name_jp": "あやまらないよ！",
+        "name_en": "あやまらないよ！",
+        "name_kr": "あやまらないよ！",
+        "desc_chs": "にじさんじ麻雀杯2025優勝記念",
+        "desc_chs_t": "にじさんじ麻雀杯2025優勝記念",
+        "desc_jp": "にじさんじ麻雀杯2025優勝記念",
+        "desc_en": "にじさんじ麻雀杯2025優勝記念",
+        "desc_kr": "にじさんじ麻雀杯2025優勝記念",
+        "icon": "extendRes/title/25njsj.png",
+        "icon_item": "extendRes/title/25njsj_item.jpg",
+        "priority": 1049,
+        "unlock_type": 1,
+        "unlock_param": [
+            30557025,
+            0,
+            0,
+            0
+        ],
+        "cross_view": 0
+    },
+    "600115": {
+        "id": 600115,
+        "name_chs": "双聖戦優勝",
+        "name_chs_t": "双聖戦優勝",
+        "name_jp": "双聖戦優勝",
+        "name_en": "双聖戦優勝",
+        "name_kr": "双聖戦優勝",
+        "desc_chs": "双聖戦優勝記念称号",
+        "desc_chs_t": "双聖戦優勝記念称号",
+        "desc_jp": "双聖戦優勝記念称号",
+        "desc_en": "双聖戦優勝記念称号",
+        "desc_kr": "双聖戦優勝記念称号",
+        "icon": "extendRes/title/25sszy.png",
+        "icon_item": "extendRes/title/25sszy_item.jpg",
+        "priority": 1050,
+        "unlock_type": 1,
+        "unlock_param": [
+            30557026,
             0,
             0,
             0

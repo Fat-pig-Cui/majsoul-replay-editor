@@ -1,7 +1,5 @@
 # 雀魂回放编辑器Replay_Editor
 
-Forked from [GrandDawn/majsoul-replay-editor](https://github.com/GrandDawn/majsoul-replay-editor), 版权归原作者所有
-
 自定义雀魂牌谱回放的注入脚本和一些自制牌谱回放文件, 支持国际中文服, 日服, 美服
 
 [中文服官网](https://www.maj-soul.com), [日服官网](https://mahjongsoul.com), [美服官网](https://mahjongsoul.yo-star.com)
@@ -23,9 +21,8 @@ Forked from [GrandDawn/majsoul-replay-editor](https://github.com/GrandDawn/majso
 
 在网页版雀魂里随便选择一个牌谱打开, 就可以看到自制的牌谱了
 
-**注意: 当前 main.js 正在添加大量新功能, 很多没有经过充分测试, 所以可能有bug**, 如果存在不符合预期的情况,
-可以在 [commit](https://github.com/Fat-pig-Cui/majsoul-replay-editor/commits/main/) 记录中使用老版本,
-也可以提 issue, 或在B站联系我: [肥pig崔的B站空间](https://space.bilibili.com/372365985),
+**注意: main.js 很多没有经过充分测试, 所以可能有bug**, 如果存在不符合预期的情况, 可以提 issue,
+或在B站联系我: [肥pig崔的B站空间](https://space.bilibili.com/372365985),
 内容比较多的话还可以发邮件到我的邮箱说明: **chubbypig@qq.com**
 
 ### 自制教程
@@ -45,8 +42,7 @@ Forked from [GrandDawn/majsoul-replay-editor](https://github.com/GrandDawn/majso
 
 [字典](doc/字典.md) 是用来查阅的, 建议编辑牌谱时使用, [字典_template](doc/字典_template.md) 是生成字典的模版, 无需阅读
 
-至于 code.js , 这是初步解混淆后的雀魂核心js文件, 与本仓库关系不大, 放在这里仅方便查阅(文件很大, 2025/1/21
-版本, 不要轻易打开),
+至于 code.js , 这是初步解混淆后的雀魂核心js文件, 与本仓库关系不大, 放在这里仅方便查阅(文件很大, 不要轻易打开),
 解混淆的方法见另一个仓库: [misc-code](https://github.com/Fat-pig-Cui/misc-code)
 
 ## 功能概述
@@ -123,7 +119,8 @@ Forked from [GrandDawn/majsoul-replay-editor](https://github.com/GrandDawn/majso
 
 4. 有少部分代码来自于雀魂源码
 
-5. 其他部分均由本人编写, 版权归原作者 [GrandDawn](https://github.com/GrandDawn) 所有, 未经原作者允许不得转载本文内容,
+5. 其他部分均由本人编写, 版权归原作者 [GrandDawn](https://github.com/GrandDawn)
+   与第二作者 [Fat-pig-Cui](https://github.com/Fat-pig-Cui) 所有, 未经原作者允许不得转载本文内容,
    否则将视为侵权, 对于不遵守此声明或者其他违法使用本文内容者, 本人依法保留追究权等
 
 6. 请不要在任何第三方网站下载该源代码, 否则后果自负

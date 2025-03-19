@@ -3,11 +3,11 @@ loadproject();
 editdata.player_datas[0].nickname = "莱娅-契约";
 editdata.player_datas[1].nickname = "莱娅";
 editdata.player_datas[2].nickname = "莱娅-契约";
-editdata.player_datas[3].nickname = "莱娅";
+editdata.player_datas[3].nickname = "罗裳曼影";
 editdata.player_datas[0].avatar_id = 409302;
 editdata.player_datas[1].avatar_id = 409301;
 editdata.player_datas[2].avatar_id = 409302;
-editdata.player_datas[3].avatar_id = 409301;
+editdata.player_datas[3].avatar_id = 409303;
 
 editdata.config = {
     'category': 1,
@@ -72,6 +72,8 @@ paishan = randompaishan("", "7z....");
 roundbegin();
 hupai();
 
+gotoju(0, 0, 0);
+
 // 第2局
 hupaioneplayer = function (seat) {
     let fans = [
@@ -121,6 +123,8 @@ tiles3 = "1112340678999s";
 paishan = randompaishan("", "7z....");
 roundbegin();
 hupai();
+
+gotoju(0, 0, 0);
 
 // 第3局
 hupaioneplayer = function (seat) {
@@ -172,6 +176,8 @@ paishan = randompaishan("", "7z....");
 roundbegin();
 hupai();
 
+gotoju(0, 0, 0);
+
 // 第4局
 hupaioneplayer = function (seat) {
     let fans = [
@@ -215,6 +221,8 @@ paishan = randompaishan("", "7z....");
 roundbegin();
 hupai();
 
+gotoju(0, 0, 0);
+
 // 第5局
 hupaioneplayer = function (seat) {
     let fans = [
@@ -257,6 +265,8 @@ tiles3 = "1112340678999s";
 paishan = randompaishan("", "7z....");
 roundbegin();
 hupai();
+
+gotoju(0, 0, 0);
 
 // 第6局
 hupaioneplayer = function (seat) {
@@ -303,6 +313,8 @@ tiles3 = "1112340678999s";
 paishan = randompaishan("", "7z....");
 roundbegin();
 hupai();
+
+gotoju(0, 0, 0);
 
 // 第7局
 hupaioneplayer = function (seat) {

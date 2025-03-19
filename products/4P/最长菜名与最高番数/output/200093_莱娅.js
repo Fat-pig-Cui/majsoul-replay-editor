@@ -3,11 +3,11 @@ loadproject();
 editdata.player_datas[0].nickname = "莱娅-契约";
 editdata.player_datas[1].nickname = "莱娅";
 editdata.player_datas[2].nickname = "莱娅-契约";
-editdata.player_datas[3].nickname = "莱娅";
+editdata.player_datas[3].nickname = "罗裳曼影";
 editdata.player_datas[0].avatar_id = 409302;
 editdata.player_datas[1].avatar_id = 409301;
 editdata.player_datas[2].avatar_id = 409302;
-editdata.player_datas[3].avatar_id = 409301;
+editdata.player_datas[3].avatar_id = 409303;
 
 editdata.config = {
     'category': 1,
