@@ -2223,11 +2223,13 @@ function editgame(editdata) {
 }
 
 // 回放接口, 在 edit 中重写, 并在 canceledit 中复原
-var initData, checkPaiPu, load_my_desktop_view;
+var initData, resetData, checkPaiPu, load_my_desktop_view;
 
 function edit(x) {
-    if (initData === undefined)
-        initData = uiscript.UI_Replay.prototype.initData;
+    // if (initData === undefined)
+    //     initData = uiscript.UI_Replay.prototype.initData;
+    if (resetData === undefined)
+        resetData = uiscript.UI_Replay.prototype.resetData;
     if (checkPaiPu === undefined)
         checkPaiPu = GameMgr.Inst.checkPaiPu;
     if (load_my_desktop_view === undefined)
@@ -2355,8 +2357,17 @@ function edit(x) {
     }
 
     // 重写 initData 主要是为了切换视角时数据不复原, 如果不需要切换视角则可以不用管
-    uiscript.UI_Replay.prototype.initData = function (data) {
-        let _ = initData.call(this, data);
+    // uiscript.UI_Replay.prototype.initData = function (data) {
+    //     let _ = initData.call(this, data);
+    //     if (typeof (editfunction2) !== "undefined")
+    //         editfunction2();
+    //     editgame(x);
+    //     return _;
+    // }
+
+    // 重写 resetData 主要是为了切换视角时数据不复原, 如果不需要切换视角则可以不用管
+    uiscript.UI_Replay.prototype.resetData = function () {
+        let _ = resetData.call(this);
         if (typeof (editfunction2) !== "undefined")
             editfunction2();
         editgame(x);
@@ -2438,6 +2449,9 @@ function edit(x) {
                             Laya['timer'].loop(50, W, f),
                                 W['duringPaipu'] = !1;
                         } else {
+                            // 添加: 接受的牌谱信息去除 robots
+                            n.head.robots = [];
+
                             uiscript['UI_Activity_SevenDays']['task_done'](3),
                                 uiscript['UI_Loading'].Inst['setProgressVal'](0.1);
                             var I = n.head
@@ -2609,9 +2623,13 @@ function edit(x) {
 
 // 取消编辑
 function canceledit() {
-    if (initData !== undefined)
-        uiscript.UI_Replay.prototype.initData = function (data) {
-            return initData.call(this, data);
+    // if (initData !== undefined)
+    //     uiscript.UI_Replay.prototype.initData = function (data) {
+    //         return initData.call(this, data);
+    //     }
+    if (resetData !== undefined)
+        uiscript.UI_Replay.prototype.resetData = function () {
+            return resetData.call(this);
         }
     if (checkPaiPu !== undefined)
         GameMgr.Inst.checkPaiPu = function (game_uuid, account_id, paipu_config, is_maka) {
@@ -4438,7 +4456,7 @@ function calcfan(tiles, seat, zimo, fangchong) {
             if (!flag_liangmian)
                 pinghu = false;
             // -------------------------------------
-            let xiaosanyuan = false, xiaosixi = false;
+            let xiaosanyuan = false, xiaosixi = false, dasixi = false;
 
             if (kezi[32] >= 1 && kezi[33] >= 1 && typecnt[34][7] === 1)
                 xiaosanyuan = true;
@@ -4455,6 +4473,9 @@ function calcfan(tiles, seat, zimo, fangchong) {
                 xiaosixi = true;
             if (typecnt[28][7] === 1 && kezi[29] >= 1 && kezi[30] >= 1 && kezi[31] >= 1)
                 xiaosixi = true;
+
+            if (kezi[28] >= 1 && kezi[29] >= 1 && kezi[30] >= 1 && kezi[31] >= 1)
+                dasixi = true;
 
             // -------------------------------------
             // 四种dora: 表dora, 红dora, 拔北dora, 里dora
@@ -4589,7 +4610,7 @@ function calcfan(tiles, seat, zimo, fangchong) {
                     ans.fans.push({'val': 13, 'id': 41}); // 清老头
             }
 
-            if (xiaosixi) {
+            if (xiaosixi && !dasixi) {
                 if (!is_qingtianjing())
                     ans.fans.push({'val': 1, 'id': 43}); // 小四喜
                 else
@@ -4628,7 +4649,7 @@ function calcfan(tiles, seat, zimo, fangchong) {
                     ans.fans.push({'val': 13, 'id': 45}); // 九莲宝灯
             }
 
-            if (kezi[28] >= 1 && kezi[29] >= 1 && kezi[30] >= 1 && kezi[31] >= 1) {
+            if (dasixi) {
                 if (!is_qingtianjing()) {
                     ans.fans.push({'val': no_wyakuman() ? 1 : 2, 'id': 50}); // 大四喜
                     if (!is_xuezhandaodi() && !is_wanxiangxiuluo() && !no_normalbaopai()) {

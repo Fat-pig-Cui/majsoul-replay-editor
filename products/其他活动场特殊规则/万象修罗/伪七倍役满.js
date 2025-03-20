@@ -1,5 +1,7 @@
 loadproject();
 
+// 雀魂官方的逻辑是大小四喜同时满足的话只会取大四喜, 所以只有六倍役满而不是七倍
+
 editdata.player_datas[0].nickname = "一姬-契约";
 editdata.player_datas[1].nickname = "新年初诣";
 editdata.player_datas[2].nickname = "一姬当千";

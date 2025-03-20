@@ -1,6 +1,6 @@
 loadproject();
 
-// 这个在万象修罗中是可以正常出现的, 只不过雀魂官方的逻辑应该只有六倍役满而不是八倍
+// 这个在万象修罗中是可以正常出现的, 但雀魂官方的逻辑是大小四喜只会取大四喜, 所以只有六倍役满
 
 editdata.player_datas[0].nickname = "一姬-契约";
 editdata.player_datas[1].nickname = "新年初诣";

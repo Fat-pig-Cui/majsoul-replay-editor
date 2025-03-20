@@ -21,10 +21,6 @@
 
 在网页版雀魂里随便选择一个牌谱打开, 就可以看到自制的牌谱了
 
-**注意: main.js 很多没有经过充分测试, 所以可能有bug**, 如果存在不符合预期的情况, 可以提 issue,
-或在B站联系我: [肥pig崔的B站空间](https://space.bilibili.com/372365985),
-内容比较多的话还可以发邮件到我的邮箱说明: **chubbypig@qq.com**
-
 ### 自制教程
 
 上面是简单的使用教程, 具体的修改教程要看下面的文档
@@ -44,6 +40,10 @@
 
 至于 code.js , 这是初步解混淆后的雀魂核心js文件, 与本仓库关系不大, 放在这里仅方便查阅(文件很大, 不要轻易打开),
 解混淆的方法见另一个仓库: [misc-code](https://github.com/Fat-pig-Cui/misc-code)
+
+**注意: main.js 很多没有经过充分测试, 所以可能有bug**, 如果存在不符合预期的情况, 可以提 issue,
+或在B站联系我: [肥pig崔的B站空间](https://space.bilibili.com/372365985),
+内容比较多的话还可以发邮件到我的邮箱说明: **chubbypig@qq.com**
 
 ## 功能概述
 
@@ -102,9 +102,15 @@
 
 4. 对于不符合要求的填写, 可能出现页面崩溃的问题(一般页面会卡住, 控制台会报错)
 
+## 演示截图(更多截图可见最后)
+
+![](pic/img0001.jpg)
+![](pic/img0002.jpg)
+
 ## 已知BUG
 
-目前牌谱放映时, 除第一次外, 放映自制牌谱进入对局过程中在控制台会固定出现两次"404 (Not Found)"报错, 该报错不影响牌谱的放映, 暂没有排查出原因 
+目前牌谱放映时, 除第一次外, 放映自制牌谱进入对局过程中在控制台会固定出现两次"404 (Not Found)"报错, 该报错不影响牌谱的放映,
+暂没有排查出原因
 
 ## TODO(欢迎contribute)
 
@@ -118,21 +124,42 @@
 2. 更改回放的方法参考了B站 [一般通过彳亍人](https://space.bilibili.com/23019265)
    的 [BV1HE411Q7JM](https://www.bilibili.com/video/BV1HE411Q7JM)
 
-3. 血流成河的实现方式中的使牌颜色变淡参考了greasyfork [2938137849](https://greasyfork.org/zh-CN/users/749724-2938137849)
+3. 血流成河的实现方式中的使牌颜色变淡参考了 greasyfork [2938137849](https://greasyfork.org/zh-CN/users/749724-2938137849)
    的 [雀魂麻将脚本](https://greasyfork.org/zh-CN/scripts/423689-%E9%9B%80%E9%AD%82%E9%BA%BB%E5%B0%86%E8%84%9A%E6%9C%AC)
 
 4. 有少部分代码来自于雀魂源码
 
-5. 其他部分均由本人编写, 版权归原作者 [GrandDawn](https://github.com/GrandDawn)
-   与第二作者 [Fat-pig-Cui](https://github.com/Fat-pig-Cui) 所有, 未经原作者允许不得转载本文内容,
-   否则将视为侵权, 对于不遵守此声明或者其他违法使用本文内容者, 本人依法保留追究权等
+5. 其他部分均由两位作者共同编写, 两位作者具体贡献:
+    - [GrandDawn](https://github.com/GrandDawn) (原作者):
+        - main.js 核心功能的算法实现
+        - add_function.js 重写函数的算法实现
+        - 说明文档(wiki)的编写
+        - 示例牌谱的编写
+    - [Fat-pig-Cui](https://github.com/Fat-pig-Cui) (维护者):
+        - main.js 的功能的大量扩充
+        - add_function.js 的维护
+        - guobiao.js 的编写(国标功能的实现)
+        - override.js 重写函数的编写
+        - 说明文档的重排优化, 细节补充
+        - 示例牌谱的大量补充, 及批处理脚本刷新牌谱的编写
+
+   版权归上述作者所有, 未经允许不得转载本文内容, 否则将视为侵权, 对于不遵守此声明或者其他违法使用本文内容者, 将依法保留追究权等
 
 6. 请不要在任何第三方网站下载该源代码, 否则后果自负
 
-7. 允许用途: 可以用于个人使用, 请勿用于商业用途, 谢谢配合, 请不要将 examples 文件夹下面的示例牌谱进行录制并宣传, 谢谢
+7. 允许用途: 可以用于个人使用, 请勿用于商业用途, 谢谢配合, 请不要将 examples 文件夹下面的牌谱进行录制并宣传, 谢谢
 
-## 示例代码的部分截图
+## 实机截图
 
-![](pic/preview1.JPG)
-![](pic/preview2.JPG)
-![](pic/preview3.JPG)
+- [【雀魂自制牌谱】一姬纯享版报菜名 升级版](https://www.bilibili.com/video/BV1w96LYWEzR)
+  ![](pic/img0003.jpg)
+- 天才麻将少女 宫永咲VS天江衣 名对局
+  ![](pic/img0004.jpg)
+- MLeague 名场面 佐佐木寿人死亡二则
+  ![](pic/img0005.jpg)
+- 真·字一色
+  ![](pic/img0006.jpg)
+- 国标麻将理论最大牌型(总共224番, 总番数百位显示不出来)
+  ![](pic/img0007.jpg)
+- 立直麻将版血流成河模式
+  ![](pic/img0008.jpg)
