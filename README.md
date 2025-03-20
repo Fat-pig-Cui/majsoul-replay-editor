@@ -102,6 +102,8 @@
 
 4. 对于不符合要求的填写, 可能出现页面崩溃的问题(一般页面会卡住, 控制台会报错)
 
+5. 更多示例详见 [products](products) 文件夹下的自制牌谱, 也欢迎读者根据灵感制作自己的牌谱
+
 ## 演示截图(更多截图可见最后)
 
 ![](doc/pic/img0001.jpg)
@@ -124,7 +126,8 @@
 2. 更改回放的方法参考了B站 [一般通过彳亍人](https://space.bilibili.com/23019265)
    的 [BV1HE411Q7JM](https://www.bilibili.com/video/BV1HE411Q7JM)
 
-3. 血流成河的实现方式中的使牌颜色变淡参考了 greasyfork [2938137849](https://greasyfork.org/zh-CN/users/749724-2938137849)
+3. 血流成河的实现方式中的使牌颜色变淡参考了
+   greasyfork [2938137849](https://greasyfork.org/zh-CN/users/749724-2938137849)
    的 [雀魂麻将脚本](https://greasyfork.org/zh-CN/scripts/423689-%E9%9B%80%E9%AD%82%E9%BA%BB%E5%B0%86%E8%84%9A%E6%9C%AC)
 
 4. 有少部分代码来自于雀魂源码
@@ -141,7 +144,7 @@
         - guobiao.js 的编写(国标功能的实现)
         - override.js 重写函数的编写
         - 说明文档的重排优化, 细节补充
-        - 示例牌谱的大量补充, 及批处理脚本刷新牌谱的编写
+        - 自制牌谱的大量补充, 及批处理脚本刷新牌谱的编写
 
    版权归上述作者所有, 未经允许不得转载本文内容, 否则将视为侵权, 对于不遵守此声明或者其他违法使用本文内容者, 将依法保留追究权等
 
@@ -153,11 +156,11 @@
 
 - [【雀魂自制牌谱】一姬纯享版报菜名 升级版](https://www.bilibili.com/video/BV1w96LYWEzR)
   ![](doc/pic/img0003.jpg)
-- 天才麻将少女 宫永咲VS天江衣 名对局
+- 天才麻将少女 名对局 宫永咲VS天江衣
   ![](doc/pic/img0004.jpg)
 - MLeague 名场面 佐佐木寿人死亡二则
   ![](doc/pic/img0005.jpg)
-- 真·字一色
+- 真·字一色 (注意: 这里更改立绘使用到了 [Majsoul Plus](https://github.com/MajsoulPlus/majsoul-plus), 自制牌谱只实现了牌谱部分)
   ![](doc/pic/img0006.jpg)
 - 国标麻将理论最大牌型(总共224番, 总番数百位显示不出来)
   ![](doc/pic/img0007.jpg)
