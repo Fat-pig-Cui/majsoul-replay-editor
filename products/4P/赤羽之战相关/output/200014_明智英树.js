@@ -3,13 +3,13 @@ loadproject();
 // 为了方便编辑不考虑换三张的过程
 
 editdata.player_datas[0].nickname = "明智英树-契约";
-editdata.player_datas[1].nickname = "魇魔之约";
-editdata.player_datas[2].nickname = "命运之夏";
-editdata.player_datas[3].nickname = "佳期不负";
+editdata.player_datas[1].nickname = "命运之夏";
+editdata.player_datas[2].nickname = "佳期不负";
+editdata.player_datas[3].nickname = "云泉意暖";
 editdata.player_datas[0].avatar_id = 401402;
-editdata.player_datas[1].avatar_id = 401403;
-editdata.player_datas[2].avatar_id = 401404;
-editdata.player_datas[3].avatar_id = 401405;
+editdata.player_datas[1].avatar_id = 401404;
+editdata.player_datas[2].avatar_id = 401405;
+editdata.player_datas[3].avatar_id = 401406;
 
 editdata.player_datas[0].views = editdata.player_datas[1].views = editdata.player_datas[2].views = editdata.player_datas[3].views = [
     {"slot": 6, "item_id": 305810}, // 桌布-中光波——————！
