@@ -4,9 +4,11 @@
 
 [中文服官网](https://www.maj-soul.com), [日服官网](https://mahjongsoul.com), [美服官网](https://mahjongsoul.yo-star.com)
 
+B站视频教程: [【雀魂】如何自制牌谱回放](https://www.bilibili.com/video/BV1tJ6xY4E16)
+
 ## 免责声明: 由于这属于第三方脚本, 猫粮可能发威封号, 使用时请用小号登录实验, 个人对任何因封号等导致的损失概不负责
 
-账号被封的话可以用账号邮箱发邮件给猫粮(中文服是 **cs@maj-soul.com**), 申请注销账号, 对面发了确认通知后回复一下,
+账号被封的话可以用账号邮箱发邮件给猫粮(中文服是 **cs@catfoodstudio.com**), 申请注销账号, 对面发了确认通知后回复一下,
 15天之后就可以重新使用该邮箱注册了
 
 ## 使用方法
@@ -109,10 +111,6 @@
 ![](doc/pic/img0001.jpg)
 ![](doc/pic/img0002.jpg)
 
-## 已知BUG
-
-牌谱放映时, 除第一次外, 放映牌谱进入对局过程中在控制台会固定出现两次"404 (Not Found)"报错, 经检查这是猫粮自己的问题, 不用自制牌谱也有这报错
-
 ## TODO(欢迎contribute)
 
 - 研究"装扮预览"功能
@@ -159,9 +157,9 @@
   ![](doc/pic/img0004.jpg)
 - MLeague 名场面 佐佐木寿人死亡二则
   ![](doc/pic/img0005.jpg)
-- 真·字一色 (注意: 这里更改立绘使用到了 [Majsoul Plus](https://github.com/MajsoulPlus/majsoul-plus), 自制牌谱只实现了牌谱部分)
+- 真·字一色 (注意: 这里更改立绘使用到了 [Majsoul Plus](https://github.com/MajsoulPlus/majsoul-plus), 自制牌谱只实现了牌谱部分, 教程见 [README.md](./for_MJSP/README.md))
   ![](doc/pic/img0006.jpg)
-- 国标麻将理论最大牌型(总共224番, 总番数百位显示不出来)
+- 国标麻将不算花牌情况下理论最大牌型(总共224番, 总番数百位显示不出来)
   ![](doc/pic/img0007.jpg)
 - 立直麻将版血流成河模式
   ![](doc/pic/img0008.jpg)

@@ -2232,6 +2232,8 @@ function editgame(editdata) {
 var initData, resetData, checkPaiPu, load_my_desktop_view;
 
 function edit(x) {
+    // if (initData === undefined)
+    //     initData = uiscript.UI_Replay.prototype.initData;
     try {
         if (resetData === undefined)
             resetData = uiscript.UI_Replay.prototype.resetData;
@@ -2631,6 +2633,10 @@ function edit(x) {
 
 // 取消编辑
 function canceledit() {
+    // if (initData !== undefined)
+    //     uiscript.UI_Replay.prototype.initData = function (data) {
+    //         return initData.call(this, data);
+    //     }
     if (resetData !== undefined)
         uiscript.UI_Replay.prototype.resetData = function () {
             return resetData.call(this);
@@ -9133,3 +9139,41 @@ function combomopai(cnt = 1) {
         mopai();
     }
 }
+
+
+// =========================
+
+
+loadproject();
+
+editdata.player_datas[0].nickname = "八木唯-异想烂漫";
+editdata.player_datas[1].nickname = "悸动之夏";
+editdata.player_datas[2].nickname = "四方雀者";
+editdata.player_datas[3].nickname = "异想烂漫";
+editdata.player_datas[0].avatar_id = 400708;
+editdata.player_datas[1].avatar_id = 400706;
+editdata.player_datas[2].avatar_id = 400707;
+editdata.player_datas[3].avatar_id = 400708;
+
+editdata.config = {
+    'category': 1,
+    'meta': {'mode_id': 0},
+    'mode': {
+        'mode': 1,
+        'detail_rule': {
+            'init_point': 100000,
+        }
+    }
+};
+
+tiles0 = "9s1112223334447z";
+tiles1 = "1112340678999m";
+tiles2 = "1112340678999p";
+tiles3 = "1112223345599s";
+paishan = randompaishan("1z", "7565656567z7432z");
+roundbegin();
+qiepai("9s", true);
+mingqiepai("4s");
+mopai();
+combomopai(4);
+hupai();
