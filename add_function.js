@@ -1,11 +1,8 @@
 "use strict";
 
-// 由于更换了仓库中的 code.js 版本, 所以下面所在的行数很大概率已经不对了
-
 var view;
 
 function editfunction() {
-    // code.js 文件 129157 行 : ActionDiscardTile
     !function (O) {
         O.ActionDiscardTile = function (K) {
             function U() {
@@ -195,7 +192,6 @@ function editfunction() {
                 U;
         }(O.ActionBase)
     }(view || (view = {}));
-    // code.js 文件 260255 行 : ActionBabei
     !function (O) {
         O.ActionBabei = function (K) {
             function U() {
@@ -299,7 +295,7 @@ function editfunction() {
                 U;
         }(O.ActionBase)
     }(view || (view = {}));
-    // 自创函数: ActionHuleXueLiu, 改编自 code.js 文件 190038 行 : ActionHuleXueZhanMid
+    // 自创函数: ActionHuleXueLiu, 改编自 ActionHuleXueZhanMid
     !function (O) {
         O.ActionHuleXueLiu = function (K) {
             function U() {
@@ -437,7 +433,7 @@ function editfunction() {
                 U
         }(O.ActionBase)
     }(view || (view = {}));
-    // 自创函数: ActionHuleXueLiuEnd, 改编自 code.js 文件 147282 行 : ActionHuleXueZhanEnd
+    // 自创函数: ActionHuleXueLiuEnd, 改编自 ActionHuleXueZhanEnd
     !function (O) {
         O.ActionHuleXueLiuEnd = function (K) {
             function U() {
@@ -557,7 +553,6 @@ function editfunction() {
         }(O.ActionBase)
     }(view || (view = {}));
 
-    // code.js 244309 行
     var OnChoosedPai = view.ViewPai.prototype.OnChoosedPai;
     view.ViewPai.prototype.OnChoosedPai = function () {
         try {
@@ -875,7 +870,6 @@ function editfunction() {
     }
 }
 
-// code.js 文件 167319 行
 function editfunction2() {
     uiscript.UI_Replay.Inst.page_paishan.setInfo = function () {
         var z = uiscript;

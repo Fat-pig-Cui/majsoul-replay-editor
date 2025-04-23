@@ -15,8 +15,8 @@ get_title = db.get_title
 filename = "字典_template.md"
 tmp_filename = "字典.md"
 
-infile = open(filename, "r")
-outfile = open(tmp_filename, "w")
+infile = open(filename, "r", encoding='utf-8')
+outfile = open(tmp_filename, "w", encoding='utf-8')
 
 pattern1 = "Updated YYYY/MM/DD"
 
@@ -45,7 +45,7 @@ table_head = [
 
 
 def print_db():
-    if table_cnt == 0:  #  avatar_id
+    if table_cnt == 0:  # avatar_id
         outfile.write("|400000|默认皮肤(女)|\n|400001|默认皮肤(男)|\n")
         for char in chars:
             for skin in char["skin"]:

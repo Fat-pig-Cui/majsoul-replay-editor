@@ -9,12 +9,12 @@ import re
 # 这里 player_num 参数表示对局玩家数, 默认是四麻, 三麻参数填3就行
 def generator(player_num=4):
     # 作为模版的文件, 文件名是 template.js
-    infile = open("./template.js", "r")
+    infile = open("./template.js", "r", encoding='utf-8')
     if not os.path.exists("./output"):
         os.makedirs("./output")
 
     for index in range(len(chars)):
-        outfile = open("./output/" + outfile_names[index], "w")
+        outfile = open("./output/" + outfile_names[index], "w", encoding='utf-8')
         # flag_hand = True
         flag_views = True
         name_count = id_count = 0

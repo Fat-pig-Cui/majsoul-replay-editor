@@ -2415,8 +2415,11 @@ function edit(x) {
         // code.js 文件 263712 行 : GameMgr.Inst.checkPaiPu
         GameMgr.Inst.checkPaiPu = function (game_uuid, account_id, paipu_config, is_maka) {
             try {
-                // 添加下面6行
+                // 添加下面
                 DIY_fan();
+                if (typeof (guobiao_fanlist) !== "undefined")
+                    guobiao_fanlist();
+
                 if (cfg.item_definition.view.get(get_mjp_id()) !== undefined)
                     uiscript.UI_Sushe.now_mjp_id = get_mjp_id();
                 if (cfg.item_definition.view.get(get_mjpsurface_id()) !== undefined)
@@ -2425,6 +2428,7 @@ function edit(x) {
                 is_maka = false;
 
                 var H = GameMgr;
+                // 添加上面
 
                 var W = this;
                 return void 0 === is_maka && (is_maka = !1),

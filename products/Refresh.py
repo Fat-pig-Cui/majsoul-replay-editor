@@ -6,7 +6,12 @@ import os
 home = os.getcwd()
 
 file_name = "Generator.py"
-run_python = "python3 " + file_name
+
+if os.name == "nt":  # Windows 系统
+    run_python = "python " + file_name
+else:
+    run_python = "python3 " + file_name
+
 path_prefix = "4P/"
 paths = [
     "所有报菜名合集",
@@ -16,7 +21,12 @@ paths = [
 ]
 
 file_name_3P = "Generator_3P.py"
-run_python_3P = "python3 " + file_name_3P
+
+if os.name == "nt":  # Windows 系统
+    run_python_3P = "python " + file_name_3P
+else:
+    run_python_3P = "python3 " + file_name_3P
+
 path_prefix_3P = "3P/"
 paths_3P = [
     "对局操作语音合集",
@@ -36,9 +46,15 @@ for path_3P in paths_3P:
     os.chdir(home)
 
 os.chdir("4P/所有役满合集")
-os.system("python3 Generator_SP.py")
+if os.name == "nt":  # Windows 系统
+    os.system("python Generator_SP.py")
+else:
+    os.system("python3 Generator_SP.py")
 os.chdir(home)
 
 os.chdir("../doc/")
-os.system("python3 Generate_Dictionary.py")
+if os.name == "nt":  # Windows 系统
+    os.system("python Generate_Dictionary.py")
+else:
+    os.system("python3 Generate_Dictionary.py")
 os.chdir(home)

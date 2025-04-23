@@ -113,6 +113,7 @@ B站视频教程: [【雀魂】如何自制牌谱回放](https://www.bilibili.co
 
 ## TODO(欢迎contribute)
 
+- 实现Fate联动新活动场"背水之战"的牌谱回放功能
 - 研究"装扮预览"功能
 - 通过重写函数的方式自制真实牌谱的观战
 
@@ -135,7 +136,7 @@ B站视频教程: [【雀魂】如何自制牌谱回放](https://www.bilibili.co
         - add_function.js 重写函数的算法实现
         - 说明文档(wiki)的编写
         - 示例牌谱的编写
-    - [Fat-pig-Cui](https://github.com/Fat-pig-Cui) (维护者):
+    - [Fat-pig-Cui](https://github.com/Fat-pig-Cui) (本人, 维护者):
         - main.js 的功能的大量扩充
         - add_function.js 的维护
         - guobiao.js 的编写(国标功能的实现)

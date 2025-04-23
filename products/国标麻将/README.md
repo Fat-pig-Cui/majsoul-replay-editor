@@ -2,7 +2,7 @@
 
 与雀魂的立直麻将相比: 国标麻将**8番起和**, 有头跳, 无振听, 任何情况下没有连庄
 
-开启国标模式需要在 `'detail_rule'` 中注明 `'guobiao': true`
+开启国标模式需要在 `'detail_rule'` 中注明 `'guobiao': true`, 并导入 [guobiao.js](../../guobiao.js)
 
 以下番种主要根据 [雀渣平台](https://tziakcha.xyz) 规则(明暗杠设为5番, 有天地人和)
 

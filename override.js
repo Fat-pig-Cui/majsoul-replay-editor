@@ -1,4 +1,4 @@
-// code.js 文件 101910 行 : ActionAnGangAddGang, 修正6/9/12赤的暗杠
+// 修正6/9/12赤的暗杠
 !function (O) {
     O['ActionAnGangAddGang'] = function (K) {
         function U() {

@@ -29,17 +29,17 @@ for i in range(len(chars)):
     else:
         outfile_dirname.append(str(chars[i]['id']) + "_" + chars[i]['skin'][0]['name'])
     if not os.path.exists("./output/" + outfile_dirname[i]):
-        os.makedirs("./output/" + outfile_dirname[i])
+        os.makedirs("output/" + outfile_dirname[i])
 
 
 def generator_sp():
     for file_name in file_names:
-        infile = open("./" + file_name, "r")
+        infile = open("./" + file_name, "r", encoding='utf-8')
 
         tmp_nickname = []
         tmp_avatar_id = []
         for index in range(len(chars)):
-            outfile = open("./output/" + outfile_dirname[index] + "/" + file_name, "w")
+            outfile = open("./output/" + outfile_dirname[index] + "/" + file_name, "w", encoding='utf-8')
             # flag_hand = True
             flag_views = True
             name_count = id_count = 0
