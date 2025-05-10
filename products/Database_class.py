@@ -49,28 +49,33 @@ class Database_class:
         for char in self.chars:
             if char['id'] == char_id:
                 return char
+        return None
 
     def get_skin(self, skin_id):
         for char in self.chars:
             for skin in char['skin']:
                 if skin['id'] == skin_id:
                     return skin
+        return None
 
     def get_view(self, view_id):
         for slot in self.views:
             for item in slot['item']:
                 if item['id'] == view_id:
                     return item
+        return None
 
     def get_slot(self, slot_id):
         for slot in self.views:
             if slot['slot'] == slot_id:
                 return slot['item']
+        return None
 
     def get_title(self, title_id):
         for title in self.titles:
             if title['id'] == title_id:
                 return title
+        return None
 
 
 db = Database_class()

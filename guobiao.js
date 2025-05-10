@@ -6,7 +6,11 @@ var zhahu_points = 24;
 var scale_points = 100;
 
 // 国标麻将番种
+var guobiao_fanlist_once = true;
 function guobiao_fanlist() {
+    if (!guobiao_fanlist_once)
+        return;
+    guobiao_fanlist_once = false;
     cfg.fan.fan.map_[8000] = {
         "id": 8000,
         "name_chs": "大四喜",

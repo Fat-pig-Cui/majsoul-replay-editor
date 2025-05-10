@@ -27,7 +27,7 @@ B站视频教程: [【雀魂】如何自制牌谱回放](https://www.bilibili.co
 
 上面是简单的使用教程, 具体的修改教程要看下面的文档
 
-原repo用 [wiki](https://github.com/GrandDawn/majsoul-replay-editor/wiki) 的方式当做文档,
+原仓库用 [wiki](https://github.com/GrandDawn/majsoul-replay-editor/wiki) 的方式当做文档,
 我这里为了维护方便就把文档放到 [doc](doc) 文件夹下面了
 
 建议阅读顺序:
@@ -66,6 +66,7 @@ B站视频教程: [【雀魂】如何自制牌谱回放](https://www.bilibili.co
         - 咏唱之战
         - 魂之一击
         - 万象修罗
+        - 背水之战
     - 友人房规则:
         - 古役(包括一番街的, 详见 products 文件夹下的 [古役专题](products/古役专题))
         - 赤宝牌数量(四麻除了3/4赤以外, 还支持6/9/12赤, 后者的几种情况暗杠可能会显示异常,
@@ -108,13 +109,11 @@ B站视频教程: [【雀魂】如何自制牌谱回放](https://www.bilibili.co
 
 ## 演示截图(更多截图可见最后)
 
-![](doc/pic/img0001.jpg)
-![](doc/pic/img0002.jpg)
+![doc/pic/img0001.jpg](doc/pic/img0001.jpg)
+![doc/pic/img0002.jpg](doc/pic/img0002.jpg)
 
 ## TODO(欢迎contribute)
 
-- 实现Fate联动新活动场"背水之战"的牌谱回放功能
-- 研究"装扮预览"功能
 - 通过重写函数的方式自制真实牌谱的观战
 
 ## 版权声明
@@ -148,21 +147,21 @@ B站视频教程: [【雀魂】如何自制牌谱回放](https://www.bilibili.co
 
 6. 请不要在任何第三方网站下载该源代码, 否则后果自负
 
-7. 允许用途: 可以用于个人使用, 请勿用于商业用途, 谢谢配合, 请不要将 examples 文件夹下面的牌谱进行录制并宣传, 谢谢
+7. 请勿用于商业用途, 谢谢配合, 请不要将 examples 文件夹下面的牌谱进行录制并宣传, 谢谢
 
 ## 实机截图
 
 - [【雀魂自制牌谱】一姬纯享版报菜名 升级版](https://www.bilibili.com/video/BV1w96LYWEzR)
-  ![](doc/pic/img0003.jpg)
+  ![doc/pic/img0003.jpg](doc/pic/img0003.jpg)
 - 天才麻将少女 名对局 宫永咲VS天江衣
-  ![](doc/pic/img0004.jpg)
+  ![doc/pic/img0004.jpg](doc/pic/img0004.jpg)
 - MLeague 名场面 佐佐木寿人死亡二则
-  ![](doc/pic/img0005.jpg)
-- 真·字一色 (注意: 这里更改立绘使用到了 [Majsoul Plus](https://github.com/MajsoulPlus/majsoul-plus), 自制牌谱只实现了牌谱部分, 教程见 [README.md](./for_MJSP/README.md))
-  ![](doc/pic/img0006.jpg)
+  ![doc/pic/img0005.jpg](doc/pic/img0005.jpg)
+- 真·字一色 (注意: 这里更改立绘使用到了 [Majsoul Plus](https://github.com/MajsoulPlus/majsoul-plus), 自制牌谱只实现了牌谱部分, 教程见 [README.md](MJS_Plugin/README.md))
+  ![doc/pic/img0006.jpg](doc/pic/img0006.jpg)
 - 国标麻将不算花牌情况下理论最大牌型(总共224番, 总番数百位显示不出来)
-  ![](doc/pic/img0007.jpg)
+  ![doc/pic/img0007.jpg](doc/pic/img0007.jpg)
 - 立直麻将版血流成河模式
-  ![](doc/pic/img0008.jpg)
+  ![doc/pic/img0008.jpg](doc/pic/img0008.jpg)
 
 

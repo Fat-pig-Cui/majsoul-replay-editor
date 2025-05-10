@@ -1,412 +1,177 @@
 "use strict";
 
 // 回放用装扮
-const liqibangs = [
-    305001,  // 咸鱼立直棒
-    305002,  // 大葱立直棒
-    305003,  // 狗骨头立直棒
-    305004,  // 巧克力立直棒
-    305005,  // 邪眼立直棒
-    305006,  // 翡翠立直棒
-    305018,  // 猩红立直棒
-    305019,  // 24K金棒
-    305027,  // 立直棒-爆竹
-    305028,  // 立直棒-饺子
-    305041,  // 立直棒-断恶
-    305042,  // 立直棒-雪糕
-    305049,  // 立直棒-炎夏型一姬甜筒
-    305600,  // 立直棒-小恶魔蝙蝠
-    305601,  // 立直棒-魔法棒
-    305602,  // 立直棒-金龙鱼
-    305603,  // 立直棒-绯月荆棘
-    305604,  // 立直棒-乘风破浪
-    305605,  // 立直棒-应援棒
-    305606,  // 立直棒-冰糖葫芦(咸)
-    305607,  // 立直棒-仿生喵
-    305608,  // 立直棒-夹心猫团子
-    305609,  // 立直棒-虚无传送门
-    305610,  // 立直棒-喵切丸
-    305611,  // 立直棒-如意
-    305612,  // 立直棒-陨石法杖
-    305613,  // 立直棒-波子汽水
-    305614,  // 立直棒-仙境密匙
-    305615,  // 立直棒-柴犬团子
-    305616,  // 立直棒-魔法扫帚
-    305617,  // 立直棒-王者风范
-    305618,  // 立直棒-猫神剑玉
-    305619,  // 立直棒-可口喵乐
-    305620,  // 立直棒-秘传之卷
-    305621,  // 立直棒-盆栽
-    305622,  // 立直棒-包甜好瓜
-    305623,  // 立直棒-法棍面包
-    305624,  // 立直棒-学霸眼镜
-    305625,  // 立直棒-棒球英杰
-    305626,  // 立直棒-霓彩路标
-    308003,  // 立直棒-墨西哥卷饼
-    308008,  // 立直棒-生死之剑
-    308013,  // 立直棒-命悬一线
-    308018,  // 立直棒-恋之反省
-    308023,  // 立直棒-爱心便当
-    308028,  // 立直棒-骑士的钥匙
-    308033,  // 立直棒-红晖的魔杖
-    308038,  // 立直棒-大蛇比纳
-    30560001,  // 立直棒-喵星棒
-    30560002,  // 立直棒-夺笋
-    30560003,  // 立直棒-小鳄霸
-    30560004,  // 立直棒-童话绘梦
-    30560005,  // 立直棒-动听之源
-    30560006,  // 立直棒-立奇棒
-    30560007,  // 立直棒-青竹伞
+var liqibangs = [], hupais = [], liqis = [];
+var avatar_frames = [], tablecloths = [], titles = [];
+
+// 无法加载的装扮
+var invalid_frames = [
+    305501,  // 头像框-默认
+    305510,  // 头像框-四象战
+    305511,  // 头像框-四象战
+    305512,  // 头像框-四象战
+    305513,  // 头像框-四象战
+    305514,  // 头像框-四象战
+    305515,  // 头像框-四象战
+    305516,  // 头像框-四象战
+    305517,  // 头像框-四象战
+    305518,  // 头像框-四象战
+    305519,  // 头像框-四象战
+    305524,  // 头像框-四象战
+    305525,  // 双聖の眷属たち
+    305526,  // Team Championship Limited Portrait Frame
+    305527,  // 头像框-四象战
+    305528,  // 头像框-四象战
+    305530,  // 头像框-四象战
+    305531,  // 头像框-四象战
+    305532,  // 头像框-四象战
+    305533,  // 双聖の眷属たち
+    305534,  // 头像框-四象战
+    305535,  // 头像框-四象战
+    305536,  // 头像框-四象战
+    305538,  // 头像框-四象战
+    305539,  // 双聖の眷属たち
+    305540,  // 头像框-四象战
+    305541,  // 头像框-四象战
+    305543,  // 头像框-四象战
+    305544,  // 头像框-四象战
+    305546,  // 双聖の眷属たち
+    305547,  // 头像框-四象战
+    305548,  // 头像框-四象战
+    305549,  // 头像框-四象战
+    305550,  // 头像框-四象战
+    305553,  // 双聖の眷属たち
+    305555,  // 头像框-豆芽测试用
+    30550001,  // 头像框-四象战
+    30550002,  // 头像框-四象战
+    30550003,  // 头像框-四象战
+    30550004,  // 头像框-四象战
+    30550005,  // 头像框-四象战
+    30550006,  // 头像框-四象战
+    30550007,  // 双聖の眷属たち
+    30550008,  // 头像框-四象战
+    30550009,  // 头像框-四象战
+    30550010,  // 头像框-四象战
+    30550011,  // 头像框-四象战
+    30550013,  // 双聖の眷属たち
+    30550015,  // 头像框-四象战
+    30550018,  // Limited Portrait Frame
+    30550019,  // 프로필 테두리 - MKC 2025
+    30550024,  // 双聖の眷属たち
+];
+var invalid_titles = [
+    600017,  // 认证玩家
+    600025,  // 限时称号测试用
+    600026,  // 雀魂公認の選ばれしプレイヤーG
+    600029,  // インターハイ王者
+    600041,  // 最強鴉天狗の愛弟子
+    600043,  // Limited Title
+    600044,  // 花より団子
+    600048,  // 伝説の名コンビ
+    600049,  // 伝説の迷コンビ
+    600051,  // 虹懸かる右手
+    600055,  // 麻雀スクワッド
+    600066,  // みんな家族
+    600067,  // ぶいすぽ女傑
+    600069,  // インターハイ王者
+    600071,  // 煌めく女王の星
+    600072,  // 闘魂杯王者
+    600073,  // 華風戦優勝
+    600076,  // 雀魂インビ夏王者
+    600077,  // 雀魂インビ冬将軍
+    600081,  // 野鳥観察部
+    600082,  // ななしサンマ王
+    600085,  // ぶいすぽの頂
+    600087,  // 雀荘牌舞台
+    600088,  // 闘魂杯王者
+    600089,  // 麒麟位2024
+    600090,  // 四象战冠军
+    600091,  // 四象战冠军
+    600092,  // 四象战冠军
+    600093,  // 花ノ国 戦国最強
+    600095,  // 双聖戦優勝
+    600097,  // 雀魂インビ夏王者
+    600098,  // 限定称号
+    600099,  // 四象战冠军
+    600100,  // 四象战冠军
+    600102,  // 豪勇無双のまつたけ
+    600103,  // 華風戦優勝
+    600104,  // Limited Title
+    600105,  // MKC 2025 국사무쌍
+    600106,  // 四象战冠军
+    600109,  // 雀魂インビ冬将軍
+    600110,  // ぶいすぽの覇者
+    600111,  // プロ×魂天覇者
+    600114,  // あやまらないよ！
+    600115,  // 双聖戦優勝
 ];
 
-const hupais = [
-    305007,  // 和牌-烈焰
-    305008,  // 和牌-旋风
-    305009,  // 和牌-樱花
-    305023,  // 和牌-黑炎
-    305029,  // 和牌-烟花
-    305034,  // 和牌-爆炎龙卷
-    305035,  // 和牌-方舟反应堆
-    305036,  // 和牌-红玫瑰
-    305039,  // 和牌-K.O.
-    305040,  // 和牌-逆鳞
-    305200,  // 和牌-幽灵嗷嗷
-    305201,  // 和牌-歌剧魅影
-    305202,  // 和牌-魔法少女
-    305203,  // 和牌-阖家欢
-    305204,  // 和牌-群星之寂
-    305205,  // 和牌-厄里斯之瞳
-    305206,  // 和牌-天降正义
-    305207,  // 和牌-黄金之蝶
-    305208,  // 和牌-海浪的馈赠
-    305209,  // 和牌-安可
-    305210,  // 和牌-鸿运开年
-    305211,  // 和牌-核心裂变
-    305212,  // 和牌-无间契印
-    305213,  // 和牌-疾月斩
-    305215,  // 和牌-剑吟虎啸
-    305216,  // 和牌-槲寄生下
-    305217,  // 和牌-金屏春色
-    305218,  // 和牌-天罚
-    305219,  // 和牌-银链飞雪
-    305220,  // 和牌-泰山鸭顶
-    305221,  // 和牌-机械哲学
-    305222,  // 和牌-天地无用
-    305223,  // 和牌-衔环结草
-    305224,  // 和牌-黑洞
-    305225,  // 和牌-收割时刻
-    305226,  // 和牌-水之道
-    308001,  // 和牌-龙卷雷霆
-    308006,  // 和牌-命运之轮
-    308011,  // 和牌-地狱低语
-    308016,  // 和牌-恋之降临
-    308021,  // 和牌-高岭之花
-    308026,  // 和牌-绝对的命令
-    308031,  // 和牌-魔力的迸发
-    308036,  // 和牌-冷血射击
-    30520001,  // 和牌-杰克的恶作剧
-    30520002,  // 和牌-虚空结界
-    30520003,  // 和牌-墨韵
-    30520004,  // 和牌-伺机而动
-    30520005,  // 和牌-喵——呜！
-    30520006,  // 和牌-落羽涅槃
-    30520007,  // 和牌-涟漪之空
-    30520008,  // 和牌-得胜达摩
-];
+var update_views_once = true;
 
-const liqis = [
-    305010,  // 立直-苍火
-    305021,  // 立直-碎冰
-    305022,  // 立直-火焰
-    305032,  // 立直-幻影
-    305033,  // 立直-飞羽
-    305037,  // 立直-叮～
-    305038,  // 立直-龙腾
-    305300,  // 立直-蝙蝠桀桀
-    305301,  // 立直-非常事态
-    305302,  // 立直-魔法少女
-    305303,  // 立直-鼠生威
-    305304,  // 立直-星陨
-    305305,  // 立直-血·朗基努斯枪
-    305306,  // 立直-断罪
-    305307,  // 立直-蝶惑
-    305308,  // 立直-浪之声
-    305309,  // 立直-开场曲
-    305310,  // 立直-生财有道
-    305311,  // 立直-虚拟导航
-    305312,  // 立直-灵魂契约
-    305313,  // 立直-风华斩
-    305315,  // 立直-虎啸长风
-    305316,  // 立直-鹿雪冬至
-    305317,  // 立直-暗香梅影
-    305318,  // 立直-雷电环索
-    305319,  // 立直-蛇行诡道
-    305320,  // 立直-立直鸭
-    305321,  // 立直-量子智能
-    305322,  // 立直-毒烟玉
-    305323,  // 立直-狐缘之绊
-    305324,  // 立直-猫过留痕
-    305325,  // 立直-问心之镰
-    305326,  // 立直-滚雪球效应
-    308002,  // 立直-花天月地
-    308007,  // 立直-纸牌花火
-    308012,  // 立直-幽冥之焰
-    308017,  // 立直-恋之箭矢
-    308022,  // 立直-未来视
-    308027,  // 立直-王者的决意
-    308032,  // 立直-英灵的典仪
-    308037,  // 立直-虹色轨迹
-    30530001,  // 立直-南瓜夜行
-    30530002,  // 立直-星河入梦
-    30530003,  // 立直-挥毫
-    30530004,  // 立直-一步之遥
-    30530005,  // 立直-萌爪狂欢
-    30530006,  // 立直-有凤来仪
-    30530007,  // 立直-水漾星光
-    30530008,  // 立直-一锤定音
-];
+function update_views() {
+    if (!update_views_once)
+        return;
+    update_views_once = false;
 
-const avatar_frames = [
-    305500,  // 头像框-豆芽
-    // 305501,  // 头像框-默认
-    // 305510,  // 头像框-四象战
-    // 305511,  // 头像框-四象战
-    // 305512,  // 头像框-四象战
-    // 305513,  // 头像框-四象战
-    // 305514,  // 头像框-四象战
-    // 305515,  // 头像框-四象战
-    // 305516,  // 头像框-四象战
-    // 305517,  // 头像框-四象战
-    // 305518,  // 头像框-四象战
-    // 305519,  // 头像框-四象战
-    305520,  // 头像框-试炼强者
-    305521,  // 头像框-试炼贤者
-    305522,  // 头像框-试炼霸者
-    305523,  // 头像框-猫咪军团的身份
-    // 305524,  // 头像框-四象战
-    // 305525,  // 双聖の眷属たち
-    // 305526,  // Team Championship Limited Portrait Frame
-    // 305527,  // 头像框-四象战
-    // 305528,  // 头像框-四象战
-    305529,  // 头像框-秋霜切玉
-    // 305530,  // 头像框-四象战
-    // 305531,  // 头像框-四象战
-    // 305532,  // 头像框-四象战
-    // 305533,  // 双聖の眷属たち
-    // 305534,  // 头像框-四象战
-    // 305535,  // 头像框-四象战
-    // 305536,  // 头像框-四象战
-    305537,  // 头像框-圣堂百合
-    // 305538,  // 头像框-四象战
-    // 305539,  // 双聖の眷属たち
-    // 305540,  // 头像框-四象战
-    // 305541,  // 头像框-四象战
-    305542,  // 头像框-雪夜童话
-    // 305543,  // 头像框-四象战
-    // 305544,  // 头像框-四象战
-    305545,  // 头像框-窗外
-    // 305546,  // 双聖の眷属たち
-    // 305547,  // 头像框-四象战
-    // 305548,  // 头像框-四象战
-    // 305549,  // 头像框-四象战
-    // 305550,  // 头像框-四象战
-    305551,  // 头像框-丹心一寸
-    305552,  // 头像框-大小姐发带
-    // 305553,  // 双聖の眷属たち
-    // 305555,  // 头像框-豆芽测试用
-    // 30550001,  // 头像框-四象战
-    // 30550002,  // 头像框-四象战
-    // 30550003,  // 头像框-四象战
-    // 30550004,  // 头像框-四象战
-    // 30550005,  // 头像框-四象战
-    // 30550006,  // 头像框-四象战
-    // 30550007,  // 双聖の眷属たち
-    // 30550008,  // 头像框-四象战
-    // 30550009,  // 头像框-四象战
-    // 30550010,  // 头像框-四象战
-    // 30550011,  // 头像框-四象战
-    30550012,  // 头像框-赤丹霞羽
-    // 30550013,  // 双聖の眷属たち
-    30550014,  // 头像框-肉桂卷定位器
-    // 30550015,  // 头像框-四象战
-    30550016,  // 头像框-四象战
-    30550017,  // 头像框-一汪打尽
-    // 30550018, // Limited Portrait Frame
-    // 30550019, // 프로필 테두리 - MKC 2025
-    30550020, // 头像框-四象战
-    30550021, // 头像框-四象战
-    30550022, // 头像框-竹福滚滚
-    30550023, // 头像框-喵将军
-];
-
-const tablecloths = [
-    305012, // 孔雀绿桌布
-    305013, // 莲藕紫桌布
-    305014, // 紫罗兰桌布
-    305020, // 圣夜桌布
-    305024, // 新春桌布
-    305044, // 藏青桌布
-    305046, // 桌布-吃瓜
-    305048, // 桌布-雀魂祭一周年
-    305801, // 桌布-锦鲤游
-    305802, // 桌布-冲鸭！
-    305803, // 桌布-堆雪人
-    305804, // 桌布-贺华岁
-    305805, // 动态桌布-捞金鱼
-    305806, // 桌布-勇喵传说
-    305807, // 桌布-暖屋圣夜
-    305808, // 桌布-乾坤福袋
-    305809, // 动态桌布-紫霞海岸
-    305810, // 桌布-中光波——————！
-    305811, // 桌布-小黄鸭冲浪里
-    305812, // 桌布-仙境茶话会
-    305813, // 桌布-RML联赛
-    305814, // 桌布-去海边
-    305815, // 桌布-萌芽地
-    305816, // 桌布-花月夜
-    305817, // 桌布-萤火之森
-    305818, // 桌布-藤萝悦色
-    305819, // 酒红桌布
-    305820, // 炭灰桌布
-    308004, // 桌布-赛间小憩
-    308009, // 桌布-无双之花
-    308014, // 桌布-传说之夜
-    308019, // 桌布-恋之见证
-    308024, // 桌布-清凉假日
-    308029, // 桌布-魔女的契约
-    308034, // 桌布-星夜的羁绊
-    308039, // 桌布-什亭青空
-    308997, // 桌布-官方赛事麒麟战
-    308998, // 桌布-官方赛事四象战
-    308999, // 桌布-官方赛事
-    30580001, // 桌布-月圆传说
-    30580002, // 桌布-一番祥瑞录
-    30580003, // 桌布-熊猫观月
-    30580004, // 桌布-斗鱼纪念
-    30580005, // 桌布-预热开场
-    30580006, // 桌布-破茧
-    30580007, // 动态桌布-星间飞行
-    30580008, // 桌布-小恶魔日记
-    30580009, // 桌布-禁锢之武
-    30580010, // 桌布-官方赛事麒麟战
-    30580011, // 桌布-闪耀吧！
-    30580012, // 桌布-瑞雪祈狐
-    30580013, // Tablecloth - Catfood Bowl
-    30580014, // 작탁: MKC 2025
-    30580015, // 桌布-清辉竹影
-    30580016, // 桌布-锦绣余年
-]
-
-const titles = [
-    // 600001,  // 无称号
-    600002,  // 原初之火
-    600003,  // 萤火之光
-    600004,  // 最初的雀圣 四麻
-    600005,  // 魂之契约者 初阶
-    600006,  // 魂之契约者 中阶
-    600007,  // 魂之契约者 高阶
-    600008,  // 魂之启迪者 初阶
-    600009,  // 魂之启迪者 中阶
-    600010,  // 魂之启迪者 高阶
-    600011,  // 魂之缔造者 初阶
-    600012,  // 魂之缔造者 中阶
-    600013,  // 魂之缔造者 高阶
-    600014,  // 魂之超越者
-    600015,  // 猫粮供应商
-    600016,  // 最初的魂天 四麻
-    // 600017,  // 认证玩家
-    600018,  // 12Dora
-    600019,  // 杆菌无敌
-    600020,  // 佐仓沙耶加
-    600021,  // 喵国大护法
-    600022,  // 最初的雀圣 三麻
-    600023,  // 最初的魂天 三麻
-    600024,  // 2434初代優勝
-    // 600025,  // 限时称号测试用
-    // 600026,  // 雀魂公認の選ばれしプレイヤーG
-    600027,  // 万象更新
-    600028,  // 试炼之道S1纪念
-    // 600029,  // インターハイ王者
-    600031,  // 成长之旅
-    600032,  // 连胜之道
-    600033,  // 星罗云布
-    600034,  // 天选之证
-    600035,  // 千锤百炼
-    600036,  // 牌桌见闻
-    600037,  // 良好市民
-    600038,  // 神社贵宾
-    600039,  // 森罗万象
-    600040,  // 千客万来
-    // 600041,  // 最強鴉天狗の愛弟子
-    600042,  // 麒麟位2021
-    // 600043,  // Limited Title
-    // 600044,  // 花より団子
-    600045,  // 一姬当千
-    600046,  // 逍遥散人
-    600047,  // 火龙果说电影
-    // 600048,  // 伝説の名コンビ
-    // 600049,  // 伝説の迷コンビ
-    600050,  // 麒麟位2021
-    // 600051,  // 虹懸かる右手
-    600052,  // 斗鱼雀神杯冠军
-    600053,  // 麒麟位2022
-    600054,  // 天元北斗
-    // 600055,  // 麻雀スクワッド
-    600056,  // B.league S1冠军
-    600064,  // 天元北斗
-    600065,  // 斗鱼雀神杯冠军
-    // 600066,  // みんな家族
-    // 600067,  // ぶいすぽ女傑
-    600068,  // 火龙果杯总冠军
-    // 600069,  // インターハイ王者
-    600070,  // 麒麟位2022
-    // 600071,  // 煌めく女王の星
-    // 600072,  // 闘魂杯王者
-    // 600073,  // 華風戦優勝
-    600074,  // 麒麟位2023
-    600075,  // RMLS1总冠军
-    // 600076,  // 雀魂インビ夏王者
-    // 600077,  // 雀魂インビ冬将軍
-    600078,  // 喵之一手
-    600079,  // 斗鱼雀神杯冠军
-    600080,  // 火龙果杯总冠军
-    // 600081,  // 野鳥観察部
-    // 600082,  // ななしサンマ王
-    600083,  // 斗鱼雀神杯个人赛冠军
-    600084,  // 斗鱼鬼神杯S3
-    // 600085,  // ぶいすぽの頂
-    600086,  // 麒麟位2023
-    // 600087,  // 雀荘牌舞台
-    // 600088,  // 闘魂杯王者
-    // 600089,  // 麒麟位2024
-    // 600090,  // 四象战冠军
-    // 600091,  // 四象战冠军
-    // 600092,  // 四象战冠军
-    // 600093,  // 花ノ国 戦国最強
-    600094,  // 青云之志
-    // 600095,  // 双聖戦優勝
-    600096,  // 820邹倚天
-    // 600097,  // 雀魂インビ夏王者
-    // 600098,  // 限定称号
-    // 600099,  // 四象战冠军
-    // 600100,  // 四象战冠军
-    600101,  // 神社杯S11冠军
-    // 600102,  // 豪勇無双のまつたけ
-    // 600103,  // 華風戦優勝
-    // 600104,  // Limited Title
-    // 600105,  // MKC 2025 국사무쌍
-    // 600106,  // 四象战冠军
-    600107,  // 四象战冠军
-    600108,  // 麒麟位2024
-    // 600109,  // 雀魂インビ冬将軍
-    // 600110,  // ぶいすぽの覇者
-    // 600111, // プロ×魂天覇者
-    600112,  // 喵国大将军
-    600113,  // 喵国至尊
-];
+    let slots = [0, 1, 2, 5, 6];
+    let ITEM = cfg.item_definition.item.rows_;
+    let TITLE = cfg.item_definition.title.rows_;
+    for (let i = 0; i < ITEM.length; i++) {
+        if (ITEM[i].name_chs === "(已过期)")
+            continue;
+        let category = ITEM[i].category, item_slot = ITEM[i].type;
+        let same_slot = false;
+        for (let j = 0; j < slots.length; j++)
+            if (slots[j] === item_slot)
+                same_slot = true;
+        if (category === 5 && same_slot) {
+            let is_banned = false;
+            switch (item_slot) {
+                case 0:
+                    liqibangs.push(ITEM[i].id);
+                    break;
+                case 1:
+                    hupais.push(ITEM[i].id);
+                    break;
+                case 2:
+                    liqis.push(ITEM[i].id);
+                    break;
+                case 5:
+                    for (let j = 0; j < invalid_frames.length; j++)
+                        if (invalid_frames[j] === ITEM[i].id) {
+                            is_banned = true;
+                            break;
+                        }
+                    if (!is_banned)
+                        avatar_frames.push(ITEM[i].id);
+                    break;
+                case 6:
+                    tablecloths.push(ITEM[i].id);
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
+    for (let i = 0; i < TITLE.length; i++) {
+        let is_banned = false;
+        for (let j = 0; j < invalid_titles.length; j++)
+            if (TITLE[i].id === invalid_titles[j]) {
+                is_banned = true;
+                break;
+            }
+        if (!is_banned)
+            titles.push(TITLE[i].id)
+    }
+}
 
 // 自定义役种: 役种名称的汉字需要在已有的里面选, 否则不会显示
+var DIY_fan_once = true;
+
 function DIY_fan() {
+    if (!DIY_fan_once)
+        return;
+    DIY_fan_once = false;
     // 9000: 诈和, 因为"诈"字无法显示, 名称改为"振和"
     // 9001: 天地创造: 因为"创造"二字无法显示, 名称改为"天地大白"
     // 9002: 万物生长: 因为"万生长"三字无法显示, 名称改为"龙发杠载"
@@ -2003,7 +1768,6 @@ function DIY_fan() {
     };
 }
 
-
 // md5 计算函数, 与牌谱回放关系不大
 function md5(string) {
     function md5_RotateLeft(lValue, iShiftBits) {
@@ -2361,15 +2125,6 @@ function edit(x) {
             return uiscript.UI_Sushe.now_mjp_surface_id;
         }
 
-        // 重写 initData 主要是为了切换视角时数据不复原, 如果不需要切换视角则可以不用管
-        // uiscript.UI_Replay.prototype.initData = function (data) {
-        //     let _ = initData.call(this, data);
-        //     if (typeof (editfunction2) !== "undefined")
-        //         editfunction2();
-        //     editgame(x);
-        //     return _;
-        // }
-
         // 重写 resetData 主要是为了切换视角时数据不复原, 如果不需要切换视角则可以不用管
         uiscript.UI_Replay.prototype.resetData = function () {
             let _ = resetData.call(this);
@@ -2412,11 +2167,11 @@ function edit(x) {
                 }), U);
         }
 
-        // code.js 文件 263712 行 : GameMgr.Inst.checkPaiPu
         GameMgr.Inst.checkPaiPu = function (game_uuid, account_id, paipu_config, is_maka) {
             try {
                 // 添加下面
                 DIY_fan();
+                update_views();
                 if (typeof (guobiao_fanlist) !== "undefined")
                     guobiao_fanlist();
 
@@ -2576,6 +2331,7 @@ function edit(x) {
                                                             editfunction2();
                                                         if (x.config.mode.mode > 20)
                                                             view.DesktopMgr.Inst.rule_mode = view.ERuleMode.Liqi2;
+
                                                         uiscript['UI_Replay'].Inst['initMaka'](false, false),
                                                             uiscript['UI_Replay'].Inst['initData'](H),
                                                             // 添加下面1行
@@ -2746,6 +2502,71 @@ var nxt2 = [0, 2, 3, 4, 5, 6, 7, 8, 9, 35, 11, 12, 13, 14, 15, 16, 17, 18, 35, 2
 var doranxt = [0, 2, 3, 4, 5, 6, 7, 8, 9, 1, 11, 12, 13, 14, 15, 16, 17, 18, 10, 20, 21, 22, 23, 24, 25, 26, 27, 19, 29, 30, 31, 28, 33, 34, 32];
 var dora_spell = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34];
 
+// 舍张振听
+function updatepreshezhang(seat) {
+    if (!is_chuanma() && !is_guobiao() && !no_zhenting()) {
+        // 舍张振听判断
+        shezhangzhenting[seat] = false;
+        let tingpais = calctingpai(seat);
+        for (let i = 0; i < tingpais.length; i++)
+            for (let j = 0; j < paihe[seat].tiles.length; j++)
+                if (equaltile(tingpais[i].tile, paihe[seat].tiles[j]))
+                    shezhangzhenting[seat] = true;
+        updatezhenting();
+    }
+}
+
+// leimingpai 不会造成舍张振听, 所以只有同巡和立直
+// 此外, 暗杠只有国士听牌才有可能导致其他玩家振听
+function updateprezhenting_2(seat, tile, is_angang = false) {
+    if (!is_chuanma() && !is_guobiao() && !no_zhenting()) {
+        // 其他家同巡振听预判断
+        for (let i = 0; i < playercnt; i++) {
+            if (i === seat)
+                continue;
+            let tingpais_i = calctingpai(i);
+            for (let j = 0; j < tingpais_i.length; j++)
+                if (equaltile(tile, tingpais_i[j].tile)) {
+                    if (!is_angang) {
+                        pretongxunzhenting[i] = true;
+                        break;
+                    } else {
+                        let tiles = playertiles[i];
+                        tiles.push(tile);
+                        if (calchupai(tiles) === 3) {
+                            pretongxunzhenting[i] = true;
+                            tiles.length--;
+                            break;
+                        }
+                        tiles.length--;
+                    }
+                }
+        }
+        // 其他家立直振听预判断
+        for (let i = 0; i < playercnt; i++) {
+            if (liqiinfo[i].liqi === 0)
+                continue;
+            let tingpais_i = calctingpai(i);
+            for (let j = 0; j < tingpais_i.length; j++)
+                if (equaltile(tile, tingpais_i[j].tile)) {
+                    if (!is_angang) {
+                        prelizhizhenting[i] = true;
+                        break;
+                    } else {
+                        let tiles = playertiles[i];
+                        tiles.push(tile);
+                        if (calchupai(tiles) === 3) {
+                            prelizhizhenting[i] = true;
+                            tiles.length--;
+                            break;
+                        }
+                        tiles.length--;
+                    }
+                }
+        }
+        updatezhenting();
+    }
+}
 
 function updatezhenting() {
     for (let i = 0; i < playercnt; i++)
@@ -7095,8 +6916,6 @@ function mopai(seat, index) {
         addFillAwaitingTiles(calcdoras(), seat, awaiting_tiles, paishan_len() - 14 + awaiting_tiles.length, liqi);
     }
 
-    // 摸牌解除同巡振听
-    pretongxunzhenting[seat] = tongxunzhenting[seat] = false;
     // pass掉上个操作的牌的, pre同巡振听和pre立直振听 转 真实振听
     for (let i = 0; i < playercnt; i++) {
         if (pretongxunzhenting[i])
@@ -7104,6 +6923,8 @@ function mopai(seat, index) {
         if (prelizhizhenting[i])
             lizhizhenting[i] = true;
     }
+    // 摸牌解除同巡振听
+    pretongxunzhenting[seat] = tongxunzhenting[seat] = false;
     updatezhenting();
 
     if (is_hunzhiyiji() && hunzhiyiji_info[seat].yifa)
@@ -7335,39 +7156,10 @@ function qiepai(seat, kind, is_liqi, anpai, beishui_type) {
             else
                 addDiscardTile(is_liqi, is_wliqi, calcdoras(), false, seat, kind, calctingpai(seat), tile_state, is_kailiqi, beishui_type);
 
-            if (!is_chuanma() && !is_guobiao() && !no_zhenting()) {
-                let tile = kind;
-                // 舍张振听判断
-                shezhangzhenting[seat] = false;
-                let tingpais = calctingpai(seat);
-                for (let i = 0; i < tingpais.length; i++)
-                    for (let j = 0; j < paihe[seat].tiles.length; j++)
-                        if (equaltile(tingpais[i].tile, paihe[seat].tiles[j]))
-                            shezhangzhenting[seat] = true;
-                // 其他家同巡振听预判断
-                for (let i = 0; i < playercnt; i++) {
-                    if (i === seat)
-                        continue;
-                    let tingpais_i = calctingpai(i);
-                    for (let j = 0; j < tingpais_i.length; j++)
-                        if (equaltile(tile, tingpais_i[j].tile)) {
-                            pretongxunzhenting[i] = true;
-                            break;
-                        }
-                }
-                // 其他家立直振听预判断
-                for (let i = 0; i < playercnt; i++) {
-                    if (liqiinfo[i].liqi === 0)
-                        continue;
-                    let tingpais_i = calctingpai(i);
-                    for (let j = 0; j < tingpais_i.length; j++)
-                        if (equaltile(tile, tingpais_i[j].tile)) {
-                            prelizhizhenting[i] = true;
-                            break;
-                        }
-                }
-                updatezhenting();
-            }
+            let tile = kind;
+
+            updatepreshezhang(seat);
+            updateprezhenting_2(seat, tile);
         }
         saveproject();
         return true;
@@ -7388,38 +7180,8 @@ function qiepai(seat, kind, is_liqi, anpai, beishui_type) {
         else {
             addDiscardTile(is_liqi, is_wliqi, calcdoras(), false, seat, tile, calctingpai(seat), tile_state, is_kailiqi, beishui_type);
 
-            if (!is_chuanma() && !is_guobiao() && !no_zhenting()) {
-                // 舍张振听判断
-                shezhangzhenting[seat] = false;
-                let tingpais = calctingpai(seat);
-                for (let i = 0; i < tingpais.length; i++)
-                    for (let j = 0; j < paihe[seat].tiles.length; j++)
-                        if (equaltile(tingpais[i].tile, paihe[seat].tiles[j]))
-                            shezhangzhenting[seat] = true;
-                // 其他家同巡振听预判断
-                for (let i = 0; i < playercnt; i++) {
-                    if (i === seat)
-                        continue;
-                    let tingpais_i = calctingpai(i);
-                    for (let j = 0; j < tingpais_i.length; j++)
-                        if (equaltile(tile, tingpais_i[j].tile)) {
-                            pretongxunzhenting[i] = true;
-                            break;
-                        }
-                }
-                // 其他家立直振听预判断
-                for (let i = 0; i < playercnt; i++) {
-                    if (liqiinfo[i].liqi === 0)
-                        continue;
-                    let tingpais_i = calctingpai(i);
-                    for (let j = 0; j < tingpais_i.length; j++)
-                        if (equaltile(tile, tingpais_i[j].tile)) {
-                            prelizhizhenting[i] = true;
-                            break;
-                        }
-                }
-                updatezhenting();
-            }
+            updatepreshezhang(seat);
+            updateprezhenting_2(seat, tile);
         }
         saveproject();
         return true;
@@ -7439,38 +7201,8 @@ function qiepai(seat, kind, is_liqi, anpai, beishui_type) {
         else {
             addDiscardTile(is_liqi, is_wliqi, calcdoras(), true, seat, tile, calctingpai(seat), tile_state, is_kailiqi, beishui_type);
 
-            if (!is_chuanma() && !is_guobiao() && !no_zhenting()) {
-                // 舍张振听判断
-                shezhangzhenting[seat] = false;
-                let tingpais = calctingpai(seat);
-                for (let i = 0; i < tingpais.length; i++)
-                    for (let j = 0; j < paihe[seat].tiles.length; j++)
-                        if (equaltile(tingpais[i].tile, paihe[seat].tiles[j]))
-                            shezhangzhenting[seat] = true;
-                // 其他家同巡振听预判断
-                for (let i = 0; i < playercnt; i++) {
-                    if (i === seat)
-                        continue;
-                    let tingpais_i = calctingpai(i);
-                    for (let j = 0; j < tingpais_i.length; j++)
-                        if (equaltile(tile, tingpais_i[j].tile)) {
-                            pretongxunzhenting[i] = true;
-                            break;
-                        }
-                }
-                // 其他家立直振听预判断
-                for (let i = 0; i < playercnt; i++) {
-                    if (liqiinfo[i].liqi === 0)
-                        continue;
-                    let tingpais_i = calctingpai(i);
-                    for (let j = 0; j < tingpais_i.length; j++)
-                        if (equaltile(tile, tingpais_i[j].tile)) {
-                            prelizhizhenting[i] = true;
-                            break;
-                        }
-                }
-                updatezhenting();
-            }
+            updatepreshezhang(seat);
+            updateprezhenting_2(seat, tile);
         }
         saveproject();
         return true;
@@ -7666,8 +7398,6 @@ function mingpai(seat, tiles) {
         return;
     }
 
-    // 自家鸣牌解除同巡振听
-    pretongxunzhenting[seat] = tongxunzhenting[seat] = false;
     // pass掉上个操作的牌的, pre同巡振听和pre立直振听 转 真实振听
     for (let i = 0; i < playercnt; i++) {
         if (pretongxunzhenting[i])
@@ -7675,6 +7405,8 @@ function mingpai(seat, tiles) {
         if (prelizhizhenting[i])
             lizhizhenting[i] = true;
     }
+    // 自家鸣牌解除同巡振听
+    pretongxunzhenting[seat] = tongxunzhenting[seat] = false;
     updatezhenting();
 
     let lstaction = getlstaction();
@@ -7719,7 +7451,7 @@ function mingpai(seat, tiles) {
             'seat': lstliqi.seat
         };
         if (is_beishuizhizhan())
-                liqi.liqi_type_beishuizhizhan = liqiinfo[lstliqi.seat].beishui_type = lstliqi.beishui_type;
+            liqi.liqi_type_beishuizhizhan = liqiinfo[lstliqi.seat].beishui_type = lstliqi.beishui_type;
     }
     for (let i = 0; i < playercnt; i++)
         liqiinfo[i].yifa = 0;
@@ -7893,32 +7625,8 @@ function leimingpai(seat, tile, type, first) {
         drawtype = 0;
         addBaBei(calcdoras(), seat, tile, tile_states);
 
-        if (!is_chuanma() && !is_guobiao() && !no_zhenting()) {
-            // leimingpai 不会造成舍张振听
-            // 其他家同巡振听预判断
-            for (let i = 0; i < playercnt; i++) {
-                if (i === seat)
-                    continue;
-                let tingpais_i = calctingpai(i);
-                for (let j = 0; j < tingpais_i.length; j++)
-                    if (equaltile(tile, tingpais_i[j].tile)) {
-                        pretongxunzhenting[i] = true;
-                        break;
-                    }
-            }
-            // 其他家立直振听预判断
-            for (let i = 0; i < playercnt; i++) {
-                if (liqiinfo[i].liqi === 0)
-                    continue;
-                let tingpais_i = calctingpai(i);
-                for (let j = 0; j < tingpais_i.length; j++)
-                    if (equaltile(tile, tingpais_i[j].tile)) {
-                        prelizhizhenting[i] = true;
-                        break;
-                    }
-            }
-            updatezhenting();
-        }
+        updateprezhenting_2(seat, tile);
+
         saveproject();
         return true;
     }
@@ -7961,44 +7669,8 @@ function leimingpai(seat, tile, type, first) {
         }
         addAnGangAddGang(calcdoras(), seat, tile, 3, tile_states);
 
-        if (!is_chuanma() && !is_guobiao() && !no_zhenting()) {
-            // 暗杠只有国士听牌才有可能导致振听
-            // 其他家同巡振听预判断
-            for (let i = 0; i < playercnt; i++) {
-                if (i === seat)
-                    continue;
-                let tingpais_i = calctingpai(i);
-                for (let j = 0; j < tingpais_i.length; j++)
-                    if (equaltile(tile, tingpais_i[j].tile)) {
-                        let tiles = playertiles[i];
-                        tiles.push(tile);
-                        if (calchupai(tiles) === 3) {
-                            pretongxunzhenting[i] = true;
-                            tiles.length--;
-                            break;
-                        }
-                        tiles.length--;
-                    }
-            }
-            // 其他家立直振听预判断
-            for (let i = 0; i < playercnt; i++) {
-                if (liqiinfo[i].liqi === 0)
-                    continue;
-                let tingpais_i = calctingpai(i);
-                for (let j = 0; j < tingpais_i.length; j++)
-                    if (equaltile(tile, tingpais_i[j].tile)) {
-                        let tiles = playertiles[i];
-                        tiles.push(tile);
-                        if (calchupai(tiles) === 3) {
-                            prelizhizhenting[i] = true;
-                            tiles.length--;
-                            break;
-                        }
-                        tiles.length--;
-                    }
-            }
-            updatezhenting();
-        }
+        updateprezhenting_2(seat, tile, true);
+
         saveproject();
         return true;
     }
@@ -8043,31 +7715,8 @@ function leimingpai(seat, tile, type, first) {
         }
         addAnGangAddGang(calcdoras(), seat, tile, 2, tile_states);
 
-        if (!is_chuanma() && !is_guobiao() && !no_zhenting()) {
-            // 其他家同巡振听预判断
-            for (let i = 0; i < playercnt; i++) {
-                if (i === seat)
-                    continue;
-                let tingpais_i = calctingpai(i);
-                for (let j = 0; j < tingpais_i.length; j++)
-                    if (equaltile(tile, tingpais_i[j].tile)) {
-                        pretongxunzhenting[i] = true;
-                        break;
-                    }
-            }
-            // 其他家立直振听预判断
-            for (let i = 0; i < playercnt; i++) {
-                if (liqiinfo[i].liqi === 0)
-                    continue;
-                let tingpais_i = calctingpai(i);
-                for (let j = 0; j < tingpais_i.length; j++)
-                    if (equaltile(tile, tingpais_i[j].tile)) {
-                        prelizhizhenting[i] = true;
-                        break;
-                    }
-            }
-            updatezhenting();
-        }
+        updateprezhenting_2(seat, tile);
+
         saveproject();
         return true;
     }
@@ -8082,32 +7731,8 @@ function leimingpai(seat, tile, type, first) {
         drawtype = 0;
         addBaBei(calcdoras(), seat, tile, tile_states);
 
-        if (!is_chuanma() && !is_guobiao() && !no_zhenting()) {
-            // leimingpai 不会造成舍张振听
-            // 其他家同巡振听预判断
-            for (let i = 0; i < playercnt; i++) {
-                if (i === seat)
-                    continue;
-                let tingpais_i = calctingpai(i);
-                for (let j = 0; j < tingpais_i.length; j++)
-                    if (equaltile(tile, tingpais_i[j].tile)) {
-                        pretongxunzhenting[i] = true;
-                        break;
-                    }
-            }
-            // 其他家立直振听预判断
-            for (let i = 0; i < playercnt; i++) {
-                if (liqiinfo[i].liqi === 0)
-                    continue;
-                let tingpais_i = calctingpai(i);
-                for (let j = 0; j < tingpais_i.length; j++)
-                    if (equaltile(tile, tingpais_i[j].tile)) {
-                        prelizhizhenting[i] = true;
-                        break;
-                    }
-            }
-            updatezhenting();
-        }
+        updateprezhenting_2(seat, tile);
+
         saveproject();
         return true;
     }
@@ -8729,269 +8354,10 @@ function randompaishan(paishanhead = "", paishanback = "", reddora) {
     }
 
     tiles.sort(randomcmp);
-    paishanhead = paishanhead.split('');
-    for (let i = 0; i < paishanhead.length; i++) {
-        if (paishanhead[i] === 'H') { // 字牌
-            for (let j = 0; j < tiles.length; j++) {
-                if (tiles[j][1] === 'z') {
-                    let tmp = tiles[j];
-                    tiles[j] = tiles[tiles.length - 1];
-                    tiles[tiles.length - 1] = tmp;
-                    break;
-                }
-            }
-            paishanhead[i] = tiles[tiles.length - 1][0];
-            paishanhead[i + 1] = tiles[tiles.length - 1][1];
-            if (tiles[tiles.length - 1].length > 2 && tiles[tiles.length - 1][2] === tile_suf) {
-                insert_paishan(paishanhead, i + 2, tile_suf);
-                i++;
-            }
-            tiles.length--;
-        } else if (paishanhead[i] === 'T') { // 老头牌
-            for (let j = 0; j < tiles.length; j++) {
-                if (tiles[j][0] === '1' && tiles[j][1] !== 'z' || tiles[j][0] === '9') {
-                    let tmp = tiles[j];
-                    tiles[j] = tiles[tiles.length - 1];
-                    tiles[tiles.length - 1] = tmp;
-                    break;
-                }
-            }
-            paishanhead[i] = tiles[tiles.length - 1][0];
-            paishanhead[i + 1] = tiles[tiles.length - 1][1];
-            if (tiles[tiles.length - 1].length > 2 && tiles[tiles.length - 1][2] === tile_suf) {
-                insert_paishan(paishanhead, i + 2, tile_suf);
-                i++;
-            }
-            tiles.length--;
-        }
-    }
-    for (let i = 0; i < paishanhead.length; i++) {
-        if (paishanhead[i] === 'Y') { // 幺九牌
-            for (let j = 0; j < tiles.length; j++) {
-                if (tiles[j][0] === '1' || tiles[j][0] === '9' || tiles[j][1] === 'z') {
-                    let tmp = tiles[j];
-                    tiles[j] = tiles[tiles.length - 1];
-                    tiles[tiles.length - 1] = tmp;
-                    break;
-                }
-            }
-            paishanhead[i] = tiles[tiles.length - 1][0];
-            paishanhead[i + 1] = tiles[tiles.length - 1][1];
-            if (tiles[tiles.length - 1].length > 2 && tiles[tiles.length - 1][2] === tile_suf) {
-                insert_paishan(paishanhead, i + 2, tile_suf);
-                i++;
-            }
-            tiles.length--;
-        } else if (paishanhead[i] === 'D') { // 中张牌
-            for (let j = 0; j < tiles.length; j++) {
-                if (!(tiles[j][0] === '1' || tiles[j][0] === '9' || tiles[j][1] === 'z')) {
-                    let tmp = tiles[j];
-                    tiles[j] = tiles[tiles.length - 1];
-                    tiles[tiles.length - 1] = tmp;
-                    break;
-                }
-            }
-            paishanhead[i] = tiles[tiles.length - 1][0];
-            paishanhead[i + 1] = tiles[tiles.length - 1][1];
-            if (tiles[tiles.length - 1].length > 2 && tiles[tiles.length - 1][2] === tile_suf) {
-                insert_paishan(paishanhead, i + 2, tile_suf);
-                i++;
-            }
-            tiles.length--;
-        } else if (paishanhead[i] === 'M') { // 万子
-            for (let j = 0; j < tiles.length; j++) {
-                if (tiles[j][1] === 'm') {
-                    let tmp = tiles[j];
-                    tiles[j] = tiles[tiles.length - 1];
-                    tiles[tiles.length - 1] = tmp;
-                    break;
-                }
-            }
-            paishanhead[i] = tiles[tiles.length - 1][0];
-            paishanhead[i + 1] = tiles[tiles.length - 1][1];
-            if (tiles[tiles.length - 1].length > 2 && tiles[tiles.length - 1][2] === tile_suf) {
-                insert_paishan(paishanhead, i + 2, tile_suf);
-                i++;
-            }
-            tiles.length--;
-        } else if (paishanhead[i] === 'P') { // 饼子
-            for (let j = 0; j < tiles.length; j++) {
-                if (tiles[j][1] === 'p') {
-                    let tmp = tiles[j];
-                    tiles[j] = tiles[tiles.length - 1];
-                    tiles[tiles.length - 1] = tmp;
-                    break;
-                }
-            }
-            paishanhead[i] = tiles[tiles.length - 1][0];
-            paishanhead[i + 1] = tiles[tiles.length - 1][1];
-            if (tiles[tiles.length - 1].length > 2 && tiles[tiles.length - 1][2] === tile_suf) {
-                insert_paishan(paishanhead, i + 2, tile_suf);
-                i++;
-            }
-            tiles.length--;
-        } else if (paishanhead[i] === 'S') { // 索子
-            for (let j = 0; j < tiles.length; j++) {
-                if (tiles[j][1] === 's') {
-                    let tmp = tiles[j];
-                    tiles[j] = tiles[tiles.length - 1];
-                    tiles[tiles.length - 1] = tmp;
-                    break;
-                }
-            }
-            paishanhead[i] = tiles[tiles.length - 1][0];
-            paishanhead[i + 1] = tiles[tiles.length - 1][1];
-            if (tiles[tiles.length - 1].length > 2 && tiles[tiles.length - 1][2] === tile_suf) {
-                insert_paishan(paishanhead, i + 2, tile_suf);
-                i++;
-            }
-            tiles.length--;
-        }
-    }
-    for (let i = 0; i < paishanhead.length; i++) {
-        if (paishanhead[i] === '.') { // 任意其他牌
-            paishanhead[i] = tiles[tiles.length - 1][0];
-            paishanhead[i + 1] = tiles[tiles.length - 1][1];
-            if (tiles[tiles.length - 1].length > 2 && tiles[tiles.length - 1][2] === tile_suf) {
-                insert_paishan(paishanhead, i + 2, tile_suf);
-                i++;
-            }
-            tiles.length--;
-        }
-    }
-    paishanhead = paishanhead.join('');
 
-    paishanback = paishanback.split('');
-    for (let i = 0; i < paishanback.length; i++) {
-        if (paishanback[i] === 'H') { // 字牌
-            for (let j = 0; j < tiles.length; j++) {
-                if (tiles[j][1] === 'z') {
-                    let tmp = tiles[j];
-                    tiles[j] = tiles[tiles.length - 1];
-                    tiles[tiles.length - 1] = tmp;
-                    break;
-                }
-            }
-            paishanback[i] = tiles[tiles.length - 1][0];
-            paishanback[i + 1] = tiles[tiles.length - 1][1];
-            if (tiles[tiles.length - 1].length > 2 && tiles[tiles.length - 1][2] === tile_suf) {
-                insert_paishan(paishanback, i + 2, tile_suf);
-                i++;
-            }
-            tiles.length--;
-        } else if (paishanback[i] === 'T') { // 老头牌
-            for (let j = 0; j < tiles.length; j++) {
-                if (tiles[j][0] === '1' && tiles[j][1] !== 'z' || tiles[j][0] === '9') {
-                    let tmp = tiles[j];
-                    tiles[j] = tiles[tiles.length - 1];
-                    tiles[tiles.length - 1] = tmp;
-                    break;
-                }
-            }
-            paishanback[i] = tiles[tiles.length - 1][0];
-            paishanback[i + 1] = tiles[tiles.length - 1][1];
-            if (tiles[tiles.length - 1].length > 2 && tiles[tiles.length - 1][2] === tile_suf) {
-                insert_paishan(paishanback, i + 2, tile_suf);
-                i++;
-            }
-            tiles.length--;
-        }
-    }
-    for (let i = 0; i < paishanback.length; i++) {
-        if (paishanback[i] === 'Y') { // 幺九牌
-            for (let j = 0; j < tiles.length; j++) {
-                if (tiles[j][0] === '1' || tiles[j][0] === '9' || tiles[j][1] === 'z') {
-                    let tmp = tiles[j];
-                    tiles[j] = tiles[tiles.length - 1];
-                    tiles[tiles.length - 1] = tmp;
-                    break;
-                }
-            }
-            paishanback[i] = tiles[tiles.length - 1][0];
-            paishanback[i + 1] = tiles[tiles.length - 1][1];
-            if (tiles[tiles.length - 1].length > 2 && tiles[tiles.length - 1][2] === tile_suf) {
-                insert_paishan(paishanback, i + 2, tile_suf);
-                i++;
-            }
-            tiles.length--;
-        } else if (paishanback[i] === 'D') { // 中张牌
-            for (let j = 0; j < tiles.length; j++) {
-                if (!(tiles[j][0] === '1' || tiles[j][0] === '9' || tiles[j][1] === 'z')) {
-                    let tmp = tiles[j];
-                    tiles[j] = tiles[tiles.length - 1];
-                    tiles[tiles.length - 1] = tmp;
-                    break;
-                }
-            }
-            paishanback[i] = tiles[tiles.length - 1][0];
-            paishanback[i + 1] = tiles[tiles.length - 1][1];
-            if (tiles[tiles.length - 1].length > 2 && tiles[tiles.length - 1][2] === tile_suf) {
-                insert_paishan(paishanback, i + 2, tile_suf);
-                i++;
-            }
-            tiles.length--;
-        } else if (paishanback[i] === 'M') { // 万子
-            for (let j = 0; j < tiles.length; j++) {
-                if (tiles[j][1] === 'm') {
-                    let tmp = tiles[j];
-                    tiles[j] = tiles[tiles.length - 1];
-                    tiles[tiles.length - 1] = tmp;
-                    break;
-                }
-            }
-            paishanback[i] = tiles[tiles.length - 1][0];
-            paishanback[i + 1] = tiles[tiles.length - 1][1];
-            if (tiles[tiles.length - 1].length > 2 && tiles[tiles.length - 1][2] === tile_suf) {
-                insert_paishan(paishanback, i + 2, tile_suf);
-                i++;
-            }
-            tiles.length--;
-        } else if (paishanback[i] === 'P') { // 饼子
-            for (let j = 0; j < tiles.length; j++) {
-                if (tiles[j][1] === 'p') {
-                    let tmp = tiles[j];
-                    tiles[j] = tiles[tiles.length - 1];
-                    tiles[tiles.length - 1] = tmp;
-                    break;
-                }
-            }
-            paishanback[i] = tiles[tiles.length - 1][0];
-            paishanback[i + 1] = tiles[tiles.length - 1][1];
-            if (tiles[tiles.length - 1].length > 2 && tiles[tiles.length - 1][2] === tile_suf) {
-                insert_paishan(paishanback, i + 2, tile_suf);
-                i++;
-            }
-            tiles.length--;
-        } else if (paishanback[i] === 'S') { // 索子
-            for (let j = 0; j < tiles.length; j++) {
-                if (tiles[j][1] === 's') {
-                    let tmp = tiles[j];
-                    tiles[j] = tiles[tiles.length - 1];
-                    tiles[tiles.length - 1] = tmp;
-                    break;
-                }
-            }
-            paishanback[i] = tiles[tiles.length - 1][0];
-            paishanback[i + 1] = tiles[tiles.length - 1][1];
-            if (tiles[tiles.length - 1].length > 2 && tiles[tiles.length - 1][2] === tile_suf) {
-                insert_paishan(paishanback, i + 2, tile_suf);
-                i++;
-            }
-            tiles.length--;
-        }
-    }
-    for (let i = 0; i < paishanback.length; i++) {
-        if (paishanback[i] === '.') { // 任意其他牌
-            paishanback[i] = tiles[tiles.length - 1][0];
-            paishanback[i + 1] = tiles[tiles.length - 1][1];
-            if (tiles[tiles.length - 1].length > 2 && tiles[tiles.length - 1][2] === tile_suf) {
-                insert_paishan(paishanback, i + 2, tile_suf);
-                i++;
-            }
-            tiles.length--;
-        }
-    }
-    paishanback = paishanback.join('');
+    paishanhead = randomize(paishanhead, tiles);
+    paishanback = randomize(paishanback, tiles);
+
     for (let i = 0; i < tiles.length; i++)
         paishanhead += tiles[i];
 
@@ -9018,6 +8384,93 @@ function randompaishan(paishanhead = "", paishanback = "", reddora) {
         for (let i = paishan.length - 1; i >= index; i--)
             paishan[i + 1] = paishan[i];
         paishan[index] = char;
+    }
+
+    function randomize(paishan_n, tiles) {
+        function pushtiles2paishan(i){
+            paishan_n[i] = tiles[tiles.length - 1][0];
+            paishan_n[i + 1] = tiles[tiles.length - 1][1];
+            if (tiles[tiles.length - 1].length > 2 && tiles[tiles.length - 1][2] === tile_suf) {
+                insert_paishan(paishan_n, i + 2, tile_suf);
+                i++;
+            }
+            tiles.length--;
+        }
+
+        function swap(tiles, j){
+            let tmp = tiles[j];
+            tiles[j] = tiles[tiles.length - 1];
+            tiles[tiles.length - 1] = tmp;
+        }
+
+        paishan_n = paishan_n.split('');
+        for (let i = 0; i < paishan_n.length; i++) {
+            if (paishan_n[i] === 'H') { // 字牌
+                for (let j = 0; j < tiles.length; j++) {
+                    if (tiles[j][1] === 'z') {
+                        swap(tiles, j);
+                        break;
+                    }
+                }
+                pushtiles2paishan(i);
+            } else if (paishan_n[i] === 'T') { // 老头牌
+                for (let j = 0; j < tiles.length; j++) {
+                    if (tiles[j][0] === '1' && tiles[j][1] !== 'z' || tiles[j][0] === '9') {
+                        swap(tiles, j);
+                        break;
+                    }
+                }
+                pushtiles2paishan(i);
+            }
+        }
+        for (let i = 0; i < paishan_n.length; i++) {
+            if (paishan_n[i] === 'Y') { // 幺九牌
+                for (let j = 0; j < tiles.length; j++) {
+                    if (tiles[j][0] === '1' || tiles[j][0] === '9' || tiles[j][1] === 'z') {
+                        swap(tiles, j);
+                        break;
+                    }
+                }
+                pushtiles2paishan(i);
+
+            } else if (paishan_n[i] === 'D') { // 中张牌
+                for (let j = 0; j < tiles.length; j++) {
+                    if (!(tiles[j][0] === '1' || tiles[j][0] === '9' || tiles[j][1] === 'z')) {
+                        swap(tiles, j);
+                        break;
+                    }
+                }
+                pushtiles2paishan(i);
+            } else if (paishan_n[i] === 'M') { // 万子
+                for (let j = 0; j < tiles.length; j++) {
+                    if (tiles[j][1] === 'm') {
+                        swap(tiles, j);
+                        break;
+                    }
+                }
+                pushtiles2paishan(i);
+            } else if (paishan_n[i] === 'P') { // 饼子
+                for (let j = 0; j < tiles.length; j++) {
+                    if (tiles[j][1] === 'p') {
+                        swap(tiles, j);
+                        break;
+                    }
+                }
+                pushtiles2paishan(i);
+            } else if (paishan_n[i] === 'S') { // 索子
+                for (let j = 0; j < tiles.length; j++) {
+                    if (tiles[j][1] === 's') {
+                        swap(tiles, j);
+                        break;
+                    }
+                }
+                pushtiles2paishan(i);
+            }
+        }
+        for (let i = 0; i < paishan_n.length; i++)
+            if (paishan_n[i] === '.') // 任意其他牌
+                pushtiles2paishan(i);
+        return paishan_n;
     }
 }
 
