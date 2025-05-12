@@ -17,7 +17,7 @@ editdata.config = {
     'mode': {
         'mode': 1,
         'detail_rule': {
-            'yifanjieguyi': true,
+            '_yifanjieguyi': true,
             'init_point': 500000,
         }
     }

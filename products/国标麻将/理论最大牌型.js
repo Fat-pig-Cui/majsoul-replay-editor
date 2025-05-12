@@ -17,7 +17,7 @@ editdata.config = {
     'mode': {
         'mode': 1,
         'detail_rule': {
-            'guobiao': true,
+            '_guobiao': true,
         }
     }
 };

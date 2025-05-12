@@ -24,7 +24,6 @@ editdata.config = {
             'guyi_mode': false,
             'huansanzhang': false,
             'muyu_mode': false,
-            'no_shiduan': false,
             'xuezhandaodi': false
         }
     }

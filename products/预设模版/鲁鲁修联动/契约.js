@@ -24,8 +24,8 @@ editdata.config = {
         'mode': 1,
         'detail_rule': {
             'init_point': 100000,
-            'tablecloth_id': 308029, // 桌布-魔女的契约
-            'mjp_id': 308030, // 牌背-假面的裁决
+            '_tablecloth_id': 308029, // 桌布-魔女的契约
+            '_mjp_id': 308030, // 牌背-假面的裁决
         }
     }
 };

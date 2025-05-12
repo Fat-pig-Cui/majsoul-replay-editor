@@ -31,8 +31,8 @@ editdata.config = {
         'mode': 1,
         'detail_rule': {
             'init_point': 100000,
-            'tablecloth_id': 30580008, // 桌布-小恶魔日记
-            'mjp_id': 30570005, // 牌背-萌主驾到
+            '_tablecloth_id': 30580008, // 桌布-小恶魔日记
+            '_mjp_id': 30570005, // 牌背-萌主驾到
         }
     }
 };

@@ -18,9 +18,9 @@ editdata.config = {
         'mode': 1,
         'detail_rule': {
             'init_point': 300000,
-            'guobiao': true,
-            'guobiao_no_8fanfu': true,
-            'guobiao_lianzhuang': true
+            '_guobiao': true,
+            '_guobiao_no_8fanfu': true,
+            '_guobiao_lianzhuang': true
         }
     }
 };
@@ -228,7 +228,7 @@ paishan = randompaishan("3456m");
 roundbegin();
 qiepai();
 normalmoqie();
-for (let i = 0; i<3;i++){
+for (let i = 0; i < 3; i++) {
     mingqiepai();
     normalmoqie();
 }

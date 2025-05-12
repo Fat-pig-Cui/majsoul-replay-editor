@@ -16,8 +16,8 @@ editdata.config = {
     'mode': {
         'mode': 1,
         'detail_rule': {
-            'random_views': true,
-            'random_skin': true,
+            '_random_views': true,
+            '_random_skin': true,
         }
     }
 };

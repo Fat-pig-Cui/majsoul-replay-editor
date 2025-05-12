@@ -31,8 +31,8 @@ editdata.config = {
         'mode': 1,
         'detail_rule': {
             'init_point': 100000,
-            'tablecloth_id': 305812, // 桌布-仙境茶话会
-            'mjp_id': 305710, // 牌背-三月兔
+            '_tablecloth_id': 305812, // 桌布-仙境茶话会
+            '_mjp_id': 305710, // 牌背-三月兔
         }
     }
 };

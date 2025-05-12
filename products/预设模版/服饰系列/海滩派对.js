@@ -47,8 +47,8 @@ editdata.config = {
     'mode': {
         'mode': 1,
         'detail_rule': {
-            'init_point': 100000,
-            'tablecloth_id': 305048, // 桌布-雀魂祭一周年
+            '_init_point': 100000,
+            '_tablecloth_id': 305048, // 桌布-雀魂祭一周年
         }
     }
 };

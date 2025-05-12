@@ -3,4 +3,5 @@
     函数在 Functions.py 中, 数据在 Database.py 中
 """
 from products.Functions import generator
+
 generator(3)

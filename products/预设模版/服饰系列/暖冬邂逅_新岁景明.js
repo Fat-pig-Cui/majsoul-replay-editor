@@ -32,8 +32,8 @@ editdata.config = {
         'mode': 1,
         'detail_rule': {
             'init_point': 100000,
-            'tablecloth_id': 30580002, // 桌布-一番祥瑞录
-            'mjp_id': 30570001, // 牌背-开运达摩
+            '_tablecloth_id': 30580002, // 桌布-一番祥瑞录
+            '_mjp_id': 30570001, // 牌背-开运达摩
         }
     }
 };

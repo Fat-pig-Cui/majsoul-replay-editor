@@ -21,13 +21,10 @@ editdata.config = {
             'chuanma': false,
             'dora3_mode': false,
             'guyi_mode': false,
-            'no_zimosun': false,
             'huansanzhang': true,
             'open_hand': false,
             'muyu_mode': false,
-            'no_shiduan': false,
             'xuezhandaodi': true,
-            'xueliu': false
         }
     }
 };

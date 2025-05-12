@@ -47,8 +47,8 @@ editdata.config = {
         'mode': 1,
         'detail_rule': {
             'init_point': 100000,
-            'tablecloth_id': 305808, // 桌布-乾坤福袋
-            'mjp_id': 305707, // 牌背-花灯
+            '_tablecloth_id': 305808, // 桌布-乾坤福袋
+            '_mjp_id': 305707, // 牌背-花灯
         }
     }
 };

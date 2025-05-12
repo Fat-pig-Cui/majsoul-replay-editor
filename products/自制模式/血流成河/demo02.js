@@ -18,7 +18,7 @@ editdata.config = {
             'init_point': 200000,
             'chuanma': true,
             'huansanzhang': true,
-            'xueliu': true,
+            '_xueliu': true,
         }
     }
 };

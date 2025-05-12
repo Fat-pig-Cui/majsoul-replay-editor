@@ -29,7 +29,7 @@
 
 ## 一番街特色古役
 
-开启一番街古役需要在 `'detail_rule'` 中注明 `'yifanjieguyi': true`
+开启一番街古役需要在 `'detail_rule'` 中注明 `'_yifanjieguyi': true`
 
 示例牌谱: [一番街特色古役.js](一番街特色古役.js)
 

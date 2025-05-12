@@ -24,8 +24,8 @@ editdata.config = {
         'mode': 1,
         'detail_rule': {
             'init_point': 100000,
-            'tablecloth_id': 308014, // 桌布-传说之夜
-            'mjp_id': 308015, // 牌背-双鹫纹章
+            '_tablecloth_id': 308014, // 桌布-传说之夜
+            '_mjp_id': 308015, // 牌背-双鹫纹章
         }
     }
 };

@@ -24,8 +24,8 @@ editdata.config = {
         'mode': 1,
         'detail_rule': {
             'init_point': 100000,
-            'tablecloth_id': 308019, // 桌布-恋之见证
-            'mjp_id': 308020, // 牌背-恋之背影
+            '_tablecloth_id': 308019, // 桌布-恋之见证
+            '_mjp_id': 308020, // 牌背-恋之背影
         }
     }
 };

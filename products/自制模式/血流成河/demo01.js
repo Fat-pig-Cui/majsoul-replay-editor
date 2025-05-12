@@ -16,7 +16,7 @@ editdata.config = {
         'mode': 1,
         'detail_rule': {
             'init_point': 500000,
-            'xueliu': true,
+            '_xueliu': true,
         }
     }
 };

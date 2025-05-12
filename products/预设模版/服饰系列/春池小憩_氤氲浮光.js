@@ -41,7 +41,7 @@ editdata.config = {
         'mode': 1,
         'detail_rule': {
             'init_point': 100000,
-            'mjp_id': 305713, // 牌背-魂之元件
+            '_mjp_id': 305713, // 牌背-魂之元件
         }
     }
 };

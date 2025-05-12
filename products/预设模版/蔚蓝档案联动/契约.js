@@ -24,8 +24,8 @@ editdata.config = {
         'mode': 1,
         'detail_rule': {
             'init_point': 100000,
-            'tablecloth_id': 308039, // 桌布-什亭青空
-            'mjp_id': 308040, // 牌背-佩洛之星
+            '_tablecloth_id': 308039, // 桌布-什亭青空
+            '_mjp_id': 308040, // 牌背-佩洛之星
         }
     }
 };

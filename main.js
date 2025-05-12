@@ -4,7 +4,7 @@
 var liqibangs = [], hupais = [], liqis = [];
 var avatar_frames = [], tablecloths = [], titles = [];
 
-// 无法加载的装扮
+// 无法加载的和排除的装扮
 var invalid_frames = [
     305501,  // 头像框-默认
     305510,  // 头像框-四象战
@@ -2075,16 +2075,16 @@ function edit(x) {
         }
 
         function is_random_views() {
-            return !!(config && config.mode && config.mode.detail_rule && config.mode.detail_rule.random_views);
+            return !!(config && config.mode && config.mode.detail_rule && config.mode.detail_rule._random_views);
         }
 
         function is_random_skin() {
-            return !!(config && config.mode && config.mode.detail_rule && config.mode.detail_rule.random_skin);
+            return !!(config && config.mode && config.mode.detail_rule && config.mode.detail_rule._random_skin);
         }
 
         function get_tablecloth_id() {
-            if (!!(config && config.mode && config.mode.detail_rule && config.mode.detail_rule.tablecloth_id !== undefined))
-                return config.mode.detail_rule.tablecloth_id;
+            if (!!(config && config.mode && config.mode.detail_rule && config.mode.detail_rule._tablecloth_id !== undefined))
+                return config.mode.detail_rule._tablecloth_id;
             if (x.player_datas[0].views) {
                 let views = x.player_datas[0].views;
                 for (let i = 0; i < views.length; i++)
@@ -2096,8 +2096,8 @@ function edit(x) {
         }
 
         function get_mjp_id() {
-            if (!!(config && config.mode && config.mode.detail_rule && config.mode.detail_rule.mjp_id !== undefined))
-                return config.mode.detail_rule.mjp_id;
+            if (!!(config && config.mode && config.mode.detail_rule && config.mode.detail_rule._mjp_id !== undefined))
+                return config.mode.detail_rule._mjp_id;
             if (x.player_datas[0].views) {
                 let views = x.player_datas[0].views;
                 for (let i = 0; i < views.length; i++)
@@ -2109,11 +2109,11 @@ function edit(x) {
         }
 
         function get_mjpsurface_id() {
-            if (!!(config && config.mode && config.mode.detail_rule && config.mode.detail_rule.mjpsurface_id !== undefined)) {
-                if (typeof (config.mode.detail_rule.mjpsurface_id) === "boolean" && config.mode.detail_rule.mjpsurface_id)
+            if (!!(config && config.mode && config.mode.detail_rule && config.mode.detail_rule._mjpsurface_id !== undefined)) {
+                if (typeof (config.mode.detail_rule._mjpsurface_id) === "boolean" && config.mode.detail_rule._mjpsurface_id)
                     return 305718; // 目前只有两个牌面, 另一个牌面是: 牌面-猫咪雀圣
                 else
-                    return config.mode.detail_rule.mjpsurface_id;
+                    return config.mode.detail_rule._mjpsurface_id;
             }
             if (x.player_datas[0].views) {
                 let views = x.player_datas[0].views;
@@ -2736,11 +2736,10 @@ function edit_online() {
         roundend(true);
     gameend(true);
     try {
-        if (view.DesktopMgr.Inst.active) {
+        if (view.DesktopMgr.Inst.active)
             editgame(JSON.parse(JSON.stringify(editdata)));
-        } else {
+        else
             edit(JSON.parse(JSON.stringify(editdata)));
-        }
     } catch (e) {
         edit(JSON.parse(JSON.stringify(editdata)));
     }
@@ -2967,7 +2966,7 @@ function is_beishuizhizhan() {
 }
 
 function is_xueliu() {
-    return !!(config && config.mode && config.mode.detail_rule && config.mode.detail_rule.xueliu);
+    return !!(config && config.mode && config.mode.detail_rule && config.mode.detail_rule._xueliu);
 }
 
 // ==============================
@@ -2977,15 +2976,15 @@ function is_guyi() {
 }
 
 function is_yifanjieguyi() {
-    return !!(config && config.mode && config.mode.detail_rule && config.mode.detail_rule.yifanjieguyi)
+    return !!(config && config.mode && config.mode.detail_rule && config.mode.detail_rule._yifanjieguyi)
 }
 
 function no_shiduan() {
-    return !!(config && config.mode && config.mode.detail_rule && config.mode.detail_rule.no_shiduan);
+    return !!(config && config.mode && config.mode.detail_rule && config.mode.detail_rule._no_shiduan);
 }
 
 function no_zimosun() {
-    return !!(config && config.mode && config.mode.detail_rule && config.mode.detail_rule.no_zimosun);
+    return !!(config && config.mode && config.mode.detail_rule && config.mode.detail_rule._no_zimosun);
 }
 
 function is_openhand(seat) {
@@ -2995,83 +2994,83 @@ function is_openhand(seat) {
 // ==============================
 
 function is_qieshangmanguan() {
-    return !!(config && config.mode && config.mode.detail_rule && config.mode.detail_rule.qieshangmanguan)
+    return !!(config && config.mode && config.mode.detail_rule && config.mode.detail_rule._qieshangmanguan)
 }
 
 function is_toutiao() {
-    return !!(config && config.mode && config.mode.detail_rule && config.mode.detail_rule.toutiao)
+    return !!(config && config.mode && config.mode.detail_rule && config.mode.detail_rule._toutiao)
 }
 
 function no_normalbaopai() {
-    return !!(config && config.mode && config.mode.detail_rule && config.mode.detail_rule.no_normalbaopai)
+    return !!(config && config.mode && config.mode.detail_rule && config.mode.detail_rule._no_normalbaopai)
 }
 
 function sigangbaopai() {
-    return !!(config && config.mode && config.mode.detail_rule && config.mode.detail_rule.sigangbaopai)
+    return !!(config && config.mode && config.mode.detail_rule && config.mode.detail_rule._sigangbaopai)
 }
 
 function no_liujumanguan() {
-    return !!(config && config.mode && config.mode.detail_rule && config.mode.detail_rule.no_liujumanguan)
+    return !!(config && config.mode && config.mode.detail_rule && config.mode.detail_rule._no_liujumanguan)
 }
 
 function no_yifa() {
-    return !!(config && config.mode && config.mode.detail_rule && config.mode.detail_rule.no_yifa)
+    return !!(config && config.mode && config.mode.detail_rule && config.mode.detail_rule._no_yifa)
 }
 
 function no_lianfengsifu() {
-    return !!(config && config.mode && config.mode.detail_rule && config.mode.detail_rule.no_lianfengsifu)
+    return !!(config && config.mode && config.mode.detail_rule && config.mode.detail_rule._no_lianfengsifu)
 }
 
 function is_dora_jifan() {
-    return !!(config && config.mode && config.mode.detail_rule && config.mode.detail_rule.dora_jifan)
+    return !!(config && config.mode && config.mode.detail_rule && config.mode.detail_rule._dora_jifan)
 }
 
 function is_sanxiangliuju() {
-    return !!(config && config.mode && config.mode.detail_rule && config.mode.detail_rule.sanxiangliuju)
+    return !!(config && config.mode && config.mode.detail_rule && config.mode.detail_rule._sanxiangliuju)
 }
 
 function no_leijiyiman() {
-    return !!(config && config.mode && config.mode.detail_rule && config.mode.detail_rule.no_leijiyiman)
+    return !!(config && config.mode && config.mode.detail_rule && config.mode.detail_rule._no_leijiyiman)
 }
 
 function no_wyakuman() {
-    return !!(config && config.mode && config.mode.detail_rule && config.mode.detail_rule.no_wyakuman)
+    return !!(config && config.mode && config.mode.detail_rule && config.mode.detail_rule._no_wyakuman)
 }
 
 function no_guoshiangang() {
-    return !!(config && config.mode && config.mode.detail_rule && config.mode.detail_rule.no_guoshiangang)
+    return !!(config && config.mode && config.mode.detail_rule && config.mode.detail_rule._no_guoshiangang)
 }
 
 // ==============================
 
 function is_baogang() {
-    return !!(config && config.mode && config.mode.detail_rule && config.mode.detail_rule.baogang)
+    return !!(config && config.mode && config.mode.detail_rule && config.mode.detail_rule._baogang)
 }
 
 function is_qingtianjing() {
-    return !!(config && config.mode && config.mode.detail_rule && config.mode.detail_rule.qingtianjing)
+    return !!(config && config.mode && config.mode.detail_rule && config.mode.detail_rule._qingtianjing)
 }
 
 function no_zhenting() {
-    return !!(config && config.mode && config.mode.detail_rule && config.mode.detail_rule.no_zhenting)
+    return !!(config && config.mode && config.mode.detail_rule && config.mode.detail_rule._no_zhenting)
 }
 
 function ronghuzhahu() {
-    return !!(config && config.mode && config.mode.detail_rule && config.mode.detail_rule.ronghuzhahu)
+    return !!(config && config.mode && config.mode.detail_rule && config.mode.detail_rule._ronghuzhahu)
 }
 
 // ==============================
 
 function is_guobiao() {
-    return !!(config && config.mode && config.mode.detail_rule && config.mode.detail_rule.guobiao)
+    return !!(config && config.mode && config.mode.detail_rule && config.mode.detail_rule._guobiao)
 }
 
 function is_guobiao_no_8fanfu() {
-    return !!(config && config.mode && config.mode.detail_rule && config.mode.detail_rule.guobiao_no_8fanfu)
+    return !!(config && config.mode && config.mode.detail_rule && config.mode.detail_rule._guobiao_no_8fanfu)
 }
 
 function is_guobiao_lianzhuang() {
-    return !!(config && config.mode && config.mode.detail_rule && config.mode.detail_rule.guobiao_lianzhuang)
+    return !!(config && config.mode && config.mode.detail_rule && config.mode.detail_rule._guobiao_lianzhuang)
 }
 
 // ==============================
@@ -8387,7 +8386,7 @@ function randompaishan(paishanhead = "", paishanback = "", reddora) {
     }
 
     function randomize(paishan_n, tiles) {
-        function pushtiles2paishan(i){
+        function pushtiles2paishan(i) {
             paishan_n[i] = tiles[tiles.length - 1][0];
             paishan_n[i + 1] = tiles[tiles.length - 1][1];
             if (tiles[tiles.length - 1].length > 2 && tiles[tiles.length - 1][2] === tile_suf) {
@@ -8397,7 +8396,7 @@ function randompaishan(paishanhead = "", paishanback = "", reddora) {
             tiles.length--;
         }
 
-        function swap(tiles, j){
+        function swap(tiles, j) {
             let tmp = tiles[j];
             tiles[j] = tiles[tiles.length - 1];
             tiles[tiles.length - 1] = tmp;

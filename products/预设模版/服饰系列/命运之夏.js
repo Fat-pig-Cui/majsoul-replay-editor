@@ -35,8 +35,8 @@ editdata.config = {
         'mode': 1,
         'detail_rule': {
             'init_point': 100000,
-            'tablecloth_id': 305806, // 桌布-勇喵传说
-            'mjp_id': 305705, // 牌背-鬼煤球
+            '_tablecloth_id': 305806, // 桌布-勇喵传说
+            '_mjp_id': 305705, // 牌背-鬼煤球
         }
     }
 };

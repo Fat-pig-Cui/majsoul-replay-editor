@@ -24,8 +24,8 @@ editdata.config = {
         'mode': 1,
         'detail_rule': {
             'init_point': 100000,
-            'tablecloth_id': 308044, // 桌布-剑之丘
-            'mjp_id': 308045, // 牌背-噬光之剑
+            '_tablecloth_id': 308044, // 桌布-剑之丘
+            '_mjp_id': 308045, // 牌背-噬光之剑
         }
     }
 };

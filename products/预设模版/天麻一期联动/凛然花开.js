@@ -24,8 +24,8 @@ editdata.config = {
         'mode': 1,
         'detail_rule': {
             'init_point': 100000,
-            'tablecloth_id': 308004, // 桌布-赛间小憩
-            'mjp_id': 308005, // 牌背-艾托企鹅
+            '_tablecloth_id': 308004, // 桌布-赛间小憩
+            '_mjp_id': 308005, // 牌背-艾托企鹅
         }
     }
 };

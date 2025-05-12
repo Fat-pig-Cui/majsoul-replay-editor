@@ -7,6 +7,7 @@ var scale_points = 100;
 
 // 国标麻将番种
 var guobiao_fanlist_once = true;
+
 function guobiao_fanlist() {
     if (!guobiao_fanlist_once)
         return;

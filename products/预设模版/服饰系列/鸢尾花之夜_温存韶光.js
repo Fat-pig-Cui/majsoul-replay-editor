@@ -32,8 +32,8 @@ editdata.config = {
         'mode': 1,
         'detail_rule': {
             'init_point': 100000,
-            'tablecloth_id': 30580005, // 桌布-预热开场
-            'mjp_id': 30570003, // 牌背-喵呜TV
+            '_tablecloth_id': 30580005, // 桌布-预热开场
+            '_mjp_id': 30570003, // 牌背-喵呜TV
         }
     }
 };

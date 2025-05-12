@@ -65,8 +65,8 @@ editdata.config = {
         'mode': 1,
         'detail_rule': {
             'init_point': 100000,
-            'tablecloth_id': 305801, // 桌布-锦鲤游
-            'mjp_id': 305701, // 牌背-红包
+            '_tablecloth_id': 305801, // 桌布-锦鲤游
+            '_mjp_id': 305701, // 牌背-红包
         }
     }
 };

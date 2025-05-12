@@ -24,8 +24,8 @@ editdata.config = {
         'mode': 1,
         'detail_rule': {
             'init_point': 100000,
-            'tablecloth_id': 308024, // 桌布-清凉假日
-            'mjp_id': 308025, // 牌背-摇曳彩球
+            '_tablecloth_id': 308024, // 桌布-清凉假日
+            '_mjp_id': 308025, // 牌背-摇曳彩球
         }
     }
 };

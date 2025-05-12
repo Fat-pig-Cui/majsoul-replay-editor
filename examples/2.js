@@ -19,13 +19,10 @@ editdata.config = {
             'chuanma': false,
             'dora3_mode': false,
             'guyi_mode': false,
-            'no_zimosun': true,
             'huansanzhang': false,
             'open_hand': false,
             'muyu_mode': false,
-            'no_shiduan': false,
             'xuezhandaodi': false,
-            'xueliu': false
         }
     }
 };
@@ -119,8 +116,7 @@ qiepai("8s", true);
                         leimingpai();
                     hupai();
                     break;
-                }
-                else if (tile === "4z")
+                } else if (tile === "4z")
                     leimingpai();
                 else
                     qiepai();

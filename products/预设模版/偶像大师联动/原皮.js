@@ -24,8 +24,8 @@ editdata.config = {
         'mode': 1,
         'detail_rule': {
             'init_point': 100000,
-            'tablecloth_id': 30580011, // 桌布-闪耀吧！
-            'mjp_id': 30570007, // 牌背-静谧夜光
+            '_tablecloth_id': 30580011, // 桌布-闪耀吧！
+            '_mjp_id': 30570007, // 牌背-静谧夜光
         }
     }
 };

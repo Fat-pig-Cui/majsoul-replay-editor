@@ -15,7 +15,7 @@ editdata.config = {
     'mode': {
         'mode': 1,
         'detail_rule': {
-            'guyi_mode': true,
+            '_guyi_mode': true,
             'init_point': 200000,
         }
     }
@@ -54,7 +54,7 @@ paishan = randompaishan("..3m3p7p9s2z", "2z....");
 roundbegin();
 qiepai();
 normalmoqie(3);
-for (let i = 0; i < 4; i++){
+for (let i = 0; i < 4; i++) {
     mingqiepai();
     normalmoqie();
 }

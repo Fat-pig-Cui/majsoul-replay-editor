@@ -18,9 +18,9 @@ editdata.config = {
         'mode': 1,
         'detail_rule': {
             'init_point': 300000,
-            'guobiao': true,
-            'guobiao_no_8fanfu': true,
-            'guobiao_lianzhuang': true
+            '_guobiao': true,
+            '_guobiao_no_8fanfu': true,
+            '_guobiao_lianzhuang': true
         }
     }
 };
@@ -73,7 +73,7 @@ paishan = randompaishan("2m3p4s");
 roundbegin();
 qiepai();
 normalmoqie();
-for (let i =0 ; i<2;i++){
+for (let i = 0; i < 2; i++) {
     mingqiepai();
     normalmoqie();
 }
@@ -160,7 +160,7 @@ paishan = randompaishan("26m3p8s");
 roundbegin();
 qiepai();
 normalmoqie();
-for (let i = 0; i < 3; i++){
+for (let i = 0; i < 3; i++) {
     mingqiepai();
     normalmoqie();
 }
@@ -214,7 +214,7 @@ paishan = randompaishan("..4m6m3p4s1z");
 roundbegin();
 qiepai();
 normalmoqie(3);
-for (let i = 0; i<4;i++){
+for (let i = 0; i < 4; i++) {
     mingqiepai();
     normalmoqie();
 }
@@ -284,7 +284,7 @@ paishan = randompaishan("3m4m5p");
 roundbegin();
 qiepai();
 normalmoqie();
-for (let i = 0; i<2; i++){
+for (let i = 0; i < 2; i++) {
     mingpai();
     normalmoqie(2);
 }

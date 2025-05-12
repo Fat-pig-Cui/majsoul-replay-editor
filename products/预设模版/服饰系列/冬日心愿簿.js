@@ -32,8 +32,8 @@ editdata.config = {
         'mode': 1,
         'detail_rule': {
             'init_point': 100000,
-            'tablecloth_id': 30580012, // 桌布-瑞雪祈狐
-            'mjp_id': 30570008, // 牌背-圣夜雪人
+            '_tablecloth_id': 30580012, // 桌布-瑞雪祈狐
+            '_mjp_id': 30570008, // 牌背-圣夜雪人
         }
     }
 };

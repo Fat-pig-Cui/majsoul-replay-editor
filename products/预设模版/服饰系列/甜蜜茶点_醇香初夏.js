@@ -29,7 +29,7 @@ editdata.config = {
         'mode': 1,
         'detail_rule': {
             'init_point': 100000,
-            'mjp_id': 305704, // 牌背-蝴蝶结
+            '_mjp_id': 305704, // 牌背-蝴蝶结
         }
     }
 };

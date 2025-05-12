@@ -24,7 +24,7 @@ editdata.config = {
         'mode': 1,
         'detail_rule': {
             'init_point': 100000,
-            'tablecloth_id': 305020, // 圣夜桌布
+            '_tablecloth_id': 305020, // 圣夜桌布
         }
     }
 };

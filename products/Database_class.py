@@ -38,7 +38,6 @@ class Database_class:
                     index += 1
                 self.views[index]['item'].append({"id": ITEM[item]['id'], "name": ITEM[item]['name_chs']})
 
-
         self.titles = []
         for title in TITLE:
             self.titles.append({"id": TITLE[title]['id'], "name": TITLE[title]['name_chs']})

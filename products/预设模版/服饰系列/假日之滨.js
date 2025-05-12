@@ -37,9 +37,9 @@ editdata.config = {
         'mode': 1,
         'detail_rule': {
             'init_point': 100000,
-            'tablecloth_id': 305814, // 桌布-去海边
-            'mjp_id': 305716, // 牌背-鸥气满满
-            'mjpsurface_id': 305718, // 牌面-猫咪雀圣
+            '_tablecloth_id': 305814, // 桌布-去海边
+            '_mjp_id': 305716, // 牌背-鸥气满满
+            '_mjpsurface_id': 305718, // 牌面-猫咪雀圣
         }
     }
 };

@@ -24,8 +24,8 @@ editdata.config = {
         'mode': 1,
         'detail_rule': {
             'init_point': 100000,
-            'tablecloth_id': 308009, // 桌布-无双之花
-            'mjp_id': 308010, // 牌背-百花境界
+            '_tablecloth_id': 308009, // 桌布-无双之花
+            '_mjp_id': 308010, // 牌背-百花境界
         }
     }
 };

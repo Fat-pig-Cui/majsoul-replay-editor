@@ -33,8 +33,8 @@ editdata.config = {
         'mode': 1,
         'detail_rule': {
             'init_point': 100000,
-            'tablecloth_id': 305802, // 桌布-冲鸭！
-            'mjp_id': 305702, // 牌背-浪花朵朵
+            '_tablecloth_id': 305802, // 桌布-冲鸭！
+            '_mjp_id': 305702, // 牌背-浪花朵朵
         }
     }
 };

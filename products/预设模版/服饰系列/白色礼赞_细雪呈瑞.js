@@ -30,8 +30,8 @@ editdata.config = {
         'mode': 1,
         'detail_rule': {
             'init_point': 100000,
-            'tablecloth_id': 305807, // 桌布-暖屋圣夜
-            'mjp_id': 305706, // 牌背-圣诞树
+            '_tablecloth_id': 305807, // 桌布-暖屋圣夜
+            '_mjp_id': 305706, // 牌背-圣诞树
         }
     }
 };

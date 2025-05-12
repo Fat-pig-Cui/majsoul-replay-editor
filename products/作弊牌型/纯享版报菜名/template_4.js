@@ -9,7 +9,10 @@ editdata.player_datas[1].avatar_id = 400104;
 editdata.player_datas[2].avatar_id = 400105;
 editdata.player_datas[3].avatar_id = 400106;
 
-editdata.player_datas[0].views = editdata.player_datas[1].views = editdata.player_datas[2].views = editdata.player_datas[3].views = [{"slot": 1, "item_id": 308036}, {"slot": 2, "item_id": 308037}];
+editdata.player_datas[0].views = editdata.player_datas[1].views = editdata.player_datas[2].views = editdata.player_datas[3].views = [{
+    "slot": 1,
+    "item_id": 308036
+}, {"slot": 2, "item_id": 308037}];
 
 editdata.config = {
     'category': 1,
@@ -136,22 +139,22 @@ gotoju(3, 0, 0);
 // 第3局
 hupaioneplayer = function (seat) {
     let fans = [
-            {'val': 1, 'id': 31},
-            {'val': 2, 'id': 31},
-            {'val': 3, 'id': 31},
-            {'val': 4, 'id': 31},
-            {'val': 5, 'id': 32},
-            {'val': 6, 'id': 32},
-            {'val': 7, 'id': 32},
-            {'val': 8, 'id': 32},
-            {'val': 9, 'id': 34},
-            {'val': 10, 'id': 34},
-            {'val': 11, 'id': 34},
-            {'val': 12, 'id': 34},
-            {'val': 13, 'id': 33},
-            {'val': 14, 'id': 33},
-            {'val': 15, 'id': 33},
-        ];
+        {'val': 1, 'id': 31},
+        {'val': 2, 'id': 31},
+        {'val': 3, 'id': 31},
+        {'val': 4, 'id': 31},
+        {'val': 5, 'id': 32},
+        {'val': 6, 'id': 32},
+        {'val': 7, 'id': 32},
+        {'val': 8, 'id': 32},
+        {'val': 9, 'id': 34},
+        {'val': 10, 'id': 34},
+        {'val': 11, 'id': 34},
+        {'val': 12, 'id': 34},
+        {'val': 13, 'id': 33},
+        {'val': 14, 'id': 33},
+        {'val': 15, 'id': 33},
+    ];
     playertiles[seat].length--;
     delta_scores = [-16000, -8000, -8000, 32000];
     return {

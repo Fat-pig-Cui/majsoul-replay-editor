@@ -30,8 +30,8 @@ editdata.config = {
         'mode': 1,
         'detail_rule': {
             'init_point': 100000,
-            'tablecloth_id': 30580009, // 桌布-禁锢之武
-            'mjp_id': 30570006, // 牌背-封印术
+            '_tablecloth_id': 30580009, // 桌布-禁锢之武
+            '_mjp_id': 30570006, // 牌背-封印术
         }
     }
 };

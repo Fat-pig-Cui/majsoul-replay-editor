@@ -134,22 +134,22 @@ gotoju(2, 0, 0);
 // 第3局
 hupaioneplayer = function (seat) {
     let fans = [
-            {'val': 1, 'id': 31},
-            {'val': 2, 'id': 31},
-            {'val': 3, 'id': 31},
-            {'val': 4, 'id': 31},
-            {'val': 5, 'id': 32},
-            {'val': 6, 'id': 32},
-            {'val': 7, 'id': 32},
-            {'val': 8, 'id': 32},
-            {'val': 9, 'id': 34},
-            {'val': 10, 'id': 34},
-            {'val': 11, 'id': 34},
-            {'val': 12, 'id': 34},
-            {'val': 13, 'id': 33},
-            {'val': 14, 'id': 33},
-            {'val': 15, 'id': 33},
-        ];
+        {'val': 1, 'id': 31},
+        {'val': 2, 'id': 31},
+        {'val': 3, 'id': 31},
+        {'val': 4, 'id': 31},
+        {'val': 5, 'id': 32},
+        {'val': 6, 'id': 32},
+        {'val': 7, 'id': 32},
+        {'val': 8, 'id': 32},
+        {'val': 9, 'id': 34},
+        {'val': 10, 'id': 34},
+        {'val': 11, 'id': 34},
+        {'val': 12, 'id': 34},
+        {'val': 13, 'id': 33},
+        {'val': 14, 'id': 33},
+        {'val': 15, 'id': 33},
+    ];
     playertiles[seat].length--;
     delta_scores = [-16000, -8000, 32000, -8000];
     return {

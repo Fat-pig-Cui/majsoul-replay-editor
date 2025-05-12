@@ -28,9 +28,9 @@ editdata.config = {
     'mode': {
         'mode': 1,
         'detail_rule': {
-            'tablecloth_id': 308029, // 桌布-魔女的契约
-            'mjp_id': 308030, // 牌背-假面的裁决
-            'mjpsurface_id': 305718, // 牌面-猫咪雀圣
+            '_tablecloth_id': 308029, // 桌布-魔女的契约
+            '_mjp_id': 308030, // 牌背-假面的裁决
+            '_mjpsurface_id': 305718, // 牌面-猫咪雀圣
         }
     }
 };

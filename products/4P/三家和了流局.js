@@ -15,7 +15,7 @@ editdata.config = {
     'mode': {
         'mode': 1,
         'detail_rule': {
-            'sanxiangliuju': true
+            '_sanxiangliuju': true
         }
     }
 };

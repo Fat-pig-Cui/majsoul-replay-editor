@@ -16,8 +16,8 @@ editdata.config = {
         'mode': 1,
         'detail_rule': {
             'init_point': 500000,
-            'sigangbaopai': true,
-            'baogang': true,
+            '_sigangbaopai': true,
+            '_baogang': true,
         }
     }
 };

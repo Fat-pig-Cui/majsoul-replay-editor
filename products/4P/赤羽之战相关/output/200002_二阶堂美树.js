@@ -55,7 +55,6 @@ normalmoqie();
 hupai(true);
 
 
-
 // 第2局: 地和;         清龙七对;           十八罗汉
 tiles0 = "4455667788999m9p";
 tiles1 = "1112223334m789p";
@@ -79,7 +78,6 @@ normalmoqie();
 hupai(true);
 
 
-
 // 第3局: 清七对;    清幺九, 抢杠;        龙七对
 tiles1 = "7788999m445566p7s";
 tiles2 = "2m123445677889s";
@@ -98,7 +96,6 @@ leimingpai();
 hupai();
 
 zimohu(true);
-
 
 
 // 第4局: 将对;         清对;             金钩钓
@@ -124,7 +121,6 @@ normalmoqie();
 hupai(true);
 
 
-
 // 第5局: 带幺九;        七对子;            清一色
 tiles0 = "123778899m23999s";
 tiles1 = "2233445566778m";
@@ -144,7 +140,6 @@ normalmoqie();
 hupai(true);
 
 
-
 // 第6局: 对对;         底和, 海底捞月
 tiles0 = "222333444m22235s";
 tiles1 = "8m333466788999p";
@@ -162,7 +157,6 @@ zimohu();
 notileliuju();
 
 
-
 // 第7局: 诈和示范
 tiles0 = "22234555678889m";
 tiles1 = "1112345678999m";
@@ -172,7 +166,6 @@ paishan = randompaishan();
 roundbegin();
 dingque("pssm");
 hupai(true);
-
 
 
 gameend();

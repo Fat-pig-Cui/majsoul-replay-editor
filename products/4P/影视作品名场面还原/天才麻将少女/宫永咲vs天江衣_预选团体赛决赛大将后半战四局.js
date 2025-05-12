@@ -30,7 +30,7 @@ editdata.config = {
         'detail_rule': {
             'dora_count': 4,
             'init_point': 100000,
-            'baogang': true
+            '_baogang': true
         }
     }
 };

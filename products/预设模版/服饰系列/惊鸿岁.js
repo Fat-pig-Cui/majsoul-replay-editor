@@ -35,7 +35,7 @@ editdata.config = {
         'detail_rule': {
             'init_point': 100000,
             'table_cloth_id': 30580015, // 桌布-清辉竹影
-            'mjp_id': 30570009, // 牌背-翠竹墨影
+            '_mjp_id': 30570009, // 牌背-翠竹墨影
         }
     }
 };

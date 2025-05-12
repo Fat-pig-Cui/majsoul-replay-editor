@@ -919,7 +919,7 @@ function editfunction2() {
             for (var f = view['DesktopMgr'].Inst['rule_mode'] === view['ERuleMode']['Liqi3'] ? 8 :
                 // 添加内容: 二人麻将岭上牌12张
                 view['DesktopMgr'].Inst['rule_mode'] === view['ERuleMode']['Liqi2'] ? 12 :
-                4, M = 0; C > M; M++)
+                    4, M = 0; C > M; M++)
                 this['tiles'][this['tile_count'] - f - 1 - 2 * M]['setFiltersState'](z['EUIPaiFilterState'].dora),
                     this['tiles'][this['tile_count'] - f - 2 - 2 * M]['setFiltersState'](z['EUIPaiFilterState']['lidora']);
             for (var M = 0; W > M; M++)

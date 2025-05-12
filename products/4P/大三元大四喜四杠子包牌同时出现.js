@@ -16,7 +16,7 @@ editdata.config = {
         'mode': 1,
         'detail_rule': {
             'init_point': 100000,
-            'sigangbaopai': true,
+            '_sigangbaopai': true,
         }
     }
 };
@@ -29,7 +29,7 @@ tiles3 = "1666777888999s";
 paishan = randompaishan("9mDD1m", "D432z");
 roundbegin();
 qiepai("1z");
-for (let i = 0; i < 3; i++){
+for (let i = 0; i < 3; i++) {
     mingqiepai(i + 5 + "z");
     mingpai();
     normalmoqie();
@@ -49,7 +49,7 @@ paishan = randompaishan("3s", "76s75z");
 discardtiles = ["6z3s", "1234z", "1289s", "57z67s"]
 roundbegin();
 qiepai(true);
-for (let i = 0; i < 4; i++){
+for (let i = 0; i < 4; i++) {
     mingqiepai(2);
     mingpai();
     normalmoqie();

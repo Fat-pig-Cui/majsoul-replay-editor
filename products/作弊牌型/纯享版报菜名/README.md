@@ -4,7 +4,7 @@
 
 template_n 与 [template.js](template.js) 的区别是: 后者报菜名的自风, 场风的语音是"东", 而其他三个分别是"南", "西", "北"
 
-至于 [template_branch.js](template_branch.js) , 是 template 系列的扩展版, 目前看来只适合一姬 
+至于 [template_branch.js](template_branch.js) , 是 template 系列的扩展版, 目前看来只适合一姬
 
 为使得报菜名版面更加丰满与统一, 有以下调整:
 
@@ -114,10 +114,10 @@ template_n 与 [template.js](template.js) 的区别是: 后者报菜名的自风
 
 ## 我在B站发的视频
 
-目前我在B站发了6个与该文件夹有关的视频, 报菜名界面通过剪辑的方式把中间过程剪掉使得报菜名更加连贯(导致有"翻页"的效果), 
+目前我在B站发了6个与该文件夹有关的视频, 报菜名界面通过剪辑的方式把中间过程剪掉使得报菜名更加连贯(导致有"翻页"的效果),
 除了最后一个外, 最后还加了角色的终局一位语音(牌谱回放是不会放的)
 
-其中[第一个视频](https://www.bilibili.com/video/BV1pfCPYwEwN)有个小问题, 就是和牌界面的白板有15张而不是14张, 
+其中[第一个视频](https://www.bilibili.com/video/BV1pfCPYwEwN)有个小问题, 就是和牌界面的白板有15张而不是14张,
 但两天过去了没有一条弹幕或评论发现这件事, 看来观众还是不够心细啊(
 
 template_branch 对应的视频也在B站: [【雀魂】自制牌谱 一姬纯享版报菜名 升级版](https://www.bilibili.com/video/BV1w96LYWEzR)

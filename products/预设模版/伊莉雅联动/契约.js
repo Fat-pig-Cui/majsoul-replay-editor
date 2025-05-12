@@ -24,8 +24,8 @@ editdata.config = {
         'mode': 1,
         'detail_rule': {
             'init_point': 100000,
-            'tablecloth_id': 308034, // 桌布-星夜的羁绊
-            'mjp_id': 308035, // 牌背-苍蓝的星辰
+            '_tablecloth_id': 308034, // 桌布-星夜的羁绊
+            '_mjp_id': 308035, // 牌背-苍蓝的星辰
         }
     }
 };
