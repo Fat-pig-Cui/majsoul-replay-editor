@@ -2987,8 +2987,8 @@ function no_zimosun() {
     return !!(config && config.mode && config.mode.detail_rule && config.mode.detail_rule._no_zimosun);
 }
 
-function is_openhand(seat) {
-    return !!(config && config.mode && config.mode.detail_rule && config.mode.detail_rule.open_hand && config.mode.detail_rule.open_hand[seat] === 1);
+function is_openhand() {
+    return !!(config && config.mode && config.mode.detail_rule && config.mode.detail_rule.open_hand);
 }
 
 // ==============================
@@ -5313,14 +5313,12 @@ function addNewRound(chang, ju, ben, doras, left_tile_count, liqibang, md5, pais
         }
         ];
     ret.data.opens = [];
-    if (is_peipaimingpai() || is_openhand(0))
+    if (is_peipaimingpai() || is_openhand()) {
         ret.data.opens.push(mingpai_data(tiles0, 0));
-    if (is_peipaimingpai() || is_openhand(1))
         ret.data.opens.push(mingpai_data(tiles1, 1));
-    if (is_peipaimingpai() || is_openhand(2))
         ret.data.opens.push(mingpai_data(tiles2, 2));
-    if (is_peipaimingpai() || is_openhand(3))
         ret.data.opens.push(mingpai_data(tiles3, 3));
+    }
 
     if (is_chuanma())
         ret.data.ju_count = editdata.actions.length;
@@ -6944,7 +6942,7 @@ function mopai(seat, index) {
             liqiinfo[i].yifa = 0;
 
     let tile_state;
-    if (is_openhand(seat) || liqiinfo[seat].kai)
+    if (is_openhand() || liqiinfo[seat].kai)
         tile_state = 1;
     let tmp_paishan_len = paishan_len();
     if (is_zhanxing())
@@ -7132,7 +7130,7 @@ function qiepai(seat, kind, is_liqi, anpai, beishui_type) {
 
     let lstactionname = getlstaction().name;
     let tile_state;
-    if (is_openhand(seat))
+    if (is_openhand())
         tile_state = 1;
     if (flag === 0 && kind[0] >= '0' && kind[0] <= '9') {
         if (is_peipaimingpai())
@@ -8469,6 +8467,7 @@ function randompaishan(paishanhead = "", paishanback = "", reddora) {
         for (let i = 0; i < paishan_n.length; i++)
             if (paishan_n[i] === '.') // 任意其他牌
                 pushtiles2paishan(i);
+        paishan_n = paishan_n.join('');
         return paishan_n;
     }
 }
