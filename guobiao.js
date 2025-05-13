@@ -226,7 +226,7 @@ function guobiao_fanlist() {
     };
     cfg.fan.fan.map_[8014] = {
         "id": 8014,
-        "name_chs": "111222333444",
+        "name_chs": "一色四节高",
         "name_chs_t": "",
         "name_jp": "",
         "name_en": "",
@@ -242,7 +242,7 @@ function guobiao_fanlist() {
 
     cfg.fan.fan.map_[8015] = {
         "id": 8015,
-        "name_chs": "123345567789",
+        "name_chs": "一色四步高",
         "name_chs_t": "",
         "name_jp": "",
         "name_en": "",
@@ -303,7 +303,7 @@ function guobiao_fanlist() {
     };
     cfg.fan.fan.map_[8019] = {
         "id": 8019,
-        "name_chs": "七星不顺",
+        "name_chs": "七星不靠",
         "name_chs_t": "",
         "name_jp": "",
         "name_en": "",
@@ -363,7 +363,7 @@ function guobiao_fanlist() {
     };
     cfg.fan.fan.map_[8023] = {
         "id": 8023,
-        "name_chs": "111222333",
+        "name_chs": "一色三节高",
         "name_chs_t": "",
         "name_jp": "",
         "name_en": "",
@@ -454,7 +454,7 @@ function guobiao_fanlist() {
     };
     cfg.fan.fan.map_[8029] = {
         "id": 8029,
-        "name_chs": "123345567",
+        "name_chs": "一色三步高",
         "name_chs_t": "",
         "name_jp": "",
         "name_en": "",
@@ -515,7 +515,7 @@ function guobiao_fanlist() {
 
     cfg.fan.fan.map_[8033] = {
         "id": 8033,
-        "name_chs": "全不顺",
+        "name_chs": "全不靠",
         "name_chs_t": "",
         "name_jp": "",
         "name_en": "",
@@ -530,7 +530,7 @@ function guobiao_fanlist() {
     };
     cfg.fan.fan.map_[8034] = {
         "id": 8034,
-        "name_chs": "混合龙",
+        "name_chs": "组合龙",
         "name_chs_t": "",
         "name_jp": "",
         "name_en": "",
@@ -545,7 +545,7 @@ function guobiao_fanlist() {
     };
     cfg.fan.fan.map_[8035] = {
         "id": 8035,
-        "name_chs": "大五",
+        "name_chs": "大于五",
         "name_chs_t": "",
         "name_jp": "",
         "name_en": "",
@@ -560,7 +560,7 @@ function guobiao_fanlist() {
     };
     cfg.fan.fan.map_[8036] = {
         "id": 8036,
-        "name_chs": "小五",
+        "name_chs": "小于五",
         "name_chs_t": "",
         "name_jp": "",
         "name_en": "",
@@ -606,7 +606,7 @@ function guobiao_fanlist() {
     };
     cfg.fan.fan.map_[8039] = {
         "id": 8039,
-        "name_chs": "对称牌",
+        "name_chs": "推不倒",
         "name_chs_t": "",
         "name_jp": "",
         "name_en": "",
@@ -636,7 +636,7 @@ function guobiao_fanlist() {
     };
     cfg.fan.fan.map_[8041] = {
         "id": 8041,
-        "name_chs": "111 222 333",
+        "name_chs": "三色三节高",
         "name_chs_t": "",
         "name_jp": "",
         "name_en": "",
@@ -651,7 +651,7 @@ function guobiao_fanlist() {
     };
     cfg.fan.fan.map_[8042] = {
         "id": 8042,
-        "name_chs": "无役和",
+        "name_chs": "无番和",
         "name_chs_t": "",
         "name_jp": "",
         "name_en": "",
@@ -666,7 +666,7 @@ function guobiao_fanlist() {
     };
     cfg.fan.fan.map_[8043] = {
         "id": 8043,
-        "name_chs": "海底摸月",
+        "name_chs": "妙手回春",
         "name_chs_t": "",
         "name_jp": "",
         "name_en": "",
@@ -757,7 +757,7 @@ function guobiao_fanlist() {
     };
     cfg.fan.fan.map_[8049] = {
         "id": 8049,
-        "name_chs": "123 234 345",
+        "name_chs": "三色三步高",
         "name_chs_t": "",
         "name_jp": "",
         "name_en": "",
@@ -787,7 +787,7 @@ function guobiao_fanlist() {
     };
     cfg.fan.fan.map_[8051] = {
         "id": 8051,
-        "name_chs": "十二落抬点和",
+        "name_chs": "全求人",
         "name_chs_t": "",
         "name_jp": "",
         "name_en": "",
@@ -817,7 +817,7 @@ function guobiao_fanlist() {
     };
     cfg.fan.fan.map_[8053] = {
         "id": 8053,
-        "name_chs": "双三元刻",
+        "name_chs": "双箭刻",
         "name_chs_t": "",
         "name_jp": "",
         "name_en": "",
@@ -848,7 +848,7 @@ function guobiao_fanlist() {
     };
     cfg.fan.fan.map_[8055] = {
         "id": 8055,
-        "name_chs": "门前清自摸和",
+        "name_chs": "不求人",
         "name_chs_t": "",
         "name_jp": "",
         "name_en": "",
@@ -863,7 +863,7 @@ function guobiao_fanlist() {
     };
     cfg.fan.fan.map_[8056] = {
         "id": 8056,
-        "name_chs": "双大杠",
+        "name_chs": "双明杠",
         "name_chs_t": "",
         "name_jp": "",
         "name_en": "",
@@ -878,7 +878,7 @@ function guobiao_fanlist() {
     };
     cfg.fan.fan.map_[8057] = {
         "id": 8057,
-        "name_chs": "和断牌",
+        "name_chs": "和绝张",
         "name_chs_t": "",
         "name_jp": "",
         "name_en": "",
@@ -894,7 +894,7 @@ function guobiao_fanlist() {
 
     cfg.fan.fan.map_[8058] = {
         "id": 8058,
-        "name_chs": "三元刻 白",
+        "name_chs": "箭刻 白",
         "name_chs_t": "",
         "name_jp": "",
         "name_en": "",
@@ -909,7 +909,7 @@ function guobiao_fanlist() {
     };
     cfg.fan.fan.map_[8059] = {
         "id": 8059,
-        "name_chs": "三元刻 发",
+        "name_chs": "箭刻 发",
         "name_chs_t": "",
         "name_jp": "",
         "name_en": "",
@@ -924,7 +924,7 @@ function guobiao_fanlist() {
     };
     cfg.fan.fan.map_[8060] = {
         "id": 8060,
-        "name_chs": "三元刻 中",
+        "name_chs": "箭刻 中",
         "name_chs_t": "",
         "name_jp": "",
         "name_en": "",
@@ -939,7 +939,7 @@ function guobiao_fanlist() {
     };
     cfg.fan.fan.map_[8061] = {
         "id": 8061,
-        "name_chs": "场风刻",
+        "name_chs": "圈风刻",
         "name_chs_t": "",
         "name_jp": "",
         "name_en": "",
@@ -999,7 +999,7 @@ function guobiao_fanlist() {
     };
     cfg.fan.fan.map_[8065] = {
         "id": 8065,
-        "name_chs": "四合一",
+        "name_chs": "四归一",
         "name_chs_t": "",
         "name_jp": "",
         "name_en": "",
@@ -1075,7 +1075,7 @@ function guobiao_fanlist() {
 
     cfg.fan.fan.map_[8070] = {
         "id": 8070,
-        "name_chs": "一杯口",
+        "name_chs": "一般高",
         "name_chs_t": "",
         "name_jp": "",
         "name_en": "",
@@ -1090,7 +1090,7 @@ function guobiao_fanlist() {
     };
     cfg.fan.fan.map_[8071] = {
         "id": 8071,
-        "name_chs": "二色同顺",
+        "name_chs": "喜相逢",
         "name_chs_t": "",
         "name_jp": "",
         "name_en": "",
@@ -1120,7 +1120,7 @@ function guobiao_fanlist() {
     };
     cfg.fan.fan.map_[8073] = {
         "id": 8073,
-        "name_chs": "幺九副",
+        "name_chs": "老少副",
         "name_chs_t": "",
         "name_jp": "",
         "name_en": "",
@@ -1150,7 +1150,7 @@ function guobiao_fanlist() {
     };
     cfg.fan.fan.map_[8075] = {
         "id": 8075,
-        "name_chs": "大杠",
+        "name_chs": "明杠",
         "name_chs_t": "",
         "name_jp": "",
         "name_en": "",
@@ -1165,7 +1165,7 @@ function guobiao_fanlist() {
     };
     cfg.fan.fan.map_[8076] = {
         "id": 8076,
-        "name_chs": "无一门",
+        "name_chs": "缺一门",
         "name_chs_t": "",
         "name_jp": "",
         "name_en": "",
@@ -1195,7 +1195,7 @@ function guobiao_fanlist() {
     };
     cfg.fan.fan.map_[8078] = {
         "id": 8078,
-        "name_chs": "一二八九",
+        "name_chs": "边张",
         "name_chs_t": "",
         "name_jp": "",
         "name_en": "",
@@ -1210,7 +1210,7 @@ function guobiao_fanlist() {
     };
     cfg.fan.fan.map_[8079] = {
         "id": 8079,
-        "name_chs": "一三七九",
+        "name_chs": "坎张",
         "name_chs_t": "",
         "name_jp": "",
         "name_en": "",
@@ -1256,7 +1256,7 @@ function guobiao_fanlist() {
 
     cfg.fan.fan.map_[8082] = {
         "id": 8082,
-        "name_chs": "大暗杠",
+        "name_chs": "明暗杠",
         "name_chs_t": "",
         "name_jp": "",
         "name_en": "",

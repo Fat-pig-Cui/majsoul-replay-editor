@@ -172,20 +172,20 @@ function DIY_fan() {
     if (!DIY_fan_once)
         return;
     DIY_fan_once = false;
-    // 9000: 诈和, 因为"诈"字无法显示, 名称改为"振和"
-    // 9001: 天地创造: 因为"创造"二字无法显示, 名称改为"天地大白"
-    // 9002: 万物生长: 因为"万生长"三字无法显示, 名称改为"龙发杠载"
-    // 9003: 役满 开立直: 对应语音是对局中的宣言立直
-    // 9004: 役满 开两立直: 对应语音是对局中的宣言两立直
+    // 9000: 诈和, "诈"字无法显示, 原名称为"振和"
+    // 9001: 天地创造: "创造"无法显示, 原名称为"天地大白"
+    // 9002: 万物生长: "万生长"无法显示, 原名称为"龙发杠载"
+    // 9003: 开立直(役满): 对应语音是对局中的宣言立直
+    // 9004: 开两立直(役满): 对应语音是对局中的宣言两立直
     // 9005: 开立直(2番)
     // 9006: 开两立直(3番)
     cfg.fan.fan.map_[9000] = {
         "id": 9000,
-        "name_chs": "振和",
-        "name_chs_t": "振和",
-        "name_jp": "振和",
-        "name_en": "Fake winning", // 诈和
-        "name_kr": "振和",
+        "name_chs": "诈和",
+        "name_chs_t": "诈和",
+        "name_jp": "诈和",
+        "name_en": "Fake winning",
+        "name_kr": "诈和",
         "xuanshang": 0,
         "yiman": 0,
         "fan_menqing": 5,
@@ -200,11 +200,11 @@ function DIY_fan() {
     };
     cfg.fan.fan.map_[9001] = {
         "id": 9001,
-        "name_chs": "天地大白",
-        "name_chs_t": "天地大白",
-        "name_jp": "天地大白",
-        "name_en": "Beginning of the Cosmos", // 天地创造
-        "name_kr": "天地大白",
+        "name_chs": "天地创造",
+        "name_chs_t": "天地创造",
+        "name_jp": "天地创造",
+        "name_en": "Beginning of the Cosmos",
+        "name_kr": "天地创造",
         "xuanshang": 0,
         "yiman": 6,
         "fan_menqing": 78,
@@ -219,11 +219,11 @@ function DIY_fan() {
     };
     cfg.fan.fan.map_[9002] = {
         "id": 9002,
-        "name_chs": "龙发杠载",
-        "name_chs_t": "龍發槓載",
-        "name_jp": "龍發槓載",
-        "name_en": "Sprout of the Earth", // 万物生长
-        "name_kr": "龙发杠载",
+        "name_chs": "万物生长",
+        "name_chs_t": "万物生长",
+        "name_jp": "万物生长",
+        "name_en": "Sprout of the Earth",
+        "name_kr": "万物生长",
         "xuanshang": 0,
         "yiman": 6,
         "fan_menqing": 78,
@@ -238,11 +238,11 @@ function DIY_fan() {
     };
     cfg.fan.fan.map_[9003] = {
         "id": 9003,
-        "name_chs": "开立直",
-        "name_chs_t": "开立直",
-        "name_jp": "开立直",
+        "name_chs": "役满 开立直",
+        "name_chs_t": "役满 开立直",
+        "name_jp": "役满 开立直",
         "name_en": "Open Reach",
-        "name_kr": "开立直",
+        "name_kr": "役满 开立直",
         "xuanshang": 0,
         "yiman": 1,
         "fan_menqing": 1,
@@ -257,11 +257,11 @@ function DIY_fan() {
     };
     cfg.fan.fan.map_[9004] = {
         "id": 9004,
-        "name_chs": "开两立直",
-        "name_chs_t": "开两立直",
-        "name_jp": "开两立直",
+        "name_chs": "役满 开两立直",
+        "name_chs_t": "役满 开两立直",
+        "name_jp": "役满 开两立直",
         "name_en": "Open Double Reach",
-        "name_kr": "开两立直",
+        "name_kr": "役满 开两立直",
         "xuanshang": 0,
         "yiman": 1,
         "fan_menqing": 1,
@@ -314,12 +314,12 @@ function DIY_fan() {
     };
 
     // 以下是流局满贯和自风场风役种分化
-    // 9100: 流局满贯, 这里设计成役满
+    // 9100: 流局满贯
     // 9101: 东
     // 9102: 双东
     // 9103: 南
     // 9104: 双南
-    // 9105: 西: "西"字显示不出来
+    // 9105: 西: "西"显示不出来
     // 9106: 双西
     // 9107: 北
     // 9108: 双北
@@ -328,7 +328,7 @@ function DIY_fan() {
         "name_chs": "流局满贯",
         "name_chs_t": "流局滿貫",
         "name_jp": "流局滿貫",
-        "name_en": "Sprout of the Earth",
+        "name_en": "mangan at draw",
         "name_kr": "流局满贯",
         "xuanshang": 0,
         "yiman": 0,
@@ -495,14 +495,14 @@ function DIY_fan() {
         "merge_id": 0
     };
 
-    // 对局操作语音, "荣"显示不出来, 中间会有较长时间的停顿
+    // 对局操作语音, 中间会有较长时间的停顿
     // 9200: 立直
     // 9201: 两立直
     // 9202: 吃
     // 9203: 碰
     // 9204: 杠
     // 9205: 拔北
-    // 9206: 荣
+    // 9206: 荣, "荣"无法显示, 原名称为"点和"
     // 9207: 自摸
     cfg.fan.fan.map_[9200] = {
         "id": 9200,
@@ -620,11 +620,11 @@ function DIY_fan() {
     };
     cfg.fan.fan.map_[9206] = {
         "id": 9206,
-        "name_chs": "点和",
-        "name_chs_t": "点和",
-        "name_jp": "点和",
+        "name_chs": "荣和",
+        "name_chs_t": "荣和",
+        "name_jp": "荣和",
         "name_en": "Ron",
-        "name_kr": "点和",
+        "name_kr": "荣和",
         "xuanshang": 0,
         "yiman": 0,
         "fan_menqing": 0,
@@ -677,10 +677,10 @@ function DIY_fan() {
         "merge_id": 0
     };
 
-    // 满贯及以上和听牌语音, "倍"和"累计"显示不出来
+    // 满贯及以上和听牌语音
     // 9300: 满贯
-    // 9301: 跳满
-    // 9302: 倍满
+    // 9301: 跳满, "跳"无法显示, 原名称为"一点五满贯"
+    // 9302: 倍满, "倍"无法显示, 原名称为"两满贯"
     // 9303: 三倍满
     // 9304: 役满
     // 9305: 双倍役满
@@ -688,9 +688,9 @@ function DIY_fan() {
     // 9307: 四倍役满
     // 9308: 五倍役满
     // 9309: 六倍役满
-    // 9310: 累计役满
-    // 9311: 听牌
-    // 9312: 未听牌
+    // 9310: 累计役满, "累计"无法显示, 原名称为"数满贯"
+    // 9311: 听牌, "听"无法显示
+    // 9312: 未听牌, "未"无法显示, 原名称为"无听牌"
     cfg.fan.fan.map_[9300] = {
         "id": 9300,
         "name_chs": "满贯",
@@ -712,11 +712,11 @@ function DIY_fan() {
     };
     cfg.fan.fan.map_[9301] = {
         "id": 9301,
-        "name_chs": "一点五满贯",
-        "name_chs_t": "一点五满贯",
-        "name_jp": "一点五满贯",
+        "name_chs": "跳满",
+        "name_chs_t": "跳满",
+        "name_jp": "跳满",
         "name_en": "tiaoman",
-        "name_kr": "一点五满贯",
+        "name_kr": "跳满",
         "xuanshang": 0,
         "yiman": 0,
         "fan_menqing": 0,
@@ -731,11 +731,11 @@ function DIY_fan() {
     };
     cfg.fan.fan.map_[9302] = {
         "id": 9302,
-        "name_chs": "两满贯",
-        "name_chs_t": "两满贯",
-        "name_jp": "两满贯",
+        "name_chs": "倍满",
+        "name_chs_t": "倍满",
+        "name_jp": "倍满",
         "name_en": "beiman",
-        "name_kr": "两满贯",
+        "name_kr": "倍满",
         "xuanshang": 0,
         "yiman": 0,
         "fan_menqing": 0,
@@ -750,11 +750,11 @@ function DIY_fan() {
     };
     cfg.fan.fan.map_[9303] = {
         "id": 9303,
-        "name_chs": "三满贯",
-        "name_chs_t": "三满贯",
-        "name_jp": "三满贯",
+        "name_chs": "三倍满",
+        "name_chs_t": "三倍满",
+        "name_jp": "三倍满",
         "name_en": "sanbeiman",
-        "name_kr": "三满贯",
+        "name_kr": "三倍满",
         "xuanshang": 0,
         "yiman": 0,
         "fan_menqing": 0,
@@ -788,11 +788,11 @@ function DIY_fan() {
     };
     cfg.fan.fan.map_[9305] = {
         "id": 9305,
-        "name_chs": "两役满",
-        "name_chs_t": "两役满",
-        "name_jp": "两役满",
+        "name_chs": "两倍役满",
+        "name_chs_t": "两倍役满",
+        "name_jp": "两倍役满",
         "name_en": "Double Yakuman",
-        "name_kr": "两役满",
+        "name_kr": "两倍役满",
         "xuanshang": 0,
         "yiman": 0,
         "fan_menqing": 0,
@@ -807,11 +807,11 @@ function DIY_fan() {
     };
     cfg.fan.fan.map_[9306] = {
         "id": 9306,
-        "name_chs": "三役满",
-        "name_chs_t": "三役满",
-        "name_jp": "三役满",
+        "name_chs": "三倍役满",
+        "name_chs_t": "三倍役满",
+        "name_jp": "三倍役满",
         "name_en": "Triple Yakuman",
-        "name_kr": "三役满",
+        "name_kr": "三倍役满",
         "xuanshang": 0,
         "yiman": 0,
         "fan_menqing": 0,
@@ -826,11 +826,11 @@ function DIY_fan() {
     };
     cfg.fan.fan.map_[9307] = {
         "id": 9307,
-        "name_chs": "四役满",
-        "name_chs_t": "四役满",
-        "name_jp": "四役满",
+        "name_chs": "四倍役满",
+        "name_chs_t": "四倍役满",
+        "name_jp": "四倍役满",
         "name_en": "Yakumans",
-        "name_kr": "四役满",
+        "name_kr": "四倍役满",
         "xuanshang": 0,
         "yiman": 0,
         "fan_menqing": 0,
@@ -845,11 +845,11 @@ function DIY_fan() {
     };
     cfg.fan.fan.map_[9308] = {
         "id": 9308,
-        "name_chs": "五役满",
-        "name_chs_t": "五役满",
-        "name_jp": "五役满",
+        "name_chs": "五倍役满",
+        "name_chs_t": "五倍役满",
+        "name_jp": "五倍役满",
         "name_en": "Yakumans",
-        "name_kr": "五役满",
+        "name_kr": "五倍役满",
         "xuanshang": 0,
         "yiman": 0,
         "fan_menqing": 0,
@@ -864,11 +864,11 @@ function DIY_fan() {
     };
     cfg.fan.fan.map_[9309] = {
         "id": 9309,
-        "name_chs": "六役满",
-        "name_chs_t": "六役满",
-        "name_jp": "六役满",
+        "name_chs": "六倍役满",
+        "name_chs_t": "六倍役满",
+        "name_jp": "六倍役满",
         "name_en": "Yakumans",
-        "name_kr": "六役满",
+        "name_kr": "六倍役满",
         "xuanshang": 0,
         "yiman": 0,
         "fan_menqing": 0,
@@ -883,11 +883,11 @@ function DIY_fan() {
     };
     cfg.fan.fan.map_[9310] = {
         "id": 9310,
-        "name_chs": "数役满",
-        "name_chs_t": "数役满",
-        "name_jp": "数役满",
+        "name_chs": "累计役满",
+        "name_chs_t": "累计役满",
+        "name_jp": "累计役满",
         "name_en": "Yakumans",
-        "name_kr": "数役满",
+        "name_kr": "累计役满",
         "xuanshang": 0,
         "yiman": 0,
         "fan_menqing": 0,
@@ -921,11 +921,11 @@ function DIY_fan() {
     };
     cfg.fan.fan.map_[9312] = {
         "id": 9310,
-        "name_chs": "无听牌",
-        "name_chs_t": "无听牌",
-        "name_jp": "无听牌",
+        "name_chs": "未听牌",
+        "name_chs_t": "未听牌",
+        "name_jp": "未听牌",
         "name_en": "noting",
-        "name_kr": "无听牌",
+        "name_kr": "未听牌",
         "xuanshang": 0,
         "yiman": 0,
         "fan_menqing": 0,
@@ -941,8 +941,8 @@ function DIY_fan() {
 
     // 流局语音, 这里可以穿插到川麻的番种中
     // 9400: 四风连打
-    // 9400: 四杠散了
-    // 9400: 九种九牌
+    // 9400: 四杠散了, "散"无法显示
+    // 9400: 九种九牌, "种"无法显示
     cfg.fan.fan.map_[9400] = {
         "id": 9400,
         "name_chs": "四风连打",
@@ -964,11 +964,11 @@ function DIY_fan() {
     };
     cfg.fan.fan.map_[9401] = {
         "id": 9401,
-        "name_chs": "四杠流局",
-        "name_chs_t": "四杠流局",
-        "name_jp": "四杠流局",
+        "name_chs": "四杠散了",
+        "name_chs_t": "四杠散了",
+        "name_jp": "四杠散了",
         "name_en": "sigangsanle",
-        "name_kr": "四杠流局",
+        "name_kr": "四杠散了",
         "xuanshang": 0,
         "yiman": 0,
         "fan_menqing": 0,
@@ -983,11 +983,11 @@ function DIY_fan() {
     };
     cfg.fan.fan.map_[9402] = {
         "id": 9402,
-        "name_chs": "九九牌",
-        "name_chs_t": "九九牌",
-        "name_jp": "九九牌",
+        "name_chs": "九种九牌",
+        "name_chs_t": "九种九牌",
+        "name_jp": "九种九牌",
         "name_en": "jiuzhongjiupai",
-        "name_kr": "九九牌",
+        "name_kr": "九种九牌",
         "xuanshang": 0,
         "yiman": 0,
         "fan_menqing": 0,
@@ -1002,13 +1002,34 @@ function DIY_fan() {
     };
 
     // 大厅交互语音
+    // 9500: 获得语音, 都无法显示
+    // 9501: 登录语音普通, "语音普"无法显示
+    // 9502: 登录语音满羁绊, "语音羁绊"无法显示
+    // 9503: 大厅交互语音1, "厅互语音"无法显示
+    // 9504: 大厅交互语音2
+    // 9505: 大厅交互语音3
+    // 9506: 大厅交互语音4
+    // 9507: 大厅交互语音5
+    // 9508: 大厅交互语音6
+    // 9509: 大厅交互语音7
+    // 9510: 大厅交互语音8
+    // 9511: 送礼物语音普通, "送语音普"无法显示
+    // 9512: 送礼物语音喜好, "送语音"无法显示
+    // 9513: 好感度升级语音1, "感度升级语音"无法显示
+    // 9514: 好感度升级语音2
+    // 9515: 好感度升级语音3
+    // 9516: 好感度升级语音4
+    // 9517: 好感度升级语音5
+    // 9518: 契约语音, 都无法显示
+    // 9519: 新年语音, "新语音"无法显示
+    // 9520: 情人节语音, "情节语音"无法显示
     cfg.fan.fan.map_[9500] = {
         "id": 9500,
-        "name_chs": "自我介绍",
-        "name_chs_t": "自我介绍",
-        "name_jp": "自我介绍",
+        "name_chs": "获得语音",
+        "name_chs_t": "获得语音",
+        "name_jp": "获得语音",
         "name_en": "selfintro",
-        "name_kr": "自我介绍",
+        "name_kr": "获得语音",
         "xuanshang": 0,
         "yiman": 0,
         "fan_menqing": 0,
@@ -1023,11 +1044,11 @@ function DIY_fan() {
     };
     cfg.fan.fan.map_[9501] = {
         "id": 9501,
-        "name_chs": "登录语音1",
-        "name_chs_t": "登录语音1",
-        "name_jp": "登录语音1",
+        "name_chs": "登录语音普通",
+        "name_chs_t": "登录语音普通",
+        "name_jp": "登录语音普通",
         "name_en": "playerlogin",
-        "name_kr": "登录语音1",
+        "name_kr": "登录语音普通",
         "xuanshang": 0,
         "yiman": 0,
         "fan_menqing": 0,
@@ -1042,11 +1063,11 @@ function DIY_fan() {
     };
     cfg.fan.fan.map_[9502] = {
         "id": 9502,
-        "name_chs": "登录语音2",
-        "name_chs_t": "登录语音2",
-        "name_jp": "登录语音2",
+        "name_chs": "登录语音满羁绊",
+        "name_chs_t": "登录语音满羁绊",
+        "name_jp": "登录语音满羁绊",
         "name_en": "playerlogin_max",
-        "name_kr": "登录语音2",
+        "name_kr": "登录语音满羁绊",
         "xuanshang": 0,
         "yiman": 0,
         "fan_menqing": 0,
@@ -1422,6 +1443,11 @@ function DIY_fan() {
     };
 
     // 对局契约特殊语音
+    // 9600: 连续打出多张相同牌, "续出多张"无法显示
+    // 9600: 打出宝牌, "出"无法显示
+    // 9600: 余牌少于10, "余少于"无法显示
+    // 9600: 役满听牌, "听"无法显示
+    // 9600: 倍满/三倍满听牌, "倍听"无法显示
     cfg.fan.fan.map_[9600] = {
         "id": 9600,
         "name_chs": "连续打出多张相同牌",
@@ -1519,13 +1545,26 @@ function DIY_fan() {
     };
 
     // 一番街的特色古役
+    // 9700: 推不倒, "推倒"无法显示, 原名称为"对称牌"
+    // 9701: 赤三色, "赤"无法显示, 原名称为"红三色"
+    // 9702: 三色通贯
+    // 9703: 四连刻
+    // 9704: 一色四同顺
+    // 9705: 红孔雀, "孔雀"无法显示, 原名称为"红一色"
+    // 9706: 红一点
+    // 9707: 黑一色, "黑"无法显示, 原名称为"暗一色"
+    // 9708: 十三不搭, "搭"无法显示, 原名称为"十三不顺"
+    // 9709: 百万石, "百万"无法显示, 原名称为"1000000石"
+    // 9710: 金门桥, "桥"无法显示, 原名称为"金门顺"
+    // 9711: 东北新干线, "新干线"无法显示, 原名称"东北一气通贯"
+    // 9712: 无发绿一色
     cfg.fan.fan.map_[9700] = {
         "id": 9700,
-        "name_chs": "对称牌",
-        "name_chs_t": "对称牌",
-        "name_jp": "对称牌",
+        "name_chs": "推不倒",
+        "name_chs_t": "推不倒",
+        "name_jp": "推不倒",
         "name_en": "",
-        "name_kr": "对称牌",
+        "name_kr": "推不倒",
         "xuanshang": 0,
         "yiman": 0,
         "fan_menqing": 1,
@@ -1540,11 +1579,11 @@ function DIY_fan() {
     };
     cfg.fan.fan.map_[9701] = {
         "id": 9701,
-        "name_chs": "红三色",
-        "name_chs_t": "红三色",
-        "name_jp": "红三色",
+        "name_chs": "赤三色",
+        "name_chs_t": "赤三色",
+        "name_jp": "赤三色",
         "name_en": "",
-        "name_kr": "红三色",
+        "name_kr": "赤三色",
         "xuanshang": 0,
         "yiman": 0,
         "fan_menqing": 2,
@@ -1616,11 +1655,11 @@ function DIY_fan() {
     };
     cfg.fan.fan.map_[9705] = {
         "id": 9705,
-        "name_chs": "红一色",
-        "name_chs_t": "红一色",
-        "name_jp": "红一色",
+        "name_chs": "红孔雀",
+        "name_chs_t": "红孔雀",
+        "name_jp": "红孔雀",
         "name_en": "",
-        "name_kr": "红一色",
+        "name_kr": "红孔雀",
         "xuanshang": 0,
         "yiman": 1,
         "fan_menqing": 1,
@@ -1654,11 +1693,11 @@ function DIY_fan() {
     };
     cfg.fan.fan.map_[9707] = {
         "id": 9707,
-        "name_chs": "暗一色",
-        "name_chs_t": "暗一色",
-        "name_jp": "暗一色",
+        "name_chs": "黑一色",
+        "name_chs_t": "黑一色",
+        "name_jp": "黑一色",
         "name_en": "",
-        "name_kr": "暗一色",
+        "name_kr": "黑一色",
         "xuanshang": 0,
         "yiman": 1,
         "fan_menqing": 1,
@@ -1673,11 +1712,11 @@ function DIY_fan() {
     };
     cfg.fan.fan.map_[9708] = {
         "id": 9708,
-        "name_chs": "十三不顺",
-        "name_chs_t": "十三不顺",
-        "name_jp": "十三不顺",
+        "name_chs": "十三不搭",
+        "name_chs_t": "十三不搭",
+        "name_jp": "十三不搭",
         "name_en": "",
-        "name_kr": "十三不顺",
+        "name_kr": "十三不搭",
         "xuanshang": 0,
         "yiman": 1,
         "fan_menqing": 1,
@@ -1692,11 +1731,11 @@ function DIY_fan() {
     };
     cfg.fan.fan.map_[9709] = {
         "id": 9709,
-        "name_chs": "1000000石",
-        "name_chs_t": "1000000石",
-        "name_jp": "1000000石",
+        "name_chs": "百万石",
+        "name_chs_t": "百万石",
+        "name_jp": "百万石",
         "name_en": "",
-        "name_kr": "1000000石",
+        "name_kr": "百万石",
         "xuanshang": 0,
         "yiman": 1,
         "fan_menqing": 1,
@@ -1711,11 +1750,11 @@ function DIY_fan() {
     };
     cfg.fan.fan.map_[9710] = {
         "id": 9710,
-        "name_chs": "金门顺",
-        "name_chs_t": "金门顺",
-        "name_jp": "金门顺",
+        "name_chs": "金门桥",
+        "name_chs_t": "金门桥",
+        "name_jp": "金门桥",
         "name_en": "",
-        "name_kr": "金门顺",
+        "name_kr": "金门桥",
         "xuanshang": 0,
         "yiman": 1,
         "fan_menqing": 1,
@@ -1730,11 +1769,11 @@ function DIY_fan() {
     };
     cfg.fan.fan.map_[9711] = {
         "id": 9711,
-        "name_chs": "东北一气通贯",
-        "name_chs_t": "东北一气通贯",
-        "name_jp": "东北一气通贯",
+        "name_chs": "东北新干线",
+        "name_chs_t": "东北新干线",
+        "name_jp": "东北新干线",
         "name_en": "",
-        "name_kr": "东北一气通贯",
+        "name_kr": "东北新干线",
         "xuanshang": 0,
         "yiman": 1,
         "fan_menqing": 1,
@@ -2969,7 +3008,7 @@ function is_xueliu() {
     return !!(config && config.mode && config.mode.detail_rule && config.mode.detail_rule._xueliu);
 }
 
-// ==============================
+// ---------------------------------
 
 function is_guyi() {
     return !!(config && config.mode && config.mode.detail_rule && config.mode.detail_rule.guyi_mode);
@@ -2991,7 +3030,7 @@ function is_openhand() {
     return !!(config && config.mode && config.mode.detail_rule && config.mode.detail_rule.open_hand);
 }
 
-// ==============================
+// ---------------------------------
 
 function is_qieshangmanguan() {
     return !!(config && config.mode && config.mode.detail_rule && config.mode.detail_rule._qieshangmanguan)
@@ -3041,7 +3080,7 @@ function no_guoshiangang() {
     return !!(config && config.mode && config.mode.detail_rule && config.mode.detail_rule._no_guoshiangang)
 }
 
-// ==============================
+// ---------------------------------
 
 function is_baogang() {
     return !!(config && config.mode && config.mode.detail_rule && config.mode.detail_rule._baogang)
@@ -3059,7 +3098,7 @@ function ronghuzhahu() {
     return !!(config && config.mode && config.mode.detail_rule && config.mode.detail_rule._ronghuzhahu)
 }
 
-// ==============================
+// ---------------------------------
 
 function is_guobiao() {
     return !!(config && config.mode && config.mode.detail_rule && config.mode.detail_rule._guobiao)
@@ -3073,7 +3112,7 @@ function is_guobiao_lianzhuang() {
     return !!(config && config.mode && config.mode.detail_rule && config.mode.detail_rule._guobiao_lianzhuang)
 }
 
-// ==============================
+// ---------------------------------
 
 function fanfu() {
     if (!!(config && config.mode && config.mode.detail_rule && config.mode.detail_rule.fanfu !== undefined))
