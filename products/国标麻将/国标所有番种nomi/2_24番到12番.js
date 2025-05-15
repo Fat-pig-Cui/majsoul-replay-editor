@@ -76,7 +76,7 @@ normalmoqie();
 hupai();
 
 // 第5(23)局: 一色三同顺, 缺一门
-tiles0 = "1122233m555p5567z";
+tiles0 = "1122233m456p5567z";
 tiles1 = "1112223334445z";
 tiles2 = "111234478999p5z";
 tiles3 = "1111445555999s";
@@ -182,15 +182,15 @@ mingqiepai();
 normalmoqie();
 hupai();
 
-// 第13(31)局: 全带五, 平和, 喜相逢
-tiles0 = "34556m45566p55s12z";
+// 第13(31)局: 全带五
+tiles0 = "345567m55p4555s12z";
 tiles1 = "1112223334445z";
 tiles2 = "111223466999p5z";
-tiles3 = "2224446666888s";
-paishan = randompaishan("..7m7p");
+tiles3 = "2222444666888s";
+paishan = randompaishan("5p6s");
 roundbegin();
 qiepai();
-normalmoqie(3);
+normalmoqie();
 mingqiepai();
 normalmoqie();
 hupai();

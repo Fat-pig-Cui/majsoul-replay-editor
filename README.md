@@ -43,7 +43,7 @@ B站视频教程: [【雀魂】如何自制牌谱回放](https://www.bilibili.co
 至于 code.js , 这是初步解混淆后的雀魂核心js文件, 与本仓库关系不大, 放在这里仅方便查阅(文件很大, 不要轻易打开),
 解混淆的方法见另一个仓库: [misc-code](https://github.com/Fat-pig-Cui/misc-code)
 
-**注意: main.js 很多没有经过充分测试, 所以可能有bug**, 如果存在不符合预期的情况, 可以提 issue,
+使用过程中, 如果存在 bug 之类的不符合预期的情况, 可以提 issue,
 或在B站联系我: [肥pig崔的B站空间](https://space.bilibili.com/372365985),
 内容比较多的话还可以发邮件到我的邮箱说明: **chubbypig@qq.com**
 
@@ -114,7 +114,6 @@ B站视频教程: [【雀魂】如何自制牌谱回放](https://www.bilibili.co
 
 ## TODO(欢迎contribute)
 
-- 役种名称汉字范围的扩展
 - 立直供托, 场棒, 罚符点数自定义, 人和满贯, 表宝牌, 里宝牌, 杠表宝牌, 杠里宝牌
 - 通过重写函数的方式自制真实牌谱的观战
 
@@ -159,9 +158,11 @@ B站视频教程: [【雀魂】如何自制牌谱回放](https://www.bilibili.co
   ![doc/pic/img0004.jpg](doc/pic/img0004.jpg)
 - MLeague 名场面 佐佐木寿人死亡二则
   ![doc/pic/img0005.jpg](doc/pic/img0005.jpg)
-- 真·字一色 (注意: 这里更改立绘使用到了 [Majsoul Plus](https://github.com/MajsoulPlus/majsoul-plus), 自制牌谱只实现了牌谱部分, 教程见 [README.md](MJS_Plugin/README.md))
+- 真·字一色 (注意: 这里更改立绘使用到了 [Majsoul Plus](https://github.com/MajsoulPlus/majsoul-plus), 自制牌谱只实现了牌谱部分,
+  教程见 [README.md](using_MJS/README.md))
   ![doc/pic/img0006.jpg](doc/pic/img0006.jpg)
-- 国标麻将不算花牌情况下理论最大牌型(总共224番, 总番数百位显示不出来)
+- 国标麻将不算花牌情况下理论最大牌型(总共324番, 总番数百位显示不出来, 有些番种名称无法正常显示的问题也通过 Majsoul Plus
+  解决了, 详见 [报菜名界面加入无法显示的汉字](using_MJS/报菜名界面加入无法显示的汉字.md))
   ![doc/pic/img0007.jpg](doc/pic/img0007.jpg)
 - 立直麻将版血流成河模式
   ![doc/pic/img0008.jpg](doc/pic/img0008.jpg)

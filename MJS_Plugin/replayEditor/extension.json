@@ -1,9 +1,0 @@
-{
-  "id": "replayEditor",
-  "version": "1.0.0",
-  "name": "牌谱回放编辑器",
-  "author": "Chubbypig",
-  "description": "自制牌谱回放, 每次运行只能放映一个谱, 换谱放映需要更改然后重新启动游戏",
-  "preview": "preview.jpg",
-  "entry": "script.js"
-}

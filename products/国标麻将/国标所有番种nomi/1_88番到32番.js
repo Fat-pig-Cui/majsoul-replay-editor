@@ -265,11 +265,11 @@ for (let i = 0; i < 2; i++) {
 }
 hupai();
 
-// 第18局: 混幺九, 缺一门
-tiles0 = "11m99p2223344567z";
+// 第18局: 混幺九
+tiles0 = "11m99p11s22233567z";
 tiles1 = "1334456789999m";
 tiles2 = "11123447889p11z";
-tiles3 = "1111445555999s";
+tiles3 = "1144445555999s";
 paishan = randompaishan("1m9p3z");
 roundbegin();
 qiepai();
