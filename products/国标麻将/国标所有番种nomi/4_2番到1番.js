@@ -27,7 +27,7 @@ editdata.config = {
 
 // 第1(59)局: 箭刻: 白
 tiles0 = "2245m234p789s5567z";
-tiles1 = "1334456789999m";
+tiles1 = "1114445557799m";
 tiles2 = "11123447899p11z";
 tiles3 = "1111222555999s";
 paishan = randompaishan("5z3m");
@@ -40,7 +40,7 @@ hupai();
 
 // 第2(60)局: 箭刻: 发
 tiles0 = "2245m234p789s5667z";
-tiles1 = "1334456789999m";
+tiles1 = "1114445557799m";
 tiles2 = "11123447899p11z";
 tiles3 = "1111222555999s";
 paishan = randompaishan("6z3m");
@@ -53,7 +53,7 @@ hupai();
 
 // 第3(61)局: 箭刻: 中
 tiles0 = "2245m234p789s5677z";
-tiles1 = "1334456789999m";
+tiles1 = "1114445557799m";
 tiles2 = "11123447899p11z";
 tiles3 = "1111222555999s";
 paishan = randompaishan("7z3m");
@@ -94,7 +94,7 @@ gotoju(0, 0, 5);
 
 // 第6(64)局: 门前清
 tiles0 = "22245m234p789s556z";
-tiles1 = "1334456789999m";
+tiles1 = "1114445557799m";
 tiles2 = "11123447899p11z";
 tiles3 = "1111222555999s";
 paishan = randompaishan("3m");
@@ -104,34 +104,34 @@ normalmoqie();
 hupai();
 
 // 第7(65)局: 平和
-tiles0 = "2245m23445p789s67z";
+tiles0 = "2245m78p234789s67z";
 tiles1 = "1334456789999m";
 tiles2 = "11123447899p11z";
-tiles3 = "1111222555999s";
-paishan = randompaishan("..6p3m");
+tiles3 = "6m1112345888s77z";
+paishan = randompaishan("6p");
 roundbegin();
 qiepai();
-normalmoqie(3);
+mingqiepai("6m");
 mingqiepai();
 normalmoqie();
 hupai();
 
 // 第8(66)局: 四归一
-tiles0 = "22234m45p567s1167z";
-tiles1 = "1334456789999m";
+tiles0 = "22234m55p567s1167z";
+tiles1 = "3334445557799m";
 tiles2 = "11123447899p11z";
 tiles3 = "1111222555899s";
-paishan = randompaishan("..6p2m");
+paishan = randompaishan("5p2m");
 roundbegin();
 qiepai();
-normalmoqie(3);
+normalmoqie();
 mingqiepai();
 normalmoqie();
 hupai();
 
 // 第9(67)局: 双同刻
 tiles0 = "2245m222p789s1167z";
-tiles1 = "1334456789999m";
+tiles1 = "1114445557799m";
 tiles2 = "11123447899p11z";
 tiles3 = "1111222555999s";
 paishan = randompaishan("2m3m");
@@ -144,7 +144,7 @@ hupai();
 
 // 第10(68)局: 双暗刻
 tiles0 = "22245m333p88s1167z";
-tiles1 = "1334456789999m";
+tiles1 = "1114445557799m";
 tiles2 = "11123447899p11z";
 tiles3 = "1111222555999s";
 paishan = randompaishan("8s3m");
@@ -157,7 +157,7 @@ hupai();
 
 // 第11(69)局: 暗杠
 tiles0 = "222245m33p789s116z";
-tiles1 = "1334456789999m";
+tiles1 = "1114445557799m";
 tiles2 = "11123447899p11z";
 tiles3 = "1111222555999s";
 paishan = randompaishan("3p3m");
@@ -171,7 +171,7 @@ hupai();
 
 // 第12(70)局: 断幺
 tiles0 = "2245m33p566778s67z";
-tiles1 = "1334456789999m";
+tiles1 = "1114445557799m";
 tiles2 = "11123447899p11z";
 tiles3 = "1111222555999s";
 paishan = randompaishan("3p3m");
@@ -251,7 +251,7 @@ hupai();
 
 // 第18(76)局: 明杠
 tiles0 = "222789m555p78s224z";
-tiles1 = "1334456788999m";
+tiles1 = "1114445557799m";
 tiles2 = "11123447899p11z";
 tiles3 = "1111222555999s";
 paishan = randompaishan("2m6s");
@@ -264,7 +264,7 @@ hupai();
 
 // 第19(77)局: 缺一门
 tiles0 = "22789m55578s2234z";
-tiles1 = "1334456788999m";
+tiles1 = "1114445557799m";
 tiles2 = "11123447899p11z";
 tiles3 = "1111222666999s";
 paishan = randompaishan("2m6s");
@@ -277,7 +277,7 @@ hupai();
 
 // 第20(78)局: 无字
 tiles0 = "22789m555p5578s34z";
-tiles1 = "1334456788999m";
+tiles1 = "1114445557799m";
 tiles2 = "11123447899p11z";
 tiles3 = "1111222666999s";
 paishan = randompaishan("2m6s");
@@ -289,8 +289,8 @@ normalmoqie();
 hupai();
 
 // 第21(79)局: 边张
-tiles0 = "12777m55p678s1134z";
-tiles1 = "1334456788999m";
+tiles0 = "12888m55p678s1134z";
+tiles1 = "1114445557799m";
 tiles2 = "11123447899p11z";
 tiles3 = "1111222666999s";
 paishan = randompaishan("5p3m");
@@ -303,7 +303,7 @@ hupai();
 
 // 第22(80)局: 坎张
 tiles0 = "24789m55p678s1134z";
-tiles1 = "1334456788999m";
+tiles1 = "1114445557799m";
 tiles2 = "11123447899p11z";
 tiles3 = "1111222666999s";
 paishan = randompaishan("5p3m");
@@ -328,14 +328,13 @@ normalmoqie();
 hupai();
 
 // 第24(82)局: 自摸
-tiles0 = "789m55p56778s1134z";
+tiles0 = "789m55p56778s1123z";
 tiles1 = "1334456788999m";
 tiles2 = "11123447899p11z";
-tiles3 = "1111222555999s";
-paishan = randompaishan("5p...6s");
+tiles3 = "11123458889s22z";
+paishan = randompaishan("5p6s");
 roundbegin();
 qiepai();
 normalmoqie();
-mingqiepai();
-normalmoqie(3);
+mingqiepai(2);
 zimohu();

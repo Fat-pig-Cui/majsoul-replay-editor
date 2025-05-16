@@ -1,4 +1,4 @@
-# 雀魂回放编辑器Replay_Editor
+# 雀魂回放编辑器Majsoul_Replay_Editor
 
 自定义雀魂牌谱回放的注入脚本和一些自制牌谱回放文件, 支持国际中文服, 日服, 美服
 
@@ -15,8 +15,8 @@ B站视频教程: [【雀魂】如何自制牌谱回放](https://www.bilibili.co
 
 ### 查看样例
 
-打开 [main.js](main.js) 和 [examples](examples) 文件夹或 [products](products) 文件夹下的任一牌谱回放js文件(
-如 [demo.js](examples/demo.js))
+打开 [main.js](main.js) 和 [examples](examples) 文件夹或 [products](products)
+文件夹下的任一牌谱回放js文件(如 [demo.js](examples/demo.js))
 
 电脑登录网页版雀魂(注意用小号), F12 打开 console (控制台), 把 main.js 里面的内容全选复制输入到控制台中,
 然后将牌谱回放js文件内容也输入到控制台中
@@ -114,8 +114,9 @@ B站视频教程: [【雀魂】如何自制牌谱回放](https://www.bilibili.co
 
 ## TODO(欢迎contribute)
 
+- 修改牌背时可以修改指示牌部分 (暂没有实现方式)
+- 番数达到三位数能够显示百位 (暂没有实现方式)
 - 立直供托, 场棒, 罚符点数自定义, 人和满贯, 表宝牌, 里宝牌, 杠表宝牌, 杠里宝牌
-- 通过重写函数的方式自制真实牌谱的观战
 
 ## 版权声明
 

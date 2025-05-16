@@ -2032,7 +2032,7 @@ function editgame(editdata) {
 }
 
 // 回放接口, 在 edit 中重写, 并在 canceledit 中复原
-var initData, resetData, checkPaiPu, load_my_desktop_view;
+var initData, resetData, checkPaiPu, load_my_desktop_view, showInfo_mj, setFanFu;
 
 function edit(x) {
     try {
@@ -2042,6 +2042,10 @@ function edit(x) {
             checkPaiPu = GameMgr.Inst.checkPaiPu;
         if (load_my_desktop_view === undefined)
             load_my_desktop_view = game.Scene_MJ.prototype._load_my_desktop_view;
+        if (showInfo_mj === undefined)
+            showInfo_mj = uiscript.UI_Win.prototype._showInfo_mj;
+        if (setFanFu === undefined)
+            setFanFu = uiscript.UI_Win.prototype.setFanFu;
 
         if (x === undefined)
             x = JSON.parse(JSON.stringify(editdata));
@@ -2163,6 +2167,445 @@ function edit(x) {
             // 原来的牌面
             return uiscript.UI_Sushe.now_mjp_surface_id;
         }
+
+
+        uiscript.UI_Win.prototype._showInfo_mj = function (e) {
+
+            var Q = uiscript;
+
+            var s = this;
+            this['container_Activity_Point'].me['visible'] = !1,
+                this['container_activity_rpg'].me['visible'] = !1,
+                this.root['alpha'] = 0,
+                Laya['Tween'].to(this.root, {
+                    alpha: 1
+                }, 500);
+            view['DesktopMgr'].Inst['setNickname'](this['winner_name'], e.seat, '#c3e2ff', '#fbfbfb', !0);
+            var y = view['DesktopMgr'].Inst['player_datas'][e.seat]['character']
+                , A = new Q['UIRect']();
+            A.x = this['illust_rect'].x,
+                A.y = this['illust_rect'].y,
+                A['width'] = this['illust_rect']['width'],
+                A['height'] = this['illust_rect']['height'],
+                this['char_skin']['setRect'](A),
+                this['char_skin']['setSkin'](view['DesktopMgr'].Inst['player_datas'][e.seat]['avatar_id'], 'full'),
+                2 === e.mode ? this['img_mode']['visible'] = !1 : (this['img_mode']['visible'] = !0,
+                    this['img_mode'].skin = 0 === e.mode ? game['Tools']['localUISrc']('myres/mjdesktop/pg_zimo.png') : game['Tools']['localUISrc']('myres/mjdesktop/pg_he.png')),
+                this['_showPai'](e),
+                this['container_dora']['visible'] = !view['DesktopMgr'].Inst['is_chuanma_mode'](),
+                this['container_lidora']['visible'] = !view['DesktopMgr'].Inst['is_chuanma_mode']();
+            var v = e['fan_names']['length']
+                , u = 100;
+            this['container_fan_yiman']['visible'] = !1,
+                this['container_fan_8']['visible'] = !1,
+                this['container_fan_15']['visible'] = !1,
+                this['container_fan_12']['visible'] = !1,
+                this['container_fan_liuju']['visible'] = !1,
+                this['container_fan_yiman']['visible'] = !1,
+                this['container_fan_8']['visible'] = !1,
+                this['container_fan_15']['visible'] = !1,
+                this['container_fan_12']['visible'] = !1,
+                this['container_fan_liuju']['visible'] = !1;
+            var I = null;
+            I = 2 === e.mode ? this['container_fan_liuju'] : e['yiman'] ? this['container_fan_yiman'] : 8 >= v ? this['container_fan_8'] : 12 >= v ? this['container_fan_12'] : this['container_fan_15'],
+                I['visible'] = !0;
+            for (var X = 0; X < I['numChildren']; X++)
+                I['getChildAt'](X)['visible'] = !1;
+            for (var B = [], X = 0; X < e['fan_names']['length']; X++) {
+                var S = e['fan_names'][X]
+                    , G = 0
+                    , p = e['fan_ids'][X]
+                    , h = !1
+                    , z = cfg.fan.fan.get(p);
+                z && (h = !!z.mark),
+                9999 !== p && z && (G = z['show_index']);
+                var T = {
+                    name: S,
+                    index: G,
+                    isSpecialFan: h
+                };
+                if (e['fan_value'] && e['fan_value']['length'] > X && (T['value'] = e['fan_value'][X]),
+                10 === p)
+                    switch ((e.seat - view['DesktopMgr'].Inst['index_ju'] + view['DesktopMgr'].Inst['player_count']) % view['DesktopMgr'].Inst['player_count']) {
+                        case 0:
+                            T['sound'] = 'fan_dong';
+                            break;
+                        case 1:
+                            T['sound'] = 'fan_nan';
+                            break;
+                        case 2:
+                            T['sound'] = 'fan_xi';
+                            break;
+                        case 3:
+                            T['sound'] = 'fan_bei';
+                    }
+                else if (11 === p)
+                    if (view['DesktopMgr'].Inst['index_change'] % 4 === (e.seat - view['DesktopMgr'].Inst['index_ju'] + view['DesktopMgr'].Inst['player_count']) % view['DesktopMgr'].Inst['player_count'])
+                        switch (view['DesktopMgr'].Inst['index_change'] % 4) {
+                            case 0:
+                                T['sound'] = 'fan_doubledong';
+                                break;
+                            case 1:
+                                T['sound'] = 'fan_doublenan';
+                                break;
+                            case 2:
+                                T['sound'] = 'fan_doublexi';
+                                break;
+                            case 3:
+                                T['sound'] = 'fan_doublebei';
+                        }
+                    else
+                        switch (view['DesktopMgr'].Inst['index_change'] % 4) {
+                            case 0:
+                                T['sound'] = 'fan_dong';
+                                break;
+                            case 1:
+                                T['sound'] = 'fan_nan';
+                                break;
+                            case 2:
+                                T['sound'] = 'fan_xi';
+                                break;
+                            case 3:
+                                T['sound'] = 'fan_bei';
+                        }
+                // 添加下面
+                else if (8061 === p)
+                    switch (view['DesktopMgr'].Inst['index_change'] % 4) {
+                        case 0:
+                            T['sound'] = 'fan_dong';
+                            break;
+                        case 1:
+                            T['sound'] = 'fan_nan';
+                            break;
+                        case 2:
+                            T['sound'] = 'fan_xi';
+                            break;
+                        case 3:
+                            T['sound'] = 'fan_bei';
+                    }
+                else if (8062 === p)
+                    if (view['DesktopMgr'].Inst['index_change'] % 4 === (e.seat - view['DesktopMgr'].Inst['index_ju'] + view['DesktopMgr'].Inst['player_count']) % view['DesktopMgr'].Inst['player_count'])
+                        switch ((e.seat - view['DesktopMgr'].Inst['index_ju'] + view['DesktopMgr'].Inst['player_count']) % view['DesktopMgr'].Inst['player_count']) {
+                            case 0:
+                                T['sound'] = 'fan_doubledong';
+                                break;
+                            case 1:
+                                T['sound'] = 'fan_doublenan';
+                                break;
+                            case 2:
+                                T['sound'] = 'fan_doublexi';
+                                break;
+                            case 3:
+                                T['sound'] = 'fan_doublebei';
+                        }
+                    else
+                        switch ((e.seat - view['DesktopMgr'].Inst['index_ju'] + view['DesktopMgr'].Inst['player_count']) % view['DesktopMgr'].Inst['player_count']) {
+                            case 0:
+                                T['sound'] = 'fan_dong';
+                                break;
+                            case 1:
+                                T['sound'] = 'fan_nan';
+                                break;
+                            case 2:
+                                T['sound'] = 'fan_xi';
+                                break;
+                            case 3:
+                                T['sound'] = 'fan_bei';
+                        }
+                // 添加上面
+                else if (p >= 31 && 34 >= p) {
+                    var K = T['value'];
+                    K > 13 && (K = 13),
+                        T['sound'] = 0 === K ? '' : 'fan_dora' + K;
+                } else
+                    9999 === p ? T['sound'] = 'fan_liujumanguan' : p >= 0 && (T['sound'] = cfg.fan.fan.get(p)['sound']);
+                B.push(T);
+            }
+            B = B.sort(function (Q, e) {
+                return Q['index'] - e['index'];
+            }),
+                u += 500;
+            for (var j = function (Q) {
+                var s = game['Tools']['get_chara_audio'](y, B[Q]['sound']);
+                Laya['timer'].once(u, n, function () {
+                    var y = I['getChildAt'](Q)
+                        , A = y['getChildByName']('l_name');
+                    A.text = B[Q].name,
+                        A['color'] = B[Q]['isSpecialFan'] ? '#ffc74c' : '#f1eeda';
+                    var v = e['yiman'] && 'en' === GameMgr['client_language'] ? 290 : 242;
+                    if (A['width'] = v,
+                        game['Tools']['labelLocalizationSize'](A, v, 0.8),
+                    void 0 !== B[Q]['value'] && null !== B[Q]['value']) {
+                        y['getChildAt'](2)['visible'] = !0;
+                        var u = B[Q]['value']
+                            , X = u['toString']();
+                        2 === X['length'] ? (y['getChildAt'](3).skin = game['Tools']['localUISrc']('myres/mjdesktop/number/h_' + X[1] + '.png'),
+                            y['getChildAt'](3)['visible'] = !0,
+                            y['getChildAt'](4).skin = game['Tools']['localUISrc']('myres/mjdesktop/number/h_' + X[0] + '.png'),
+                            y['getChildAt'](4)['visible'] = !0) : (y['getChildAt'](3).skin = game['Tools']['localUISrc']('myres/mjdesktop/number/h_' + X[0] + '.png'),
+                            y['getChildAt'](3)['visible'] = !0,
+                            y['getChildAt'](4)['visible'] = !1);
+                    }
+                    y['visible'] = !0,
+                        Laya['Tween'].from(y, {
+                            x: 169,
+                            y: 184,
+                            alpha: 0
+                        }, 100, Laya.Ease['strongOut']),
+                        s ? (view['AudioMgr']['PlaySound'](s.path, s['volume']),
+                            view['AudioMgr']['PlayAudio'](211, 1, 0.5)) : view['AudioMgr']['PlayAudio'](211, 1, 1);
+                }),
+                    u += s ? s['time_length'] > 500 ? s['time_length'] : 500 : 500;
+            }, n = this, X = 0; v > X && X < I['numChildren']; X++)
+                j(X);
+            this['container_fan']['visible'] = !1,
+                this['container_fu']['visible'] = !1,
+                this['img_yiman']['visible'] = !1,
+                e.fan && e.fu ? (u += 300,
+                    Laya['timer'].once(u, this, function () {
+                        view['AudioMgr']['PlayAudio'](208),
+                            s['setFanFu'](e.fan, e.fu);
+                    })) : e['yiman'] && (u += 700,
+                    Laya['timer'].once(u, this, function () {
+                        view['AudioMgr']['PlayAudio'](208),
+                            s['img_yiman']['alpha'] = 0,
+                            s['img_yiman']['visible'] = !0,
+                            Laya['Tween'].to(s['img_yiman'], {
+                                alpha: 1
+                            }, 200);
+                    })),
+                this['container_score']['alpha'] = 0;
+            for (var X = 0; X < this['score_imgs']['length']; X++)
+                this['score_imgs'][X]['visible'] = !1;
+            if (u += 700,
+                this['container_score']['scaleX'] = this['container_score']['scaleY'] = 2,
+                Laya['timer'].once(u, this, function () {
+                    for (var Q = 0, y = e['score']; 0 !== y;) {
+                        var A = y % 10;
+                        if (y = Math['floor'](y / 10),
+                            s['score_imgs'][Q].skin = game['Tools']['localUISrc']('myres/mjdesktop/number/ww_' + A['toString']() + '.png'),
+                            s['score_imgs'][Q]['visible'] = !0,
+                            Q++,
+                        Q >= s['score_imgs']['length'])
+                            break;
+                    }
+                    Laya['Tween'].to(s['container_score'], {
+                        alpha: 1,
+                        scaleX: 1.2,
+                        scaleY: 1.2
+                    }, 200, Laya.Ease['strongIn']),
+                        view['AudioMgr']['PlayAudio'](221);
+                }),
+                this['container_title']['visible'] = !1,
+                e['title_id']) {
+                u += 700;
+                var L = 0
+                    , Z = 0
+                    , F = '';
+                switch (e['title_id']) {
+                    case mjcore['E_Dadian_Title']['E_Dadian_Title_manguan']:
+                        F = 'gameend_manguan',
+                            L = 214;
+                        break;
+                    case mjcore['E_Dadian_Title']['E_Dadian_Title_tiaoman']:
+                        F = 'gameend_tiaoman',
+                            L = 214;
+                        break;
+                    case mjcore['E_Dadian_Title']['E_Dadian_Title_beiman']:
+                        F = 'gameend_beiman',
+                            L = 201;
+                        break;
+                    case mjcore['E_Dadian_Title']['E_Dadian_Title_sanbeiman']:
+                        F = 'gameend_sanbeiman',
+                            L = 201;
+                        break;
+                    case mjcore['E_Dadian_Title']['E_Dadian_Title_leijiyiman']:
+                        F = 'gameend_leijiyiman',
+                            Z = 2,
+                            L = 226;
+                        break;
+                    case mjcore['E_Dadian_Title']['E_Dadian_Title_yiman']:
+                        F = 'gameend_yiman1',
+                            Z = 1,
+                            L = 226;
+                        break;
+                    case mjcore['E_Dadian_Title']['E_Dadian_Title_yiman2']:
+                        F = 'gameend_yiman2',
+                            Z = 2,
+                            L = 226;
+                        break;
+                    case mjcore['E_Dadian_Title']['E_Dadian_Title_yiman3']:
+                        F = 'gameend_yiman3',
+                            Z = 2,
+                            L = 226;
+                        break;
+                    case mjcore['E_Dadian_Title']['E_Dadian_Title_yiman4']:
+                        F = 'gameend_yiman4',
+                            Z = 2,
+                            L = 226;
+                        break;
+                    case mjcore['E_Dadian_Title']['E_Dadian_Title_yiman5']:
+                        F = 'gameend_yiman5',
+                            Z = 2,
+                            L = 226;
+                        break;
+                    case mjcore['E_Dadian_Title']['E_Dadian_Title_yiman6']:
+                        F = 'gameend_yiman6',
+                            Z = 2,
+                            L = 226;
+                }
+                var D = game['Tools']['get_chara_audio'](y, F);
+                Laya['timer'].once(u, this, function () {
+                    s['setTitle'](e['title_id']),
+                        s['container_title']['visible'] = !0,
+                        s['container_title']['alpha'] = 0,
+                        s['container_title']['scaleX'] = s['container_title']['scaleY'] = 3,
+                        Laya['Tween'].to(s['container_title'], {
+                            alpha: 1,
+                            scaleX: 1.2,
+                            scaleY: 1.2
+                        }, 300, Laya.Ease['strongIn']),
+                        Laya['timer'].once(300, s, function () {
+                            0 !== L && view['AudioMgr']['PlayAudio'](L);
+                        }),
+                    D && Laya['timer'].once(500, s, function () {
+                        view['AudioMgr']['PlaySound'](D.path, D['volume']);
+                    }),
+                    0 != Z && Laya['timer'].once(300, s, function () {
+                        var Q, e;
+                        'en' === GameMgr['client_language'] ? (Q = s.root['getChildByName']('effect_yiman_en'),
+                            e = 'scene/effect_yiman2.lh') : 'kr' === GameMgr['client_language'] ? (Q = s.root['getChildByName']('effect_yiman_en'),
+                            e = 'scene/effect_yiman.lh') : 1 === Z ? (Q = s.root['getChildByName']('effect_yiman'),
+                            e = 'scene/effect_yiman.lh') : (Q = s.root['getChildByName']('effect_yiman2'),
+                            e = 'scene/effect_yiman2.lh'),
+                            s['effect_yiman'] = game['FrontEffect'].Inst['create_ui_effect'](Q, e, new Laya['Point'](0, 0), 25);
+                    });
+                }),
+                (e['yiman'] || '累积役满' === e['title']) && (u += 500);
+            }
+            if (this.muyu['visible'] = !1,
+                view['DesktopMgr'].Inst['muyu_info']) {
+                var w = !1;
+                0 === e.mode ? w = !0 : 1 === e.mode && (view['DesktopMgr'].Inst['index_player'] === view['DesktopMgr'].Inst['muyu_info'].seat && (w = !0),
+                e.seat === view['DesktopMgr'].Inst['muyu_info'].seat && (w = !0)),
+                w && (this.muyu['scale'](1.2, 1.2),
+                    u += 700,
+                    Laya['timer'].once(u, this, function () {
+                        s.muyu['visible'] = !0,
+                            s.muyu['alpha'] = 0;
+                        var Q = (view['DesktopMgr'].Inst['muyu_info'].seat - view['DesktopMgr'].Inst['index_ju'] + view['DesktopMgr'].Inst['player_count']) % view['DesktopMgr'].Inst['player_count'];
+                        s.muyu.skin = game['Tools']['localUISrc']('myres/mjdesktop/muyu_seat' + Q + '.png'),
+                            Laya['Tween'].to(s.muyu, {
+                                alpha: 1
+                            }, 250);
+                    }));
+            }
+            if (view['DesktopMgr'].Inst['is_tianming_mode']()) {
+                this.muyu['visible'] = !1;
+                var w = !1;
+                e['tianming_bonus'] > 0 && (w = !0),
+                w && (this.muyu['scale'](1, 1),
+                    u += 700,
+                    Laya['timer'].once(u, this, function () {
+                        s.muyu['visible'] = !0,
+                            s.muyu['alpha'] = 0,
+                            s.muyu.skin = game['Tools']['localUISrc']('myres/mjdesktop/tianming_result_' + e['tianming_bonus'] + '.png'),
+                            Laya['Tween'].to(s.muyu, {
+                                alpha: 1
+                            }, 250);
+                    }));
+            }
+            if (view['DesktopMgr'].Inst.mode === view['EMJMode'].play && e.seat === view['DesktopMgr'].Inst.seat && e.mode <= 1 && Q['UI_Activity']['activity_is_running'](Q['UI_Activity_DuanWu_Point']['activity_id'])) {
+                for (var o = !1, X = 0; X < view['DesktopMgr'].Inst['player_datas']['length']; X++) {
+                    var J = view['DesktopMgr'].Inst['player_datas'][X];
+                    if (!J || game['Tools'].isAI(J['account_id'])) {
+                        o = !0;
+                        break;
+                    }
+                }
+                o ? this['container_Activity_Point'].me['visible'] = !1 : u += this['container_Activity_Point'].show(u, e['point_sum'], e['score']);
+            } else
+                this['container_Activity_Point'].me['visible'] = !1;
+            if (view['DesktopMgr'].Inst.mode === view['EMJMode'].play && Q['UI_Activity']['activity_is_running'](Q['UI_Activity_RPG']['activity_id'])) {
+                for (var o = !1, X = 0; X < view['DesktopMgr'].Inst['player_datas']['length']; X++) {
+                    var J = view['DesktopMgr'].Inst['player_datas'][X];
+                    if (!J || game['Tools'].isAI(J['account_id'])) {
+                        o = !0;
+                        break;
+                    }
+                }
+                if (o)
+                    this['container_activity_rpg'].me['visible'] = !1;
+                else {
+                    var _ = 0;
+                    view['DesktopMgr'].Inst.seat !== e.seat && (_ = 0 == e.mode ? 2 : 1),
+                        1 === _ && 0 !== view['DesktopMgr'].Inst['seat2LocalPosition'](view['DesktopMgr'].Inst['index_player']) ? this['container_activity_rpg'].me['visible'] = !1 : this['container_activity_rpg'].show(_, 0);
+                }
+            } else
+                this['container_activity_rpg'].me['visible'] = !1;
+            this['btn_confirm']['visible'] = !1,
+                u += 300,
+                this['btn_confirm']['disabled'] = !0,
+                Laya['timer'].once(u, this, function () {
+                    if (s['btn_confirm']['visible'] = !0,
+                        s['btn_confirm']['alpha'] = 1,
+                        Laya['Tween'].from(s['btn_confirm'], {
+                            alpha: 0
+                        }, 200),
+                        s['btn_confirm']['disabled'] = !1,
+                    view['DesktopMgr'].Inst.mode === view['EMJMode']['paipu'] || view['DesktopMgr'].Inst.mode === view['EMJMode']['xinshouyindao'])
+                        s['count_down']['visible'] = !1,
+                            s['btn_confirm']['getChildByName']('confirm').x = 131;
+                    else {
+                        s['count_down']['visible'] = !0,
+                            s['btn_confirm']['getChildByName']('confirm').x = 165;
+                        for (var Q = function (Q) {
+                            Laya['timer'].once(1000 * Q, s, function () {
+                                s['btn_confirm']['disabled'] || (s['count_down'].text = '(' + (3 - Q)['toString']() + ')');
+                            });
+                        }, e = 0; 3 > e; e++)
+                            Q(e);
+                        Laya['timer'].once(3000, s, function () {
+                            s['btn_confirm']['disabled'] || s['onConfirm']();
+                        });
+                    }
+                });
+        }
+
+        // uiscript.UI_Win.prototype.setFanFu = function (Fan, Fu) {
+        //
+        //     var Q = Fan, e = Fu;
+        //     if (this['fan_imgs'].length < 3)
+        //         this['fan_imgs'].push(this['container_fan']['getChildByName']('n3'))
+        //
+        //     this['container_fan']['visible'] = this['container_fu']['visible'] = !0,
+        //     this['container_fan']['alpha'] = this['container_fu']['alpha'] = 0;
+        //     for (var s = 0; 3 > s; s++)
+        //         if (0 === Q)
+        //             this['fan_imgs'][s]['visible'] = !1;
+        //         else {
+        //             var y = Q % 10;
+        //             Q = Math['floor'](Q / 10),
+        //             this['fan_imgs'][s]['visible'] = !0,
+        //             this['fan_imgs'][s].skin = game['Tools']['localUISrc']('myres/mjdesktop/number/h_' + y['toString']() + '.png');
+        //         }
+        //     this['container_fu']['visible'] = view['DesktopMgr'].Inst['is_chuanma_mode']() ? !1 : !0;
+        //     for (var s = 0; 3 > s; s++)
+        //         if (0 === e)
+        //             this['fu_imgs'][s]['visible'] = !1;
+        //         else {
+        //             var y = e % 10;
+        //             e = Math['floor'](e / 10),
+        //             this['fu_imgs'][s]['visible'] = !0,
+        //             this['fu_imgs'][s].skin = game['Tools']['localUISrc']('myres/mjdesktop/number/ww_' + y['toString']() + '.png');
+        //         }
+        //     Laya['Tween'].to(this['container_fan'], {
+        //         alpha: 1
+        //     }, 200),
+        //     Laya['Tween'].to(this['container_fu'], {
+        //         alpha: 1
+        //     }, 200);
+        // }
 
         // 重写 resetData 主要是为了切换视角时数据不复原, 如果不需要切换视角则可以不用管
         uiscript.UI_Replay.prototype.resetData = function () {
@@ -2441,6 +2884,14 @@ function canceledit() {
     if (load_my_desktop_view !== undefined)
         game.Scene_MJ.prototype._load_my_desktop_view = function (K, U) {
             return load_my_desktop_view.call(this, K, U);
+        }
+    if (showInfo_mj !== undefined)
+        uiscript.UI_Win.prototype._showInfo_mj = function(e) {
+            return showInfo_mj.call(this, e);
+        }
+    if (setFanFu !== undefined)
+        uiscript.UI_Win.prototype.setFanFu = function(Fan, Fu) {
+            return setFanFu.call(this, Fan, Fu);
         }
 }
 
@@ -8399,19 +8850,21 @@ function randompaishan(paishanhead = "", paishanback = "", reddora) {
 
     let ret_paishan = paishanhead + paishanback;
     for (let i = 0; i < cnt.length; i++) {
-        if (cnt[i] !== undefined && cnt[i] < 0) {
-            if (is_chuanma() && ret_paishan.length !== 55 * 2)
-                console.warn("chang: " + chang + ", ju: " + ju + ", ben: " + ben + " paishan 不合规: " + (4 - cnt[i]) + " 个 " + inttotile(i));
-            if (!is_chuanma() && !is_guobiao() && config.mode.mode >= 10 && config.mode.mode <= 19 && ret_paishan.length !== 68 * 2)
-                console.warn("chang: " + chang + ", ju: " + ju + ", ben: " + ben + " paishan 不合规: " + (4 - cnt[i]) + " 个 " + inttotile(i));
-            if (!is_chuanma() && !is_guobiao() && config.mode.mode < 10 && config.mode.mode >= 0 && ret_paishan.length !== 83 * 2)
-                console.warn("chang: " + chang + ", ju: " + ju + ", ben: " + ben + " paishan 不合规: " + (4 - cnt[i]) + " 个 " + inttotile(i));
-        }
         if (is_mingjing()) {
             if (cnt[i] < 0 && ret_paishan.length !== 83 * 2)
                 console.warn("明镜之战: chang: " + chang + ", ju: " + ju + ", ben: " + ben + " paishan 不合规: " + (1 - cnt[i]) + " 个 " + inttotile(i));
             if (cnt2[i] < 0 && ret_paishan.length !== 83 * 2)
                 console.warn("明镜之战: chang: " + chang + ", ju: " + ju + ", ben: " + ben + " paishan 不合规: " + (3 - cnt2[i]) + " 个 " + inttotile(i) + tile_suf);
+        }
+        else if (cnt[i] < 0) {
+            if (is_guobiao() && ret_paishan.length !== 83 * 2)
+                console.warn("chang: " + chang + ", ju: " + ju + ", ben: " + ben + " paishan 不合规: " + (4 - cnt[i]) + " 个 " + inttotile(i));
+            else if (is_chuanma() && ret_paishan.length !== 55 * 2)
+                console.warn("chang: " + chang + ", ju: " + ju + ", ben: " + ben + " paishan 不合规: " + (4 - cnt[i]) + " 个 " + inttotile(i));
+            else if (!is_chuanma() && !is_guobiao() && config.mode.mode >= 10 && config.mode.mode <= 19 && ret_paishan.length !== 68 * 2)
+                console.warn("chang: " + chang + ", ju: " + ju + ", ben: " + ben + " paishan 不合规: " + (4 - cnt[i]) + " 个 " + inttotile(i));
+            else if (!is_chuanma() && !is_guobiao() && config.mode.mode < 10 && config.mode.mode >= 0 && ret_paishan.length !== 83 * 2)
+                console.warn("chang: " + chang + ", ju: " + ju + ", ben: " + ben + " paishan 不合规: " + (4 - cnt[i]) + " 个 " + inttotile(i));
         }
     }
     return ret_paishan;

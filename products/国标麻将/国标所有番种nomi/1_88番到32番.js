@@ -41,19 +41,17 @@ for (let i = 0; i < 2; i++) {
 hupai();
 
 // 第2局: 大三元, 缺一门
-tiles0 = "23m55s1234556677z";
-tiles1 = "1133445678999m";
+tiles0 = "23m55s1235566777z";
+tiles1 = "3334446688999m";
 tiles2 = "1112345678999p";
 tiles3 = "1112345678999s";
-paishan = randompaishan("567z1m");
+paishan = randompaishan("56z1m");
 roundbegin();
 qiepai("1z");
 normalmoqie();
 mingqiepai("2z");
 normalmoqie();
 mingqiepai("3z");
-normalmoqie();
-mingqiepai("4z");
 normalmoqie();
 hupai();
 
@@ -84,7 +82,7 @@ hupai();
 // 第5局: 四杠
 tiles0 = "2222m555666p333s1z";
 tiles1 = "1133445678999m";
-tiles2 = "11123447889p11z";
+tiles2 = "555m1112447p9s11z";
 tiles3 = "1111445555999s";
 paishan = randompaishan("5p6p3s1z");
 roundbegin();
@@ -109,28 +107,28 @@ normalmoqie();
 hupai();
 
 // 第7局: 十三幺
-tiles0 = "19m19p18s9s1234567z";
+tiles0 = "19m19p19s12345777z";
 tiles1 = "1133445678999m";
 tiles2 = "11223447889p11z";
 tiles3 = "1112445555999s";
-paishan = randompaishan("1p");
+paishan = randompaishan("6z");
 roundbegin();
-qiepai("8s");
+qiepai();
 normalmoqie();
 hupai();
 
 // ===========================
 
 // 第8局: 清幺九
-tiles0 = "1199m1199p11s1234z";
+tiles0 = "1199m11999p11s123z";
 tiles1 = "3334445666777m";
 tiles2 = "12223447889p11z";
 tiles3 = "1244555566999s";
-paishan = randompaishan("1m9m1p9p");
+paishan = randompaishan("1m9m1p");
 roundbegin();
 qiepai();
 normalmoqie();
-for (let i = 0; i < 3; i++) {
+for (let i = 0; i < 2; i++) {
     mingqiepai();
     normalmoqie();
 }
@@ -150,17 +148,15 @@ normalmoqie();
 hupai();
 
 // 第10局: 小三元, 缺一门
-tiles0 = "23m234s123556677z";
-tiles1 = "1133445678999m";
+tiles0 = "23m234s125566677z";
+tiles1 = "2223344488999m";
 tiles2 = "1112345678999p";
 tiles3 = "1112345678999s";
-paishan = randompaishan("56z1m");
+paishan = randompaishan("5z1m");
 roundbegin();
 qiepai("1z");
 normalmoqie();
 mingqiepai("2z");
-normalmoqie();
-mingqiepai("3z");
 normalmoqie();
 hupai();
 
@@ -194,11 +190,11 @@ hupai();
 tiles0 = "112233557789m12z";
 tiles1 = "1122334455677m";
 tiles2 = "1112344478999p";
-tiles3 = "1112345668999s";
-paishan = randompaishan("..8m9m");
+tiles3 = "8m1112345888s22z";
+paishan = randompaishan("9m");
 roundbegin();
 qiepai();
-normalmoqie(3);
+mingqiepai("8m");
 mingqiepai();
 normalmoqie();
 hupai();
@@ -207,28 +203,28 @@ hupai();
 
 // 第14局: 一色四同顺, 平和, 缺一门
 tiles0 = "3333444455m99p12z";
-tiles1 = "1111222266668m";
+tiles1 = "1111222288889m";
 tiles2 = "1112344478899p";
-tiles3 = "1112345668999s";
-paishan = randompaishan("..5m5m");
+tiles3 = "5m1112345888s22z";
+paishan = randompaishan("5m");
 roundbegin();
 qiepai();
-normalmoqie(3);
+mingqiepai("5m");
 mingpai("34m");
 qiepai();
 normalmoqie();
 hupai();
 
 // 第15局: 一色四节高, 缺一门, 无字
-tiles0 = "33445566m99p1234z";
+tiles0 = "334455666m99p123z";
 tiles1 = "1111222289999m";
 tiles2 = "1112344478899p";
 tiles3 = "1112345668999s";
-paishan = randompaishan("3456m");
+paishan = randompaishan("345m");
 roundbegin();
 qiepai();
 normalmoqie();
-for (let i = 0; i < 3; i++) {
+for (let i = 0; i < 2; i++) {
     mingqiepai();
     normalmoqie();
 }
@@ -238,13 +234,13 @@ hupai();
 
 // 第16局: 一色四步高, 平和, 缺一门
 tiles0 = "1233455678m99p12z";
-tiles1 = "1122334455677m";
+tiles1 = "1112223344455m";
 tiles2 = "1112344478899p";
-tiles3 = "1112345668999s";
-paishan = randompaishan("..9m7m");
+tiles3 = "9m1112345888s22z";
+paishan = randompaishan("7m");
 roundbegin();
 qiepai();
-normalmoqie(3);
+mingqiepai("9m");
 mingqiepai();
 normalmoqie();
 hupai();
@@ -252,8 +248,8 @@ hupai();
 // 第17局: 三杠
 tiles0 = "2222m555666p23s11z";
 tiles1 = "1133445678999m";
-tiles2 = "11123447889p11z";
-tiles3 = "1111445555999s";
+tiles2 = "555m11123447p11z";
+tiles3 = "1111444777789s";
 paishan = randompaishan("5p6p4s");
 roundbegin();
 combomopai();
@@ -269,8 +265,8 @@ hupai();
 tiles0 = "11m99p11s22233567z";
 tiles1 = "1334456789999m";
 tiles2 = "11123447889p11z";
-tiles3 = "1144445555999s";
-paishan = randompaishan("1m9p3z");
+tiles3 = "2244445555999s";
+paishan = randompaishan("1s9p3z");
 roundbegin();
 qiepai();
 normalmoqie();

@@ -13,4 +13,5 @@
     - [demo01](开立直/demo01.js) 荣和
     - [demo02](开立直/demo02.js) 自摸
 - [血流成河](血流成河)
-    - [demo01](血流成河/demo01.js)
+    - [demo01](血流成河/demo01.js) 立直版本
+    - [demo02](血流成河/demo02.js) 川麻版本
