@@ -162,15 +162,15 @@ for (let i = 0; i < 2; i++) {
 hupai();
 
 // 第11(49)局: 混一色
-tiles0 = "1233456688m2245z";
+tiles0 = "2233466688s5667z";
 tiles1 = "1112223355777m";
 tiles2 = "11122344p11167z";
-tiles3 = "1111225555999s";
-paishan = randompaishan("8m6m");
+tiles3 = "1122334449999s";
+paishan = randompaishan("8s1s");
 roundbegin();
 qiepai();
 normalmoqie();
-mingqiepai();
+mingqiepai("5z");
 normalmoqie();
 hupai();
 

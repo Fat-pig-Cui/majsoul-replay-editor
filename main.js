@@ -8792,7 +8792,7 @@ function randompaishan(paishanhead = "", paishanback = "", reddora) {
         cnt[35] = cnt[36] = cnt[37] = 0;
         // 用 huapai 当做国标的花牌
         if (typeof (editfunction) !== "undefined")
-            cnt[tiletoint(huapai)] = 8;
+            cnt[tiletoint(huapai, true)] = 8;
     }
 
     // 明镜之战

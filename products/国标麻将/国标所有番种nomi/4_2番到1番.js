@@ -328,11 +328,11 @@ normalmoqie();
 hupai();
 
 // 第24(82)局: 自摸
-tiles0 = "789m55p56778s1123z";
+tiles0 = "789m55p45667s1123z";
 tiles1 = "1334456788999m";
 tiles2 = "11123447899p11z";
 tiles3 = "11123458889s22z";
-paishan = randompaishan("5p6s");
+paishan = randompaishan("5p5s");
 roundbegin();
 qiepai();
 normalmoqie();

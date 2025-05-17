@@ -1,5 +1,11 @@
 loadproject();
 
+// 需要导入 add_function.js
+
+// 用"0m"当做花牌
+
+// 大三元, 四杠, 字一色, 四暗刻, 妙手回春, 杠上开花, 圈风刻, 门风刻, 加上8个花牌总计共332番
+
 editdata.player_datas[0].nickname = "一姬-契约";
 editdata.player_datas[1].nickname = "新年初诣";
 editdata.player_datas[2].nickname = "一姬当千";
@@ -16,18 +22,20 @@ editdata.config = {
         'mode': 1,
         'detail_rule': {
             '_guobiao': true,
-            '_guobiao_no_8fanfu': true,
-            '_guobiao_lianzhuang': true
         }
     }
 };
 
-tiles0 = "14m28p69s12345677z";
-tiles1 = "2223334445556z";
-tiles2 = "1122336678999p";
-tiles3 = "1122345678999s";
-paishan = randompaishan("5p");
+tiles0 = "0m1112555666777z";
+tiles1 = "23455678p22334z";
+tiles2 = "1112223334445p";
+tiles3 = "5666777888999p";
+paishan = randompaishan("", "123765z0000000m");
 roundbegin();
+combomopai(11);
 qiepai();
-normalmoqie();
+mingqiepai();
+normalmoqie(78);
+mopai();
+combomopai();
 hupai();

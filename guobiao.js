@@ -1844,7 +1844,7 @@ function calcfan_guobiao(tiles, seat, zimo) {
             // 天地人和
             if (liqiinfo[seat].yifa !== 0 && liqiinfo[seat].liqi === 0 && seat === ju && zimo) {
                 ans.fans.push({'val': 8, 'id': 8083}); // 天和
-                // 不计 不求人, 自摸, 边张, 坎张, 单调将
+                // 不计 不求人, 自摸, 边张, 坎张, 单钓将
                 banfan(8055);
                 banfan(8081);
                 banfan(8078);
