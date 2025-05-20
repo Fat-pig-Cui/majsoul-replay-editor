@@ -109,8 +109,8 @@ B站视频教程: [【雀魂】如何自制牌谱回放](https://www.bilibili.co
 
 ## 演示截图(更多截图可见最后)
 
-![doc/pic/img0001.jpg](doc/pic/img0001.jpg)
-![doc/pic/img0002.jpg](doc/pic/img0002.jpg)
+![doc/pic/img01.jpg](doc/pic/img01.jpg)
+![doc/pic/img02.jpg](doc/pic/img02.jpg)
 
 ## TODO(欢迎contribute)
 
@@ -154,18 +154,18 @@ B站视频教程: [【雀魂】如何自制牌谱回放](https://www.bilibili.co
 ## 实机截图
 
 - [【雀魂自制牌谱】一姬纯享版报菜名 升级版](https://www.bilibili.com/video/BV1w96LYWEzR)
-  ![doc/pic/img0003.jpg](doc/pic/img0003.jpg)
+  ![doc/pic/img03.jpg](doc/pic/img03.jpg)
 - 天才麻将少女 名对局 宫永咲VS天江衣
-  ![doc/pic/img0004.jpg](doc/pic/img0004.jpg)
+  ![doc/pic/img04.jpg](doc/pic/img04.jpg)
 - MLeague 名场面 佐佐木寿人死亡二则
-  ![doc/pic/img0005.jpg](doc/pic/img0005.jpg)
+  ![doc/pic/img05.jpg](doc/pic/img05.jpg)
 - 真·字一色 (注意: 这里更改立绘使用到了 [Majsoul Plus](https://github.com/MajsoulPlus/majsoul-plus), 自制牌谱只实现了牌谱部分,
   教程见 [README.md](using_MJS/README.md))
-  ![doc/pic/img0006.jpg](doc/pic/img0006.jpg)
+  ![doc/pic/img06.jpg](doc/pic/img06.jpg)
 - 国标麻将不算花牌情况下理论最大牌型(总共324番, 总番数百位显示不出来, 有些番种名称无法正常显示的问题也通过 Majsoul Plus
   解决了, 详见 [报菜名界面加入无法显示的汉字](using_MJS/报菜名界面加入无法显示的汉字.md))
-  ![doc/pic/img0007.jpg](doc/pic/img0007.jpg)
+  ![doc/pic/img07.jpg](doc/pic/img07.jpg)
 - 立直麻将版血流成河模式
-  ![doc/pic/img0008.jpg](doc/pic/img0008.jpg)
+  ![doc/pic/img08.jpg](doc/pic/img08.jpg)
 
 

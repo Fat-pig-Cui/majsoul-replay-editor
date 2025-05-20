@@ -144,14 +144,14 @@ hupai();
 // ===========================
 
 // 第10(28)局: 清龙, 缺一门
-tiles0 = "12345678m23p1123z";
+tiles0 = "12345678m44p1123z";
 tiles1 = "1144555666777z";
 tiles2 = "111123466999p5z";
 tiles3 = "9m1112345888s33z";
-paishan = randompaishan("4p");
+paishan = randompaishan("4p9m");
 roundbegin();
 qiepai();
-mingqiepai("9m")
+normalmoqie();
 mingqiepai();
 normalmoqie();
 hupai();
@@ -170,14 +170,14 @@ normalmoqie();
 hupai();
 
 // 第12(30)局: 一色三步高, 缺一门
-tiles0 = "12334556m23p1123z";
+tiles0 = "12334556m44p1123z";
 tiles1 = "1144555666777z";
 tiles2 = "111223466999p5z";
 tiles3 = "7m1112345888s33z";
-paishan = randompaishan("4p");
+paishan = randompaishan("4p7m");
 roundbegin();
 qiepai();
-mingqiepai("7m");
+normalmoqie();
 mingqiepai();
 normalmoqie();
 hupai();
@@ -196,18 +196,16 @@ normalmoqie();
 hupai();
 
 // 第14(32)局: 三同刻
-tiles0 = "2278m22p222s44567z";
+tiles0 = "22789m22p222s4456z";
 tiles1 = "1112223334555z";
 tiles2 = "1112334669999p";
 tiles3 = "3334446666888s";
-paishan = randompaishan("2m2p9m");
+paishan = randompaishan("2m2p");
 roundbegin();
 qiepai();
 normalmoqie();
-for (let i = 0; i < 2; i++) {
-    mingqiepai();
-    normalmoqie();
-}
+mingqiepai();
+normalmoqie();
 hupai();
 
 // 第15(33)局: 三暗刻, 无字

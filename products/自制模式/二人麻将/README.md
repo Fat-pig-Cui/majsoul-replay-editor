@@ -15,7 +15,7 @@
 
 另外记得导入 [add_function.js](../../../add_function.js)
 
-![pic/image01.jpg](pic/image01.jpg)
+![pic/img01.jpg](pic/img01.jpg)
 
 ## 示例牌谱
 

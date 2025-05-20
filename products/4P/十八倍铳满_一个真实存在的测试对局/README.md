@@ -23,12 +23,12 @@
 
 真实牌谱截图:
 
-![1.png](pic/1.png)
+![pic/img01.jpg](pic/img01.jpg)
 
-![2.png](pic/2.png)
+![pic/img02.jpg](pic/img02.jpg)
 
-![3.png](pic/3.png)
+![pic/img03.jpg](pic/img03.jpg)
 
-![4.png](pic/4.png)
+![pic/img04.jpg](pic/img04.jpg)
 
-![5.png](pic/5.png)
+![pic/img05.jpg](pic/img05.jpg)
