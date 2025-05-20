@@ -41,17 +41,15 @@ for (let i = 0; i < 2; i++) {
 hupai();
 
 // 第2局: 大三元, 缺一门
-tiles0 = "23m55s1235566777z";
+tiles0 = "123m55s125566777z";
 tiles1 = "3334446688999m";
 tiles2 = "1112345678999p";
 tiles3 = "1112345678999s";
-paishan = randompaishan("56z1m");
+paishan = randompaishan("56z");
 roundbegin();
 qiepai("1z");
 normalmoqie();
 mingqiepai("2z");
-normalmoqie();
-mingqiepai("3z");
 normalmoqie();
 hupai();
 
@@ -148,11 +146,11 @@ normalmoqie();
 hupai();
 
 // 第10局: 小三元, 缺一门
-tiles0 = "23m234s125566677z";
+tiles0 = "123m234s12556677z";
 tiles1 = "2223344488999m";
 tiles2 = "1112345678999p";
 tiles3 = "1112345678999s";
-paishan = randompaishan("5z1m");
+paishan = randompaishan("56z");
 roundbegin();
 qiepai("1z");
 normalmoqie();
