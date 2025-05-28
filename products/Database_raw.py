@@ -13078,7 +13078,7 @@ SKIN = {
         "greeting_init": 0,
         "click2": 0,
         "celebrate_idle": 0,
-        "illust_data": ""
+        "illust_data": "lianggongxingshu"
     },
     "402102": {
         "id": 402102,
@@ -13137,7 +13137,7 @@ SKIN = {
         "greeting_init": 0,
         "click2": 0,
         "celebrate_idle": 0,
-        "illust_data": ""
+        "illust_data": "lianggongxingshu_0"
     },
     "402103": {
         "id": 402103,
@@ -13196,7 +13196,7 @@ SKIN = {
         "greeting_init": 0,
         "click2": 0,
         "celebrate_idle": 0,
-        "illust_data": ""
+        "illust_data": "lianggongxingshu_sy"
     },
     "402104": {
         "id": 402104,
@@ -13244,18 +13244,18 @@ SKIN = {
         "half_width": 2784,
         "half_height": 1261,
         "spine_type": 1,
-        "spine_width": 1600,
-        "spine_height": 2022,
-        "pivot_x": 728,
-        "pivot_y": 1753,
+        "spine_width": 1550,
+        "spine_height": 5000,
+        "pivot_x": 716,
+        "pivot_y": 1756,
         "idle": 8000,
         "greeting": 8000,
         "celebrate": 8000,
         "click": 8000,
         "greeting_init": 8000,
-        "click2": 0,
+        "click2": 8000,
         "celebrate_idle": 8000,
-        "illust_data": ""
+        "illust_data": "lianggongxingshu_yy"
     },
     "402105": {
         "id": 402105,
@@ -13314,7 +13314,66 @@ SKIN = {
         "greeting_init": 0,
         "click2": 0,
         "celebrate_idle": 0,
-        "illust_data": ""
+        "illust_data": "lianggongxingshu_cj"
+    },
+    "402106": {
+        "id": 402106,
+        "type": 17,
+        "name_chs": "足尖独白",
+        "desc_chs": "足尖独白活动限定\\n“解析：今天{name}看向KR-976的频率是平日的两倍。结论：{name}喜欢白色舞裙，更新对应喜好列表，信息备份至KR-976的最高机密档案。”",
+        "character_id": 200021,
+        "lock_tips_chs": "活动限定",
+        "path": "extendRes/charactor/lianggongxingshu_BL",
+        "exchange_item_id": 0,
+        "exchange_item_num": 0,
+        "direction": 0,
+        "no_reverse": 0,
+        "lock_reverse": 0,
+        "offset_x": 0,
+        "offset_y": 0,
+        "spot_scale": "0",
+        "effective_time": "",
+        "lobby_offset": "",
+        "liaoshe_offset": "",
+        "shop_offset": "",
+        "win_offset": "",
+        "gameend_offset": "",
+        "starup_offset": "",
+        "treasure_offset": "",
+        "ck_full_0_offset": "",
+        "ck_full_1_offset": "",
+        "ck_full_2_offset": "",
+        "ck_full_3_offset": "",
+        "ck_full_single_offset": "",
+        "ck_half_0_offset": "",
+        "ck_half_1_offset": "",
+        "ck_half_2_offset": "",
+        "ck_half_3_offset": "",
+        "ck_half_single_offset": "",
+        "smallhead_x": 0,
+        "smallhead_y": 0,
+        "smallhead_width": 0,
+        "full_x": 0,
+        "full_y": 0,
+        "full_width": 0,
+        "full_height": 0,
+        "half_x": 0,
+        "half_y": 0,
+        "half_width": 0,
+        "half_height": 0,
+        "spine_type": 1,
+        "spine_width": 869,
+        "spine_height": 5000,
+        "pivot_x": 464,
+        "pivot_y": 765,
+        "idle": 5333,
+        "greeting": 5000,
+        "celebrate": 7000,
+        "click": 8333,
+        "greeting_init": 14000,
+        "click2": 8000,
+        "celebrate_idle": 5333,
+        "illust_data": "lianggongxingshu_bl"
     },
     "402201": {
         "id": 402201,
@@ -22164,7 +22223,7 @@ SKIN = {
         "greeting_init": 0,
         "click2": 0,
         "celebrate_idle": 0,
-        "illust_data": ""
+        "illust_data": "you"
     },
     "405902": {
         "id": 405902,
@@ -22223,7 +22282,7 @@ SKIN = {
         "greeting_init": 0,
         "click2": 0,
         "celebrate_idle": 0,
-        "illust_data": ""
+        "illust_data": "you_0"
     },
     "405903": {
         "id": 405903,
@@ -22282,7 +22341,7 @@ SKIN = {
         "greeting_init": 0,
         "click2": 0,
         "celebrate_idle": 0,
-        "illust_data": ""
+        "illust_data": "you_sy"
     },
     "405904": {
         "id": 405904,
@@ -22341,7 +22400,7 @@ SKIN = {
         "greeting_init": 0,
         "click2": 0,
         "celebrate_idle": 0,
-        "illust_data": ""
+        "illust_data": "you_yd"
     },
     "405905": {
         "id": 405905,
@@ -22389,18 +22448,77 @@ SKIN = {
         "half_width": 2423,
         "half_height": 1261,
         "spine_type": 1,
-        "spine_width": 3760,
+        "spine_width": 3592,
         "spine_height": 5000,
-        "pivot_x": 1779,
-        "pivot_y": 3103,
+        "pivot_x": 1734,
+        "pivot_y": 3050,
         "idle": 8000,
         "greeting": 8000,
         "celebrate": 5600,
         "click": 4333,
         "greeting_init": 13000,
-        "click2": 8000,
+        "click2": 6666,
         "celebrate_idle": 2666,
-        "illust_data": ""
+        "illust_data": "you_yz"
+    },
+    "405906": {
+        "id": 405906,
+        "type": 17,
+        "name_chs": "足尖独白",
+        "desc_chs": "足尖独白活动限定\\n“啾噜噜，{name}的动作还真慢，差点就要赶不上柚的表演了！……柚也不是非要在登台前得到你的鼓励，只、只是既然约好要在幕布升起前碰面，柚就绝对不会让{name}变成言而无信的人！”",
+        "character_id": 200059,
+        "lock_tips_chs": "活动限定",
+        "path": "extendRes/charactor/you_BL",
+        "exchange_item_id": 0,
+        "exchange_item_num": 0,
+        "direction": 0,
+        "no_reverse": 0,
+        "lock_reverse": 0,
+        "offset_x": 0,
+        "offset_y": 0,
+        "spot_scale": "0",
+        "effective_time": "",
+        "lobby_offset": "",
+        "liaoshe_offset": "",
+        "shop_offset": "",
+        "win_offset": "",
+        "gameend_offset": "",
+        "starup_offset": "",
+        "treasure_offset": "",
+        "ck_full_0_offset": "",
+        "ck_full_1_offset": "",
+        "ck_full_2_offset": "",
+        "ck_full_3_offset": "",
+        "ck_full_single_offset": "",
+        "ck_half_0_offset": "",
+        "ck_half_1_offset": "",
+        "ck_half_2_offset": "",
+        "ck_half_3_offset": "",
+        "ck_half_single_offset": "",
+        "smallhead_x": 0,
+        "smallhead_y": 0,
+        "smallhead_width": 0,
+        "full_x": 0,
+        "full_y": 0,
+        "full_width": 0,
+        "full_height": 0,
+        "half_x": 0,
+        "half_y": 0,
+        "half_width": 0,
+        "half_height": 0,
+        "spine_type": 1,
+        "spine_width": 3318,
+        "spine_height": 5000,
+        "pivot_x": 1600,
+        "pivot_y": 3856,
+        "idle": 2666,
+        "greeting": 7333,
+        "celebrate": 9333,
+        "click": 6666,
+        "greeting_init": 14000,
+        "click2": 6666,
+        "celebrate_idle": 2666,
+        "illust_data": "you_bl"
     },
     "406001": {
         "id": 406001,
@@ -24229,7 +24347,7 @@ SKIN = {
         "greeting_init": 0,
         "click2": 0,
         "celebrate_idle": 0,
-        "illust_data": ""
+        "illust_data": "weilai"
     },
     "406902": {
         "id": 406902,
@@ -24288,7 +24406,7 @@ SKIN = {
         "greeting_init": 0,
         "click2": 0,
         "celebrate_idle": 0,
-        "illust_data": ""
+        "illust_data": "weilai_0"
     },
     "406903": {
         "id": 406903,
@@ -24347,7 +24465,66 @@ SKIN = {
         "greeting_init": 0,
         "click2": 0,
         "celebrate_idle": 0,
-        "illust_data": ""
+        "illust_data": "weilai_lf"
+    },
+    "406904": {
+        "id": 406904,
+        "type": 17,
+        "name_chs": "足尖独白",
+        "desc_chs": "足尖独白活动限定\\n“想要研究出舞姿优雅的仿生机器人，开发人员只是坐在电脑前计算数据是远远不够的，必须要亲自上阵深度体验各种舞蹈才行。唔……能麻烦你帮我压一下腿吗？我还差一点点就能碰到脚尖了……对，就是这样。咦？你的手怎么这么热？”",
+        "character_id": 200069,
+        "lock_tips_chs": "活动限定",
+        "path": "extendRes/charactor/weilai_BL",
+        "exchange_item_id": 0,
+        "exchange_item_num": 0,
+        "direction": 0,
+        "no_reverse": 0,
+        "lock_reverse": 0,
+        "offset_x": 0,
+        "offset_y": 0,
+        "spot_scale": "0",
+        "effective_time": "",
+        "lobby_offset": "",
+        "liaoshe_offset": "",
+        "shop_offset": "",
+        "win_offset": "",
+        "gameend_offset": "",
+        "starup_offset": "",
+        "treasure_offset": "",
+        "ck_full_0_offset": "",
+        "ck_full_1_offset": "",
+        "ck_full_2_offset": "",
+        "ck_full_3_offset": "",
+        "ck_full_single_offset": "",
+        "ck_half_0_offset": "",
+        "ck_half_1_offset": "",
+        "ck_half_2_offset": "",
+        "ck_half_3_offset": "",
+        "ck_half_single_offset": "",
+        "smallhead_x": 0,
+        "smallhead_y": 0,
+        "smallhead_width": 0,
+        "full_x": 0,
+        "full_y": 0,
+        "full_width": 0,
+        "full_height": 0,
+        "half_x": 0,
+        "half_y": 0,
+        "half_width": 0,
+        "half_height": 0,
+        "spine_type": 0,
+        "spine_width": 0,
+        "spine_height": 0,
+        "pivot_x": 0,
+        "pivot_y": 0,
+        "idle": 0,
+        "greeting": 0,
+        "celebrate": 0,
+        "click": 0,
+        "greeting_init": 0,
+        "click2": 0,
+        "celebrate_idle": 0,
+        "illust_data": "weilai_bl"
     },
     "407001": {
         "id": 407001,
@@ -40568,11 +40745,11 @@ ITEM = {
         "sell_reward_id": 0,
         "sell_reward_count": 0,
         "item_expire": "2025-05-31 05:00:00",
-        "expire_desc_chs": "2025-05-31 05:00:00(UTC+8)",
+        "expire_desc_chs": "2025-05-31 05:00:00",
         "expire_desc_chs_t": "2025-05-31 05:00:00(UTC+8)",
         "expire_desc_jp": "2025年5月31日6:00まで",
         "expire_desc_en": "2025/5/30 2:00 P.M. (UTC-7)",
-        "expire_desc_kr": "2025/5/30 2:00 P.M. (UTC-7)",
+        "expire_desc_kr": "2025.05.31 06:00(GMT+9)",
         "region_limit": 0,
         "cross_view": 1,
         "database_cache": 0
@@ -47465,6 +47642,48 @@ ITEM = {
         "cross_view": 0,
         "database_cache": 0
     },
+    "307272": {
+        "id": 307272,
+        "sort": 15072,
+        "name_chs": "纯白律动-2025",
+        "name_chs_t2": "",
+        "desc_func_chs": "点击仓库-插画更换",
+        "desc_chs": "面对期待已久的演出，候场的舞者比台前的观众更紧张。身为临时经纪人，是你出面稳定军心的时候了！",
+        "desc_chs_t2": "",
+        "icon": "extendRes/loading_cg/250501_thumb.jpg",
+        "icon_transparent": "",
+        "category": 8,
+        "type": 12,
+        "is_unique": 1,
+        "max_stack": 0,
+        "access": "",
+        "accessinfo": 0,
+        "func": "",
+        "iargs": [
+            250501,
+            0,
+            0,
+            0,
+            0,
+            0
+        ],
+        "sargs": [
+            "",
+            ""
+        ],
+        "can_sell": 0,
+        "sell_reward_id": 0,
+        "sell_reward_count": 0,
+        "item_expire": "2025-06-11 05:00:00",
+        "expire_desc_chs": "2025-06-11 05:00:00",
+        "expire_desc_chs_t": "2025-06-11 05:00:00",
+        "expire_desc_jp": "2025/06/11 5:59 まで",
+        "expire_desc_en": "2025-06-10 14:00:00 (UTC-7)",
+        "expire_desc_kr": "2025.06.11 06:00(GMT+9)",
+        "region_limit": 0,
+        "cross_view": 0,
+        "database_cache": 0
+    },
     "307401": {
         "id": 307401,
         "sort": 16201,
@@ -50424,6 +50643,48 @@ ITEM = {
         "func": "",
         "iargs": [
             250401,
+            0,
+            0,
+            0,
+            0,
+            0
+        ],
+        "sargs": [
+            "",
+            ""
+        ],
+        "can_sell": 0,
+        "sell_reward_id": 0,
+        "sell_reward_count": 0,
+        "item_expire": "",
+        "expire_desc_chs": "",
+        "expire_desc_chs_t": "",
+        "expire_desc_jp": "",
+        "expire_desc_en": "",
+        "expire_desc_kr": "",
+        "region_limit": 0,
+        "cross_view": 0,
+        "database_cache": 0
+    },
+    "307472": {
+        "id": 307472,
+        "sort": 15072,
+        "name_chs": "纯白律动-2025",
+        "name_chs_t2": "",
+        "desc_func_chs": "点击仓库-插画更换",
+        "desc_chs": "面对期待已久的演出，候场的舞者比台前的观众更紧张。身为临时经纪人，是你出面稳定军心的时候了！",
+        "desc_chs_t2": "",
+        "icon": "extendRes/loading_cg/250501_thumb.jpg",
+        "icon_transparent": "",
+        "category": 8,
+        "type": 12,
+        "is_unique": 1,
+        "max_stack": 0,
+        "access": "",
+        "accessinfo": 0,
+        "func": "",
+        "iargs": [
+            250501,
             0,
             0,
             0,
@@ -55535,10 +55796,10 @@ ITEM = {
         "name_chs": "扭蛋代币",
         "name_chs_t2": "",
         "desc_func_chs": "活动限定道具",
-        "desc_chs": "万圣夜特别扭蛋活动道具，通过活动任务获得。可用于在神秘扭蛋机中获得奖励。",
+        "desc_chs": "通过活动任务获得。可用于在神秘扭蛋机中获得奖励。",
         "desc_chs_t2": "",
-        "icon": "extendRes/items2/2303wenquan_coin.jpg",
-        "icon_transparent": "extendRes/items2/2303wenquan_coin_0.png",
+        "icon": "extendRes/items2/2505balei_coin.jpg",
+        "icon_transparent": "extendRes/items2/2505balei_coin_0.png",
         "category": 6,
         "type": 0,
         "is_unique": 0,
@@ -60863,6 +61124,48 @@ ITEM = {
         "cross_view": 0,
         "database_cache": 0
     },
+    "30550027": {
+        "id": 30550027,
+        "sort": 5073,
+        "name_chs": "头像框-双圣战",
+        "name_chs_t2": "",
+        "desc_func_chs": "点击寮舍-装扮更换",
+        "desc_chs": "头像框-双圣战",
+        "desc_chs_t2": "",
+        "icon": "extendRes/items2/headframe_ssz.jpg",
+        "icon_transparent": "",
+        "category": 5,
+        "type": 5,
+        "is_unique": 1,
+        "max_stack": 0,
+        "access": "",
+        "accessinfo": 0,
+        "func": "",
+        "iargs": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+        ],
+        "sargs": [
+            "",
+            ""
+        ],
+        "can_sell": 0,
+        "sell_reward_id": 0,
+        "sell_reward_count": 0,
+        "item_expire": "2026-09-01 05:00:00",
+        "expire_desc_chs": "2026-09-01 05:00:00",
+        "expire_desc_chs_t": "2026-09-01 05:00:00",
+        "expire_desc_jp": "2026-09-01 05:00:00",
+        "expire_desc_en": "2026-09-01 05:00:00",
+        "expire_desc_kr": "2026-09-01 05:00:00",
+        "region_limit": 0,
+        "cross_view": 0,
+        "database_cache": 0
+    },
     "30557001": {
         "id": 30557001,
         "sort": 6027,
@@ -62121,6 +62424,90 @@ ITEM = {
         "expire_desc_kr": "2026-01-01 05:00:00",
         "region_limit": 0,
         "cross_view": 0,
+        "database_cache": 0
+    },
+    "30557031": {
+        "id": 30557031,
+        "sort": 6057,
+        "name_chs": "天元北斗",
+        "name_chs_t2": "",
+        "desc_func_chs": "北斗战2025冠军纪念",
+        "desc_chs": "",
+        "desc_chs_t2": "",
+        "icon": "extendRes/title/tianyuanbeidou_item.jpg",
+        "icon_transparent": "",
+        "category": 7,
+        "type": 11,
+        "is_unique": 1,
+        "max_stack": 0,
+        "access": "",
+        "accessinfo": 0,
+        "func": "",
+        "iargs": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+        ],
+        "sargs": [
+            "",
+            ""
+        ],
+        "can_sell": 0,
+        "sell_reward_id": 0,
+        "sell_reward_count": 0,
+        "item_expire": "2026-12-31 05:00:00",
+        "expire_desc_chs": "2026-12-31 05:00:00",
+        "expire_desc_chs_t": "2026-12-31 05:00:00(UTC+8)",
+        "expire_desc_jp": "2026年12月31日6:00まで",
+        "expire_desc_en": "2026/12/30 2:00 P.M. (UTC-7)",
+        "expire_desc_kr": "2026.12.31 06:00(GMT+9)",
+        "region_limit": 0,
+        "cross_view": 1,
+        "database_cache": 0
+    },
+    "30557032": {
+        "id": 30557032,
+        "sort": 6058,
+        "name_chs": "天元北斗",
+        "name_chs_t2": "",
+        "desc_func_chs": "北斗战2025冠军纪念",
+        "desc_chs": "",
+        "desc_chs_t2": "",
+        "icon": "extendRes/title/tianyuanbeidou_item.jpg",
+        "icon_transparent": "",
+        "category": 7,
+        "type": 11,
+        "is_unique": 1,
+        "max_stack": 0,
+        "access": "",
+        "accessinfo": 0,
+        "func": "",
+        "iargs": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+        ],
+        "sargs": [
+            "",
+            ""
+        ],
+        "can_sell": 0,
+        "sell_reward_id": 0,
+        "sell_reward_count": 0,
+        "item_expire": "2026-06-15 23:00:00",
+        "expire_desc_chs": "2026.06.16 00:00(GMT+9)",
+        "expire_desc_chs_t": "2026.06.16 00:00(GMT+9)",
+        "expire_desc_jp": "2026.06.16 00:00(GMT+9)",
+        "expire_desc_en": "2026.06.16 00:00(GMT+9)",
+        "expire_desc_kr": "2026.06.16 00:00(GMT+9)",
+        "region_limit": 0,
+        "cross_view": 1,
         "database_cache": 0
     },
     "30560001": {
@@ -63476,6 +63863,48 @@ ITEM = {
         "desc_chs": "[작혼: 리치 마작] 대회 라이브 스트리밍 전용 작탁.",
         "desc_chs_t2": "",
         "icon": "extendRes/items2/tablecloth_25krsaishi.jpg",
+        "icon_transparent": "",
+        "category": 5,
+        "type": 6,
+        "is_unique": 1,
+        "max_stack": 0,
+        "access": "",
+        "accessinfo": 0,
+        "func": "",
+        "iargs": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+        ],
+        "sargs": [
+            "",
+            ""
+        ],
+        "can_sell": 0,
+        "sell_reward_id": 0,
+        "sell_reward_count": 0,
+        "item_expire": "",
+        "expire_desc_chs": "",
+        "expire_desc_chs_t": "",
+        "expire_desc_jp": "",
+        "expire_desc_en": "",
+        "expire_desc_kr": "",
+        "region_limit": 0,
+        "cross_view": 0,
+        "database_cache": 0
+    },
+    "30580018": {
+        "id": 30580018,
+        "sort": 10037,
+        "name_chs": "桌布-三垣杯",
+        "name_chs_t2": "",
+        "desc_func_chs": "点击寮舍-装扮更换",
+        "desc_chs": "桌布-三垣杯",
+        "desc_chs_t2": "",
+        "icon": "extendRes/items2/tablecloth_25sanyuanbei.jpg",
         "icon_transparent": "",
         "category": 5,
         "type": 6,
@@ -69533,7 +69962,7 @@ TITLE = {
         "desc_kr": "",
         "icon": "extendRes/title/notitle.png",
         "icon_item": "extendRes/title/notitle.png",
-        "priority": 8,
+        "priority": 1,
         "unlock_type": 0,
         "unlock_param": [
             0,
@@ -69557,7 +69986,7 @@ TITLE = {
         "desc_kr": "작혼 오픈 기념 특전 칭호",
         "icon": "extendRes/title/yuanchuzhihuo.png",
         "icon_item": "extendRes/title/yuanchuzhihuo.png",
-        "priority": 10,
+        "priority": 2,
         "unlock_type": 0,
         "unlock_param": [
             0,
@@ -69581,7 +70010,7 @@ TITLE = {
         "desc_kr": "상하이 'Firefly Expo' 이벤트에 참가한 행운의 플레이어",
         "icon": "extendRes/title/yinghuozhiguang.png",
         "icon_item": "extendRes/title/yinghuozhiguang.png",
-        "priority": 20,
+        "priority": 3,
         "unlock_type": 0,
         "unlock_param": [
             0,
@@ -69605,7 +70034,7 @@ TITLE = {
         "desc_kr": "최초로 작성 랭크를 달성한 플레이어 (4인전)",
         "icon": "extendRes/title/zuichuquesheng.png",
         "icon_item": "extendRes/title/zuichuquesheng.png",
-        "priority": 21,
+        "priority": 4,
         "unlock_type": 0,
         "unlock_param": [
             0,
@@ -69629,7 +70058,7 @@ TITLE = {
         "desc_kr": "작혼과 계약을 맺은 초급 실습생",
         "icon": "extendRes/title/hunzhiqiyuezhe1.png",
         "icon_item": "extendRes/title/hunzhiqiyuezhe1.png",
-        "priority": 32,
+        "priority": 10001,
         "unlock_type": 0,
         "unlock_param": [
             0,
@@ -69653,7 +70082,7 @@ TITLE = {
         "desc_kr": "작혼과 계약을 맺은 중급 실습생",
         "icon": "extendRes/title/hunzhiqiyuezhe2.png",
         "icon_item": "extendRes/title/hunzhiqiyuezhe2.png",
-        "priority": 33,
+        "priority": 10002,
         "unlock_type": 0,
         "unlock_param": [
             0,
@@ -69677,7 +70106,7 @@ TITLE = {
         "desc_kr": "작혼과 계약을 맺은 상급 실습생",
         "icon": "extendRes/title/hunzhiqiyuezhe3.png",
         "icon_item": "extendRes/title/hunzhiqiyuezhe3.png",
-        "priority": 34,
+        "priority": 10003,
         "unlock_type": 0,
         "unlock_param": [
             0,
@@ -69701,7 +70130,7 @@ TITLE = {
         "desc_kr": "작혼의 성장에 기여한 초급 지도자",
         "icon": "extendRes/title/hunzhiqidizhe1.png",
         "icon_item": "extendRes/title/hunzhiqidizhe1.png",
-        "priority": 35,
+        "priority": 10004,
         "unlock_type": 0,
         "unlock_param": [
             0,
@@ -69725,7 +70154,7 @@ TITLE = {
         "desc_kr": "작혼의 성장에 기여한 중급 지도자",
         "icon": "extendRes/title/hunzhiqidizhe2.png",
         "icon_item": "extendRes/title/hunzhiqidizhe2.png",
-        "priority": 36,
+        "priority": 10005,
         "unlock_type": 0,
         "unlock_param": [
             0,
@@ -69749,7 +70178,7 @@ TITLE = {
         "desc_kr": "작혼의 성장에 기여한 상급 지도자",
         "icon": "extendRes/title/hunzhiqidizhe3.png",
         "icon_item": "extendRes/title/hunzhiqidizhe3.png",
-        "priority": 37,
+        "priority": 10006,
         "unlock_type": 0,
         "unlock_param": [
             0,
@@ -69773,7 +70202,7 @@ TITLE = {
         "desc_kr": "작혼 우주 창생에 기여한 초급 사절",
         "icon": "extendRes/title/hunzhidizaozhe1.png",
         "icon_item": "extendRes/title/hunzhidizaozhe1.png",
-        "priority": 38,
+        "priority": 10007,
         "unlock_type": 0,
         "unlock_param": [
             0,
@@ -69797,7 +70226,7 @@ TITLE = {
         "desc_kr": "작혼 우주 창생에 기여한 중급 사절",
         "icon": "extendRes/title/hunzhidizaozhe2.png",
         "icon_item": "extendRes/title/hunzhidizaozhe2.png",
-        "priority": 39,
+        "priority": 10008,
         "unlock_type": 0,
         "unlock_param": [
             0,
@@ -69821,7 +70250,7 @@ TITLE = {
         "desc_kr": "작혼 우주 창생에 기여한 상급 사절",
         "icon": "extendRes/title/hunzhidizaozhe3.png",
         "icon_item": "extendRes/title/hunzhidizaozhe3.png",
-        "priority": 40,
+        "priority": 10009,
         "unlock_type": 0,
         "unlock_param": [
             0,
@@ -69845,7 +70274,7 @@ TITLE = {
         "desc_kr": "작혼에 상상을 초월할 정도로 공헌한 자",
         "icon": "extendRes/title/hunzhichaoyuezhe.png",
         "icon_item": "extendRes/title/hunzhichaoyuezhe.png",
-        "priority": 41,
+        "priority": 10010,
         "unlock_type": 0,
         "unlock_param": [
             0,
@@ -69869,7 +70298,7 @@ TITLE = {
         "desc_kr": "혼천 신사를 위해 많은 기부를 한 자",
         "icon": "extendRes/title/maolianggongyingshang.png",
         "icon_item": "extendRes/title/maolianggongyingshang.png",
-        "priority": 42,
+        "priority": 10011,
         "unlock_type": 0,
         "unlock_param": [
             0,
@@ -69893,7 +70322,7 @@ TITLE = {
         "desc_kr": "최초로 혼천 랭크를 달성한 플레이어 (4인전)",
         "icon": "extendRes/title/zuichuhuntian.png",
         "icon_item": "extendRes/title/zuichuhuntian.png",
-        "priority": 22,
+        "priority": 5,
         "unlock_type": 0,
         "unlock_param": [
             0,
@@ -69917,7 +70346,7 @@ TITLE = {
         "desc_kr": "작혼 공인 플레이어",
         "icon": "extendRes/title/gai.png",
         "icon_item": "extendRes/title/gai.png",
-        "priority": 9,
+        "priority": 6,
         "unlock_type": 0,
         "unlock_param": [
             0,
@@ -69941,7 +70370,7 @@ TITLE = {
         "desc_kr": "지금까지 우리와 함께 해 준 보스를 위한 칭호",
         "icon": "extendRes/title/12dora.png",
         "icon_item": "extendRes/title/12dora_item.jpg",
-        "priority": 60,
+        "priority": 7,
         "unlock_type": 0,
         "unlock_param": [
             0,
@@ -69965,7 +70394,7 @@ TITLE = {
         "desc_kr": "아기 간균을 위해 노력하는 간균을 위한 칭호",
         "icon": "extendRes/title/ganjunwudi.png",
         "icon_item": "extendRes/title/ganjunwudi_item.jpg",
-        "priority": 70,
+        "priority": 8,
         "unlock_type": 0,
         "unlock_param": [
             0,
@@ -69989,7 +70418,7 @@ TITLE = {
         "desc_kr": "육아방송 중 가장 마작을 잘 치는 파란머리를 위한 칭호",
         "icon": "extendRes/title/zuocangshayejia.png",
         "icon_item": "extendRes/title/zuocangshayejia_item.jpg",
-        "priority": 80,
+        "priority": 9,
         "unlock_type": 0,
         "unlock_param": [
             0,
@@ -70013,7 +70442,7 @@ TITLE = {
         "desc_kr": "“캣푸드는 내가 지킨다!”",
         "icon": "extendRes/title/miaoguodahufa.png",
         "icon_item": "extendRes/title/miaoguodahufa.jpg",
-        "priority": 43,
+        "priority": 10012,
         "unlock_type": 0,
         "unlock_param": [
             0,
@@ -70037,7 +70466,7 @@ TITLE = {
         "desc_kr": "최초로 작성 랭크를 달성한 플레이어 (3인전)",
         "icon": "extendRes/title/zuichuquesheng3.png",
         "icon_item": "extendRes/title/zuichuquesheng3_item.jpg",
-        "priority": 23,
+        "priority": 10,
         "unlock_type": 0,
         "unlock_param": [
             0,
@@ -70061,7 +70490,7 @@ TITLE = {
         "desc_kr": "최초로 혼천 랭크를 달성한 플레이어 (3인전)",
         "icon": "extendRes/title/zuichuhuntian3.png",
         "icon_item": "extendRes/title/zuichuhuntian3_item.jpg",
-        "priority": 24,
+        "priority": 11,
         "unlock_type": 0,
         "unlock_param": [
             0,
@@ -70085,7 +70514,7 @@ TITLE = {
         "desc_kr": "니지산지 최강 작사 결정전 우승 기념",
         "icon": "extendRes/title/2434chudai.png",
         "icon_item": "extendRes/title/2434chudai_item.jpg",
-        "priority": 30,
+        "priority": 40001,
         "unlock_type": 0,
         "unlock_param": [
             0,
@@ -70133,7 +70562,7 @@ TITLE = {
         "desc_kr": "작혼 공인 플레이어G",
         "icon": "extendRes/title/japan_g.png",
         "icon_item": "extendRes/title/japan_g_item.jpg",
-        "priority": 25,
+        "priority": 12,
         "unlock_type": 0,
         "unlock_param": [
             0,
@@ -70157,7 +70586,7 @@ TITLE = {
         "desc_kr": "앞으로도 당신과 계속 함께할 수 있기를 바라고 있습니다.",
         "icon": "extendRes/title/wanxianggengxin.png",
         "icon_item": "extendRes/title/wanxianggengxin_item.jpg",
-        "priority": 11,
+        "priority": 13,
         "unlock_type": 0,
         "unlock_param": [
             0,
@@ -70181,7 +70610,7 @@ TITLE = {
         "desc_kr": "시련의 길 시즌 1 기념",
         "icon": "extendRes/title/trial.png",
         "icon_item": "extendRes/title/trial_item.jpg",
-        "priority": 13,
+        "priority": 30001,
         "unlock_type": 0,
         "unlock_param": [
             0,
@@ -70205,7 +70634,7 @@ TITLE = {
         "desc_kr": "작혼 버츄얼 인터하이 우승 팀에게 주어지는 칭호",
         "icon": "extendRes/title/interhigh.png",
         "icon_item": "extendRes/title/interhigh_item.jpg",
-        "priority": 998,
+        "priority": 40002,
         "unlock_type": 1,
         "unlock_param": [
             305557,
@@ -70229,7 +70658,7 @@ TITLE = {
         "desc_kr": "업적 '성장의 여정'의 모든 항목을 달성한 기념 칭호",
         "icon": "extendRes/title/achievementgroup1.png",
         "icon_item": "extendRes/title/achievementgroup1_item.jpg",
-        "priority": 800,
+        "priority": 20099,
         "unlock_type": 0,
         "unlock_param": [
             0,
@@ -70253,7 +70682,7 @@ TITLE = {
         "desc_kr": "업적 '연승의 길'의 모든 항목을 달성한 기념 칭호",
         "icon": "extendRes/title/achievementgroup2.png",
         "icon_item": "extendRes/title/achievementgroup2_item.jpg",
-        "priority": 799,
+        "priority": 20098,
         "unlock_type": 0,
         "unlock_param": [
             0,
@@ -70277,7 +70706,7 @@ TITLE = {
         "desc_kr": "업적 '성라운포'의 모든 항목을 달성한 기념 칭호",
         "icon": "extendRes/title/achievementgroup3.png",
         "icon_item": "extendRes/title/achievementgroup3_item.jpg",
-        "priority": 798,
+        "priority": 20097,
         "unlock_type": 0,
         "unlock_param": [
             0,
@@ -70301,7 +70730,7 @@ TITLE = {
         "desc_kr": "업적 '천우신조'의 모든 항목을 달성한 기념 칭호",
         "icon": "extendRes/title/achievementgroup4.png",
         "icon_item": "extendRes/title/achievementgroup4_item.jpg",
-        "priority": 797,
+        "priority": 20096,
         "unlock_type": 0,
         "unlock_param": [
             0,
@@ -70325,7 +70754,7 @@ TITLE = {
         "desc_kr": "업적 '백련천마'의 모든 항목을 달성한 기념 칭호",
         "icon": "extendRes/title/achievementgroup5.png",
         "icon_item": "extendRes/title/achievementgroup5_item.jpg",
-        "priority": 796,
+        "priority": 20095,
         "unlock_type": 0,
         "unlock_param": [
             0,
@@ -70349,7 +70778,7 @@ TITLE = {
         "desc_kr": "업적 '작탁견문'의 모든 항목을 달성한 기념 칭호",
         "icon": "extendRes/title/achievementgroup6.png",
         "icon_item": "extendRes/title/achievementgroup6_item.jpg",
-        "priority": 795,
+        "priority": 20094,
         "unlock_type": 0,
         "unlock_param": [
             0,
@@ -70373,7 +70802,7 @@ TITLE = {
         "desc_kr": "업적 '이한시 시민'의 모든 항목을 달성한 기념 칭호",
         "icon": "extendRes/title/achievementgroup7.png",
         "icon_item": "extendRes/title/achievementgroup7_item.jpg",
-        "priority": 794,
+        "priority": 20093,
         "unlock_type": 0,
         "unlock_param": [
             0,
@@ -70397,7 +70826,7 @@ TITLE = {
         "desc_kr": "업적 '신사귀빈'의 모든 항목을 달성한 기념 칭호",
         "icon": "extendRes/title/achievementgroup8.png",
         "icon_item": "extendRes/title/achievementgroup8_item.jpg",
-        "priority": 793,
+        "priority": 20092,
         "unlock_type": 0,
         "unlock_param": [
             0,
@@ -70421,7 +70850,7 @@ TITLE = {
         "desc_kr": "업적 '삼라만상'의 모든 항목을 달성한 기념 칭호",
         "icon": "extendRes/title/achievementgroup9.png",
         "icon_item": "extendRes/title/achievementgroup9_item.jpg",
-        "priority": 792,
+        "priority": 20091,
         "unlock_type": 0,
         "unlock_param": [
             0,
@@ -70445,7 +70874,7 @@ TITLE = {
         "desc_kr": "업적 '천객만래'의 모든 항목을 달성한 기념 칭호",
         "icon": "extendRes/title/achievementgroup10.png",
         "icon_item": "extendRes/title/achievementgroup10_item.jpg",
-        "priority": 791,
+        "priority": 20090,
         "unlock_type": 0,
         "unlock_param": [
             0,
@@ -70469,7 +70898,7 @@ TITLE = {
         "desc_kr": "니지산지 마작대회 2021 우승 기념",
         "icon": "extendRes/title/24342021champion.png",
         "icon_item": "extendRes/title/24342021champion_item.jpg",
-        "priority": 50,
+        "priority": 40003,
         "unlock_type": 1,
         "unlock_param": [
             305558,
@@ -70493,7 +70922,7 @@ TITLE = {
         "desc_kr": "키린전 2021 우승 기념",
         "icon": "extendRes/title/kirin.png",
         "icon_item": "extendRes/title/kirin_item.jpg",
-        "priority": 999,
+        "priority": 40004,
         "unlock_type": 0,
         "unlock_param": [
             0,
@@ -70517,7 +70946,7 @@ TITLE = {
         "desc_kr": "A reward for Mahjong Soul official tournament: Catfood Bowl - Major #Battle of Kirin winner",
         "icon": "extendRes/title/kirins1en.png",
         "icon_item": "extendRes/title/kirins1en_item.jpg",
-        "priority": 1000,
+        "priority": 40005,
         "unlock_type": 0,
         "unlock_param": [
             0,
@@ -70541,7 +70970,7 @@ TITLE = {
         "desc_kr": "니지산지 '화조풍월' 우승 기념",
         "icon": "extendRes/title/hanagroup.png",
         "icon_item": "extendRes/title/hanagroup_item.jpg",
-        "priority": 50,
+        "priority": 40006,
         "unlock_type": 1,
         "unlock_param": [
             305559,
@@ -70565,7 +70994,7 @@ TITLE = {
         "desc_kr": "작혼 여름축제·일희당천' 한정 칭호",
         "icon": "extendRes/title/1jdq.png",
         "icon_item": "extendRes/title/1jdq_item.jpg",
-        "priority": 790,
+        "priority": 30002,
         "unlock_type": 0,
         "unlock_param": [
             0,
@@ -70589,7 +71018,7 @@ TITLE = {
         "desc_kr": "자유를 향해 나아가는 늙은 잉여를 위한 칭호",
         "icon": "extendRes/title/xysr.png",
         "icon_item": "extendRes/title/xysr_item.jpg",
-        "priority": 71,
+        "priority": 14,
         "unlock_type": 0,
         "unlock_param": [
             0,
@@ -70613,7 +71042,7 @@ TITLE = {
         "desc_kr": "마작 9단이 되고픈 용과의영화를 위한 칭호",
         "icon": "extendRes/title/hlg.png",
         "icon_item": "extendRes/title/hlg_item.jpg",
-        "priority": 72,
+        "priority": 15,
         "unlock_type": 0,
         "unlock_param": [
             0,
@@ -70637,7 +71066,7 @@ TITLE = {
         "desc_kr": "아카기 콜라보 대회 우승 기념",
         "icon": "extendRes/title/meiconbi.png",
         "icon_item": "extendRes/title/meiconbi_item.jpg",
-        "priority": 50,
+        "priority": 40007,
         "unlock_type": 1,
         "unlock_param": [
             305560,
@@ -70661,7 +71090,7 @@ TITLE = {
         "desc_kr": "아카기 콜라보 대회 참가 기념",
         "icon": "extendRes/title/nazokonbi.png",
         "icon_item": "extendRes/title/nazokonbi_item.jpg",
-        "priority": 50,
+        "priority": 40008,
         "unlock_type": 1,
         "unlock_param": [
             305561,
@@ -70685,7 +71114,7 @@ TITLE = {
         "desc_kr": "키린전 2021 우승 기념",
         "icon": "extendRes/title/kirin.png",
         "icon_item": "extendRes/title/kirin_item.jpg",
-        "priority": 999,
+        "priority": 40009,
         "unlock_type": 0,
         "unlock_param": [
             0,
@@ -70709,7 +71138,7 @@ TITLE = {
         "desc_kr": "니지산지 마작대회 2022 우승 기념",
         "icon": "extendRes/title/24342022.png",
         "icon_item": "extendRes/title/24342022_item.jpg",
-        "priority": 50,
+        "priority": 40010,
         "unlock_type": 1,
         "unlock_param": [
             305562,
@@ -70733,7 +71162,7 @@ TITLE = {
         "desc_kr": "Douyu작신 대회 챔피언에게 주어지는 칭호",
         "icon": "extendRes/title/douyuchampion.png",
         "icon_item": "extendRes/title/douyuchampion_item.jpg",
-        "priority": 50,
+        "priority": 40011,
         "unlock_type": 1,
         "unlock_param": [
             305563,
@@ -70757,7 +71186,7 @@ TITLE = {
         "desc_kr": "",
         "icon": "extendRes/title/kirin2022.png",
         "icon_item": "extendRes/title/kirin2022_item.jpg",
-        "priority": 1001,
+        "priority": 40012,
         "unlock_type": 0,
         "unlock_param": [
             0,
@@ -70781,7 +71210,7 @@ TITLE = {
         "desc_kr": "",
         "icon": "extendRes/title/tianyuanbeidou.png",
         "icon_item": "extendRes/title/tianyuanbeidou_item.jpg",
-        "priority": 1002,
+        "priority": 40013,
         "unlock_type": 1,
         "unlock_param": [
             305564,
@@ -70805,7 +71234,7 @@ TITLE = {
         "desc_kr": "",
         "icon": "extendRes/title/squat.png",
         "icon_item": "extendRes/title/squat_item.jpg",
-        "priority": 1003,
+        "priority": 40014,
         "unlock_type": 1,
         "unlock_param": [
             305565,
@@ -70829,7 +71258,7 @@ TITLE = {
         "desc_kr": "",
         "icon": "extendRes/title/bleagues1.png",
         "icon_item": "extendRes/title/bleagues1_item.jpg",
-        "priority": 1004,
+        "priority": 40015,
         "unlock_type": 1,
         "unlock_param": [
             305566,
@@ -70853,7 +71282,7 @@ TITLE = {
         "desc_kr": "",
         "icon": "extendRes/title/tianyuanbeidou.png",
         "icon_item": "extendRes/title/tianyuanbeidou_item.jpg",
-        "priority": 1002,
+        "priority": 40016,
         "unlock_type": 0,
         "unlock_param": [
             0,
@@ -70877,7 +71306,7 @@ TITLE = {
         "desc_kr": "",
         "icon": "extendRes/title/douyuchampion.png",
         "icon_item": "extendRes/title/douyuchampion_item.jpg",
-        "priority": 51,
+        "priority": 40017,
         "unlock_type": 1,
         "unlock_param": [
             305567,
@@ -70901,7 +71330,7 @@ TITLE = {
         "desc_kr": "第二回花鳥風月戦優勝チーム称号",
         "icon": "extendRes/title/2208kazoku.png",
         "icon_item": "extendRes/title/2208kazoku_item.jpg",
-        "priority": 1005,
+        "priority": 40018,
         "unlock_type": 1,
         "unlock_param": [
             305568,
@@ -70925,7 +71354,7 @@ TITLE = {
         "desc_kr": "ぶいすぽ雀魂女傑戦優勝チーム称号",
         "icon": "extendRes/title/2208joketsu.png",
         "icon_item": "extendRes/title/2208joketsu_item.jpg",
-        "priority": 1006,
+        "priority": 40019,
         "unlock_type": 1,
         "unlock_param": [
             305569,
@@ -70949,7 +71378,7 @@ TITLE = {
         "desc_kr": "赠予火龙果杯总冠军",
         "icon": "extendRes/title/22huolongguo.png",
         "icon_item": "extendRes/title/22huolongguo_item.jpg",
-        "priority": 1007,
+        "priority": 40020,
         "unlock_type": 1,
         "unlock_param": [
             305570,
@@ -70973,7 +71402,7 @@ TITLE = {
         "desc_kr": "작혼 버츄얼 인터하이 우승 팀에게 주어지는 칭호",
         "icon": "extendRes/title/interhigh.png",
         "icon_item": "extendRes/title/interhigh_item.jpg",
-        "priority": 998,
+        "priority": 40021,
         "unlock_type": 1,
         "unlock_param": [
             305571,
@@ -70997,7 +71426,7 @@ TITLE = {
         "desc_kr": "麒麟戰2022冠军紀念",
         "icon": "extendRes/title/kirin2022cn.png",
         "icon_item": "extendRes/title/kirin2022cn_item.jpg",
-        "priority": 997,
+        "priority": 40022,
         "unlock_type": 0,
         "unlock_param": [
             0,
@@ -71021,7 +71450,7 @@ TITLE = {
         "desc_kr": "「新春！にじさんじ麻雀杯2023」優勝賞品",
         "icon": "extendRes/title/2301nw.png",
         "icon_item": "extendRes/title/2301nw_item.jpg",
-        "priority": 1008,
+        "priority": 40023,
         "unlock_type": 1,
         "unlock_param": [
             305572,
@@ -71045,7 +71474,7 @@ TITLE = {
         "desc_kr": "「第3期闘魂杯」優勝賞品",
         "icon": "extendRes/title/2301dhb.png",
         "icon_item": "extendRes/title/2301dhb_item.jpg",
-        "priority": 1009,
+        "priority": 40024,
         "unlock_type": 1,
         "unlock_param": [
             305573,
@@ -71069,7 +71498,7 @@ TITLE = {
         "desc_kr": "「華風戦」優勝賞品",
         "icon": "extendRes/title/2301hfz.png",
         "icon_item": "extendRes/title/2301hfz_item.jpg",
-        "priority": 1010,
+        "priority": 40025,
         "unlock_type": 1,
         "unlock_param": [
             305574,
@@ -71093,7 +71522,7 @@ TITLE = {
         "desc_kr": "麒麟戦2023優勝記念",
         "icon": "extendRes/title/kirin2023jp.png",
         "icon_item": "extendRes/title/kirin2023jp_item.jpg",
-        "priority": 1011,
+        "priority": 40026,
         "unlock_type": 0,
         "unlock_param": [
             0,
@@ -71117,7 +71546,7 @@ TITLE = {
         "desc_kr": "赠予RML S1 总冠军",
         "icon": "extendRes/title/2304rmls1.png",
         "icon_item": "extendRes/title/2304rmls1_item.jpg",
-        "priority": 1012,
+        "priority": 40027,
         "unlock_type": 1,
         "unlock_param": [
             305575,
@@ -71141,7 +71570,7 @@ TITLE = {
         "desc_kr": "雀魂インビテーショナル2023夏優勝記念称号",
         "icon": "extendRes/title/2306is.png",
         "icon_item": "extendRes/title/2306is_item.jpg",
-        "priority": 1013,
+        "priority": 40028,
         "unlock_type": 1,
         "unlock_param": [
             305576,
@@ -71165,7 +71594,7 @@ TITLE = {
         "desc_kr": "雀魂インビテーショナル2023冬優勝記念称号",
         "icon": "extendRes/title/2306iw.png",
         "icon_item": "extendRes/title/2306iw_item.jpg",
-        "priority": 1014,
+        "priority": 40029,
         "unlock_type": 1,
         "unlock_param": [
             305577,
@@ -71189,7 +71618,7 @@ TITLE = {
         "desc_kr": "고양이의 능력 이벤트 기념 칭호",
         "icon": "extendRes/title/2308event.png",
         "icon_item": "extendRes/title/2308event_item.jpg",
-        "priority": 1015,
+        "priority": 30003,
         "unlock_type": 0,
         "unlock_param": [
             0,
@@ -71213,7 +71642,7 @@ TITLE = {
         "desc_kr": "赠予斗鱼雀神杯冠军",
         "icon": "extendRes/title/douyuchampion.png",
         "icon_item": "extendRes/title/douyuchampion_item.jpg",
-        "priority": 1016,
+        "priority": 40030,
         "unlock_type": 1,
         "unlock_param": [
             305578,
@@ -71237,7 +71666,7 @@ TITLE = {
         "desc_kr": "赠予火龙果杯总冠军",
         "icon": "extendRes/title/22huolongguo.png",
         "icon_item": "extendRes/title/22huolongguo_item.jpg",
-        "priority": 1017,
+        "priority": 40031,
         "unlock_type": 1,
         "unlock_param": [
             305579,
@@ -71261,7 +71690,7 @@ TITLE = {
         "desc_kr": "第3回花鳥風月戦優勝記念",
         "icon": "extendRes/title/2307_2434.png",
         "icon_item": "extendRes/title/2307_2434_item.jpg",
-        "priority": 1018,
+        "priority": 40032,
         "unlock_type": 1,
         "unlock_param": [
             305580,
@@ -71285,7 +71714,7 @@ TITLE = {
         "desc_kr": "「雀魂ななしサンマ杯 ～秋の陣～」優勝記念",
         "icon": "extendRes/title/2309_nanashi.png",
         "icon_item": "extendRes/title/2309_nanashi_item.jpg",
-        "priority": 1019,
+        "priority": 40033,
         "unlock_type": 1,
         "unlock_param": [
             30557001,
@@ -71309,7 +71738,7 @@ TITLE = {
         "desc_kr": "赠予斗鱼雀神杯个人赛冠军",
         "icon": "extendRes/title/douyuchampion2.png",
         "icon_item": "extendRes/title/douyuchampion2_item.jpg",
-        "priority": 1020,
+        "priority": 40034,
         "unlock_type": 1,
         "unlock_param": [
             30557002,
@@ -71333,7 +71762,7 @@ TITLE = {
         "desc_kr": "斗鱼鬼神杯纪念称号",
         "icon": "extendRes/title/douyuguishen.png",
         "icon_item": "extendRes/title/douyuguishen_item.jpg",
-        "priority": 1021,
+        "priority": 40035,
         "unlock_type": 1,
         "unlock_param": [
             30557003,
@@ -71357,7 +71786,7 @@ TITLE = {
         "desc_kr": "「ぶいすぽ雀魂女傑戦2」優勝チーム称号",
         "icon": "extendRes/title/2312nvjie.png",
         "icon_item": "extendRes/title/2312nvjie_item.jpg",
-        "priority": 1022,
+        "priority": 40036,
         "unlock_type": 1,
         "unlock_param": [
             30557004,
@@ -71381,7 +71810,7 @@ TITLE = {
         "desc_kr": "麒麟战2023冠军纪念",
         "icon": "extendRes/title/kirin2023cn.png",
         "icon_item": "extendRes/title/kirin2023cn_item.jpg",
-        "priority": 1023,
+        "priority": 40037,
         "unlock_type": 0,
         "unlock_param": [
             0,
@@ -71405,7 +71834,7 @@ TITLE = {
         "desc_kr": "「新春！にじさんじ麻雀杯2024」優勝称号",
         "icon": "extendRes/title/24012434.png",
         "icon_item": "extendRes/title/24012434_item.jpg",
-        "priority": 1024,
+        "priority": 40038,
         "unlock_type": 1,
         "unlock_param": [
             30557005,
@@ -71429,7 +71858,7 @@ TITLE = {
         "desc_kr": "「第5期闘魂杯」優勝賞品",
         "icon": "extendRes/title/2301dhb.png",
         "icon_item": "extendRes/title/2301dhb_item.jpg",
-        "priority": 1025,
+        "priority": 40039,
         "unlock_type": 1,
         "unlock_param": [
             30557006,
@@ -71453,7 +71882,7 @@ TITLE = {
         "desc_kr": "麒麟戦2024優勝記念",
         "icon": "extendRes/title/kirin2024jp.png",
         "icon_item": "extendRes/title/kirin2024jp_item.jpg",
-        "priority": 1026,
+        "priority": 40040,
         "unlock_type": 0,
         "unlock_param": [
             0,
@@ -71477,7 +71906,7 @@ TITLE = {
         "desc_kr": "贈予四象戰冠軍",
         "icon": "extendRes/title/24sxz1.png",
         "icon_item": "extendRes/title/24sxz1_item.jpg",
-        "priority": 1027,
+        "priority": 40041,
         "unlock_type": 1,
         "unlock_param": [
             30557007,
@@ -71501,7 +71930,7 @@ TITLE = {
         "desc_kr": "贈予四象戰冠軍",
         "icon": "extendRes/title/24sxz2.png",
         "icon_item": "extendRes/title/24sxz2_item.jpg",
-        "priority": 1028,
+        "priority": 40042,
         "unlock_type": 1,
         "unlock_param": [
             30557008,
@@ -71525,7 +71954,7 @@ TITLE = {
         "desc_kr": "贈予四象戰冠軍",
         "icon": "extendRes/title/24sxz2.png",
         "icon_item": "extendRes/title/24sxz2_item.jpg",
-        "priority": 1029,
+        "priority": 40043,
         "unlock_type": 1,
         "unlock_param": [
             30557009,
@@ -71549,7 +71978,7 @@ TITLE = {
         "desc_kr": "2024にじさんじ花鳥風月杯優勝チーム称号",
         "icon": "extendRes/title/24zgws.png",
         "icon_item": "extendRes/title/24zgws_item.jpg",
-        "priority": 1030,
+        "priority": 40044,
         "unlock_type": 1,
         "unlock_param": [
             30557010,
@@ -71573,7 +72002,7 @@ TITLE = {
         "desc_kr": "청운의 꿈 이벤트 기념 칭호",
         "icon": "extendRes/title/24qyzz.png",
         "icon_item": "extendRes/title/24qyzz_item.jpg",
-        "priority": 1031,
+        "priority": 40004,
         "unlock_type": 0,
         "unlock_param": [
             0,
@@ -71597,7 +72026,7 @@ TITLE = {
         "desc_kr": "双聖戦優勝記念称号",
         "icon": "extendRes/title/24sszy.png",
         "icon_item": "extendRes/title/24sszy_item.jpg",
-        "priority": 1032,
+        "priority": 40045,
         "unlock_type": 1,
         "unlock_param": [
             30557011,
@@ -71621,7 +72050,7 @@ TITLE = {
         "desc_kr": "赠与役满见证者820邹倚天",
         "icon": "extendRes/title/820.png",
         "icon_item": "extendRes/title/820_item.jpg",
-        "priority": 1033,
+        "priority": 16,
         "unlock_type": 0,
         "unlock_param": [
             0,
@@ -71645,7 +72074,7 @@ TITLE = {
         "desc_kr": "雀魂インビテーショナル2024夏優勝記念称号",
         "icon": "extendRes/title/2306is.png",
         "icon_item": "extendRes/title/2306is_item.jpg",
-        "priority": 1034,
+        "priority": 40046,
         "unlock_type": 1,
         "unlock_param": [
             30557012,
@@ -71669,7 +72098,7 @@ TITLE = {
         "desc_kr": "A reward for Mahjong Soul official tournament Catfood Bowl - Major #Battle of Kirin S2 winner",
         "icon": "extendRes/title/2409qilinzhan.png",
         "icon_item": "extendRes/title/2409qilinzhan_item.jpg",
-        "priority": 1035,
+        "priority": 40047,
         "unlock_type": 0,
         "unlock_param": [
             0,
@@ -71693,7 +72122,7 @@ TITLE = {
         "desc_kr": "贈予四象戰冠軍",
         "icon": "extendRes/title/24sxz3.png",
         "icon_item": "extendRes/title/24sxz3_item.jpg",
-        "priority": 1036,
+        "priority": 40048,
         "unlock_type": 1,
         "unlock_param": [
             30557013,
@@ -71717,7 +72146,7 @@ TITLE = {
         "desc_kr": "贈予四象戰冠軍",
         "icon": "extendRes/title/24sxz3.png",
         "icon_item": "extendRes/title/24sxz3_item.jpg",
-        "priority": 1037,
+        "priority": 40049,
         "unlock_type": 1,
         "unlock_param": [
             30557014,
@@ -71741,7 +72170,7 @@ TITLE = {
         "desc_kr": "神社杯S11冠军纪念称号",
         "icon": "extendRes/title/24shenshebei.png",
         "icon_item": "extendRes/title/24shenshebei_item.jpg",
-        "priority": 1038,
+        "priority": 40050,
         "unlock_type": 1,
         "unlock_param": [
             30557015,
@@ -71765,7 +72194,7 @@ TITLE = {
         "desc_kr": "ななし実りの麻雀杯優勝記念称号",
         "icon": "extendRes/title/24matsutake.png",
         "icon_item": "extendRes/title/24matsutake_item.jpg",
-        "priority": 1039,
+        "priority": 40051,
         "unlock_type": 1,
         "unlock_param": [
             30557016,
@@ -71789,7 +72218,7 @@ TITLE = {
         "desc_kr": "2025年12月1日华风战 限时",
         "icon": "extendRes/title/2301hfz.png",
         "icon_item": "extendRes/title/2301hfz_item.jpg",
-        "priority": 1040,
+        "priority": 40052,
         "unlock_type": 1,
         "unlock_param": [
             30557017,
@@ -71813,7 +72242,7 @@ TITLE = {
         "desc_kr": "A reward for Mahjong Soul official tournament Catfood Bowl winner",
         "icon": "extendRes/title/25catfoodbowl.png",
         "icon_item": "extendRes/title/25catfoodbowl_item.jpg",
-        "priority": 1041,
+        "priority": 40053,
         "unlock_type": 1,
         "unlock_param": [
             30557018,
@@ -71837,7 +72266,7 @@ TITLE = {
         "desc_kr": "MKC 2025 대회 우승자 전용 칭호 (유효기간 1년)",
         "icon": "extendRes/title/25mkc.png",
         "icon_item": "extendRes/title/25mkc_item.jpg",
-        "priority": 1042,
+        "priority": 40054,
         "unlock_type": 1,
         "unlock_param": [
             30557019,
@@ -71861,7 +72290,7 @@ TITLE = {
         "desc_kr": "贈予四象戰冠軍",
         "icon": "extendRes/title/24sxz4.png",
         "icon_item": "extendRes/title/24sxz4_item.jpg",
-        "priority": 1043,
+        "priority": 40055,
         "unlock_type": 1,
         "unlock_param": [
             30557020,
@@ -71885,7 +72314,7 @@ TITLE = {
         "desc_kr": "贈予四象戰冠軍",
         "icon": "extendRes/title/24sxz4.png",
         "icon_item": "extendRes/title/24sxz4_item.jpg",
-        "priority": 1044,
+        "priority": 40056,
         "unlock_type": 1,
         "unlock_param": [
             30557021,
@@ -71909,7 +72338,7 @@ TITLE = {
         "desc_kr": "麒麟战2024冠军纪念",
         "icon": "extendRes/title/kirin2024cn.png",
         "icon_item": "extendRes/title/kirin2024cn_item.jpg",
-        "priority": 1045,
+        "priority": 40057,
         "unlock_type": 0,
         "unlock_param": [
             0,
@@ -71933,7 +72362,7 @@ TITLE = {
         "desc_kr": "雀魂インビテーショナル2024冬優勝記念称号",
         "icon": "extendRes/title/2306iw.png",
         "icon_item": "extendRes/title/2306iw_item.jpg",
-        "priority": 1046,
+        "priority": 40058,
         "unlock_type": 1,
         "unlock_param": [
             30557022,
@@ -71957,7 +72386,7 @@ TITLE = {
         "desc_kr": "「ぶいすぽ雀魂女傑戦3」優勝チーム称号",
         "icon": "extendRes/title/25vspo.png",
         "icon_item": "extendRes/title/25vspo_item.jpg",
-        "priority": 1047,
+        "priority": 40059,
         "unlock_type": 1,
         "unlock_param": [
             30557023,
@@ -71981,7 +72410,7 @@ TITLE = {
         "desc_kr": "「プロ × 魂天ミニリーグ」優勝チーム称号",
         "icon": "extendRes/title/25huntianbazhe.png",
         "icon_item": "extendRes/title/25huntianbazhe_item.jpg",
-        "priority": 1048,
+        "priority": 40060,
         "unlock_type": 1,
         "unlock_param": [
             30557024,
@@ -72005,7 +72434,7 @@ TITLE = {
         "desc_kr": "눈부신 전공을 세운 대장군.",
         "icon": "extendRes/title/miaoguodajiangjun.png",
         "icon_item": "extendRes/title/miaoguodajiangjun_item.jpg",
-        "priority": 44,
+        "priority": 10013,
         "unlock_type": 0,
         "unlock_param": [
             0,
@@ -72029,7 +72458,7 @@ TITLE = {
         "desc_kr": "모든 고양이가 우러러보는 최고 강자.",
         "icon": "extendRes/title/miaoguozhizun.png",
         "icon_item": "extendRes/title/miaoguozhizun_item.jpg",
-        "priority": 45,
+        "priority": 10014,
         "unlock_type": 0,
         "unlock_param": [
             0,
@@ -72053,7 +72482,7 @@ TITLE = {
         "desc_kr": "にじさんじ麻雀杯2025優勝記念",
         "icon": "extendRes/title/25njsj.png",
         "icon_item": "extendRes/title/25njsj_item.jpg",
-        "priority": 1049,
+        "priority": 40061,
         "unlock_type": 1,
         "unlock_param": [
             30557025,
@@ -72077,7 +72506,7 @@ TITLE = {
         "desc_kr": "双聖戦優勝記念称号",
         "icon": "extendRes/title/25sszy.png",
         "icon_item": "extendRes/title/25sszy_item.jpg",
-        "priority": 1050,
+        "priority": 40062,
         "unlock_type": 1,
         "unlock_param": [
             30557026,
@@ -72101,7 +72530,7 @@ TITLE = {
         "desc_kr": "업적 '문일지십'의 모든 항목을 달성한 기념 칭호",
         "icon": "extendRes/title/achievementgroup13.png",
         "icon_item": "extendRes/title/achievementgroup13_item.jpg",
-        "priority": 789,
+        "priority": 20089,
         "unlock_type": 0,
         "unlock_param": [
             0,
@@ -72125,7 +72554,7 @@ TITLE = {
         "desc_kr": "업적 '오색영롱'의 모든 항목을 달성한 기념 칭호",
         "icon": "extendRes/title/achievementgroup14.png",
         "icon_item": "extendRes/title/achievementgroup14_item.jpg",
-        "priority": 788,
+        "priority": 20088,
         "unlock_type": 0,
         "unlock_param": [
             0,
@@ -72149,7 +72578,7 @@ TITLE = {
         "desc_kr": "贈予四象戰冠軍",
         "icon": "extendRes/title/24sxz1.png",
         "icon_item": "extendRes/title/24sxz1_item.jpg",
-        "priority": 1051,
+        "priority": 40063,
         "unlock_type": 1,
         "unlock_param": [
             30557027,
@@ -72173,7 +72602,7 @@ TITLE = {
         "desc_kr": "贈予四象戰冠軍",
         "icon": "extendRes/title/24sxz1.png",
         "icon_item": "extendRes/title/24sxz1_item.jpg",
-        "priority": 1052,
+        "priority": 40064,
         "unlock_type": 1,
         "unlock_param": [
             30557028,
@@ -72197,7 +72626,7 @@ TITLE = {
         "desc_kr": "贈予嗶哩嗶哩第二屆立直麻將大賽冠軍",
         "icon": "extendRes/title/25bl1.png",
         "icon_item": "extendRes/title/25bl1_item.jpg",
-        "priority": 1053,
+        "priority": 40065,
         "unlock_type": 1,
         "unlock_param": [
             30557029,
@@ -72221,7 +72650,7 @@ TITLE = {
         "desc_kr": "贈與嗶哩嗶哩【按鈕亮了】活動賽冠軍",
         "icon": "extendRes/title/25bl2.png",
         "icon_item": "extendRes/title/25bl2_item.jpg",
-        "priority": 1054,
+        "priority": 40066,
         "unlock_type": 1,
         "unlock_param": [
             30557030,
@@ -72230,6 +72659,78 @@ TITLE = {
             0
         ],
         "cross_view": 0
+    },
+    "600122": {
+        "id": 600122,
+        "name_chs": "麒麟位2025",
+        "name_chs_t": "麒麟位2025",
+        "name_jp": "麒麟位2025",
+        "name_en": "麒麟位2025",
+        "name_kr": "麒麟位2025",
+        "desc_chs": "麒麟戦2025優勝記念",
+        "desc_chs_t": "麒麟戦2025優勝記念",
+        "desc_jp": "麒麟戦2025優勝記念",
+        "desc_en": "麒麟戦2025優勝記念",
+        "desc_kr": "麒麟戦2025優勝記念",
+        "icon": "extendRes/title/kirin2025jp.png",
+        "icon_item": "extendRes/title/kirin2025jp_item.jpg",
+        "priority": 40067,
+        "unlock_type": 0,
+        "unlock_param": [
+            0,
+            0,
+            0,
+            0
+        ],
+        "cross_view": 0
+    },
+    "600123": {
+        "id": 600123,
+        "name_chs": "天元北斗",
+        "name_chs_t": "天元北斗",
+        "name_jp": "天元北斗",
+        "name_en": "Grand Charioteer",
+        "name_kr": "MGC 2025 천원북두",
+        "desc_chs": "北斗战2025冠军纪念",
+        "desc_chs_t": "北斗戰2025冠軍紀念",
+        "desc_jp": "北斗戦2025優勝記念",
+        "desc_en": "Champion commemorative title for 2025 Grand Chariot Cup",
+        "desc_kr": "MGC 2025 글로벌 공식 대회 우승 그룹 전용 칭호 (유효기간 1년)",
+        "icon": "extendRes/title/tianyuanbeidou.png",
+        "icon_item": "extendRes/title/tianyuanbeidou_item.jpg",
+        "priority": 40068,
+        "unlock_type": 1,
+        "unlock_param": [
+            30557031,
+            0,
+            0,
+            0
+        ],
+        "cross_view": 1
+    },
+    "600124": {
+        "id": 600124,
+        "name_chs": "天元北斗",
+        "name_chs_t": "天元北斗",
+        "name_jp": "天元北斗",
+        "name_en": "Grand Charioteer",
+        "name_kr": "MGC 2025 천원북두",
+        "desc_chs": "北斗战2025冠军纪念",
+        "desc_chs_t": "北斗戰2025冠軍紀念",
+        "desc_jp": "北斗戦2025優勝記念",
+        "desc_en": "Champion commemorative title for 2025 Grand Chariot Cup",
+        "desc_kr": "MGC 2025 글로벌 공식 대회 우승 그룹 전용 칭호 (유효기간 1년)",
+        "icon": "extendRes/title/tianyuanbeidou.png",
+        "icon_item": "extendRes/title/tianyuanbeidou_item.jpg",
+        "priority": 40069,
+        "unlock_type": 1,
+        "unlock_param": [
+            30557032,
+            0,
+            0,
+            0
+        ],
+        "cross_view": 1
     }
 }
 

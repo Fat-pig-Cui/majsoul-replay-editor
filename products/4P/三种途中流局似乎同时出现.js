@@ -7,6 +7,10 @@ loadproject();
 // 因为通常的逻辑是先打出牌, 之后再判断牌是否通过,
 // 四风连打只要牌打出就算, 而立直成功需要牌通过
 
+// 供参考的真实牌谱(已匿名):
+// 四杠散了后立直是否成立(东1局0本场): https://game.maj-soul.com/1/?paipu=jmklmq-vsry7112-yy10-63cc-gdmo-nksoqtwmrr0z_2
+// 四风连打后立直是否成立(东3局2本场): https://game.maj-soul.com/1/?paipu=jnjpns-uvuv46x4-5d99-69da-ianf-hinotnnktnxy_2
+
 editdata.player_datas[0].nickname = "一姬-契约";
 editdata.player_datas[1].nickname = "新年初诣";
 editdata.player_datas[2].nickname = "一姬当千";

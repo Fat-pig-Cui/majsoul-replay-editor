@@ -1,13 +1,13 @@
 loadproject();
 
 editdata.player_datas[0].nickname = "柚-契约";
-editdata.player_datas[1].nickname = "枕边私语";
-editdata.player_datas[2].nickname = "新岁景明";
-editdata.player_datas[3].nickname = "玩转夏日";
+editdata.player_datas[1].nickname = "新岁景明";
+editdata.player_datas[2].nickname = "玩转夏日";
+editdata.player_datas[3].nickname = "足尖独白";
 editdata.player_datas[0].avatar_id = 405902;
-editdata.player_datas[1].avatar_id = 405903;
-editdata.player_datas[2].avatar_id = 405904;
-editdata.player_datas[3].avatar_id = 405905;
+editdata.player_datas[1].avatar_id = 405904;
+editdata.player_datas[2].avatar_id = 405905;
+editdata.player_datas[3].avatar_id = 405906;
 
 editdata.player_datas[0].views = editdata.player_datas[1].views = editdata.player_datas[2].views = editdata.player_datas[3].views = [
     {"slot": 0, "item_id": 305612}, // 立直棒-陨石法杖

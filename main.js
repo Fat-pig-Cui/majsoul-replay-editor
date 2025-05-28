@@ -2910,6 +2910,9 @@ var liqiinfo = [], lstliqi = null;
 var doras = [], li_doras = [], doracnt = {'cnt': 1, 'lastype': 0};
 // chang: 场(东/南/西/北), ju: 局(东1/2/3/4), ben: 本场数, liqibang: 场上立直棒个数, benchangbang: 本场棒个数
 var chang = 0, ju = 0, ben = 0, liqibang = 0, benchangbang = 0;
+// liqi_neednum: 立直所需要的棒子数, ben_times: 本场数倍数
+var liqi_neednum = 1, ben_times = 1;
+var fafu_1st = 3000, fafu_2nd = 1500, fafu_3rd = 1000, fafu_3p_1st = 2000, fafu_3p_2nd = 1000;
 // scores: 玩家点数, delta_scores: 玩家点数变动, firstneededscores: 一位必要点数
 var scores = [], delta_scores = [], firstneededscores = 0;
 // drawtype: 摸牌方向: 1 表示正常摸牌, 0 表示岭上摸牌, lstdrawtype: 最近玩家摸牌方向
