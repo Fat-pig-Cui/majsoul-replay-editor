@@ -4,7 +4,7 @@
 
 开启国标模式需要在 `'detail_rule'` 中注明 `'_guobiao': true`, 并导入 [guobiao.js](../../guobiao.js)
 
-以下番种主要根据 [雀渣平台](https://tziakcha.xyz) 规则(明暗杠设为5番, 有天地人和)
+以下番种主要根据 [雀渣平台](https://tziakcha.net) 规则(明暗杠设为5番, 有天地人和)
 
 为了使得各家点数更加美观, 对局中将各家点数和结算点数都乘了 100 (即 `scale_points`)
 

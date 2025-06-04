@@ -4,7 +4,7 @@
 var liqibangs = [], hupais = [], liqis = [];
 var avatar_frames = [], tablecloths = [], titles = [];
 
-// 无法加载的和排除的装扮
+// 中文服无法加载的和排除的装扮
 var invalid_frames = [
     305501,  // 头像框-默认
     305510,  // 头像框-四象战
@@ -2032,7 +2032,7 @@ function editgame(editdata) {
 }
 
 // 回放接口, 在 edit 中重写, 并在 canceledit 中复原
-var initData, resetData, checkPaiPu, load_my_desktop_view, showInfo_mj, setFanFu;
+var resetData, checkPaiPu, load_my_desktop_view, showInfo_mj;
 
 function edit(x) {
     try {
@@ -2044,8 +2044,6 @@ function edit(x) {
             load_my_desktop_view = game.Scene_MJ.prototype._load_my_desktop_view;
         if (showInfo_mj === undefined)
             showInfo_mj = uiscript.UI_Win.prototype._showInfo_mj;
-        if (setFanFu === undefined)
-            setFanFu = uiscript.UI_Win.prototype.setFanFu;
 
         if (x === undefined)
             x = JSON.parse(JSON.stringify(editdata));
@@ -2167,445 +2165,6 @@ function edit(x) {
             // 原来的牌面
             return uiscript.UI_Sushe.now_mjp_surface_id;
         }
-
-
-        uiscript.UI_Win.prototype._showInfo_mj = function (e) {
-
-            var Q = uiscript;
-
-            var s = this;
-            this['container_Activity_Point'].me['visible'] = !1,
-                this['container_activity_rpg'].me['visible'] = !1,
-                this.root['alpha'] = 0,
-                Laya['Tween'].to(this.root, {
-                    alpha: 1
-                }, 500);
-            view['DesktopMgr'].Inst['setNickname'](this['winner_name'], e.seat, '#c3e2ff', '#fbfbfb', !0);
-            var y = view['DesktopMgr'].Inst['player_datas'][e.seat]['character']
-                , A = new Q['UIRect']();
-            A.x = this['illust_rect'].x,
-                A.y = this['illust_rect'].y,
-                A['width'] = this['illust_rect']['width'],
-                A['height'] = this['illust_rect']['height'],
-                this['char_skin']['setRect'](A),
-                this['char_skin']['setSkin'](view['DesktopMgr'].Inst['player_datas'][e.seat]['avatar_id'], 'full'),
-                2 === e.mode ? this['img_mode']['visible'] = !1 : (this['img_mode']['visible'] = !0,
-                    this['img_mode'].skin = 0 === e.mode ? game['Tools']['localUISrc']('myres/mjdesktop/pg_zimo.png') : game['Tools']['localUISrc']('myres/mjdesktop/pg_he.png')),
-                this['_showPai'](e),
-                this['container_dora']['visible'] = !view['DesktopMgr'].Inst['is_chuanma_mode'](),
-                this['container_lidora']['visible'] = !view['DesktopMgr'].Inst['is_chuanma_mode']();
-            var v = e['fan_names']['length']
-                , u = 100;
-            this['container_fan_yiman']['visible'] = !1,
-                this['container_fan_8']['visible'] = !1,
-                this['container_fan_15']['visible'] = !1,
-                this['container_fan_12']['visible'] = !1,
-                this['container_fan_liuju']['visible'] = !1,
-                this['container_fan_yiman']['visible'] = !1,
-                this['container_fan_8']['visible'] = !1,
-                this['container_fan_15']['visible'] = !1,
-                this['container_fan_12']['visible'] = !1,
-                this['container_fan_liuju']['visible'] = !1;
-            var I = null;
-            I = 2 === e.mode ? this['container_fan_liuju'] : e['yiman'] ? this['container_fan_yiman'] : 8 >= v ? this['container_fan_8'] : 12 >= v ? this['container_fan_12'] : this['container_fan_15'],
-                I['visible'] = !0;
-            for (var X = 0; X < I['numChildren']; X++)
-                I['getChildAt'](X)['visible'] = !1;
-            for (var B = [], X = 0; X < e['fan_names']['length']; X++) {
-                var S = e['fan_names'][X]
-                    , G = 0
-                    , p = e['fan_ids'][X]
-                    , h = !1
-                    , z = cfg.fan.fan.get(p);
-                z && (h = !!z.mark),
-                9999 !== p && z && (G = z['show_index']);
-                var T = {
-                    name: S,
-                    index: G,
-                    isSpecialFan: h
-                };
-                if (e['fan_value'] && e['fan_value']['length'] > X && (T['value'] = e['fan_value'][X]),
-                10 === p)
-                    switch ((e.seat - view['DesktopMgr'].Inst['index_ju'] + view['DesktopMgr'].Inst['player_count']) % view['DesktopMgr'].Inst['player_count']) {
-                        case 0:
-                            T['sound'] = 'fan_dong';
-                            break;
-                        case 1:
-                            T['sound'] = 'fan_nan';
-                            break;
-                        case 2:
-                            T['sound'] = 'fan_xi';
-                            break;
-                        case 3:
-                            T['sound'] = 'fan_bei';
-                    }
-                else if (11 === p)
-                    if (view['DesktopMgr'].Inst['index_change'] % 4 === (e.seat - view['DesktopMgr'].Inst['index_ju'] + view['DesktopMgr'].Inst['player_count']) % view['DesktopMgr'].Inst['player_count'])
-                        switch (view['DesktopMgr'].Inst['index_change'] % 4) {
-                            case 0:
-                                T['sound'] = 'fan_doubledong';
-                                break;
-                            case 1:
-                                T['sound'] = 'fan_doublenan';
-                                break;
-                            case 2:
-                                T['sound'] = 'fan_doublexi';
-                                break;
-                            case 3:
-                                T['sound'] = 'fan_doublebei';
-                        }
-                    else
-                        switch (view['DesktopMgr'].Inst['index_change'] % 4) {
-                            case 0:
-                                T['sound'] = 'fan_dong';
-                                break;
-                            case 1:
-                                T['sound'] = 'fan_nan';
-                                break;
-                            case 2:
-                                T['sound'] = 'fan_xi';
-                                break;
-                            case 3:
-                                T['sound'] = 'fan_bei';
-                        }
-                // 添加下面
-                else if (8061 === p)
-                    switch (view['DesktopMgr'].Inst['index_change'] % 4) {
-                        case 0:
-                            T['sound'] = 'fan_dong';
-                            break;
-                        case 1:
-                            T['sound'] = 'fan_nan';
-                            break;
-                        case 2:
-                            T['sound'] = 'fan_xi';
-                            break;
-                        case 3:
-                            T['sound'] = 'fan_bei';
-                    }
-                else if (8062 === p)
-                    if (view['DesktopMgr'].Inst['index_change'] % 4 === (e.seat - view['DesktopMgr'].Inst['index_ju'] + view['DesktopMgr'].Inst['player_count']) % view['DesktopMgr'].Inst['player_count'])
-                        switch ((e.seat - view['DesktopMgr'].Inst['index_ju'] + view['DesktopMgr'].Inst['player_count']) % view['DesktopMgr'].Inst['player_count']) {
-                            case 0:
-                                T['sound'] = 'fan_doubledong';
-                                break;
-                            case 1:
-                                T['sound'] = 'fan_doublenan';
-                                break;
-                            case 2:
-                                T['sound'] = 'fan_doublexi';
-                                break;
-                            case 3:
-                                T['sound'] = 'fan_doublebei';
-                        }
-                    else
-                        switch ((e.seat - view['DesktopMgr'].Inst['index_ju'] + view['DesktopMgr'].Inst['player_count']) % view['DesktopMgr'].Inst['player_count']) {
-                            case 0:
-                                T['sound'] = 'fan_dong';
-                                break;
-                            case 1:
-                                T['sound'] = 'fan_nan';
-                                break;
-                            case 2:
-                                T['sound'] = 'fan_xi';
-                                break;
-                            case 3:
-                                T['sound'] = 'fan_bei';
-                        }
-                // 添加上面
-                else if (p >= 31 && 34 >= p) {
-                    var K = T['value'];
-                    K > 13 && (K = 13),
-                        T['sound'] = 0 === K ? '' : 'fan_dora' + K;
-                } else
-                    9999 === p ? T['sound'] = 'fan_liujumanguan' : p >= 0 && (T['sound'] = cfg.fan.fan.get(p)['sound']);
-                B.push(T);
-            }
-            B = B.sort(function (Q, e) {
-                return Q['index'] - e['index'];
-            }),
-                u += 500;
-            for (var j = function (Q) {
-                var s = game['Tools']['get_chara_audio'](y, B[Q]['sound']);
-                Laya['timer'].once(u, n, function () {
-                    var y = I['getChildAt'](Q)
-                        , A = y['getChildByName']('l_name');
-                    A.text = B[Q].name,
-                        A['color'] = B[Q]['isSpecialFan'] ? '#ffc74c' : '#f1eeda';
-                    var v = e['yiman'] && 'en' === GameMgr['client_language'] ? 290 : 242;
-                    if (A['width'] = v,
-                        game['Tools']['labelLocalizationSize'](A, v, 0.8),
-                    void 0 !== B[Q]['value'] && null !== B[Q]['value']) {
-                        y['getChildAt'](2)['visible'] = !0;
-                        var u = B[Q]['value']
-                            , X = u['toString']();
-                        2 === X['length'] ? (y['getChildAt'](3).skin = game['Tools']['localUISrc']('myres/mjdesktop/number/h_' + X[1] + '.png'),
-                            y['getChildAt'](3)['visible'] = !0,
-                            y['getChildAt'](4).skin = game['Tools']['localUISrc']('myres/mjdesktop/number/h_' + X[0] + '.png'),
-                            y['getChildAt'](4)['visible'] = !0) : (y['getChildAt'](3).skin = game['Tools']['localUISrc']('myres/mjdesktop/number/h_' + X[0] + '.png'),
-                            y['getChildAt'](3)['visible'] = !0,
-                            y['getChildAt'](4)['visible'] = !1);
-                    }
-                    y['visible'] = !0,
-                        Laya['Tween'].from(y, {
-                            x: 169,
-                            y: 184,
-                            alpha: 0
-                        }, 100, Laya.Ease['strongOut']),
-                        s ? (view['AudioMgr']['PlaySound'](s.path, s['volume']),
-                            view['AudioMgr']['PlayAudio'](211, 1, 0.5)) : view['AudioMgr']['PlayAudio'](211, 1, 1);
-                }),
-                    u += s ? s['time_length'] > 500 ? s['time_length'] : 500 : 500;
-            }, n = this, X = 0; v > X && X < I['numChildren']; X++)
-                j(X);
-            this['container_fan']['visible'] = !1,
-                this['container_fu']['visible'] = !1,
-                this['img_yiman']['visible'] = !1,
-                e.fan && e.fu ? (u += 300,
-                    Laya['timer'].once(u, this, function () {
-                        view['AudioMgr']['PlayAudio'](208),
-                            s['setFanFu'](e.fan, e.fu);
-                    })) : e['yiman'] && (u += 700,
-                    Laya['timer'].once(u, this, function () {
-                        view['AudioMgr']['PlayAudio'](208),
-                            s['img_yiman']['alpha'] = 0,
-                            s['img_yiman']['visible'] = !0,
-                            Laya['Tween'].to(s['img_yiman'], {
-                                alpha: 1
-                            }, 200);
-                    })),
-                this['container_score']['alpha'] = 0;
-            for (var X = 0; X < this['score_imgs']['length']; X++)
-                this['score_imgs'][X]['visible'] = !1;
-            if (u += 700,
-                this['container_score']['scaleX'] = this['container_score']['scaleY'] = 2,
-                Laya['timer'].once(u, this, function () {
-                    for (var Q = 0, y = e['score']; 0 !== y;) {
-                        var A = y % 10;
-                        if (y = Math['floor'](y / 10),
-                            s['score_imgs'][Q].skin = game['Tools']['localUISrc']('myres/mjdesktop/number/ww_' + A['toString']() + '.png'),
-                            s['score_imgs'][Q]['visible'] = !0,
-                            Q++,
-                        Q >= s['score_imgs']['length'])
-                            break;
-                    }
-                    Laya['Tween'].to(s['container_score'], {
-                        alpha: 1,
-                        scaleX: 1.2,
-                        scaleY: 1.2
-                    }, 200, Laya.Ease['strongIn']),
-                        view['AudioMgr']['PlayAudio'](221);
-                }),
-                this['container_title']['visible'] = !1,
-                e['title_id']) {
-                u += 700;
-                var L = 0
-                    , Z = 0
-                    , F = '';
-                switch (e['title_id']) {
-                    case mjcore['E_Dadian_Title']['E_Dadian_Title_manguan']:
-                        F = 'gameend_manguan',
-                            L = 214;
-                        break;
-                    case mjcore['E_Dadian_Title']['E_Dadian_Title_tiaoman']:
-                        F = 'gameend_tiaoman',
-                            L = 214;
-                        break;
-                    case mjcore['E_Dadian_Title']['E_Dadian_Title_beiman']:
-                        F = 'gameend_beiman',
-                            L = 201;
-                        break;
-                    case mjcore['E_Dadian_Title']['E_Dadian_Title_sanbeiman']:
-                        F = 'gameend_sanbeiman',
-                            L = 201;
-                        break;
-                    case mjcore['E_Dadian_Title']['E_Dadian_Title_leijiyiman']:
-                        F = 'gameend_leijiyiman',
-                            Z = 2,
-                            L = 226;
-                        break;
-                    case mjcore['E_Dadian_Title']['E_Dadian_Title_yiman']:
-                        F = 'gameend_yiman1',
-                            Z = 1,
-                            L = 226;
-                        break;
-                    case mjcore['E_Dadian_Title']['E_Dadian_Title_yiman2']:
-                        F = 'gameend_yiman2',
-                            Z = 2,
-                            L = 226;
-                        break;
-                    case mjcore['E_Dadian_Title']['E_Dadian_Title_yiman3']:
-                        F = 'gameend_yiman3',
-                            Z = 2,
-                            L = 226;
-                        break;
-                    case mjcore['E_Dadian_Title']['E_Dadian_Title_yiman4']:
-                        F = 'gameend_yiman4',
-                            Z = 2,
-                            L = 226;
-                        break;
-                    case mjcore['E_Dadian_Title']['E_Dadian_Title_yiman5']:
-                        F = 'gameend_yiman5',
-                            Z = 2,
-                            L = 226;
-                        break;
-                    case mjcore['E_Dadian_Title']['E_Dadian_Title_yiman6']:
-                        F = 'gameend_yiman6',
-                            Z = 2,
-                            L = 226;
-                }
-                var D = game['Tools']['get_chara_audio'](y, F);
-                Laya['timer'].once(u, this, function () {
-                    s['setTitle'](e['title_id']),
-                        s['container_title']['visible'] = !0,
-                        s['container_title']['alpha'] = 0,
-                        s['container_title']['scaleX'] = s['container_title']['scaleY'] = 3,
-                        Laya['Tween'].to(s['container_title'], {
-                            alpha: 1,
-                            scaleX: 1.2,
-                            scaleY: 1.2
-                        }, 300, Laya.Ease['strongIn']),
-                        Laya['timer'].once(300, s, function () {
-                            0 !== L && view['AudioMgr']['PlayAudio'](L);
-                        }),
-                    D && Laya['timer'].once(500, s, function () {
-                        view['AudioMgr']['PlaySound'](D.path, D['volume']);
-                    }),
-                    0 != Z && Laya['timer'].once(300, s, function () {
-                        var Q, e;
-                        'en' === GameMgr['client_language'] ? (Q = s.root['getChildByName']('effect_yiman_en'),
-                            e = 'scene/effect_yiman2.lh') : 'kr' === GameMgr['client_language'] ? (Q = s.root['getChildByName']('effect_yiman_en'),
-                            e = 'scene/effect_yiman.lh') : 1 === Z ? (Q = s.root['getChildByName']('effect_yiman'),
-                            e = 'scene/effect_yiman.lh') : (Q = s.root['getChildByName']('effect_yiman2'),
-                            e = 'scene/effect_yiman2.lh'),
-                            s['effect_yiman'] = game['FrontEffect'].Inst['create_ui_effect'](Q, e, new Laya['Point'](0, 0), 25);
-                    });
-                }),
-                (e['yiman'] || '累积役满' === e['title']) && (u += 500);
-            }
-            if (this.muyu['visible'] = !1,
-                view['DesktopMgr'].Inst['muyu_info']) {
-                var w = !1;
-                0 === e.mode ? w = !0 : 1 === e.mode && (view['DesktopMgr'].Inst['index_player'] === view['DesktopMgr'].Inst['muyu_info'].seat && (w = !0),
-                e.seat === view['DesktopMgr'].Inst['muyu_info'].seat && (w = !0)),
-                w && (this.muyu['scale'](1.2, 1.2),
-                    u += 700,
-                    Laya['timer'].once(u, this, function () {
-                        s.muyu['visible'] = !0,
-                            s.muyu['alpha'] = 0;
-                        var Q = (view['DesktopMgr'].Inst['muyu_info'].seat - view['DesktopMgr'].Inst['index_ju'] + view['DesktopMgr'].Inst['player_count']) % view['DesktopMgr'].Inst['player_count'];
-                        s.muyu.skin = game['Tools']['localUISrc']('myres/mjdesktop/muyu_seat' + Q + '.png'),
-                            Laya['Tween'].to(s.muyu, {
-                                alpha: 1
-                            }, 250);
-                    }));
-            }
-            if (view['DesktopMgr'].Inst['is_tianming_mode']()) {
-                this.muyu['visible'] = !1;
-                var w = !1;
-                e['tianming_bonus'] > 0 && (w = !0),
-                w && (this.muyu['scale'](1, 1),
-                    u += 700,
-                    Laya['timer'].once(u, this, function () {
-                        s.muyu['visible'] = !0,
-                            s.muyu['alpha'] = 0,
-                            s.muyu.skin = game['Tools']['localUISrc']('myres/mjdesktop/tianming_result_' + e['tianming_bonus'] + '.png'),
-                            Laya['Tween'].to(s.muyu, {
-                                alpha: 1
-                            }, 250);
-                    }));
-            }
-            if (view['DesktopMgr'].Inst.mode === view['EMJMode'].play && e.seat === view['DesktopMgr'].Inst.seat && e.mode <= 1 && Q['UI_Activity']['activity_is_running'](Q['UI_Activity_DuanWu_Point']['activity_id'])) {
-                for (var o = !1, X = 0; X < view['DesktopMgr'].Inst['player_datas']['length']; X++) {
-                    var J = view['DesktopMgr'].Inst['player_datas'][X];
-                    if (!J || game['Tools'].isAI(J['account_id'])) {
-                        o = !0;
-                        break;
-                    }
-                }
-                o ? this['container_Activity_Point'].me['visible'] = !1 : u += this['container_Activity_Point'].show(u, e['point_sum'], e['score']);
-            } else
-                this['container_Activity_Point'].me['visible'] = !1;
-            if (view['DesktopMgr'].Inst.mode === view['EMJMode'].play && Q['UI_Activity']['activity_is_running'](Q['UI_Activity_RPG']['activity_id'])) {
-                for (var o = !1, X = 0; X < view['DesktopMgr'].Inst['player_datas']['length']; X++) {
-                    var J = view['DesktopMgr'].Inst['player_datas'][X];
-                    if (!J || game['Tools'].isAI(J['account_id'])) {
-                        o = !0;
-                        break;
-                    }
-                }
-                if (o)
-                    this['container_activity_rpg'].me['visible'] = !1;
-                else {
-                    var _ = 0;
-                    view['DesktopMgr'].Inst.seat !== e.seat && (_ = 0 == e.mode ? 2 : 1),
-                        1 === _ && 0 !== view['DesktopMgr'].Inst['seat2LocalPosition'](view['DesktopMgr'].Inst['index_player']) ? this['container_activity_rpg'].me['visible'] = !1 : this['container_activity_rpg'].show(_, 0);
-                }
-            } else
-                this['container_activity_rpg'].me['visible'] = !1;
-            this['btn_confirm']['visible'] = !1,
-                u += 300,
-                this['btn_confirm']['disabled'] = !0,
-                Laya['timer'].once(u, this, function () {
-                    if (s['btn_confirm']['visible'] = !0,
-                        s['btn_confirm']['alpha'] = 1,
-                        Laya['Tween'].from(s['btn_confirm'], {
-                            alpha: 0
-                        }, 200),
-                        s['btn_confirm']['disabled'] = !1,
-                    view['DesktopMgr'].Inst.mode === view['EMJMode']['paipu'] || view['DesktopMgr'].Inst.mode === view['EMJMode']['xinshouyindao'])
-                        s['count_down']['visible'] = !1,
-                            s['btn_confirm']['getChildByName']('confirm').x = 131;
-                    else {
-                        s['count_down']['visible'] = !0,
-                            s['btn_confirm']['getChildByName']('confirm').x = 165;
-                        for (var Q = function (Q) {
-                            Laya['timer'].once(1000 * Q, s, function () {
-                                s['btn_confirm']['disabled'] || (s['count_down'].text = '(' + (3 - Q)['toString']() + ')');
-                            });
-                        }, e = 0; 3 > e; e++)
-                            Q(e);
-                        Laya['timer'].once(3000, s, function () {
-                            s['btn_confirm']['disabled'] || s['onConfirm']();
-                        });
-                    }
-                });
-        }
-
-        // uiscript.UI_Win.prototype.setFanFu = function (Fan, Fu) {
-        //
-        //     var Q = Fan, e = Fu;
-        //     if (this['fan_imgs'].length < 3)
-        //         this['fan_imgs'].push(this['container_fan']['getChildByName']('n3'))
-        //
-        //     this['container_fan']['visible'] = this['container_fu']['visible'] = !0,
-        //     this['container_fan']['alpha'] = this['container_fu']['alpha'] = 0;
-        //     for (var s = 0; 3 > s; s++)
-        //         if (0 === Q)
-        //             this['fan_imgs'][s]['visible'] = !1;
-        //         else {
-        //             var y = Q % 10;
-        //             Q = Math['floor'](Q / 10),
-        //             this['fan_imgs'][s]['visible'] = !0,
-        //             this['fan_imgs'][s].skin = game['Tools']['localUISrc']('myres/mjdesktop/number/h_' + y['toString']() + '.png');
-        //         }
-        //     this['container_fu']['visible'] = view['DesktopMgr'].Inst['is_chuanma_mode']() ? !1 : !0;
-        //     for (var s = 0; 3 > s; s++)
-        //         if (0 === e)
-        //             this['fu_imgs'][s]['visible'] = !1;
-        //         else {
-        //             var y = e % 10;
-        //             e = Math['floor'](e / 10),
-        //             this['fu_imgs'][s]['visible'] = !0,
-        //             this['fu_imgs'][s].skin = game['Tools']['localUISrc']('myres/mjdesktop/number/ww_' + y['toString']() + '.png');
-        //         }
-        //     Laya['Tween'].to(this['container_fan'], {
-        //         alpha: 1
-        //     }, 200),
-        //     Laya['Tween'].to(this['container_fu'], {
-        //         alpha: 1
-        //     }, 200);
-        // }
 
         // 重写 resetData 主要是为了切换视角时数据不复原, 如果不需要切换视角则可以不用管
         uiscript.UI_Replay.prototype.resetData = function () {
@@ -2864,7 +2423,6 @@ function edit(x) {
                         void 0);
             } catch (e) {
                 console.error(e);
-                checkPaiPu.call(this, game_uuid, account_id, paipu_config, is_maka);
             }
         }
     } catch (e) {
@@ -2886,17 +2444,18 @@ function canceledit() {
             return load_my_desktop_view.call(this, K, U);
         }
     if (showInfo_mj !== undefined)
-        uiscript.UI_Win.prototype._showInfo_mj = function(e) {
+        uiscript.UI_Win.prototype._showInfo_mj = function (e) {
             return showInfo_mj.call(this, e);
-        }
-    if (setFanFu !== undefined)
-        uiscript.UI_Win.prototype.setFanFu = function(Fan, Fu) {
-            return setFanFu.call(this, Fan, Fu);
         }
 }
 
 // config: 对局房间的信息, playercnt: 玩家数, players: 玩家信息
 var config = null, playercnt = 4, players = [];
+// liqi_need: 立直所需要的棒子数, ben_times: 本场点数的倍数
+var liqi_need = 1, ben_times = 1;
+// 荒牌流局罚符(未听牌玩家向听牌玩家支付的点数)
+var fafu_1ting = 3000, fafu_2ting = 1500, fafu_3ting = 1000;
+var fafu_3p_1ting = 2000, fafu_3p_2ting = 1000, fafu_2p = 1000;
 // tiles: 玩家的起手, paishan: 牌山,
 // playertiles: 玩家的手牌, fulu: 玩家的副露信息
 // paihe: 玩家的牌河, discardtiles: 玩家的切牌, xun: 玩家的巡目
@@ -2906,13 +2465,11 @@ var playertiles = [[], [], [], []], fulu = [[], [], [], []];
 var paihe = [], discardtiles = ["", "", "", ""], xun = [];
 // liqiinfo: 立直信息, lstliqi: 宣言立直的玩家信息
 var liqiinfo = [], lstliqi = null;
-// doras: 表宝牌, li_doras: 里宝牌, doracnt: dora数量及最近类型: 1表示即翻指示牌(暗杠), 2表示过一个操作才翻指示牌(明杠)
-var doras = [], li_doras = [], doracnt = {'cnt': 1, 'lastype': 0};
+// doras: 表宝牌, li_doras: 里宝牌, doracnt: 表里dora数量, 及最近类型: 1表示即翻指示牌(暗杠), 2表示过一个操作才翻指示牌(明杠),
+// bonus 是幻境传说模式下能否多一个dora的表现
+var doras = [], li_doras = [], doracnt = {'cnt': 1, 'licnt': 1, 'lastype': 0, 'bonus': 0};
 // chang: 场(东/南/西/北), ju: 局(东1/2/3/4), ben: 本场数, liqibang: 场上立直棒个数, benchangbang: 本场棒个数
 var chang = 0, ju = 0, ben = 0, liqibang = 0, benchangbang = 0;
-// liqi_neednum: 立直所需要的棒子数, ben_times: 本场数倍数
-var liqi_neednum = 1, ben_times = 1;
-var fafu_1st = 3000, fafu_2nd = 1500, fafu_3rd = 1000, fafu_3p_1st = 2000, fafu_3p_2nd = 1000;
 // scores: 玩家点数, delta_scores: 玩家点数变动, firstneededscores: 一位必要点数
 var scores = [], delta_scores = [], firstneededscores = 0;
 // drawtype: 摸牌方向: 1 表示正常摸牌, 0 表示岭上摸牌, lstdrawtype: 最近玩家摸牌方向
@@ -3102,6 +2659,14 @@ function saveproject() {
     tmp.benchangbang = JSON.parse(JSON.stringify(benchangbang));
     tmp.chuanmagangs = JSON.parse(JSON.stringify(chuanmagangs));
     tmp.config = JSON.parse(JSON.stringify(config));
+    tmp.liqi_need = JSON.parse(JSON.stringify(liqi_need));
+    tmp.ben_times = JSON.parse(JSON.stringify(ben_times));
+    tmp.fafu_1ting = JSON.parse(JSON.stringify(fafu_1ting));
+    tmp.fafu_2ting = JSON.parse(JSON.stringify(fafu_2ting));
+    tmp.fafu_3ting = JSON.parse(JSON.stringify(fafu_3ting));
+    tmp.fafu_3p_1ting = JSON.parse(JSON.stringify(fafu_3p_1ting));
+    tmp.fafu_3p_2ting = JSON.parse(JSON.stringify(fafu_3p_2ting));
+    tmp.fafu_2p = JSON.parse(JSON.stringify(fafu_2p));
     tmp.hules_history = JSON.parse(JSON.stringify(hules_history));
     tmp.hupaied = JSON.parse(JSON.stringify(hupaied));
     tmp.paishan = JSON.parse(JSON.stringify(paishan));
@@ -3161,6 +2726,14 @@ function loadproject(x) {
         benchangbang = JSON.parse(JSON.stringify(x.benchangbang));
         chuanmagangs = JSON.parse(JSON.stringify(x.chuanmagangs));
         config = JSON.parse(JSON.stringify(x.config));
+        liqi_need = JSON.parse(JSON.stringify(x.liqi_need));
+        ben_times = JSON.parse(JSON.stringify(x.ben_times));
+        fafu_1ting = JSON.parse(JSON.stringify(x.fafu_1ting));
+        fafu_2ting = JSON.parse(JSON.stringify(x.fafu_2ting));
+        fafu_3ting = JSON.parse(JSON.stringify(x.fafu_3ting));
+        fafu_3p_1ting = JSON.parse(JSON.stringify(x.fafu_3p_1ting));
+        fafu_3p_2ting = JSON.parse(JSON.stringify(x.fafu_3p_2ting));
+        fafu_2p = JSON.parse(JSON.stringify(x.fafu_2p));
         hules_history = JSON.parse(JSON.stringify(x.hules_history));
         hupaied = JSON.parse(JSON.stringify(x.hupaied));
         paishan = JSON.parse(JSON.stringify(x.paishan));
@@ -3249,7 +2822,7 @@ function init() {
     actions = [];
     lstliqi = null;
     chuanmagangs = {'over': [], 'notover': []};
-    doracnt = {'cnt': 1, 'lastype': 0};
+    doracnt = {'cnt': 1, 'licnt': 1, 'lastype': 0, 'bonus': 0};
     hupaied = [false, false, false, false];
     hules_history = [];
     playertiles = [[], [], [], []];
@@ -3532,6 +3105,23 @@ function no_wyakuman() {
 
 function no_guoshiangang() {
     return !!(config && config.mode && config.mode.detail_rule && config.mode.detail_rule._no_guoshiangang)
+}
+
+function is_renhumanguan() {
+    return !!(config && config.mode && config.mode.detail_rule && config.mode.detail_rule._renhumanguan)
+}
+
+function no_dora() {
+    return !!(config && config.mode && config.mode.detail_rule && config.mode.detail_rule._no_dora)
+}
+function no_lidora() {
+    return !!(config && config.mode && config.mode.detail_rule && config.mode.detail_rule._no_lidora)
+}
+function no_gangdora() {
+    return !!(config && config.mode && config.mode.detail_rule && config.mode.detail_rule._no_gangdora)
+}
+function no_ganglidora() {
+    return !!(config && config.mode && config.mode.detail_rule && config.mode.detail_rule._no_ganglidora)
 }
 
 // ---------------------------------
@@ -4252,7 +3842,7 @@ function calcsudian(x, type = 0) {
 // dora   红宝   里宝     北宝   天和   地和   带三元 四暗   字一色 绿一色
 // 清老头 国士   小四喜   四杠   九莲   八连庄 纯九   四单   十三面 带四喜
 // 燕返   杠振   十二落抬 五门齐 三连刻 三同顺 1p摸月 9p捞鱼 人和   带车轮
-// 大竹林 大数邻 石上     带七星
+// 大竹林 大数邻 石上     带七星 人和2
 
 // type 为 false 表示正常和牌, true 表示查大叫的情况
 function calcfan_chuanma(tiles, seat, zimo, type = false) {
@@ -4828,6 +4418,8 @@ function calcfan(tiles, seat, zimo, fangchong) {
                     alldoras[0] += cnt2[doranxt[tiletoint(doras[i])]];
                 }
 
+            }
+            for (let i = 0; i < doracnt.licnt; i++) {
                 if ((playercnt === 3 || playercnt === 2) && tiletoint(li_doras[i]) === 1)
                     alldoras[3] += cnt2[9];
                 else if (playercnt === 2 && tiletoint(li_doras[i]) === 10)
@@ -5118,6 +4710,12 @@ function calcfan(tiles, seat, zimo, fangchong) {
                 return ans;
             // ------------------------------------
             ans.yiman = false;
+
+            if (liqiinfo[seat].yifa !== 0 && liqiinfo[seat].liqi === 0 && seat !== ju && !zimo && (is_guyi() || is_yifanjieguyi())) {
+                if (is_renhumanguan())
+                    ans.fans.push({'val': 5, 'id': 65}); // 人和2
+            }
+
             if (is_hunzhiyiji()) {
                 if (hunzhiyiji_info[seat].liqi === 1)
                     ans.fans.push({'val': 2, 'id': 804}); // 立直
@@ -5669,8 +5267,15 @@ function calcxun() {
 
 function calcdoras() {
     doracnt.cnt = Math.min(doracnt.cnt, 5);
-    if (is_chuanma() || is_guobiao())
-        doracnt.cnt = 0;
+    doracnt.licnt = Math.min(doracnt.licnt, 5);
+    if (no_ganglidora())
+        doracnt.licnt = 1;
+    if (no_gangdora())
+        doracnt.cnt = doracnt.licnt = 1;
+    if (no_lidora())
+        doracnt.licnt = 0;
+    if (is_chuanma() || is_guobiao() || no_dora())
+        doracnt.cnt = doracnt.licnt = 0;
     let doras0 = [];
     for (let i = 0; i < doracnt.cnt; i++)
         doras0[i] = doras[i];
@@ -5706,8 +5311,42 @@ function gamebegin() {
     else
         playercnt = 4;
 
-    if (config.mode && config.mode.detail_rule && config.mode.detail_rule.open_hand === true)
-        config.mode.detail_rule.open_hand = "1111";
+    if (!!(config && config.mode && config.mode.detail_rule && typeof(config.mode.detail_rule._liqi_need) === "number"))
+        liqi_need = config.mode.detail_rule._liqi_need;
+    else if (get_field_spell_mode3() === 2) // 幻境传说: 命运卡2
+        liqi_need = 2;
+    else
+        liqi_need = 1;
+    if (!!(config && config.mode && config.mode.detail_rule && typeof(config.mode.detail_rule._ben_times) === "number"))
+        ben_times = config.mode.detail_rule._ben_times;
+    else
+        ben_times = 1;
+
+    if (!!(config && config.mode && config.mode.detail_rule && typeof(config.mode.detail_rule._fafu_1ting) === "number"))
+        fafu_1ting = config.mode.detail_rule._fafu_1ting;
+    else
+        fafu_1ting = 1000;
+    if (!!(config && config.mode && config.mode.detail_rule && typeof(config.mode.detail_rule._fafu_2ting) === "number"))
+        fafu_2ting = config.mode.detail_rule._fafu_2ting;
+    else
+        fafu_2ting = 1500;
+    if (!!(config && config.mode && config.mode.detail_rule && typeof(config.mode.detail_rule._fafu_3ting) === "number"))
+        fafu_3ting = config.mode.detail_rule._fafu_3ting;
+    else
+        fafu_3ting = 3000;
+    if (!!(config && config.mode && config.mode.detail_rule && typeof(config.mode.detail_rule._fafu_3p_1ting) === "number"))
+        fafu_3p_1ting = config.mode.detail_rule._fafu_3p_1ting;
+    else
+        fafu_3p_1ting = 1000;
+    if (!!(config && config.mode && config.mode.detail_rule && typeof(config.mode.detail_rule._fafu_3p_2ting) === "number"))
+        fafu_3p_2ting = config.mode.detail_rule._fafu_3p_2ting;
+    else
+        fafu_3p_2ting = 2000;
+    if (!!(config && config.mode && config.mode.detail_rule && typeof(config.mode.detail_rule._fafu_2p) === "number"))
+        fafu_2p = config.mode.detail_rule._fafu_2p;
+    else
+        fafu_2p = 2000;
+
     if (config.mode.mode >= 21) { // 二麻
         if (config && config.mode && config.mode.detail_rule && config.mode.detail_rule.init_point)
             scores = [config.mode.detail_rule.init_point, config.mode.detail_rule.init_point];
@@ -5866,7 +5505,8 @@ function roundbegin() {
     }
     playertiles[ju].push(lastile);
     if (is_dora3())
-        doracnt.cnt = 3;
+        doracnt.cnt = doracnt.licnt = 3;
+
     if (playercnt === 2)
         addNewRound(chang, ju, ben, calcdoras(), paishan_len() - 18, liqibang, md5(paishan), paishan, scores.slice(), tiles0.slice(), tiles1.slice(), tiles2.slice(), tiles3.slice(), tingpais);
     else if (is_chuanma() || is_guobiao())
@@ -6326,7 +5966,7 @@ function hupaioneplayer(seat) {
         doras0[i] = doras[i];
     let li_doras0 = [];
     if (liqiinfo[seat].liqi !== 0)
-        for (let i = 0; i < doracnt.cnt; i++)
+        for (let i = 0; i < doracnt.licnt; i++)
             li_doras0[i] = li_doras[i];
     let ming = [];
     for (let i = 0; i < fulu[seat].length; i++) {
@@ -6708,34 +6348,34 @@ function hupaioneplayer(seat) {
                 for (let i = 0; i < playercnt; i++) {
                     if (i === seat || hupaied[i])
                         continue;
-                    delta_scores[i] -= 100 * benchangbang;
-                    delta_scores[seat] += 100 * benchangbang;
+                    delta_scores[i] -= 100 * benchangbang * ben_times;
+                    delta_scores[seat] += 100 * benchangbang * ben_times;
                 }
             } else if (zimo) { // 自摸情况下全是包牌, 且包牌家只有一家, 则那个包牌家支付全部本场
-                delta_scores[baopai[seat][0].seat] -= (playercnt - 1) * 100 * benchangbang;
-                delta_scores[seat] += (playercnt - 1) * 100 * benchangbang;
+                delta_scores[baopai[seat][0].seat] -= (playercnt - 1) * 100 * benchangbang * ben_times;
+                delta_scores[seat] += (playercnt - 1) * 100 * benchangbang * ben_times;
             } else { // 放铳, 放铳家支付全部本场
-                delta_scores[fangchong] -= (playercnt - 1) * 100 * benchangbang;
-                delta_scores[seat] += (playercnt - 1) * 100 * benchangbang;
+                delta_scores[fangchong] -= (playercnt - 1) * 100 * benchangbang * ben_times;
+                delta_scores[seat] += (playercnt - 1) * 100 * benchangbang * ben_times;
             }
         } else if (zimo && !hupaied[baogangseat]) { // 有包牌存在包杠, 则一定是自摸, 包杠家支付全部本场
-            delta_scores[baogangseat] -= (playercnt - 1) * 100 * benchangbang;
-            delta_scores[seat] += (playercnt - 1) * 100 * benchangbang;
+            delta_scores[baogangseat] -= (playercnt - 1) * 100 * benchangbang * ben_times;
+            delta_scores[seat] += (playercnt - 1) * 100 * benchangbang * ben_times;
         }
     } else if (zimo) { // 一般自摸
         if (baogangseat !== -1 && !hupaied[baogangseat]) { // 存在包杠, 则包杠家支付全部本场, 相当于包杠家放铳
-            delta_scores[baogangseat] -= (playercnt - 1) * 100 * benchangbang;
-            delta_scores[seat] += (playercnt - 1) * 100 * benchangbang;
+            delta_scores[baogangseat] -= (playercnt - 1) * 100 * benchangbang * ben_times;
+            delta_scores[seat] += (playercnt - 1) * 100 * benchangbang * ben_times;
         } else
             for (let i = 0; i < playercnt; i++) {
                 if (i === seat || hupaied[i])
                     continue;
-                delta_scores[i] -= 100 * benchangbang;
-                delta_scores[seat] += 100 * benchangbang;
+                delta_scores[i] -= 100 * benchangbang * ben_times;
+                delta_scores[seat] += 100 * benchangbang * ben_times;
             }
     } else { // 一般放铳
-        delta_scores[fangchong] -= (playercnt - 1) * 100 * benchangbang;
-        delta_scores[seat] += (playercnt - 1) * 100 * benchangbang;
+        delta_scores[fangchong] -= (playercnt - 1) * 100 * benchangbang * ben_times;
+        delta_scores[seat] += (playercnt - 1) * 100 * benchangbang * ben_times;
     }
     benchangbang = 0;
     delta_scores[seat] += liqibang * 1000;
@@ -7020,11 +6660,11 @@ function hupai(x, type) {
 
         let liqi = null;
         if (lstliqi != null) {
-            if (scores[lstliqi.seat] >= 1000)
+            if (scores[lstliqi.seat] >= 1000 * liqi_need)
                 liqi = {
                     'seat': lstliqi.seat,
-                    'score': scores[lstliqi.seat] - 1000,
-                    'liqibang': liqibang + 1
+                    'score': scores[lstliqi.seat] - 1000 * liqi_need,
+                    'liqibang': liqibang + liqi_need
                 };
             else
                 liqi = {
@@ -7040,9 +6680,9 @@ function hupai(x, type) {
         else
             addHuleXueLiu(ret, old_scores.slice(), delta_scores.slice(), scores.slice());
 
-        if (lstliqi != null && scores[lstliqi.seat] >= 1000) {
-            liqibang++;
-            scores[lstliqi.seat] -= 1000;
+        if (lstliqi != null && scores[lstliqi.seat] >= 1000 * liqi_need) {
+            liqibang += liqi_need;
+            scores[lstliqi.seat] -= 1000 * liqi_need;
             liqiinfo[lstliqi.seat] = {'liqi': lstliqi.type, 'yifa': 0, 'kai': lstliqi.kai};
         }
         lstliqi = null;
@@ -7327,10 +6967,7 @@ function mopai(seat, index) {
     let liqi = null;
     let drawcard;
     if (lstliqi != null) {
-        let need_bangzi = 1;
-        // 幻境传说: 命运卡2
-        if (get_field_spell_mode3() === 2)
-            need_bangzi = 2;
+        let need_bangzi = liqi_need;
         if (is_beishuizhizhan() && lstliqi != null && lstliqi.beishui_type !== undefined) {
             if (lstliqi.beishui_type === 1)
                 need_bangzi = 5;
@@ -7423,12 +7060,9 @@ function mopai(seat, index) {
         hunzhiyiji_info[seat].overload = true;
 
     if (doracnt.lastype === 2) {
-        if (doracnt.num !== undefined && doracnt.num === 2) {
-            dora.cnt++;
-            doracnt.num = undefined;
-        }
-        doracnt.cnt++;
-        doracnt.lastype = 0;
+        doracnt.cnt += 1 + doracnt.bonus;
+        doracnt.licnt += 1 + doracnt.bonus;
+        doracnt.bonus = doracnt.lastype = 0;
     }
     for (let i = 0; i < playercnt; i++)
         if (liqiinfo[i].yifa === -1)
@@ -7541,12 +7175,9 @@ function qiepai(seat, kind, is_liqi, anpai, beishui_type) {
     if (is_beishuizhizhan() && is_liqi)
         lstliqi.beishui_type = beishui_type;
     if (doracnt.lastype === 1) {
-        if (doracnt.num !== undefined && doracnt.num === 2) {
-            dora.cnt++;
-            doracnt.num = undefined;
-        }
-        doracnt.cnt++;
-        doracnt.lastype = 0;
+        doracnt.cnt += 1 + doracnt.bonus;
+        doracnt.licnt += 1 + doracnt.bonus;
+        doracnt.bonus = doracnt.lastype = 0;
     }
     // flag: 0 表示 kind === "moqie" 而摸切, 1 表示手切, 2 表示 kind 正好等于摸的牌而摸切
     let flag = 0, tile;
@@ -7917,10 +7548,7 @@ function mingpai(seat, tiles) {
     }
 
     let liqi = null;
-    let need_bangzi = 1;
-    // 幻境传说: 命运卡2
-    if (get_field_spell_mode3() === 2)
-        need_bangzi = 2;
+    let need_bangzi = liqi_need;
     if (is_beishuizhizhan() && lstliqi != null && lstliqi.beishui_type !== undefined) {
         if (lstliqi.beishui_type === 1)
             need_bangzi = 5;
@@ -7967,7 +7595,7 @@ function mingpai(seat, tiles) {
     } else if (tiles.length === 3) { // 大明杠
         // 幻境传说: 庄家卡4
         if (get_field_spell_mode1() === 4 && seat === ju)
-            doracnt.num = 2;
+            doracnt.bonus = 1;
         doracnt.lastype = is_dora_jifan() ? 2 : 1;
         if (!is_chuanma()) {
             if (!is_guobiao()) {
@@ -8082,12 +7710,9 @@ function leimingpai(seat, tile, type, first) {
         return false;
 
     if (doracnt.lastype === 1) {
-        if (doracnt.num !== undefined && doracnt.num === 2) {
-            dora.cnt++;
-            doracnt.num = undefined;
-        }
-        doracnt.cnt++;
-        doracnt.lastype = 0;
+        doracnt.cnt += 1 + doracnt.bonus;
+        doracnt.licnt += 1 + doracnt.bonus;
+        doracnt.bonus = doracnt.lastype = 0;
     }
     let tile_states = [];
     let tilecnt = 0, jiagangflag = false;
@@ -8127,7 +7752,7 @@ function leimingpai(seat, tile, type, first) {
                 liqiinfo[i].yifa = -1;
         // 幻境传说: 庄家卡4
         if (get_field_spell_mode1() === 4 && seat === ju)
-            doracnt.num = 2;
+            doracnt.bonus = 1;
 
         doracnt.lastype = 2;
         fulu[seat].push({'type': 3, 'tile': []});
@@ -8176,7 +7801,7 @@ function leimingpai(seat, tile, type, first) {
                 liqiinfo[i].yifa = -1;
         // 幻境传说: 庄家卡4
         if (get_field_spell_mode1() === 4 && seat === ju)
-            doracnt.num = 2;
+            doracnt.bonus = 1;
         doracnt.lastype = is_dora_jifan() ? 2 : 1;
         for (let i = 0; i < fulu[seat].length; i++) {
             if (fulu[seat][i].type === 1 && equaltile(fulu[seat][i].tile[0], tile)) {
@@ -8276,111 +7901,127 @@ function notileliuju() {
         times = 2;
 
     let ret2 = [];
-    for (let i = ju; i < playercnt + ju; i++) {
-        if (is_chuanma() || is_guobiao())
-            break;
-        const seat = i % playercnt;
-        if (!paihe[seat].liujumanguan || hupaied[seat])
-            continue;
-        liujumanguan = !no_liujumanguan();
-        let score = 0;
-        playertiles[seat].sort(cmp);
-        for (let i = 0; i < playercnt; i++) {
-            if (seat === i || hupaied[i])
+    if (!no_liujumanguan()) {
+        for (let i = ju; i < playercnt + ju; i++) {
+            if (is_chuanma() || is_guobiao())
+                break;
+            const seat = i % playercnt;
+            if (!paihe[seat].liujumanguan || hupaied[seat])
                 continue;
-            // 幻境传说: 命运卡1
-            if (seat === ju || i === ju) {
-
-                delta_scores[i] -= 4000 * times;
-                delta_scores[seat] += 4000 * times;
-                score += 4000 * times;
-            } else {
-                delta_scores[i] -= 2000 * times;
-                delta_scores[seat] += 2000 * times;
-                score += 2000 * times;
-            }
-        }
-        if (playercnt === 3 && no_zimosun()) {
+            liujumanguan = true;
+            let score = 0;
+            playertiles[seat].sort(cmp);
             for (let i = 0; i < playercnt; i++) {
                 if (seat === i || hupaied[i])
                     continue;
-                if (seat === ju) {
-                    delta_scores[i] -= 2000;
-                    delta_scores[seat] += 2000;
-                    score += 2000;
+                // 幻境传说: 命运卡1
+                if (seat === ju || i === ju) {
+                    delta_scores[i] -= 4000 * times;
+                    delta_scores[seat] += 4000 * times;
+                    score += 4000 * times;
                 } else {
-                    delta_scores[i] -= 1000;
-                    delta_scores[seat] += 1000;
-                    score += 1000;
+                    delta_scores[i] -= 2000 * times;
+                    delta_scores[seat] += 2000 * times;
+                    score += 2000 * times;
                 }
             }
-        }
-        if (playercnt === 2 && no_zimosun()) {
+            if (playercnt === 3 && no_zimosun()) {
+                for (let i = 0; i < playercnt; i++) {
+                    if (seat === i || hupaied[i])
+                        continue;
+                    if (seat === ju) {
+                        delta_scores[i] -= 2000;
+                        delta_scores[seat] += 2000;
+                        score += 2000;
+                    } else {
+                        delta_scores[i] -= 1000;
+                        delta_scores[seat] += 1000;
+                        score += 1000;
+                    }
+                }
+            }
+            if (playercnt === 2 && no_zimosun()) {
+                for (let i = 0; i < playercnt; i++) {
+                    if (seat === i || hupaied[i])
+                        continue;
+                    if (seat === ju) {
+                        delta_scores[i] -= 8000;
+                        delta_scores[seat] += 8000;
+                        score += 8000;
+                    } else {
+                        delta_scores[i] -= 4000;
+                        delta_scores[seat] += 4000;
+                        score += 4000;
+                    }
+                }
+            }
+            let ming = [];
+            for (let i = 0; i < fulu[seat].length; i++) {
+                let tiles = fulu[seat][i].tile;
+                if (fulu[seat][i].type === 0)
+                    ming.push("shunzi(" + tiles[0] + "," + tiles[1] + "," + tiles[2] + ")");
+                else if (fulu[seat][i].type === 1)
+                    ming.push("kezi(" + tiles[0] + "," + tiles[1] + "," + tiles[2] + ")");
+                else if (fulu[seat][i].type === 2)
+                    ming.push("minggang(" + tiles[0] + "," + tiles[1] + "," + tiles[2] + "," + tiles[3] + ")");
+                else if (fulu[seat][i].type === 3)
+                    ming.push("angang(" + tiles[0] + "," + tiles[1] + "," + tiles[2] + "," + tiles[3] + ")");
+            }
+            ret2.push({
+                'delta_scores': delta_scores.slice(),
+                'doras': calcdoras(),
+                'hand': playertiles[seat].slice(),
+                'ming': ming,
+                'old_scores': scores.slice(),
+                'score': score,
+                'seat': seat
+            });
             for (let i = 0; i < playercnt; i++) {
-                if (seat === i || hupaied[i])
-                    continue;
-                if (seat === ju) {
-                    delta_scores[i] -= 8000;
-                    delta_scores[seat] += 8000;
-                    score += 8000;
-                } else {
-                    delta_scores[i] -= 4000;
-                    delta_scores[seat] += 4000;
-                    score += 4000;
-                }
+                scores[i] = scores[i] + delta_scores[i];
+                delta_scores[i] = 0;
             }
         }
-        let ming = [];
-        for (let i = 0; i < fulu[seat].length; i++) {
-            let tiles = fulu[seat][i].tile;
-            if (fulu[seat][i].type === 0)
-                ming.push("shunzi(" + tiles[0] + "," + tiles[1] + "," + tiles[2] + ")");
-            else if (fulu[seat][i].type === 1)
-                ming.push("kezi(" + tiles[0] + "," + tiles[1] + "," + tiles[2] + ")");
-            else if (fulu[seat][i].type === 2)
-                ming.push("minggang(" + tiles[0] + "," + tiles[1] + "," + tiles[2] + "," + tiles[3] + ")");
-            else if (fulu[seat][i].type === 3)
-                ming.push("angang(" + tiles[0] + "," + tiles[1] + "," + tiles[2] + "," + tiles[3] + ")");
+        if (liujumanguan && !is_chuanma() && !is_guobiao()) {
+            endNoTile(true, ret, ret2);
+            if (!is_xuezhandaodi() && !is_wanxiangxiuluo() && !is_xueliu()) {
+                ben++;
+                // 幻境传说: 庄家卡2
+                if (get_field_spell_mode1() === 2)
+                    ben += 4;
+            }
+            if (!ret[ju].tingpai || is_xuezhandaodi() || is_wanxiangxiuluo())
+                ju++;
+            roundend();
+            saveproject();
+            return;
         }
-        ret2.push({
-            'delta_scores': delta_scores.slice(),
-            'doras': calcdoras(),
-            'hand': playertiles[seat].slice(),
-            'ming': ming,
-            'old_scores': scores.slice(),
-            'score': score,
-            'seat': seat
-        });
-        for (let i = 0; i < playercnt; i++) {
-            scores[i] = scores[i] + delta_scores[i];
-            delta_scores[i] = 0;
-        }
-    }
-    if (liujumanguan && !is_chuanma() && !is_guobiao()) {
-        endNoTile(true, ret, ret2);
-        if (!is_xuezhandaodi() && !is_wanxiangxiuluo() && !is_xueliu()) {
-            ben++;
-            // 幻境传说: 庄家卡2
-            if (get_field_spell_mode1() === 2)
-                ben += 4;
-        }
-        if (!ret[ju].tingpai || is_xuezhandaodi() || is_wanxiangxiuluo())
-            ju++;
-        roundend();
-        saveproject();
-        return;
     }
     ret2 = [{'delta_scores': [], 'old_scores': []}];
-    if (tingcnt !== 0 && tingcnt !== playerleft) {
+    let notingcnt = playerleft - tingcnt;
+    if (tingcnt !== 0 && notingcnt !== 0) {
         if (!is_chuanma() && !is_guobiao()) {
+            let fafu = 1000;
+            if (tingcnt === 1 && notingcnt === 1)
+                fafu = fafu_2p;
+            else if (tingcnt === 1 && notingcnt === 2)
+                fafu = fafu_3p_1ting;
+            else if (tingcnt === 2 && notingcnt === 1)
+                fafu = fafu_3p_2ting;
+            else if (tingcnt === 1 && notingcnt === 3)
+                fafu = fafu_1ting;
+            else if (tingcnt === 2 && notingcnt === 2)
+                fafu = fafu_2ting;
+            else if (tingcnt === 3 && notingcnt === 1)
+                fafu = fafu_3ting;
+
             for (let seat = 0; seat < playercnt; seat++) {
                 if (hupaied[seat])
                     continue;
                 // 幻境传说: 命运卡1
                 if (ret[seat].tingpai)
-                    delta_scores[seat] += (playerleft - 1) * 1000 / tingcnt * times;
+                    delta_scores[seat] += fafu * notingcnt / tingcnt * times;
                 else
-                    delta_scores[seat] -= (playerleft - 1) * 1000 / (playerleft - tingcnt) * times;
+                    delta_scores[seat] -= fafu * times;
             }
         } else if (is_chuanma()) {
             for (let seat = 0; seat < playercnt; seat++) {
@@ -8478,7 +8119,21 @@ function liuju(liuju_type) {
         if (fulu[0].length === 0 && fulu[1].length === 0 && fulu[2].length === 0 && fulu[3].length === 0)
             if (paihe[0].tiles.length === 1 && paihe[1].tiles.length === 1 && paihe[2].tiles.length === 1 && paihe[3].tiles.length === 1)
                 if (paihe[0].tiles[0] === paihe[1].tiles[0] && paihe[1].tiles[0] === paihe[2].tiles[0] && paihe[2].tiles[0] === paihe[3].tiles[0])
-                    if (tiletoint(paihe[0].tiles[0]) >= 28 && tiletoint(paihe[0].tiles[0]) <= 31)
+                    if (tiletoint(paihe[0].tiles[0]) >= 28 && tiletoint(paihe[0].tiles[0]) <= 31) {
+                        let need_bangzi = liqi_need;
+                        if (is_beishuizhizhan() && lstliqi != null && lstliqi.beishui_type !== undefined) {
+                            if (lstliqi.beishui_type === 1)
+                                need_bangzi = 5;
+                            else if (lstliqi.beishui_type === 2)
+                                need_bangzi = 10;
+                        }
+                        if (lstliqi != null && scores[lstliqi.seat] >= need_bangzi * 1000) {
+                            liqibang += need_bangzi;
+                            scores[lstliqi.seat] -= need_bangzi * 1000;
+                            liqiinfo[lstliqi.seat] = {'liqi': lstliqi.type, 'yifa': 1, 'kai': lstliqi.kai};
+                            if (is_beishuizhizhan())
+                                liqiinfo[lstliqi.seat].beishui_type = lstliqi.beishui_type;
+                        }
                         if (ret === undefined)
                             ret = {
                                 'name': "RecordLiuJu",
@@ -8486,6 +8141,7 @@ function liuju(liuju_type) {
                                     'type': 2
                                 }
                             };
+                    }
     if (liuju_type === 2 && ret === undefined)
         ret = {
             'name': "RecordLiuJu",
@@ -8504,10 +8160,7 @@ function liuju(liuju_type) {
             havegangcnt++;
     }
     if (doracnt.cnt === 5 && havegangcnt >= 2) {
-        let need_bangzi = 1;
-        // 幻境传说: 命运卡2
-        if (get_field_spell_mode3() === 2)
-            need_bangzi = 2;
+        let need_bangzi = liqi_need;
         if (is_beishuizhizhan() && lstliqi != null && lstliqi.beishui_type !== undefined) {
             if (lstliqi.beishui_type === 1)
                 need_bangzi = 5;
@@ -8553,10 +8206,7 @@ function liuju(liuju_type) {
         for (let i = 0; i <= 3; i++)
             if (liqiinfo[i].liqi !== 0)
                 liqiplayercnt++;
-        let need_bangzi = 1;
-        // 幻境传说: 命运卡2
-        if (get_field_spell_mode3() === 2)
-            need_bangzi = 2;
+        let need_bangzi = liqi_need;
         if (is_beishuizhizhan() && lstliqi != null && lstliqi.beishui_type !== undefined) {
             if (lstliqi.beishui_type === 1)
                 need_bangzi = 5;
@@ -8858,8 +8508,7 @@ function randompaishan(paishanhead = "", paishanback = "", reddora) {
                 console.warn("明镜之战: chang: " + chang + ", ju: " + ju + ", ben: " + ben + " paishan 不合规: " + (1 - cnt[i]) + " 个 " + inttotile(i));
             if (cnt2[i] < 0 && ret_paishan.length !== 83 * 2)
                 console.warn("明镜之战: chang: " + chang + ", ju: " + ju + ", ben: " + ben + " paishan 不合规: " + (3 - cnt2[i]) + " 个 " + inttotile(i) + tile_suf);
-        }
-        else if (cnt[i] < 0) {
+        } else if (cnt[i] < 0) {
             if (is_guobiao() && ret_paishan.length !== 83 * 2)
                 console.warn("chang: " + chang + ", ju: " + ju + ", ben: " + ben + " paishan 不合规: " + (4 - cnt[i]) + " 个 " + inttotile(i));
             else if (is_chuanma() && ret_paishan.length !== 55 * 2)
