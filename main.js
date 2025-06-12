@@ -1807,208 +1807,534 @@ function DIY_fan() {
     };
 }
 
-// md5 计算函数, 与牌谱回放关系不大
-function md5(string) {
-    function md5_RotateLeft(lValue, iShiftBits) {
-        return lValue << iShiftBits | lValue >>> 32 - iShiftBits;
+// sha256 计算函数, 与牌谱回放关系不大
+/**
+ * [js-sha256]{@link https://github.com/emn178/js-sha256}
+ *
+ * @version 0.11.1
+ * @author Chen, Yi-Cyuan [emn178@gmail.com]
+ * @copyright Chen, Yi-Cyuan 2014-2025
+ * @license MIT
+ */
+/*jslint bitwise: true */
+(function () {
+    'use strict';
+
+    var ERROR = 'input is invalid type';
+    var WINDOW = typeof window === 'object';
+    var root = WINDOW ? window : {};
+    if (root.JS_SHA256_NO_WINDOW) {
+        WINDOW = false;
+    }
+    var WEB_WORKER = !WINDOW && typeof self === 'object';
+    var NODE_JS = !root.JS_SHA256_NO_NODE_JS && typeof process === 'object' && process.versions && process.versions.node && process.type != 'renderer';
+    if (NODE_JS) {
+        root = global;
+    } else if (WEB_WORKER) {
+        root = self;
+    }
+    var COMMON_JS = !root.JS_SHA256_NO_COMMON_JS && typeof module === 'object' && module.exports;
+    var AMD = typeof define === 'function' && define.amd;
+    var ARRAY_BUFFER = !root.JS_SHA256_NO_ARRAY_BUFFER && typeof ArrayBuffer !== 'undefined';
+    var HEX_CHARS = '0123456789abcdef'.split('');
+    var EXTRA = [-2147483648, 8388608, 32768, 128];
+    var SHIFT = [24, 16, 8, 0];
+    var K = [
+        0x428a2f98, 0x71374491, 0xb5c0fbcf, 0xe9b5dba5, 0x3956c25b, 0x59f111f1, 0x923f82a4, 0xab1c5ed5,
+        0xd807aa98, 0x12835b01, 0x243185be, 0x550c7dc3, 0x72be5d74, 0x80deb1fe, 0x9bdc06a7, 0xc19bf174,
+        0xe49b69c1, 0xefbe4786, 0x0fc19dc6, 0x240ca1cc, 0x2de92c6f, 0x4a7484aa, 0x5cb0a9dc, 0x76f988da,
+        0x983e5152, 0xa831c66d, 0xb00327c8, 0xbf597fc7, 0xc6e00bf3, 0xd5a79147, 0x06ca6351, 0x14292967,
+        0x27b70a85, 0x2e1b2138, 0x4d2c6dfc, 0x53380d13, 0x650a7354, 0x766a0abb, 0x81c2c92e, 0x92722c85,
+        0xa2bfe8a1, 0xa81a664b, 0xc24b8b70, 0xc76c51a3, 0xd192e819, 0xd6990624, 0xf40e3585, 0x106aa070,
+        0x19a4c116, 0x1e376c08, 0x2748774c, 0x34b0bcb5, 0x391c0cb3, 0x4ed8aa4a, 0x5b9cca4f, 0x682e6ff3,
+        0x748f82ee, 0x78a5636f, 0x84c87814, 0x8cc70208, 0x90befffa, 0xa4506ceb, 0xbef9a3f7, 0xc67178f2
+    ];
+    var OUTPUT_TYPES = ['hex', 'array', 'digest', 'arrayBuffer'];
+
+    var blocks = [];
+
+    if (root.JS_SHA256_NO_NODE_JS || !Array.isArray) {
+        Array.isArray = function (obj) {
+            return Object.prototype.toString.call(obj) === '[object Array]';
+        };
     }
 
-    function md5_AddUnsigned(lX, lY) {
-        let lX4, lY4, lX8, lY8, lResult;
-        lX8 = lX & 0x80000000;
-        lY8 = lY & 0x80000000;
-        lX4 = lX & 0x40000000;
-        lY4 = lY & 0x40000000;
-        lResult = (lX & 0x3FFFFFFF) + (lY & 0x3FFFFFFF);
-        if (lX4 & lY4)
-            return lResult ^ 0x80000000 ^ lX8 ^ lY8;
-        if (lX4 | lY4) {
-            if (lResult & 0x40000000)
-                return lResult ^ 0xC0000000 ^ lX8 ^ lY8;
-            else
-                return lResult ^ 0x40000000 ^ lX8 ^ lY8;
-        } else
-            return lResult ^ lX8 ^ lY8;
+    if (ARRAY_BUFFER && (root.JS_SHA256_NO_ARRAY_BUFFER_IS_VIEW || !ArrayBuffer.isView)) {
+        ArrayBuffer.isView = function (obj) {
+            return typeof obj === 'object' && obj.buffer && obj.buffer.constructor === ArrayBuffer;
+        };
     }
 
-    function md5_F(x, y, z) {
-        return x & y | ~x & z;
-    }
+    var createOutputMethod = function (outputType, is224) {
+        return function (message) {
+            return new Sha256(is224, true).update(message)[outputType]();
+        };
+    };
 
-    function md5_G(x, y, z) {
-        return x & z | y & ~z;
-    }
-
-    function md5_H(x, y, z) {
-        return x ^ y ^ z;
-    }
-
-    function md5_I(x, y, z) {
-        return y ^ (x | ~z);
-    }
-
-    function md5_FF(a, b, c, d, x, s, ac) {
-        a = md5_AddUnsigned(a, md5_AddUnsigned(md5_AddUnsigned(md5_F(b, c, d), x), ac));
-        return md5_AddUnsigned(md5_RotateLeft(a, s), b);
-    }
-
-    function md5_GG(a, b, c, d, x, s, ac) {
-        a = md5_AddUnsigned(a, md5_AddUnsigned(md5_AddUnsigned(md5_G(b, c, d), x), ac));
-        return md5_AddUnsigned(md5_RotateLeft(a, s), b);
-    }
-
-    function md5_HH(a, b, c, d, x, s, ac) {
-        a = md5_AddUnsigned(a, md5_AddUnsigned(md5_AddUnsigned(md5_H(b, c, d), x), ac));
-        return md5_AddUnsigned(md5_RotateLeft(a, s), b);
-    }
-
-    function md5_II(a, b, c, d, x, s, ac) {
-        a = md5_AddUnsigned(a, md5_AddUnsigned(md5_AddUnsigned(md5_I(b, c, d), x), ac));
-        return md5_AddUnsigned(md5_RotateLeft(a, s), b);
-    }
-
-    function md5_ConvertToWordArray(string) {
-        let lWordCount;
-        let lMessageLength = string.length;
-        let lNumberOfWords_temp1 = lMessageLength + 8;
-        let lNumberOfWords_temp2 = (lNumberOfWords_temp1 - (lNumberOfWords_temp1 % 64)) / 64;
-        let lNumberOfWords = (lNumberOfWords_temp2 + 1) * 16;
-        let lWordArray = Array(lNumberOfWords - 1);
-        let lBytePosition = 0;
-        let lByteCount = 0;
-        while (lByteCount < lMessageLength) {
-            lWordCount = (lByteCount - (lByteCount % 4)) / 4;
-            lBytePosition = (lByteCount % 4) * 8;
-            lWordArray[lWordCount] = (lWordArray[lWordCount] | (string.charCodeAt(lByteCount) << lBytePosition));
-            lByteCount++;
+    var createMethod = function (is224) {
+        var method = createOutputMethod('hex', is224);
+        if (NODE_JS) {
+            method = nodeWrap(method, is224);
         }
-        lWordCount = (lByteCount - (lByteCount % 4)) / 4;
-        lBytePosition = (lByteCount % 4) * 8;
-        lWordArray[lWordCount] = lWordArray[lWordCount] | (0x80 << lBytePosition);
-        lWordArray[lNumberOfWords - 2] = lMessageLength << 3;
-        lWordArray[lNumberOfWords - 1] = lMessageLength >>> 29;
-        return lWordArray;
-    }
-
-    function md5_WordToHex(lValue) {
-        let WordToHexValue = "",
-            WordToHexValue_temp = "",
-            lByte, lCount;
-        for (lCount = 0; lCount <= 3; lCount++) {
-            lByte = (lValue >>> (lCount * 8)) & 255;
-            WordToHexValue_temp = "0" + lByte.toString(16);
-            WordToHexValue = WordToHexValue + WordToHexValue_temp.substring(WordToHexValue_temp.length - 2);
+        method.create = function () {
+            return new Sha256(is224);
+        };
+        method.update = function (message) {
+            return method.create().update(message);
+        };
+        for (var i = 0; i < OUTPUT_TYPES.length; ++i) {
+            var type = OUTPUT_TYPES[i];
+            method[type] = createOutputMethod(type, is224);
         }
-        return WordToHexValue;
-    }
+        return method;
+    };
 
-    function md5_Utf8Encode(string) {
-        string = string.replace(/\r\n/g, "\n");
-        let utftext = "";
-        for (let n = 0; n < string.length; n++) {
-            let c = string.charCodeAt(n);
-            if (c < 128)
-                utftext += String.fromCharCode(c);
-            else if ((c > 127) && (c < 2048)) {
-                utftext += String.fromCharCode((c >> 6) | 192);
-                utftext += String.fromCharCode((c & 63) | 128);
+    var nodeWrap = function (method, is224) {
+        var crypto = require('crypto')
+        var Buffer = require('buffer').Buffer;
+        var algorithm = is224 ? 'sha224' : 'sha256';
+        var bufferFrom;
+        if (Buffer.from && !root.JS_SHA256_NO_BUFFER_FROM) {
+            bufferFrom = Buffer.from;
+        } else {
+            bufferFrom = function (message) {
+                return new Buffer(message);
+            };
+        }
+        var nodeMethod = function (message) {
+            if (typeof message === 'string') {
+                return crypto.createHash(algorithm).update(message, 'utf8').digest('hex');
             } else {
-                utftext += String.fromCharCode((c >> 12) | 224);
-                utftext += String.fromCharCode(((c >> 6) & 63) | 128);
-                utftext += String.fromCharCode((c & 63) | 128);
+                if (message === null || message === undefined) {
+                    throw new Error(ERROR);
+                } else if (message.constructor === ArrayBuffer) {
+                    message = new Uint8Array(message);
+                }
+            }
+            if (Array.isArray(message) || ArrayBuffer.isView(message) ||
+                message.constructor === Buffer) {
+                return crypto.createHash(algorithm).update(bufferFrom(message)).digest('hex');
+            } else {
+                return method(message);
+            }
+        };
+        return nodeMethod;
+    };
+
+    var createHmacOutputMethod = function (outputType, is224) {
+        return function (key, message) {
+            return new HmacSha256(key, is224, true).update(message)[outputType]();
+        };
+    };
+
+    var createHmacMethod = function (is224) {
+        var method = createHmacOutputMethod('hex', is224);
+        method.create = function (key) {
+            return new HmacSha256(key, is224);
+        };
+        method.update = function (key, message) {
+            return method.create(key).update(message);
+        };
+        for (var i = 0; i < OUTPUT_TYPES.length; ++i) {
+            var type = OUTPUT_TYPES[i];
+            method[type] = createHmacOutputMethod(type, is224);
+        }
+        return method;
+    };
+
+    function Sha256(is224, sharedMemory) {
+        if (sharedMemory) {
+            blocks[0] = blocks[16] = blocks[1] = blocks[2] = blocks[3] =
+                blocks[4] = blocks[5] = blocks[6] = blocks[7] =
+                    blocks[8] = blocks[9] = blocks[10] = blocks[11] =
+                        blocks[12] = blocks[13] = blocks[14] = blocks[15] = 0;
+            this.blocks = blocks;
+        } else {
+            this.blocks = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+        }
+
+        if (is224) {
+            this.h0 = 0xc1059ed8;
+            this.h1 = 0x367cd507;
+            this.h2 = 0x3070dd17;
+            this.h3 = 0xf70e5939;
+            this.h4 = 0xffc00b31;
+            this.h5 = 0x68581511;
+            this.h6 = 0x64f98fa7;
+            this.h7 = 0xbefa4fa4;
+        } else { // 256
+            this.h0 = 0x6a09e667;
+            this.h1 = 0xbb67ae85;
+            this.h2 = 0x3c6ef372;
+            this.h3 = 0xa54ff53a;
+            this.h4 = 0x510e527f;
+            this.h5 = 0x9b05688c;
+            this.h6 = 0x1f83d9ab;
+            this.h7 = 0x5be0cd19;
+        }
+
+        this.block = this.start = this.bytes = this.hBytes = 0;
+        this.finalized = this.hashed = false;
+        this.first = true;
+        this.is224 = is224;
+    }
+
+    Sha256.prototype.update = function (message) {
+        if (this.finalized) {
+            return;
+        }
+        var notString, type = typeof message;
+        if (type !== 'string') {
+            if (type === 'object') {
+                if (message === null) {
+                    throw new Error(ERROR);
+                } else if (ARRAY_BUFFER && message.constructor === ArrayBuffer) {
+                    message = new Uint8Array(message);
+                } else if (!Array.isArray(message)) {
+                    if (!ARRAY_BUFFER || !ArrayBuffer.isView(message)) {
+                        throw new Error(ERROR);
+                    }
+                }
+            } else {
+                throw new Error(ERROR);
+            }
+            notString = true;
+        }
+        var code, index = 0, i, length = message.length, blocks = this.blocks;
+        while (index < length) {
+            if (this.hashed) {
+                this.hashed = false;
+                blocks[0] = this.block;
+                this.block = blocks[16] = blocks[1] = blocks[2] = blocks[3] =
+                    blocks[4] = blocks[5] = blocks[6] = blocks[7] =
+                        blocks[8] = blocks[9] = blocks[10] = blocks[11] =
+                            blocks[12] = blocks[13] = blocks[14] = blocks[15] = 0;
+            }
+
+            if (notString) {
+                for (i = this.start; index < length && i < 64; ++index) {
+                    blocks[i >>> 2] |= message[index] << SHIFT[i++ & 3];
+                }
+            } else {
+                for (i = this.start; index < length && i < 64; ++index) {
+                    code = message.charCodeAt(index);
+                    if (code < 0x80) {
+                        blocks[i >>> 2] |= code << SHIFT[i++ & 3];
+                    } else if (code < 0x800) {
+                        blocks[i >>> 2] |= (0xc0 | (code >>> 6)) << SHIFT[i++ & 3];
+                        blocks[i >>> 2] |= (0x80 | (code & 0x3f)) << SHIFT[i++ & 3];
+                    } else if (code < 0xd800 || code >= 0xe000) {
+                        blocks[i >>> 2] |= (0xe0 | (code >>> 12)) << SHIFT[i++ & 3];
+                        blocks[i >>> 2] |= (0x80 | ((code >>> 6) & 0x3f)) << SHIFT[i++ & 3];
+                        blocks[i >>> 2] |= (0x80 | (code & 0x3f)) << SHIFT[i++ & 3];
+                    } else {
+                        code = 0x10000 + (((code & 0x3ff) << 10) | (message.charCodeAt(++index) & 0x3ff));
+                        blocks[i >>> 2] |= (0xf0 | (code >>> 18)) << SHIFT[i++ & 3];
+                        blocks[i >>> 2] |= (0x80 | ((code >>> 12) & 0x3f)) << SHIFT[i++ & 3];
+                        blocks[i >>> 2] |= (0x80 | ((code >>> 6) & 0x3f)) << SHIFT[i++ & 3];
+                        blocks[i >>> 2] |= (0x80 | (code & 0x3f)) << SHIFT[i++ & 3];
+                    }
+                }
+            }
+
+            this.lastByteIndex = i;
+            this.bytes += i - this.start;
+            if (i >= 64) {
+                this.block = blocks[16];
+                this.start = i - 64;
+                this.hash();
+                this.hashed = true;
+            } else {
+                this.start = i;
             }
         }
-        return utftext;
+        if (this.bytes > 4294967295) {
+            this.hBytes += this.bytes / 4294967296 << 0;
+            this.bytes = this.bytes % 4294967296;
+        }
+        return this;
+    };
+
+    Sha256.prototype.finalize = function () {
+        if (this.finalized) {
+            return;
+        }
+        this.finalized = true;
+        var blocks = this.blocks, i = this.lastByteIndex;
+        blocks[16] = this.block;
+        blocks[i >>> 2] |= EXTRA[i & 3];
+        this.block = blocks[16];
+        if (i >= 56) {
+            if (!this.hashed) {
+                this.hash();
+            }
+            blocks[0] = this.block;
+            blocks[16] = blocks[1] = blocks[2] = blocks[3] =
+                blocks[4] = blocks[5] = blocks[6] = blocks[7] =
+                    blocks[8] = blocks[9] = blocks[10] = blocks[11] =
+                        blocks[12] = blocks[13] = blocks[14] = blocks[15] = 0;
+        }
+        blocks[14] = this.hBytes << 3 | this.bytes >>> 29;
+        blocks[15] = this.bytes << 3;
+        this.hash();
+    };
+
+    Sha256.prototype.hash = function () {
+        var a = this.h0, b = this.h1, c = this.h2, d = this.h3, e = this.h4, f = this.h5, g = this.h6,
+            h = this.h7, blocks = this.blocks, j, s0, s1, maj, t1, t2, ch, ab, da, cd, bc;
+
+        for (j = 16; j < 64; ++j) {
+            // rightrotate
+            t1 = blocks[j - 15];
+            s0 = ((t1 >>> 7) | (t1 << 25)) ^ ((t1 >>> 18) | (t1 << 14)) ^ (t1 >>> 3);
+            t1 = blocks[j - 2];
+            s1 = ((t1 >>> 17) | (t1 << 15)) ^ ((t1 >>> 19) | (t1 << 13)) ^ (t1 >>> 10);
+            blocks[j] = blocks[j - 16] + s0 + blocks[j - 7] + s1 << 0;
+        }
+
+        bc = b & c;
+        for (j = 0; j < 64; j += 4) {
+            if (this.first) {
+                if (this.is224) {
+                    ab = 300032;
+                    t1 = blocks[0] - 1413257819;
+                    h = t1 - 150054599 << 0;
+                    d = t1 + 24177077 << 0;
+                } else {
+                    ab = 704751109;
+                    t1 = blocks[0] - 210244248;
+                    h = t1 - 1521486534 << 0;
+                    d = t1 + 143694565 << 0;
+                }
+                this.first = false;
+            } else {
+                s0 = ((a >>> 2) | (a << 30)) ^ ((a >>> 13) | (a << 19)) ^ ((a >>> 22) | (a << 10));
+                s1 = ((e >>> 6) | (e << 26)) ^ ((e >>> 11) | (e << 21)) ^ ((e >>> 25) | (e << 7));
+                ab = a & b;
+                maj = ab ^ (a & c) ^ bc;
+                ch = (e & f) ^ (~e & g);
+                t1 = h + s1 + ch + K[j] + blocks[j];
+                t2 = s0 + maj;
+                h = d + t1 << 0;
+                d = t1 + t2 << 0;
+            }
+            s0 = ((d >>> 2) | (d << 30)) ^ ((d >>> 13) | (d << 19)) ^ ((d >>> 22) | (d << 10));
+            s1 = ((h >>> 6) | (h << 26)) ^ ((h >>> 11) | (h << 21)) ^ ((h >>> 25) | (h << 7));
+            da = d & a;
+            maj = da ^ (d & b) ^ ab;
+            ch = (h & e) ^ (~h & f);
+            t1 = g + s1 + ch + K[j + 1] + blocks[j + 1];
+            t2 = s0 + maj;
+            g = c + t1 << 0;
+            c = t1 + t2 << 0;
+            s0 = ((c >>> 2) | (c << 30)) ^ ((c >>> 13) | (c << 19)) ^ ((c >>> 22) | (c << 10));
+            s1 = ((g >>> 6) | (g << 26)) ^ ((g >>> 11) | (g << 21)) ^ ((g >>> 25) | (g << 7));
+            cd = c & d;
+            maj = cd ^ (c & a) ^ da;
+            ch = (g & h) ^ (~g & e);
+            t1 = f + s1 + ch + K[j + 2] + blocks[j + 2];
+            t2 = s0 + maj;
+            f = b + t1 << 0;
+            b = t1 + t2 << 0;
+            s0 = ((b >>> 2) | (b << 30)) ^ ((b >>> 13) | (b << 19)) ^ ((b >>> 22) | (b << 10));
+            s1 = ((f >>> 6) | (f << 26)) ^ ((f >>> 11) | (f << 21)) ^ ((f >>> 25) | (f << 7));
+            bc = b & c;
+            maj = bc ^ (b & d) ^ cd;
+            ch = (f & g) ^ (~f & h);
+            t1 = e + s1 + ch + K[j + 3] + blocks[j + 3];
+            t2 = s0 + maj;
+            e = a + t1 << 0;
+            a = t1 + t2 << 0;
+            this.chromeBugWorkAround = true;
+        }
+
+        this.h0 = this.h0 + a << 0;
+        this.h1 = this.h1 + b << 0;
+        this.h2 = this.h2 + c << 0;
+        this.h3 = this.h3 + d << 0;
+        this.h4 = this.h4 + e << 0;
+        this.h5 = this.h5 + f << 0;
+        this.h6 = this.h6 + g << 0;
+        this.h7 = this.h7 + h << 0;
+    };
+
+    Sha256.prototype.hex = function () {
+        this.finalize();
+
+        var h0 = this.h0, h1 = this.h1, h2 = this.h2, h3 = this.h3, h4 = this.h4, h5 = this.h5,
+            h6 = this.h6, h7 = this.h7;
+
+        var hex = HEX_CHARS[(h0 >>> 28) & 0x0F] + HEX_CHARS[(h0 >>> 24) & 0x0F] +
+            HEX_CHARS[(h0 >>> 20) & 0x0F] + HEX_CHARS[(h0 >>> 16) & 0x0F] +
+            HEX_CHARS[(h0 >>> 12) & 0x0F] + HEX_CHARS[(h0 >>> 8) & 0x0F] +
+            HEX_CHARS[(h0 >>> 4) & 0x0F] + HEX_CHARS[h0 & 0x0F] +
+            HEX_CHARS[(h1 >>> 28) & 0x0F] + HEX_CHARS[(h1 >>> 24) & 0x0F] +
+            HEX_CHARS[(h1 >>> 20) & 0x0F] + HEX_CHARS[(h1 >>> 16) & 0x0F] +
+            HEX_CHARS[(h1 >>> 12) & 0x0F] + HEX_CHARS[(h1 >>> 8) & 0x0F] +
+            HEX_CHARS[(h1 >>> 4) & 0x0F] + HEX_CHARS[h1 & 0x0F] +
+            HEX_CHARS[(h2 >>> 28) & 0x0F] + HEX_CHARS[(h2 >>> 24) & 0x0F] +
+            HEX_CHARS[(h2 >>> 20) & 0x0F] + HEX_CHARS[(h2 >>> 16) & 0x0F] +
+            HEX_CHARS[(h2 >>> 12) & 0x0F] + HEX_CHARS[(h2 >>> 8) & 0x0F] +
+            HEX_CHARS[(h2 >>> 4) & 0x0F] + HEX_CHARS[h2 & 0x0F] +
+            HEX_CHARS[(h3 >>> 28) & 0x0F] + HEX_CHARS[(h3 >>> 24) & 0x0F] +
+            HEX_CHARS[(h3 >>> 20) & 0x0F] + HEX_CHARS[(h3 >>> 16) & 0x0F] +
+            HEX_CHARS[(h3 >>> 12) & 0x0F] + HEX_CHARS[(h3 >>> 8) & 0x0F] +
+            HEX_CHARS[(h3 >>> 4) & 0x0F] + HEX_CHARS[h3 & 0x0F] +
+            HEX_CHARS[(h4 >>> 28) & 0x0F] + HEX_CHARS[(h4 >>> 24) & 0x0F] +
+            HEX_CHARS[(h4 >>> 20) & 0x0F] + HEX_CHARS[(h4 >>> 16) & 0x0F] +
+            HEX_CHARS[(h4 >>> 12) & 0x0F] + HEX_CHARS[(h4 >>> 8) & 0x0F] +
+            HEX_CHARS[(h4 >>> 4) & 0x0F] + HEX_CHARS[h4 & 0x0F] +
+            HEX_CHARS[(h5 >>> 28) & 0x0F] + HEX_CHARS[(h5 >>> 24) & 0x0F] +
+            HEX_CHARS[(h5 >>> 20) & 0x0F] + HEX_CHARS[(h5 >>> 16) & 0x0F] +
+            HEX_CHARS[(h5 >>> 12) & 0x0F] + HEX_CHARS[(h5 >>> 8) & 0x0F] +
+            HEX_CHARS[(h5 >>> 4) & 0x0F] + HEX_CHARS[h5 & 0x0F] +
+            HEX_CHARS[(h6 >>> 28) & 0x0F] + HEX_CHARS[(h6 >>> 24) & 0x0F] +
+            HEX_CHARS[(h6 >>> 20) & 0x0F] + HEX_CHARS[(h6 >>> 16) & 0x0F] +
+            HEX_CHARS[(h6 >>> 12) & 0x0F] + HEX_CHARS[(h6 >>> 8) & 0x0F] +
+            HEX_CHARS[(h6 >>> 4) & 0x0F] + HEX_CHARS[h6 & 0x0F];
+        if (!this.is224) {
+            hex += HEX_CHARS[(h7 >>> 28) & 0x0F] + HEX_CHARS[(h7 >>> 24) & 0x0F] +
+                HEX_CHARS[(h7 >>> 20) & 0x0F] + HEX_CHARS[(h7 >>> 16) & 0x0F] +
+                HEX_CHARS[(h7 >>> 12) & 0x0F] + HEX_CHARS[(h7 >>> 8) & 0x0F] +
+                HEX_CHARS[(h7 >>> 4) & 0x0F] + HEX_CHARS[h7 & 0x0F];
+        }
+        return hex;
+    };
+
+    Sha256.prototype.toString = Sha256.prototype.hex;
+
+    Sha256.prototype.digest = function () {
+        this.finalize();
+
+        var h0 = this.h0, h1 = this.h1, h2 = this.h2, h3 = this.h3, h4 = this.h4, h5 = this.h5,
+            h6 = this.h6, h7 = this.h7;
+
+        var arr = [
+            (h0 >>> 24) & 0xFF, (h0 >>> 16) & 0xFF, (h0 >>> 8) & 0xFF, h0 & 0xFF,
+            (h1 >>> 24) & 0xFF, (h1 >>> 16) & 0xFF, (h1 >>> 8) & 0xFF, h1 & 0xFF,
+            (h2 >>> 24) & 0xFF, (h2 >>> 16) & 0xFF, (h2 >>> 8) & 0xFF, h2 & 0xFF,
+            (h3 >>> 24) & 0xFF, (h3 >>> 16) & 0xFF, (h3 >>> 8) & 0xFF, h3 & 0xFF,
+            (h4 >>> 24) & 0xFF, (h4 >>> 16) & 0xFF, (h4 >>> 8) & 0xFF, h4 & 0xFF,
+            (h5 >>> 24) & 0xFF, (h5 >>> 16) & 0xFF, (h5 >>> 8) & 0xFF, h5 & 0xFF,
+            (h6 >>> 24) & 0xFF, (h6 >>> 16) & 0xFF, (h6 >>> 8) & 0xFF, h6 & 0xFF
+        ];
+        if (!this.is224) {
+            arr.push((h7 >>> 24) & 0xFF, (h7 >>> 16) & 0xFF, (h7 >>> 8) & 0xFF, h7 & 0xFF);
+        }
+        return arr;
+    };
+
+    Sha256.prototype.array = Sha256.prototype.digest;
+
+    Sha256.prototype.arrayBuffer = function () {
+        this.finalize();
+
+        var buffer = new ArrayBuffer(this.is224 ? 28 : 32);
+        var dataView = new DataView(buffer);
+        dataView.setUint32(0, this.h0);
+        dataView.setUint32(4, this.h1);
+        dataView.setUint32(8, this.h2);
+        dataView.setUint32(12, this.h3);
+        dataView.setUint32(16, this.h4);
+        dataView.setUint32(20, this.h5);
+        dataView.setUint32(24, this.h6);
+        if (!this.is224) {
+            dataView.setUint32(28, this.h7);
+        }
+        return buffer;
+    };
+
+    function HmacSha256(key, is224, sharedMemory) {
+        var i, type = typeof key;
+        if (type === 'string') {
+            var bytes = [], length = key.length, index = 0, code;
+            for (i = 0; i < length; ++i) {
+                code = key.charCodeAt(i);
+                if (code < 0x80) {
+                    bytes[index++] = code;
+                } else if (code < 0x800) {
+                    bytes[index++] = (0xc0 | (code >>> 6));
+                    bytes[index++] = (0x80 | (code & 0x3f));
+                } else if (code < 0xd800 || code >= 0xe000) {
+                    bytes[index++] = (0xe0 | (code >>> 12));
+                    bytes[index++] = (0x80 | ((code >>> 6) & 0x3f));
+                    bytes[index++] = (0x80 | (code & 0x3f));
+                } else {
+                    code = 0x10000 + (((code & 0x3ff) << 10) | (key.charCodeAt(++i) & 0x3ff));
+                    bytes[index++] = (0xf0 | (code >>> 18));
+                    bytes[index++] = (0x80 | ((code >>> 12) & 0x3f));
+                    bytes[index++] = (0x80 | ((code >>> 6) & 0x3f));
+                    bytes[index++] = (0x80 | (code & 0x3f));
+                }
+            }
+            key = bytes;
+        } else {
+            if (type === 'object') {
+                if (key === null) {
+                    throw new Error(ERROR);
+                } else if (ARRAY_BUFFER && key.constructor === ArrayBuffer) {
+                    key = new Uint8Array(key);
+                } else if (!Array.isArray(key)) {
+                    if (!ARRAY_BUFFER || !ArrayBuffer.isView(key)) {
+                        throw new Error(ERROR);
+                    }
+                }
+            } else {
+                throw new Error(ERROR);
+            }
+        }
+
+        if (key.length > 64) {
+            key = (new Sha256(is224, true)).update(key).array();
+        }
+
+        var oKeyPad = [], iKeyPad = [];
+        for (i = 0; i < 64; ++i) {
+            var b = key[i] || 0;
+            oKeyPad[i] = 0x5c ^ b;
+            iKeyPad[i] = 0x36 ^ b;
+        }
+
+        Sha256.call(this, is224, sharedMemory);
+
+        this.update(iKeyPad);
+        this.oKeyPad = oKeyPad;
+        this.inner = true;
+        this.sharedMemory = sharedMemory;
     }
 
-    let x;
-    let k, AA, BB, CC, DD, a, b, c, d;
-    let S11 = 7, S12 = 12, S13 = 17, S14 = 22;
-    let S21 = 5, S22 = 9, S23 = 14, S24 = 20;
-    let S31 = 4, S32 = 11, S33 = 16, S34 = 23;
-    let S41 = 6, S42 = 10, S43 = 15, S44 = 21;
-    string = md5_Utf8Encode(string);
-    x = md5_ConvertToWordArray(string);
-    a = 0x67452301;
-    b = 0xEFCDAB89;
-    c = 0x98BADCFE;
-    d = 0x10325476;
-    for (k = 0; k < x.length; k += 16) {
-        AA = a;
-        BB = b;
-        CC = c;
-        DD = d;
-        a = md5_FF(a, b, c, d, x[k], S11, 0xD76AA478);
-        d = md5_FF(d, a, b, c, x[k + 1], S12, 0xE8C7B756);
-        c = md5_FF(c, d, a, b, x[k + 2], S13, 0x242070DB);
-        b = md5_FF(b, c, d, a, x[k + 3], S14, 0xC1BDCEEE);
-        a = md5_FF(a, b, c, d, x[k + 4], S11, 0xF57C0FAF);
-        d = md5_FF(d, a, b, c, x[k + 5], S12, 0x4787C62A);
-        c = md5_FF(c, d, a, b, x[k + 6], S13, 0xA8304613);
-        b = md5_FF(b, c, d, a, x[k + 7], S14, 0xFD469501);
-        a = md5_FF(a, b, c, d, x[k + 8], S11, 0x698098D8);
-        d = md5_FF(d, a, b, c, x[k + 9], S12, 0x8B44F7AF);
-        c = md5_FF(c, d, a, b, x[k + 10], S13, 0xFFFF5BB1);
-        b = md5_FF(b, c, d, a, x[k + 11], S14, 0x895CD7BE);
-        a = md5_FF(a, b, c, d, x[k + 12], S11, 0x6B901122);
-        d = md5_FF(d, a, b, c, x[k + 13], S12, 0xFD987193);
-        c = md5_FF(c, d, a, b, x[k + 14], S13, 0xA679438E);
-        b = md5_FF(b, c, d, a, x[k + 15], S14, 0x49B40821);
-        a = md5_GG(a, b, c, d, x[k + 1], S21, 0xF61E2562);
-        d = md5_GG(d, a, b, c, x[k + 6], S22, 0xC040B340);
-        c = md5_GG(c, d, a, b, x[k + 11], S23, 0x265E5A51);
-        b = md5_GG(b, c, d, a, x[k], S24, 0xE9B6C7AA);
-        a = md5_GG(a, b, c, d, x[k + 5], S21, 0xD62F105D);
-        d = md5_GG(d, a, b, c, x[k + 10], S22, 0x2441453);
-        c = md5_GG(c, d, a, b, x[k + 15], S23, 0xD8A1E681);
-        b = md5_GG(b, c, d, a, x[k + 4], S24, 0xE7D3FBC8);
-        a = md5_GG(a, b, c, d, x[k + 9], S21, 0x21E1CDE6);
-        d = md5_GG(d, a, b, c, x[k + 14], S22, 0xC33707D6);
-        c = md5_GG(c, d, a, b, x[k + 3], S23, 0xF4D50D87);
-        b = md5_GG(b, c, d, a, x[k + 8], S24, 0x455A14ED);
-        a = md5_GG(a, b, c, d, x[k + 13], S21, 0xA9E3E905);
-        d = md5_GG(d, a, b, c, x[k + 2], S22, 0xFCEFA3F8);
-        c = md5_GG(c, d, a, b, x[k + 7], S23, 0x676F02D9);
-        b = md5_GG(b, c, d, a, x[k + 12], S24, 0x8D2A4C8A);
-        a = md5_HH(a, b, c, d, x[k + 5], S31, 0xFFFA3942);
-        d = md5_HH(d, a, b, c, x[k + 8], S32, 0x8771F681);
-        c = md5_HH(c, d, a, b, x[k + 11], S33, 0x6D9D6122);
-        b = md5_HH(b, c, d, a, x[k + 14], S34, 0xFDE5380C);
-        a = md5_HH(a, b, c, d, x[k + 1], S31, 0xA4BEEA44);
-        d = md5_HH(d, a, b, c, x[k + 4], S32, 0x4BDECFA9);
-        c = md5_HH(c, d, a, b, x[k + 7], S33, 0xF6BB4B60);
-        b = md5_HH(b, c, d, a, x[k + 10], S34, 0xBEBFBC70);
-        a = md5_HH(a, b, c, d, x[k + 13], S31, 0x289B7EC6);
-        d = md5_HH(d, a, b, c, x[k], S32, 0xEAA127FA);
-        c = md5_HH(c, d, a, b, x[k + 3], S33, 0xD4EF3085);
-        b = md5_HH(b, c, d, a, x[k + 6], S34, 0x4881D05);
-        a = md5_HH(a, b, c, d, x[k + 9], S31, 0xD9D4D039);
-        d = md5_HH(d, a, b, c, x[k + 12], S32, 0xE6DB99E5);
-        c = md5_HH(c, d, a, b, x[k + 15], S33, 0x1FA27CF8);
-        b = md5_HH(b, c, d, a, x[k + 2], S34, 0xC4AC5665);
-        a = md5_II(a, b, c, d, x[k], S41, 0xF4292244);
-        d = md5_II(d, a, b, c, x[k + 7], S42, 0x432AFF97);
-        c = md5_II(c, d, a, b, x[k + 14], S43, 0xAB9423A7);
-        b = md5_II(b, c, d, a, x[k + 5], S44, 0xFC93A039);
-        a = md5_II(a, b, c, d, x[k + 12], S41, 0x655B59C3);
-        d = md5_II(d, a, b, c, x[k + 3], S42, 0x8F0CCC92);
-        c = md5_II(c, d, a, b, x[k + 10], S43, 0xFFEFF47D);
-        b = md5_II(b, c, d, a, x[k + 1], S44, 0x85845DD1);
-        a = md5_II(a, b, c, d, x[k + 8], S41, 0x6FA87E4F);
-        d = md5_II(d, a, b, c, x[k + 15], S42, 0xFE2CE6E0);
-        c = md5_II(c, d, a, b, x[k + 6], S43, 0xA3014314);
-        b = md5_II(b, c, d, a, x[k + 13], S44, 0x4E0811A1);
-        a = md5_II(a, b, c, d, x[k + 4], S41, 0xF7537E82);
-        d = md5_II(d, a, b, c, x[k + 11], S42, 0xBD3AF235);
-        c = md5_II(c, d, a, b, x[k + 2], S43, 0x2AD7D2BB);
-        b = md5_II(b, c, d, a, x[k + 9], S44, 0xEB86D391);
-        a = md5_AddUnsigned(a, AA);
-        b = md5_AddUnsigned(b, BB);
-        c = md5_AddUnsigned(c, CC);
-        d = md5_AddUnsigned(d, DD);
+    HmacSha256.prototype = new Sha256();
+
+    HmacSha256.prototype.finalize = function () {
+        Sha256.prototype.finalize.call(this);
+        if (this.inner) {
+            this.inner = false;
+            var innerHash = this.array();
+            Sha256.call(this, this.is224, this.sharedMemory);
+            this.update(this.oKeyPad);
+            this.update(innerHash);
+            Sha256.prototype.finalize.call(this);
+        }
+    };
+
+    var exports = createMethod();
+    exports.sha256 = exports;
+    exports.sha224 = createMethod(true);
+    exports.sha256.hmac = createHmacMethod();
+    exports.sha224.hmac = createHmacMethod(true);
+
+    if (COMMON_JS) {
+        module.exports = exports;
+    } else {
+        root.sha256 = exports.sha256;
+        root.sha224 = exports.sha224;
+        if (AMD) {
+            define(function () {
+                return exports;
+            });
+        }
     }
-    return (md5_WordToHex(a) + md5_WordToHex(b) + md5_WordToHex(c) + md5_WordToHex(d)).toLowerCase();
-}
+})();
 
 function editgame(editdata) {
     try {
@@ -2032,7 +2358,8 @@ function editgame(editdata) {
 }
 
 // 回放接口, 在 edit 中重写, 并在 canceledit 中复原
-var resetData, checkPaiPu, load_my_desktop_view, showInfo_mj;
+// 其中 showInfo_mj 的重写在 guobiao.js 中
+var resetData, checkPaiPu, showInfo_mj;
 
 function edit(x) {
     try {
@@ -2040,8 +2367,6 @@ function edit(x) {
             resetData = uiscript.UI_Replay.prototype.resetData;
         if (checkPaiPu === undefined)
             checkPaiPu = GameMgr.Inst.checkPaiPu;
-        if (load_my_desktop_view === undefined)
-            load_my_desktop_view = game.Scene_MJ.prototype._load_my_desktop_view;
         if (showInfo_mj === undefined)
             showInfo_mj = uiscript.UI_Win.prototype._showInfo_mj;
 
@@ -2112,6 +2437,7 @@ function edit(x) {
                     ret[seat].character.charid = cfg.item_definition.skin.map_[skin].character_id;
                 }
             }
+            x.playerdatas = ret;
             return ret;
         }
 
@@ -2175,39 +2501,6 @@ function edit(x) {
             return _;
         }
 
-        game.Scene_MJ.prototype._load_my_desktop_view = function (K, U) {
-            var O = game;
-            var V = this
-                , N = O['GameUtility']['get_view_res_name'](O['EView']['desktop']),
-                // 添加下面三行
-                tt = cfg.item_definition.view.get(get_tablecloth_id());
-            if (tt !== undefined)
-                N = tt.res_name;
-
-            'tablecloth_quehunji1' === N && 'chs' !== GameMgr['client_language'] && 'chs_t' !== GameMgr['client_language'] && (N += '_enjp'),
-            'tablecloth_20chunjie' === N && 'en' === GameMgr['client_language'] && (N += '_en'),
-            'tablecloth_20chunjie' === N && 'chs_t' === GameMgr['client_language'] && (N += '_chs_t'),
-            'tablecloth_21chunjie' === N && 'chs' !== GameMgr['client_language'] && (N += '_chs_t'),
-            'tablecloth_official_sxz' !== N && 'tablecloth_official_qlz' !== N || 'jp' !== GameMgr['client_language'] || (N += '_jp'),
-                this['_desktop_model_path'] = 'scene/' + N + '.lh',
-                O['EffectMgr']['add_3d_resource'](this['_desktop_model_path']),
-                Laya['loader']['create'](this['_desktop_model_path'], Laya['Handler']['create'](this, function () {
-                    if (V['_desktop_model'] = Laya['loader']['getRes'](V['_desktop_model_path']),
-                        V['desktop']['getChildByName']('room')['getChildByName']('container_desktop')['addChild'](V['_desktop_model']),
-                        V['_desktop_model']['transform']['localPosition'] = new Laya['Vector3'](0, 0, 0),
-                        V['_desktop_model']['transform']['localScale'] = new Laya['Vector3'](1, 1, 1),
-                        V['_desktop_model']['transform']['localRotationEuler'] = new Laya['Vector3'](0, 0, 0),
-                        V['_desktop_model']['active'] = !0,
-                        V['_desktop_model']['isStatic'] = !0,
-                    'tablecloth_22event' === N)
-                        for (var O = V['_desktop_model']['getChildAt'](0), q = 1; 6 > q; q++)
-                            for (var _ = O['getChildAt'](q), h = 0; h < _['_childs']['length']; h++)
-                                4 === q && 4 === h || 5 === q && 0 === h || _['getChildAt'](h)['meshRender']['material']['disableLight']();
-                    U['runWith'](1),
-                        K.run();
-                }), U);
-        }
-
         GameMgr.Inst.checkPaiPu = function (game_uuid, account_id, paipu_config, is_maka) {
             try {
                 // 添加下面
@@ -2215,11 +2508,6 @@ function edit(x) {
                 update_views();
                 if (typeof (guobiao_fanlist) !== "undefined")
                     guobiao_fanlist();
-
-                if (cfg.item_definition.view.get(get_mjp_id()) !== undefined)
-                    uiscript.UI_Sushe.now_mjp_id = get_mjp_id();
-                if (cfg.item_definition.view.get(get_mjpsurface_id()) !== undefined)
-                    uiscript.UI_Sushe.now_mjp_surface_id = get_mjpsurface_id();
 
                 is_maka = false;
 
@@ -2356,9 +2644,19 @@ function edit(x) {
                                 // 修改的地方: 本来是 openMJRoom 的第二个参数(单个字母), 现在套上了 player_datas 函数
                                 // 本来是 openMJRoom 的第一个参数(如 X['config']), 现在是 x.config
                                 // 修改 account_id 主要是为了强制修改一开始的主视角为东起, 防止一些bug
+                                // 添加下面
                                 let new_player_datas = player_datas(z);
                                 X = new_player_datas;
+
+                                if (cfg.item_definition.view.get(get_tablecloth_id()) !== undefined)
+                                    uiscript.UI_Sushe.now_desktop_id = get_tablecloth_id();
+                                if (cfg.item_definition.view.get(get_mjp_id()) !== undefined)
+                                    uiscript.UI_Sushe.now_mjp_id = get_mjp_id();
+                                if (cfg.item_definition.view.get(get_mjpsurface_id()) !== undefined)
+                                    uiscript.UI_Sushe.now_mjp_surface_id = get_mjpsurface_id();
+
                                 account_id = new_player_datas[0].account_id;
+                                // 添加上面
 
                                 var C = Laya['Handler']['create'](W, function (H) {
                                     var XX = function () {
@@ -2439,16 +2737,13 @@ function canceledit() {
         GameMgr.Inst.checkPaiPu = function (game_uuid, account_id, paipu_config, is_maka) {
             return checkPaiPu.call(this, game_uuid, account_id, paipu_config, is_maka);
         }
-    if (load_my_desktop_view !== undefined)
-        game.Scene_MJ.prototype._load_my_desktop_view = function (K, U) {
-            return load_my_desktop_view.call(this, K, U);
-        }
     if (showInfo_mj !== undefined)
         uiscript.UI_Win.prototype._showInfo_mj = function (e) {
             return showInfo_mj.call(this, e);
         }
 }
 
+var salt_str = "", salt_sha256 = "";
 // config: 对局房间的信息, playercnt: 玩家数, players: 玩家信息
 var config = null, playercnt = 4, players = [];
 // liqi_need: 立直所需要的棒子数, ben_times: 本场点数的倍数
@@ -2456,11 +2751,11 @@ var liqi_need = 1, ben_times = 1;
 // 荒牌流局罚符(未听牌玩家向听牌玩家支付的点数)
 var fafu_1ting = 3000, fafu_2ting = 1500, fafu_3ting = 1000;
 var fafu_3p_1ting = 2000, fafu_3p_2ting = 1000, fafu_2p = 1000;
-// tiles: 玩家的起手, paishan: 牌山,
+// tiles: 玩家的起手, paishan: 牌山, paishan_full: 完整牌山
 // playertiles: 玩家的手牌, fulu: 玩家的副露信息
 // paihe: 玩家的牌河, discardtiles: 玩家的切牌, xun: 玩家的巡目
-var tiles0 = [], tiles1 = [], tiles2 = [], tiles3 = [];
-var paishan = [];
+var tiles0 = "", tiles1 = "", tiles2 = "", tiles3 = "";
+var paishan = "", paishan_full = "";
 var playertiles = [[], [], [], []], fulu = [[], [], [], []];
 var paihe = [], discardtiles = ["", "", "", ""], xun = [];
 // liqiinfo: 立直信息, lstliqi: 宣言立直的玩家信息
@@ -2534,7 +2829,7 @@ var editdata = {
     'actions': [],
     'xun': [],
     'players': [],
-    'config': {},
+    'config': undefined,
     'player_datas': [
         {'nickname': "电脑0", 'avatar_id': 400101, 'title': 600001, 'avatar_frame': 0, 'verified': 0, 'views': []},
         {'nickname': "电脑1", 'avatar_id': 400101, 'title': 600001, 'avatar_frame': 0, 'verified': 0, 'views': []},
@@ -2670,6 +2965,7 @@ function saveproject() {
     tmp.hules_history = JSON.parse(JSON.stringify(hules_history));
     tmp.hupaied = JSON.parse(JSON.stringify(hupaied));
     tmp.paishan = JSON.parse(JSON.stringify(paishan));
+    tmp.paishan_full = JSON.parse(JSON.stringify(paishan_full));
     tmp.discardtiles = JSON.parse(JSON.stringify(discardtiles));
     tmp.gaps = JSON.parse(JSON.stringify(gaps));
     tmp.juc = JSON.parse(JSON.stringify(juc));
@@ -2737,6 +3033,7 @@ function loadproject(x) {
         hules_history = JSON.parse(JSON.stringify(x.hules_history));
         hupaied = JSON.parse(JSON.stringify(x.hupaied));
         paishan = JSON.parse(JSON.stringify(x.paishan));
+        paishan_full = JSON.parse(JSON.stringify(x.paishan_full));
         discardtiles = JSON.parse(JSON.stringify(x.discardtiles));
         gaps = JSON.parse(JSON.stringify(x.gaps));
         juc = JSON.parse(JSON.stringify(x.juc));
@@ -2757,7 +3054,7 @@ function loadproject(x) {
         return;
     }
     scores = [25000, 25000, 25000, 25000];
-    tiles0 = tiles1 = tiles2 = tiles3 = [];
+    tiles0 = tiles1 = tiles2 = tiles3 = "";
     liqibang = 0;
     muyu = {'count': 5, 'seat': 0, 'id': 0};
     mingpais = [{}, {}, {}, {}];
@@ -2765,7 +3062,7 @@ function loadproject(x) {
     ju = 0;
     ben = 0;
     lianzhuangcnt = 0;
-    paishan = [];
+    paishan = "";
     discardtiles = ["", "", "", ""];
     juc = -1;
     baogangseat = -1;
@@ -2786,7 +3083,7 @@ function loadproject(x) {
         'actions': [],
         'xun': [],
         'players': [],
-        'config': {},
+        'config': undefined,
         'player_datas': [
             {'avatar_frame': 0, 'avatar_id': 400101, 'nickname': "电脑0", 'title': 600001, 'views': []},
             {'avatar_frame': 0, 'avatar_id': 400101, 'nickname': "电脑1", 'title': 600001, 'views': []},
@@ -2857,46 +3154,29 @@ function init() {
     shoumoqie = [[], [], [], []];
     shoumoqiemaxlen = [[0, 0], [0, 0], [0, 0], [0, 0]];
     awaiting_tiles = [];
-    if (tiles0 === [] && tiles1 === [] && tiles2 === [] && tiles3 === []) { // 没有给定起手, 则模仿现实中摸牌
-        if (paishan === [])
+    paishan_full = paishan.slice();
+    if (!tiles0 && !tiles1 && !tiles2 && !tiles3) { // 没有给定起手, 则模仿现实中摸牌
+        if (!paishan)
             paishan = randompaishan();
-        for (let i = 1; i <= 3; i++) {
-            if (ju === 0)
-                for (let o = 1; o <= 4; o++)
-                    push_tile(tiles0);
-            if (ju === 0 || ju === 1)
-                for (let o = 1; o <= 4; o++)
-                    push_tile(tiles1);
-            if (ju === 0 || ju === 1 || ju === 2)
-                for (let o = 1; o <= 4; o++)
-                    push_tile(tiles2);
-            for (let o = 1; o <= 4; o++)
-                push_tile(tiles3);
-            if (ju === 1 || ju === 2 || ju === 3)
-                for (let o = 1; o <= 4; o++)
-                    push_tile(tiles0);
-            if (ju === 2 || ju === 3)
-                for (let o = 1; o <= 4; o++)
-                    push_tile(tiles1);
-            if (ju === 3)
-                for (let o = 1; o <= 4; o++)
-                    push_tile(tiles2);
-        }
-        if (ju === 0)
-            push_tile(tiles0);
-        if (ju === 0 || ju === 1)
-            push_tile(tiles1);
-        if (ju === 0 || ju === 1 || ju === 2)
-            push_tile(tiles2);
-        push_tile(tiles3);
-        push_tile(tiles0);
-        if (ju === 1 || ju === 2 || ju === 3)
-            push_tile(tiles1);
-        if (ju === 2 || ju === 3)
-            push_tile(tiles2);
-        if (ju === 3)
-            push_tile(tiles3);
-    }
+        paishan_full = paishan.slice();
+        let ESWN = ["", "", "", ""];
+        for (let i = 0; i < 3; i++)
+            for (let j = 0; j < playercnt; j++)
+                for (let k = 0; k < 4; k++)
+                    ESWN[j] += pop_firstile();
+        for (let i = 0; i < playercnt; i++)
+            ESWN[i] += pop_firstile();
+        ESWN[0] += pop_firstile();
+
+        tiles0 = ESWN[(playercnt - ju) % playercnt];
+        tiles1 = ESWN[(playercnt + 1 - ju) % playercnt];
+        if (playercnt >= 3)
+            tiles2 = ESWN[(playercnt + 2 - ju) % playercnt];
+        if (playercnt === 4)
+            tiles3 = ESWN[(playercnt + 3 - ju) % playercnt];
+    } else
+        for (let i = 0; i < 13 * playercnt + 1; i++)
+            pop_firstile();
     for (let i = 0; i < discardtiles.length; i++)
         discardtiles[i] = decompose(discardtiles[i]);
     if (typeof (tiles0) == "string")
@@ -2942,15 +3222,8 @@ function init() {
     for (let i = 0; i < tiles3.length; i++)
         playertiles[3][i] = tiles3[i];
 
-    function push_tile(tiles) {
-        if (paishan.length > 2 && paishan[2] === tile_suf) {
-            tiles.push(paishan.substring(paishan.length - 3));
-            paishan = paishan.substring(0, paishan.length - 3);
-        } else {
-            tiles.push(paishan.substring(paishan.length - 2));
-            paishan = paishan.substring(0, paishan.length - 2);
-        }
-    }
+    salt_str = sha256(Date.now().toString()).substring(0, 32);
+    salt_sha256 = sha256(salt_str);
 }
 
 function is_huansanzhang() {
@@ -3114,12 +3387,15 @@ function is_renhumanguan() {
 function no_dora() {
     return !!(config && config.mode && config.mode.detail_rule && config.mode.detail_rule._no_dora)
 }
+
 function no_lidora() {
     return !!(config && config.mode && config.mode.detail_rule && config.mode.detail_rule._no_lidora)
 }
+
 function no_gangdora() {
     return !!(config && config.mode && config.mode.detail_rule && config.mode.detail_rule._no_gangdora)
 }
+
 function no_ganglidora() {
     return !!(config && config.mode && config.mode.detail_rule && config.mode.detail_rule._no_ganglidora)
 }
@@ -5283,7 +5559,7 @@ function calcdoras() {
 }
 
 function gamebegin() {
-    if (editdata.config === undefined)
+    if (!editdata.config)
         editdata.config = {
             'category': 1,
             'meta': {'mode_id': 0},
@@ -5291,8 +5567,6 @@ function gamebegin() {
                 'mode': 1,
             }
         };
-    if (editdata.player_datas === undefined)
-        editdata.player_datas = [];
     config = editdata.config;
     if (config.mode.mode >= 11 && config.mode.mode <= 20) { // 三麻屏蔽以下模式
         if (is_xuezhandaodi() || is_wanxiangxiuluo())
@@ -5311,48 +5585,48 @@ function gamebegin() {
     else
         playercnt = 4;
 
-    if (!!(config && config.mode && config.mode.detail_rule && typeof(config.mode.detail_rule._liqi_need) === "number"))
+    if (!!(config && config.mode && config.mode.detail_rule && typeof (config.mode.detail_rule._liqi_need) === "number"))
         liqi_need = config.mode.detail_rule._liqi_need;
     else if (get_field_spell_mode3() === 2) // 幻境传说: 命运卡2
         liqi_need = 2;
     else
         liqi_need = 1;
-    if (!!(config && config.mode && config.mode.detail_rule && typeof(config.mode.detail_rule._ben_times) === "number"))
+    if (!!(config && config.mode && config.mode.detail_rule && typeof (config.mode.detail_rule._ben_times) === "number"))
         ben_times = config.mode.detail_rule._ben_times;
     else
         ben_times = 1;
 
-    if (!!(config && config.mode && config.mode.detail_rule && typeof(config.mode.detail_rule._fafu_1ting) === "number"))
+    if (!!(config && config.mode && config.mode.detail_rule && typeof (config.mode.detail_rule._fafu_1ting) === "number"))
         fafu_1ting = config.mode.detail_rule._fafu_1ting;
     else
         fafu_1ting = 1000;
-    if (!!(config && config.mode && config.mode.detail_rule && typeof(config.mode.detail_rule._fafu_2ting) === "number"))
+    if (!!(config && config.mode && config.mode.detail_rule && typeof (config.mode.detail_rule._fafu_2ting) === "number"))
         fafu_2ting = config.mode.detail_rule._fafu_2ting;
     else
         fafu_2ting = 1500;
-    if (!!(config && config.mode && config.mode.detail_rule && typeof(config.mode.detail_rule._fafu_3ting) === "number"))
+    if (!!(config && config.mode && config.mode.detail_rule && typeof (config.mode.detail_rule._fafu_3ting) === "number"))
         fafu_3ting = config.mode.detail_rule._fafu_3ting;
     else
         fafu_3ting = 3000;
-    if (!!(config && config.mode && config.mode.detail_rule && typeof(config.mode.detail_rule._fafu_3p_1ting) === "number"))
+    if (!!(config && config.mode && config.mode.detail_rule && typeof (config.mode.detail_rule._fafu_3p_1ting) === "number"))
         fafu_3p_1ting = config.mode.detail_rule._fafu_3p_1ting;
     else
         fafu_3p_1ting = 1000;
-    if (!!(config && config.mode && config.mode.detail_rule && typeof(config.mode.detail_rule._fafu_3p_2ting) === "number"))
+    if (!!(config && config.mode && config.mode.detail_rule && typeof (config.mode.detail_rule._fafu_3p_2ting) === "number"))
         fafu_3p_2ting = config.mode.detail_rule._fafu_3p_2ting;
     else
         fafu_3p_2ting = 2000;
-    if (!!(config && config.mode && config.mode.detail_rule && typeof(config.mode.detail_rule._fafu_2p) === "number"))
+    if (!!(config && config.mode && config.mode.detail_rule && typeof (config.mode.detail_rule._fafu_2p) === "number"))
         fafu_2p = config.mode.detail_rule._fafu_2p;
     else
         fafu_2p = 2000;
 
-    if (config.mode.mode >= 21) { // 二麻
+    if (playercnt === 2) { // 二麻
         if (config && config.mode && config.mode.detail_rule && config.mode.detail_rule.init_point)
             scores = [config.mode.detail_rule.init_point, config.mode.detail_rule.init_point];
         else
             scores = [50000, 50000];
-    } else if (config.mode.mode >= 11 && config.mode.mode <= 20) { // 三麻
+    } else if (playercnt === 3) { // 三麻
         if (config && config.mode && config.mode.detail_rule && config.mode.detail_rule.init_point)
             scores = [config.mode.detail_rule.init_point, config.mode.detail_rule.init_point, config.mode.detail_rule.init_point];
         else
@@ -5377,7 +5651,7 @@ function gamebegin() {
     edit_online();
 }
 
-function addNewRound(chang, ju, ben, doras, left_tile_count, liqibang, md5, paishan, scores, tiles0, tiles1, tiles2, tiles3, tingpai) {
+function addNewRound(chang, ju, ben, doras, left_tile_count, liqibang, sha256, paishan, scores, tiles0, tiles1, tiles2, tiles3, tingpai) {
     function mingpai_data(tiles, seat) {
         let ret = {'count': [], 'seat': seat, 'tiles': []};
         let cnt = [];
@@ -5404,7 +5678,9 @@ function addNewRound(chang, ju, ben, doras, left_tile_count, liqibang, md5, pais
             'ben': ben,
             'left_tile_count': left_tile_count,
             'liqibang': liqibang,
-            'md5': md5,
+            'sha256': sha256,
+            'salt': salt_str,
+            'saltSha256': salt_sha256,
             'paishan': paishan,
             'scores': scores.slice(),
             'tiles0': tiles0.slice(),
@@ -5454,7 +5730,7 @@ function addNewRound(chang, ju, ben, doras, left_tile_count, liqibang, md5, pais
 
     if (is_chuanma())
         ret.data.ju_count = editdata.actions.length;
-    if (tingpai !== undefined && tingpai !== [])
+    if (tingpai !== undefined)
         ret.data.tingpai = tingpai;
     if (!is_xuezhandaodi() && !is_wanxiangxiuluo() && !is_chuanma()) {
         if (typeof (doras) === "string")
@@ -5508,11 +5784,11 @@ function roundbegin() {
         doracnt.cnt = doracnt.licnt = 3;
 
     if (playercnt === 2)
-        addNewRound(chang, ju, ben, calcdoras(), paishan_len() - 18, liqibang, md5(paishan), paishan, scores.slice(), tiles0.slice(), tiles1.slice(), tiles2.slice(), tiles3.slice(), tingpais);
+        addNewRound(chang, ju, ben, calcdoras(), paishan_len() - 18, liqibang, sha256(paishan + salt_str), paishan_full, scores.slice(), tiles0.slice(), tiles1.slice(), tiles2.slice(), tiles3.slice(), tingpais);
     else if (is_chuanma() || is_guobiao())
-        addNewRound(chang, ju, ben, calcdoras(), paishan_len(), liqibang, md5(paishan), paishan, scores.slice(), tiles0.slice(), tiles1.slice(), tiles2.slice(), tiles3.slice(), tingpais);
+        addNewRound(chang, ju, ben, calcdoras(), paishan_len(), liqibang, sha256(paishan + salt_str), paishan_full, scores.slice(), tiles0.slice(), tiles1.slice(), tiles2.slice(), tiles3.slice(), tingpais);
     else
-        addNewRound(chang, ju, ben, calcdoras(), paishan_len() - 14, liqibang, md5(paishan), paishan, scores.slice(), tiles0.slice(), tiles1.slice(), tiles2.slice(), tiles3.slice(), tingpais);
+        addNewRound(chang, ju, ben, calcdoras(), paishan_len() - 14, liqibang, sha256(paishan + salt_str), paishan_full, scores.slice(), tiles0.slice(), tiles1.slice(), tiles2.slice(), tiles3.slice(), tingpais);
     saveproject();
 }
 
@@ -5746,7 +6022,7 @@ function addChiPengGang(froms, seat, tiles, type, liqi, tile_states) {
         }
     }
 
-    if (tile_states !== undefined && tile_states !== [])
+    if (tile_states !== undefined)
         ret.data.tile_states = tile_states;
     if (is_muyu()) {
         if (muyu.seat === seat)
@@ -8283,11 +8559,11 @@ function roundend(type) {
     if (type === undefined && is_chuanma() && chuanmagangs.notover.length !== 0 && getlstaction().name !== "RecordNoTile" && getlstaction().name !== "RecordHuleXueZhanEnd")
         calcgangpoint(true);
     discardtiles = ["", "", "", ""];
-    tiles0 = [];
-    tiles1 = [];
-    tiles2 = [];
-    tiles3 = [];
-    paishan = [];
+    tiles0 = "";
+    tiles1 = "";
+    tiles2 = "";
+    tiles3 = "";
+    paishan = "";
     muyuseats = "";
     editdata.actions.push(actions.slice());
     editdata.xun.push(xun.slice());
@@ -8355,7 +8631,7 @@ function randompaishan(paishanhead = "", paishanback = "", reddora) {
     let all_tiles = [tiles0, tiles1, tiles2, tiles3];
     for (let i = 0; i < playercnt; i++) {
         let tiles_len = all_tiles[i].length;
-        if ((i === ju % 4) && !is_chuanma()) {
+        if ((i === ju % playercnt) && !is_chuanma()) {
             if (tiles_len !== 14)
                 console.warn("chang: " + chang + ", ju: " + ju + ", ben: " + ben + ", tiles" + i + " 长度不对: " + tiles_len);
         } else if (tiles_len !== 13 && !is_chuanma())
@@ -8396,13 +8672,13 @@ function randompaishan(paishanhead = "", paishanback = "", reddora) {
     for (let i = 35; i <= 37; i++)
         cnt[i] = 0;
 
-    if ((tiles2.length === 0) && (tiles3.length === 0)) { // 二麻
+    if (playercnt === 2) { // 二麻
         cnt[11] = cnt[12] = cnt[13] = cnt[14] = cnt[15] = cnt[16] = cnt[17] = cnt[20] = cnt[21] = cnt[22] = cnt[23] = cnt[24] = cnt[25] = cnt[26] = 0;
         if (reddora === undefined || reddora === 1) {
             cnt[5] = 3;
             cnt[35] = 1;
         }
-    } else if (tiles3.length === 0) { // 三麻, 赤宝牌数量分为 3, 4, 6, 9, 12
+    } else if (playercnt === 3) { // 三麻, 赤宝牌数量分为 3, 4, 6, 9, 12
         cnt[2] = cnt[3] = cnt[4] = cnt[5] = cnt[6] = cnt[7] = cnt[8] = 0;
         if (reddora === undefined || reddora === 2) {
             cnt[14] = cnt[23] = 3;
@@ -8502,6 +8778,24 @@ function randompaishan(paishanhead = "", paishanback = "", reddora) {
         paishanhead += tiles[i];
 
     let ret_paishan = paishanhead + paishanback;
+
+    let shoupai_tiles = "";
+    for (let i = 0; i < 3; i++)
+        for (let j = 0; j < playercnt; j++) {
+            let index = (ju + j) % playercnt;
+            if (all_tiles[index][0] !== undefined)
+                for (let k = 0; k < 4; k++)
+                    shoupai_tiles += all_tiles[index][i * 4 + k];
+        }
+    for (let i = 0; i < playercnt; i++){
+        let index = (ju + i) % playercnt;
+        if (all_tiles[index][0] !== undefined)
+            shoupai_tiles += all_tiles[index][12];
+    }
+    if (all_tiles[ju][13] !== undefined)
+        shoupai_tiles += all_tiles[ju][13];
+    ret_paishan = shoupai_tiles + ret_paishan;
+
     for (let i = 0; i < cnt.length; i++) {
         if (is_mingjing()) {
             if (cnt[i] < 0 && ret_paishan.length !== 83 * 2)

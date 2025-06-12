@@ -19,16 +19,10 @@
 文件存为 [paipu.js](paipu.js)
 
 事实上有被封杀的牌谱的例子, 比如这个 `230927-6c344aaf-1a63-477c-b14c-c2a0a7f39db8`, 这个是当时大小三元未计算的bug,
-查看会显示系统错误
+查看会显示"获取牌谱失败, 请稍后重试"
 
 真实牌谱截图:
 
 ![pic/img01.jpg](pic/img01.jpg)
 
 ![pic/img02.jpg](pic/img02.jpg)
-
-![pic/img03.jpg](pic/img03.jpg)
-
-![pic/img04.jpg](pic/img04.jpg)
-
-![pic/img05.jpg](pic/img05.jpg)

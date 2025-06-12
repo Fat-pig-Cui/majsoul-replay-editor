@@ -1,6 +1,6 @@
 """
     这个文件使用 file_names 里面的文件来对所有报菜名进行同步刷新
-    和 Functions.py 中的函数大差不差, 数据在 Database.py 中
+    和 Function.py 中的函数大差不差, 数据在 Database.py 中
 """
 from products.Database import *
 import os

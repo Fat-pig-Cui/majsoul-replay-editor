@@ -1,6 +1,6 @@
 # 背水之战模式
 
-活动场对应 `mode_id` 是 44, 关键词是 `beishuizhizhan_mode`
+活动场对应 `mode_id` 是 52, 关键词是 `beishuizhizhan_mode`
 
 ## 规则说明
 

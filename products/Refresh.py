@@ -3,14 +3,18 @@
 """
 import os
 
+if os.name == "posix":  # 类 Unix 系统
+    python_exe = "python3 "
+else:
+    python_exe = "python "
+
 home = os.getcwd()
 
 file_name = "Generator.py"
+file_name_sp1 = "Generator_SP.py"
+file_name_sp2 = "Generate_Dictionary.py"
 
-if os.name == "nt":  # Windows 系统
-    run_python = "python " + file_name
-else:
-    run_python = "python3 " + file_name
+run_python = python_exe + file_name
 
 path_prefix = "4P/"
 paths = [
@@ -22,10 +26,7 @@ paths = [
 
 file_name_3P = "Generator_3P.py"
 
-if os.name == "nt":  # Windows 系统
-    run_python_3P = "python " + file_name_3P
-else:
-    run_python_3P = "python3 " + file_name_3P
+run_python_3P = python_exe + file_name_3P
 
 path_prefix_3P = "3P/"
 paths_3P = [
@@ -46,15 +47,9 @@ for path_3P in paths_3P:
     os.chdir(home)
 
 os.chdir("4P/所有役满合集")
-if os.name == "nt":  # Windows 系统
-    os.system("python Generator_SP.py")
-else:
-    os.system("python3 Generator_SP.py")
+os.system(python_exe + file_name_sp1)
 os.chdir(home)
 
 os.chdir("../doc/")
-if os.name == "nt":  # Windows 系统
-    os.system("python Generate_Dictionary.py")
-else:
-    os.system("python3 Generate_Dictionary.py")
+os.system(python_exe + file_name_sp2)
 os.chdir(home)
