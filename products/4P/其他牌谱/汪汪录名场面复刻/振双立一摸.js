@@ -17,11 +17,13 @@ editdata.config = {
     'meta': {'mode_id': 2},
     'mode': {
         'mode': 1,
+        'detail_rule': {
+            '_chang_ju_ben_num_': [0, 2, 0], // 东3局0本场
+            '_scores_': [24600, 25300, 24600, 25500],
+            '_local_position_': 3
+        }
     }
 };
-
-// 东3局0本场
-transition(0, 2, 0);
 
 tiles2 = "112m48p167778s347z";
 tiles3 = "44567m12p123456s";

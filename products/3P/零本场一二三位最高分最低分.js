@@ -17,14 +17,13 @@ editdata.config = {
     'meta': {'mode_id': 0},
     'mode': {
         'mode': 11,
+        'detail_rule': {
+            '_scores_': [105000, 0, 0]
+        }
     }
 };
 
-// 过渡
-transition3P();
-
 // 零本场一位最高分: 393000, 三位最低分: -384000
-scores = [105000, 0, 0];
 tiles0 = "11112223334446z";
 tiles1 = "1112340678999p";
 tiles2 = "222444666888s6z";

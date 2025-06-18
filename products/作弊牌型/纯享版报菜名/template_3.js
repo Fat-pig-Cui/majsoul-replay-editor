@@ -16,13 +16,13 @@ editdata.config = {
         'mode': 1,
         'detail_rule': {
             'init_point': 300000,
+            '_chang_ju_ben_num_': [2, 0, 0]
         }
     }
 };
 
 origin_hupaioneplayer = hupaioneplayer;
 
-transition(2, 0, 0);
 // 第1局
 hupaioneplayer = function (seat) {
     let fans = [

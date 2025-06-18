@@ -29,14 +29,14 @@ editdata.config = {
             '_no_leijiyiman': true,
             '_no_wyakuman': true,
             '_no_guoshiangang': true,
+
+            '_chang_ju_ben_num_': [1, 2, 0], // 南3局0本场
+            '_scores_': [22600, 22900, 33800, 20700],
+            '_local_position_': 1
         }
     }
 };
 
-// 南3局0本场
-transition(1, 2, 0);
-
-scores = [22600, 22900, 33800, 20700];
 tiles2 = "13569m1147p668s25z";
 tiles3 = "3m338p199s245667z";
 tiles0 = "12358m068p4788s3z";

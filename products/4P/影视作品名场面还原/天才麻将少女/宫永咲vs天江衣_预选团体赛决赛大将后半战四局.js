@@ -30,17 +30,17 @@ editdata.config = {
         'detail_rule': {
             'dora_count': 4,
             'init_point': 100000,
-            '_baogang': true
+            '_baogang': true,
+
+            '_chang_ju_ben_num_': [0, 1, 3], // 东2局3本场
+            '_scores_': [0, 187900, 113200, 98900],
+            '_local_position_': 2
         }
     }
 };
 
-// 东2局3本场
-transition(0, 1, 3);
-
 // 枪杠dora7
 // 因为动画没有部分切牌和 天江衣, 加治木由美 的手牌画面, 我这里乱编了一个
-scores = [0, 187900, 113200, 98900];
 tiles1 = "7899m9s111223346z";
 tiles2 = "4444067788s667p";
 tiles3 = "123345789p2389s";

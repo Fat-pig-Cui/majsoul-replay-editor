@@ -16,14 +16,13 @@ editdata.config = {
     'meta': {'mode_id': 0},
     'mode': {
         'mode': 1,
+        'detail_rule': {
+            '_scores_': [55000, 21000, 24000, 0]
+        }
     }
 };
 
-// 过渡
-transition();
-
 // 大三元包牌
-scores = [55000, 21000, 24000, 0];
 tiles0 = "238999p11z556677z";
 tiles1 = "11345678m23456p";
 tiles2 = "2223405567888m";

@@ -219,7 +219,7 @@ hupai();
 tiles0 = "3333444m55p67s112z";
 tiles1 = "1112225557779m";
 tiles2 = "11122344p11267z";
-tiles3 = "1111225559999s";
+tiles3 = "1112225555888s";
 paishan = randompaishan("5p8s", "4m");
 roundbegin();
 combomopai(2);
@@ -271,7 +271,7 @@ zimohu();
 // 第19(57)局: 双明杠
 tiles0 = "333444m55p678s112z";
 tiles1 = "1112225557799m";
-tiles2 = "11122344p11267z";
+tiles2 = "111223445p1167z";
 tiles3 = "1111225559999s";
 paishan = randompaishan("3m4m5p");
 roundbegin();
@@ -284,15 +284,15 @@ for (let i = 0; i < 2; i++) {
 hupai();
 
 // 第20(58)局: 和绝张
-tiles0 = "567m2245p789s5567z";
+tiles0 = "567m45p33789s5567z";
 tiles1 = "1334455789999m";
-tiles2 = "111244455566p4z";
+tiles2 = "11144455566p3s4z";
 tiles3 = "1111225555999s";
 paishan = randompaishan("66p");
 roundbegin();
 qiepai();
 normalmoqie();
-mingqiepai("2p");
+mingqiepai("3s");
 mingqiepai();
 normalmoqie();
 hupai();

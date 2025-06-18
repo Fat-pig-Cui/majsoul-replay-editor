@@ -29,14 +29,14 @@ editdata.config = {
             '_no_leijiyiman': true,
             '_no_wyakuman': true,
             '_no_guoshiangang': true,
+
+            '_chang_ju_ben_num_': [1, 3, 2], // 南4局2本场
+            '_scores_': [16100, 17700, 30900, 35300],
+            '_local_position_': 0
         }
     }
 };
 
-// 南4局2本场
-transition(1, 3, 2);
-
-scores = [16100, 17700, 30900, 35300];
 tiles3 = "27m3567p89s123347z";
 tiles0 = "46m140789p13s567z";
 tiles1 = "8m233p13489s1245z";

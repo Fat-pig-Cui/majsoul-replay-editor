@@ -28,7 +28,7 @@ editdata.config = {
 tiles0 = "2222333m123p67s55z";
 tiles1 = "1112223334445z";
 tiles2 = "111234478899p1z";
-tiles3 = "1111445556999s";
+tiles3 = "1112225555888s";
 paishan = randompaishan("3m8s");
 roundbegin();
 combomopai();

@@ -112,6 +112,9 @@ B站视频教程: [【雀魂】如何自制牌谱回放](https://www.bilibili.co
 
 5. 更多牌谱详见 [products](products) 文件夹, 也欢迎读者根据灵感制作自己的牌谱
 
+6. 之前实现过牌山格式与官方同步(牌山包含起手, md5升级为sha256), 但奈何进入牌谱后有牌山检查, 无法实现"作弊牌型",
+   牌山长度超限会直接游戏内报错导致封号, 所以最终还是选择回退为旧版本
+
 ## 演示截图(更多截图可见最后)
 
 ![doc/pic/img01.jpg](doc/pic/img01.jpg)
@@ -132,7 +135,7 @@ B站视频教程: [【雀魂】如何自制牌谱回放](https://www.bilibili.co
 
 ## 版权声明
 
-1. sha256 算法源自 [emn178](https://github.com/emn178) 的 [js-sha256](https://github.com/emn178/js-sha256) 仓库
+1. md5算法源自 [百度百科](https://baike.baidu.com/item/MD5)
 
 2. 更改回放的方法参考了B站 [一般通过彳亍人](https://space.bilibili.com/23019265)
    的 [BV1HE411Q7JM](https://www.bilibili.com/video/BV1HE411Q7JM)

@@ -16,7 +16,6 @@ def generator(player_num=4):
 
     for index in range(len(chars)):
         outfile = open("./output/" + outfile_names[index], "w", encoding='utf-8')
-        # flag_hand = True
         flag_views = True
         name_count = id_count = 0
 

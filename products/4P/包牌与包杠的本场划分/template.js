@@ -18,12 +18,10 @@ editdata.config = {
             'init_point': 500000,
             '_sigangbaopai': true,
             '_baogang': true,
+            '_chang_ju_ben_num_': [0, 0, 1] // 1本场
         }
     }
 };
-
-// 1本场
-transition(0, 0, 1);
 
 // 第1局: 一般放铳
 tiles0 = "23m123456p22345s7z";

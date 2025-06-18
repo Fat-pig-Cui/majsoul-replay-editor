@@ -19,12 +19,12 @@ editdata.config = {
     'meta': {'mode_id': 0},
     'mode': {
         'mode': 1,
+        'detail_rule': {
+            '_scores_': [100000, 0, 0, 0]
+        }
     }
 };
 
-transition();
-
-scores = [100000, 0, 0, 0];
 tiles0 = "11112223334446z";
 tiles1 = "1112340678999m";
 tiles2 = "111333777999s6z";

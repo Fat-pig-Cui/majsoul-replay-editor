@@ -71,60 +71,40 @@ qiepai(true);
 mopai();
 qiepai("8s", true);
 {
-    let tingpais = calctingpai(1);
-
-    function hule(t, tingpais) {
-        for (let i = 0; i < tingpais.length; i++)
-            if (equaltile(tingpais[i].tile, t))
-                return true;
-        return false;
-    }
-
-    mopai();
-    if (getlstaction().data.tile !== "4z")
-        qiepai(true);
-    else
-        leimingpai();
-    if (hule(getlstaction().data.tile, tingpais))
-        hupai();
-    else {
-        if (getlstaction().name === "RecordBaBei") {
-            mopai();
-            if (getlstaction().data.tile !== "4z")
-                qiepai(true);
-            else
-                leimingpai();
-            if (hule(getlstaction().data.tile, tingpais))
-                hupai();
-            if (getlstaction().name === "RecordBaBei") {
-                mopai();
-                if (getlstaction().data.tile !== "4z")
-                    qiepai(true);
-                else
-                    leimingpai();
-                if (hule(getlstaction().data.tile, tingpais))
-                    hupai();
-            }
+    let tmp_tingpais = calctingpai(1);
+    let first_2 = false; // 2号玩家是否已经立直
+    for (let i = 0; i < 52; i++) {
+        mopai();
+        if (calchupai(playertiles[getlstaction().data.seat]) !== 0) {
+            hupai();
+            break;
         } else {
-            while (getlstaction(2).data.left_tile_count >= 1) {
-                mopai();
-                let seat = getlstaction().data.seat, tile = getlstaction().data.tile;
-                if (hule(tile, tingpais)) {
-                    if (seat !== 1 && tile !== "4z")
-                        qiepai();
-                    else if (seat !== 1)
-                        leimingpai();
+            if (getlstaction().data.tile === "4z") {
+                leimingpai();
+                if (equaltile("4z", tmp_tingpais[0].tile)) {
                     hupai();
                     break;
-                } else if (tile === "4z")
-                    leimingpai();
-                else
-                    qiepai();
-                if (getlstaction(2).data.left_tile_count === 0) {
-                    notileliuju();
+                } else
+                    continue;
+            }
+            if (!first_2 && getlstaction().data.seat === 2) {
+                first_2 = true;
+                qiepai(true);
+            }
+            else
+                qiepai();
+            let is_fangchong = false;
+            for (let j = 0; j < tmp_tingpais.length; j++) {
+                if (equaltile(getlstaction().data.tile, tmp_tingpais[j].tile)) {
+                    is_fangchong = true;
+                    hupai();
                     break;
                 }
             }
+            if (is_fangchong)
+                break;
         }
     }
 }
+if (getlstaction().name !== "RecordHule")
+    notileliuju();

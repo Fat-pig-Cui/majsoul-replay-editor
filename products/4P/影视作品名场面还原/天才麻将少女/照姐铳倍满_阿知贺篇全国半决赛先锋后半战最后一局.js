@@ -23,16 +23,15 @@ editdata.config = {
         'detail_rule': {
             'dora_count': 4,
             'init_point': 100000,
+
+            '_chang_ju_ben_num_': [1, 3, 2], // 南4局2本场
+            '_scores_': [48200, 80900, 57100, 213800]
         }
     }
 };
 
-// 南4局2本场
-transition(1, 3, 2);
-
 // 立直平和一杯口断幺dora6, 倍满
 // 有些手牌切牌没有画面, 我就随便编了几个
-scores = [48200, 80900, 57100, 213800];
 tiles3 = "14m4667778p44777z";
 tiles0 = "126899s1127m455z";
 tiles1 = "2489m357789s89p5z";

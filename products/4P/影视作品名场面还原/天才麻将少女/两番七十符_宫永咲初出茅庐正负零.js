@@ -23,15 +23,15 @@ editdata.config = {
         'mode': 1,
         'detail_rule': {
             'dora_count': 4,
+
+            '_chang_ju_ben_num_': [0, 3, 0], // 东4局0本场
+            '_scores_': [32600, 18700, 24500, 24200],
+            '_local_position_': 2
         }
     }
 };
 
-// 东4局0本场
-transition(0, 3, 0);
-
 // 具体到这一小局, 因为动画没有部分切牌和 片冈优希, 染谷真子 的手牌画面, 我这里随便编的
-scores = [32600, 18700, 24500, 24200];
 tiles3 = "23467m111p156889s";
 tiles0 = "2468m058p227777s";
 tiles1 = "2468m2488p44446s";

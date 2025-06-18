@@ -21,14 +21,13 @@ editdata.config = {
     'meta': {'mode_id': 0},
     'mode': {
         'mode': 1,
+        'detail_rule': {
+            '_scores_': [34000, 66000, 0, 0]
+        }
     }
 };
 
-// 过渡
-transition();
-
 // 零本场二位最高分: 226000
-scores = [34000, 66000, 0, 0];
 tiles0 = "2222444666888s6z";
 tiles1 = "1112223334446z";
 tiles2 = "1112340678999m";

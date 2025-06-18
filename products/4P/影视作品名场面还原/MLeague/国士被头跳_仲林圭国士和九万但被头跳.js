@@ -29,14 +29,14 @@ editdata.config = {
             '_no_leijiyiman': true,
             '_no_wyakuman': true,
             '_no_guoshiangang': true,
+
+            '_chang_ju_ben_num_': [1, 1, 5], // 南2局5本场
+            '_scores_': [35500, 35100, 17000, 12400],
+            '_local_position_': 0
         }
     }
 };
 
-// 南2局5本场
-transition(1, 1, 5);
-
-scores = [35500, 35100, 17000, 12400];
 tiles1 = "33477m48p13358s12z";
 tiles2 = "1122407m1669p34z";
 tiles3 = "18m4569p7888s566z";
