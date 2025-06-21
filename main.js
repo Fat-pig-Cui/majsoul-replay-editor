@@ -3503,7 +3503,7 @@ function erasemingpai(tile, seat) {
 // 5: 国标中全不靠和牌(含有组合龙)
 // 6-11: 国标中一般组合龙和牌
 // 12: 一番街古役"十三不搭"
-function calchupai(tiles, type = true) {
+function calchupai(tiles, type) {
     function deletetile(tiles, int) {
         for (let i = 0; i < tiles.length; i++)
             if (tiletoint(tiles[i]) === int) {
@@ -3515,6 +3515,8 @@ function calchupai(tiles, type = true) {
             }
         return tiles;
     }
+    if (type === undefined)
+        type = true;
 
     let cnt = [], tmp = [];
     for (let i = 0; i < nxt2.length; i++)
@@ -3522,38 +3524,29 @@ function calchupai(tiles, type = true) {
     for (let i = 0; i < tiles.length; i++)
         cnt[tiletoint(tiles[i])]++;
 
-    if (is_guobiao()) { // 国标无法听花牌, 有花牌一定不是和牌型
+    if (is_guobiao())  // 国标无法听花牌, 有花牌一定不是和牌型
         for (let i = 0; i < tiles.length; i++)
             if (tiles[i] === huapai)
-                return [];
-    }
+                return 0;
 
     if (is_wanxiangxiuluo() && cnt[tiletoint("bd")] === 1 && type) {
         cnt[tiletoint("bd")]--;
-        let tmp_tiles = [], origin_tiles = [];
+        let tmp_tiles = [];
         for (let i = 0; i < tiles.length; i++) {
-            origin_tiles.push(tiles[i]);
-
             if (tiles[i] === "bd")
                 continue;
             tmp_tiles.push(tiles[i]);
         }
-        tiles = tmp_tiles;
 
-        let result = 0;
         for (let i = 1; i <= 34; i++) { // 试所有百搭牌
-            tiles.push(inttotile(i));
+            tmp_tiles.push(inttotile(i));
             cnt[i]++;
-
-            result = calchupai(tiles, false);
-
+            let result = calchupai(tmp_tiles, false);
             if (result !== 0) // 存在百搭牌使得成为和牌型, 则返回
-                break;
-            tiles.length--;
+                return result;
+            tmp_tiles.length--;
             cnt[i]--;
         }
-        tiles = origin_tiles;
-        return result;
     }
 
     for (let i = 1; i <= 34; i++) {
@@ -7301,14 +7294,6 @@ function qiepai(seat, kind, is_liqi, anpai, beishui_type) {
 }
 
 function mingpai(seat, tiles) {
-    function changedora(x) {
-        if (x[0] === '0')
-            return "5" + x.substring(1);
-        if (x[0] === '5' && x[1] !== 'z')
-            return "0" + x.substring(1);
-        return x;
-    }
-
     function intiles(x, y) {
         let cnt = [], cnt2 = [];
         for (let i = 1; i <= nxt2.length + OFFSET; i++)
