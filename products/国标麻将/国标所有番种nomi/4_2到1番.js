@@ -20,7 +20,7 @@ editdata.config = {
             'init_point': 300000,
             '_guobiao': true,
             '_guobiao_no_8fanfu': true,
-            '_guobiao_lianzhuang': true
+            '_guobiao_lianzhuang': true,
         }
     }
 };

@@ -66,8 +66,7 @@ discardtiles = ["1p3m9p2m3p6z9m1p7p7p6z9s3z9m4m", "1z5z5z1z3z1p2s7p4p8s2s1s9s8s"
 roundbegin();
 qiepai();
 normalmoqie(18);
-mingpai("79m");
-qiepai();
+mingqiepai("79m");
 normalmoqie(15);
 mingqiepai();
 normalmoqie();
@@ -87,8 +86,7 @@ discardtiles = ["2m1z1p2s1z3z5z6z8p8p5z4m", "1m1p6m4m9p9p9s4s8p3m3m8s7m", "3z1s9
 roundbegin();
 qiepai();
 normalmoqie(15);
-mingpai("34s");
-qiepai();
+mingqiepai("34s");
 normalmoqie(6);
 mingqiepai();
 normalmoqie(3);
@@ -108,14 +106,12 @@ discardtiles = ["1z5z9m6z4s2p9s3z7m1p3m6s6z2m9s2z2p", "1m1s5z3m2m9m7m6s4s3p8s5m9
 roundbegin();
 qiepai();
 normalmoqie(23);
-mingpai("34p");
-qiepai();
+mingqiepai("34p");
 normalmoqie(9);
 mingqiepai();
 normalmoqie(10);
 moqieliqi();
-normalmoqie(26);
-notileliuju();
+moqieliuju();
 
 // 东3局2本场
 tiles2 = "107m130567p7s1145z";
@@ -127,8 +123,7 @@ discardtiles = ["1s2z8s3z3p9m7z6z4z2p8p4s6s3z", "3z4z5z1m9s9m2z8s2p3s7p3s8p5z4s4
 roundbegin();
 qiepai();
 normalmoqie(35);
-mingpai("13p");
-qiepai();
+mingqiepai("13p");
 normalmoqie();
 mingqiepai();
 normalmoqie();

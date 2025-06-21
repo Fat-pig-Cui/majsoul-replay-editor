@@ -17,7 +17,7 @@ editdata.config = {
         'detail_rule': {
             'init_point': 50000,
             '_guobiao': true,
-            '_guobiao_lianzhuang': true
+            '_guobiao_lianzhuang': true,
         }
     }
 };

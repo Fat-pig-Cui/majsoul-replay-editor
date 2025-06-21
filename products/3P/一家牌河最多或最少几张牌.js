@@ -39,8 +39,7 @@ for (let i = 0; i < 3; i++) {
     normalmoqie(2);
     mingqiepai("9p");
 }
-normalmoqie(43);
-notileliuju();
+moqieliuju();
 
 // 要让一家牌河最少, 那该家最好是西家
 // 且 西家出的牌
@@ -65,5 +64,4 @@ for (let i = 0; i < 4; i++) {
     normalmoqie();
     mingqiepai("9p");
 }
-normalmoqie(33);
-notileliuju();
+moqieliuju();

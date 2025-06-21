@@ -22,7 +22,7 @@ editdata.config = {
             'guyi_mode': 1,
         },
         'testing_environment': {
-            'paixing': 3
+            'paixing': 3,
         }
     },
 

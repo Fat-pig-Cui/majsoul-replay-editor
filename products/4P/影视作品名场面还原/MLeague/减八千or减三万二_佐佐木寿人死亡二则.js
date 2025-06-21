@@ -32,7 +32,7 @@ editdata.config = {
 
             '_chang_ju_ben_num_': [1, 2, 0], // 南3局0本场
             '_scores_': [22600, 22900, 33800, 20700],
-            '_local_position_': 1
+            '_local_position_': 1,
         }
     }
 };
@@ -50,8 +50,7 @@ mingqiepai();
 normalmoqie(3);
 mingqiepai();
 normalmoqie(9);
-mingpai("34m");
-qiepai();
+mingqiepai("34m");
 mingqiepai();
 normalmoqie();
 mingqiepai();

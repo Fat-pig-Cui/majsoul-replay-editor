@@ -172,6 +172,3 @@ paishan = randompaishan();
 roundbegin();
 dingque("pssm");
 hupai(true);
-
-
-gameend();

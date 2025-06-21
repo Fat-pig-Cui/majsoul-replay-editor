@@ -33,5 +33,3 @@ hupai();
 zimohu();
 
 zimohu(true);
-
-gameend();

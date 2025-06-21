@@ -415,5 +415,3 @@ while (paishan.length !== 0) {
 }
 hupai(0, true);
 roundend();
-
-gameend();

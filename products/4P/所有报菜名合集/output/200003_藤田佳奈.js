@@ -296,5 +296,4 @@ paishan = randompaishan("YYYDYYYDYYYDYYYDYYYDYYYDYYYDYYYDYYYDYYYDYYYDYYYDYYYDYYY
 roundbegin();
 combomopai(4);
 qiepai(true);
-normalmoqie(65);
-notileliuju();
+moqieliuju();

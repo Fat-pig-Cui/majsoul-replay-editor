@@ -20,7 +20,7 @@ editdata.config = {
     'mode': {
         'mode': 1,
         'detail_rule': {
-            '_scores_': [100000, 0, 0, 0]
+            '_scores_': [100000, 0, 0, 0],
         }
     }
 };

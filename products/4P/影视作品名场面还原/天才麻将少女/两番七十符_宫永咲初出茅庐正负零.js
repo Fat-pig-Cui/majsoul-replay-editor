@@ -26,7 +26,7 @@ editdata.config = {
 
             '_chang_ju_ben_num_': [0, 3, 0], // 东4局0本场
             '_scores_': [32600, 18700, 24500, 24200],
-            '_local_position_': 2
+            '_local_position_': 2,
         }
     }
 };

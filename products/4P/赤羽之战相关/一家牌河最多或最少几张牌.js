@@ -124,5 +124,3 @@ for (let i = 0; i < 4; i++) {
 }
 normalmoqie(12);
 notileliuju();
-
-gameend();

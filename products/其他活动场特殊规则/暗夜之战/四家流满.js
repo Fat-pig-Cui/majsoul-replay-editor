@@ -27,15 +27,22 @@ tiles0 = "22223444666888s";
 tiles1 = "2228m333557777s";
 tiles2 = "233344447777m0s";
 tiles3 = "05556666888m08p";
-paishan = randompaishan("YYYYYYYDYYYDYYYDYYYDYYYDYYYDYYYDYYYDYYYDYYYDYYYDYYYDYYYDYYYDYYYDY", "Y864s");
+paishan = randompaishan("", "Y864s");
 roundbegin();
 combomopai(4);
 qiepai(true);
-normalmoqie(4);
-for (let i = 0; i < 15; i++) {
-    normalmoqie(3);
+for (let i = 0; i < 65; i++) {
     mopai();
-    qiepai("anpai");
+    let tile = getlstaction().data.tile;
+    let is_yaojiu = false;
+    for (let i = 0; i < specialtiles.duanyaojiu.length; i++)
+        if (equaltile(tile, specialtiles.duanyaojiu[i])){
+            is_yaojiu = true;
+            break;
+        }
+    if (is_yaojiu)
+        qiepai();
+    else
+        qiepai("anpai");
 }
-normalmoqie();
 notileliuju();

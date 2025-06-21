@@ -19,6 +19,9 @@ editdata.config = {
     'meta': {'mode_id': 6},
     'mode': {
         'mode': 2,
+        'detail_rule': {
+            '_local_position_': 3,
+        }
     }
 };
 
@@ -36,7 +39,6 @@ normalmoqie(19);
 mingqiepai();
 normalmoqie(6);
 mopai();
-leimingpai("8m");
-mopai();
+combomopai("8m");
 combomopai();
 hupai();

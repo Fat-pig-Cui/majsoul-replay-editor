@@ -45,8 +45,7 @@ for (let i = 0; i < 4; i++) {
     mingqiepai("9m");
     normalmoqie(3);
 }
-normalmoqie(41);
-notileliuju();
+moqieliuju();
 
 // 要让一家巡目最少, 那该家最好是北家, 且西家打出的牌
 // 被亲家明杠四次
@@ -68,5 +67,4 @@ for (let i = 0; i < 4; i++) {
     mingqiepai("9m");
     normalmoqie();
 }
-normalmoqie(51);
-notileliuju();
+moqieliuju();

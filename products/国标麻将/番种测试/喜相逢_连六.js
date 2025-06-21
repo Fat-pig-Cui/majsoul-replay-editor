@@ -17,20 +17,19 @@ editdata.config = {
         'detail_rule': {
             '_guobiao': true,
             '_guobiao_no_8fanfu': true,
-            '_guobiao_lianzhuang': true
+            '_guobiao_lianzhuang': true,
         }
     }
 };
 
-tiles0 = "12346m1234569s12z";
+tiles0 = "12345m1234569s12z";
 tiles1 = "2223334445556z";
 tiles2 = "1112233678999p";
 tiles3 = "1122345678899s";
-paishan = randompaishan("..5m...9s");
+paishan = randompaishan("..6m...9s");
 roundbegin();
 qiepai();
 normalmoqie(3);
-mingpai("46m");
-qiepai();
+mingqiepai();
 normalmoqie(3);
 zimohu();

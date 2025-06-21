@@ -17,7 +17,7 @@ editdata.config = {
         'detail_rule': {
             '_guobiao': true,
             '_guobiao_no_8fanfu': true,
-            '_guobiao_lianzhuang': true
+            '_guobiao_lianzhuang': true,
         }
     }
 };

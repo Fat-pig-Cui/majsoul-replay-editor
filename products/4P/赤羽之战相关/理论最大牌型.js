@@ -39,5 +39,3 @@ mopai();
 combomopai(4);
 hupai();
 notileliuju();
-
-gameend();

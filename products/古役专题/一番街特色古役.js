@@ -98,8 +98,7 @@ tiles3 = "19m19p19s1234567z";
 paishan = randompaishan();
 roundbegin();
 qiepai("8s");
-normalmoqie(3);
-notileliuju();
+moqieliuju();
 
 
 // 第7局: 红一点

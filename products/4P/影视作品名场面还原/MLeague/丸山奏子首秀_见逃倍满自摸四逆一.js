@@ -32,7 +32,7 @@ editdata.config = {
 
             '_chang_ju_ben_num_': [1, 3, 2], // 南4局2本场
             '_scores_': [16100, 17700, 30900, 35300],
-            '_local_position_': 0
+            '_local_position_': 0,
         }
     }
 };

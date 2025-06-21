@@ -32,7 +32,7 @@ editdata.config = {
 
             '_chang_ju_ben_num_': [1, 1, 5], // 南2局5本场
             '_scores_': [35500, 35100, 17000, 12400],
-            '_local_position_': 0
+            '_local_position_': 0,
         }
     }
 };

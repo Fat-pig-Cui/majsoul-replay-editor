@@ -16,7 +16,7 @@ editdata.config = {
         'mode': 1,
         'detail_rule': {
             'init_point': 300000,
-            '_chang_ju_ben_num_': [2, 0, 0]
+            '_chang_ju_ben_num_': [2, 0, 0],
         }
     }
 };

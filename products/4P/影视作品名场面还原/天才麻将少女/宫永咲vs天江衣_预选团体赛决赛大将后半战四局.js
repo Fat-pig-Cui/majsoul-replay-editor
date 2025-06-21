@@ -34,7 +34,7 @@ editdata.config = {
 
             '_chang_ju_ben_num_': [0, 1, 3], // 东2局3本场
             '_scores_': [0, 187900, 113200, 98900],
-            '_local_position_': 2
+            '_local_position_': 2,
         }
     }
 };
@@ -73,8 +73,7 @@ roundbegin();
 qiepai();
 normalmoqie(16);
 mopai();
-leimingpai("6z");
-mopai();
+combomopai("6z");
 leimingpai("1p");
 normalmoqie(2);
 moqieliqi();
@@ -98,10 +97,8 @@ normalmoqie(13);
 mingqiepai();
 normalmoqie(3);
 mopai();
-leimingpai("6p");
-mopai();
-leimingpai("8p");
-mopai();
+combomopai("6p");
+combomopai("8p");
 leimingpai("3s");
 zimohu();
 // IF线, 如果宫永咲没碰6p 天江衣自摸倍满

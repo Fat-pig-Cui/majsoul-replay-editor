@@ -15,7 +15,7 @@ editdata.config = {
     'mode': {
         'mode': 1,
         'detail_rule': {
-            'tianming_mode': true
+            'tianming_mode': true,
         }
     }
 };

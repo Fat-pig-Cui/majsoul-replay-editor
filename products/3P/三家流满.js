@@ -22,5 +22,4 @@ paishan = randompaishan("YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY", "Y
 roundbegin();
 combomopai(4);
 qiepai();
-normalmoqie(50)
-notileliuju();
+moqieliuju();

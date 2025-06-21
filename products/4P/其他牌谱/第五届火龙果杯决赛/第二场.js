@@ -86,8 +86,7 @@ normalmoqie(43);
 mingqiepai();
 normalmoqie();
 moqieliqi();
-normalmoqie(24);
-notileliuju();
+moqieliuju();
 
 // 东3局0本场
 tiles2 = "1266789m78p469s14z";
@@ -121,8 +120,7 @@ mingqiepai();
 normalmoqie(5);
 mingqiepai(2);
 normalmoqie(3);
-mingpai("12p");
-qiepai();
+mingqiepai("12p");
 normalmoqie(10);
 hupai();
 
@@ -137,8 +135,7 @@ roundbegin();
 qiepai();
 normalmoqie(9);
 mingqiepai();
-mingpai("35m");
-qiepai();
+mingqiepai("35m");
 normalmoqie(4);
 mingqiepai();
 normalmoqie(8);
@@ -156,7 +153,7 @@ qiepai();
 normalmoqie(9);
 mingqiepai();
 normalmoqie(24);
-hupai(2);
+hupai();
 
 // 南3局0本场
 tiles2 = "3440m12p2307s1567z";

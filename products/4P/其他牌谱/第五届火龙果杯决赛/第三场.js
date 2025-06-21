@@ -68,10 +68,8 @@ qiepai();
 normalmoqie(50);
 mingqiepai();
 normalmoqie(5);
-mopai();
-qiepai(true);
-normalmoqie(13);
-notileliuju();
+moqieliqi();
+moqieliuju();
 
 // 东1局1本场
 tiles0 = "14579m68p167s2477z";
@@ -85,11 +83,9 @@ qiepai();
 normalmoqie(9);
 mingqiepai();
 normalmoqie(16);
-mopai();
-qiepai(true);
+moqieliqi();
 normalmoqie(24);
-mopai();
-qiepai(true);
+moqieliqi();
 normalmoqie(16);
 hupai();
 
@@ -113,8 +109,7 @@ mingqiepai();
 normalmoqie(8);
 mingqiepai();
 normalmoqie(4);
-mingpai("35s");
-qiepai();
+mingqiepai("35s");
 normalmoqie(5);
 hupai();
 
@@ -128,8 +123,7 @@ discardtiles = ["1s9m9s8p4p4s8m4p6m7s", "2z3z1s2z8s4m2m7z1z3m", "4z1p1m9s5z7z6z"
 roundbegin();
 qiepai();
 normalmoqie(19);
-mingpai("30p");
-qiepai();
+mingqiepai("30p");
 normalmoqie(4);
 mingqiepai();
 normalmoqie(2);
@@ -166,8 +160,7 @@ normalmoqie(10);
 mingqiepai();
 normalmoqie(19);
 mingqiepai();
-mingpai("46p");
-qiepai();
+mingqiepai("46p");
 normalmoqie(13);
 mingqiepai();
 normalmoqie(9);
@@ -192,8 +185,7 @@ mopai();
 leimingpai();
 normalmoqie(10);
 moqieliqi();
-normalmoqie(6);
-notileliuju();
+moqieliuju();
 
 // 南1局1本场
 tiles0 = "36m3567p8s1234677z";

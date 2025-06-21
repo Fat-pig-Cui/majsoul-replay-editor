@@ -31,6 +31,4 @@ huansanzhang("248p", "368m", "345z", "248s", 1);
 qiepai("5s");
 mopai();
 leimingpai();
-hupai(true)
-
-gameend();
+hupai(true);

@@ -68,10 +68,8 @@ qiepai();
 normalmoqie(32);
 mingqiepai();
 normalmoqie(25);
-mingpai("45p");
-qiepai();
-mingpai("67m");
-qiepai();
+mingqiepai("45p");
+mingqiepai("67m");
 hupai();
 
 // 东2局0本场
@@ -157,8 +155,7 @@ mingqiepai();
 normalmoqie();
 mingqiepai();
 normalmoqie(12);
-mingpai("35s");
-qiepai();
+mingqiepai("35s");
 normalmoqie(14);
 hupai();
 
@@ -198,8 +195,7 @@ normalmoqie(19);
 mingqiepai();
 normalmoqie(30);
 moqieliqi();
-normalmoqie(19);
-notileliuju();
+moqieliuju();
 
 // 南4局0本场
 tiles3 = "11245m6p23679s266z";
@@ -217,8 +213,7 @@ mingqiepai();
 normalmoqie(27);
 mingqiepai();
 normalmoqie(3);
-mingpai("12s");
-qiepai();
+mingqiepai("12s");
 normalmoqie(8);
 hupai();
 

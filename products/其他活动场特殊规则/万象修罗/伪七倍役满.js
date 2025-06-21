@@ -33,5 +33,3 @@ huansanzhang("899p", "899s", "89m7z", "134z", 1);
 qiepai();
 
 zimohu(true);
-
-gameend();

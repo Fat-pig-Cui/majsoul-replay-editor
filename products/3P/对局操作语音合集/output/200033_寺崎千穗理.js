@@ -22,7 +22,7 @@ tiles2 = "1112223335777z";
 paishan = randompaishan("1z6s", "6z84s4z4s");
 roundbegin();
 qiepai(true);
-mingqiepai("6z");
+mingqiepai("23s");
 mopai();
 combomopai();
 qiepai(true);

@@ -21,5 +21,4 @@ tiles2 = "19m19p19s1234567z";
 paishan = randompaishan("", "YYYYYDYYYYYYYY");
 roundbegin();
 qiepai("8s");
-normalmoqie(54);
-notileliuju();
+moqieliuju();

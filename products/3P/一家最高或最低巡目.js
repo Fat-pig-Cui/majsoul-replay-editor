@@ -38,8 +38,7 @@ for (let i = 0; i < 4; i++) {
     mingqiepai("9s");
     normalmoqie(2);
 }
-normalmoqie(34);
-notileliuju();
+moqieliuju();
 
 // 要让一家牌河最少, 那该家最好是西家
 // 亲家拔四北, 且南家出的牌被亲家杠四次
@@ -56,5 +55,4 @@ for (let i = 0; i < 4; i++) {
     mingpai();
     normalmoqie(2);
 }
-normalmoqie(41);
-notileliuju();
+moqieliuju();

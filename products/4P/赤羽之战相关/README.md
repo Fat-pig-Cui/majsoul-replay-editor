@@ -35,7 +35,7 @@
 
 ## 函数特殊说明
 
-### 换三张换牌(修罗之战/川麻): `huansanzhang(tiles0, tiles1, tiles2, tiles3, type)`
+### 换三张换牌: `huansanzhang(tiles0, tiles1, tiles2, tiles3, type)`
 
 `tiles0, tiles1, tiles2, tiles3` : 表示四个人要交出去的三张牌
 
@@ -43,9 +43,10 @@
 
 例子: `huansanzhang("9p79s", "333s", "78p8s", "333z", 1);`
 
-### 和牌(修罗之战/川麻): `hupai(allseats, type)`
+### 和牌: `hupai(allseats, type)`
 
-与段位场相比多了个参数 `type`, 值为 false 表示中途和牌, true 表示最终和牌, 默认为 false
+与段位场相比多了个参数 `type`, 值为 `false` 表示中途和牌, `true` 表示最终和牌(使得该小局结束的和牌,
+而不是玩家的最后和牌), 默认为中途和牌
 
 例子: `hupai([0, 2, 3], true);` 和 `hupai(1);`
 
@@ -54,10 +55,6 @@
 `gaps` : 表示所有人的定缺花色, 四个字母从前到后分别代表 `seat` 从 0 到 3 的四名玩家
 
 例子: `dingque("smps")`
-
-### 对局结束 `gameend()`
-
-如果"血战到底"的模式的最后一局不是流局的话, 需要在牌谱文件的最后加一个 `gameend();` 表示对局结束, 否则最后会跳过最后一位玩家的和牌展示
 
 # template.js: 赤羽之战(川麻)报菜名合集
 

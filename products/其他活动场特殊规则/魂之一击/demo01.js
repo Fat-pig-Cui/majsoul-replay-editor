@@ -15,7 +15,7 @@ editdata.config = {
     'mode': {
         'mode': 1,
         'detail_rule': {
-            'hunzhiyiji_mode': true
+            'hunzhiyiji_mode': true,
         }
     }
 };

@@ -22,7 +22,7 @@ editdata.config = {
     'mode': {
         'mode': 1,
         'detail_rule': {
-            '_scores_': [34000, 66000, 0, 0]
+            '_scores_': [34000, 66000, 0, 0],
         }
     }
 };

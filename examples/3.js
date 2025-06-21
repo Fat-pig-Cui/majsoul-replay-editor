@@ -76,5 +76,3 @@ paishan = randompaishan("6z9m");
 roundbegin();
 huansanzhang("78p8s", "333z", "9p9m9s", "333s", 1);
 hupai(true);
-
-gameend();
