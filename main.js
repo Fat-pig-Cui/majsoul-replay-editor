@@ -3,6 +3,7 @@
 // 回放用装扮
 var liqibangs = [], hupais = [], liqis = [];
 var avatar_frames = [], tablecloths = [], titles = [];
+var mjps = [], mjp_surfaces = [];
 
 // 中文服无法加载的和排除的装扮
 var invalid_frames = [
@@ -104,6 +105,7 @@ var invalid_titles = [
     600111,  // プロ×魂天覇者
     600114,  // あやまらないよ！
     600115,  // 双聖戦優勝
+    600122,  // 麒麟位2025
 ];
 
 var update_views_once = true;
@@ -113,7 +115,7 @@ function update_views() {
         return;
     update_views_once = false;
 
-    let slots = [0, 1, 2, 5, 6];
+    let slots = [0, 1, 2, 5, 6, 7, 13];
     let ITEM = cfg.item_definition.item.rows_;
     let TITLE = cfg.item_definition.title.rows_;
     for (let i = 0; i < ITEM.length; i++) {
@@ -147,6 +149,12 @@ function update_views() {
                     break;
                 case 6:
                     tablecloths.push(ITEM[i].id);
+                    break;
+                case 7:
+                    mjps.push(ITEM[i].id);
+                    break;
+                case 13:
+                    mjp_surfaces.push(ITEM[i].id);
                     break;
                 default:
                     break;
@@ -2054,8 +2062,9 @@ function edit(x) {
             let views_pool = [];
             views_pool[0] = liqibangs, views_pool[1] = hupais, views_pool[2] = liqis;
             views_pool[5] = avatar_frames, views_pool[6] = tablecloths, views_pool[11] = titles;
-            let slot_num = [0, 1, 2, 5, 6, 11];
-            // 建议玩家随机的装扮: 立直棒(0), 和牌特效(1), 立直特效(2), 头像框(5), 桌布(6), 称号(11)
+            views_pool[7] = mjps, views_pool[13] = mjp_surfaces;
+            let slot_num = [0, 1, 2, 5, 6, 7, 11, 13];
+            // 建议玩家随机的装扮: 立直棒(0), 和牌特效(1), 立直特效(2), 头像框(5), 桌布(6), 牌背(7), 称号(11), 牌面(13)
             for (let seat = 0; seat < x.player_datas.length; seat++) {
                 ret[seat] = {
                     'account_id': x.player_datas[seat].avatar_id * 10 + seat,
@@ -2068,7 +2077,7 @@ function edit(x) {
                         "exp": 0,
                         'skin': x.player_datas[seat].avatar_id,
                         'is_upgraded': true,
-                        'extra_emoji': [10, 11, 12]
+                        'extra_emoji': [10, 11, 12],
                     },
                     'title': x.player_datas[seat].title,
                     'level': {'id': 10503, 'score': 4500},
@@ -2325,10 +2334,16 @@ function edit(x) {
 
                                 if (cfg.item_definition.view.get(get_tablecloth_id()) !== undefined)
                                     uiscript.UI_Sushe.now_desktop_id = get_tablecloth_id();
-                                if (cfg.item_definition.view.get(get_mjp_id()) !== undefined)
+                                if (cfg.item_definition.view.get(get_mjp_id()) !== undefined) {
                                     uiscript.UI_Sushe.now_mjp_id = get_mjp_id();
-                                if (cfg.item_definition.view.get(get_mjpsurface_id()) !== undefined)
+                                    GameMgr.Inst.mjp_view = cfg['item_definition'].view.get(get_mjp_id()).res_name;
+                                    Laya['loader'].load(game.LoadMgr.getAtlasRoot() + 'myres2/mjp/' + GameMgr.Inst.mjp_view + '/hand.atlas');
+                                }
+                                if (cfg.item_definition.view.get(get_mjpsurface_id()) !== undefined) {
                                     uiscript.UI_Sushe.now_mjp_surface_id = get_mjpsurface_id();
+                                    GameMgr.Inst.mjp_surface_view = cfg['item_definition'].view.get(get_mjpsurface_id()).res_name;
+                                    Laya['loader'].load(game.LoadMgr.getAtlasRoot() + 'myres2/mjpm/' + GameMgr.Inst.mjp_surface_view + '/ui.atlas');
+                                }
 
                                 // 第一场的主视角
                                 if (!!(config && config.mode && config.mode.detail_rule && typeof (config.mode.detail_rule._local_position_) === "number"))
@@ -3328,20 +3343,6 @@ function pop_discardtiles(seat) {
     return "..";
 }
 
-function get_left_tile_cnt() {
-    let tmp_action;
-    if (actions.length !== 0)
-        tmp_action = actions;
-    else
-        tmp_action = editdata.actions[editdata.actions.length - 1];
-
-    for (let i = tmp_action.length - 1; i >= 0; i--)
-        if (tmp_action[i].name === "RecordNewRound" || tmp_action[i].name === "RecordDealTile" || tmp_action[i].name === "RecordFillAwaitingTiles")
-            return tmp_action[i].data.left_tile_count;
-
-    return 0;
-}
-
 // tile 是否为 dora, 用于幻境传说
 function is_dora(tile) {
     if (tile[0] === '0')
@@ -3515,6 +3516,7 @@ function calchupai(tiles, type) {
             }
         return tiles;
     }
+
     if (type === undefined)
         type = true;
 
@@ -7326,7 +7328,7 @@ function mingpai(seat, tiles) {
             }
         return false;
 
-        function trymingpai(try_tiles){
+        function trymingpai(try_tiles) {
             for (let seat2 = 0; seat2 < playercnt; seat2++)
                 if ((seat === seat2 || seat === undefined) && intiles(try_tiles, playertiles[seat2])) {
                     mingpai(seat2, try_tiles.slice());
@@ -8606,6 +8608,36 @@ function normalmoqie(tile_cnt) {
         console.error("Error at normalmoqie()");
 }
 
+function moqieliqi(tile_cnt) {
+    if (tile_cnt === undefined)
+        tile_cnt = 1;
+    if (typeof (tile_cnt) === "number")
+        for (let i = 0; i < tile_cnt; i++) {
+            mopai();
+            qiepai(true);
+        }
+    else if (typeof (tile_cnt) === "string") {
+        mopai();
+        qiepai(tile_cnt, true);
+    } else
+        console.error("Error at moqieliqi()");
+}
+
+function combomopai(tile_cnt) {
+    if (tile_cnt === undefined)
+        tile_cnt = 1;
+    if (typeof (tile_cnt) === "number")
+        for (let i = 0; i < tile_cnt; i++) {
+            leimingpai();
+            mopai();
+        }
+    else if (typeof (tile_cnt) === "string") {
+        leimingpai(tile_cnt);
+        mopai();
+    } else
+        console.error("Error at combomopai()");
+}
+
 function mingqiepai(tls_cnt) {
     if (tls_cnt === undefined)
         tls_cnt = 1;
@@ -8624,16 +8656,6 @@ function mingqiepai(tls_cnt) {
         console.error("Error at mingqiepai()");
 }
 
-function moqieliqi(tile) {
-    if (tile === undefined) {
-        mopai();
-        qiepai(true);
-    } else {
-        mopai();
-        qiepai(tile, true);
-    }
-}
-
 function zimohu(flag = false) {
     if (typeof (flag) == "boolean") {
         mopai();
@@ -8642,22 +8664,21 @@ function zimohu(flag = false) {
         console.error("Error at zimohu()");
 }
 
-function combomopai(tile_cnt) {
-    if (tile_cnt === undefined)
-        tile_cnt = 1;
-    if (typeof (tile_cnt) === "number")
-        for (let i = 0; i < tile_cnt; i++) {
-            leimingpai();
-            mopai();
-        }
-    else if (typeof (tile_cnt) === "string") {
-        leimingpai(tile_cnt);
-        mopai();
-    } else
-        console.error("Error at combomopai()");
-}
-
 function moqieliuju() {
     normalmoqie(get_left_tile_cnt());
     notileliuju();
+
+    function get_left_tile_cnt() {
+        let tmp_action;
+        if (actions.length !== 0)
+            tmp_action = actions;
+        else
+            tmp_action = editdata.actions[editdata.actions.length - 1];
+
+        for (let i = tmp_action.length - 1; i >= 0; i--)
+            if (tmp_action[i].name === "RecordNewRound" || tmp_action[i].name === "RecordDealTile" || tmp_action[i].name === "RecordFillAwaitingTiles")
+                return tmp_action[i].data.left_tile_count;
+
+        return 0;
+    }
 }

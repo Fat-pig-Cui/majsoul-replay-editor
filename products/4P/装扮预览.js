@@ -31,6 +31,8 @@ editdata.config = {
             '_tablecloth_id': 308029, // 桌布-魔女的契约
             '_mjp_id': 308030, // 牌背-假面的裁决
             '_mjpsurface_id': 305718, // 牌面-猫咪雀圣
+
+            '_local_position_': 1,
         }
     }
 };
@@ -63,5 +65,4 @@ qiepai();
 normalmoqie(35);
 mopai(1);
 qiepai(true);
-normalmoqie(33);
-notileliuju();
+moqieliuju();
