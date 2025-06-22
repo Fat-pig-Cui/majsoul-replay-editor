@@ -1,6 +1,6 @@
 loadproject();
 
-// 除了斋藤治
+// 除了如月莲
 
 // 暖冬邂逅和新岁景明完全同期, UP装扮:
 // 和牌-虚空结界
@@ -9,11 +9,11 @@ loadproject();
 // 桌布-一番祥瑞录
 // 牌背-开运达摩
 
-editdata.player_datas[0].nickname = "如月莲";
+editdata.player_datas[0].nickname = "斋藤治";
 editdata.player_datas[1].nickname = "柚";
 editdata.player_datas[2].nickname = "四宫冬实";
 editdata.player_datas[3].nickname = "如月彩音";
-editdata.player_datas[0].avatar_id = 403004;
+editdata.player_datas[0].avatar_id = 402304;
 editdata.player_datas[1].avatar_id = 405904;
 editdata.player_datas[2].avatar_id = 406604;
 editdata.player_datas[3].avatar_id = 406803;

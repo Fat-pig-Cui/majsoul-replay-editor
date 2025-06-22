@@ -8574,6 +8574,17 @@ function demogame() {
     hupai();
 }
 
+function demogame_3P() {
+    tiles0 = "11223344556777z";
+    tiles1 = "1112340678999p";
+    tiles2 = "1112340678999s";
+    paishan = randompaishan("6z", "55z........");
+    roundbegin();
+    qiepai(true);
+    moqieliqi();
+    hupai();
+}
+
 function gotoju(c_chang = chang, c_ju = ju, c_ben = ben) {
     chang = c_chang;
     ju = c_ju;
