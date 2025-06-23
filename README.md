@@ -122,9 +122,10 @@ B站视频教程: [【雀魂】如何自制牌谱回放](https://www.bilibili.co
 
 ## TODO(欢迎contribute)
 
+- randompaishan 自动补全起手
 - 番数达到三位数能够显示百位 (暂没有实现方式)
 - 在牌谱回放中发送表情 (暂没有实现方式)
-- 关于GUI(图形化用户界面), 有玩家反映写代码门槛过高, 能否搞个GUI, 但目前有以下因素导致短期内无法实现:
+- 关于GUI(图形化用户界面): 有玩家反映写代码门槛过高, 能否搞个GUI. 但目前有以下因素导致短期内无法实现:
     - 核心脚本的代码很少考虑健壮性, 而且很难保证稳定性
     - 核心脚本功能过于复杂, 即使做GUI了还是要读上面的文档才能学会使用
     - 做GUI所花费的精力要比脚本大的多
@@ -174,10 +175,10 @@ B站视频教程: [【雀魂】如何自制牌谱回放](https://www.bilibili.co
 - MLeague 名场面 佐佐木寿人死亡二则
   ![doc/pic/img05.jpg](doc/pic/img05.jpg)
 - 真·字一色 (注意: 这里更改立绘使用到了 [Majsoul Plus](https://github.com/MajsoulPlus/majsoul-plus), 自制牌谱只实现了牌谱部分,
-  教程见 [README.md](using_MJS/README.md))
+  教程见 [README.md](using_MJSP/README.md))
   ![doc/pic/img06.jpg](doc/pic/img06.jpg)
 - 国标麻将不算花牌情况下理论最大牌型(总共324番, 总番数百位显示不出来, 有些番种名称无法正常显示的问题也通过 Majsoul Plus
-  解决了, 详见 [报菜名界面加入无法显示的汉字](using_MJS/报菜名界面加入无法显示的汉字.md))
+  解决了, 详见 [报菜名界面加入无法显示的汉字](using_MJSP/报菜名界面加入无法显示的汉字.md))
   ![doc/pic/img07.jpg](doc/pic/img07.jpg)
 - 立直麻将版血流成河模式
   ![doc/pic/img08.jpg](doc/pic/img08.jpg)

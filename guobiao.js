@@ -1452,35 +1452,43 @@ function guobiao_fanlist() {
         "show_range_2": "",
         "merge_id": 0
     };
+}
 
-    // 添加国标麻将的圈风刻, 门风刻语音
-    uiscript.UI_Win.prototype._showInfo_mj = function (e) {
+function guobiao_function() {
+    // 添加圈风刻, 门风刻语音, 并不显示宝牌指示牌
+    uiscript.UI_Win.prototype.showRecord = function (K) {
 
-        var Q = uiscript;
+        var B = uiscript;
 
-        var s = this;
-        this['container_Activity_Point'].me['visible'] = !1,
+        var z = this;
+        if (!view['DesktopMgr'].Inst['record_show_anim'])
+            return this['_showInfo_record'](K),
+                this['isDoAnimation'] = !1,
+                void 0;
+        this['isDoAnimation'] = !0,
+            this['container_Activity_Point'].me['visible'] = !1,
             this['container_activity_rpg'].me['visible'] = !1,
             this.root['alpha'] = 0,
-            Laya['Tween'].to(this.root, {
+            this['tweenManager']['addTweenTo'](this.root, {
                 alpha: 1
             }, 500);
-        view['DesktopMgr'].Inst['setNickname'](this['winner_name'], e.seat, '#c3e2ff', '#fbfbfb', !0);
-        var y = view['DesktopMgr'].Inst['player_datas'][e.seat]['character']
-            , A = new Q['UIRect']();
-        A.x = this['illust_rect'].x,
-            A.y = this['illust_rect'].y,
-            A['width'] = this['illust_rect']['width'],
-            A['height'] = this['illust_rect']['height'],
-            this['char_skin']['setRect'](A),
-            this['char_skin']['setSkin'](view['DesktopMgr'].Inst['player_datas'][e.seat]['avatar_id'], 'full'),
-            2 === e.mode ? this['img_mode']['visible'] = !1 : (this['img_mode']['visible'] = !0,
-                this['img_mode'].skin = 0 === e.mode ? game['Tools']['localUISrc']('myres/mjdesktop/pg_zimo.png') : game['Tools']['localUISrc']('myres/mjdesktop/pg_he.png')),
-            this['_showPai'](e),
-            this['container_dora']['visible'] = !view['DesktopMgr'].Inst['is_chuanma_mode'](),
-            this['container_lidora']['visible'] = !view['DesktopMgr'].Inst['is_chuanma_mode']();
-        var v = e['fan_names']['length']
-            , u = 100;
+        var Z = view['DesktopMgr'].Inst['getPlayerName'](K.seat);
+        game['Tools']['SetNickname'](this['winner_name'], Z, !1, !0);
+        var s = view['DesktopMgr'].Inst['player_datas'][K.seat]['character']
+            , U = new B['UIRect']();
+        U.x = this['illust_rect'].x,
+            U.y = this['illust_rect'].y,
+            U['width'] = this['illust_rect']['width'],
+            U['height'] = this['illust_rect']['height'],
+            this['char_skin']['setRect'](U),
+            this['char_skin']['setSkin'](view['DesktopMgr'].Inst['player_datas'][K.seat]['avatar_id'], 'full'),
+            2 === K.mode ? this['img_mode']['visible'] = !1 : (this['img_mode']['visible'] = !0,
+                this['img_mode'].skin = 0 === K.mode ? game['Tools']['localUISrc']('myres/mjdesktop/pg_zimo.png') : game['Tools']['localUISrc']('myres/mjdesktop/pg_he.png')),
+            this['_showPai'](K),
+            this['container_dora']['visible'] = !(view['DesktopMgr'].Inst['is_chuanma_mode']() || is_guobiao()),
+            this['container_lidora']['visible'] = !(view['DesktopMgr'].Inst['is_chuanma_mode']() || is_guobiao());
+        var O = K['fan_names']['length']
+            , m = 100;
         this['container_fan_yiman']['visible'] = !1,
             this['container_fan_8']['visible'] = !1,
             this['container_fan_15']['visible'] = !1,
@@ -1491,190 +1499,190 @@ function guobiao_fanlist() {
             this['container_fan_15']['visible'] = !1,
             this['container_fan_12']['visible'] = !1,
             this['container_fan_liuju']['visible'] = !1;
-        var I = null;
-        I = 2 === e.mode ? this['container_fan_liuju'] : e['yiman'] ? this['container_fan_yiman'] : 8 >= v ? this['container_fan_8'] : 12 >= v ? this['container_fan_12'] : this['container_fan_15'],
-            I['visible'] = !0;
-        for (var X = 0; X < I['numChildren']; X++)
-            I['getChildAt'](X)['visible'] = !1;
-        for (var B = [], X = 0; X < e['fan_names']['length']; X++) {
-            var S = e['fan_names'][X]
-                , G = 0
-                , p = e['fan_ids'][X]
-                , h = !1
-                , z = cfg.fan.fan.get(p);
-            z && (h = !!z.mark),
-            9999 !== p && z && (G = z['show_index']);
-            var T = {
-                name: S,
-                index: G,
-                isSpecialFan: h
+        var Y = null;
+        Y = 2 === K.mode ? this['container_fan_liuju'] : K['yiman'] ? this['container_fan_yiman'] : 8 >= O ? this['container_fan_8'] : 12 >= O ? this['container_fan_12'] : this['container_fan_15'],
+            Y['visible'] = !0;
+        for (var j = 0; j < Y['numChildren']; j++)
+            Y['getChildAt'](j)['visible'] = !1;
+        for (var Q = [], j = 0; j < K['fan_names']['length']; j++) {
+            var p = K['fan_names'][j]
+                , M = 0
+                , u = K['fan_ids'][j]
+                , e = !1
+                , H = cfg.fan.fan.get(u);
+            H && (e = !!H.mark),
+            9999 !== u && H && (M = H['show_index']);
+            var r = {
+                name: p,
+                index: M,
+                isSpecialFan: e
             };
-            if (e['fan_value'] && e['fan_value']['length'] > X && (T['value'] = e['fan_value'][X]),
-            10 === p)
-                switch ((e.seat - view['DesktopMgr'].Inst['index_ju'] + view['DesktopMgr'].Inst['player_count']) % view['DesktopMgr'].Inst['player_count']) {
+            if (K['fan_value'] && K['fan_value']['length'] > j && (r['value'] = K['fan_value'][j]),
+            10 === u)
+                switch ((K.seat - view['DesktopMgr'].Inst['index_ju'] + view['DesktopMgr'].Inst['player_count']) % view['DesktopMgr'].Inst['player_count']) {
                     case 0:
-                        T['sound'] = 'fan_dong';
+                        r['sound'] = 'fan_dong';
                         break;
                     case 1:
-                        T['sound'] = 'fan_nan';
+                        r['sound'] = 'fan_nan';
                         break;
                     case 2:
-                        T['sound'] = 'fan_xi';
+                        r['sound'] = 'fan_xi';
                         break;
                     case 3:
-                        T['sound'] = 'fan_bei';
+                        r['sound'] = 'fan_bei';
                 }
-            else if (11 === p)
-                if (view['DesktopMgr'].Inst['index_change'] % 4 === (e.seat - view['DesktopMgr'].Inst['index_ju'] + view['DesktopMgr'].Inst['player_count']) % view['DesktopMgr'].Inst['player_count'])
+            else if (11 === u)
+                if (view['DesktopMgr'].Inst['index_change'] % 4 === (K.seat - view['DesktopMgr'].Inst['index_ju'] + view['DesktopMgr'].Inst['player_count']) % view['DesktopMgr'].Inst['player_count'])
                     switch (view['DesktopMgr'].Inst['index_change'] % 4) {
                         case 0:
-                            T['sound'] = 'fan_doubledong';
+                            r['sound'] = 'fan_doubledong';
                             break;
                         case 1:
-                            T['sound'] = 'fan_doublenan';
+                            r['sound'] = 'fan_doublenan';
                             break;
                         case 2:
-                            T['sound'] = 'fan_doublexi';
+                            r['sound'] = 'fan_doublexi';
                             break;
                         case 3:
-                            T['sound'] = 'fan_doublebei';
+                            r['sound'] = 'fan_doublebei';
                     }
                 else
                     switch (view['DesktopMgr'].Inst['index_change'] % 4) {
                         case 0:
-                            T['sound'] = 'fan_dong';
+                            r['sound'] = 'fan_dong';
                             break;
                         case 1:
-                            T['sound'] = 'fan_nan';
+                            r['sound'] = 'fan_nan';
                             break;
                         case 2:
-                            T['sound'] = 'fan_xi';
+                            r['sound'] = 'fan_xi';
                             break;
                         case 3:
-                            T['sound'] = 'fan_bei';
+                            r['sound'] = 'fan_bei';
                     }
             // 添加下面
-            else if (8061 === p)
+            else if (8061 === u)
                 switch (view['DesktopMgr'].Inst['index_change'] % 4) {
                     case 0:
-                        T['sound'] = 'fan_dong';
+                        r['sound'] = 'fan_dong';
                         break;
                     case 1:
-                        T['sound'] = 'fan_nan';
+                        r['sound'] = 'fan_nan';
                         break;
                     case 2:
-                        T['sound'] = 'fan_xi';
+                        r['sound'] = 'fan_xi';
                         break;
                     case 3:
-                        T['sound'] = 'fan_bei';
+                        r['sound'] = 'fan_bei';
                 }
-            else if (8062 === p)
-                if (view['DesktopMgr'].Inst['index_change'] % 4 === (e.seat - view['DesktopMgr'].Inst['index_ju'] + view['DesktopMgr'].Inst['player_count']) % view['DesktopMgr'].Inst['player_count'])
-                    switch ((e.seat - view['DesktopMgr'].Inst['index_ju'] + view['DesktopMgr'].Inst['player_count']) % view['DesktopMgr'].Inst['player_count']) {
+            else if (8062 === u)
+                if (view['DesktopMgr'].Inst['index_change'] % 4 === (K.seat - view['DesktopMgr'].Inst['index_ju'] + view['DesktopMgr'].Inst['player_count']) % view['DesktopMgr'].Inst['player_count'])
+                    switch ((K.seat - view['DesktopMgr'].Inst['index_ju'] + view['DesktopMgr'].Inst['player_count']) % view['DesktopMgr'].Inst['player_count']) {
                         case 0:
-                            T['sound'] = 'fan_doubledong';
+                            r['sound'] = 'fan_doubledong';
                             break;
                         case 1:
-                            T['sound'] = 'fan_doublenan';
+                            r['sound'] = 'fan_doublenan';
                             break;
                         case 2:
-                            T['sound'] = 'fan_doublexi';
+                            r['sound'] = 'fan_doublexi';
                             break;
                         case 3:
-                            T['sound'] = 'fan_doublebei';
+                            r['sound'] = 'fan_doublebei';
                     }
                 else
-                    switch ((e.seat - view['DesktopMgr'].Inst['index_ju'] + view['DesktopMgr'].Inst['player_count']) % view['DesktopMgr'].Inst['player_count']) {
+                    switch ((K.seat - view['DesktopMgr'].Inst['index_ju'] + view['DesktopMgr'].Inst['player_count']) % view['DesktopMgr'].Inst['player_count']) {
                         case 0:
-                            T['sound'] = 'fan_dong';
+                            r['sound'] = 'fan_dong';
                             break;
                         case 1:
-                            T['sound'] = 'fan_nan';
+                            r['sound'] = 'fan_nan';
                             break;
                         case 2:
-                            T['sound'] = 'fan_xi';
+                            r['sound'] = 'fan_xi';
                             break;
                         case 3:
-                            T['sound'] = 'fan_bei';
+                            r['sound'] = 'fan_bei';
                     }
             // 添加上面
-            else if (p >= 31 && 34 >= p) {
-                var K = T['value'];
-                K > 13 && (K = 13),
-                    T['sound'] = 0 === K ? '' : 'fan_dora' + K;
+            else if (u >= 31 && 34 >= u) {
+                var T = r['value'];
+                T > 13 && (T = 13),
+                    r['sound'] = 0 === T ? '' : 'fan_dora' + T;
             } else
-                9999 === p ? T['sound'] = 'fan_liujumanguan' : p >= 0 && (T['sound'] = cfg.fan.fan.get(p)['sound']);
-            B.push(T);
+                9999 === u ? r['sound'] = 'fan_liujumanguan' : u >= 0 && (r['sound'] = cfg.fan.fan.get(u)['sound']);
+            Q.push(r);
         }
-        B = B.sort(function (Q, e) {
-            return Q['index'] - e['index'];
+        Q = Q.sort(function(B, K) {
+            return B['index'] - K['index'];
         }),
-            u += 500;
-        for (var j = function (Q) {
-            var s = game['Tools']['get_chara_audio'](y, B[Q]['sound']);
-            Laya['timer'].once(u, n, function () {
-                var y = I['getChildAt'](Q)
-                    , A = y['getChildByName']('l_name');
-                A.text = B[Q].name,
-                    A['color'] = B[Q]['isSpecialFan'] ? '#ffc74c' : '#f1eeda';
-                var v = e['yiman'] && 'en' === GameMgr['client_language'] ? 290 : 242;
-                if (A['width'] = v,
-                    game['Tools']['labelLocalizationSize'](A, v, 0.8),
-                void 0 !== B[Q]['value'] && null !== B[Q]['value']) {
-                    y['getChildAt'](2)['visible'] = !0;
-                    var u = B[Q]['value']
-                        , X = u['toString']();
-                    2 === X['length'] ? (y['getChildAt'](3).skin = game['Tools']['localUISrc']('myres/mjdesktop/number/h_' + X[1] + '.png'),
-                        y['getChildAt'](3)['visible'] = !0,
-                        y['getChildAt'](4).skin = game['Tools']['localUISrc']('myres/mjdesktop/number/h_' + X[0] + '.png'),
-                        y['getChildAt'](4)['visible'] = !0) : (y['getChildAt'](3).skin = game['Tools']['localUISrc']('myres/mjdesktop/number/h_' + X[0] + '.png'),
-                        y['getChildAt'](3)['visible'] = !0,
-                        y['getChildAt'](4)['visible'] = !1);
+            m += 500;
+        for (var I = function(B) {
+            var Z = game['Tools']['get_chara_audio'](s, Q[B]['sound']);
+            C['timerManager']['addTimerOnce'](m, function() {
+                var s = Y['getChildAt'](B)
+                    , U = s['getChildByName']('l_name');
+                U.text = Q[B].name,
+                    U['color'] = Q[B]['isSpecialFan'] ? '#ffc74c' : '#f1eeda';
+                var O = K['yiman'] && 'en' === GameMgr['client_language'] ? 290 : 242;
+                if (U['width'] = O,
+                    game['Tools']['labelLocalizationSize'](U, O, 0.8),
+                void 0 !== Q[B]['value'] && null !== Q[B]['value']) {
+                    s['getChildAt'](2)['visible'] = !0;
+                    var m = Q[B]['value']
+                        , j = m['toString']();
+                    2 === j['length'] ? (s['getChildAt'](3).skin = game['Tools']['localUISrc']('myres/mjdesktop/number/h_' + j[1] + '.png'),
+                        s['getChildAt'](3)['visible'] = !0,
+                        s['getChildAt'](4).skin = game['Tools']['localUISrc']('myres/mjdesktop/number/h_' + j[0] + '.png'),
+                        s['getChildAt'](4)['visible'] = !0) : (s['getChildAt'](3).skin = game['Tools']['localUISrc']('myres/mjdesktop/number/h_' + j[0] + '.png'),
+                        s['getChildAt'](3)['visible'] = !0,
+                        s['getChildAt'](4)['visible'] = !1);
                 }
-                y['visible'] = !0,
-                    Laya['Tween'].from(y, {
+                s['visible'] = !0,
+                    z['tweenManager']['addTweenFrom'](s, {
                         x: 169,
                         y: 184,
                         alpha: 0
                     }, 100, Laya.Ease['strongOut']),
-                    s ? (view['AudioMgr']['PlaySound'](s.path, s['volume']),
+                    Z ? (view['AudioMgr']['PlaySound'](Z.path, Z['volume']),
                         view['AudioMgr']['PlayAudio'](211, 1, 0.5)) : view['AudioMgr']['PlayAudio'](211, 1, 1);
             }),
-                u += s ? s['time_length'] > 500 ? s['time_length'] : 500 : 500;
-        }, n = this, X = 0; v > X && X < I['numChildren']; X++)
-            j(X);
+                m += Z ? Z['time_length'] > 500 ? Z['time_length'] : 500 : 500;
+        }, C = this, j = 0; O > j && j < Y['numChildren']; j++)
+            I(j);
         this['container_fan']['visible'] = !1,
             this['container_fu']['visible'] = !1,
             this['img_yiman']['visible'] = !1,
-            e.fan && e.fu ? (u += 300,
-                Laya['timer'].once(u, this, function () {
+            K.fan && K.fu ? (m += 300,
+                this['timerManager']['addTimerOnce'](m, function() {
                     view['AudioMgr']['PlayAudio'](208),
-                        s['setFanFu'](e.fan, e.fu);
-                })) : e['yiman'] && (u += 700,
-                Laya['timer'].once(u, this, function () {
+                        z['setFanFu'](K.fan, K.fu);
+                })) : K['yiman'] && (m += 700,
+                this['timerManager']['addTimerOnce'](m, function() {
                     view['AudioMgr']['PlayAudio'](208),
-                        s['img_yiman']['alpha'] = 0,
-                        s['img_yiman']['visible'] = !0,
-                        Laya['Tween'].to(s['img_yiman'], {
+                        z['img_yiman']['alpha'] = 0,
+                        z['img_yiman']['visible'] = !0,
+                        z['tweenManager']['addTweenTo'](z['img_yiman'], {
                             alpha: 1
                         }, 200);
                 })),
             this['container_score']['alpha'] = 0;
-        for (var X = 0; X < this['score_imgs']['length']; X++)
-            this['score_imgs'][X]['visible'] = !1;
-        if (u += 700,
+        for (var j = 0; j < this['score_imgs']['length']; j++)
+            this['score_imgs'][j]['visible'] = !1;
+        if (m += 700,
             this['container_score']['scaleX'] = this['container_score']['scaleY'] = 2,
-            Laya['timer'].once(u, this, function () {
-                for (var Q = 0, y = e['score']; 0 !== y;) {
-                    var A = y % 10;
-                    if (y = Math['floor'](y / 10),
-                        s['score_imgs'][Q].skin = game['Tools']['localUISrc']('myres/mjdesktop/number/ww_' + A['toString']() + '.png'),
-                        s['score_imgs'][Q]['visible'] = !0,
-                        Q++,
-                    Q >= s['score_imgs']['length'])
+            this['timerManager']['addTimerOnce'](m, function() {
+                for (var B = 0, Z = K['score']; 0 !== Z; ) {
+                    var s = Z % 10;
+                    if (Z = Math['floor'](Z / 10),
+                        z['score_imgs'][B].skin = game['Tools']['localUISrc']('myres/mjdesktop/number/ww_' + s['toString']() + '.png'),
+                        z['score_imgs'][B]['visible'] = !0,
+                        B++,
+                    B >= z['score_imgs']['length'])
                         break;
                 }
-                Laya['Tween'].to(s['container_score'], {
+                z['tweenManager']['addTweenTo'](z['container_score'], {
                     alpha: 1,
                     scaleX: 1.2,
                     scaleY: 1.2
@@ -1682,179 +1690,323 @@ function guobiao_fanlist() {
                     view['AudioMgr']['PlayAudio'](221);
             }),
             this['container_title']['visible'] = !1,
-            e['title_id']) {
-            u += 700;
-            var L = 0
-                , Z = 0
-                , F = '';
-            switch (e['title_id']) {
+            K['title_id']) {
+            m += 700;
+            var V = 0
+                , g = 0
+                , W = '';
+            switch (K['title_id']) {
                 case mjcore['E_Dadian_Title']['E_Dadian_Title_manguan']:
-                    F = 'gameend_manguan',
-                        L = 214;
+                    W = 'gameend_manguan',
+                        V = 214;
                     break;
                 case mjcore['E_Dadian_Title']['E_Dadian_Title_tiaoman']:
-                    F = 'gameend_tiaoman',
-                        L = 214;
+                    W = 'gameend_tiaoman',
+                        V = 214;
                     break;
                 case mjcore['E_Dadian_Title']['E_Dadian_Title_beiman']:
-                    F = 'gameend_beiman',
-                        L = 201;
+                    W = 'gameend_beiman',
+                        V = 201;
                     break;
                 case mjcore['E_Dadian_Title']['E_Dadian_Title_sanbeiman']:
-                    F = 'gameend_sanbeiman',
-                        L = 201;
+                    W = 'gameend_sanbeiman',
+                        V = 201;
                     break;
                 case mjcore['E_Dadian_Title']['E_Dadian_Title_leijiyiman']:
-                    F = 'gameend_leijiyiman',
-                        Z = 2,
-                        L = 226;
+                    W = 'gameend_leijiyiman',
+                        g = 2,
+                        V = 226;
                     break;
                 case mjcore['E_Dadian_Title']['E_Dadian_Title_yiman']:
-                    F = 'gameend_yiman1',
-                        Z = 1,
-                        L = 226;
+                    W = 'gameend_yiman1',
+                        g = 1,
+                        V = 226;
                     break;
                 case mjcore['E_Dadian_Title']['E_Dadian_Title_yiman2']:
-                    F = 'gameend_yiman2',
-                        Z = 2,
-                        L = 226;
+                    W = 'gameend_yiman2',
+                        g = 2,
+                        V = 226;
                     break;
                 case mjcore['E_Dadian_Title']['E_Dadian_Title_yiman3']:
-                    F = 'gameend_yiman3',
-                        Z = 2,
-                        L = 226;
+                    W = 'gameend_yiman3',
+                        g = 2,
+                        V = 226;
                     break;
                 case mjcore['E_Dadian_Title']['E_Dadian_Title_yiman4']:
-                    F = 'gameend_yiman4',
-                        Z = 2,
-                        L = 226;
+                    W = 'gameend_yiman4',
+                        g = 2,
+                        V = 226;
                     break;
                 case mjcore['E_Dadian_Title']['E_Dadian_Title_yiman5']:
-                    F = 'gameend_yiman5',
-                        Z = 2,
-                        L = 226;
+                    W = 'gameend_yiman5',
+                        g = 2,
+                        V = 226;
                     break;
                 case mjcore['E_Dadian_Title']['E_Dadian_Title_yiman6']:
-                    F = 'gameend_yiman6',
-                        Z = 2,
-                        L = 226;
+                    W = 'gameend_yiman6',
+                        g = 2,
+                        V = 226;
             }
-            var D = game['Tools']['get_chara_audio'](y, F);
-            Laya['timer'].once(u, this, function () {
-                s['setTitle'](e['title_id']),
-                    s['container_title']['visible'] = !0,
-                    s['container_title']['alpha'] = 0,
-                    s['container_title']['scaleX'] = s['container_title']['scaleY'] = 3,
-                    Laya['Tween'].to(s['container_title'], {
+            var X = game['Tools']['get_chara_audio'](s, W);
+            this['timerManager']['addTimerOnce'](m, function() {
+                z['setTitle'](K['title_id']),
+                    z['container_title']['visible'] = !0,
+                    z['container_title']['alpha'] = 0,
+                    z['container_title']['scaleX'] = z['container_title']['scaleY'] = 3,
+                    z['tweenManager']['addTweenTo'](z['container_title'], {
                         alpha: 1,
                         scaleX: 1.2,
                         scaleY: 1.2
                     }, 300, Laya.Ease['strongIn']),
-                    Laya['timer'].once(300, s, function () {
-                        0 !== L && view['AudioMgr']['PlayAudio'](L);
+                    z['timerManager']['addTimerOnce'](300, function() {
+                        0 !== V && view['AudioMgr']['PlayAudio'](V);
                     }),
-                D && Laya['timer'].once(500, s, function () {
-                    view['AudioMgr']['PlaySound'](D.path, D['volume']);
+                X && z['timerManager']['addTimerOnce'](500, function() {
+                    view['AudioMgr']['PlaySound'](X.path, X['volume']);
                 }),
-                0 !== Z && Laya['timer'].once(300, s, function () {
-                    var Q, e;
-                    'en' === GameMgr['client_language'] ? (Q = s.root['getChildByName']('effect_yiman_en'),
-                        e = 'scene/effect_yiman2.lh') : 'kr' === GameMgr['client_language'] ? (Q = s.root['getChildByName']('effect_yiman_en'),
-                        e = 'scene/effect_yiman.lh') : 1 === Z ? (Q = s.root['getChildByName']('effect_yiman'),
-                        e = 'scene/effect_yiman.lh') : (Q = s.root['getChildByName']('effect_yiman2'),
-                        e = 'scene/effect_yiman2.lh'),
-                        s['effect_yiman'] = game['FrontEffect'].Inst['create_ui_effect'](Q, e, new Laya['Point'](0, 0), 25);
+                0 !== g && z['timerManager']['addTimerOnce'](300, function() {
+                    var B, K;
+                    'en' === GameMgr['client_language'] ? (B = z.root['getChildByName']('effect_yiman_en'),
+                        K = 'scene/effect_yiman2.lh') : 'kr' === GameMgr['client_language'] ? (B = z.root['getChildByName']('effect_yiman_en'),
+                        K = 'scene/effect_yiman.lh') : 1 === g ? (B = z.root['getChildByName']('effect_yiman'),
+                        K = 'scene/effect_yiman.lh') : (B = z.root['getChildByName']('effect_yiman2'),
+                        K = 'scene/effect_yiman2.lh'),
+                        z['effect_yiman'] = game['FrontEffect'].Inst['create_ui_effect'](B, K, new Laya['Point'](0,0), 25);
                 });
             }),
-            (e['yiman'] || '累积役满' === e['title']) && (u += 500);
+            (K['yiman'] || '累积役满' === K['title']) && (m += 500);
         }
         if (this.muyu['visible'] = !1,
             view['DesktopMgr'].Inst['muyu_info']) {
-            var w = !1;
-            0 === e.mode ? w = !0 : 1 === e.mode && (view['DesktopMgr'].Inst['index_player'] === view['DesktopMgr'].Inst['muyu_info'].seat && (w = !0),
-            e.seat === view['DesktopMgr'].Inst['muyu_info'].seat && (w = !0)),
-            w && (this.muyu['scale'](1.2, 1.2),
-                u += 700,
-                Laya['timer'].once(u, this, function () {
-                    s.muyu['visible'] = !0,
-                        s.muyu['alpha'] = 0;
-                    var Q = (view['DesktopMgr'].Inst['muyu_info'].seat - view['DesktopMgr'].Inst['index_ju'] + view['DesktopMgr'].Inst['player_count']) % view['DesktopMgr'].Inst['player_count'];
-                    s.muyu.skin = game['Tools']['localUISrc']('myres/mjdesktop/muyu_seat' + Q + '.png'),
-                        Laya['Tween'].to(s.muyu, {
+            var i = !1;
+            0 === K.mode ? i = !0 : 1 === K.mode && (view['DesktopMgr'].Inst['index_player'] === view['DesktopMgr'].Inst['muyu_info'].seat && (i = !0),
+            K.seat === view['DesktopMgr'].Inst['muyu_info'].seat && (i = !0)),
+            i && (this.muyu['scale'](1.2, 1.2),
+                m += 700,
+                this['timerManager']['addTimerOnce'](m, function() {
+                    z.muyu['visible'] = !0,
+                        z.muyu['alpha'] = 0;
+                    var B = (view['DesktopMgr'].Inst['muyu_info'].seat - view['DesktopMgr'].Inst['index_ju'] + view['DesktopMgr'].Inst['player_count']) % view['DesktopMgr'].Inst['player_count'];
+                    z.muyu.skin = game['Tools']['localUISrc']('myres/mjdesktop/muyu_seat' + B + '.png'),
+                        z['tweenManager']['addTweenTo'](z.muyu, {
                             alpha: 1
                         }, 250);
                 }));
         }
         if (view['DesktopMgr'].Inst['is_tianming_mode']()) {
             this.muyu['visible'] = !1;
-            var w = !1;
-            e['tianming_bonus'] > 0 && (w = !0),
-            w && (this.muyu['scale'](1, 1),
-                u += 700,
-                Laya['timer'].once(u, this, function () {
-                    s.muyu['visible'] = !0,
-                        s.muyu['alpha'] = 0,
-                        s.muyu.skin = game['Tools']['localUISrc']('myres/mjdesktop/tianming_result_' + e['tianming_bonus'] + '.png'),
-                        Laya['Tween'].to(s.muyu, {
+            var i = !1;
+            K['tianming_bonus'] > 0 && (i = !0),
+            i && (this.muyu['scale'](1, 1),
+                m += 700,
+                this['timerManager']['addTimerOnce'](m, function() {
+                    z.muyu['visible'] = !0,
+                        z.muyu['alpha'] = 0,
+                        z.muyu.skin = game['Tools']['localUISrc']('myres/mjdesktop/tianming_result_' + K['tianming_bonus'] + '.png'),
+                        z['tweenManager']['addTweenTo'](z.muyu, {
                             alpha: 1
                         }, 250);
                 }));
         }
-        if (view['DesktopMgr'].Inst.mode === view['EMJMode'].play && e.seat === view['DesktopMgr'].Inst.seat && e.mode <= 1 && Q['UI_Activity']['activity_is_running'](Q['UI_Activity_DuanWu_Point']['activity_id'])) {
-            for (var o = !1, X = 0; X < view['DesktopMgr'].Inst['player_datas']['length']; X++) {
-                var J = view['DesktopMgr'].Inst['player_datas'][X];
-                if (!J || game['Tools'].isAI(J['account_id'])) {
-                    o = !0;
+        if (view['DesktopMgr'].Inst.mode === view['EMJMode'].play && K.seat === view['DesktopMgr'].Inst.seat && K.mode <= 1 && B['UI_Activity']['activity_is_running'](B['UI_Activity_DuanWu_Point']['activity_id'])) {
+            for (var S = !1, j = 0; j < view['DesktopMgr'].Inst['player_datas']['length']; j++) {
+                var _ = view['DesktopMgr'].Inst['player_datas'][j];
+                if (!_ || game['Tools'].isAI(_['account_id'])) {
+                    S = !0;
                     break;
                 }
             }
-            o ? this['container_Activity_Point'].me['visible'] = !1 : u += this['container_Activity_Point'].show(u, e['point_sum'], e['score']);
+            S ? this['container_Activity_Point'].me['visible'] = !1 : m += this['container_Activity_Point'].show(m, K['point_sum'], K['score']);
         } else
             this['container_Activity_Point'].me['visible'] = !1;
-        if (view['DesktopMgr'].Inst.mode === view['EMJMode'].play && Q['UI_Activity']['activity_is_running'](Q['UI_Activity_RPG']['activity_id'])) {
-            for (var o = !1, X = 0; X < view['DesktopMgr'].Inst['player_datas']['length']; X++) {
-                var J = view['DesktopMgr'].Inst['player_datas'][X];
-                if (!J || game['Tools'].isAI(J['account_id'])) {
-                    o = !0;
+        if (view['DesktopMgr'].Inst.mode === view['EMJMode'].play && B['UI_Activity']['activity_is_running'](B['UI_Activity_RPG']['activity_id'])) {
+            for (var S = !1, j = 0; j < view['DesktopMgr'].Inst['player_datas']['length']; j++) {
+                var _ = view['DesktopMgr'].Inst['player_datas'][j];
+                if (!_ || game['Tools'].isAI(_['account_id'])) {
+                    S = !0;
                     break;
                 }
             }
-            if (o)
+            if (S)
                 this['container_activity_rpg'].me['visible'] = !1;
             else {
-                var _ = 0;
-                view['DesktopMgr'].Inst.seat !== e.seat && (_ = 0 === e.mode ? 2 : 1),
-                    1 === _ && 0 !== view['DesktopMgr'].Inst['seat2LocalPosition'](view['DesktopMgr'].Inst['index_player']) ? this['container_activity_rpg'].me['visible'] = !1 : this['container_activity_rpg'].show(_, 0);
+                var f = 0;
+                view['DesktopMgr'].Inst.seat !== K.seat && (f = 0 === K.mode ? 2 : 1),
+                    1 === f && 0 !== view['DesktopMgr'].Inst['seat2LocalPosition'](view['DesktopMgr'].Inst['index_player']) ? this['container_activity_rpg'].me['visible'] = !1 : this['container_activity_rpg'].show(f, 0);
             }
         } else
             this['container_activity_rpg'].me['visible'] = !1;
         this['btn_confirm']['visible'] = !1,
-            u += 300,
+            m += 300,
             this['btn_confirm']['disabled'] = !0,
-            Laya['timer'].once(u, this, function () {
-                if (s['btn_confirm']['visible'] = !0,
-                    s['btn_confirm']['alpha'] = 1,
-                    Laya['Tween'].from(s['btn_confirm'], {
+            this['timerManager']['addTimerOnce'](m, function() {
+                if (z['btn_confirm']['visible'] = !0,
+                    z['btn_confirm']['alpha'] = 1,
+                    z['tweenManager']['addTweenFrom'](z['btn_confirm'], {
                         alpha: 0
                     }, 200),
-                    s['btn_confirm']['disabled'] = !1,
+                    z['btn_confirm']['disabled'] = !1,
                 view['DesktopMgr'].Inst.mode === view['EMJMode']['paipu'] || view['DesktopMgr'].Inst.mode === view['EMJMode']['xinshouyindao'])
-                    s['count_down']['visible'] = !1,
-                        s['btn_confirm']['getChildByName']('confirm').x = 131;
+                    z['count_down']['visible'] = !1,
+                        z['btn_confirm']['getChildByName']('confirm').x = 131;
                 else {
-                    s['count_down']['visible'] = !0,
-                        s['btn_confirm']['getChildByName']('confirm').x = 165;
-                    for (var Q = function (Q) {
-                        Laya['timer'].once(1000 * Q, s, function () {
-                            s['btn_confirm']['disabled'] || (s['count_down'].text = '(' + (3 - Q)['toString']() + ')');
+                    z['count_down']['visible'] = !0,
+                        z['btn_confirm']['getChildByName']('confirm').x = 165;
+                    for (var B = function(B) {
+                        z['timerManager']['addTimerOnce'](1000 * B, function() {
+                            z['btn_confirm']['disabled'] || (z['count_down'].text = '(' + (3 - B)['toString']() + ')');
                         });
-                    }, e = 0; 3 > e; e++)
-                        Q(e);
-                    Laya['timer'].once(3000, s, function () {
-                        s['btn_confirm']['disabled'] || s['onConfirm']();
+                    }, K = 0; 3 > K; K++)
+                        B(K);
+                    z['timerManager']['addTimerOnce'](3000, function() {
+                        z['btn_confirm']['disabled'] || z['onConfirm']();
                     });
                 }
             });
+    }
+
+    // 跳过动画的函数
+    uiscript.UI_Win.prototype._showInfo_record = function (K) {
+
+        var B = uiscript;
+
+        this['container_Activity_Point'].me['visible'] = !1,
+            this.root['alpha'] = 1;
+        view['DesktopMgr'].Inst['setNickname'](this['winner_name'], K.seat, '#c3e2ff', '#fbfbfb', !0);
+        var z = new B['UIRect']();
+        z.x = this['illust_rect'].x,
+            z.y = this['illust_rect'].y,
+            z['width'] = this['illust_rect']['width'],
+            z['height'] = this['illust_rect']['height'],
+            this['char_skin']['setRect'](z),
+            this['char_skin']['setSkin'](view['DesktopMgr'].Inst['player_datas'][K.seat]['avatar_id'], 'full'),
+            2 === K.mode ? this['img_mode']['visible'] = !1 : (this['img_mode']['visible'] = !0,
+                this['img_mode'].skin = 0 === K.mode ? game['Tools']['localUISrc']('myres/mjdesktop/pg_zimo.png') : game['Tools']['localUISrc']('myres/mjdesktop/pg_he.png')),
+            this['_showPai'](K),
+            this['container_dora']['visible'] = !(view['DesktopMgr'].Inst['is_chuanma_mode']() || is_guobiao()),
+            this['container_lidora']['visible'] = !(view['DesktopMgr'].Inst['is_chuanma_mode']() || is_guobiao());
+        var Z = K['fan_names']['length'];
+        this['container_fan_yiman']['visible'] = !1,
+            this['container_fan_8']['visible'] = !1,
+            this['container_fan_15']['visible'] = !1,
+            this['container_fan_12']['visible'] = !1,
+            this['container_fan_liuju']['visible'] = !1,
+            this['container_fan_yiman']['visible'] = !1,
+            this['container_fan_8']['visible'] = !1,
+            this['container_fan_15']['visible'] = !1,
+            this['container_fan_12']['visible'] = !1,
+            this['container_fan_liuju']['visible'] = !1;
+        var s = null;
+        s = 2 === K.mode ? this['container_fan_liuju'] : K['yiman'] ? this['container_fan_yiman'] : 8 >= Z ? this['container_fan_8'] : 12 >= Z ? this['container_fan_12'] : this['container_fan_15'],
+            s['visible'] = !0;
+        for (var U = 0; U < s['numChildren']; U++)
+            s['getChildAt'](U)['visible'] = !1;
+        for (var O = [], U = 0; U < K['fan_names']['length']; U++) {
+            var m = K['fan_names'][U]
+                , Y = K['fan_ids'][U]
+                , j = 0
+                , Q = !1
+                , p = cfg.fan.fan.get(Y);
+            p && (Q = !!p.mark),
+            9999 !== Y && p && (j = p['show_index']);
+            var M = {
+                name: m,
+                index: j,
+                isSpecialFan: Q
+            };
+            K['fan_value'] && K['fan_value']['length'] > U && (M['value'] = K['fan_value'][U]),
+                O.push(M);
+        }
+        O = O.sort(function(B, K) {
+            return B['index'] - K['index'];
+        });
+        for (var U = 0; Z > U && U < s['numChildren']; U++) {
+            var u = s['getChildAt'](U)
+                , e = u['getChildByName']('l_name');
+            e.text = O[U].name,
+                e['color'] = O[U]['isSpecialFan'] ? '#ffc74c' : '#f1eeda';
+            var H = K['yiman'] && 'en' === GameMgr['client_language'] ? 290 : 242;
+            if (e['width'] = H,
+                game['Tools']['labelLocalizationSize'](e, H, 0.8),
+            void 0 !== O[U]['value'] && null !== O[U]['value']) {
+                u['getChildAt'](2)['visible'] = !0;
+                var r = O[U]['value']
+                    , T = r['toString']();
+                2 === T['length'] ? (u['getChildAt'](3).skin = game['Tools']['localUISrc']('myres/mjdesktop/number/h_' + T[1] + '.png'),
+                    u['getChildAt'](3)['visible'] = !0,
+                    u['getChildAt'](4).skin = game['Tools']['localUISrc']('myres/mjdesktop/number/h_' + T[0] + '.png'),
+                    u['getChildAt'](4)['visible'] = !0) : (u['getChildAt'](3).skin = game['Tools']['localUISrc']('myres/mjdesktop/number/h_' + T[0] + '.png'),
+                    u['getChildAt'](3)['visible'] = !0,
+                    u['getChildAt'](4)['visible'] = !1);
+            }
+            u['visible'] = !0;
+        }
+        this['container_fan']['visible'] = !1,
+            this['container_fu']['visible'] = !1,
+            this['img_yiman']['visible'] = !1,
+            K.fan && K.fu ? this['setFanFu'](K.fan, K.fu) : K['yiman'] && (this['img_yiman']['alpha'] = 1,
+                this['img_yiman']['visible'] = !0);
+        for (var U = 0; U < this['score_imgs']['length']; U++)
+            this['score_imgs'][U]['visible'] = !1;
+        for (var I = K['score']['toString'](), U = 0; U < I['length'] && !(U >= this['score_imgs']['length']); U++)
+            this['score_imgs'][U].skin = game['Tools']['localUISrc']('myres/mjdesktop/number/ww_' + I['charAt'](I['length'] - 1 - U) + '.png'),
+                this['score_imgs'][U]['visible'] = !0;
+        if (this['container_score']['alpha'] = 1,
+            this['container_score']['scaleX'] = this['container_score']['scaleY'] = 1.2,
+            this['container_title']['visible'] = !1,
+        K['title_id'] && (this['setTitle'](K['title_id']),
+            this['container_title']['visible'] = !0,
+            this['container_title']['alpha'] = 1,
+            this['container_title']['scaleX'] = this['container_title']['scaleY'] = 1.2),
+            this.muyu['visible'] = !1,
+            view['DesktopMgr'].Inst['muyu_info']) {
+            var C = !1;
+            if (0 === K.mode ? C = !0 : 1 === K.mode && (view['DesktopMgr'].Inst['index_player'] === view['DesktopMgr'].Inst['muyu_info'].seat && (C = !0),
+            K.seat === view['DesktopMgr'].Inst['muyu_info'].seat && (C = !0)),
+                C) {
+                this.muyu['visible'] = !0,
+                    this.muyu['alpha'] = 1;
+                var V = (view['DesktopMgr'].Inst['muyu_info'].seat - view['DesktopMgr'].Inst['index_ju'] + view['DesktopMgr'].Inst['player_count']) % view['DesktopMgr'].Inst['player_count'];
+                this.muyu.skin = game['Tools']['localUISrc']('myres/mjdesktop/muyu_seat' + V + '.png');
+            }
+        }
+        this['count_down'].text = '',
+            this['btn_confirm']['visible'] = !0,
+            this['btn_confirm']['disabled'] = !1,
+            this['btn_confirm']['alpha'] = 1,
+            this['count_down']['visible'] = !1,
+            this['btn_confirm']['getChildByName']('confirm').x = 131;
+    }
+
+    // 不显示符数
+    uiscript.UI_Win.prototype.setFanFu = function (B, K) {
+        this['container_fan']['visible'] = this['container_fu']['visible'] = !0,
+            this['container_fan']['alpha'] = this['container_fu']['alpha'] = 0;
+        for (var z = 0; 2 > z; z++)
+            if (0 === B)
+                this['fan_imgs'][z]['visible'] = !1;
+            else {
+                var Z = B % 10;
+                B = Math['floor'](B / 10),
+                    this['fan_imgs'][z]['visible'] = !0,
+                    this['fan_imgs'][z].skin = game['Tools']['localUISrc']('myres/mjdesktop/number/h_' + Z['toString']() + '.png');
+            }
+        this['container_fu']['visible'] = (view['DesktopMgr'].Inst['is_chuanma_mode']() || is_guobiao()) ? !1 : !0;
+        for (var z = 0; 3 > z; z++)
+            if (0 === K)
+                this['fu_imgs'][z]['visible'] = !1;
+            else {
+                var Z = K % 10;
+                K = Math['floor'](K / 10),
+                    this['fu_imgs'][z]['visible'] = !0,
+                    this['fu_imgs'][z].skin = game['Tools']['localUISrc']('myres/mjdesktop/number/ww_' + Z['toString']() + '.png');
+            }
+        this['tweenManager']['addTweenTo'](this['container_fan'], {
+            alpha: 1
+        }, 200),
+            this['tweenManager']['addTweenTo'](this['container_fu'], {
+                alpha: 1
+            }, 200);
     }
 }
 
@@ -1893,7 +2045,7 @@ function hupai_guobiao(seat) {
     // ------------------------------
     let qinjia = seat === ju;
     // -------------------------------------------
-    let points = calcfan_guobiao(playertiles[seat], seat, zimo, fangchong);
+    let points = calcfan_guobiao(playertiles[seat].slice(), seat, zimo, fangchong);
     let val = 0;
     for (let i = 0; i < points.fans.length; i++)
         val = val + points.fans[i].val;
@@ -2023,7 +2175,10 @@ function calcfan_guobiao(tiles, seat, zimo) {
 
         function calc0(tingpaifu) {
             function banfan(x) {
-                ban_num[x - 8000] = true;
+                if (typeof (x) === "number")
+                    x = [x];
+                for (let i = 0; i < x.length; i++)
+                    ban_num[x[i] - 8000] = true;
             }
 
             function is_banned(x) {
@@ -2249,11 +2404,7 @@ function calcfan_guobiao(tiles, seat, zimo) {
             if (liqiinfo[seat].yifa !== 0 && liqiinfo[seat].liqi === 0 && seat === ju && zimo) {
                 ans.fans.push({'val': 8, 'id': 8083}); // 天和
                 // 不计 不求人, 自摸, 边张, 坎张, 单钓将
-                banfan(8055);
-                banfan(8081);
-                banfan(8078);
-                banfan(8079);
-                banfan(8080);
+                banfan([8055, 8081, 8078, 8079, 8080]);
             }
 
             let first_tile = true;
@@ -2273,8 +2424,7 @@ function calcfan_guobiao(tiles, seat, zimo) {
             if (liqiinfo[seat].yifa !== 0 && liqiinfo[seat].liqi === 0 && seat !== ju && zimo) {
                 ans.fans.push({'val': 8, 'id': 8085}); // 人和
                 // 不计 不求人, 自摸
-                banfan(8055);
-                banfan(8081);
+                banfan([8055, 8081]);
             } else if (liqiinfo[seat].yifa !== 0 && liqiinfo[seat].liqi === 0 && seat !== ju && !zimo && liqiinfo[(ju + 1) % playercnt].yifa === 0) {
                 ans.fans.push({'val': 8, 'id': 8085}); // 人和
                 // 不计 门前清
@@ -2287,19 +2437,12 @@ function calcfan_guobiao(tiles, seat, zimo) {
             if (kezi[28] >= 1 && kezi[29] >= 1 && kezi[30] >= 1 && kezi[31] >= 1 && !is_banned(8000)) {
                 ans.fans.push({'val': 88, 'id': 8000}); // 大四喜
                 // 不计 三风刻, 碰碰和, 圈风刻, 门风刻, 幺九刻
-                banfan(8037);
-                banfan(8047);
-                banfan(8061);
-                banfan(8062);
-                banfan(8074);
+                banfan([8037, 8047, 8061, 8062, 8074]);
             }
             if (kezi[32] >= 1 && kezi[33] >= 1 && kezi[34] >= 1 && !is_banned(8001)) {
                 ans.fans.push({'val': 88, 'id': 8001}); // 大三元
                 // 不计 双箭刻, 箭刻, 组成大三元的三副刻子不计幺九刻
-                banfan(8053);
-                banfan(8058);
-                banfan(8059);
-                banfan(8060);
+                banfan([8053, 8058, 8059, 8060]);
                 ban_yaojiuke_num += 3;
             }
             if (flag_lvyise && !is_banned(8002)) {
@@ -2311,17 +2454,13 @@ function calcfan_guobiao(tiles, seat, zimo) {
             if (jiulian && !is_banned(8003)) {
                 ans.fans.push({'val': 88, 'id': 8003}); // 九莲宝灯
                 // 不计 清一色, 不求人, 门前清, 无字, 一个幺九刻
-                banfan(8021);
-                banfan(8055);
-                banfan(8063);
-                banfan(8077);
+                banfan([8021, 8055, 8063, 8077]);
                 ban_yaojiuke_num++;
             }
             if (gangzi_num === 4 && !is_banned(8004)) {
                 ans.fans.push({'val': 88, 'id': 8004}); // 四杠
                 // 不计 碰碰和, 单钓将
-                banfan(8047);
-                banfan(8080);
+                banfan([8047, 8080]);
             }
 
             let lianqidui = false;
@@ -2343,57 +2482,36 @@ function calcfan_guobiao(tiles, seat, zimo) {
             if (lianqidui && !is_banned(8005)) {
                 ans.fans.push({'val': 88, 'id': 8005}); // 连七对
                 // 不计 清一色, 七对, 不求人, 门前清, 无字, 单钓将
-                banfan(8021);
-                banfan(8018);
-                banfan(8055);
-                banfan(8063);
-                banfan(8077);
-                banfan(8080);
+                banfan([8021, 8018, 8055, 8063, 8077, 8080]);
             }
             // ---------------------------
             // 64 番
             if (flag_qinglaotou && !is_banned(8007)) {
                 ans.fans.push({'val': 64, 'id': 8007}); // 清幺九
                 // 不计混幺九、碰碰和、全带幺、双同刻、幺九刻、无字
-                banfan(8017);
-                banfan(8047);
-                banfan(8054);
-                banfan(8066);
-                banfan(8074);
-                banfan(8077);
+                banfan([8017, 8047, 8054, 8066, 8074, 8077]);
             }
             if (xiaosixi && !is_banned(8008)) {
                 ans.fans.push({'val': 64, 'id': 8008}); // 小四喜
                 // 不计 三风刻, 幺九刻
-                banfan(8037);
-                banfan(8074);
+                banfan([8037, 8074]);
             }
             if (xiaosanyuan && !is_banned(8009)) {
                 ans.fans.push({'val': 64, 'id': 8009}); // 小三元
                 // 不计 箭刻, 双箭刻, 组成小三元的两副刻子不计幺九刻
-                banfan(8058);
-                banfan(8059);
-                banfan(8060);
-                banfan(8053);
+                banfan([8058, 8059, 8060, 8053]);
                 ban_yaojiuke_num += 2;
             }
             if (flag_ziyise && !is_banned(8010)) {
                 ans.fans.push({'val': 64, 'id': 8010}); // 字一色
                 // 不计 混幺九, 碰碰和, 全带幺, 幺九刻
                 // 此外删除判断漏洞的混一色
-                banfan(8017);
-                banfan(8047);
-                banfan(8054);
-                banfan(8074);
-
-                banfan(8048);
+                banfan([8017, 8047, 8054, 8074, 8048]);
             }
             if (anke_num === 4 && !is_banned(8011)) {
                 ans.fans.push({'val': 64, 'id': 8011}); // 四暗刻
                 // 不计 碰碰和, 不求人, 门前清
-                banfan(8047);
-                banfan(8055);
-                banfan(8063);
+                banfan([8047, 8055, 8063]);
             }
 
             let shuanglonghui = false;
@@ -2408,12 +2526,7 @@ function calcfan_guobiao(tiles, seat, zimo) {
             if (shuanglonghui && !is_banned(8012)) {
                 ans.fans.push({'val': 64, 'id': 8012}); // 一色双龙会
                 // 不计 七对, 清一色, 平和, 一般高, 老少副, 无字
-                banfan(8018);
-                banfan(8021);
-                banfan(8064);
-                banfan(8070);
-                banfan(8073);
-                banfan(8077);
+                banfan([8018, 8021, 8064, 8070, 8073, 8077]);
             }
             // ---------------------------
             // 48 番
@@ -2428,18 +2541,12 @@ function calcfan_guobiao(tiles, seat, zimo) {
             if (sitongshun && !is_banned(8013)) {
                 ans.fans.push({'val': 48, 'id': 8013}); // 一色四同顺
                 // 不计 一色三同顺, 一色三节高, 七对, 四归一, 一般高
-                banfan(8022);
-                banfan(8023);
-                banfan(8018);
-                banfan(8065);
-                banfan(8070);
+                banfan([8022, 8023, 8018, 8065, 8070]);
             }
             if (sijiegao && !is_banned(8014)) {
                 ans.fans.push({'val': 48, 'id': 8014}); // 一色四节高
                 // 不计 一色三同顺, 一色三节高, 碰碰和
-                banfan(8022);
-                banfan(8023);
-                banfan(8047);
+                banfan([8022, 8023, 8047]);
             }
             // ---------------------------
             // 32 番
@@ -2455,18 +2562,14 @@ function calcfan_guobiao(tiles, seat, zimo) {
             if (sibugao && !is_banned(8015)) {
                 ans.fans.push({'val': 32, 'id': 8015}); // 一色四步高
                 // 不计 一色三步高, 连六, 老少副
-                banfan(8029);
-                banfan(8072);
-                banfan(8073);
+                banfan([8029, 8072, 8073]);
             }
             if (gangzi_num === 3)
                 ans.fans.push({'val': 32, 'id': 8016}); // 三杠
             if (flag_hunlaotou && !flag_qinglaotou && !is_banned(8017)) {
                 ans.fans.push({'val': 32, 'id': 8017}); // 混幺九
                 // 不计 碰碰和, 全带幺, 幺九刻
-                banfan(8047);
-                banfan(8054);
-                banfan(8074);
+                banfan([8047, 8054, 8074]);
             }
             // ---------------------------
             // 24 番
@@ -2474,9 +2577,7 @@ function calcfan_guobiao(tiles, seat, zimo) {
             if (duizi_num === 7 && !is_banned(8018)) {
                 ans.fans.push({'val': 24, 'id': 8018}); // 七对
                 // 不计 不求人、门前清、单钓将
-                banfan(8055);
-                banfan(8063);
-                banfan(8080);
+                banfan([8055, 8063, 8080]);
             }
             let quanshuangke = true;
             for (let i = 1; i <= 34; i++)
@@ -2488,9 +2589,7 @@ function calcfan_guobiao(tiles, seat, zimo) {
             if (quanshuangke && !is_banned(8020)) {
                 ans.fans.push({'val': 24, 'id': 8020}); // 全双刻
                 // 不计 碰碰和、断幺、无字
-                banfan(8047);
-                banfan(8069);
-                banfan(8077);
+                banfan([8047, 8069, 8077]);
             }
             if (qingyise && !is_banned(8021)) {
                 ans.fans.push({'val': 24, 'id': 8021}); // 清一色
@@ -2501,8 +2600,7 @@ function calcfan_guobiao(tiles, seat, zimo) {
             if (santongshun && !is_banned(8022)) {
                 ans.fans.push({'val': 24, 'id': 8022}); // 一色三同顺
                 // 不计 一色三节高、一般高
-                banfan(8023);
-                banfan(8070);
+                banfan([8023, 8070]);
             }
 
             let sanjiegao = false;
@@ -2535,28 +2633,24 @@ function calcfan_guobiao(tiles, seat, zimo) {
             if (quanda && !is_banned(8024)) {
                 ans.fans.push({'val': 24, 'id': 8024}); // 全大
                 // 不计 大于五, 无字
-                banfan(8035);
-                banfan(8077);
+                banfan([8035, 8077]);
             }
             if (quanzhong && !is_banned(8025)) {
                 ans.fans.push({'val': 24, 'id': 8025}); // 全中
                 // 不计 断幺, 无字
-                banfan(8069);
-                banfan(8077);
+                banfan([8069, 8077]);
             }
             if (quanxiao && !is_banned(8026)) {
                 ans.fans.push({'val': 24, 'id': 8026}); // 全小
                 // 不计 小于五, 无字
-                banfan(8036);
-                banfan(8077);
+                banfan([8036, 8077]);
             }
             // ---------------------------
             // 16 番
             if (yiqi && !is_banned(8027)) {
                 ans.fans.push({'val': 16, 'id': 8027}); // 清龙
                 // 不计 连六, 老少副
-                banfan(8072);
-                banfan(8073);
+                banfan([8072, 8073]);
             }
             let sanseshuanglonghui = false;
             if (shunzi[2] >= 1 && shunzi[8] >= 1 && shunzi[11] >= 1 && shunzi[17] >= 1 && typecnt[23][7] >= 1)
@@ -2568,10 +2662,7 @@ function calcfan_guobiao(tiles, seat, zimo) {
             if (sanseshuanglonghui && !is_banned(8028)) {
                 ans.fans.push({'val': 16, 'id': 8028}); // 三色双龙会
                 // 不计 喜相逢、老少副、无字、平和
-                banfan(8071);
-                banfan(8073);
-                banfan(8077);
-                banfan(8064);
+                banfan([8071, 8073, 8077, 8064]);
             }
             let sanbugao = false;
             for (let j = 0; j <= 2; j++) {
@@ -2596,8 +2687,7 @@ function calcfan_guobiao(tiles, seat, zimo) {
             if (quandaiwu && !is_banned(8030)) {
                 ans.fans.push({'val': 16, 'id': 8030}); // 全带五
                 // 不计 断幺, 无字
-                banfan(8069);
-                banfan(8077);
+                banfan([8069, 8077]);
             }
 
             if (santongke && !is_banned(8031)) {
@@ -2665,10 +2755,8 @@ function calcfan_guobiao(tiles, seat, zimo) {
             if (hualong && !is_banned(8038)) {
                 ans.fans.push({'val': 8, 'id': 8038}); // 花龙
                 // 还有喜相逢时, 删除连六和老少副
-                if (ersetongshun_num >= 1) {
-                    banfan(8072);
-                    banfan(8073);
-                }
+                if (ersetongshun_num >= 1)
+                    banfan([8072, 8073]);
             }
 
             let tuibudao = true;
@@ -2780,9 +2868,7 @@ function calcfan_guobiao(tiles, seat, zimo) {
                 shuangjianke = true;
             if (shuangjianke && !is_banned(8053)) {
                 // 不计箭刻, 组成双箭刻的两副刻子不计幺九刻
-                banfan(8058);
-                banfan(8059);
-                banfan(8060);
+                banfan([8058, 8059, 8060]);
                 ban_yaojiuke_num += 2;
                 ans.fans.push({'val': 6, 'id': 8053}); // 双箭刻
             }
@@ -3143,7 +3229,6 @@ function calcfan_guobiao(tiles, seat, zimo) {
     if (result === 3) {
         let ans = {'yiman': false, 'fans': [], 'fu': 25};
         // 国标麻将十三幺不能枪暗杠, 至于优先头跳, 这里没有实现
-        // 至于会不会计门前清等其他番种, 萌娘百科上没有说明, 这里就不计了
         ans.fans.push({'val': 88, 'id': 8006}); // 十三幺
         updateret(ans);
     }
@@ -3165,9 +3250,6 @@ function calcfan_guobiao(tiles, seat, zimo) {
     }
     if (result >= 6 && result <= 11) { // 一般组合龙
         let row = result - 6;
-        let origin_tiles = [];
-        for (let i = 0; i < tiles.length; i++)
-            origin_tiles[i] = tiles[i];
         let condition = [
             [1, 4, 7, 11, 14, 17, 21, 24, 27],
             [1, 4, 7, 12, 15, 18, 20, 23, 26],
@@ -3189,8 +3271,6 @@ function calcfan_guobiao(tiles, seat, zimo) {
             cnt[tiletoint(tiles[i])]++;
         dfs(1);
         ret.fans.push({'val': 12, 'id': 8034}); // 组合龙
-        ret.fu = 25;
-        tiles = origin_tiles;
     }
 
     function deletetile(tiles, int) {
@@ -3205,6 +3285,7 @@ function calcfan_guobiao(tiles, seat, zimo) {
         return tiles;
     }
 
+    ret.fu = 30;
     return ret;
 }
 

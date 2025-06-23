@@ -2041,8 +2041,8 @@ function editgame(editdata) {
 }
 
 // 回放接口, 在 edit 中重写, 并在 canceledit 中复原
-// 其中 showInfo_mj 的重写在 guobiao.js 中
-var resetData, checkPaiPu, showInfo_mj;
+// 其中 showRecord, showInfo_record, setFanFu 的重写在 guobiao.js 中
+var resetData, checkPaiPu, showRecord, showInfo_record, setFanFu;
 
 function edit(x) {
     try {
@@ -2050,11 +2050,19 @@ function edit(x) {
             resetData = uiscript.UI_Replay.prototype.resetData;
         if (checkPaiPu === undefined)
             checkPaiPu = GameMgr.Inst.checkPaiPu;
-        if (showInfo_mj === undefined)
-            showInfo_mj = uiscript.UI_Win.prototype._showInfo_mj;
+        if (showRecord === undefined)
+            showRecord = uiscript.UI_Win.prototype.showRecord;
+        if (showInfo_record === undefined)
+            showInfo_record = uiscript.UI_Win.prototype._showInfo_record;
+        if (setFanFu === undefined)
+            setFanFu = uiscript.UI_Win.prototype.setFanFu;
 
         if (x === undefined)
             x = JSON.parse(JSON.stringify(editdata));
+        if (typeof (editfunction) !== "undefined")
+            editfunction();
+        if (typeof (guobiao_function) !== "undefined")
+            guobiao_function();
 
         // 玩家信息
         function player_datas(a) {
@@ -2190,7 +2198,7 @@ function edit(x) {
                 // 添加下面
                 DIY_fan();
                 update_views();
-                if (typeof (guobiao_fanlist) !== "undefined")
+                if (typeof (guobiao_fanlist) != "undefined")
                     guobiao_fanlist();
 
                 is_maka = false;
@@ -2326,7 +2334,7 @@ function edit(x) {
                                 X = X['concat'](n.head['accounts']);
 
                                 // 修改的地方: 本来是 openMJRoom 的第二个参数(单个字母), 现在套上了 player_datas 函数
-                                // 本来是 openMJRoom 的第一个参数(如 X['config']), 现在是 x.config
+                                // 本来是 openMJRoom 的第一个参数(如 X.config), 现在是 x.config
                                 // 修改 account_id 主要是为了强制修改一开始的主视角为东起, 防止一些bug
                                 // 添加下面
                                 let new_player_datas = player_datas(z);
@@ -2431,9 +2439,17 @@ function canceledit() {
         GameMgr.Inst.checkPaiPu = function (game_uuid, account_id, paipu_config, is_maka) {
             return checkPaiPu.call(this, game_uuid, account_id, paipu_config, is_maka);
         }
-    if (showInfo_mj !== undefined)
-        uiscript.UI_Win.prototype._showInfo_mj = function (e) {
-            return showInfo_mj.call(this, e);
+    if (showRecord !== undefined)
+        uiscript.UI_Win.prototype.showRecord = function (K) {
+            return showRecord.call(this, K);
+        }
+    if (showInfo_record !== undefined)
+        uiscript.UI_Win.prototype._showInfo_record = function (K) {
+            return showInfo_record.call(this, K);
+        }
+    if (setFanFu !== undefined)
+        uiscript.UI_Win.prototype.setFanFu = function (B, K) {
+            return setFanFu.call(this, B, K);
         }
 }
 
@@ -3763,8 +3779,8 @@ function inserthules_history(x) {
 
 function calcsudian_chuanma(x, type = 0) {
     let val = 0;
-    for (let i = 0; i < x.length; i++)
-        val = val + x[i].val;
+    for (let i = 0; i < x.fans.length; i++)
+        val = val + x.fans[i].val;
     return Math.min(1000 * Math.pow(2, val - 1), 32000) + type * val;
 }
 
@@ -3824,34 +3840,34 @@ function calcfan_chuanma(tiles, seat, zimo, type = false) {
     }
 
     function tofan(x) {
-        let ans = [];
+        let ans = {'yiman': false, 'fans': [], 'fu': x.fu};
         for (let i = 1019; i >= 1005; i--) {
-            if (i === 1014 && x[1020] >= 1) { // 这里 1014 可以换成 1013, 1012
-                ans.push({'val': x[1020], 'id': 1020});
+            if (i === 1014 && x.fans[1020] >= 1) { // 这里 1014 可以换成 1013, 1012
+                ans.fans.push({'val': x.fans[1020], 'id': 1020});
                 break;
             }
-            if (x[i] >= 1) {
-                ans.push({'val': x[i], 'id': i});
+            if (x.fans[i] >= 1) {
+                ans.fans.push({'val': x.fans[i], 'id': i});
                 break;
             }
-            if (i === 1005 && ans.length === 0)
-                ans.push({'val': x[1003], 'id': 1003});
+            if (i === 1005 && ans.fans.length === 0)
+                ans.fans.push({'val': x.fans[1003], 'id': 1003});
         }
-        if (x[1000] >= 1)
-            ans.push({'val': x[1000], 'id': 1000});
-        if (x[1001] >= 1)
-            ans.push({'val': x[1001], 'id': 1001});
-        if (x[1002] >= 1)
-            ans.push({'val': x[1002], 'id': 1002});
-        if (x[1004] >= 1)
-            ans.push({'val': x[1004], 'id': 1004});
-        if (x[1021] >= 1)
-            ans.push({'val': x[1021], 'id': 1021});
+        if (x.fans[1000] >= 1)
+            ans.fans.push({'val': x.fans[1000], 'id': 1000});
+        if (x.fans[1001] >= 1)
+            ans.fans.push({'val': x.fans[1001], 'id': 1001});
+        if (x.fans[1002] >= 1)
+            ans.fans.push({'val': x.fans[1002], 'id': 1002});
+        if (x.fans[1004] >= 1)
+            ans.fans.push({'val': x.fans[1004], 'id': 1004});
+        if (x.fans[1021] >= 1)
+            ans.fans.push({'val': x.fans[1021], 'id': 1021});
         return ans;
     }
 
     let lastile = tiles[tiles.length - 1], fulucnt = 0;
-    let ret = [];
+    let ret = {'yiman': false, 'fans': [], 'fu': 0};
     let cnt = [];
     for (let i = 0; i < nxt2.length; i++)
         cnt[i] = 0;
@@ -3886,8 +3902,8 @@ function calcfan_chuanma(tiles, seat, zimo, type = false) {
                 cnt2[tiletoint(tmp_tiles[0])] += 2;
         }
 
-        function calc0() {
-            let ans = [];
+        function calc0(tingpaifu) {
+            let ans = {'yiman': false, 'fans': [], 'fu': 0};
             // 0: 明顺    1: 明刻   2: 明杠   3: 暗杠
             // 4: 北宝    5: 暗顺   6: 暗刻   7: 对子
             let typecnt = [[]];
@@ -3957,88 +3973,117 @@ function calcfan_chuanma(tiles, seat, zimo, type = false) {
                     jiangdui = false;
             }
             // ---------------------------
-            ans[1000] = 0;
+            ans.fans[1000] = 0;
             for (let i = 1; i <= 27; i++)
-                ans[1000] += Math.floor(cnt2[i] / 4); // 根
+                ans.fans[1000] += Math.floor(cnt2[i] / 4); // 根
             if (!type && zimo && getlstaction(2) !== undefined && (getlstaction(2).name === "RecordAnGangAddGang" || getlstaction(2).name === "RecordChiPengGang"))
-                ans[1001] = 1; // 杠上花
+                ans.fans[1001] = 1; // 杠上花
             if (!type && !zimo && getlstaction().name !== "RecordAnGangAddGang" && getlstaction(3) !== undefined && (getlstaction(3).name === "RecordAnGangAddGang" || getlstaction(3).name === "RecordChiPengGang"))
-                ans[1002] = 1; // 杠上炮
-            ans[1003] = 1;
+                ans.fans[1002] = 1; // 杠上炮
+            ans.fans[1003] = 1;
             if (!type && getlstaction().name === "RecordAnGangAddGang")
-                ans[1004] = 1; // 抢杠
+                ans.fans[1004] = 1; // 抢杠
             if (kezi_num === 4)
-                ans[1005] = 2; // 对对和
+                ans.fans[1005] = 2; // 对对和
             if (qingyise)
-                ans[1006] = 3; // 清一色
+                ans.fans[1006] = 3; // 清一色
             if (duizi_num === 7)
-                ans[1007] = 3; // 七对子
+                ans.fans[1007] = 3; // 七对子
             if (quandai)
-                ans[1008] = 3; // 带幺九
+                ans.fans[1008] = 3; // 带幺九
             if (fulucnt === 4)
-                ans[1009] = 3; // 金钩钓
+                ans.fans[1009] = 3; // 金钩钓
             if (qingyise && kezi_num === 4)
-                ans[1010] = 4; // 清对
+                ans.fans[1010] = 4; // 清对
             if (jiangdui && kezi_num === 4)
-                ans[1011] = 4; // 将对
-            if (ans[1000] > 0 && duizi_num === 7) {
-                ans[1012] = 4;
-                ans[1000]--;
+                ans.fans[1011] = 4; // 将对
+            if (ans.fans[1000] > 0 && duizi_num === 7) {
+                ans.fans[1012] = 4;
+                ans.fans[1000]--;
             } // 龙七对
             if (qingyise && duizi_num === 7)
-                ans[1013] = 5; // 清七对
+                ans.fans[1013] = 5; // 清七对
             if (qingyise && fulucnt === 4)
-                ans[1014] = 5; // 清金钩钓
-            if (qingyise && ans[1012] === 4)
-                ans[1015] = 6; // 清龙七对
+                ans.fans[1014] = 5; // 清金钩钓
+            if (qingyise && ans.fans[1012] === 4)
+                ans.fans[1015] = 6; // 清龙七对
             if (gangzi_num === 4) {
-                ans[1016] = 6;
-                ans[1000] -= 4;
+                ans.fans[1016] = 6;
+                ans.fans[1000] -= 4;
             } // 十八罗汉
             if (qingyise && gangzi_num === 4)
-                ans[1017] = 6; // 清十八罗汉
+                ans.fans[1017] = 6; // 清十八罗汉
             if (liqiinfo[seat].yifa !== 0 && liqiinfo[seat].liqi === 0 && seat === ju && zimo)
-                ans[1018] = 6; // 天和
+                ans.fans[1018] = 6; // 天和
             if (liqiinfo[seat].yifa !== 0 && liqiinfo[seat].liqi === 0 && seat !== ju && zimo)
-                ans[1019] = 6; // 地和
+                ans.fans[1019] = 6; // 地和
             if (qingyise && quandai)
-                ans[1020] = 5; // 清幺九
+                ans.fans[1020] = 5; // 清幺九
             if (!type && paishan_len() === 0)
-                ans[1021] = 1; // 海底捞月
+                ans.fans[1021] = 1; // 海底捞月
+
+            if (duizi_num === 7) { // 七对子固定符数
+                ans.fu = 25;
+                return tofan(ans);
+            }
+            ans.fu = 20; // 符底
+            ans.fu += tingpaifu; // 听牌型符
+            for (let i = 1; i <= 27; i++) {
+                // 刻子符(幺九/中张, 明刻明杠, 暗杠暗刻)
+                if (i === 1 || i === 9 || i === 10 || i === 18 || i === 19 || i === 27 || i >= 28 && i <= 34) {
+                    ans.fu += typecnt[i][1] * 4;
+                    ans.fu += typecnt[i][2] * 16;
+                    ans.fu += typecnt[i][3] * 32;
+                    ans.fu += typecnt[i][6] * 8;
+                } else {
+                    ans.fu += typecnt[i][1] * 2;
+                    ans.fu += typecnt[i][2] * 8;
+                    ans.fu += typecnt[i][3] * 16;
+                    ans.fu += typecnt[i][6] * 4;
+                }
+            }
+            if (zimo)
+                ans.fu += 2; // 自摸符
+            if (!zimo && fulucnt === 0)
+                ans.fu += 10; // 门前清荣和符
+            ans.fu = Math.ceil(ans.fu / 10) * 10;
+            if (fulucnt !== 0 && ans.fu === 20)
+                ans.fu = 30;
+
             return tofan(ans);
         }
 
         for (let i = partitiontmp.length - 1; i >= 0; i--) {
-            let tile = partitiontmp[i].tile, tmp_type = partitiontmp[i].type;
-            if (tmp_type === 5 && (equaltile(tile[0], lastile) || equaltile(tile[1], lastile) || equaltile(tile[2], lastile))) {
+            let tile = partitiontmp[i].tile, type = partitiontmp[i].type;
+            if (type === 5 && (equaltile(tile[0], lastile) || equaltile(tile[1], lastile) || equaltile(tile[2], lastile))) {
                 if (!zimo)
                     partitiontmp[i].type = 0;
                 let midtile = inttotile((tiletoint(tile[0]) + tiletoint(tile[1]) + tiletoint(tile[2])) / 3);
                 if (equaltile(midtile, lastile))
-                    updateret(calc0());
+                    updateret(calc0(2)); // 坎张听符
                 else if (tiletoint(lastile) % 9 === 3 && tiletoint(midtile) % 9 === 2)
-                    updateret(calc0());
+                    updateret(calc0(2)); // 边张听符
                 else if (tiletoint(lastile) % 9 === 7 && tiletoint(midtile) % 9 === 8)
-                    updateret(calc0());
+                    updateret(calc0(2)); // 边张听符
                 else
-                    updateret(calc0());
+                    updateret(calc0(0));
                 partitiontmp[i].type = 5;
             }
-            if (tmp_type === 6 && equaltile(tile[0], lastile)) {
+            if (type === 6 && equaltile(tile[0], lastile)) {
                 if (!zimo)
                     partitiontmp[i].type = 1;
-                updateret(calc0());
+                updateret(calc0(0));
                 partitiontmp[i].type = 6;
             }
-            if (tmp_type === 7 && equaltile(tile[0], lastile))
-                updateret(calc0());
+            if (type === 7 && equaltile(tile[0], lastile))
+                updateret(calc0(2)); // 单骑符
         }
     }
 
     // 一般形: 4个面子 + 1个雀头
     function dfs(now) {
         if (now === 28) {
-            if (partition.length === 5) // 本来有 或者 partition.length === 7, 这里单独把七对子的情况放到下面了, 这里就不用了
+            if (partition.length === 5 || partition.length === 7)
                 calc();
             return;
         }
@@ -4989,8 +5034,7 @@ function calcfan(tiles, seat, zimo, fangchong) {
                 ans.fu += 2; // 自摸符
             if (!zimo && menqing)
                 ans.fu += 10; // 门前清荣和符
-            ans.fu =
-                Math.ceil(ans.fu / 10) * 10;
+            ans.fu = Math.ceil(ans.fu / 10) * 10;
             if (fulucnt !== 0 && ans.fu === 20)
                 ans.fu = 30;
             // --------------------------------------------------
@@ -5452,9 +5496,6 @@ function addNewRound(chang, ju, ben, doras, left_tile_count, liqibang, md5, pais
 }
 
 function roundbegin() {
-    if (typeof (editfunction) !== "undefined")
-        editfunction();
-
     if (editdata.actions.length === 0)
         gamebegin();
 
@@ -5829,12 +5870,12 @@ function hupaioneplayer_chuanma(seat) {
     hand.length--;
     hand.sort(cmp);
     // -------------------------------------------
-    let fans = calcfan_chuanma(playertiles[seat], seat, zimo);
+    let points = calcfan_chuanma(playertiles[seat], seat, zimo);
     let val = 0;
-    for (let i = 0; i < fans.length; i++)
-        val = val + fans[i].val;
+    for (let i = 0; i < points.fans.length; i++)
+        val = val + points.fans[i].val;
     // -------------------------------------------
-    let sudian = calcsudian_chuanma(fans);
+    let sudian = calcsudian_chuanma(points);
     let zhahu = false;
     if (calchupai(playertiles[seat]) === 0 || huazhu(seat))
         zhahu = true;
@@ -5885,8 +5926,8 @@ function hupaioneplayer_chuanma(seat) {
         'doras': [],
         'li_doras': [],
         'dadian': dadian,
-        'fans': fans,
-        'fu': 20,
+        'fans': points.fans,
+        'fu': points.fu,
         'hand': hand,
         'hu_tile': hu_tile,
         'ming': ming,
