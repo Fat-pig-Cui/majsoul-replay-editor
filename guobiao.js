@@ -1,10 +1,5 @@
 "use strict"
 
-// 错和, 诈和赔给每家的点数
-var zhahu_points = 24;
-// 为了美观, 将点数提升的倍数
-var scale_points = 100;
-
 // 国标麻将番种
 var guobiao_fanlist_once = true;
 
@@ -2026,6 +2021,38 @@ function guobiao_function() {
     }
 }
 
+// ---------------------------------
+
+function is_guobiao() {
+    return !!(config && config.mode && config.mode.detail_rule && config.mode.detail_rule._guobiao);
+}
+
+// 是否取消8番缚
+function is_guobiao_no_8fanfu() {
+    return !!(config && config.mode && config.mode.detail_rule && config.mode.detail_rule._guobiao_no_8fanfu);
+}
+
+// 是否有连庄
+function is_guobiao_lianzhuang() {
+    return !!(config && config.mode && config.mode.detail_rule && config.mode.detail_rule._guobiao_lianzhuang);
+}
+
+// 错和, 诈和赔给每家的点数
+function cuohu_points() {
+    if (!!(config && config.mode && config.mode.detail_rule && typeof (config.mode.detail_rule._cuohu_points) == "number"))
+        return config.mode.detail_rule._cuohu_points;
+    return 10;
+}
+
+// 为了美观, 将点数放大的倍数
+function scale_points() {
+    if (!!(config && config.mode && config.mode.detail_rule && typeof (config.mode.detail_rule._scale_points) == "number"))
+        return config.mode.detail_rule._scale_points;
+    return 100;
+}
+
+// ---------------------------------
+
 function hupai_guobiao(seat) {
     let lstaction = getlstaction(), zimo = false;
     if (lstaction.name === "RecordNewRound" || lstaction.name === "RecordChangeTile")
@@ -2068,20 +2095,20 @@ function hupai_guobiao(seat) {
     // -------------------------------------------
     let sudian = calcsudian_guobiao(points);
     let zhahu = false;
-    if (calchupai(playertiles[seat]) === 0 || sudian === -zhahu_points * scale_points)
+    if (calchupai(playertiles[seat]) === 0 || sudian === -cuohu_points() * scale_points())
         zhahu = true;
-    if (!is_guobiao_no_8fanfu() && sudian < 8 * scale_points)
+    if (!is_guobiao_no_8fanfu() && sudian < 8 * scale_points())
         zhahu = true;
     // 国标无法听花牌, 所以和拔北的花牌一定是诈和
     if (lstaction.name === "RecordBaBei" || lstaction.name === "RecordAnGangAddGang" && lstaction.data.type === 3)
         zhahu = true;
 
-    if (zhahu) { // 诈和, 错和赔三家各 zhahu_points * scale_points 点
+    if (zhahu) { // 诈和, 错和赔三家各 cuohu_points() * scale_points() 点
         for (let i = 0; i < playercnt; i++) {
             if (i === seat)
                 continue;
-            delta_scores[i] += zhahu_points * scale_points;
-            delta_scores[seat] -= zhahu_points * scale_points;
+            delta_scores[i] += cuohu_points() * scale_points();
+            delta_scores[seat] -= cuohu_points() * scale_points();
         }
         let ret = {
             'count': 0,
@@ -2093,10 +2120,10 @@ function hupai_guobiao(seat) {
             'hu_tile': hu_tile,
             'liqi': false,
             'ming': ming,
-            'point_rong': zhahu_points * scale_points,
-            'point_sum': zhahu_points * scale_points,
-            'point_zimo_qin': zhahu_points * scale_points,
-            'point_zimo_xian': zhahu_points * scale_points,
+            'point_rong': cuohu_points() * scale_points(),
+            'point_sum': cuohu_points() * scale_points(),
+            'point_zimo_qin': cuohu_points() * scale_points(),
+            'point_zimo_xian': cuohu_points() * scale_points(),
             'qinjia': qinjia,
             'seat': seat,
             'title_id': 0,
@@ -2109,18 +2136,18 @@ function hupai_guobiao(seat) {
         for (let i = 0; i < playercnt; i++) {
             if (i === seat)
                 continue;
-            delta_scores[i] -= sudian + 8 * scale_points;
-            delta_scores[seat] += sudian + 8 * scale_points;
+            delta_scores[i] -= sudian + 8 * scale_points();
+            delta_scores[seat] += sudian + 8 * scale_points();
         }
     } else {
-        delta_scores[fangchong] -= sudian + 8 * scale_points;
-        delta_scores[seat] += sudian + 8 * scale_points;
+        delta_scores[fangchong] -= sudian + 8 * scale_points();
+        delta_scores[seat] += sudian + 8 * scale_points();
 
         for (let i = 0; i < playercnt; i++) {
             if (i === seat || i === fangchong)
                 continue;
-            delta_scores[i] -= 8 * scale_points;
-            delta_scores[seat] += 8 * scale_points;
+            delta_scores[i] -= 8 * scale_points();
+            delta_scores[seat] += 8 * scale_points();
         }
     }
     // ---------------------------------------------------
@@ -2134,7 +2161,7 @@ function hupai_guobiao(seat) {
         'hu_tile': hu_tile,
         'liqi': false,
         'ming': ming,
-        'point_rong': sudian + zhahu_points * scale_points,
+        'point_rong': sudian + cuohu_points() * scale_points(),
         'point_sum': delta_scores[seat],
         'point_zimo_qin': delta_scores[seat] / 3,
         'point_zimo_xian': delta_scores[seat] / 3,
@@ -2191,7 +2218,7 @@ function calcfan_guobiao(tiles, seat, zimo) {
 
         function calc0(tingpaifu) {
             function banfan(x) {
-                if (typeof (x) === "number")
+                if (typeof (x) == "number")
                     x = [x];
                 for (let i = 0; i < x.length; i++)
                     ban_num[x[i] - 8000] = true;
@@ -3102,7 +3129,7 @@ function calcfan_guobiao(tiles, seat, zimo) {
             if (ans.fans.length === 0 && !is_banned(8042))
                 ans.fans.push({'val': 8, 'id': 8042}); // 无番和
 
-            if (calcsudian_guobiao(ans) === -zhahu_points * scale_points)
+            if (calcsudian_guobiao(ans) === -cuohu_points() * scale_points())
                 return ans;
             // ---------------------------
             // ---------------------------
@@ -3310,6 +3337,6 @@ function calcsudian_guobiao(x) {
     for (let i = 0; i < x.fans.length; i++)
         val = val + x.fans[i].val;
     if (!(is_guobiao_no_8fanfu() || val >= 8))
-        return -zhahu_points * scale_points;
-    return val * scale_points;
+        return -cuohu_points() * scale_points();
+    return val * scale_points();
 }

@@ -90,8 +90,7 @@ qiepai("8s", true);
             if (!first_2 && getlstaction().data.seat === 2) {
                 first_2 = true;
                 qiepai(true);
-            }
-            else
+            } else
                 qiepai();
             let is_fangchong = false;
             for (let j = 0; j < tmp_tingpais.length; j++) {

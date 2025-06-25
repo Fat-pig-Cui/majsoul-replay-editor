@@ -36,7 +36,7 @@ for (let i = 0; i < 65; i++) {
     let tile = getlstaction().data.tile;
     let is_yaojiu = false;
     for (let i = 0; i < specialtiles.duanyaojiu.length; i++)
-        if (equaltile(tile, specialtiles.duanyaojiu[i])){
+        if (equaltile(tile, specialtiles.duanyaojiu[i])) {
             is_yaojiu = true;
             break;
         }
