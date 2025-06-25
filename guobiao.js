@@ -1614,13 +1614,13 @@ function guobiao_function() {
                 9999 === u ? r['sound'] = 'fan_liujumanguan' : u >= 0 && (r['sound'] = cfg.fan.fan.get(u)['sound']);
             Q.push(r);
         }
-        Q = Q.sort(function(B, K) {
+        Q = Q.sort(function (B, K) {
             return B['index'] - K['index'];
         }),
             m += 500;
-        for (var I = function(B) {
+        for (var I = function (B) {
             var Z = game['Tools']['get_chara_audio'](s, Q[B]['sound']);
-            C['timerManager']['addTimerOnce'](m, function() {
+            C['timerManager']['addTimerOnce'](m, function () {
                 var s = Y['getChildAt'](B)
                     , U = s['getChildByName']('l_name');
                 U.text = Q[B].name,
@@ -1655,11 +1655,11 @@ function guobiao_function() {
             this['container_fu']['visible'] = !1,
             this['img_yiman']['visible'] = !1,
             K.fan && K.fu ? (m += 300,
-                this['timerManager']['addTimerOnce'](m, function() {
+                this['timerManager']['addTimerOnce'](m, function () {
                     view['AudioMgr']['PlayAudio'](208),
                         z['setFanFu'](K.fan, K.fu);
                 })) : K['yiman'] && (m += 700,
-                this['timerManager']['addTimerOnce'](m, function() {
+                this['timerManager']['addTimerOnce'](m, function () {
                     view['AudioMgr']['PlayAudio'](208),
                         z['img_yiman']['alpha'] = 0,
                         z['img_yiman']['visible'] = !0,
@@ -1672,8 +1672,8 @@ function guobiao_function() {
             this['score_imgs'][j]['visible'] = !1;
         if (m += 700,
             this['container_score']['scaleX'] = this['container_score']['scaleY'] = 2,
-            this['timerManager']['addTimerOnce'](m, function() {
-                for (var B = 0, Z = K['score']; 0 !== Z; ) {
+            this['timerManager']['addTimerOnce'](m, function () {
+                for (var B = 0, Z = K['score']; 0 !== Z;) {
                     var s = Z % 10;
                     if (Z = Math['floor'](Z / 10),
                         z['score_imgs'][B].skin = game['Tools']['localUISrc']('myres/mjdesktop/number/ww_' + s['toString']() + '.png'),
@@ -1748,7 +1748,7 @@ function guobiao_function() {
                         V = 226;
             }
             var X = game['Tools']['get_chara_audio'](s, W);
-            this['timerManager']['addTimerOnce'](m, function() {
+            this['timerManager']['addTimerOnce'](m, function () {
                 z['setTitle'](K['title_id']),
                     z['container_title']['visible'] = !0,
                     z['container_title']['alpha'] = 0,
@@ -1758,20 +1758,20 @@ function guobiao_function() {
                         scaleX: 1.2,
                         scaleY: 1.2
                     }, 300, Laya.Ease['strongIn']),
-                    z['timerManager']['addTimerOnce'](300, function() {
+                    z['timerManager']['addTimerOnce'](300, function () {
                         0 !== V && view['AudioMgr']['PlayAudio'](V);
                     }),
-                X && z['timerManager']['addTimerOnce'](500, function() {
+                X && z['timerManager']['addTimerOnce'](500, function () {
                     view['AudioMgr']['PlaySound'](X.path, X['volume']);
                 }),
-                0 !== g && z['timerManager']['addTimerOnce'](300, function() {
+                0 !== g && z['timerManager']['addTimerOnce'](300, function () {
                     var B, K;
                     'en' === GameMgr['client_language'] ? (B = z.root['getChildByName']('effect_yiman_en'),
                         K = 'scene/effect_yiman2.lh') : 'kr' === GameMgr['client_language'] ? (B = z.root['getChildByName']('effect_yiman_en'),
                         K = 'scene/effect_yiman.lh') : 1 === g ? (B = z.root['getChildByName']('effect_yiman'),
                         K = 'scene/effect_yiman.lh') : (B = z.root['getChildByName']('effect_yiman2'),
                         K = 'scene/effect_yiman2.lh'),
-                        z['effect_yiman'] = game['FrontEffect'].Inst['create_ui_effect'](B, K, new Laya['Point'](0,0), 25);
+                        z['effect_yiman'] = game['FrontEffect'].Inst['create_ui_effect'](B, K, new Laya['Point'](0, 0), 25);
                 });
             }),
             (K['yiman'] || '累积役满' === K['title']) && (m += 500);
@@ -1783,7 +1783,7 @@ function guobiao_function() {
             K.seat === view['DesktopMgr'].Inst['muyu_info'].seat && (i = !0)),
             i && (this.muyu['scale'](1.2, 1.2),
                 m += 700,
-                this['timerManager']['addTimerOnce'](m, function() {
+                this['timerManager']['addTimerOnce'](m, function () {
                     z.muyu['visible'] = !0,
                         z.muyu['alpha'] = 0;
                     var B = (view['DesktopMgr'].Inst['muyu_info'].seat - view['DesktopMgr'].Inst['index_ju'] + view['DesktopMgr'].Inst['player_count']) % view['DesktopMgr'].Inst['player_count'];
@@ -1799,7 +1799,7 @@ function guobiao_function() {
             K['tianming_bonus'] > 0 && (i = !0),
             i && (this.muyu['scale'](1, 1),
                 m += 700,
-                this['timerManager']['addTimerOnce'](m, function() {
+                this['timerManager']['addTimerOnce'](m, function () {
                     z.muyu['visible'] = !0,
                         z.muyu['alpha'] = 0,
                         z.muyu.skin = game['Tools']['localUISrc']('myres/mjdesktop/tianming_result_' + K['tianming_bonus'] + '.png'),
@@ -1839,7 +1839,7 @@ function guobiao_function() {
         this['btn_confirm']['visible'] = !1,
             m += 300,
             this['btn_confirm']['disabled'] = !0,
-            this['timerManager']['addTimerOnce'](m, function() {
+            this['timerManager']['addTimerOnce'](m, function () {
                 if (z['btn_confirm']['visible'] = !0,
                     z['btn_confirm']['alpha'] = 1,
                     z['tweenManager']['addTweenFrom'](z['btn_confirm'], {
@@ -1852,13 +1852,13 @@ function guobiao_function() {
                 else {
                     z['count_down']['visible'] = !0,
                         z['btn_confirm']['getChildByName']('confirm').x = 165;
-                    for (var B = function(B) {
-                        z['timerManager']['addTimerOnce'](1000 * B, function() {
+                    for (var B = function (B) {
+                        z['timerManager']['addTimerOnce'](1000 * B, function () {
                             z['btn_confirm']['disabled'] || (z['count_down'].text = '(' + (3 - B)['toString']() + ')');
                         });
                     }, K = 0; 3 > K; K++)
                         B(K);
-                    z['timerManager']['addTimerOnce'](3000, function() {
+                    z['timerManager']['addTimerOnce'](3000, function () {
                         z['btn_confirm']['disabled'] || z['onConfirm']();
                     });
                 }
@@ -1917,7 +1917,7 @@ function guobiao_function() {
             K['fan_value'] && K['fan_value']['length'] > U && (M['value'] = K['fan_value'][U]),
                 O.push(M);
         }
-        O = O.sort(function(B, K) {
+        O = O.sort(function (B, K) {
             return B['index'] - K['index'];
         });
         for (var U = 0; Z > U && U < s['numChildren']; U++) {
@@ -1982,6 +1982,20 @@ function guobiao_function() {
     uiscript.UI_Win.prototype.setFanFu = function (B, K) {
         this['container_fan']['visible'] = this['container_fu']['visible'] = !0,
             this['container_fan']['alpha'] = this['container_fu']['alpha'] = 0;
+
+        // if (this['container_fan']._childs.length < 4)
+        //     for (let i = this['container_fan']._childs.length - 1; i >= 0 ; i--)
+        //     this['container_fan']._childs[i + 1] = this['container_fan']._childs[i];
+        // this['container_fan']._childs[0] = Object.create(this['container_fan']._childs[1]);
+        // this['container_fan']._childs[0] = Object.assign(this['container_fan']._childs[0], this['container_fan']._childs[1]);
+        //
+        // if (this['fan_imgs'].length < 3)
+        //     this['fan_imgs'][2] = Object.create(this['fan_imgs'][1]);
+        // this['fan_imgs'][2] = Object.assign(this['fan_imgs'][2], this['fan_imgs'][1]);
+        //
+        // this['container_fan']._childs[0]._x = -138;
+        // this['container_fan']._childs[0]._y = 62;
+
         for (var z = 0; 2 > z; z++)
             if (0 === B)
                 this['fan_imgs'][z]['visible'] = !1;
@@ -1991,6 +2005,8 @@ function guobiao_function() {
                     this['fan_imgs'][z]['visible'] = !0,
                     this['fan_imgs'][z].skin = game['Tools']['localUISrc']('myres/mjdesktop/number/h_' + Z['toString']() + '.png');
             }
+        // this['container_fan']._childs[0]._skin = this['fan_imgs'][2]._skin;
+
         this['container_fu']['visible'] = (view['DesktopMgr'].Inst['is_chuanma_mode']() || is_guobiao()) ? !1 : !0;
         for (var z = 0; 3 > z; z++)
             if (0 === K)

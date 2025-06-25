@@ -8480,18 +8480,26 @@ function randompaishan(paishanhead = "", paishanback = "", reddora) {
         function pushtiles2playertiles() {
             if (!!(config && config.mode && config.mode.detail_rule && config.mode.detail_rule._buquanshoupai)) {
                 for (let i = 0; i < playercnt; i++) {
-                    let tiles_len = all_tiles[i].length;
-                    if (tiles_len === 0) {
-                        for (let j = 0; j < 13; j++)
-                            all_tiles[i].push(tiles[tiles.length - j - 1]);
-                        tiles.length -= 13;
-                        if (i === ju) {
-                            if (qin_first_tile !== undefined)
+                    for (let j = 0; all_tiles[i].length < 13; j++) {
+                        all_tiles[i].push(tiles[tiles.length - 1]);
+                        tiles.length--;
+                    }
+                    if (i === ju && all_tiles[i].length < 14) {
+                        if (qin_first_tile !== undefined) {
+                            let flag = true;
+                            for (let j = 0; j < all_tiles[i].length; j++)
+                                if (all_tiles[i][j] === qin_first_tile) {
+                                    flag = false;
+                                    all_tiles[i].push(tiles[tiles.length - 1]);
+                                    tiles.length--;
+                                    break;
+                                }
+                            if (flag)
                                 all_tiles[i].push(qin_first_tile);
-                            else {
-                                all_tiles[i].push(tiles[tiles.length - 1]);
-                                tiles.length--;
-                            }
+                        }
+                        else {
+                            all_tiles[i].push(tiles[tiles.length - 1]);
+                            tiles.length--;
                         }
                     }
                 }
