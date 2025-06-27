@@ -4,5 +4,4 @@ loadproject();
 
 roundbegin();
 qiepai();
-normalmoqie(69);
-notileliuju();
+moqieliuju();

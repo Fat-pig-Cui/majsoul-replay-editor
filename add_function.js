@@ -20,12 +20,11 @@ function editfunction() {
 
                     // 添加内容: kailiqi
                     if (K.is_kailiqi) {
-                        if (K.seat !== view.DesktopMgr.Inst.seat) {
-                            for (let i = 0; i < view.DesktopMgr.Inst.players[view.DesktopMgr.Inst.seat2LocalPosition(K.seat)].hand.length; i++)
+                        if (K.seat !== view.DesktopMgr.Inst.seat)
+                            for (let i = 0; i < view.DesktopMgr.Inst.players[view.DesktopMgr.Inst.seat2LocalPosition(K.seat)].hand.length; i++) {
                                 view.DesktopMgr.Inst.players[view.DesktopMgr.Inst.seat2LocalPosition(K.seat)].hand[i].DoAnim_FullDown();
-                            for (let i = 0; i < view.DesktopMgr.Inst.players[view.DesktopMgr.Inst.seat2LocalPosition(K.seat)].hand.length; i++)
                                 view.DesktopMgr.Inst.players[view.DesktopMgr.Inst.seat2LocalPosition(K.seat)].hand[i].is_open = true;
-                        }
+                            }
                     }
 
                     if (K.muyu && O['DesktopMgr'].Inst['onMuyuChange'](K.muyu, !0),
@@ -76,12 +75,11 @@ function editfunction() {
 
                     // 添加内容: kailiqi
                     if (K.is_kailiqi) {
-                        if (K.seat !== view.DesktopMgr.Inst.seat) {
-                            for (let i = 0; i < view.DesktopMgr.Inst.players[view.DesktopMgr.Inst.seat2LocalPosition(K.seat)].hand.length; i++)
+                        if (K.seat !== view.DesktopMgr.Inst.seat)
+                            for (let i = 0; i < view.DesktopMgr.Inst.players[view.DesktopMgr.Inst.seat2LocalPosition(K.seat)].hand.length; i++) {
                                 view.DesktopMgr.Inst.players[view.DesktopMgr.Inst.seat2LocalPosition(K.seat)].hand[i].DoAnim_FullDown();
-                            for (let i = 0; i < view.DesktopMgr.Inst.players[view.DesktopMgr.Inst.seat2LocalPosition(K.seat)].hand.length; i++)
                                 view.DesktopMgr.Inst.players[view.DesktopMgr.Inst.seat2LocalPosition(K.seat)].hand[i].is_open = true;
-                        }
+                            }
                     }
 
                     !N['touming'] && K['tile_state'] && K['tile_state'] > 0 && (_ = !0),
@@ -114,12 +112,11 @@ function editfunction() {
 
                     // 添加内容: kailiqi
                     if (K.is_kailiqi) {
-                        if (K.seat !== view.DesktopMgr.Inst.seat) {
-                            for (let i = 0; i < view.DesktopMgr.Inst.players[view.DesktopMgr.Inst.seat2LocalPosition(K.seat)].hand.length; i++)
+                        if (K.seat !== view.DesktopMgr.Inst.seat)
+                            for (let i = 0; i < view.DesktopMgr.Inst.players[view.DesktopMgr.Inst.seat2LocalPosition(K.seat)].hand.length; i++) {
                                 view.DesktopMgr.Inst.players[view.DesktopMgr.Inst.seat2LocalPosition(K.seat)].hand[i].DoAnim_FullDown();
-                            for (let i = 0; i < view.DesktopMgr.Inst.players[view.DesktopMgr.Inst.seat2LocalPosition(K.seat)].hand.length; i++)
                                 view.DesktopMgr.Inst.players[view.DesktopMgr.Inst.seat2LocalPosition(K.seat)].hand[i].is_open = true;
-                        }
+                            }
                     }
 
                     if (!q['touming'] && K['tile_state'] && K['tile_state'] > 0 && (h = !0),
@@ -161,12 +158,11 @@ function editfunction() {
 
                     // 添加内容: kailiqi
                     if (K.is_kailiqi) {
-                        if (K.seat !== view.DesktopMgr.Inst.seat) {
-                            for (let i = 0; i < view.DesktopMgr.Inst.players[view.DesktopMgr.Inst.seat2LocalPosition(K.seat)].hand.length; i++)
+                        if (K.seat !== view.DesktopMgr.Inst.seat)
+                            for (let i = 0; i < view.DesktopMgr.Inst.players[view.DesktopMgr.Inst.seat2LocalPosition(K.seat)].hand.length; i++) {
                                 view.DesktopMgr.Inst.players[view.DesktopMgr.Inst.seat2LocalPosition(K.seat)].hand[i].DoAnim_FullDown();
-                            for (let i = 0; i < view.DesktopMgr.Inst.players[view.DesktopMgr.Inst.seat2LocalPosition(K.seat)].hand.length; i++)
                                 view.DesktopMgr.Inst.players[view.DesktopMgr.Inst.seat2LocalPosition(K.seat)].hand[i].is_open = true;
-                        }
+                            }
                     }
 
                     if (!N['touming'] && K['tile_state'] && K['tile_state'] > 0 && (_ = !0),
@@ -352,13 +348,11 @@ function editfunction() {
                                 }
                             })
                         }
-                        q += 2e3, Laya.timer.once(q, U, function () {
+                        Laya.timer.once(q, U, function () {
                             for (var n = 0, r = O.DesktopMgr.Inst.players; n < r.length; n++) {
                                 r[n].hideLiqi()
                             }
-                            K.liqi ? Laya.timer.once(2500, U, function () {
-                                O.ActionLiqi.play(K.liqi)
-                            }) : uiscript.UI_DesktopInfo.Inst.setLiqibang(0);
+                            K.liqi ? O.ActionLiqi.play(K.liqi) : uiscript.UI_DesktopInfo.Inst.setLiqibang(0);
                             for (var s = [], o = 0; o < K.delta_scores.length; o++) {
                                 var l = {
                                     title_id: 0,
@@ -385,7 +379,7 @@ function editfunction() {
                             O.DesktopMgr.Inst.ActionRunComplete()
                         })
                     })
-                    return 6e3;
+                    return 4e3;
                 },
                 U.fastrecord = function (e) {
                     app.Log.log("ActionHule fastplay data:" + JSON.stringify(e));
