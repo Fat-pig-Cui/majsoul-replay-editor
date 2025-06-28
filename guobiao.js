@@ -2023,36 +2023,6 @@ function guobiao_function() {
 
 // ---------------------------------
 
-function is_guobiao() {
-    return !!(config && config.mode && config.mode.detail_rule && config.mode.detail_rule._guobiao);
-}
-
-// 是否取消8番缚
-function is_guobiao_no_8fanfu() {
-    return !!(config && config.mode && config.mode.detail_rule && config.mode.detail_rule._guobiao_no_8fanfu);
-}
-
-// 是否有连庄
-function is_guobiao_lianzhuang() {
-    return !!(config && config.mode && config.mode.detail_rule && config.mode.detail_rule._guobiao_lianzhuang);
-}
-
-// 错和, 诈和赔给每家的点数
-function cuohu_points() {
-    if (!!(config && config.mode && config.mode.detail_rule && typeof (config.mode.detail_rule._cuohu_points) == "number"))
-        return config.mode.detail_rule._cuohu_points;
-    return 10;
-}
-
-// 为了美观, 将点数放大的倍数
-function scale_points() {
-    if (!!(config && config.mode && config.mode.detail_rule && typeof (config.mode.detail_rule._scale_points) == "number"))
-        return config.mode.detail_rule._scale_points;
-    return 100;
-}
-
-// ---------------------------------
-
 function hupai_guobiao(seat) {
     let lstaction = getlstaction(), zimo = false;
     if (lstaction.name === "RecordNewRound" || lstaction.name === "RecordChangeTile")

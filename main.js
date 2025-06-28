@@ -3120,6 +3120,36 @@ function is_ronghuzhahu() {
 
 // ---------------------------------
 
+function is_guobiao() {
+    return !!(config && config.mode && config.mode.detail_rule && config.mode.detail_rule._guobiao);
+}
+
+// 是否取消8番缚
+function is_guobiao_no_8fanfu() {
+    return !!(config && config.mode && config.mode.detail_rule && config.mode.detail_rule._guobiao_no_8fanfu);
+}
+
+// 是否有连庄
+function is_guobiao_lianzhuang() {
+    return !!(config && config.mode && config.mode.detail_rule && config.mode.detail_rule._guobiao_lianzhuang);
+}
+
+// 国标错和, 诈和赔给每家的点数
+function cuohu_points() {
+    if (!!(config && config.mode && config.mode.detail_rule && typeof (config.mode.detail_rule._cuohu_points) == "number"))
+        return config.mode.detail_rule._cuohu_points;
+    return 10;
+}
+
+// 国标为了美观, 将点数放大的倍数
+function scale_points() {
+    if (!!(config && config.mode && config.mode.detail_rule && typeof (config.mode.detail_rule._scale_points) == "number"))
+        return config.mode.detail_rule._scale_points;
+    return 100;
+}
+
+// ---------------------------------
+
 function get_muyu(type) {
     if (type === "new") {
         muyu.id++;
@@ -3807,7 +3837,7 @@ function calcsudian(x, type = 0) {
 function calcfan_chuanma(tiles, seat, zimo, type = false) {
     // 手牌少一张, 表示查大叫的情况
     if (tiles.length % 3 === 1) {
-        let tingpais = calctingpai(seat), ret = [];
+        let tingpais = calctingpai(seat), ret = {'yiman': false, 'fans': [], 'fu': 0};
         for (let i = 0; i < tingpais.length; i++) {
             tiles.push(tingpais[i].tile);
             let tmp = calcfan_chuanma(tiles.slice(), seat, zimo, true);
