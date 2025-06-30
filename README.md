@@ -70,7 +70,7 @@ B站视频教程: [【雀魂】如何自制牌谱回放](https://www.bilibili.co
     - 友人房规则:
         - 古役(包括一番街的, 详见 products 文件夹下的 [古役专题](products/古役专题))
         - 赤宝牌数量(四麻除了3/4赤以外, 还支持6/9/12赤, 后者的几种情况暗杠可能会显示异常,
-          这种情况需要导入 [override.js](override.js))
+          这种情况需要导入 [add_function.js](add_function.js))
         - 食断
         - 番缚
         - 有无自摸损(三麻)
@@ -149,9 +149,8 @@ B站视频教程: [【雀魂】如何自制牌谱回放](https://www.bilibili.co
         - 示例牌谱的编写
     - [Fat-pig-Cui](https://github.com/Fat-pig-Cui) (我, 维护者):
         - main.js 的功能的大量扩充
-        - add_function.js 的维护
+        - add_function.js 的维护与扩充
         - guobiao.js 的编写(国标功能的实现)
-        - override.js 重写函数的编写
         - 说明文档的重排优化, 细节补充
         - 自制牌谱的大量补充, 及批处理脚本刷新牌谱的编写
 
