@@ -475,7 +475,8 @@ function editfunction() {
         // 添加内容: 拔的牌可以是其他牌
         N = K.tile ? mjcore.MJPai.Create(K.tile) : mjcore.MJPai.Create("4z");
 
-        O['DesktopMgr'].Inst['players'][O['DesktopMgr'].Inst['seat2LocalPosition'](V)]['AddBabei'](N, K['moqie'], !0),
+        O['DesktopMgr'].Inst['players'][O['DesktopMgr'].Inst['seat2LocalPosition'](V)]['AddBabei'](N, K['moqie'], !0);
+        if (!is_guobiao())
             O['DesktopMgr'].Inst['players'][O['DesktopMgr'].Inst['seat2LocalPosition'](V)]['PlaySound']('act_babei');
         var q = !1;
         if (K['tile_state'] && K['tile_state'] > 0 && (q = !0),
@@ -761,6 +762,54 @@ function editfunction() {
             uiscript.UIMgr.Inst.ShowWin(K, !1)
     }
 
+    // 自创函数: ActionCuohu, 改编自 ActionGangResult
+    view.ActionCuohu = {};
+    view.ActionCuohu.record = function (X) {
+        var Q = view;
+        var A = Q['DesktopMgr'].Inst['record_show_anim'],
+            F = true,
+            E = uiscript['UI_Replay'].Inst['enable'] && uiscript['UI_Replay'].Inst['auto_play'],
+            I = 1200, d = X['CuohuInfo'], S = !1, P = [];
+
+        if (d.zimo)
+            uiscript.UI_Huleshow.Inst.showZimo([Q.DesktopMgr.Inst.seat2LocalPosition(d.seat)]);
+        else
+            uiscript.UI_Huleshow.Inst.showRong([Q.DesktopMgr.Inst.seat2LocalPosition(d.seat)]);
+
+        for (var B = 0; B < d['delta_scores']['length']; B++) {
+            var m = {
+                title_id: 0,
+                score: 0,
+                delta: 0
+            };
+            d['delta_scores'][B] > 0 ? (uiscript['UI_DesktopInfo'].Inst['changeHeadEmo'](B, 'emoji_7', -1),
+                    m['delta'] = d['delta_scores'][B], S = !0)
+                : d['delta_scores'][B] < 0 && (m['delta'] = d['delta_scores'][B],
+                uiscript['UI_DesktopInfo'].Inst['changeHeadEmo'](B, 'emoji_8', -1), S = !0),
+                m['score'] = d['old_scores'][B],
+                P.push(m);
+        }
+        S && (Laya['timer'].once(I, this, function () {
+            uiscript['UI_Hu_Xuezhan'].Inst['showScoreChange'](P),
+                Q['DesktopMgr'].Inst['setScores'](d['scores']);
+        }),
+            !F || A || E ? (
+                    I += 2000, Q['DesktopMgr'].Inst['mainrole']['revertAllPais'](),
+                        Laya['timer'].once(I, this, function () {
+                            Q['DesktopMgr'].Inst['ActionRunComplete']();
+                        })) :
+                (uiscript['UI_Hu_Xuezhan'].Inst['showScoreChange'](P, Laya['Handler']['create'](this, function () {
+                    Q['DesktopMgr'].Inst['ActionRunComplete']();
+                })),
+                    Q['DesktopMgr'].Inst['mainrole']['revertAllPais']()));
+        return 4000;
+    }
+    view.ActionCuohu.fastrecord = function (X) {
+        app.Log.log('ActionHule fastplay data:' + JSON['stringify'](X));
+        var A = X['CuohuInfo'];
+        view['DesktopMgr'].Inst['setScores'](A['scores']);
+    }
+
     var OnChoosedPai;
     if (OnChoosedPai === undefined)
         OnChoosedPai = view.ViewPai.prototype.OnChoosedPai
@@ -883,7 +932,8 @@ function editfunction() {
                 V['method'] = 'ui_replay doRecord',
                 V.name = O.name,
                 V.data = O.data,
-                GameMgr.Inst['onFatalError'](V),
+                // GameMgr.Inst['onFatalError'](V),
+                console.error(U),
                 1000000;
         }
     };
@@ -974,7 +1024,8 @@ function editfunction() {
                 U['method'] = 'ui_replay doRecord',
                 U.name = O.name,
                 U.data = O.data,
-                GameMgr.Inst['onFatalError'](U),
+                // GameMgr.Inst['onFatalError'](U),
+                console.error(U),
                 1000000;
         }
         return 0;
@@ -1120,7 +1171,7 @@ function editfunction2() {
             if (view.DesktopMgr.Inst.rule_mode === view.ERuleMode.Liqi2)
                 R = 18;
 
-            view['DesktopMgr'].Inst['is_chuanma_mode']() && (W = 0,
+            (view['DesktopMgr'].Inst['is_chuanma_mode']() || is_guobiao()) && (W = 0,
                 R = 0);
             var L = view['DesktopMgr'].Inst['sha256'] ? view['DesktopMgr'].Inst['rule_mode'] === view['ERuleMode']['Liqi3'] ? 40 : view['DesktopMgr'].Inst['is_wanxiangxiuluo_mode']() ? 49 : 53 : 0
                 , G = this['tile_count'] - W - R - L;

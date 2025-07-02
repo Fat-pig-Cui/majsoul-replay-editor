@@ -2505,8 +2505,8 @@ var awaiting_tiles = [];
 
 // 庄家连续和牌连庄数量, 用于八连庄
 var lianzhuangcnt = 0;
-// 国标花牌
-var huapai = "0m";
+// 国标花牌与玩家是否已错和
+var huapai = "0m", cuohu = [false, false, false, false];
 // -----振听-----
 // 造成振听的因素
 // 1. 自家牌河中有听的牌 (qiepai)
@@ -2692,6 +2692,7 @@ function saveproject() {
     tmp.shoumoqie = JSON.parse(JSON.stringify(shoumoqie));
     tmp.shoumoqiemaxlen = JSON.parse(JSON.stringify(shoumoqiemaxlen));
     tmp.awaiting_tiles = JSON.parse(JSON.stringify(awaiting_tiles));
+    tmp.cuohu = JSON.parse(JSON.stringify(cuohu));
     lastscene = tmp;
 }
 
@@ -2759,6 +2760,7 @@ function loadproject(x) {
         shoumoqie = JSON.parse(JSON.stringify(x.shoumoqie));
         shoumoqiemaxlen = JSON.parse(JSON.stringify(x.shoumoqiemaxlen));
         awaiting_tiles = JSON.parse(JSON.stringify(x.awaiting_tiles));
+        cuohu = JSON.parse(JSON.stringify(x.cuohu));
         return;
     }
     scores = [25000, 25000, 25000, 25000];
@@ -2787,6 +2789,7 @@ function loadproject(x) {
     shoumoqie = [[], [], [], []];
     shoumoqiemaxlen = [[0, 0], [0, 0], [0, 0], [0, 0]];
     awaiting_tiles = [];
+    cuohu = [false, false, false, false];
     editdata = {
         'actions': [],
         'xun': [],
@@ -2862,6 +2865,7 @@ function init() {
     shoumoqie = [[], [], [], []];
     shoumoqiemaxlen = [[0, 0], [0, 0], [0, 0], [0, 0]];
     awaiting_tiles = [];
+    cuohu = [false, false, false, false];
     if (!tiles0 && !tiles1 && !tiles2 && !tiles3) { // 没有给定起手, 则模仿现实中摸牌
         if (!paishan)
             paishan = randompaishan();
@@ -3125,24 +3129,24 @@ function is_guobiao() {
     return !!(config && config.mode && config.mode.detail_rule && config.mode.detail_rule._guobiao);
 }
 
-// 是否取消8番缚
+function is_guobiao_huapai() {
+    return !!(config && config.mode && config.mode.detail_rule && config.mode.detail_rule._guobiao_huapai);
+}
+
 function is_guobiao_no_8fanfu() {
     return !!(config && config.mode && config.mode.detail_rule && config.mode.detail_rule._guobiao_no_8fanfu);
 }
 
-// 是否有连庄
 function is_guobiao_lianzhuang() {
     return !!(config && config.mode && config.mode.detail_rule && config.mode.detail_rule._guobiao_lianzhuang);
 }
 
-// 国标错和, 诈和赔给每家的点数
 function cuohu_points() {
     if (!!(config && config.mode && config.mode.detail_rule && typeof (config.mode.detail_rule._cuohu_points) == "number"))
         return config.mode.detail_rule._cuohu_points;
     return 10;
 }
 
-// 国标为了美观, 将点数放大的倍数
 function scale_points() {
     if (!!(config && config.mode && config.mode.detail_rule && typeof (config.mode.detail_rule._scale_points) == "number"))
         return config.mode.detail_rule._scale_points;
@@ -6577,19 +6581,20 @@ function hupai(x, type) {
                     playertiles[seat].push(lstaction.data.tiles);
                 else if (lstaction.name === "RecordBaBei")
                     playertiles[seat].push(lstaction.data.tile);
-                if ((is_chuanma() || is_guobiao() || !is_chuanma() && !is_guobiao() && !zhenting[seat]) && calchupai(playertiles[seat]) !== 0) {
-                    if (!is_chuanma() && !is_guobiao() && !is_ronghuzhahu()) { // 非川麻国标防止自动无役荣和诈和
+                if ((is_chuanma() || is_guobiao() && !cuohu[seat] || !is_chuanma() && !is_guobiao() && !zhenting[seat]) && calchupai(playertiles[seat]) !== 0) {
+                    if (!is_chuanma() && !is_guobiao() && !is_ronghuzhahu()) { // 非川麻国标防止自动无役荣和诈和, 及
                         let points = calcfan(playertiles[seat], seat, false, lstaction.data.seat);
                         if (calcsudian(points) !== -2000)
                             x.push(seat);
-                    } else
+                    }
+                    else
                         x.push(seat);
                     if (!is_chuanma() && (is_toutiao() || is_mingjing() || is_guobiao())) {
-                        playertiles[seat].length = playertiles[seat].length - 1;
+                        playertiles[seat].length--;
                         break;
                     }
                 }
-                playertiles[seat].length = playertiles[seat].length - 1;
+                playertiles[seat].length--;
             }
         }
         if (x.length === 0) { // 没给参数 seat 的情况下, 无人能正常和牌
@@ -6645,6 +6650,11 @@ function hupai(x, type) {
         } else { // 国标模式
             let ret = [];
             ret.push(hupai_guobiao(x[0]));
+            if (typeof(editfunction) != "undefined" && ret[0].cuohu) {
+                addCuohu(ret[0]);
+                cuohu[x[0]] = true;
+                return;
+            }
             hupaied[x[0]] = true;
             let old_scores = scores.slice();
             for (let i = 0; i < playercnt; i++)
@@ -6905,11 +6915,13 @@ function calcgangpoint(type) {
         chuanmagangs.notover.length--;
     }
     ret.delta_scores = delta_scores.slice();
+
     for (let i = 0; i < playercnt; i++) {
         scores[i] = scores[i] + delta_scores[i];
         delta_scores[i] = 0;
     }
     ret.scores = scores.slice();
+
     if (!type)
         addGangResult(ret);
     else {
@@ -7041,6 +7053,13 @@ function mopai(seat, index) {
         if (lstaction.name === "RecordHuleXueLiu") {
             if (lst2action.name === "RecordNewRound")
                 seat = (lstaction.data.hules[lstaction.data.hules.length - 1].seat + 1) % playercnt;
+            else
+                seat = (lst2action.data.seat + 1) % playercnt;
+        }
+        // 国标错和, 摸牌家为最后操作玩家的下一家
+        if (lstaction.name === "RecordCuohu") {
+            if (lst2action.name === "RecordNewRound")
+                seat = ju;
             else
                 seat = (lst2action.data.seat + 1) % playercnt;
         }
@@ -7577,26 +7596,27 @@ function mingpai(seat, tiles) {
 
 // first 表示是否为第一次调用, 用于调试
 function leimingpai(seat, tile, type, first) {
-    if (first === undefined)
-        first = true;
-
     function preprocess() {
         let obj = {};
-        let mat = [seat, tile, type];
+        let mat = [seat, tile, type, first];
         for (let i = 0; i < mat.length; i++) {
             if (mat[i] === "babei" || mat[i] === "angang" || mat[i] === "jiagang" || mat[i] === "baxi")
                 obj.type = mat[i];
-            else if (typeof (mat[i]) == "number")
+            else if (typeof mat[i] == "boolean")
+                obj.first = mat[i];
+            else if (typeof mat[i] == "number")
                 obj.seat = mat[i];
-            else if (mat[i] !== undefined)
+            else if (typeof mat[i] == "string" && mat[i].length >= 2)
                 obj.tile = mat[i];
         }
-        return [obj.seat, obj.tile, obj.type];
+        return [obj.seat, obj.tile, obj.type, obj.first];
     }
 
-    [seat, tile, type] = preprocess();
+    [seat, tile, type, first] = preprocess();
 
     let lstaction = getlstaction();
+    if (first === undefined)
+        first = true;
     if (seat === undefined) {
         if (lstaction.name === "RecordNewRound")
             seat = ju;
@@ -8366,7 +8386,7 @@ function randompaishan(paishanhead = "", paishanback = "", reddora) {
         cnt[5] = cnt[14] = cnt[23] = 4;
         cnt[35] = cnt[36] = cnt[37] = 0;
         // 用 huapai 当做国标的花牌
-        if (typeof (editfunction) != "undefined")
+        if (is_guobiao_huapai() && typeof (editfunction) != "undefined")
             cnt[tiletoint(huapai, true)] = 8;
     }
 

@@ -22,6 +22,7 @@ editdata.config = {
         'mode': 1,
         'detail_rule': {
             '_guobiao': true,
+            '_guobiao_huapai': true,
         }
     }
 };

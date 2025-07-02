@@ -2069,6 +2069,8 @@ function hupai_guobiao(seat) {
         zhahu = true;
     if (!is_guobiao_no_8fanfu() && sudian < 8 * scale_points())
         zhahu = true;
+    if (cuohu[seat]) // 已错和的玩家再次和牌, 仍然是错和
+        zhahu = true;
     // 国标无法听花牌, 所以和拔北的花牌一定是诈和
     if (lstaction.name === "RecordBaBei" || lstaction.name === "RecordAnGangAddGang" && lstaction.data.type === 3)
         zhahu = true;
@@ -2090,8 +2092,8 @@ function hupai_guobiao(seat) {
             'hu_tile': hu_tile,
             'liqi': false,
             'ming': ming,
-            'point_rong': cuohu_points() * scale_points(),
-            'point_sum': cuohu_points() * scale_points(),
+            'point_rong': 3 * cuohu_points() * scale_points(),
+            'point_sum': 3 * cuohu_points() * scale_points(),
             'point_zimo_qin': cuohu_points() * scale_points(),
             'point_zimo_xian': cuohu_points() * scale_points(),
             'qinjia': qinjia,
@@ -2099,6 +2101,7 @@ function hupai_guobiao(seat) {
             'title_id': 0,
             'yiman': false,
             'zimo': zimo,
+            'cuohu': true,
         }
         playertiles[seat].length--;
         return ret;
@@ -3309,4 +3312,35 @@ function calcsudian_guobiao(x) {
     if (!(is_guobiao_no_8fanfu() || val >= 8))
         return -cuohu_points() * scale_points();
     return val * scale_points();
+}
+
+function addCuohu(CuohuInfo) {
+    let ret = {
+        'delta_scores': [],
+        'old_scores': scores.slice(),
+        'scores': [],
+        'zimo': CuohuInfo.zimo,
+        'seat': CuohuInfo.seat,
+    }
+    for (let i = 0; i < playercnt; i++)
+        if (i === CuohuInfo.seat)
+            delta_scores[i] = -3 * cuohu_points() * scale_points();
+        else
+            delta_scores[i] = cuohu_points() * scale_points();
+    ret.delta_scores = delta_scores.slice();
+
+    for (let i = 0; i < playercnt; i++) {
+        scores[i] = scores[i] + delta_scores[i];
+        delta_scores[i] = 0;
+    }
+    ret.scores = scores.slice();
+
+    actions.push({
+        'name': "RecordCuohu",
+        'data': {
+            'CuohuInfo': ret,
+        }
+    });
+    edit_online();
+    saveproject();
 }
