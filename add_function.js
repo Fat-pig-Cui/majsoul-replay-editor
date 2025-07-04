@@ -58,7 +58,7 @@ function editfunction() {
         K['doras'] && O['DesktopMgr'].Inst['WhenDoras'](K['doras'], !0);
         var V = K.seat
             , N = mjcore['MJPai']['Create'](K.tile)
-            , q = !(null == K['is_liqi'] || void 0 == K['is_liqi'] || !K['is_liqi'])
+            , q = !(null == K['is_liqi'] || void 0 === K['is_liqi'] || !K['is_liqi'])
             , _ = !1;
 
         // 添加内容: kailiqi
@@ -772,9 +772,9 @@ function editfunction() {
             I = 1200, d = X['CuohuInfo'], S = !1, P = [];
 
         if (d.zimo)
-            uiscript.UI_Huleshow.Inst.showZimo([Q.DesktopMgr.Inst.seat2LocalPosition(d.seat)]);
+            uiscript.UI_Huleshow.Inst.showZimo([Q.DesktopMgr.Inst.seat2LocalPosition(X.seat)]);
         else
-            uiscript.UI_Huleshow.Inst.showRong([Q.DesktopMgr.Inst.seat2LocalPosition(d.seat)]);
+            uiscript.UI_Huleshow.Inst.showRong([Q.DesktopMgr.Inst.seat2LocalPosition(X.seat)]);
 
         for (var B = 0; B < d['delta_scores']['length']; B++) {
             var m = {
@@ -805,14 +805,9 @@ function editfunction() {
         return 4000;
     }
     view.ActionCuohu.fastrecord = function (X) {
-        app.Log.log('ActionHule fastplay data:' + JSON['stringify'](X));
-        var A = X['CuohuInfo'];
-        view['DesktopMgr'].Inst['setScores'](A['scores']);
+        view['DesktopMgr'].Inst['setScores'](X['CuohuInfo']['scores']);
     }
 
-    var OnChoosedPai;
-    if (OnChoosedPai === undefined)
-        OnChoosedPai = view.ViewPai.prototype.OnChoosedPai
     view.ViewPai.prototype.OnChoosedPai = function () {
         try {
             var K = view['ERevealState'];
@@ -1068,11 +1063,6 @@ function editfunction() {
         return 0;
     }
 
-    var seat2LocalPosition, localPosition2Seat;
-    if (seat2LocalPosition === undefined)
-        seat2LocalPosition = view.DesktopMgr.prototype.seat2LocalPosition;
-    if (localPosition2Seat === undefined)
-        localPosition2Seat = view.DesktopMgr.prototype.localPosition2Seat;
     view.ERuleMode[view.ERuleMode.Liqi2 = 2] = "Liqi2";
     view.DesktopMgr.prototype.seat2LocalPosition = function (t) {
         if (this.rule_mode === view.ERuleMode.Liqi2) {

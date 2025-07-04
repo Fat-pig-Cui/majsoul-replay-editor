@@ -7,11 +7,9 @@
 以下番种主要根据 [雀渣平台](https://tziakcha.net) 规则(明暗杠设为5番, 有天地人和)
 
 对于诈和, 以及在 `'detail_rule'` 中没有设置 `'_guobiao_no_8fanfu'` 的情况下不足8番的错和,
-按照赔每家 `'detail_rule'` 中 `'_cuohu_points'` 的点数来设置, 默认是 10, 
-后面根据是否导入了 [add_function.js](../../add_function.js) 进行分支
-
-- 若已导入, 则按照是国标正常的错和逻辑, 停和陪打, 若该小局错和玩家后面再次和牌, 无论是否够番, 都是错和
-- 若未导入, 则错和后结束该小局, 没有陪打
+按照赔每家 `'detail_rule'` 中 `'_cuohu_points'` 设置的点数, 默认是 10, 若又设置了 `'_cuohupeida'` 
+且导入了 [add_function.js](../../add_function.js), 则诈和, 错和的玩家会听和陪打, 否则该小局结束, 
+已诈和, 错和的玩家再次和牌, 无论是否够番, 都是错和
 
 为了使得各家点数更加美观, `'detail_rule'` 中将各家及结算点数都放大了 `'_scale_points'` 倍, 默认是 100
 

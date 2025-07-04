@@ -1,5 +1,7 @@
 "use strict"
 
+var Qihu_fan = 8;
+
 // 国标麻将番种
 var guobiao_fanlist_once = true;
 
@@ -2063,19 +2065,19 @@ function hupai_guobiao(seat) {
     for (let i = 0; i < points.fans.length; i++)
         val = val + points.fans[i].val;
     // -------------------------------------------
-    let sudian = calcsudian_guobiao(points);
-    let zhahu = false;
-    if (calchupai(playertiles[seat]) === 0 || sudian === -cuohu_points() * scale_points())
+    let sudian_no_huapai = calcsudian_guobiao(points, true), sudian = calcsudian_guobiao(points);
+    let zhahu = false, is_cuohu = false;
+    if (calchupai(playertiles[seat]) === 0)
         zhahu = true;
-    if (!is_guobiao_no_8fanfu() && sudian < 8 * scale_points())
-        zhahu = true;
-    if (cuohu[seat]) // 已错和的玩家再次和牌, 仍然是错和
-        zhahu = true;
-    // 国标无法听花牌, 所以和拔北的花牌一定是诈和
+    // 国标无法听花牌, 所以和拔的花牌一定是诈和
     if (lstaction.name === "RecordBaBei" || lstaction.name === "RecordAnGangAddGang" && lstaction.data.type === 3)
         zhahu = true;
+    if (!is_guobiao_no_8fanfu() && sudian_no_huapai < Qihu_fan * scale_points())
+        is_cuohu = true;
+    if (cuohu[seat]) // 已错和的玩家再次和牌, 仍然是错和
+        is_cuohu = true;
 
-    if (zhahu) { // 诈和, 错和赔三家各 cuohu_points() * scale_points() 点
+    if (zhahu || is_cuohu) { // 诈和, 错和赔三家各 cuohu_points() * scale_points() 点
         for (let i = 0; i < playercnt; i++) {
             if (i === seat)
                 continue;
@@ -2086,7 +2088,7 @@ function hupai_guobiao(seat) {
             'count': 0,
             'doras': [],
             'li_doras': [],
-            'fans': [{'val': 0, 'id': 9000}],
+            'fans': points.fans,
             'fu': 0,
             'hand': hand,
             'hu_tile': hu_tile,
@@ -2103,24 +2105,27 @@ function hupai_guobiao(seat) {
             'zimo': zimo,
             'cuohu': true,
         }
-        playertiles[seat].length--;
+        if (zhahu)
+            ret.fans = [{'val': 0, 'id': 9000}]; // 诈和
+        if (!zimo)
+            playertiles[seat].length--;
         return ret;
     } else if (zimo) {
         for (let i = 0; i < playercnt; i++) {
             if (i === seat)
                 continue;
-            delta_scores[i] -= sudian + 8 * scale_points();
-            delta_scores[seat] += sudian + 8 * scale_points();
+            delta_scores[i] -= sudian + Qihu_fan * scale_points();
+            delta_scores[seat] += sudian + Qihu_fan * scale_points();
         }
     } else {
-        delta_scores[fangchong] -= sudian + 8 * scale_points();
-        delta_scores[seat] += sudian + 8 * scale_points();
+        delta_scores[fangchong] -= sudian + Qihu_fan * scale_points();
+        delta_scores[seat] += sudian + Qihu_fan * scale_points();
 
         for (let i = 0; i < playercnt; i++) {
             if (i === seat || i === fangchong)
                 continue;
-            delta_scores[i] -= 8 * scale_points();
-            delta_scores[seat] += 8 * scale_points();
+            delta_scores[i] -= Qihu_fan * scale_points();
+            delta_scores[seat] += Qihu_fan * scale_points();
         }
     }
     // ---------------------------------------------------
@@ -2166,7 +2171,7 @@ function calcfan_guobiao(tiles, seat, zimo) {
     }
 
     function updateret(x) {
-        if (x !== undefined && calcsudian_guobiao(x) > calcsudian_guobiao(ret))
+        if (calcsudian_guobiao(x) > calcsudian_guobiao(ret))
             ret = x;
     }
 
@@ -2178,7 +2183,7 @@ function calcfan_guobiao(tiles, seat, zimo) {
         for (let i = partitiontmp.length - 1; i >= 0; i--) {
             let tiles = partitiontmp[i].tile;
             // 新增 9 分类, 用于组合龙
-            if (partitiontmp[i].type === 0 || partitiontmp[i].type === 5 || partitiontmp[i].type === 9)
+            if (partitiontmp[i].type === 0 || partitiontmp[i].type === 5)
                 for (let j = 0; j <= 2; j++)
                     cnt2[tiletoint(tiles[j])]++;
             else if (partitiontmp[i].type === 1 || partitiontmp[i].type === 6)
@@ -2376,18 +2381,16 @@ function calcfan_guobiao(tiles, seat, zimo) {
                     hunquandai = false;
                 if (i !== 1 && i !== 9 && i !== 10 && i !== 18 && i !== 19 && i !== 27 && i < 28 && kezi[i] + typecnt[i][7] >= 1)
                     hunquandai = false;
-
             }
             // --------------------------
             let pinghu = true;
             if (duizi_num === 7)
                 pinghu = false;
-            for (let i = 1; i <= 34; i++) {
-                if (kezi[i] >= 1) // 有刻子
+            for (let i = 1; i <= 34; i++)
+                if (kezi[i] >= 1 || typecnt[i][7] === 1 && i >= 28 && i <= 34) { // 有刻子或雀头是字牌
                     pinghu = false;
-                if (typecnt[i][7] === 1 && i >= 28 && i <= 34) // 雀头是字牌
-                    pinghu = false;
-            }
+                    break;
+                }
             // --------------------------
             let sansetongshun = false, ersetongshun_num = 0;
             for (let i = 2; i <= 8; i++) {
@@ -2463,7 +2466,7 @@ function calcfan_guobiao(tiles, seat, zimo) {
             }
             if (flag_lvyise && !is_banned(8002)) {
                 ans.fans.push({'val': 88, 'id': 8002}); // 绿一色
-                // 不计混一色。如无发，可计清一色
+                // 不计 混一色
                 banfan(8048);
             }
             // 国标中的九莲对标立直麻将中的纯九
@@ -2504,7 +2507,7 @@ function calcfan_guobiao(tiles, seat, zimo) {
             // 64 番
             if (flag_qinglaotou && !is_banned(8007)) {
                 ans.fans.push({'val': 64, 'id': 8007}); // 清幺九
-                // 不计混幺九、碰碰和、全带幺、双同刻、幺九刻、无字
+                // 不计 混幺九, 碰碰和, 全带幺, 双同刻, 幺九刻, 无字
                 banfan([8017, 8047, 8054, 8066, 8074, 8077]);
             }
             if (xiaosixi && !is_banned(8008)) {
@@ -2592,7 +2595,7 @@ function calcfan_guobiao(tiles, seat, zimo) {
             // 七星不靠放到最后
             if (duizi_num === 7 && !is_banned(8018)) {
                 ans.fans.push({'val': 24, 'id': 8018}); // 七对
-                // 不计 不求人、门前清、单钓将
+                // 不计 不求人, 门前清, 单钓将
                 banfan([8055, 8063, 8080]);
             }
             let quanshuangke = true;
@@ -2604,7 +2607,7 @@ function calcfan_guobiao(tiles, seat, zimo) {
                 quanshuangke = false;
             if (quanshuangke && !is_banned(8020)) {
                 ans.fans.push({'val': 24, 'id': 8020}); // 全双刻
-                // 不计 碰碰和、断幺、无字
+                // 不计 碰碰和, 断幺, 无字
                 banfan([8047, 8069, 8077]);
             }
             if (qingyise && !is_banned(8021)) {
@@ -2615,7 +2618,7 @@ function calcfan_guobiao(tiles, seat, zimo) {
 
             if (santongshun && !is_banned(8022)) {
                 ans.fans.push({'val': 24, 'id': 8022}); // 一色三同顺
-                // 不计 一色三节高、一般高
+                // 不计 一色三节高, 一般高
                 banfan([8023, 8070]);
             }
 
@@ -2677,7 +2680,7 @@ function calcfan_guobiao(tiles, seat, zimo) {
                 sanseshuanglonghui = true;
             if (sanseshuanglonghui && !is_banned(8028)) {
                 ans.fans.push({'val': 16, 'id': 8028}); // 三色双龙会
-                // 不计 喜相逢、老少副、无字、平和
+                // 不计 喜相逢, 老少副, 无字, 平和
                 banfan([8071, 8073, 8077, 8064]);
             }
             let sanbugao = false;
@@ -2857,12 +2860,8 @@ function calcfan_guobiao(tiles, seat, zimo) {
             let quanqiuren = true;
             if (zimo)
                 quanqiuren = false;
-            if (fulu[seat].length !== 4)
+            if (fulucnt !== 4)
                 quanqiuren = false;
-            else
-                for (let i = 0; i < 4; i++)
-                    if (fulu[seat][i].type === 3)
-                        quanqiuren = false;
 
             if (quanqiuren && !is_banned(8051)) {
                 ans.fans.push({'val': 6, 'id': 8051}); // 全求人
@@ -3025,20 +3024,16 @@ function calcfan_guobiao(tiles, seat, zimo) {
                 ans.fans.push({'val': 1, 'id': 8075}); // 明杠
 
             let queyimen = false;
-            let havewanzi = false, havebingzi = false, havesuozi = false;
+            let havewanzi = 0, havebingzi = 0, havesuozi = 0;
             for (let i = 1; i <= 9; i++) {
                 if (cnt2[i] >= 1)
-                    havewanzi = true;
+                    havewanzi = 1;
                 if (cnt2[i + 9] >= 1)
-                    havebingzi = true;
+                    havebingzi = 1;
                 if (cnt2[i + 18] >= 1)
-                    havesuozi = true;
+                    havesuozi = 1;
             }
-            if (havewanzi && havebingzi && !havesuozi)
-                queyimen = true;
-            if (havewanzi && !havebingzi && havesuozi)
-                queyimen = true;
-            if (!havewanzi && havebingzi && havesuozi)
+            if (havewanzi + havebingzi + havesuozi === 2)
                 queyimen = true;
             if (queyimen && !is_banned(8076))
                 ans.fans.push({'val': 1, 'id': 8076}); // 缺一门
@@ -3101,9 +3096,6 @@ function calcfan_guobiao(tiles, seat, zimo) {
             // 无番和
             if (ans.fans.length === 0 && !is_banned(8042))
                 ans.fans.push({'val': 8, 'id': 8042}); // 无番和
-
-            if (calcsudian_guobiao(ans) === -cuohu_points() * scale_points())
-                return ans;
             // ---------------------------
             // ---------------------------
             // ---------------------------
@@ -3112,10 +3104,8 @@ function calcfan_guobiao(tiles, seat, zimo) {
             // 花牌
             let huapai_num = 0;
             for (let i = 0; i < fulu[seat].length; i++)
-                if (fulu[seat][i].type === 4) {
-                    cnt2[tiletoint(fulu[seat][i].tile[0])]++;
+                if (fulu[seat][i].type === 4)
                     huapai_num++;
-                }
             if (huapai_num >= 1 && huapai_num <= 8)
                 ans.fans.push({'val': huapai_num, 'id': 8090 + huapai_num});
             else if (huapai_num >= 9)
@@ -3300,17 +3290,16 @@ function calcfan_guobiao(tiles, seat, zimo) {
             }
         return tiles;
     }
-
-    ret.fu = 30;
+    if (ret.fu === 0)
+        ret.fu = 25;
     return ret;
 }
 
-function calcsudian_guobiao(x) {
+function calcsudian_guobiao(x, no_huapai=false) {
     let val = 0;
     for (let i = 0; i < x.fans.length; i++)
-        val = val + x.fans[i].val;
-    if (!(is_guobiao_no_8fanfu() || val >= 8))
-        return -cuohu_points() * scale_points();
+        if (!(no_huapai && x.fans[i].id >= 8091 && x.fans[i].id <= 8099))
+            val = val + x.fans[i].val;
     return val * scale_points();
 }
 
@@ -3320,7 +3309,6 @@ function addCuohu(CuohuInfo) {
         'old_scores': scores.slice(),
         'scores': [],
         'zimo': CuohuInfo.zimo,
-        'seat': CuohuInfo.seat,
     }
     for (let i = 0; i < playercnt; i++)
         if (i === CuohuInfo.seat)
@@ -3339,6 +3327,7 @@ function addCuohu(CuohuInfo) {
         'name': "RecordCuohu",
         'data': {
             'CuohuInfo': ret,
+            'seat': CuohuInfo.seat,
         }
     });
     edit_online();

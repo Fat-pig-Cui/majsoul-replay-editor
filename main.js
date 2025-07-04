@@ -2042,7 +2042,9 @@ function editgame(editdata) {
 
 // 回放接口, 在 edit 中重写, 并在 canceledit 中复原
 // 其中 showRecord, showInfo_record, setFanFu 的重写在 guobiao.js 中
+// OnChoosedPai, seat2LocalPosition, localPosition2Seat 在 add_function.js 中
 var resetData, checkPaiPu, showRecord, showInfo_record, setFanFu;
+var OnChoosedPai, seat2LocalPosition, localPosition2Seat;
 
 function edit(x) {
     try {
@@ -2056,6 +2058,12 @@ function edit(x) {
             showInfo_record = uiscript.UI_Win.prototype._showInfo_record;
         if (setFanFu === undefined)
             setFanFu = uiscript.UI_Win.prototype.setFanFu;
+        if (OnChoosedPai === undefined)
+            OnChoosedPai = view.ViewPai.prototype.OnChoosedPai
+        if (seat2LocalPosition === undefined)
+            seat2LocalPosition = view.DesktopMgr.prototype.seat2LocalPosition;
+        if (localPosition2Seat === undefined)
+            localPosition2Seat = view.DesktopMgr.prototype.localPosition2Seat;
 
         if (x === undefined)
             x = JSON.parse(JSON.stringify(editdata));
@@ -2187,8 +2195,6 @@ function edit(x) {
         // 重写 resetData 主要是为了切换视角时数据不复原, 如果不需要切换视角则可以不用管
         uiscript.UI_Replay.prototype.resetData = function () {
             let _ = resetData.call(this);
-            if (typeof (editfunction2) != "undefined")
-                editfunction2();
             editgame(x);
             return _;
         }
@@ -3141,16 +3147,20 @@ function is_guobiao_lianzhuang() {
     return !!(config && config.mode && config.mode.detail_rule && config.mode.detail_rule._guobiao_lianzhuang);
 }
 
+function scale_points() {
+    if (!!(config && config.mode && config.mode.detail_rule && typeof (config.mode.detail_rule._scale_points) == "number"))
+        return config.mode.detail_rule._scale_points;
+    return 100;
+}
+
 function cuohu_points() {
     if (!!(config && config.mode && config.mode.detail_rule && typeof (config.mode.detail_rule._cuohu_points) == "number"))
         return config.mode.detail_rule._cuohu_points;
     return 10;
 }
 
-function scale_points() {
-    if (!!(config && config.mode && config.mode.detail_rule && typeof (config.mode.detail_rule._scale_points) == "number"))
-        return config.mode.detail_rule._scale_points;
-    return 100;
+function is_cuohupeida() {
+    return !!(config && config.mode && config.mode.detail_rule && config.mode.detail_rule._cuohupeida);
 }
 
 // ---------------------------------
@@ -3801,29 +3811,29 @@ function calcsudian(x, type = 0) {
 
     let val = 0;
     for (let i = 0; i < x.fans.length; i++)
-        val = val + x.fans[i].val;
+        val += x.fans[i].val;
     if (is_qingtianjing())
         return x.fu * Math.pow(2, val + 2);
 
     if (x.yiman)
-        return 8000 * val + type * val + type * x.fu / 5 * 0.01;
+        return 8000 * val + type * val + type * x.fu * 0.01;
 
     else if (val < fanfu)
         return -2000;
     else if (val === 5)
-        return 2000 + type * val + type * x.fu / 5 * 0.01;
+        return 2000 + type * val + type * x.fu * 0.01;
     else if (val === 6 || val === 7)
-        return 3000 + type * val + type * x.fu / 5 * 0.01;
+        return 3000 + type * val + type * x.fu * 0.01;
     else if (val >= 8 && val <= 10)
-        return 4000 + type * val + type * x.fu / 5 * 0.01;
+        return 4000 + type * val + type * x.fu * 0.01;
     else if (val === 11 || val === 12 || (val >= 13 && no_leijiyiman()))
-        return 6000 + type * val + type * x.fu / 5 * 0.01;
+        return 6000 + type * val + type * x.fu * 0.01;
     else if (val >= 13)
-        return 8000 + type * val + type * x.fu / 5 * 0.01;
+        return 8000 + type * val + type * x.fu * 0.01;
     else if (type === 0 && is_qieshangmanguan() && (val === 4 && x.fu === 30 || val === 3 && x.fu === 60))
         return 2000;
     else
-        return Math.min(Math.pow(2, val + 2) * x.fu, 2000) + type * val + type * x.fu / 5 * 0.01;
+        return Math.min(Math.pow(2, val + 2) * x.fu, 2000) + type * val + type * x.fu * 0.01;
 }
 
 // 0: 明顺    1: 明刻   2: 明杠   3: 暗杠
@@ -6650,7 +6660,7 @@ function hupai(x, type) {
         } else { // 国标模式
             let ret = [];
             ret.push(hupai_guobiao(x[0]));
-            if (typeof(editfunction) != "undefined" && ret[0].cuohu) {
+            if (is_cuohupeida() && typeof(editfunction) != "undefined" && ret[0].cuohu) {
                 addCuohu(ret[0]);
                 cuohu[x[0]] = true;
                 return;
@@ -7602,11 +7612,11 @@ function leimingpai(seat, tile, type, first) {
         for (let i = 0; i < mat.length; i++) {
             if (mat[i] === "babei" || mat[i] === "angang" || mat[i] === "jiagang" || mat[i] === "baxi")
                 obj.type = mat[i];
-            else if (typeof mat[i] == "boolean")
+            else if (typeof (mat[i]) == "boolean")
                 obj.first = mat[i];
-            else if (typeof mat[i] == "number")
+            else if (typeof (mat[i]) == "number")
                 obj.seat = mat[i];
-            else if (typeof mat[i] == "string" && mat[i].length >= 2)
+            else if (typeof (mat[i]) == "string" && mat[i].length >= 2)
                 obj.tile = mat[i];
         }
         return [obj.seat, obj.tile, obj.type, obj.first];
