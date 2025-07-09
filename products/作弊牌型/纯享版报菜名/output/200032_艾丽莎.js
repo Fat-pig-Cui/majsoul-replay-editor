@@ -1,16 +1,16 @@
 loadproject();
 
-editdata.player_datas[0].nickname = "艾丽莎-契约";
-editdata.player_datas[1].nickname = "择芳意";
-editdata.player_datas[2].nickname = "天黑请闭眼";
-editdata.player_datas[3].nickname = "心跳时速";
+editdata.player_datas[0].nickname = '艾丽莎-契约';
+editdata.player_datas[1].nickname = '择芳意';
+editdata.player_datas[2].nickname = '天黑请闭眼';
+editdata.player_datas[3].nickname = '心跳时速';
 editdata.player_datas[0].avatar_id = 403202;
 editdata.player_datas[1].avatar_id = 403204;
 editdata.player_datas[2].avatar_id = 403205;
 editdata.player_datas[3].avatar_id = 403206;
 
 editdata.player_datas[0].views = editdata.player_datas[1].views = editdata.player_datas[2].views = editdata.player_datas[3].views = [
-    {"slot": 6, "item_id": 305803}, // 桌布-堆雪人
+    {'slot': 6, 'item_id': 305803}, // 桌布-堆雪人
 ];
 
 editdata.config = {
@@ -67,11 +67,11 @@ hupaioneplayer = function (seat) {
         'zimo': true,
     };
 }
-tiles0 = "1112340678999m7z";
-tiles1 = "1112340678999p";
-tiles2 = "5555555555555z";
-tiles3 = "1112340678999s";
-paishan = randompaishan("75z", "7z....");
+tiles0 = '1112340678999m7z';
+tiles1 = '1112340678999p';
+tiles2 = '5555555555555z';
+tiles3 = '1112340678999s';
+paishan = randompaishan('75z', '7z....');
 roundbegin();
 qiepai();
 normalmoqie();
@@ -119,11 +119,11 @@ hupaioneplayer = function (seat) {
         'zimo': true,
     };
 }
-tiles0 = "1112340678999m7z";
-tiles1 = "1112340678999p";
-tiles2 = "5555555555555z";
-tiles3 = "1112340678999s";
-paishan = randompaishan("75z", "7z....");
+tiles0 = '1112340678999m7z';
+tiles1 = '1112340678999p';
+tiles2 = '5555555555555z';
+tiles3 = '1112340678999s';
+paishan = randompaishan('75z', '7z....');
 roundbegin();
 qiepai();
 normalmoqie();
@@ -171,11 +171,11 @@ hupaioneplayer = function (seat) {
         'zimo': true,
     };
 }
-tiles0 = "1112340678999m7z";
-tiles1 = "1112340678999p";
-tiles2 = "5555555555555z";
-tiles3 = "1112340678999s";
-paishan = randompaishan("75z", "7z....");
+tiles0 = '1112340678999m7z';
+tiles1 = '1112340678999p';
+tiles2 = '5555555555555z';
+tiles3 = '1112340678999s';
+paishan = randompaishan('75z', '7z....');
 roundbegin();
 qiepai();
 normalmoqie();
@@ -223,11 +223,11 @@ hupaioneplayer = function (seat) {
         'zimo': true,
     };
 }
-tiles0 = "1112340678999m7z";
-tiles1 = "1112340678999p";
-tiles2 = "5555555555555z";
-tiles3 = "1112340678999s";
-paishan = randompaishan("75z", "7z....");
+tiles0 = '1112340678999m7z';
+tiles1 = '1112340678999p';
+tiles2 = '5555555555555z';
+tiles3 = '1112340678999s';
+paishan = randompaishan('75z', '7z....');
 roundbegin();
 qiepai();
 normalmoqie();
@@ -270,11 +270,11 @@ hupaioneplayer = function (seat) {
         'zimo': true,
     };
 }
-tiles0 = "1112340678999m7z";
-tiles1 = "1112340678999p";
-tiles2 = "5555555555555z";
-tiles3 = "1112340678999s";
-paishan = randompaishan("75z", "7z....");
+tiles0 = '1112340678999m7z';
+tiles1 = '1112340678999p';
+tiles2 = '5555555555555z';
+tiles3 = '1112340678999s';
+paishan = randompaishan('75z', '7z....');
 roundbegin();
 qiepai();
 normalmoqie();
@@ -317,11 +317,11 @@ hupaioneplayer = function (seat) {
         'zimo': true,
     };
 }
-tiles0 = "1112340678999m7z";
-tiles1 = "1112340678999p";
-tiles2 = "5555555555555z";
-tiles3 = "1112340678999s";
-paishan = randompaishan("75z", "7z....");
+tiles0 = '1112340678999m7z';
+tiles1 = '1112340678999p';
+tiles2 = '5555555555555z';
+tiles3 = '1112340678999s';
+paishan = randompaishan('75z', '7z....');
 roundbegin();
 qiepai();
 normalmoqie();
@@ -369,11 +369,11 @@ hupaioneplayer = function (seat) {
         'zimo': true,
     };
 }
-tiles0 = "1112340678999m7z";
-tiles1 = "1112340678999p";
-tiles2 = "5555555555555z";
-tiles3 = "1112340678999s";
-paishan = randompaishan("75z", "7z....");
+tiles0 = '1112340678999m7z';
+tiles1 = '1112340678999p';
+tiles2 = '5555555555555z';
+tiles3 = '1112340678999s';
+paishan = randompaishan('75z', '7z....');
 roundbegin();
 qiepai();
 normalmoqie();

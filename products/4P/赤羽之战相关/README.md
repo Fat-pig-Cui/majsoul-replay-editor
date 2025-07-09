@@ -41,7 +41,7 @@
 
 `type` : 0 表示逆时针换牌, 1 表示对家换牌, 2 表示顺时针换牌
 
-例子: `huansanzhang("9p79s", "333s", "78p8s", "333z", 1);`
+例子: `huansanzhang('9p79s', '333s', '78p8s', '333z', 1);`
 
 ### 和牌: `hupai(allseats, type)`
 
@@ -54,7 +54,7 @@
 
 `gaps` : 表示所有人的定缺花色, 四个字母从前到后分别代表 `seat` 从 0 到 3 的四名玩家
 
-例子: `dingque("smps")`
+例子: `dingque('smps')`
 
 ### 开杠击飞(赤羽之战): `roundend()`
 

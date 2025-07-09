@@ -1,9 +1,9 @@
 loadproject();
 
-editdata.player_datas[0].nickname = "一姬-契约";
-editdata.player_datas[1].nickname = "新年初诣";
-editdata.player_datas[2].nickname = "一姬当千";
-editdata.player_datas[3].nickname = "绮春歌";
+editdata.player_datas[0].nickname = '一姬-契约';
+editdata.player_datas[1].nickname = '新年初诣';
+editdata.player_datas[2].nickname = '一姬当千';
+editdata.player_datas[3].nickname = '绮春歌';
 editdata.player_datas[0].avatar_id = 400102;
 editdata.player_datas[1].avatar_id = 400104;
 editdata.player_datas[2].avatar_id = 400105;
@@ -12,9 +12,9 @@ editdata.player_datas[3].avatar_id = 400106;
 // 头像框-赤丹霞羽
 editdata.player_datas[0].avatar_frame = editdata.player_datas[1].avatar_frame = editdata.player_datas[2].avatar_frame = editdata.player_datas[3].avatar_frame = 30550012;
 editdata.player_datas[0].views = editdata.player_datas[1].views = editdata.player_datas[2].views = editdata.player_datas[3].views = [
-    {"slot": 1, "item_id": 30520006}, // 和牌-落羽涅槃
-    {"slot": 2, "item_id": 30530006}, // 立直-有凤来仪
-    {"slot": 5, "item_id": 30550012}, // 头像框-赤丹霞羽
+    {'slot': 1, 'item_id': 30520006}, // 和牌-落羽涅槃
+    {'slot': 2, 'item_id': 30530006}, // 立直-有凤来仪
+    {'slot': 5, 'item_id': 30550012}, // 头像框-赤丹霞羽
 ];
 
 editdata.config = {
@@ -29,43 +29,43 @@ editdata.config = {
 };
 
 // 第1局: 东亲, 南起 纯正九莲宝灯
-tiles0 = "0m123456789p1114z";
-tiles1 = "1112345678999m";
-tiles2 = "1112340678999p";
-tiles3 = "1112340678999s";
+tiles0 = '0m123456789p1114z';
+tiles1 = '1112345678999m';
+tiles2 = '1112340678999p';
+tiles3 = '1112340678999s';
 paishan = randompaishan();
 roundbegin();
-qiepai("0m");
+qiepai('0m');
 hupai();
 
 // 第2局: 南亲, 南起 四暗刻单骑
-tiles1 = "222p222s11122267z";
-tiles2 = "1112340678999m";
-tiles3 = "1112340678999p";
-tiles0 = "1112340678999s";
-paishan = randompaishan("6z");
+tiles1 = '222p222s11122267z';
+tiles2 = '1112340678999m';
+tiles3 = '1112340678999p';
+tiles0 = '1112340678999s';
+paishan = randompaishan('6z');
 roundbegin();
 qiepai();
 normalmoqie();
 hupai();
 
 // 第3局: 南亲, 南起 国士无双十三面
-tiles1 = "139m19p19s1234567z";
-tiles2 = "2223405567888m";
-tiles3 = "1112340678999p";
-tiles0 = "1112340678999s";
-paishan = randompaishan("1z");
+tiles1 = '139m19p19s1234567z';
+tiles2 = '2223405567888m';
+tiles3 = '1112340678999p';
+tiles0 = '1112340678999s';
+paishan = randompaishan('1z');
 roundbegin();
-qiepai("3m");
+qiepai('3m');
 normalmoqie();
 hupai();
 
 // 第4局: 南亲, 南起 大四喜
-tiles1 = "22m111222333445z";
-tiles2 = "1112340678999m";
-tiles3 = "1112340678999p";
-tiles0 = "1112340678999s";
-paishan = randompaishan("54z");
+tiles1 = '22m111222333445z';
+tiles2 = '1112340678999m';
+tiles3 = '1112340678999p';
+tiles0 = '1112340678999s';
+paishan = randompaishan('54z');
 roundbegin();
 qiepai();
 normalmoqie(2);

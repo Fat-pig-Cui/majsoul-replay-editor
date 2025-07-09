@@ -2,10 +2,10 @@ loadproject();
 
 // 川麻的理论最大牌型是 花天月地清十八罗汉
 
-editdata.player_datas[0].nickname = "一姬-契约";
-editdata.player_datas[1].nickname = "新年初诣";
-editdata.player_datas[2].nickname = "一姬当千";
-editdata.player_datas[3].nickname = "绮春歌";
+editdata.player_datas[0].nickname = '一姬-契约';
+editdata.player_datas[1].nickname = '新年初诣';
+editdata.player_datas[2].nickname = '一姬当千';
+editdata.player_datas[3].nickname = '绮春歌';
 editdata.player_datas[0].avatar_id = 400102;
 editdata.player_datas[1].avatar_id = 400104;
 editdata.player_datas[2].avatar_id = 400105;
@@ -24,16 +24,16 @@ editdata.config = {
     }
 };
 
-tiles0 = "22335777889p159s";
-tiles1 = "2589m445569p159s";
-tiles2 = "112346689p3467s";
-tiles3 = "114699m469p3467s";
-paishan = randompaishan("", "23785p");
+tiles0 = '22335777889p159s';
+tiles1 = '2589m445569p159s';
+tiles2 = '112346689p3467s';
+tiles3 = '114699m469p3467s';
+paishan = randompaishan('', '23785p');
 roundbegin();
-huansanzhang("159s", "159s", "238p", "469p", 1);
-dingque("msmp")
-qiepai("9p");
-mingqiepai("2m");
+huansanzhang('159s', '159s', '238p', '469p', 1);
+dingque('msmp')
+qiepai('9p');
+mingqiepai('2m');
 normalmoqie(50);
 mopai();
 combomopai(4);

@@ -9,21 +9,21 @@ loadproject();
 // 桌布-冲鸭！
 // 牌背-浪花朵朵
 
-editdata.player_datas[0].nickname = "三上千织";
-editdata.player_datas[1].nickname = "泽尼娅";
-editdata.player_datas[2].nickname = "白石奈奈";
-editdata.player_datas[3].nickname = "五十岚阳菜";
+editdata.player_datas[0].nickname = '三上千织';
+editdata.player_datas[1].nickname = '泽尼娅';
+editdata.player_datas[2].nickname = '白石奈奈';
+editdata.player_datas[3].nickname = '五十岚阳菜';
 editdata.player_datas[0].avatar_id = 400404;
 editdata.player_datas[1].avatar_id = 400904;
 editdata.player_datas[2].avatar_id = 401803;
 editdata.player_datas[3].avatar_id = 402003;
 
 editdata.player_datas[0].views = editdata.player_datas[1].views = editdata.player_datas[2].views = editdata.player_datas[3].views = [
-    {"slot": 0, "item_id": 305604}, // 立直棒-乘风破浪
-    {"slot": 1, "item_id": 305208}, // 和牌-海浪的馈赠
-    {"slot": 2, "item_id": 305308}, // 立直-浪之声
-    {"slot": 6, "item_id": 305802}, // 桌布-冲鸭！
-    {"slot": 7, "item_id": 305702}, // 牌背-浪花朵朵
+    {'slot': 0, 'item_id': 305604}, // 立直棒-乘风破浪
+    {'slot': 1, 'item_id': 305208}, // 和牌-海浪的馈赠
+    {'slot': 2, 'item_id': 305308}, // 立直-浪之声
+    {'slot': 6, 'item_id': 305802}, // 桌布-冲鸭！
+    {'slot': 7, 'item_id': 305702}, // 牌背-浪花朵朵
 ];
 
 editdata.config = {

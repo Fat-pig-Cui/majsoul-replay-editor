@@ -1,9 +1,9 @@
 loadproject();
 
-editdata.player_datas[0].nickname = "汪次郎-契约";
-editdata.player_datas[1].nickname = "化妆舞会";
-editdata.player_datas[2].nickname = "假日之滨";
-editdata.player_datas[3].nickname = "冬日心愿簿";
+editdata.player_datas[0].nickname = '汪次郎-契约';
+editdata.player_datas[1].nickname = '化妆舞会';
+editdata.player_datas[2].nickname = '假日之滨';
+editdata.player_datas[3].nickname = '冬日心愿簿';
 editdata.player_datas[0].avatar_id = 401202;
 editdata.player_datas[1].avatar_id = 401203;
 editdata.player_datas[2].avatar_id = 401204;
@@ -14,7 +14,7 @@ editdata.player_datas[0].title = editdata.player_datas[1].title = editdata.playe
 // 主播(猫爪子)认证
 editdata.player_datas[0].verified = editdata.player_datas[1].verified = editdata.player_datas[2].verified = editdata.player_datas[3].verified = 1;
 editdata.player_datas[0].views = editdata.player_datas[1].views = editdata.player_datas[2].views = editdata.player_datas[3].views = [
-    {"slot": 6, "item_id": 305810}, // 桌布-中光波——————！
+    {'slot': 6, 'item_id': 305810}, // 桌布-中光波——————！
 ];
 
 editdata.config = {
@@ -71,11 +71,11 @@ hupaioneplayer = function (seat) {
         'zimo': true,
     };
 }
-tiles0 = "1112340678999m7z";
-tiles1 = "1112340678999p";
-tiles2 = "5555555555555z";
-tiles3 = "1112340678999s";
-paishan = randompaishan("75z", "7z....");
+tiles0 = '1112340678999m7z';
+tiles1 = '1112340678999p';
+tiles2 = '5555555555555z';
+tiles3 = '1112340678999s';
+paishan = randompaishan('75z', '7z....');
 roundbegin();
 qiepai();
 normalmoqie();
@@ -123,11 +123,11 @@ hupaioneplayer = function (seat) {
         'zimo': true,
     };
 }
-tiles0 = "1112340678999m7z";
-tiles1 = "1112340678999p";
-tiles2 = "5555555555555z";
-tiles3 = "1112340678999s";
-paishan = randompaishan("75z", "7z....");
+tiles0 = '1112340678999m7z';
+tiles1 = '1112340678999p';
+tiles2 = '5555555555555z';
+tiles3 = '1112340678999s';
+paishan = randompaishan('75z', '7z....');
 roundbegin();
 qiepai();
 normalmoqie();
@@ -175,11 +175,11 @@ hupaioneplayer = function (seat) {
         'zimo': true,
     };
 }
-tiles0 = "1112340678999m7z";
-tiles1 = "1112340678999p";
-tiles2 = "5555555555555z";
-tiles3 = "1112340678999s";
-paishan = randompaishan("75z", "7z....");
+tiles0 = '1112340678999m7z';
+tiles1 = '1112340678999p';
+tiles2 = '5555555555555z';
+tiles3 = '1112340678999s';
+paishan = randompaishan('75z', '7z....');
 roundbegin();
 qiepai();
 normalmoqie();
@@ -227,11 +227,11 @@ hupaioneplayer = function (seat) {
         'zimo': true,
     };
 }
-tiles0 = "1112340678999m7z";
-tiles1 = "1112340678999p";
-tiles2 = "5555555555555z";
-tiles3 = "1112340678999s";
-paishan = randompaishan("75z", "7z....");
+tiles0 = '1112340678999m7z';
+tiles1 = '1112340678999p';
+tiles2 = '5555555555555z';
+tiles3 = '1112340678999s';
+paishan = randompaishan('75z', '7z....');
 roundbegin();
 qiepai();
 normalmoqie();
@@ -274,11 +274,11 @@ hupaioneplayer = function (seat) {
         'zimo': true,
     };
 }
-tiles0 = "1112340678999m7z";
-tiles1 = "1112340678999p";
-tiles2 = "5555555555555z";
-tiles3 = "1112340678999s";
-paishan = randompaishan("75z", "7z....");
+tiles0 = '1112340678999m7z';
+tiles1 = '1112340678999p';
+tiles2 = '5555555555555z';
+tiles3 = '1112340678999s';
+paishan = randompaishan('75z', '7z....');
 roundbegin();
 qiepai();
 normalmoqie();
@@ -321,11 +321,11 @@ hupaioneplayer = function (seat) {
         'zimo': true,
     };
 }
-tiles0 = "1112340678999m7z";
-tiles1 = "1112340678999p";
-tiles2 = "5555555555555z";
-tiles3 = "1112340678999s";
-paishan = randompaishan("75z", "7z....");
+tiles0 = '1112340678999m7z';
+tiles1 = '1112340678999p';
+tiles2 = '5555555555555z';
+tiles3 = '1112340678999s';
+paishan = randompaishan('75z', '7z....');
 roundbegin();
 qiepai();
 normalmoqie();
@@ -373,11 +373,11 @@ hupaioneplayer = function (seat) {
         'zimo': true,
     };
 }
-tiles0 = "1112340678999m7z";
-tiles1 = "1112340678999p";
-tiles2 = "5555555555555z";
-tiles3 = "1112340678999s";
-paishan = randompaishan("75z", "7z....");
+tiles0 = '1112340678999m7z';
+tiles1 = '1112340678999p';
+tiles2 = '5555555555555z';
+tiles3 = '1112340678999s';
+paishan = randompaishan('75z', '7z....');
 roundbegin();
 qiepai();
 normalmoqie();

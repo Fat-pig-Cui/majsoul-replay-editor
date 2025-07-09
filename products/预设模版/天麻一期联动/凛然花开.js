@@ -1,20 +1,20 @@
 loadproject();
 
-editdata.player_datas[0].nickname = "宫永咲-凛然花开";
-editdata.player_datas[1].nickname = "原村和-凛然花开";
-editdata.player_datas[2].nickname = "天江衣-凛然花开";
-editdata.player_datas[3].nickname = "宫永照-凛然花开";
+editdata.player_datas[0].nickname = '宫永咲-凛然花开';
+editdata.player_datas[1].nickname = '原村和-凛然花开';
+editdata.player_datas[2].nickname = '天江衣-凛然花开';
+editdata.player_datas[3].nickname = '宫永照-凛然花开';
 editdata.player_datas[0].avatar_id = 403403;
 editdata.player_datas[1].avatar_id = 403503;
 editdata.player_datas[2].avatar_id = 403603;
 editdata.player_datas[3].avatar_id = 403703;
 
 editdata.player_datas[0].views = editdata.player_datas[1].views = editdata.player_datas[2].views = editdata.player_datas[3].views = [
-    {"slot": 0, "item_id": 308003}, // 立直棒-墨西哥卷饼
-    {"slot": 1, "item_id": 308001}, // 和牌-龙卷雷霆
-    {"slot": 2, "item_id": 308002}, // 立直-花天月地
-    {"slot": 6, "item_id": 308004}, // 桌布-赛间小憩
-    {"slot": 7, "item_id": 308005}, // 牌背-艾托企鹅
+    {'slot': 0, 'item_id': 308003}, // 立直棒-墨西哥卷饼
+    {'slot': 1, 'item_id': 308001}, // 和牌-龙卷雷霆
+    {'slot': 2, 'item_id': 308002}, // 立直-花天月地
+    {'slot': 6, 'item_id': 308004}, // 桌布-赛间小憩
+    {'slot': 7, 'item_id': 308005}, // 牌背-艾托企鹅
 ];
 
 editdata.config = {

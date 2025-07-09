@@ -1,9 +1,9 @@
 loadproject();
 
-editdata.player_datas[0].nickname = "电脑0";
-editdata.player_datas[1].nickname = "电脑1";
-editdata.player_datas[2].nickname = "电脑2";
-editdata.player_datas[3].nickname = "电脑3";
+editdata.player_datas[0].nickname = '电脑0';
+editdata.player_datas[1].nickname = '电脑1';
+editdata.player_datas[2].nickname = '电脑2';
+editdata.player_datas[3].nickname = '电脑3';
 editdata.player_datas[0].avatar_id = 400101;
 editdata.player_datas[1].avatar_id = 400101;
 editdata.player_datas[2].avatar_id = 400101;
@@ -29,14 +29,14 @@ editdata.config = {
     }
 };
 
-tiles0 = "1112378999m5z406p";
-tiles1 = "1112378999s555s";
-tiles2 = "11123p78999p406m";
-tiles3 = "4556m345567p406s";
-paishan = decompose("555555z5m5555555555555555555555555555555555555555555555555555555555555555555555555555z");
+tiles0 = '1112378999m5z406p';
+tiles1 = '1112378999s555s';
+tiles2 = '11123p78999p406m';
+tiles3 = '4556m345567p406s';
+paishan = decompose('555555z5m5555555555555555555555555555555555555555555555555555555555555555555555555555z');
 roundbegin();
-huansanzhang("406p", "555s", "406m", "406s", 1);
-qiepai("5z");
+huansanzhang('406p', '555s', '406m', '406s', 1);
+qiepai('5z');
 mopai();
 for (let i = 0; i < 6; i++) {
     qiepai();
@@ -49,14 +49,14 @@ for (let i = 62; i >= 0; i--) {
 }
 notileliuju();
 
-tiles1 = "19m19p19s1234z6s550m";
-tiles2 = "12345s12345m406p";
-tiles3 = "1122288999m556z";
-tiles0 = "1112378999p6m11s";
-paishan = randompaishan("11z8m17z");
+tiles1 = '19m19p19s1234z6s550m';
+tiles2 = '12345s12345m406p';
+tiles3 = '1122288999m556z';
+tiles0 = '1112378999p6m11s';
+paishan = randompaishan('11z8m17z');
 roundbegin();
-huansanzhang("6m11s", "550m", "406p", "556z", 1);
-qiepai("6s");
+huansanzhang('6m11s', '550m', '406p', '556z', 1);
+qiepai('6s');
 hupai(2);
 for (let i = 0; i < 3; i++) {
     mopai();
@@ -68,11 +68,11 @@ qiepai();
 mopai();
 hupai(true);
 
-tiles2 = "8s6667788p111m9p9m9s";
-tiles3 = "111222z4446z333s";
-tiles0 = "1m1p1s1234567z78p8s";
-tiles1 = "222444s666s6z333z";
-paishan = randompaishan("6z9m");
+tiles2 = '8s6667788p111m9p9m9s';
+tiles3 = '111222z4446z333s';
+tiles0 = '1m1p1s1234567z78p8s';
+tiles1 = '222444s666s6z333z';
+paishan = randompaishan('6z9m');
 roundbegin();
-huansanzhang("78p8s", "333z", "9p9m9s", "333s", 1);
+huansanzhang('78p8s', '333z', '9p9m9s', '333s', 1);
 hupai(true);

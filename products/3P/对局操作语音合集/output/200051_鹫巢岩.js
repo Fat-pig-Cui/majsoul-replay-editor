@@ -1,18 +1,18 @@
 loadproject();
 
-editdata.player_datas[0].nickname = "鹫巢岩-契约";
-editdata.player_datas[1].nickname = "鹫巢岩";
-editdata.player_datas[2].nickname = "光暗对决";
+editdata.player_datas[0].nickname = '鹫巢岩-契约';
+editdata.player_datas[1].nickname = '鹫巢岩';
+editdata.player_datas[2].nickname = '光暗对决';
 editdata.player_datas[0].avatar_id = 405102;
 editdata.player_datas[1].avatar_id = 405101;
 editdata.player_datas[2].avatar_id = 405103;
 
 editdata.player_datas[0].views = editdata.player_datas[1].views = editdata.player_datas[2].views = [
-    {"slot": 0, "item_id": 308013}, // 立直棒-命悬一线
-    {"slot": 1, "item_id": 308011}, // 和牌-地狱低语
-    {"slot": 2, "item_id": 308012}, // 立直-幽冥之焰
-    {"slot": 6, "item_id": 308014}, // 桌布-传说之夜
-    {"slot": 7, "item_id": 308015}, // 牌背-双鹫纹章
+    {'slot': 0, 'item_id': 308013}, // 立直棒-命悬一线
+    {'slot': 1, 'item_id': 308011}, // 和牌-地狱低语
+    {'slot': 2, 'item_id': 308012}, // 立直-幽冥之焰
+    {'slot': 6, 'item_id': 308014}, // 桌布-传说之夜
+    {'slot': 7, 'item_id': 308015}, // 牌背-双鹫纹章
 ];
 
 editdata.config = {
@@ -24,17 +24,17 @@ editdata.config = {
 };
 
 // 第1局: 立直, 两立直, 吃, 碰, 杠, 拔北, 四杠流局
-tiles0 = "1112340678999p1s";
-tiles1 = "23446668889s66z";
-tiles2 = "1112223335777z";
-paishan = randompaishan("1z6s", "6z84s4z4s");
+tiles0 = '1112340678999p1s';
+tiles1 = '23446668889s66z';
+tiles2 = '1112223335777z';
+paishan = randompaishan('1z6s', '6z84s4z4s');
 roundbegin();
 qiepai(true);
-mingqiepai("23s");
+mingqiepai('23s');
 mopai();
 combomopai();
 qiepai(true);
-mingqiepai("6z");
+mingqiepai('6z');
 normalmoqie();
 mingpai();
 mopai();
@@ -43,19 +43,19 @@ qiepai();
 liuju();
 
 // 第2局: 自摸
-tiles0 = "111m23456p11123s4z";
-tiles1 = "1112340678999p";
-tiles2 = "1112223334445z";
-paishan = randompaishan("", "1m.......1p");
+tiles0 = '111m23456p11123s4z';
+tiles1 = '1112340678999p';
+tiles2 = '1112223334445z';
+paishan = randompaishan('', '1m.......1p');
 roundbegin();
 combomopai();
 hupai();
 
 // 第3局: 荣
-tiles0 = "2p1112223334445z";
-tiles1 = "2455667p234567s";
-tiles2 = "1112340678999s";
-paishan = randompaishan("", "1m........");
+tiles0 = '2p1112223334445z';
+tiles1 = '2455667p234567s';
+tiles2 = '1112340678999s';
+paishan = randompaishan('', '1m........');
 roundbegin();
-qiepai("2p");
+qiepai('2p');
 hupai();

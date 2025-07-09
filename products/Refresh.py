@@ -3,35 +3,35 @@
 """
 import os
 
-if os.name == "posix":  # 类 Unix 系统
-    python_exe = "python3 "
+if os.name == 'posix':  # 类 Unix 系统
+    python_exe = 'python3 '
 else:
-    python_exe = "python "
+    python_exe = 'python '
 
 home = os.getcwd()
 
-file_name = "Generator.py"
-file_name_sp1 = "Generator_SP.py"
-file_name_sp2 = "Generate_Dictionary.py"
+file_name = 'Generator.py'
+file_name_sp1 = 'Generator_SP.py'
+file_name_sp2 = 'Generate_Dictionary.py'
 
 run_python = python_exe + file_name
 
-path_prefix = "4P/"
+path_prefix = '4P/'
 paths = [
-    "所有报菜名合集",
-    "最长菜名与最高番数",
-    "赤羽之战相关",
-    "../作弊牌型/纯享版报菜名",
+    '所有报菜名合集',
+    '最长菜名与最高番数',
+    '赤羽之战相关',
+    '../作弊牌型/纯享版报菜名',
 ]
 
-file_name_3P = "Generator_3P.py"
+file_name_3P = 'Generator_3P.py'
 
 run_python_3P = python_exe + file_name_3P
 
-path_prefix_3P = "3P/"
+path_prefix_3P = '3P/'
 paths_3P = [
-    "对局操作语音合集",
-    "最长菜名与最高番数",
+    '对局操作语音合集',
+    '最长菜名与最高番数',
 ]
 
 for path in paths:
@@ -46,10 +46,10 @@ for path_3P in paths_3P:
     os.system(run_python_3P)
     os.chdir(home)
 
-os.chdir("4P/所有役满合集")
+os.chdir('4P/所有役满合集')
 os.system(python_exe + file_name_sp1)
 os.chdir(home)
 
-os.chdir("../doc/")
+os.chdir('../doc/')
 os.system(python_exe + file_name_sp2)
 os.chdir(home)

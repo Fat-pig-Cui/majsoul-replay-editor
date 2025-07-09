@@ -1,7 +1,7 @@
-function GetPaipuJSON(paipulink = "") {
-    if (paipulink === "")
-        paipulink = prompt("Please Enter a Paipu Link or Paipu UUID.");
-    if (paipulink === "")
+function GetPaipuJSON(paipulink = '') {
+    if (paipulink === '')
+        paipulink = prompt('Please Enter a Paipu Link or Paipu UUID.');
+    if (paipulink === '')
         return;
     paipulink = paipulink.split('=');
     paipulink = paipulink[paipulink.length - 1].split('_');
@@ -9,8 +9,8 @@ function GetPaipuJSON(paipulink = "") {
     if (paipulink.length > 2 && parseInt(paipulink[2]) === 2)
         uuid = game.Tools.DecodePaipuUUID(uuid);
 
-    const pbWrapper = net.ProtobufManager.lookupType(".lq.Wrapper");
-    const pbGameDetailRecords = net.ProtobufManager.lookupType(".lq.GameDetailRecords");
+    const pbWrapper = net.ProtobufManager.lookupType('.lq.Wrapper');
+    const pbGameDetailRecords = net.ProtobufManager.lookupType('.lq.GameDetailRecords');
 
     function parseRecords(gameDetailRecords, json) {
         try {
@@ -31,7 +31,7 @@ function GetPaipuJSON(paipulink = "") {
                     }
                 }
             } else
-                throw ("Unknown version: " + gameDetailRecords.version);
+                throw ('Unknown version: ' + gameDetailRecords.version);
         } catch (e) {
             console.log(e);
         }
@@ -45,29 +45,29 @@ function GetPaipuJSON(paipulink = "") {
     }
 
     function download(data, uuid) {
-        let a = document.createElement("a");
+        let a = document.createElement('a');
         a.href = URL.createObjectURL(
-            new Blob([JSON.stringify(data, null, "  ")],
-                {type: "text/plain"}));
-        a.download = "paipu_" + uuid + ".json";
-        a.style.display = "none";
+            new Blob([JSON.stringify(data, null, '  ')],
+                {type: 'text/plain'}));
+        a.download = 'paipu_' + uuid + '.json';
+        a.style.display = 'none';
         document.body.appendChild(a);
         a.click();
         document.body.removeChild(a);
     }
 
     app.NetAgent.sendReq2Lobby(
-        "Lobby",
-        "fetchGameRecord",
+        'Lobby',
+        'fetchGameRecord',
         {game_uuid: uuid, client_version_string: GameMgr.Inst.getClientVersion()},
         async function (error, gameRecord) {
-            if (gameRecord.data === "")
+            if (gameRecord.data === '')
                 gameRecord.data = await fetchData(gameRecord.data_url);
             const gameDetailRecordsWrapper = pbWrapper.decode(gameRecord.data);
             const gameDetailRecords = pbGameDetailRecords.decode(gameDetailRecordsWrapper.data);
             let gameDetailRecordsJson = JSON.parse(JSON.stringify(gameDetailRecords));
             gameDetailRecordsJson = parseRecords(gameDetailRecords, gameDetailRecordsJson);
-            gameRecord.data = "";
+            gameRecord.data = '';
             let gameRecordJson = JSON.parse(JSON.stringify(gameRecord));
             gameRecordJson.data = {name: gameDetailRecordsWrapper.name, data: gameDetailRecordsJson};
             download(gameRecordJson, uuid);

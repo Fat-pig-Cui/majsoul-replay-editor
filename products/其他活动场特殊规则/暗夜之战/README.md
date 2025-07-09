@@ -18,7 +18,7 @@
 
 ### 切牌: `qiepai(seat, kind, is_liqi, anpai)`
 
-与段位场的切牌相比, 多了一个参数 `anpai`, 如果 `anpai` 的值是字符串 `"anpai"` 时, 在暗夜之战切牌会暗牌
+与段位场的切牌相比, 多了一个参数 `anpai`, 如果 `anpai` 的值是字符串 `'anpai'` 时, 在暗夜之战切牌会暗牌
 
 ### 开牌: `unveil(seat)`
 

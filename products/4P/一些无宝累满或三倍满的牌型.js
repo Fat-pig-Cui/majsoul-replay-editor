@@ -11,10 +11,10 @@ loadproject();
 // 大车轮: 无论怎么和都一定有 平和, 两杯口, 断幺, 清一色, 加上 立直 和 自摸, 刚好13番
 // 22334455667788p
 
-editdata.player_datas[0].nickname = "一姬-契约";
-editdata.player_datas[1].nickname = "新年初诣";
-editdata.player_datas[2].nickname = "一姬当千";
-editdata.player_datas[3].nickname = "绮春歌";
+editdata.player_datas[0].nickname = '一姬-契约';
+editdata.player_datas[1].nickname = '新年初诣';
+editdata.player_datas[2].nickname = '一姬当千';
+editdata.player_datas[3].nickname = '绮春歌';
 editdata.player_datas[0].avatar_id = 400102;
 editdata.player_datas[1].avatar_id = 400104;
 editdata.player_datas[2].avatar_id = 400105;
@@ -32,33 +32,33 @@ editdata.config = {
 };
 
 // 对对和, 三暗刻, 小三元, 混老头, 混一色  13番
-tiles0 = "111999m15556677z";
-tiles1 = "2223455567888m";
-tiles2 = "1112340678999p";
-tiles3 = "1112340678999s";
-paishan = randompaishan("6z", "1z....");
+tiles0 = '111999m15556677z';
+tiles1 = '2223455567888m';
+tiles2 = '1112340678999p';
+tiles3 = '1112340678999s';
+paishan = randompaishan('6z', '1z....');
 roundbegin();
-qiepai("1z");
+qiepai('1z');
 normalmoqie();
 hupai();
 
 // 平和(也可以换成 门前清自摸和), 两杯口, 纯全带幺九, 清一色  13番
-tiles0 = "1112233778899m1z";
-tiles1 = "4444055566667m";
-tiles2 = "1112340678999p";
-tiles3 = "1112340678999s";
-paishan = randompaishan("1m", "1z....");
+tiles0 = '1112233778899m1z';
+tiles1 = '4444055566667m';
+tiles2 = '1112340678999p';
+tiles3 = '1112340678999s';
+paishan = randompaishan('1m', '1z....');
 roundbegin();
 qiepai();
 normalmoqie();
 hupai();
 
 // 双立直, 河底, 断幺, 三色同刻, 三杠子, 对对和, 三暗刻  12番
-tiles0 = "22288m22288p222s1z";
-tiles1 = "1111340678999m";
-tiles2 = "1111340678999p";
-tiles3 = "1111340678999s";
-paishan = randompaishan("...2m", "8m.....22223333z8p.2s2p");
+tiles0 = '22288m22288p222s1z';
+tiles1 = '1111340678999m';
+tiles2 = '1111340678999p';
+tiles3 = '1111340678999s';
+paishan = randompaishan('...2m', '8m.....22223333z8p.2s2p');
 roundbegin();
 qiepai(true);
 normalmoqie(3);
@@ -69,29 +69,29 @@ normalmoqie(62);
 hupai();
 
 // 立直, 一发, 海底, 自摸, 断幺, 三色同刻, 三杠子, 三暗刻  11番
-tiles0 = "222268m22288p222s";
-tiles1 = "1111340678999m";
-tiles2 = "1111330678999p";
-tiles3 = "1111340678999s";
-paishan = randompaishan("", "77m....22223333z7m3p2s2p");
+tiles0 = '222268m22288p222s';
+tiles1 = '1111340678999m';
+tiles2 = '1111330678999p';
+tiles3 = '1111340678999s';
+paishan = randompaishan('', '77m....22223333z7m3p2s2p');
 roundbegin();
 combomopai(3);
 qiepai();
-mingqiepai("9p");
+mingqiepai('9p');
 normalmoqie(61);
 moqieliqi();
 normalmoqie(3);
 zimohu();
 
 // 立直, 自摸, 平和, 两杯口, 断幺, 清一色  13番
-tiles0 = "1m2233445667788p";
-tiles1 = "1112340678999p";
-tiles2 = "1112340678999s";
-tiles3 = "1122306678999m";
-paishan = randompaishan("2m5p", "11z....");
+tiles0 = '1m2233445667788p';
+tiles1 = '1112340678999p';
+tiles2 = '1112340678999s';
+tiles3 = '1122306678999m';
+paishan = randompaishan('2m5p', '11z....');
 roundbegin();
-qiepai("1m");
-mingqiepai("3m");
+qiepai('1m');
+mingqiepai('3m');
 moqieliqi();
-mingqiepai("6m");
+mingqiepai('6m');
 zimohu();

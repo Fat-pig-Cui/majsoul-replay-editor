@@ -6,21 +6,21 @@ class Database_class:
         self.chars = []
         char_num = 0
         for char in CHARACTER:
-            self.chars.append({"id": CHARACTER[char]['id'], "skin": []})
+            self.chars.append({'id': CHARACTER[char]['id'], 'skin': []})
             char_num += 1
             for skin in SKIN:
                 if SKIN[skin]['character_id'] == CHARACTER[char]['id']:
-                    self.chars[char_num - 1]['skin'].append({"id": SKIN[skin]['id'], "name": SKIN[skin]['name_chs']})
-                    if SKIN[skin]['name_chs'] == "契约":
+                    self.chars[char_num - 1]['skin'].append({'id': SKIN[skin]['id'], 'name': SKIN[skin]['name_chs']})
+                    if SKIN[skin]['name_chs'] == '契约':
                         origin_name = self.chars[char_num - 1]['skin'][0]['name']
                         index = len(self.chars[char_num - 1]['skin']) - 1
                         # 名字过长修剪
-                        if origin_name == "早乙女芽亚里":
-                            self.chars[char_num - 1]['skin'][index]['name'] = "早乙女-契约"
-                        elif origin_name == "鲁鲁修·兰佩洛基":
-                            self.chars[char_num - 1]['skin'][index]['name'] = "鲁鲁修-契约"
+                        if origin_name == '早乙女芽亚里':
+                            self.chars[char_num - 1]['skin'][index]['name'] = '早乙女-契约'
+                        elif origin_name == '鲁鲁修·兰佩洛基':
+                            self.chars[char_num - 1]['skin'][index]['name'] = '鲁鲁修-契约'
                         else:
-                            self.chars[char_num - 1]['skin'][index]['name'] = origin_name + "-契约"
+                            self.chars[char_num - 1]['skin'][index]['name'] = origin_name + '-契约'
 
         self.views = []
         # 立直棒, 和牌特效, 立直特效, 手的样式, 立直音乐, 头像框,
@@ -28,7 +28,7 @@ class Database_class:
         # 11 是称号, 但在 ITEM 中不全
         slots = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 13]
         for slot in slots:
-            self.views.append({"slot": slot, "item": []})
+            self.views.append({'slot': slot, 'item': []})
         for item in ITEM:
             category = ITEM[item]['category']
             item_slot = ITEM[item]['type']
@@ -36,11 +36,11 @@ class Database_class:
                 index = 0
                 while index < len(self.views) and self.views[index]['slot'] != item_slot:
                     index += 1
-                self.views[index]['item'].append({"id": ITEM[item]['id'], "name": ITEM[item]['name_chs']})
+                self.views[index]['item'].append({'id': ITEM[item]['id'], 'name': ITEM[item]['name_chs']})
 
         self.titles = []
         for title in TITLE:
-            self.titles.append({"id": TITLE[title]['id'], "name": TITLE[title]['name_chs']})
+            self.titles.append({'id': TITLE[title]['id'], 'name': TITLE[title]['name_chs']})
 
         return
 

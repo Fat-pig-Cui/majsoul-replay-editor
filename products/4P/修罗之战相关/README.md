@@ -28,7 +28,7 @@
 
 `type` : 0 表示逆时针换牌, 1 表示对家换牌, 2 表示顺时针换牌
 
-例子: `huansanzhang("9p79s", "333s", "78p8s", "333z", 1);`
+例子: `huansanzhang('9p79s', '333s', '78p8s', '333z', 1);`
 
 ### 和牌: `hupai(allseats, type)`
 

@@ -1,9 +1,9 @@
 loadproject();
 
-editdata.player_datas[0].nickname = "天江衣-契约";
-editdata.player_datas[1].nickname = "天江衣";
-editdata.player_datas[2].nickname = "凛然花开";
-editdata.player_datas[3].nickname = "兔耳派对";
+editdata.player_datas[0].nickname = '天江衣-契约';
+editdata.player_datas[1].nickname = '天江衣';
+editdata.player_datas[2].nickname = '凛然花开';
+editdata.player_datas[3].nickname = '兔耳派对';
 editdata.player_datas[0].avatar_id = 403602;
 editdata.player_datas[1].avatar_id = 403601;
 editdata.player_datas[2].avatar_id = 403603;
@@ -12,12 +12,12 @@ editdata.player_datas[3].avatar_id = 403604;
 // 头像框-大小姐发带
 editdata.player_datas[0].avatar_frame = editdata.player_datas[1].avatar_frame = editdata.player_datas[2].avatar_frame = editdata.player_datas[3].avatar_frame = 305552;
 editdata.player_datas[0].views = editdata.player_datas[1].views = editdata.player_datas[2].views = editdata.player_datas[3].views = [
-    {"slot": 0, "item_id": 308003}, // 立直棒-墨西哥卷饼
-    {"slot": 1, "item_id": 308001}, // 和牌-龙卷雷霆
-    {"slot": 2, "item_id": 308002}, // 立直-花天月地
-    {"slot": 5, "item_id": 305552}, // 头像框-大小姐发带
-    {"slot": 6, "item_id": 308004}, // 桌布-赛间小憩
-    {"slot": 7, "item_id": 308005}, // 牌背-艾托企鹅
+    {'slot': 0, 'item_id': 308003}, // 立直棒-墨西哥卷饼
+    {'slot': 1, 'item_id': 308001}, // 和牌-龙卷雷霆
+    {'slot': 2, 'item_id': 308002}, // 立直-花天月地
+    {'slot': 5, 'item_id': 305552}, // 头像框-大小姐发带
+    {'slot': 6, 'item_id': 308004}, // 桌布-赛间小憩
+    {'slot': 7, 'item_id': 308005}, // 牌背-艾托企鹅
 ];
 
 editdata.config = {
@@ -74,11 +74,11 @@ hupaioneplayer = function (seat) {
         'zimo': true,
     };
 }
-tiles0 = "1112340678999m7z";
-tiles1 = "1112340678999p";
-tiles2 = "5555555555555z";
-tiles3 = "1112340678999s";
-paishan = randompaishan("75z", "7z....");
+tiles0 = '1112340678999m7z';
+tiles1 = '1112340678999p';
+tiles2 = '5555555555555z';
+tiles3 = '1112340678999s';
+paishan = randompaishan('75z', '7z....');
 roundbegin();
 qiepai();
 normalmoqie();
@@ -126,11 +126,11 @@ hupaioneplayer = function (seat) {
         'zimo': true,
     };
 }
-tiles0 = "1112340678999m7z";
-tiles1 = "1112340678999p";
-tiles2 = "5555555555555z";
-tiles3 = "1112340678999s";
-paishan = randompaishan("75z", "7z....");
+tiles0 = '1112340678999m7z';
+tiles1 = '1112340678999p';
+tiles2 = '5555555555555z';
+tiles3 = '1112340678999s';
+paishan = randompaishan('75z', '7z....');
 roundbegin();
 qiepai();
 normalmoqie();
@@ -178,11 +178,11 @@ hupaioneplayer = function (seat) {
         'zimo': true,
     };
 }
-tiles0 = "1112340678999m7z";
-tiles1 = "1112340678999p";
-tiles2 = "5555555555555z";
-tiles3 = "1112340678999s";
-paishan = randompaishan("75z", "7z....");
+tiles0 = '1112340678999m7z';
+tiles1 = '1112340678999p';
+tiles2 = '5555555555555z';
+tiles3 = '1112340678999s';
+paishan = randompaishan('75z', '7z....');
 roundbegin();
 qiepai();
 normalmoqie();
@@ -230,11 +230,11 @@ hupaioneplayer = function (seat) {
         'zimo': true,
     };
 }
-tiles0 = "1112340678999m7z";
-tiles1 = "1112340678999p";
-tiles2 = "5555555555555z";
-tiles3 = "1112340678999s";
-paishan = randompaishan("75z", "7z....");
+tiles0 = '1112340678999m7z';
+tiles1 = '1112340678999p';
+tiles2 = '5555555555555z';
+tiles3 = '1112340678999s';
+paishan = randompaishan('75z', '7z....');
 roundbegin();
 qiepai();
 normalmoqie();
@@ -277,11 +277,11 @@ hupaioneplayer = function (seat) {
         'zimo': true,
     };
 }
-tiles0 = "1112340678999m7z";
-tiles1 = "1112340678999p";
-tiles2 = "5555555555555z";
-tiles3 = "1112340678999s";
-paishan = randompaishan("75z", "7z....");
+tiles0 = '1112340678999m7z';
+tiles1 = '1112340678999p';
+tiles2 = '5555555555555z';
+tiles3 = '1112340678999s';
+paishan = randompaishan('75z', '7z....');
 roundbegin();
 qiepai();
 normalmoqie();
@@ -324,11 +324,11 @@ hupaioneplayer = function (seat) {
         'zimo': true,
     };
 }
-tiles0 = "1112340678999m7z";
-tiles1 = "1112340678999p";
-tiles2 = "5555555555555z";
-tiles3 = "1112340678999s";
-paishan = randompaishan("75z", "7z....");
+tiles0 = '1112340678999m7z';
+tiles1 = '1112340678999p';
+tiles2 = '5555555555555z';
+tiles3 = '1112340678999s';
+paishan = randompaishan('75z', '7z....');
 roundbegin();
 qiepai();
 normalmoqie();
@@ -376,11 +376,11 @@ hupaioneplayer = function (seat) {
         'zimo': true,
     };
 }
-tiles0 = "1112340678999m7z";
-tiles1 = "1112340678999p";
-tiles2 = "5555555555555z";
-tiles3 = "1112340678999s";
-paishan = randompaishan("75z", "7z....");
+tiles0 = '1112340678999m7z';
+tiles1 = '1112340678999p';
+tiles2 = '5555555555555z';
+tiles3 = '1112340678999s';
+paishan = randompaishan('75z', '7z....');
 roundbegin();
 qiepai();
 normalmoqie();

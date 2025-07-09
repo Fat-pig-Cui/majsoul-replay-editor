@@ -1,9 +1,9 @@
 loadproject();
 
-editdata.player_datas[0].nickname = "宫永咲";
-editdata.player_datas[1].nickname = "福姬";
-editdata.player_datas[2].nickname = "七夕";
-editdata.player_datas[3].nickname = "远坂凛";
+editdata.player_datas[0].nickname = '宫永咲';
+editdata.player_datas[1].nickname = '福姬';
+editdata.player_datas[2].nickname = '七夕';
+editdata.player_datas[3].nickname = '远坂凛';
 editdata.player_datas[0].avatar_id = 403401;
 editdata.player_datas[1].avatar_id = 403801;
 editdata.player_datas[2].avatar_id = 403901;

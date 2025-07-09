@@ -7,20 +7,20 @@ loadproject();
 // 立直音乐-一触即发 (没加入views)
 // 牌背-天然呆幽灵
 
-editdata.player_datas[0].nickname = "二阶堂美树";
-editdata.player_datas[1].nickname = "泽尼娅";
-editdata.player_datas[2].nickname = "四宫夏生";
-editdata.player_datas[3].nickname = "汪次郎";
+editdata.player_datas[0].nickname = '二阶堂美树';
+editdata.player_datas[1].nickname = '泽尼娅';
+editdata.player_datas[2].nickname = '四宫夏生';
+editdata.player_datas[3].nickname = '汪次郎';
 editdata.player_datas[0].avatar_id = 400203;
 editdata.player_datas[1].avatar_id = 400903;
 editdata.player_datas[2].avatar_id = 401103;
 editdata.player_datas[3].avatar_id = 401203;
 
 editdata.player_datas[0].views = editdata.player_datas[1].views = editdata.player_datas[2].views = editdata.player_datas[3].views = [
-    {"slot": 0, "item_id": 305600}, // 立直棒-小恶魔蝙蝠
-    {"slot": 1, "item_id": 305200}, // 和牌-幽灵嗷嗷
-    {"slot": 2, "item_id": 305300}, // 立直-蝙蝠桀桀
-    {"slot": 7, "item_id": 305700}, // 牌背-天然呆幽灵
+    {'slot': 0, 'item_id': 305600}, // 立直棒-小恶魔蝙蝠
+    {'slot': 1, 'item_id': 305200}, // 和牌-幽灵嗷嗷
+    {'slot': 2, 'item_id': 305300}, // 立直-蝙蝠桀桀
+    {'slot': 7, 'item_id': 305700}, // 牌背-天然呆幽灵
 ];
 
 editdata.config = {

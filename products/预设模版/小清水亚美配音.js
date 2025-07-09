@@ -1,9 +1,9 @@
 loadproject();
 
-editdata.player_datas[0].nickname = "八木唯";
-editdata.player_datas[1].nickname = "九条璃雨";
-editdata.player_datas[2].nickname = "原村和";
-editdata.player_datas[3].nickname = "红月卡莲";
+editdata.player_datas[0].nickname = '八木唯';
+editdata.player_datas[1].nickname = '九条璃雨';
+editdata.player_datas[2].nickname = '原村和';
+editdata.player_datas[3].nickname = '红月卡莲';
 editdata.player_datas[0].avatar_id = 400701;
 editdata.player_datas[1].avatar_id = 400801;
 editdata.player_datas[2].avatar_id = 403501;

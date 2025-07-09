@@ -4,7 +4,7 @@
 
 [中文服官网](https://www.maj-soul.com), [日服官网](https://mahjongsoul.com), [美服官网](https://mahjongsoul.yo-star.com)
 
-B站视频教程: [【雀魂】如何自制牌谱回放](https://www.bilibili.com/video/BV1tJ6xY4E16)
+B站视频教程(偏过时): [【雀魂】如何自制牌谱回放](https://www.bilibili.com/video/BV1tJ6xY4E16)
 
 ## 免责声明: 由于这属于第三方脚本, 猫粮可能发威封号, 使用时请用小号登录实验, 个人对任何因封号等导致的损失概不负责
 
@@ -119,7 +119,6 @@ B站视频教程: [【雀魂】如何自制牌谱回放](https://www.bilibili.co
 
 ## TODO(欢迎contribute)
 
-- 负分立直
 - 番数达到三位数能够显示百位 (暂没有实现方式)
 - 在牌谱回放中发送表情 (暂没有实现方式)
 - 关于GUI(图形化用户界面): 有玩家反映写代码门槛过高, 能否搞个GUI. 但目前有以下因素导致短期内无法实现:

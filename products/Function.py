@@ -10,12 +10,12 @@ import re
 # 这里 player_num 参数表示对局玩家数, 默认是四麻, 三麻参数填3就行
 def generator(player_num=4):
     # 作为模版的文件, 文件名是 template.js
-    infile = open("./template.js", "r", encoding='utf-8')
-    if not os.path.exists("./output"):
-        os.makedirs("./output")
+    infile = open('./template.js', 'r', encoding='utf-8')
+    if not os.path.exists('./output'):
+        os.makedirs('./output')
 
     for index in range(len(chars)):
-        outfile = open("./output/" + outfile_names[index], "w", encoding='utf-8')
+        outfile = open('./output/' + outfile_names[index], 'w', encoding='utf-8')
         flag_views = True
         name_count = id_count = 0
 
@@ -70,7 +70,7 @@ def generator(player_num=4):
                         id_count += 1
                 outfile.write(line)
                 if flag_views and chars[index]['id'] in char_unique_views and id_count == 4 and name_count == 4:
-                    outfile.write("\n" + char_unique_views[chars[index]['id']])
+                    outfile.write('\n' + char_unique_views[chars[index]['id']])
                     flag_views = False
 
         elif player_num == 3:
@@ -107,7 +107,7 @@ def generator(player_num=4):
                         id_count += 1
                 outfile.write(line)
                 if flag_views and chars[index]['id'] in char_unique_views_3P and id_count == 3 and name_count == 3:
-                    outfile.write("\n" + char_unique_views_3P[chars[index]['id']])
+                    outfile.write('\n' + char_unique_views_3P[chars[index]['id']])
                     flag_views = False
         infile.seek(0)
         outfile.close()

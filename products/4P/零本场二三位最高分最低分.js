@@ -7,10 +7,10 @@ loadproject();
 // 零本场限制了用刷本场的方法刷最高分
 // 因为一局最多只能有一个人放铳, 所以二位和三位最低分都只能是亲自摸导致的, 而且数值一样
 
-editdata.player_datas[0].nickname = "一姬-契约";
-editdata.player_datas[1].nickname = "新年初诣";
-editdata.player_datas[2].nickname = "一姬当千";
-editdata.player_datas[3].nickname = "绮春歌";
+editdata.player_datas[0].nickname = '一姬-契约';
+editdata.player_datas[1].nickname = '新年初诣';
+editdata.player_datas[2].nickname = '一姬当千';
+editdata.player_datas[3].nickname = '绮春歌';
 editdata.player_datas[0].avatar_id = 400102;
 editdata.player_datas[1].avatar_id = 400104;
 editdata.player_datas[2].avatar_id = 400105;
@@ -28,11 +28,11 @@ editdata.config = {
 };
 
 // 零本场二位最高分: 226000
-tiles0 = "2222444666888s6z";
-tiles1 = "1112223334446z";
-tiles2 = "1112340678999m";
-tiles3 = "111333777999s6z";
-paishan = randompaishan("76z", "7z864s");
+tiles0 = '2222444666888s6z';
+tiles1 = '1112223334446z';
+tiles2 = '1112340678999m';
+tiles3 = '111333777999s6z';
+paishan = randompaishan('76z', '7z864s');
 roundbegin();
 combomopai(4);
 qiepai();
@@ -43,11 +43,11 @@ gotoju(0, 0, 0);
 
 // 零本场三位最高分: 162000
 scores = [0, 2000, 0, 98000];
-tiles0 = "2222444666888s6z";
-tiles1 = "1112223334446z";
-tiles2 = "1112340678999m";
-tiles3 = "111333777999s6z";
-paishan = randompaishan("76z", "7z864s");
+tiles0 = '2222444666888s6z';
+tiles1 = '1112223334446z';
+tiles2 = '1112340678999m';
+tiles3 = '111333777999s6z';
+paishan = randompaishan('76z', '7z864s');
 roundbegin();
 combomopai(4);
 qiepai();
@@ -58,10 +58,10 @@ gotoju(0, 0, 0);
 
 // 零本场二位最低分和三位最低分: -96000
 scores = [100000, 0, 0, 0];
-tiles0 = "11122233344477z";
-tiles1 = "1112340678999m";
-tiles2 = "1112340678999p";
-tiles3 = "1112340678999s";
+tiles0 = '11122233344477z';
+tiles1 = '1112340678999m';
+tiles2 = '1112340678999p';
+tiles3 = '1112340678999s';
 paishan = randompaishan();
 roundbegin();
 hupai();

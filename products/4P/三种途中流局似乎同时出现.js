@@ -10,10 +10,10 @@ loadproject();
 // 四杠散了后立直可以成立(东1局0本场): https://game.maj-soul.com/1/?paipu=jmklmq-vsry7112-yy10-63cc-gdmo-nksoqtwmrr0z_2
 // 四风连打后立直可以成立(东3局2本场): https://game.maj-soul.com/1/?paipu=jnjpns-uvuv46x4-5d99-69da-ianf-hinotnnktnxy_2
 
-editdata.player_datas[0].nickname = "一姬-契约";
-editdata.player_datas[1].nickname = "新年初诣";
-editdata.player_datas[2].nickname = "一姬当千";
-editdata.player_datas[3].nickname = "绮春歌";
+editdata.player_datas[0].nickname = '一姬-契约';
+editdata.player_datas[1].nickname = '新年初诣';
+editdata.player_datas[2].nickname = '一姬当千';
+editdata.player_datas[3].nickname = '绮春歌';
 editdata.player_datas[0].avatar_id = 400102;
 editdata.player_datas[1].avatar_id = 400104;
 editdata.player_datas[2].avatar_id = 400105;
@@ -27,11 +27,11 @@ editdata.config = {
     }
 };
 
-tiles0 = "11112224445556z";
-tiles1 = "111999m111999p6z";
-tiles2 = "222444666888s6z";
-tiles3 = "111333777999s6z";
-paishan = randompaishan("1m2s1s", "23333z");
+tiles0 = '11112224445556z';
+tiles1 = '111999m111999p6z';
+tiles2 = '222444666888s6z';
+tiles3 = '111333777999s6z';
+paishan = randompaishan('1m2s1s', '23333z');
 roundbegin();
 combomopai();
 qiepai(true);

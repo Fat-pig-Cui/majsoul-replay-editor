@@ -9,20 +9,20 @@ loadproject();
 // 桌布-预热开场
 // 牌背-喵呜TV
 
-editdata.player_datas[0].nickname = "二阶堂美树";
-editdata.player_datas[1].nickname = "相原舞";
-editdata.player_datas[2].nickname = "月见山";
-editdata.player_datas[3].nickname = "藤本绮罗";
+editdata.player_datas[0].nickname = '二阶堂美树';
+editdata.player_datas[1].nickname = '相原舞';
+editdata.player_datas[2].nickname = '月见山';
+editdata.player_datas[3].nickname = '藤本绮罗';
 editdata.player_datas[0].avatar_id = 400207;
 editdata.player_datas[1].avatar_id = 400506;
 editdata.player_datas[2].avatar_id = 402705;
 editdata.player_datas[3].avatar_id = 402805;
 
 editdata.player_datas[0].views = editdata.player_datas[1].views = editdata.player_datas[2].views = editdata.player_datas[3].views = [
-    {"slot": 1, "item_id": 305221}, // 和牌-机械哲学
-    {"slot": 2, "item_id": 305321}, // 立直-量子智能
-    {"slot": 6, "item_id": 30580005}, // 桌布-预热开场
-    {"slot": 7, "item_id": 30570003}, // 牌背-喵呜TV
+    {'slot': 1, 'item_id': 305221}, // 和牌-机械哲学
+    {'slot': 2, 'item_id': 305321}, // 立直-量子智能
+    {'slot': 6, 'item_id': 30580005}, // 桌布-预热开场
+    {'slot': 7, 'item_id': 30570003}, // 牌背-喵呜TV
 ];
 
 editdata.config = {

@@ -6,17 +6,17 @@ loadproject();
 // 立直-一步之遥
 // 桌布-破茧
 
-editdata.player_datas[0].nickname = "九条璃雨";
-editdata.player_datas[1].nickname = "北见纱和子";
-editdata.player_datas[2].nickname = "艾丽莎";
+editdata.player_datas[0].nickname = '九条璃雨';
+editdata.player_datas[1].nickname = '北见纱和子';
+editdata.player_datas[2].nickname = '艾丽莎';
 editdata.player_datas[0].avatar_id = 400806;
 editdata.player_datas[1].avatar_id = 402406;
 editdata.player_datas[2].avatar_id = 403206;
 
 editdata.player_datas[0].views = editdata.player_datas[1].views = editdata.player_datas[2].views = [
-    {"slot": 1, "item_id": 30520004}, // 和牌-伺机而动
-    {"slot": 2, "item_id": 30530004}, // 立直-一步之遥
-    {"slot": 6, "item_id": 30580006}, // 桌布-破茧
+    {'slot': 1, 'item_id': 30520004}, // 和牌-伺机而动
+    {'slot': 2, 'item_id': 30530004}, // 立直-一步之遥
+    {'slot': 6, 'item_id': 30580006}, // 桌布-破茧
 ];
 
 editdata.config = {

@@ -4,10 +4,10 @@ loadproject();
 
 // 没有找到UP装扮的公告(
 
-editdata.player_datas[0].nickname = "九条璃雨";
-editdata.player_datas[1].nickname = "北见纱和子";
-editdata.player_datas[2].nickname = "藤本绮罗";
-editdata.player_datas[3].nickname = "辉夜姬";
+editdata.player_datas[0].nickname = '九条璃雨';
+editdata.player_datas[1].nickname = '北见纱和子';
+editdata.player_datas[2].nickname = '藤本绮罗';
+editdata.player_datas[3].nickname = '辉夜姬';
 editdata.player_datas[0].avatar_id = 400804;
 editdata.player_datas[1].avatar_id = 402403;
 editdata.player_datas[2].avatar_id = 402803;

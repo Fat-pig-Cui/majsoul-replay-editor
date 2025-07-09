@@ -7,39 +7,39 @@ import os
 import re
 
 file_names = [
-    "01_单倍役满.js",
-    "02_双倍役满_非复合.js",
-    "03_双倍役满_复合.js",
-    "04_三倍役满_21.js",
-    "05_三倍役满_111.js",
-    "06_四倍役满_1111_22.js",
-    "07_四倍役满_211.js",
-    "08_五倍役满_221.js",
-    "09_五倍役满_2111.js",
-    "10_六倍役满_2211.js",
+    '01_单倍役满.js',
+    '02_双倍役满_非复合.js',
+    '03_双倍役满_复合.js',
+    '04_三倍役满_21.js',
+    '05_三倍役满_111.js',
+    '06_四倍役满_1111_22.js',
+    '07_四倍役满_211.js',
+    '08_五倍役满_221.js',
+    '09_五倍役满_2111.js',
+    '10_六倍役满_2211.js',
 ]
 
-if not os.path.exists("./output"):
-    os.makedirs("./output")
+if not os.path.exists('./output'):
+    os.makedirs('./output')
 
 outfile_dirname = []
 for i in range(len(chars)):
     if chars[i]['id'] == 200071:  # 因为文件夹不能以句点结尾, 故 C.C. 舍弃两个句点变成 CC
-        outfile_dirname.append(str(chars[i]['id']) + "_CC")
+        outfile_dirname.append(str(chars[i]['id']) + '_CC')
     else:
-        outfile_dirname.append(str(chars[i]['id']) + "_" + chars[i]['skin'][0]['name'])
-    if not os.path.exists("./output/" + outfile_dirname[i]):
-        os.makedirs("output/" + outfile_dirname[i])
+        outfile_dirname.append(str(chars[i]['id']) + '_' + chars[i]['skin'][0]['name'])
+    if not os.path.exists('./output/' + outfile_dirname[i]):
+        os.makedirs('output/' + outfile_dirname[i])
 
 
 def generator_sp():
     for file_name in file_names:
-        infile = open("./" + file_name, "r", encoding='utf-8')
+        infile = open('./' + file_name, 'r', encoding='utf-8')
 
         tmp_nickname = []
         tmp_avatar_id = []
         for index in range(len(chars)):
-            outfile = open("./output/" + outfile_dirname[index] + "/" + file_name, "w", encoding='utf-8')
+            outfile = open('./output/' + outfile_dirname[index] + '/' + file_name, 'w', encoding='utf-8')
             # flag_hand = True
             flag_views = True
             name_count = id_count = 0
@@ -77,7 +77,7 @@ def generator_sp():
                         id_count += 1
                 outfile.write(line)
                 if flag_views and chars[index]['id'] in char_unique_views and id_count == 4 and name_count == 4:
-                    outfile.write("\n" + char_unique_views[chars[index]['id']])
+                    outfile.write('\n' + char_unique_views[chars[index]['id']])
                     flag_views = False
             infile.seek(0)
             outfile.close()

@@ -1,8 +1,8 @@
 loadproject();
 
-editdata.player_datas[0].nickname = "电脑0";
-editdata.player_datas[1].nickname = "电脑1";
-editdata.player_datas[2].nickname = "电脑2";
+editdata.player_datas[0].nickname = '电脑0';
+editdata.player_datas[1].nickname = '电脑1';
+editdata.player_datas[2].nickname = '电脑2';
 editdata.player_datas[0].avatar_id = 400101;
 editdata.player_datas[1].avatar_id = 400101;
 editdata.player_datas[2].avatar_id = 400101;
@@ -27,16 +27,16 @@ editdata.config = {
     }
 };
 
-tiles0 = "111s11125566777z";
-tiles1 = "1m222333444688s";
-tiles2 = "1m111222333p688s";
-paishan = randompaishan("66s4z", "2s5z999m33336z9999s65z9m71z1s444z");
+tiles0 = '111s11125566777z';
+tiles1 = '1m222333444688s';
+tiles2 = '1m111222333p688s';
+paishan = randompaishan('66s4z', '2s5z999m33336z9999s65z9m71z1s444z');
 roundbegin();
-qiepai("2z", true);
+qiepai('2z', true);
 mopai();
-qiepai("1m", true);
+qiepai('1m', true);
 mopai();
-qiepai("1m", true);
+qiepai('1m', true);
 mopai();
 for (let i = 0; i < 7; i++) {
     leimingpai();
@@ -51,25 +51,25 @@ mopai();
 qiepai();
 hupai();
 
-tiles0 = "1122334567899s4z";
-tiles1 = "1m444055667789s";
-tiles2 = "1m111222333p688s";
-paishan = randompaishan("", "9s");
+tiles0 = '1122334567899s4z';
+tiles1 = '1m444055667789s';
+tiles2 = '1m111222333p688s';
+paishan = randompaishan('', '9s');
 roundbegin();
 leimingpai();
 mopai();
 hupai();
 
-tiles0 = "1199m123456789p4z";
-tiles1 = "2223334448888s";
-tiles2 = "1199m123456789p";
+tiles0 = '1199m123456789p4z';
+tiles1 = '2223334448888s';
+tiles2 = '1199m123456789p';
 paishan = randompaishan();
 roundbegin();
 leimingpai();
 mopai();
 qiepai(true);
 mopai();
-qiepai("8s", true);
+qiepai('8s', true);
 {
     let tmp_tingpais = calctingpai(1);
     let first_2 = false; // 2号玩家是否已经立直
@@ -79,9 +79,9 @@ qiepai("8s", true);
             hupai();
             break;
         } else {
-            if (getlstaction().data.tile === "4z") {
+            if (getlstaction().data.tile === '4z') {
                 leimingpai();
-                if (equaltile("4z", tmp_tingpais[0].tile)) {
+                if (equaltile('4z', tmp_tingpais[0].tile)) {
                     hupai();
                     break;
                 } else
@@ -105,5 +105,5 @@ qiepai("8s", true);
         }
     }
 }
-if (getlstaction().name !== "RecordHule")
+if (getlstaction().name !== 'RecordHule')
     notileliuju();

@@ -10,11 +10,11 @@ get_title = db.get_title
 # 输出的文件名集合, 如: 200001_一姬.js
 outfile_names = []
 for i in range(len(chars)):
-    outfile_names.append(str(chars[i]['id']) + "_" + chars[i]['skin'][0]['name'] + ".js")
+    outfile_names.append(str(chars[i]['id']) + '_' + chars[i]['skin'][0]['name'] + '.js')
 
 # 两个正则匹配串
-pattern_name = r'editdata\.player_datas\[\d]\.nickname = "(.*)";'
-pattern_id = r"editdata\.player_datas\[\d]\.avatar_id = (.*);"
+pattern_name = r'editdata\.player_datas\[\d]\.nickname = \'(.*)\';'
+pattern_id = r'editdata\.player_datas\[\d]\.avatar_id = (.*);'
 
 template_title = 'editdata.player_datas[0].title = editdata.player_datas[1].title = editdata.player_datas[2].title = editdata.player_datas[3].title = '
 template_verified = 'editdata.player_datas[0].verified = editdata.player_datas[1].verified = editdata.player_datas[2].verified = editdata.player_datas[3].verified = '
@@ -55,7 +55,7 @@ def generate_views(slots, item_ids, player_num=4):
         temp = template_views_3P
     result = temp + '[\n'
     for index in range(len(slots)):
-        result += ('    {"slot": ' + str(slots[index]) + ', "item_id": ' + str(item_ids[index]) + '}, // ' +
+        result += ('    {\'slot\': ' + str(slots[index]) + ', \'item_id\': ' + str(item_ids[index]) + '}, // ' +
                    get_view(item_ids[index])['name'] + '\n')
     result += '];\n'
     return result

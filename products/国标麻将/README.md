@@ -4,7 +4,7 @@
 
 开启国标模式需要在 `'detail_rule'` 中注明 `'_guobiao': true`, 并导入 [guobiao.js](../../guobiao.js)
 
-以下番种主要根据 [雀渣平台](https://tziakcha.net) 规则(明暗杠设为5番, 有天地人和)
+以下番种主要根据 [雀渣平台](https://tziakcha.net/scoring) 规则(明暗杠设为5番, 有天地人和)
 
 对于诈和, 以及在 `'detail_rule'` 中没有设置 `'_guobiao_no_8fanfu'` 的情况下不足8番的错和,
 按照赔每家 `'detail_rule'` 中 `'_cuohu_points'` 设置的点数, 默认是 10, 若又设置了 `'_cuohupeida'` 

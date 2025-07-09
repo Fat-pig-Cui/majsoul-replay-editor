@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 function editfunction() {
     // ActionDiscardTile 改动: 添加 kailiqi
@@ -6,7 +6,7 @@ function editfunction() {
         var O = view;
 
         void 0 === U && (U = 0),
-            app.Log.log("ActionDiscardTile record data:" + JSON.stringify(K));
+            app.Log.log('ActionDiscardTile record data:' + JSON.stringify(K));
         var V = 500;
         K.doras && O.DesktopMgr.Inst.WhenDoras(K.doras, !0);
         var N = K.seat,
@@ -469,11 +469,11 @@ function editfunction() {
         var O = view;
 
         void 0 === U && (U = 0),
-            app.Log.log("ActionBabei record data:" + JSON.stringify(K)), K.doras && O.DesktopMgr.Inst.WhenDoras(K.doras, !0);
+            app.Log.log('ActionBabei record data:' + JSON.stringify(K)), K.doras && O.DesktopMgr.Inst.WhenDoras(K.doras, !0);
         var V = K.seat, N;
 
         // 添加内容: 拔的牌可以是其他牌
-        N = K.tile ? mjcore.MJPai.Create(K.tile) : mjcore.MJPai.Create("4z");
+        N = K.tile ? mjcore.MJPai.Create(K.tile) : mjcore.MJPai.Create('4z');
 
         O['DesktopMgr'].Inst['players'][O['DesktopMgr'].Inst['seat2LocalPosition'](V)]['AddBabei'](N, K['moqie'], !0);
         if (!is_guobiao())
@@ -494,12 +494,12 @@ function editfunction() {
         var O = view;
 
         void 0 === U && (U = -1),
-            app.Log.log("ActionBabei fastrecord data:" + JSON.stringify(K)),
+            app.Log.log('ActionBabei fastrecord data:' + JSON.stringify(K)),
         K.doras && O.DesktopMgr.Inst.WhenDoras(K.doras, !0);
         var V = K.seat, N;
 
         // 添加内容: 拔的牌可以是其他牌
-        N = K.tile ? mjcore.MJPai.Create(K.tile) : mjcore.MJPai.Create("4z");
+        N = K.tile ? mjcore.MJPai.Create(K.tile) : mjcore.MJPai.Create('4z');
         // 添加听牌
         K['tingpais'] && O['DesktopMgr'].Inst['setTingpai'](K.seat, K['tingpais']);
 
@@ -583,7 +583,7 @@ function editfunction() {
                         delta: 0
                     };
                     if (K.delta_scores[o] > 0) {
-                        o === O.DesktopMgr.Inst.seat, uiscript.UI_DesktopInfo.Inst.changeHeadEmo(o, "emoji_7", -1), l.delta = K.delta_scores[o];
+                        o === O.DesktopMgr.Inst.seat, uiscript.UI_DesktopInfo.Inst.changeHeadEmo(o, 'emoji_7', -1), l.delta = K.delta_scores[o];
                         for (var h = 0, c = N; h < c.length; h++) {
                             var _ = c[h];
                             if (_.seat === o) {
@@ -592,7 +592,7 @@ function editfunction() {
                             }
                         }
                     } else
-                        K.delta_scores[o] < 0 && (l.delta = K.delta_scores[o], uiscript.UI_DesktopInfo.Inst.changeHeadEmo(o, "emoji_8", -1));
+                        K.delta_scores[o] < 0 && (l.delta = K.delta_scores[o], uiscript.UI_DesktopInfo.Inst.changeHeadEmo(o, 'emoji_8', -1));
                     l.score = K.old_scores[o], s.push(l)
                 }
                 Laya.timer.once(200, U, function () {
@@ -727,7 +727,7 @@ function editfunction() {
                         delta: 0
                     };
                     if (K.delta_scores[o] > 0) {
-                        o === O.DesktopMgr.Inst.seat, uiscript.UI_DesktopInfo.Inst.changeHeadEmo(o, "emoji_7", -1), l.delta = K.delta_scores[o];
+                        o === O.DesktopMgr.Inst.seat, uiscript.UI_DesktopInfo.Inst.changeHeadEmo(o, 'emoji_7', -1), l.delta = K.delta_scores[o];
                         for (var h = 0, c = a; h < c.length; h++) {
                             var _ = c[h];
                             if (_.seat === o) {
@@ -736,7 +736,7 @@ function editfunction() {
                             }
                         }
                     } else
-                        K.delta_scores[o] < 0 && (l.delta = K.delta_scores[o], uiscript.UI_DesktopInfo.Inst.changeHeadEmo(o, "emoji_8", -1));
+                        K.delta_scores[o] < 0 && (l.delta = K.delta_scores[o], uiscript.UI_DesktopInfo.Inst.changeHeadEmo(o, 'emoji_8', -1));
                     l.score = K.old_scores[o], s.push(l)
                 }
                 Laya.timer.once(200, i, function () {
@@ -744,7 +744,7 @@ function editfunction() {
                 }), uiscript.UI_Hu_Xuezhan.Inst.showScoreChange(s)
             }), r += 2500, Laya.timer.once(r, this, function () {
                 for (var i = 0; i < K.allplayertiles.length; i++) {
-                    for (var n = K.allplayertiles[i].split("|"), r = [], s = 0; s < n.length; s++)
+                    for (var n = K.allplayertiles[i].split('|'), r = [], s = 0; s < n.length; s++)
                         r.push(mjcore.MJPai.Create(n[s]));
                     r = r.sort(mjcore.MJPai.Distance), O.DesktopMgr.Inst.players[O.DesktopMgr.Inst.seat2LocalPosition(i)].Huangpai(!0, r, !1)
                 }
@@ -903,14 +903,14 @@ function editfunction() {
                     break;
 
                 // 添加内容: RecordHuleXueLiu 和 RecordHuleXueLiuEnd
-                case "RecordHuleXueLiu":
+                case 'RecordHuleXueLiu':
                     K = view.ActionHuleXueLiu.record(O.data);
                     break;
-                case "RecordHuleXueLiuEnd":
+                case 'RecordHuleXueLiuEnd':
                     K = view.ActionHuleXueLiuEnd.record(O.data);
                     break;
                 // 添加内容: 国标麻将 RecordCuohu
-                case "RecordCuohu":
+                case 'RecordCuohu':
                     K = view.ActionCuohu.record(O.data);
                     break;
                 default:
@@ -997,14 +997,14 @@ function editfunction() {
                     break;
 
                 // 添加内容: RecordHuleXueLiu 和 RecordHuleXueLiuEnd
-                case "RecordHuleXueLiu":
+                case 'RecordHuleXueLiu':
                     view.ActionHuleXueLiu.fastrecord(O.data);
                     break;
-                case "RecordHuleXueLiuEnd":
+                case 'RecordHuleXueLiuEnd':
                     view.ActionHuleXueLiuEnd.fastrecord(O.data);
                     break;
                 // 添加内容: 国标麻将 RecordCuohu
-                case "RecordCuohu":
+                case 'RecordCuohu':
                     view.ActionCuohu.fastrecord(O.data);
                     break;
                 default:
@@ -1053,9 +1053,9 @@ function editfunction() {
                 return 1000;
 
             // 添加内容: RecordHuleXueLiu 和 RecordCuohu
-            case "RecordHuleXueLiu":
+            case 'RecordHuleXueLiu':
                 return 500;
-            case "RecordCuohu":
+            case 'RecordCuohu':
                 return 500;
             default:
                 break;
@@ -1063,7 +1063,7 @@ function editfunction() {
         return 0;
     }
 
-    view.ERuleMode[view.ERuleMode.Liqi2 = 2] = "Liqi2";
+    view.ERuleMode[view.ERuleMode.Liqi2 = 2] = 'Liqi2';
     view.DesktopMgr.prototype.seat2LocalPosition = function (t) {
         if (this.rule_mode === view.ERuleMode.Liqi2) {
             if (t === this.seat)
@@ -1097,7 +1097,7 @@ function editfunction() {
         }
     }
 
-    Object.defineProperty(view.DesktopMgr.prototype, "player_count", {
+    Object.defineProperty(view.DesktopMgr.prototype, 'player_count', {
         get: function () {
             if (this.rule_mode === view.ERuleMode.Liqi2)
                 return 2;

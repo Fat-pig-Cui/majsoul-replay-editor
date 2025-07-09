@@ -1,9 +1,9 @@
 loadproject();
 
-editdata.player_datas[0].nickname = "一姬-契约";
-editdata.player_datas[1].nickname = "新年初诣";
-editdata.player_datas[2].nickname = "一姬当千";
-editdata.player_datas[3].nickname = "绮春歌";
+editdata.player_datas[0].nickname = '一姬-契约';
+editdata.player_datas[1].nickname = '新年初诣';
+editdata.player_datas[2].nickname = '一姬当千';
+editdata.player_datas[3].nickname = '绮春歌';
 editdata.player_datas[0].avatar_id = 400102;
 editdata.player_datas[1].avatar_id = 400104;
 editdata.player_datas[2].avatar_id = 400105;
@@ -23,14 +23,14 @@ editdata.config = {
     }
 };
 
-tiles0 = "222888m22255s789p";
-tiles1 = "1112345699m789s";
-tiles2 = "1112345699p588s";
-tiles3 = "1112345699s789m";
+tiles0 = '222888m22255s789p';
+tiles1 = '1112345699m789s';
+tiles2 = '1112345699p588s';
+tiles3 = '1112345699s789m';
 paishan = randompaishan();
 roundbegin();
-huansanzhang("789p", "789s", "588s", "789m", 1);
-dingque("psmp");
+huansanzhang('789p', '789s', '588s', '789m', 1);
+dingque('psmp');
 hupai();
 for (let cnt = 0; cnt < 55; cnt++) {
     mopai();
