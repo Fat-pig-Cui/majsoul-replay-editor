@@ -120,7 +120,7 @@ hupai();
 
 for (let i = 0; i < 4; i++) {
     normalmoqie();
-    mingqiepai('9s')
+    mingqiepai('9s');
 }
 normalmoqie();
 hupai(true);

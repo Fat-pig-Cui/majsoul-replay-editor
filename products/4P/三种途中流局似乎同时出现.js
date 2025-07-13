@@ -7,8 +7,8 @@ loadproject();
 // 以上两种情况, 按照雀魂官方规则, 临近流局的最后一张牌立直也会成功交出棒子, 但没有交出棒子动画
 
 // 供参考的真实牌谱(已匿名):
-// 四杠散了后立直可以成立(东1局0本场): https://game.maj-soul.com/1/?paipu=jmklmq-vsry7112-yy10-63cc-gdmo-nksoqtwmrr0z_2
-// 四风连打后立直可以成立(东3局2本场): https://game.maj-soul.com/1/?paipu=jnjpns-uvuv46x4-5d99-69da-ianf-hinotnnktnxy_2
+// 四杠散了后立直可以成立(东1局0本场): https://game.maj-soul.com/1/?paipu=jmklmq-vsry7112-yy10-63cc-gdmo-nksoqtwmrr0z__2
+// 四风连打后立直可以成立(东3局2本场): https://game.maj-soul.com/1/?paipu=jnjpns-uvuv46x4-5d99-69da-ianf-hinotnnktnxy__2
 
 editdata.player_datas[0].nickname = '一姬-契约';
 editdata.player_datas[1].nickname = '新年初诣';

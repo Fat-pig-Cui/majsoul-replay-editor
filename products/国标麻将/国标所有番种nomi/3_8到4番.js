@@ -217,8 +217,8 @@ hupai();
 
 // 第15(53)局: 双暗杠
 tiles0 = '3333444m55p67s112z';
-tiles1 = '1112225557779m';
-tiles2 = '11122344p11267z';
+tiles1 = '1116677889999m';
+tiles2 = '166m1112345p117z';
 tiles3 = '1112225555888s';
 paishan = randompaishan('5p8s', '4m');
 roundbegin();
@@ -269,10 +269,10 @@ mingqiepai();
 zimohu();
 
 // 第19(57)局: 双明杠
-tiles0 = '333444m55p678s112z';
-tiles1 = '1112225557799m';
-tiles2 = '111223445p1167z';
-tiles3 = '1111225559999s';
+tiles0 = '333444m55p678s223z';
+tiles1 = '1116677889999m';
+tiles2 = '166m1112345p117z';
+tiles3 = '1112225559999s';
 paishan = randompaishan('3m4m5p');
 roundbegin();
 qiepai();

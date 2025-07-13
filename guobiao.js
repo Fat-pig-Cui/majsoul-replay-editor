@@ -1452,7 +1452,7 @@ function guobiao_fanlist() {
 }
 
 function guobiao_function() {
-    // 添加圈风刻, 门风刻语音, 并不显示宝牌指示牌
+    // 国标添加圈风刻, 门风刻语音, 并不显示宝牌指示牌
     uiscript.UI_Win.prototype.showRecord = function (K) {
 
         var B = uiscript;
@@ -1862,7 +1862,7 @@ function guobiao_function() {
             });
     }
 
-    // 跳过动画的函数
+    // 上述函数对应的跳过动画的版本
     uiscript.UI_Win.prototype._showInfo_record = function (K) {
 
         var B = uiscript;
@@ -1975,14 +1975,14 @@ function guobiao_function() {
             this['btn_confirm']['getChildByName']('confirm').x = 131;
     }
 
-    // 不显示符数
+    // 国标麻将不显示符数
     uiscript.UI_Win.prototype.setFanFu = function (B, K) {
         this['container_fan']['visible'] = this['container_fu']['visible'] = !0,
             this['container_fan']['alpha'] = this['container_fu']['alpha'] = 0;
 
         // if (this['container_fan']._childs.length < 4)
         //     for (let i = this['container_fan']._childs.length - 1; i >= 0 ; i--)
-        //     this['container_fan']._childs[i + 1] = this['container_fan']._childs[i];
+        //         this['container_fan']._childs[i + 1] = this['container_fan']._childs[i];
         // this['container_fan']._childs[0] = Object.create(this['container_fan']._childs[1]);
         // this['container_fan']._childs[0] = Object.assign(this['container_fan']._childs[0], this['container_fan']._childs[1]);
         //
@@ -2002,7 +2002,6 @@ function guobiao_function() {
                     this['fan_imgs'][z]['visible'] = !0,
                     this['fan_imgs'][z].skin = game['Tools']['localUISrc']('myres/mjdesktop/number/h_' + Z['toString']() + '.png');
             }
-        // this['container_fan']._childs[0]._skin = this['fan_imgs'][2]._skin;
 
         this['container_fu']['visible'] = (view['DesktopMgr'].Inst['is_chuanma_mode']() || is_guobiao()) ? !1 : !0;
         for (var z = 0; 3 > z; z++)

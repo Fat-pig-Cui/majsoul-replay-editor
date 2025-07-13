@@ -22,7 +22,6 @@ editdata.config = {
     }
 };
 
-
 tiles0 = '22223444666888s';
 tiles1 = '2228m333557777s';
 tiles2 = '233344447777m0s';

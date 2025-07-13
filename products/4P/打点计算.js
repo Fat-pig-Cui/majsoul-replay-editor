@@ -72,7 +72,7 @@ roundbegin();
 qiepai('2s');
 mingpai();
 normalmoqie();
-mingqiepai('5z')
+mingqiepai('5z');
 normalmoqie();
 hupai();
 
@@ -134,7 +134,7 @@ roundbegin();
 qiepai('2s');
 mingpai();
 normalmoqie();
-mingqiepai('5z')
+mingqiepai('5z');
 normalmoqie();
 hupai();
 

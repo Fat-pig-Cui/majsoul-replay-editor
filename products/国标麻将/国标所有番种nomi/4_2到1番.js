@@ -156,10 +156,10 @@ normalmoqie();
 hupai();
 
 // 第11(69)局: 暗杠
-tiles0 = '222245m33p789s116z';
-tiles1 = '1114445557799m';
-tiles2 = '11123447899p11z';
-tiles3 = '1111222555999s';
+tiles0 = '222245m33p678s116z';
+tiles1 = '1114446667799m';
+tiles2 = '33367799m199p11z';
+tiles3 = '1112225559999s';
 paishan = randompaishan('3p3m');
 roundbegin();
 combomopai();
@@ -252,8 +252,8 @@ hupai();
 // 第18(76)局: 明杠
 tiles0 = '222789m555p78s224z';
 tiles1 = '1114445557799m';
-tiles2 = '11123447899p11z';
-tiles3 = '1111222555999s';
+tiles2 = '79m111235899p11z';
+tiles3 = '1112226669999s';
 paishan = randompaishan('2m6s');
 roundbegin();
 qiepai();

@@ -19,12 +19,10 @@ editdata.config = {
     }
 };
 
-tiles0 = '1112340678999m5z';
-tiles1 = '1112340678999p';
-tiles2 = '1112223333444z';
+tiles0 = '11122233344444z';
+tiles1 = '1112340678999m';
+tiles2 = '1112340678999p';
 tiles3 = '1112340678999s';
-paishan = randompaishan('53z');
+paishan = randompaishan('', '1z....');
 roundbegin();
-qiepai();
-normalmoqie();
-zimohu();
+hupai();

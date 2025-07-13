@@ -31,7 +31,7 @@ tiles3 = '114699m469p3467s';
 paishan = randompaishan('', '23785p');
 roundbegin();
 huansanzhang('159s', '159s', '238p', '469p', 1);
-dingque('msmp')
+dingque('msmp');
 qiepai('9p');
 mingqiepai('2m');
 normalmoqie(50);

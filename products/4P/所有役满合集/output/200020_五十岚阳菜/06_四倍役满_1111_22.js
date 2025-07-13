@@ -33,7 +33,7 @@ tiles2 = '2223405567888p';
 tiles3 = '2223405567888s';
 paishan = randompaishan('1s');
 roundbegin();
-qiepai('1p')
+qiepai('1p');
 normalmoqie();
 hupai();
 

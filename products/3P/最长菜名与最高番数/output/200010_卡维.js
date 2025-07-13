@@ -75,8 +75,8 @@ roundbegin();
 qiepai('9m');
 mopai();
 combomopai(7);
-qiepai('6p')
-mingqiepai('9p')
+qiepai('6p');
+mingqiepai('9p');
 normalmoqie(42);
 moqieliqi();
 normalmoqie(2);
