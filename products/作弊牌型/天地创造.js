@@ -7,16 +7,16 @@ loadproject();
 // 共计105番140符, 计算结果35位, 共 90865195024359483499283685761351700 点
 // 因为青天井规则非常容易导致游戏崩溃, 而且'创造'没使用雀魂Plus修改的话无法显示, 这里直接显示'六倍役满'(虽然按雀魂逻辑只有两倍役满)
 
-editdata.player_datas[0].nickname = '一姬-契约';
-editdata.player_datas[1].nickname = '新年初诣';
-editdata.player_datas[2].nickname = '一姬当千';
-editdata.player_datas[3].nickname = '绮春歌';
-editdata.player_datas[0].avatar_id = 400102;
-editdata.player_datas[1].avatar_id = 400104;
-editdata.player_datas[2].avatar_id = 400105;
-editdata.player_datas[3].avatar_id = 400106;
+player_datas[0].nickname = '一姬-契约';
+player_datas[1].nickname = '新年初诣';
+player_datas[2].nickname = '一姬当千';
+player_datas[3].nickname = '绮春歌';
+player_datas[0].avatar_id = 400102;
+player_datas[1].avatar_id = 400104;
+player_datas[2].avatar_id = 400105;
+player_datas[3].avatar_id = 400106;
 
-editdata.config = {
+config = {
     'category': 1,
     'meta': {'mode_id': 0},
     'mode': {

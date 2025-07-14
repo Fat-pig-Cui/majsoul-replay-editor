@@ -2,16 +2,16 @@ loadproject();
 
 // 为了方便编辑不考虑换三张的过程
 
-editdata.player_datas[0].nickname = '莱恩-契约';
-editdata.player_datas[1].nickname = '莱恩';
-editdata.player_datas[2].nickname = '甜蜜魔法';
-editdata.player_datas[3].nickname = '天黑请闭眼';
-editdata.player_datas[0].avatar_id = 404702;
-editdata.player_datas[1].avatar_id = 404701;
-editdata.player_datas[2].avatar_id = 404703;
-editdata.player_datas[3].avatar_id = 404704;
+player_datas[0].nickname = '莱恩-契约';
+player_datas[1].nickname = '莱恩';
+player_datas[2].nickname = '甜蜜魔法';
+player_datas[3].nickname = '天黑请闭眼';
+player_datas[0].avatar_id = 404702;
+player_datas[1].avatar_id = 404701;
+player_datas[2].avatar_id = 404703;
+player_datas[3].avatar_id = 404704;
 
-editdata.config = {
+config = {
     'category': 1,
     'meta': {'mode_id': 0},
     'mode': {

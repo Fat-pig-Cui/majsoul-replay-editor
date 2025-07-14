@@ -1,15 +1,15 @@
 loadproject();
 
-editdata.player_datas[0].nickname = '斋藤治-契约';
-editdata.player_datas[1].nickname = '斋藤治';
-editdata.player_datas[2].nickname = '花火之约';
-editdata.player_datas[3].nickname = '暖冬邂逅';
-editdata.player_datas[0].avatar_id = 402302;
-editdata.player_datas[1].avatar_id = 402301;
-editdata.player_datas[2].avatar_id = 402303;
-editdata.player_datas[3].avatar_id = 402304;
+player_datas[0].nickname = '斋藤治-契约';
+player_datas[1].nickname = '斋藤治';
+player_datas[2].nickname = '花火之约';
+player_datas[3].nickname = '暖冬邂逅';
+player_datas[0].avatar_id = 402302;
+player_datas[1].avatar_id = 402301;
+player_datas[2].avatar_id = 402303;
+player_datas[3].avatar_id = 402304;
 
-editdata.config = {
+config = {
     'category': 1,
     'meta': {'mode_id': 0},
     'mode': {

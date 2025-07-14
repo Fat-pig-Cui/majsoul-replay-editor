@@ -3,18 +3,18 @@ loadproject();
 // 第一局亲家的最长菜名(15条49番), 第二局最高番数(14条64番)
 // 最后一局子家的最长菜名(15条55番)
 
-editdata.player_datas[0].nickname = '泽尼娅-契约';
-editdata.player_datas[1].nickname = '绮春歌';
-editdata.player_datas[2].nickname = '异想烂漫';
-editdata.player_datas[0].avatar_id = 400902;
-editdata.player_datas[1].avatar_id = 400905;
-editdata.player_datas[2].avatar_id = 400906;
+player_datas[0].nickname = '泽尼娅-契约';
+player_datas[1].nickname = '绮春歌';
+player_datas[2].nickname = '异想烂漫';
+player_datas[0].avatar_id = 400902;
+player_datas[1].avatar_id = 400905;
+player_datas[2].avatar_id = 400906;
 
-editdata.player_datas[0].views = editdata.player_datas[1].views = editdata.player_datas[2].views = [
+player_datas[0].views = player_datas[1].views = player_datas[2].views = [
     {'slot': 6, 'item_id': 30580008}, // 桌布-小恶魔日记
 ];
 
-editdata.config = {
+config = {
     'category': 1,
     'meta': {'mode_id': 0},
     'mode': {

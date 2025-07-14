@@ -1,18 +1,18 @@
 loadproject();
 
-editdata.player_datas[0].nickname = '卡维-契约';
-editdata.player_datas[1].nickname = '命运之夏';
-editdata.player_datas[2].nickname = '拂晓的G大调';
-editdata.player_datas[0].avatar_id = 401002;
-editdata.player_datas[1].avatar_id = 401003;
-editdata.player_datas[2].avatar_id = 401004;
+player_datas[0].nickname = '卡维-契约';
+player_datas[1].nickname = '命运之夏';
+player_datas[2].nickname = '拂晓的G大调';
+player_datas[0].avatar_id = 401002;
+player_datas[1].avatar_id = 401003;
+player_datas[2].avatar_id = 401004;
 
-editdata.player_datas[0].views = editdata.player_datas[1].views = editdata.player_datas[2].views = [
+player_datas[0].views = player_datas[1].views = player_datas[2].views = [
     {'slot': 0, 'item_id': 305612}, // 立直棒-陨石法杖
     {'slot': 6, 'item_id': 305809}, // 动态桌布-紫霞海岸
 ];
 
-editdata.config = {
+config = {
     'category': 1,
     'meta': {'mode_id': 0},
     'mode': {

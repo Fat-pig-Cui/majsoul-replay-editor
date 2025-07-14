@@ -1,19 +1,19 @@
 loadproject();
 
-editdata.player_datas[0].nickname = '五十岚阳菜-契约';
-editdata.player_datas[1].nickname = '新岁添喜';
-editdata.player_datas[2].nickname = '无拘乐趣';
-editdata.player_datas[0].avatar_id = 402002;
-editdata.player_datas[1].avatar_id = 402005;
-editdata.player_datas[2].avatar_id = 402006;
+player_datas[0].nickname = '五十岚阳菜-契约';
+player_datas[1].nickname = '新岁添喜';
+player_datas[2].nickname = '无拘乐趣';
+player_datas[0].avatar_id = 402002;
+player_datas[1].avatar_id = 402005;
+player_datas[2].avatar_id = 402006;
 
 // 头像框-猫咪军团的身份
-editdata.player_datas[0].avatar_frame = editdata.player_datas[1].avatar_frame = editdata.player_datas[2].avatar_frame = 305523;
-editdata.player_datas[0].views = editdata.player_datas[1].views = editdata.player_datas[2].views = [
+player_datas[0].avatar_frame = player_datas[1].avatar_frame = player_datas[2].avatar_frame = 305523;
+player_datas[0].views = player_datas[1].views = player_datas[2].views = [
     {'slot': 5, 'item_id': 305523}, // 头像框-猫咪军团的身份
 ];
 
-editdata.config = {
+config = {
     'category': 1,
     'meta': {'mode_id': 0},
     'mode': {

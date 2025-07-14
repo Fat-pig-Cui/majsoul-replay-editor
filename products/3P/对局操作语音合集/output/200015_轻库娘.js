@@ -1,13 +1,13 @@
 loadproject();
 
-editdata.player_datas[0].nickname = '轻库娘-契约';
-editdata.player_datas[1].nickname = '轻库娘';
-editdata.player_datas[2].nickname = '清凉夏日';
-editdata.player_datas[0].avatar_id = 401502;
-editdata.player_datas[1].avatar_id = 401501;
-editdata.player_datas[2].avatar_id = 401503;
+player_datas[0].nickname = '轻库娘-契约';
+player_datas[1].nickname = '轻库娘';
+player_datas[2].nickname = '清凉夏日';
+player_datas[0].avatar_id = 401502;
+player_datas[1].avatar_id = 401501;
+player_datas[2].avatar_id = 401503;
 
-editdata.player_datas[0].views = editdata.player_datas[1].views = editdata.player_datas[2].views = [
+player_datas[0].views = player_datas[1].views = player_datas[2].views = [
     {'slot': 0, 'item_id': 305604}, // 立直棒-乘风破浪
     {'slot': 1, 'item_id': 305208}, // 和牌-海浪的馈赠
     {'slot': 2, 'item_id': 305308}, // 立直-浪之声
@@ -15,7 +15,7 @@ editdata.player_datas[0].views = editdata.player_datas[1].views = editdata.playe
     {'slot': 7, 'item_id': 305702}, // 牌背-浪花朵朵
 ];
 
-editdata.config = {
+config = {
     'category': 1,
     'meta': {'mode_id': 0},
     'mode': {

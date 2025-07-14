@@ -1,13 +1,13 @@
 loadproject();
 
-editdata.player_datas[0].nickname = '寺崎千穗理-契约';
-editdata.player_datas[1].nickname = '佳期不负';
-editdata.player_datas[2].nickname = '玩转夏日';
-editdata.player_datas[0].avatar_id = 403302;
-editdata.player_datas[1].avatar_id = 403303;
-editdata.player_datas[2].avatar_id = 403304;
+player_datas[0].nickname = '寺崎千穗理-契约';
+player_datas[1].nickname = '佳期不负';
+player_datas[2].nickname = '玩转夏日';
+player_datas[0].avatar_id = 403302;
+player_datas[1].avatar_id = 403303;
+player_datas[2].avatar_id = 403304;
 
-editdata.config = {
+config = {
     'category': 1,
     'meta': {'mode_id': 0},
     'mode': {

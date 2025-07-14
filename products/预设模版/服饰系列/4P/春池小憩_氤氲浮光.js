@@ -10,31 +10,31 @@ loadproject();
 // 立直-量子智能
 // 牌背-魂之元件
 
-editdata.player_datas[0].nickname = '辉夜姬';
-editdata.player_datas[1].nickname = '福姬';
-editdata.player_datas[2].nickname = '泷川夏彦';
-editdata.player_datas[3].nickname = '夏弥尔';
-editdata.player_datas[0].avatar_id = 402905;
-editdata.player_datas[1].avatar_id = 403803;
-editdata.player_datas[2].avatar_id = 404903;
-editdata.player_datas[3].avatar_id = 405403;
+player_datas[0].nickname = '辉夜姬';
+player_datas[1].nickname = '福姬';
+player_datas[2].nickname = '泷川夏彦';
+player_datas[3].nickname = '夏弥尔';
+player_datas[0].avatar_id = 402905;
+player_datas[1].avatar_id = 403803;
+player_datas[2].avatar_id = 404903;
+player_datas[3].avatar_id = 405403;
 
 // 福姬, 夏弥尔
-editdata.player_datas[1].views = editdata.player_datas[3].views = [
+player_datas[1].views = player_datas[3].views = [
     {'slot': 0, 'item_id': 305607}, // 立直棒-仿生喵
     {'slot': 1, 'item_id': 305211}, // 和牌-核心裂变
     {'slot': 2, 'item_id': 305311}, // 立直-虚拟导航
     {'slot': 7, 'item_id': 305713}, // 牌背-魂之元件
 ];
 // 辉夜姬, 泷川夏彦
-editdata.player_datas[0].views = editdata.player_datas[2].views = [
+player_datas[0].views = player_datas[2].views = [
     {'slot': 0, 'item_id': 305607}, // 立直棒-仿生喵
     {'slot': 1, 'item_id': 305221}, // 和牌-机械哲学
     {'slot': 2, 'item_id': 305321}, // 立直-量子智能
     {'slot': 7, 'item_id': 305713}, // 牌背-魂之元件
 ];
 
-editdata.config = {
+config = {
     'category': 1,
     'meta': {'mode_id': 0},
     'mode': {

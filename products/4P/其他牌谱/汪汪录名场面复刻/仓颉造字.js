@@ -2,17 +2,17 @@ loadproject();
 
 // 2020雀魂TOP20, 其中的TOP3: '仓颉造字' https://www.bilibili.com/video/BV1BV411B7nw/?t=403
 
-editdata.player_datas[0].nickname = '珒';
-editdata.player_datas[1].nickname = '七海单推人';
-editdata.player_datas[2].nickname = '瑞文丶丶';
-editdata.player_datas[3].nickname = '纟非';
-editdata.player_datas[0].avatar_id = 400101;
-editdata.player_datas[1].avatar_id = 401801;
-editdata.player_datas[2].avatar_id = 400101;
-editdata.player_datas[3].avatar_id = 400101;
-editdata.player_datas[1].title = 600008;
+player_datas[0].nickname = '珒';
+player_datas[1].nickname = '七海单推人';
+player_datas[2].nickname = '瑞文丶丶';
+player_datas[3].nickname = '纟非';
+player_datas[0].avatar_id = 400101;
+player_datas[1].avatar_id = 401801;
+player_datas[2].avatar_id = 400101;
+player_datas[3].avatar_id = 400101;
+player_datas[1].title = 600008;
 
-editdata.config = {
+config = {
     'category': 2,
     'meta': {'mode_id': 2},
     'mode': {

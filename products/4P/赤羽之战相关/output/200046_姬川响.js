@@ -2,19 +2,19 @@ loadproject();
 
 // 为了方便编辑不考虑换三张的过程
 
-editdata.player_datas[0].nickname = '姬川响-契约';
-editdata.player_datas[1].nickname = '姬川响';
-editdata.player_datas[2].nickname = '新岁添喜';
-editdata.player_datas[3].nickname = '奇遇星光';
-editdata.player_datas[0].avatar_id = 404602;
-editdata.player_datas[1].avatar_id = 404601;
-editdata.player_datas[2].avatar_id = 404603;
-editdata.player_datas[3].avatar_id = 404604;
+player_datas[0].nickname = '姬川响-契约';
+player_datas[1].nickname = '姬川响';
+player_datas[2].nickname = '新岁添喜';
+player_datas[3].nickname = '奇遇星光';
+player_datas[0].avatar_id = 404602;
+player_datas[1].avatar_id = 404601;
+player_datas[2].avatar_id = 404603;
+player_datas[3].avatar_id = 404604;
 
 // 主播(猫爪子)认证
-editdata.player_datas[0].verified = editdata.player_datas[1].verified = editdata.player_datas[2].verified = editdata.player_datas[3].verified = 1;
+player_datas[0].verified = player_datas[1].verified = player_datas[2].verified = player_datas[3].verified = 1;
 
-editdata.config = {
+config = {
     'category': 1,
     'meta': {'mode_id': 0},
     'mode': {

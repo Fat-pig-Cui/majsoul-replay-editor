@@ -2,24 +2,24 @@ loadproject();
 
 // 为了方便编辑不考虑换三张的过程
 
-editdata.player_datas[0].nickname = '辉夜姬-契约';
-editdata.player_datas[1].nickname = '择芳意';
-editdata.player_datas[2].nickname = '氤氲浮光';
-editdata.player_datas[3].nickname = '罗裳曼影';
-editdata.player_datas[0].avatar_id = 402902;
-editdata.player_datas[1].avatar_id = 402904;
-editdata.player_datas[2].avatar_id = 402905;
-editdata.player_datas[3].avatar_id = 402906;
+player_datas[0].nickname = '辉夜姬-契约';
+player_datas[1].nickname = '择芳意';
+player_datas[2].nickname = '氤氲浮光';
+player_datas[3].nickname = '罗裳曼影';
+player_datas[0].avatar_id = 402902;
+player_datas[1].avatar_id = 402904;
+player_datas[2].avatar_id = 402905;
+player_datas[3].avatar_id = 402906;
 
 // 称号-神社贵宾
-editdata.player_datas[0].title = editdata.player_datas[1].title = editdata.player_datas[2].title = editdata.player_datas[3].title = 600038;
+player_datas[0].title = player_datas[1].title = player_datas[2].title = player_datas[3].title = 600038;
 // 主播(猫爪子)认证
-editdata.player_datas[0].verified = editdata.player_datas[1].verified = editdata.player_datas[2].verified = editdata.player_datas[3].verified = 1;
-editdata.player_datas[0].views = editdata.player_datas[1].views = editdata.player_datas[2].views = editdata.player_datas[3].views = [
+player_datas[0].verified = player_datas[1].verified = player_datas[2].verified = player_datas[3].verified = 1;
+player_datas[0].views = player_datas[1].views = player_datas[2].views = player_datas[3].views = [
     {'slot': 6, 'item_id': 30580005}, // 桌布-预热开场
 ];
 
-editdata.config = {
+config = {
     'category': 1,
     'meta': {'mode_id': 0},
     'mode': {

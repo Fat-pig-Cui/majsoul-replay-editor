@@ -3,18 +3,18 @@ loadproject();
 // 第一局亲家的最长菜名(15条49番), 第二局最高番数(14条64番)
 // 最后一局子家的最长菜名(15条55番)
 
-editdata.player_datas[0].nickname = '九条璃雨-契约';
-editdata.player_datas[1].nickname = '魂色幻想';
-editdata.player_datas[2].nickname = '心跳时速';
-editdata.player_datas[0].avatar_id = 400802;
-editdata.player_datas[1].avatar_id = 400805;
-editdata.player_datas[2].avatar_id = 400806;
+player_datas[0].nickname = '九条璃雨-契约';
+player_datas[1].nickname = '魂色幻想';
+player_datas[2].nickname = '心跳时速';
+player_datas[0].avatar_id = 400802;
+player_datas[1].avatar_id = 400805;
+player_datas[2].avatar_id = 400806;
 
-editdata.player_datas[0].views = editdata.player_datas[1].views = editdata.player_datas[2].views = [
+player_datas[0].views = player_datas[1].views = player_datas[2].views = [
     {'slot': 6, 'item_id': 305805}, // 动态桌布-捞金鱼
 ];
 
-editdata.config = {
+config = {
     'category': 1,
     'meta': {'mode_id': 0},
     'mode': {

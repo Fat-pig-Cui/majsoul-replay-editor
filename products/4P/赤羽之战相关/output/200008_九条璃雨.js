@@ -2,20 +2,20 @@ loadproject();
 
 // 为了方便编辑不考虑换三张的过程
 
-editdata.player_datas[0].nickname = '九条璃雨-契约';
-editdata.player_datas[1].nickname = '瑞雪迎新';
-editdata.player_datas[2].nickname = '魂色幻想';
-editdata.player_datas[3].nickname = '心跳时速';
-editdata.player_datas[0].avatar_id = 400802;
-editdata.player_datas[1].avatar_id = 400804;
-editdata.player_datas[2].avatar_id = 400805;
-editdata.player_datas[3].avatar_id = 400806;
+player_datas[0].nickname = '九条璃雨-契约';
+player_datas[1].nickname = '瑞雪迎新';
+player_datas[2].nickname = '魂色幻想';
+player_datas[3].nickname = '心跳时速';
+player_datas[0].avatar_id = 400802;
+player_datas[1].avatar_id = 400804;
+player_datas[2].avatar_id = 400805;
+player_datas[3].avatar_id = 400806;
 
-editdata.player_datas[0].views = editdata.player_datas[1].views = editdata.player_datas[2].views = editdata.player_datas[3].views = [
+player_datas[0].views = player_datas[1].views = player_datas[2].views = player_datas[3].views = [
     {'slot': 6, 'item_id': 305805}, // 动态桌布-捞金鱼
 ];
 
-editdata.config = {
+config = {
     'category': 1,
     'meta': {'mode_id': 0},
     'mode': {

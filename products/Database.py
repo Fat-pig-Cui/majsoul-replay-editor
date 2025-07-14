@@ -13,17 +13,17 @@ for i in range(len(chars)):
     outfile_names.append(str(chars[i]['id']) + '_' + chars[i]['skin'][0]['name'] + '.js')
 
 # 两个正则匹配串
-pattern_name = r'editdata\.player_datas\[\d]\.nickname = \'(.*)\';'
-pattern_id = r'editdata\.player_datas\[\d]\.avatar_id = (.*);'
+pattern_name = r'player_datas\[\d]\.nickname = \'(.*)\';'
+pattern_id = r'player_datas\[\d]\.avatar_id = (.*);'
 
-template_title = 'editdata.player_datas[0].title = editdata.player_datas[1].title = editdata.player_datas[2].title = editdata.player_datas[3].title = '
-template_verified = 'editdata.player_datas[0].verified = editdata.player_datas[1].verified = editdata.player_datas[2].verified = editdata.player_datas[3].verified = '
-template_avatar_frame = 'editdata.player_datas[0].avatar_frame = editdata.player_datas[1].avatar_frame = editdata.player_datas[2].avatar_frame = editdata.player_datas[3].avatar_frame = '
-template_views = 'editdata.player_datas[0].views = editdata.player_datas[1].views = editdata.player_datas[2].views = editdata.player_datas[3].views = '
-template_title_3P = 'editdata.player_datas[0].title = editdata.player_datas[1].title = editdata.player_datas[2].title = '
-template_verified_3P = 'editdata.player_datas[0].verified = editdata.player_datas[1].verified = editdata.player_datas[2].verified = '
-template_avatar_frame_3P = 'editdata.player_datas[0].avatar_frame = editdata.player_datas[1].avatar_frame = editdata.player_datas[2].avatar_frame = '
-template_views_3P = 'editdata.player_datas[0].views = editdata.player_datas[1].views = editdata.player_datas[2].views = '
+template_title = 'player_datas[0].title = player_datas[1].title = player_datas[2].title = player_datas[3].title = '
+template_verified = 'player_datas[0].verified = player_datas[1].verified = player_datas[2].verified = player_datas[3].verified = '
+template_avatar_frame = 'player_datas[0].avatar_frame = player_datas[1].avatar_frame = player_datas[2].avatar_frame = player_datas[3].avatar_frame = '
+template_views = 'player_datas[0].views = player_datas[1].views = player_datas[2].views = player_datas[3].views = '
+template_title_3P = 'player_datas[0].title = player_datas[1].title = player_datas[2].title = '
+template_verified_3P = 'player_datas[0].verified = player_datas[1].verified = player_datas[2].verified = '
+template_avatar_frame_3P = 'player_datas[0].avatar_frame = player_datas[1].avatar_frame = player_datas[2].avatar_frame = '
+template_views_3P = 'player_datas[0].views = player_datas[1].views = player_datas[2].views = '
 
 
 def generate_title(title_id, player_num=4):

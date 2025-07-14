@@ -1,15 +1,15 @@
 loadproject();
 
-editdata.player_datas[0].nickname = '石原碓海-契约';
-editdata.player_datas[1].nickname = '石原碓海';
-editdata.player_datas[2].nickname = '白色礼赞';
-editdata.player_datas[3].nickname = '假日之滨';
-editdata.player_datas[0].avatar_id = 403102;
-editdata.player_datas[1].avatar_id = 403101;
-editdata.player_datas[2].avatar_id = 403103;
-editdata.player_datas[3].avatar_id = 403104;
+player_datas[0].nickname = '石原碓海-契约';
+player_datas[1].nickname = '石原碓海';
+player_datas[2].nickname = '白色礼赞';
+player_datas[3].nickname = '假日之滨';
+player_datas[0].avatar_id = 403102;
+player_datas[1].avatar_id = 403101;
+player_datas[2].avatar_id = 403103;
+player_datas[3].avatar_id = 403104;
 
-editdata.config = {
+config = {
     'category': 1,
     'meta': {'mode_id': 0},
     'mode': {

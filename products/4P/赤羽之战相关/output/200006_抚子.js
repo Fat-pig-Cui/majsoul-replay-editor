@@ -2,20 +2,20 @@ loadproject();
 
 // 为了方便编辑不考虑换三张的过程
 
-editdata.player_datas[0].nickname = '抚子-契约';
-editdata.player_datas[1].nickname = '细雪呈瑞';
-editdata.player_datas[2].nickname = '四方雀者';
-editdata.player_datas[3].nickname = '无拘乐趣';
-editdata.player_datas[0].avatar_id = 400602;
-editdata.player_datas[1].avatar_id = 400604;
-editdata.player_datas[2].avatar_id = 400605;
-editdata.player_datas[3].avatar_id = 400606;
+player_datas[0].nickname = '抚子-契约';
+player_datas[1].nickname = '细雪呈瑞';
+player_datas[2].nickname = '四方雀者';
+player_datas[3].nickname = '无拘乐趣';
+player_datas[0].avatar_id = 400602;
+player_datas[1].avatar_id = 400604;
+player_datas[2].avatar_id = 400605;
+player_datas[3].avatar_id = 400606;
 
-editdata.player_datas[0].views = editdata.player_datas[1].views = editdata.player_datas[2].views = editdata.player_datas[3].views = [
+player_datas[0].views = player_datas[1].views = player_datas[2].views = player_datas[3].views = [
     {'slot': 6, 'item_id': 305048}, // 桌布-雀魂祭一周年
 ];
 
-editdata.config = {
+config = {
     'category': 1,
     'meta': {'mode_id': 0},
     'mode': {

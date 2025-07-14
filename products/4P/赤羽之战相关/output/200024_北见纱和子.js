@@ -2,16 +2,16 @@ loadproject();
 
 // 为了方便编辑不考虑换三张的过程
 
-editdata.player_datas[0].nickname = '北见纱和子-契约';
-editdata.player_datas[1].nickname = '枕边私语';
-editdata.player_datas[2].nickname = '心跳时速';
-editdata.player_datas[3].nickname = '云泉意暖';
-editdata.player_datas[0].avatar_id = 402402;
-editdata.player_datas[1].avatar_id = 402405;
-editdata.player_datas[2].avatar_id = 402406;
-editdata.player_datas[3].avatar_id = 402407;
+player_datas[0].nickname = '北见纱和子-契约';
+player_datas[1].nickname = '枕边私语';
+player_datas[2].nickname = '心跳时速';
+player_datas[3].nickname = '云泉意暖';
+player_datas[0].avatar_id = 402402;
+player_datas[1].avatar_id = 402405;
+player_datas[2].avatar_id = 402406;
+player_datas[3].avatar_id = 402407;
 
-editdata.config = {
+config = {
     'category': 1,
     'meta': {'mode_id': 0},
     'mode': {

@@ -2,16 +2,16 @@ loadproject();
 
 // 为了方便编辑不考虑换三张的过程
 
-editdata.player_datas[0].nickname = '七海礼奈-契约';
-editdata.player_datas[1].nickname = '白色礼赞';
-editdata.player_datas[2].nickname = '枕边私语';
-editdata.player_datas[3].nickname = '云窗春几枝';
-editdata.player_datas[0].avatar_id = 404402;
-editdata.player_datas[1].avatar_id = 404403;
-editdata.player_datas[2].avatar_id = 404404;
-editdata.player_datas[3].avatar_id = 404405;
+player_datas[0].nickname = '七海礼奈-契约';
+player_datas[1].nickname = '白色礼赞';
+player_datas[2].nickname = '枕边私语';
+player_datas[3].nickname = '云窗春几枝';
+player_datas[0].avatar_id = 404402;
+player_datas[1].avatar_id = 404403;
+player_datas[2].avatar_id = 404404;
+player_datas[3].avatar_id = 404405;
 
-editdata.config = {
+config = {
     'category': 1,
     'meta': {'mode_id': 0},
     'mode': {

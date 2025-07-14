@@ -3,14 +3,14 @@ loadproject();
 // 第一局亲家的最长菜名(15条49番), 第二局最高番数(14条64番)
 // 最后一局子家的最长菜名(15条55番)
 
-editdata.player_datas[0].nickname = '市川雏菜-契约';
-editdata.player_datas[1].nickname = '市川雏菜';
-editdata.player_datas[2].nickname = '悠然格调';
-editdata.player_datas[0].avatar_id = 40010302;
-editdata.player_datas[1].avatar_id = 40010301;
-editdata.player_datas[2].avatar_id = 40010303;
+player_datas[0].nickname = '市川雏菜-契约';
+player_datas[1].nickname = '市川雏菜';
+player_datas[2].nickname = '悠然格调';
+player_datas[0].avatar_id = 40010302;
+player_datas[1].avatar_id = 40010301;
+player_datas[2].avatar_id = 40010303;
 
-editdata.player_datas[0].views = editdata.player_datas[1].views = editdata.player_datas[2].views = [
+player_datas[0].views = player_datas[1].views = player_datas[2].views = [
     {'slot': 0, 'item_id': 30560005}, // 立直棒-动听之源
     {'slot': 1, 'item_id': 30520007}, // 和牌-涟漪之空
     {'slot': 2, 'item_id': 30530007}, // 立直-水漾星光
@@ -18,7 +18,7 @@ editdata.player_datas[0].views = editdata.player_datas[1].views = editdata.playe
     {'slot': 7, 'item_id': 30570007}, // 牌背-静谧夜光
 ];
 
-editdata.config = {
+config = {
     'category': 1,
     'meta': {'mode_id': 0},
     'mode': {

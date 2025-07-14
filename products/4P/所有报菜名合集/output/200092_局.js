@@ -1,15 +1,15 @@
 loadproject();
 
-editdata.player_datas[0].nickname = '局-契约';
-editdata.player_datas[1].nickname = '局';
-editdata.player_datas[2].nickname = '局-契约';
-editdata.player_datas[3].nickname = '局';
-editdata.player_datas[0].avatar_id = 409202;
-editdata.player_datas[1].avatar_id = 409201;
-editdata.player_datas[2].avatar_id = 409202;
-editdata.player_datas[3].avatar_id = 409201;
+player_datas[0].nickname = '局-契约';
+player_datas[1].nickname = '局';
+player_datas[2].nickname = '局-契约';
+player_datas[3].nickname = '局';
+player_datas[0].avatar_id = 409202;
+player_datas[1].avatar_id = 409201;
+player_datas[2].avatar_id = 409202;
+player_datas[3].avatar_id = 409201;
 
-editdata.config = {
+config = {
     'category': 1,
     'meta': {'mode_id': 0},
     'mode': {

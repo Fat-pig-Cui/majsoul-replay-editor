@@ -3,18 +3,18 @@ loadproject();
 // 第一局亲家的最长菜名(15条49番), 第二局最高番数(14条64番)
 // 最后一局子家的最长菜名(15条55番)
 
-editdata.player_datas[0].nickname = '青鸾-契约';
-editdata.player_datas[1].nickname = '青鸾';
-editdata.player_datas[2].nickname = '贺今朝';
-editdata.player_datas[0].avatar_id = 406702;
-editdata.player_datas[1].avatar_id = 406701;
-editdata.player_datas[2].avatar_id = 406703;
+player_datas[0].nickname = '青鸾-契约';
+player_datas[1].nickname = '青鸾';
+player_datas[2].nickname = '贺今朝';
+player_datas[0].avatar_id = 406702;
+player_datas[1].avatar_id = 406701;
+player_datas[2].avatar_id = 406703;
 
-editdata.player_datas[0].views = editdata.player_datas[1].views = editdata.player_datas[2].views = [
+player_datas[0].views = player_datas[1].views = player_datas[2].views = [
     {'slot': 6, 'item_id': 305812}, // 桌布-仙境茶话会
 ];
 
-editdata.config = {
+config = {
     'category': 1,
     'meta': {'mode_id': 0},
     'mode': {

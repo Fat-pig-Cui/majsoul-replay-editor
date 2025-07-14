@@ -1,16 +1,16 @@
 loadproject();
 
-editdata.player_datas[0].nickname = '四宫冬实-契约';
-editdata.player_datas[1].nickname = '暖冬邂逅';
-editdata.player_datas[2].nickname = '奇遇星光';
-editdata.player_datas[0].avatar_id = 406602;
-editdata.player_datas[1].avatar_id = 406604;
-editdata.player_datas[2].avatar_id = 406605;
+player_datas[0].nickname = '四宫冬实-契约';
+player_datas[1].nickname = '暖冬邂逅';
+player_datas[2].nickname = '奇遇星光';
+player_datas[0].avatar_id = 406602;
+player_datas[1].avatar_id = 406604;
+player_datas[2].avatar_id = 406605;
 
 // 主播(猫爪子)认证
-editdata.player_datas[0].verified = editdata.player_datas[1].verified = editdata.player_datas[2].verified = 1;
+player_datas[0].verified = player_datas[1].verified = player_datas[2].verified = 1;
 
-editdata.config = {
+config = {
     'category': 1,
     'meta': {'mode_id': 0},
     'mode': {

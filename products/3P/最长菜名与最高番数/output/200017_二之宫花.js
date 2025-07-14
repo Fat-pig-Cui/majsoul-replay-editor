@@ -3,22 +3,22 @@ loadproject();
 // 第一局亲家的最长菜名(15条49番), 第二局最高番数(14条64番)
 // 最后一局子家的最长菜名(15条55番)
 
-editdata.player_datas[0].nickname = '二之宫花-契约';
-editdata.player_datas[1].nickname = '馥郁满室';
-editdata.player_datas[2].nickname = '冬日心愿簿';
-editdata.player_datas[0].avatar_id = 401702;
-editdata.player_datas[1].avatar_id = 401708;
-editdata.player_datas[2].avatar_id = 401709;
+player_datas[0].nickname = '二之宫花-契约';
+player_datas[1].nickname = '馥郁满室';
+player_datas[2].nickname = '冬日心愿簿';
+player_datas[0].avatar_id = 401702;
+player_datas[1].avatar_id = 401708;
+player_datas[2].avatar_id = 401709;
 
 // 头像框-豆芽
-editdata.player_datas[0].avatar_frame = editdata.player_datas[1].avatar_frame = editdata.player_datas[2].avatar_frame = 305500;
-editdata.player_datas[0].views = editdata.player_datas[1].views = editdata.player_datas[2].views = [
+player_datas[0].avatar_frame = player_datas[1].avatar_frame = player_datas[2].avatar_frame = 305500;
+player_datas[0].views = player_datas[1].views = player_datas[2].views = [
     {'slot': 0, 'item_id': 305621}, // 立直棒-盆栽
     {'slot': 5, 'item_id': 305500}, // 头像框-豆芽
     {'slot': 6, 'item_id': 305801}, // 桌布-锦鲤游
 ];
 
-editdata.config = {
+config = {
     'category': 1,
     'meta': {'mode_id': 0},
     'mode': {

@@ -13,7 +13,7 @@ get_title = db.get_title
 # ---
 
 filename = '字典_template.md'
-tmp_filename = '字典.md'
+tmp_filename = '0_字典.md'
 
 infile = open(filename, 'r', encoding='utf-8')
 outfile = open(tmp_filename, 'w', encoding='utf-8')

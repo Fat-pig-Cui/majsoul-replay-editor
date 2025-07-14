@@ -2,19 +2,19 @@ loadproject();
 
 // 2018雀魂TOP15, 其中的NO.7: '无役岭上累满' https://www.bilibili.com/video/BV1ub411r7Qh/?t=460
 
-editdata.player_datas[0].nickname = 'sqn惹不起';
-editdata.player_datas[1].nickname = '最强之九';
-editdata.player_datas[2].nickname = 'CSJL';
-editdata.player_datas[3].nickname = '蒲烧';
-editdata.player_datas[0].avatar_id = 400201;
-editdata.player_datas[1].avatar_id = 400101;
-editdata.player_datas[2].avatar_id = 400101;
-editdata.player_datas[3].avatar_id = 400101;
-editdata.player_datas[3].views = [
+player_datas[0].nickname = 'sqn惹不起';
+player_datas[1].nickname = '最强之九';
+player_datas[2].nickname = 'CSJL';
+player_datas[3].nickname = '蒲烧';
+player_datas[0].avatar_id = 400201;
+player_datas[1].avatar_id = 400101;
+player_datas[2].avatar_id = 400101;
+player_datas[3].avatar_id = 400101;
+player_datas[3].views = [
     {'slot': 1, 'item_id': 305009}, // 和牌-樱花
 ]
 
-editdata.config = {
+config = {
     'category': 2,
     'meta': {'mode_id': 6},
     'mode': {

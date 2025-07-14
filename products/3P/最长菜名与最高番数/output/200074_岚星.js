@@ -3,20 +3,20 @@ loadproject();
 // 第一局亲家的最长菜名(15条49番), 第二局最高番数(14条64番)
 // 最后一局子家的最长菜名(15条55番)
 
-editdata.player_datas[0].nickname = '岚星-契约';
-editdata.player_datas[1].nickname = '岚星';
-editdata.player_datas[2].nickname = '不寐之绊';
-editdata.player_datas[0].avatar_id = 407402;
-editdata.player_datas[1].avatar_id = 407401;
-editdata.player_datas[2].avatar_id = 407403;
+player_datas[0].nickname = '岚星-契约';
+player_datas[1].nickname = '岚星';
+player_datas[2].nickname = '不寐之绊';
+player_datas[0].avatar_id = 407402;
+player_datas[1].avatar_id = 407401;
+player_datas[2].avatar_id = 407403;
 
-editdata.player_datas[0].views = editdata.player_datas[1].views = editdata.player_datas[2].views = [
+player_datas[0].views = player_datas[1].views = player_datas[2].views = [
     {'slot': 0, 'item_id': 305620}, // 立直棒-秘传之卷
     {'slot': 1, 'item_id': 305222}, // 和牌-天地无用
     {'slot': 2, 'item_id': 305322}, // 立直-毒烟玉
 ];
 
-editdata.config = {
+config = {
     'category': 1,
     'meta': {'mode_id': 0},
     'mode': {

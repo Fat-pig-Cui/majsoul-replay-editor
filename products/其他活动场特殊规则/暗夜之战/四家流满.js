@@ -34,8 +34,8 @@ for (let i = 0; i < 65; i++) {
     mopai();
     let tile = getlstaction().data.tile;
     let is_yaojiu = false;
-    for (let i = 0; i < specialtiles.duanyaojiu.length; i++)
-        if (equaltile(tile, specialtiles.duanyaojiu[i])) {
+    for (let i = 0; i < non_sptiles.duanyaojiu.length; i++)
+        if (equaltile(tile, non_sptiles.duanyaojiu[i])) {
             is_yaojiu = true;
             break;
         }

@@ -1,13 +1,13 @@
 loadproject();
 
-editdata.player_datas[0].nickname = '汉娜-契约';
-editdata.player_datas[1].nickname = '汉娜';
-editdata.player_datas[2].nickname = '迷人礼颂';
-editdata.player_datas[0].avatar_id = 407702;
-editdata.player_datas[1].avatar_id = 407701;
-editdata.player_datas[2].avatar_id = 407703;
+player_datas[0].nickname = '汉娜-契约';
+player_datas[1].nickname = '汉娜';
+player_datas[2].nickname = '迷人礼颂';
+player_datas[0].avatar_id = 407702;
+player_datas[1].avatar_id = 407701;
+player_datas[2].avatar_id = 407703;
 
-editdata.config = {
+config = {
     'category': 1,
     'meta': {'mode_id': 0},
     'mode': {

@@ -3,19 +3,19 @@ loadproject();
 // 照姐铳松实玄倍满, 阿知贺篇第11集19min开始
 // 因为雀魂天麻联动没有 花田煌 和 松实玄, 所以分别用 岚星 和 伊芙 代替
 
-editdata.player_datas[0].nickname = '花田煌';
-editdata.player_datas[1].nickname = '园城寺怜';
-editdata.player_datas[2].nickname = '松实玄';
-editdata.player_datas[3].nickname = '宫永照';
-editdata.player_datas[0].avatar_id = 407401;
-editdata.player_datas[1].avatar_id = 406501;
-editdata.player_datas[2].avatar_id = 408301;
-editdata.player_datas[3].avatar_id = 403701;
+player_datas[0].nickname = '花田煌';
+player_datas[1].nickname = '园城寺怜';
+player_datas[2].nickname = '松实玄';
+player_datas[3].nickname = '宫永照';
+player_datas[0].avatar_id = 407401;
+player_datas[1].avatar_id = 406501;
+player_datas[2].avatar_id = 408301;
+player_datas[3].avatar_id = 403701;
 
-editdata.player_datas[2].views = [{'slot': 1, 'item_id': 305206}, {'slot': 2, 'item_id': 308022}]; // 和牌-天降正义 和 立直-未来视
-editdata.player_datas[3].views = [{'slot': 2, 'item_id': 308002}]; // 立直-花天月地
+player_datas[2].views = [{'slot': 1, 'item_id': 305206}, {'slot': 2, 'item_id': 308022}]; // 和牌-天降正义 和 立直-未来视
+player_datas[3].views = [{'slot': 2, 'item_id': 308002}]; // 立直-花天月地
 
-editdata.config = {
+config = {
     'category': 4,
     'meta': {'mode_id': 0},
     'mode': {

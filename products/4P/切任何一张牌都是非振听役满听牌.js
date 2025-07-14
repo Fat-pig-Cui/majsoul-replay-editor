@@ -10,16 +10,16 @@ loadproject();
 //  1) 111222333444z + 任意一个顺子去掉一张牌, 如 12m111222333444z, 役满是 小四喜(听3m) 或 大四喜和四暗刻单骑(听1m或2m)
 //  2) 22224444888s666z, 役满是 绿一色, 听牌是 3s
 
-editdata.player_datas[0].nickname = '一姬-契约';
-editdata.player_datas[1].nickname = '新年初诣';
-editdata.player_datas[2].nickname = '一姬当千';
-editdata.player_datas[3].nickname = '绮春歌';
-editdata.player_datas[0].avatar_id = 400102;
-editdata.player_datas[1].avatar_id = 400104;
-editdata.player_datas[2].avatar_id = 400105;
-editdata.player_datas[3].avatar_id = 400106;
+player_datas[0].nickname = '一姬-契约';
+player_datas[1].nickname = '新年初诣';
+player_datas[2].nickname = '一姬当千';
+player_datas[3].nickname = '绮春歌';
+player_datas[0].avatar_id = 400102;
+player_datas[1].avatar_id = 400104;
+player_datas[2].avatar_id = 400105;
+player_datas[3].avatar_id = 400106;
 
-editdata.config = {
+config = {
     'category': 1,
     'meta': {'mode_id': 0},
     'mode': {

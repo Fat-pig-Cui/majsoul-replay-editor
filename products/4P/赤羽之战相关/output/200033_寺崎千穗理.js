@@ -2,16 +2,16 @@ loadproject();
 
 // 为了方便编辑不考虑换三张的过程
 
-editdata.player_datas[0].nickname = '寺崎千穗理-契约';
-editdata.player_datas[1].nickname = '寺崎千穗理';
-editdata.player_datas[2].nickname = '佳期不负';
-editdata.player_datas[3].nickname = '玩转夏日';
-editdata.player_datas[0].avatar_id = 403302;
-editdata.player_datas[1].avatar_id = 403301;
-editdata.player_datas[2].avatar_id = 403303;
-editdata.player_datas[3].avatar_id = 403304;
+player_datas[0].nickname = '寺崎千穗理-契约';
+player_datas[1].nickname = '寺崎千穗理';
+player_datas[2].nickname = '佳期不负';
+player_datas[3].nickname = '玩转夏日';
+player_datas[0].avatar_id = 403302;
+player_datas[1].avatar_id = 403301;
+player_datas[2].avatar_id = 403303;
+player_datas[3].avatar_id = 403304;
 
-editdata.config = {
+config = {
     'category': 1,
     'meta': {'mode_id': 0},
     'mode': {

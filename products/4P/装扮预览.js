@@ -2,8 +2,8 @@ loadproject();
 
 // 客户端的装扮预览界面的虚假的对局(虚假是因为有些地方不符合规则逻辑, 比如作为主视角的南家比亲家先摸牌)
 
-editdata.player_datas[0].nickname = editdata.player_datas[2].nickname = editdata.player_datas[3].nickname = '电脑(简单)';
-editdata.player_datas[1] = {
+player_datas[0].nickname = player_datas[2].nickname = player_datas[3].nickname = '电脑(简单)';
+player_datas[1] = {
     'nickname': '$nickname$',
     'avatar_id': 407002, // 鲁鲁修-契约
     'title': 600034, // 称号也可以看, 不过称号不属于严格意义上的装扮, 这里用 天选之证 举例
@@ -22,7 +22,7 @@ editdata.player_datas[1] = {
     ]
 };
 
-editdata.config = {
+config = {
     'category': 1,
     'meta': {'mode_id': 0},
     'mode': {

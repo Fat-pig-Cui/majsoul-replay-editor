@@ -2,16 +2,16 @@ loadproject();
 
 // 为了方便编辑不考虑换三张的过程
 
-editdata.player_datas[0].nickname = '赤木茂-契约';
-editdata.player_datas[1].nickname = '赤木茂';
-editdata.player_datas[2].nickname = '赤木茂-契约';
-editdata.player_datas[3].nickname = '光暗对决';
-editdata.player_datas[0].avatar_id = 405002;
-editdata.player_datas[1].avatar_id = 405001;
-editdata.player_datas[2].avatar_id = 405002;
-editdata.player_datas[3].avatar_id = 405003;
+player_datas[0].nickname = '赤木茂-契约';
+player_datas[1].nickname = '赤木茂';
+player_datas[2].nickname = '赤木茂-契约';
+player_datas[3].nickname = '光暗对决';
+player_datas[0].avatar_id = 405002;
+player_datas[1].avatar_id = 405001;
+player_datas[2].avatar_id = 405002;
+player_datas[3].avatar_id = 405003;
 
-editdata.player_datas[0].views = editdata.player_datas[1].views = editdata.player_datas[2].views = editdata.player_datas[3].views = [
+player_datas[0].views = player_datas[1].views = player_datas[2].views = player_datas[3].views = [
     {'slot': 0, 'item_id': 308013}, // 立直棒-命悬一线
     {'slot': 1, 'item_id': 308011}, // 和牌-地狱低语
     {'slot': 2, 'item_id': 308012}, // 立直-幽冥之焰
@@ -19,7 +19,7 @@ editdata.player_datas[0].views = editdata.player_datas[1].views = editdata.playe
     {'slot': 7, 'item_id': 308015}, // 牌背-双鹫纹章
 ];
 
-editdata.config = {
+config = {
     'category': 1,
     'meta': {'mode_id': 0},
     'mode': {

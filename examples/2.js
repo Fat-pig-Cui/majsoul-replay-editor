@@ -1,12 +1,13 @@
 loadproject();
 
-editdata.player_datas[0].nickname = '电脑0';
-editdata.player_datas[1].nickname = '电脑1';
-editdata.player_datas[2].nickname = '电脑2';
-editdata.player_datas[0].avatar_id = 400101;
-editdata.player_datas[1].avatar_id = 400101;
-editdata.player_datas[2].avatar_id = 400101;
-editdata.config = {
+player_datas[0].nickname = '电脑0';
+player_datas[1].nickname = '电脑1';
+player_datas[2].nickname = '电脑2';
+player_datas[0].avatar_id = 400101;
+player_datas[1].avatar_id = 400101;
+player_datas[2].avatar_id = 400101;
+
+config = {
     'category': 1,
     'meta': {'mode_id': 0},
     'mode': {

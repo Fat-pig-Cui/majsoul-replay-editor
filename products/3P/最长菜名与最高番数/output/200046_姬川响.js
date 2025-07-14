@@ -3,17 +3,17 @@ loadproject();
 // 第一局亲家的最长菜名(15条49番), 第二局最高番数(14条64番)
 // 最后一局子家的最长菜名(15条55番)
 
-editdata.player_datas[0].nickname = '姬川响-契约';
-editdata.player_datas[1].nickname = '新岁添喜';
-editdata.player_datas[2].nickname = '奇遇星光';
-editdata.player_datas[0].avatar_id = 404602;
-editdata.player_datas[1].avatar_id = 404603;
-editdata.player_datas[2].avatar_id = 404604;
+player_datas[0].nickname = '姬川响-契约';
+player_datas[1].nickname = '新岁添喜';
+player_datas[2].nickname = '奇遇星光';
+player_datas[0].avatar_id = 404602;
+player_datas[1].avatar_id = 404603;
+player_datas[2].avatar_id = 404604;
 
 // 主播(猫爪子)认证
-editdata.player_datas[0].verified = editdata.player_datas[1].verified = editdata.player_datas[2].verified = 1;
+player_datas[0].verified = player_datas[1].verified = player_datas[2].verified = 1;
 
-editdata.config = {
+config = {
     'category': 1,
     'meta': {'mode_id': 0},
     'mode': {

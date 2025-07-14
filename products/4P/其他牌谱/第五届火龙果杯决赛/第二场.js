@@ -1,6 +1,6 @@
 loadproject();
 
-editdata.player_datas[0] = {
+player_datas[0] = {
     'nickname': '114231',
     'avatar_id': 405001, // 雏桃-契约
     'level': {'id': 10501, 'score': 2000},
@@ -10,7 +10,7 @@ editdata.player_datas[0] = {
         {'slot': 2, 'item_id': 305038}, // 立直-龙腾
     ]
 };
-editdata.player_datas[1] = {
+player_datas[1] = {
     'nickname': '北雨听海',
     'avatar_id': 402602, // 雏桃-契约
     'title': 600006, // 魂之契约者-中阶
@@ -21,7 +21,7 @@ editdata.player_datas[1] = {
         {'slot': 2, 'item_id': 305316}, // 立直-鹿雪冬至
     ]
 };
-editdata.player_datas[2] = {
+player_datas[2] = {
     'nickname': '领取好运',
     'avatar_id': 402202, // 约瑟夫-契约
     'title': 600038, // 神社贵宾, 牌谱问题这个修改无效
@@ -34,7 +34,7 @@ editdata.player_datas[2] = {
         {'slot': 5, 'item_id': 305523}, // 头像框-猫咪军团的身份
     ]
 };
-editdata.player_datas[3] = {
+player_datas[3] = {
     'nickname': '猛吞',
     'avatar_id': 400102, // 一姬-契约
     'title': 600045, // 一姬当千
@@ -48,7 +48,7 @@ editdata.player_datas[3] = {
     ]
 };
 
-editdata.config = {
+config = {
     'category': 4,
     'meta': {'mode_id': 0},
     'mode': {

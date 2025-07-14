@@ -1,13 +1,13 @@
 loadproject();
 
-editdata.player_datas[0].nickname = '泷川夏彦-契约';
-editdata.player_datas[1].nickname = '氤氲浮光';
-editdata.player_datas[2].nickname = '贺今朝';
-editdata.player_datas[0].avatar_id = 404902;
-editdata.player_datas[1].avatar_id = 404903;
-editdata.player_datas[2].avatar_id = 404904;
+player_datas[0].nickname = '泷川夏彦-契约';
+player_datas[1].nickname = '氤氲浮光';
+player_datas[2].nickname = '贺今朝';
+player_datas[0].avatar_id = 404902;
+player_datas[1].avatar_id = 404903;
+player_datas[2].avatar_id = 404904;
 
-editdata.config = {
+config = {
     'category': 1,
     'meta': {'mode_id': 0},
     'mode': {

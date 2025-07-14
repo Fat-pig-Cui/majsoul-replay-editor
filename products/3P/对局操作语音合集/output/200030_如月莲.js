@@ -1,13 +1,13 @@
 loadproject();
 
-editdata.player_datas[0].nickname = '如月莲-契约';
-editdata.player_datas[1].nickname = '暗夜法则';
-editdata.player_datas[2].nickname = '新岁景明';
-editdata.player_datas[0].avatar_id = 403002;
-editdata.player_datas[1].avatar_id = 403003;
-editdata.player_datas[2].avatar_id = 403004;
+player_datas[0].nickname = '如月莲-契约';
+player_datas[1].nickname = '暗夜法则';
+player_datas[2].nickname = '新岁景明';
+player_datas[0].avatar_id = 403002;
+player_datas[1].avatar_id = 403003;
+player_datas[2].avatar_id = 403004;
 
-editdata.config = {
+config = {
     'category': 1,
     'meta': {'mode_id': 0},
     'mode': {

@@ -1,18 +1,18 @@
 loadproject();
 
-editdata.player_datas[0].nickname = '七夕-契约';
-editdata.player_datas[1].nickname = '七夕';
-editdata.player_datas[2].nickname = '悸动之夏';
-editdata.player_datas[3].nickname = '四方雀者';
-editdata.player_datas[0].avatar_id = 403902;
-editdata.player_datas[1].avatar_id = 403901;
-editdata.player_datas[2].avatar_id = 403903;
-editdata.player_datas[3].avatar_id = 403904;
+player_datas[0].nickname = '七夕-契约';
+player_datas[1].nickname = '七夕';
+player_datas[2].nickname = '悸动之夏';
+player_datas[3].nickname = '四方雀者';
+player_datas[0].avatar_id = 403902;
+player_datas[1].avatar_id = 403901;
+player_datas[2].avatar_id = 403903;
+player_datas[3].avatar_id = 403904;
 
 // 主播(猫爪子)认证
-editdata.player_datas[0].verified = editdata.player_datas[1].verified = editdata.player_datas[2].verified = editdata.player_datas[3].verified = 1;
+player_datas[0].verified = player_datas[1].verified = player_datas[2].verified = player_datas[3].verified = 1;
 
-editdata.config = {
+config = {
     'category': 1,
     'meta': {'mode_id': 0},
     'mode': {

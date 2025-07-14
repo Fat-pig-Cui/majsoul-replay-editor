@@ -3,14 +3,14 @@ loadproject();
 // 第一局亲家的最长菜名(15条49番), 第二局最高番数(14条64番)
 // 最后一局子家的最长菜名(15条55番)
 
-editdata.player_datas[0].nickname = '吉尔-契约';
-editdata.player_datas[1].nickname = '吉尔';
-editdata.player_datas[2].nickname = 'Prism Live';
-editdata.player_datas[0].avatar_id = 408202;
-editdata.player_datas[1].avatar_id = 408201;
-editdata.player_datas[2].avatar_id = 408203;
+player_datas[0].nickname = '吉尔-契约';
+player_datas[1].nickname = '吉尔';
+player_datas[2].nickname = 'Prism Live';
+player_datas[0].avatar_id = 408202;
+player_datas[1].avatar_id = 408201;
+player_datas[2].avatar_id = 408203;
 
-editdata.player_datas[0].views = editdata.player_datas[1].views = editdata.player_datas[2].views = [
+player_datas[0].views = player_datas[1].views = player_datas[2].views = [
     {'slot': 0, 'item_id': 308033}, // 立直棒-红晖的魔杖
     {'slot': 1, 'item_id': 308031}, // 和牌-魔力的迸发
     {'slot': 2, 'item_id': 308032}, // 立直-英灵的典仪
@@ -18,7 +18,7 @@ editdata.player_datas[0].views = editdata.player_datas[1].views = editdata.playe
     {'slot': 7, 'item_id': 308035}, // 牌背-苍蓝的星辰
 ];
 
-editdata.config = {
+config = {
     'category': 1,
     'meta': {'mode_id': 0},
     'mode': {

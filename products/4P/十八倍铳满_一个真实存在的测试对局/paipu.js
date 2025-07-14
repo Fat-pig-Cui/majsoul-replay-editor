@@ -1,18 +1,18 @@
 loadproject();
 
-editdata.player_datas[0].nickname = '宫永五峰';
-editdata.player_datas[1].nickname = '仓木幽魂　';
-editdata.player_datas[2].nickname = 'lyuris';
-editdata.player_datas[3].nickname = '手柄';
-editdata.player_datas[0].avatar_id = 400101;
-editdata.player_datas[1].avatar_id = 400101;
-editdata.player_datas[2].avatar_id = 400201;
-editdata.player_datas[3].avatar_id = 402401;
+player_datas[0].nickname = '宫永五峰';
+player_datas[1].nickname = '仓木幽魂　';
+player_datas[2].nickname = 'lyuris';
+player_datas[3].nickname = '手柄';
+player_datas[0].avatar_id = 400101;
+player_datas[1].avatar_id = 400101;
+player_datas[2].avatar_id = 400201;
+player_datas[3].avatar_id = 402401;
 
-editdata.player_datas[2].title = 600027;
-editdata.player_datas[3].title = 600012;
+player_datas[2].title = 600027;
+player_datas[3].title = 600012;
 
-editdata.config = {
+config = {
     'category': 1,
     'meta': {'room_id': 63031},
     'mode': {

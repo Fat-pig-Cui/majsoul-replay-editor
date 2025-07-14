@@ -9,20 +9,20 @@ loadproject();
 // 大会战的规则是四赤, 有杠包牌, 无双倍役满
 // 因为雀魂天麻联动没有 池田华菜 和 加治木由美, 所以分别用 一姬 和 小鸟游雏田 代替
 
-editdata.player_datas[0].nickname = '池田华菜';
-editdata.player_datas[1].nickname = '天江衣';
-editdata.player_datas[2].nickname = '宫永咲';
-editdata.player_datas[3].nickname = '加治木由美';
-editdata.player_datas[0].avatar_id = 400101;
-editdata.player_datas[1].avatar_id = 403601;
-editdata.player_datas[2].avatar_id = 403401;
-editdata.player_datas[3].avatar_id = 401901;
+player_datas[0].nickname = '池田华菜';
+player_datas[1].nickname = '天江衣';
+player_datas[2].nickname = '宫永咲';
+player_datas[3].nickname = '加治木由美';
+player_datas[0].avatar_id = 400101;
+player_datas[1].avatar_id = 403601;
+player_datas[2].avatar_id = 403401;
+player_datas[3].avatar_id = 401901;
 
-editdata.player_datas[0].views = [{'slot': 1, 'item_id': 305206}, {'slot': 2, 'item_id': 305324}]; // 和牌-天降正义 和 立直-猫过留痕
-editdata.player_datas[1].views = [{'slot': 1, 'item_id': 308001}]; // 和牌-龙卷雷霆
-editdata.player_datas[2].views = [{'slot': 1, 'item_id': 308021}]; // 和牌-高岭之花
+player_datas[0].views = [{'slot': 1, 'item_id': 305206}, {'slot': 2, 'item_id': 305324}]; // 和牌-天降正义 和 立直-猫过留痕
+player_datas[1].views = [{'slot': 1, 'item_id': 308001}]; // 和牌-龙卷雷霆
+player_datas[2].views = [{'slot': 1, 'item_id': 308021}]; // 和牌-高岭之花
 
-editdata.config = {
+config = {
     'category': 4,
     'meta': {'mode_id': 0},
     'mode': {

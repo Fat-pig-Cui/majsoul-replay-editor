@@ -3,22 +3,22 @@ loadproject();
 // 第一局亲家的最长菜名(15条49番), 第二局最高番数(14条64番)
 // 最后一局子家的最长菜名(15条55番)
 
-editdata.player_datas[0].nickname = '汪次郎-契约';
-editdata.player_datas[1].nickname = '假日之滨';
-editdata.player_datas[2].nickname = '冬日心愿簿';
-editdata.player_datas[0].avatar_id = 401202;
-editdata.player_datas[1].avatar_id = 401204;
-editdata.player_datas[2].avatar_id = 401205;
+player_datas[0].nickname = '汪次郎-契约';
+player_datas[1].nickname = '假日之滨';
+player_datas[2].nickname = '冬日心愿簿';
+player_datas[0].avatar_id = 401202;
+player_datas[1].avatar_id = 401204;
+player_datas[2].avatar_id = 401205;
 
 // 称号-神社贵宾
-editdata.player_datas[0].title = editdata.player_datas[1].title = editdata.player_datas[2].title = 600038;
+player_datas[0].title = player_datas[1].title = player_datas[2].title = 600038;
 // 主播(猫爪子)认证
-editdata.player_datas[0].verified = editdata.player_datas[1].verified = editdata.player_datas[2].verified = 1;
-editdata.player_datas[0].views = editdata.player_datas[1].views = editdata.player_datas[2].views = [
+player_datas[0].verified = player_datas[1].verified = player_datas[2].verified = 1;
+player_datas[0].views = player_datas[1].views = player_datas[2].views = [
     {'slot': 6, 'item_id': 305810}, // 桌布-中光波——————！
 ];
 
-editdata.config = {
+config = {
     'category': 1,
     'meta': {'mode_id': 0},
     'mode': {

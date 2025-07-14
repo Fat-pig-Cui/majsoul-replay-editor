@@ -1,15 +1,15 @@
 loadproject();
 
-editdata.player_datas[0].nickname = '一姬-契约';
-editdata.player_datas[1].nickname = '新年初诣';
-editdata.player_datas[2].nickname = '一姬当千';
-editdata.player_datas[3].nickname = '绮春歌';
-editdata.player_datas[0].avatar_id = 400102;
-editdata.player_datas[1].avatar_id = 400104;
-editdata.player_datas[2].avatar_id = 400105;
-editdata.player_datas[3].avatar_id = 400106;
+player_datas[0].nickname = '一姬-契约';
+player_datas[1].nickname = '新年初诣';
+player_datas[2].nickname = '一姬当千';
+player_datas[3].nickname = '绮春歌';
+player_datas[0].avatar_id = 400102;
+player_datas[1].avatar_id = 400104;
+player_datas[2].avatar_id = 400105;
+player_datas[3].avatar_id = 400106;
 
-editdata.player_datas[0].views = editdata.player_datas[1].views = editdata.player_datas[2].views = editdata.player_datas[3].views = [
+player_datas[0].views = player_datas[1].views = player_datas[2].views = player_datas[3].views = [
     {'slot': 0, 'item_id': 308043}, // 立直棒-胜利誓约
     {'slot': 1, 'item_id': 308041}, // 和牌-咒层界・恶念祝祭
     {'slot': 2, 'item_id': 308042}, // 立直-虚影祝祷
@@ -17,7 +17,7 @@ editdata.player_datas[0].views = editdata.player_datas[1].views = editdata.playe
     {'slot': 7, 'item_id': 308045}, // 牌背-噬光之剑
 ];
 
-editdata.config = {
+config = {
     'category': 1,
     'meta': {'mode_id': 0},
     'mode': {

@@ -1,13 +1,13 @@
 loadproject();
 
-editdata.player_datas[0].nickname = '一之濑空-契约';
-editdata.player_datas[1].nickname = '绮春歌';
-editdata.player_datas[2].nickname = '不寐之绊';
-editdata.player_datas[0].avatar_id = 401302;
-editdata.player_datas[1].avatar_id = 401305;
-editdata.player_datas[2].avatar_id = 401306;
+player_datas[0].nickname = '一之濑空-契约';
+player_datas[1].nickname = '绮春歌';
+player_datas[2].nickname = '不寐之绊';
+player_datas[0].avatar_id = 401302;
+player_datas[1].avatar_id = 401305;
+player_datas[2].avatar_id = 401306;
 
-editdata.config = {
+config = {
     'category': 1,
     'meta': {'mode_id': 0},
     'mode': {

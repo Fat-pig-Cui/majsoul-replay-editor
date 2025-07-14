@@ -1,15 +1,15 @@
 loadproject();
 
-editdata.player_datas[0].nickname = '艾因-契约';
-editdata.player_datas[1].nickname = '艾因';
-editdata.player_datas[2].nickname = '命运之夏';
-editdata.player_datas[3].nickname = '天黑请闭眼';
-editdata.player_datas[0].avatar_id = 402502;
-editdata.player_datas[1].avatar_id = 402501;
-editdata.player_datas[2].avatar_id = 402503;
-editdata.player_datas[3].avatar_id = 402504;
+player_datas[0].nickname = '艾因-契约';
+player_datas[1].nickname = '艾因';
+player_datas[2].nickname = '命运之夏';
+player_datas[3].nickname = '天黑请闭眼';
+player_datas[0].avatar_id = 402502;
+player_datas[1].avatar_id = 402501;
+player_datas[2].avatar_id = 402503;
+player_datas[3].avatar_id = 402504;
 
-editdata.config = {
+config = {
     'category': 1,
     'meta': {'mode_id': 0},
     'mode': {

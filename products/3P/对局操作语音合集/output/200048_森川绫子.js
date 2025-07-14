@@ -1,13 +1,13 @@
 loadproject();
 
-editdata.player_datas[0].nickname = '森川绫子-契约';
-editdata.player_datas[1].nickname = '拂晓的G大调';
-editdata.player_datas[2].nickname = '不寐之绊';
-editdata.player_datas[0].avatar_id = 404802;
-editdata.player_datas[1].avatar_id = 404804;
-editdata.player_datas[2].avatar_id = 404805;
+player_datas[0].nickname = '森川绫子-契约';
+player_datas[1].nickname = '拂晓的G大调';
+player_datas[2].nickname = '不寐之绊';
+player_datas[0].avatar_id = 404802;
+player_datas[1].avatar_id = 404804;
+player_datas[2].avatar_id = 404805;
 
-editdata.config = {
+config = {
     'category': 1,
     'meta': {'mode_id': 0},
     'mode': {

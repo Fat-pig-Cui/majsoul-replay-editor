@@ -1,11 +1,11 @@
 loadproject();
 
-editdata.player_datas[0].nickname = '一姬-契约';
-editdata.player_datas[1].nickname = '绮春歌';
-editdata.player_datas[0].avatar_id = 400102;
-editdata.player_datas[1].avatar_id = 400106;
+player_datas[0].nickname = '一姬-契约';
+player_datas[1].nickname = '绮春歌';
+player_datas[0].avatar_id = 400102;
+player_datas[1].avatar_id = 400106;
 
-editdata.config = {
+config = {
     'category': 100,
     'meta': {'mode_id': 0},
     'mode': {

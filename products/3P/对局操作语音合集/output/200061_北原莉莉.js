@@ -1,21 +1,21 @@
 loadproject();
 
-editdata.player_datas[0].nickname = '北原莉莉-契约';
-editdata.player_datas[1].nickname = '北原莉莉';
-editdata.player_datas[2].nickname = '北原莉莉-契约';
-editdata.player_datas[0].avatar_id = 406102;
-editdata.player_datas[1].avatar_id = 406101;
-editdata.player_datas[2].avatar_id = 406102;
+player_datas[0].nickname = '北原莉莉-契约';
+player_datas[1].nickname = '北原莉莉';
+player_datas[2].nickname = '北原莉莉-契约';
+player_datas[0].avatar_id = 406102;
+player_datas[1].avatar_id = 406101;
+player_datas[2].avatar_id = 406102;
 
 // 头像框-圣堂百合
-editdata.player_datas[0].avatar_frame = editdata.player_datas[1].avatar_frame = editdata.player_datas[2].avatar_frame = 305537;
-editdata.player_datas[0].views = editdata.player_datas[1].views = editdata.player_datas[2].views = [
+player_datas[0].avatar_frame = player_datas[1].avatar_frame = player_datas[2].avatar_frame = 305537;
+player_datas[0].views = player_datas[1].views = player_datas[2].views = [
     {'slot': 1, 'item_id': 305219}, // 和牌-银链飞雪
     {'slot': 2, 'item_id': 305319}, // 立直-蛇行诡道
     {'slot': 5, 'item_id': 305537}, // 头像框-圣堂百合
 ];
 
-editdata.config = {
+config = {
     'category': 1,
     'meta': {'mode_id': 0},
     'mode': {

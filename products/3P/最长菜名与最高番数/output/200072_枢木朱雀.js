@@ -3,14 +3,14 @@ loadproject();
 // 第一局亲家的最长菜名(15条49番), 第二局最高番数(14条64番)
 // 最后一局子家的最长菜名(15条55番)
 
-editdata.player_datas[0].nickname = '枢木朱雀-契约';
-editdata.player_datas[1].nickname = '枢木朱雀';
-editdata.player_datas[2].nickname = '棋盘晚宴';
-editdata.player_datas[0].avatar_id = 407202;
-editdata.player_datas[1].avatar_id = 407201;
-editdata.player_datas[2].avatar_id = 407203;
+player_datas[0].nickname = '枢木朱雀-契约';
+player_datas[1].nickname = '枢木朱雀';
+player_datas[2].nickname = '棋盘晚宴';
+player_datas[0].avatar_id = 407202;
+player_datas[1].avatar_id = 407201;
+player_datas[2].avatar_id = 407203;
 
-editdata.player_datas[0].views = editdata.player_datas[1].views = editdata.player_datas[2].views = [
+player_datas[0].views = player_datas[1].views = player_datas[2].views = [
     {'slot': 0, 'item_id': 308028}, // 立直棒-骑士的钥匙
     {'slot': 1, 'item_id': 308026}, // 和牌-绝对的命令
     {'slot': 2, 'item_id': 308027}, // 立直-王者的决意
@@ -18,7 +18,7 @@ editdata.player_datas[0].views = editdata.player_datas[1].views = editdata.playe
     {'slot': 7, 'item_id': 308030}, // 牌背-假面的裁决
 ];
 
-editdata.config = {
+config = {
     'category': 1,
     'meta': {'mode_id': 0},
     'mode': {

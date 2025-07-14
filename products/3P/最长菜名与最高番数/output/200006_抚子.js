@@ -3,18 +3,18 @@ loadproject();
 // 第一局亲家的最长菜名(15条49番), 第二局最高番数(14条64番)
 // 最后一局子家的最长菜名(15条55番)
 
-editdata.player_datas[0].nickname = '抚子-契约';
-editdata.player_datas[1].nickname = '四方雀者';
-editdata.player_datas[2].nickname = '无拘乐趣';
-editdata.player_datas[0].avatar_id = 400602;
-editdata.player_datas[1].avatar_id = 400605;
-editdata.player_datas[2].avatar_id = 400606;
+player_datas[0].nickname = '抚子-契约';
+player_datas[1].nickname = '四方雀者';
+player_datas[2].nickname = '无拘乐趣';
+player_datas[0].avatar_id = 400602;
+player_datas[1].avatar_id = 400605;
+player_datas[2].avatar_id = 400606;
 
-editdata.player_datas[0].views = editdata.player_datas[1].views = editdata.player_datas[2].views = [
+player_datas[0].views = player_datas[1].views = player_datas[2].views = [
     {'slot': 6, 'item_id': 305048}, // 桌布-雀魂祭一周年
 ];
 
-editdata.config = {
+config = {
     'category': 1,
     'meta': {'mode_id': 0},
     'mode': {

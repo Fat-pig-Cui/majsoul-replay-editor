@@ -4,19 +4,19 @@ loadproject();
 // 清澄高校内部友人场, 四赤东风战
 // 因为雀魂天麻联动没有 片冈优希 和 染谷真子, 所以分别用 五十岚阳菜 和 二之宫花 代替
 
-editdata.player_datas[0].nickname = '片冈优希';
-editdata.player_datas[1].nickname = '染谷真子';
-editdata.player_datas[2].nickname = '宫永咲';
-editdata.player_datas[3].nickname = '原村和';
-editdata.player_datas[0].avatar_id = 402001;
-editdata.player_datas[1].avatar_id = 401701;
-editdata.player_datas[2].avatar_id = 403401;
-editdata.player_datas[3].avatar_id = 403501;
+player_datas[0].nickname = '片冈优希';
+player_datas[1].nickname = '染谷真子';
+player_datas[2].nickname = '宫永咲';
+player_datas[3].nickname = '原村和';
+player_datas[0].avatar_id = 402001;
+player_datas[1].avatar_id = 401701;
+player_datas[2].avatar_id = 403401;
+player_datas[3].avatar_id = 403501;
 
-editdata.player_datas[2].views = [{'slot': 1, 'item_id': 308021}]; // 和牌-高岭之花
-editdata.player_datas[3].views = [{'slot': 2, 'item_id': 308002}]; // 立直-花天月地
+player_datas[2].views = [{'slot': 1, 'item_id': 308021}]; // 和牌-高岭之花
+player_datas[3].views = [{'slot': 2, 'item_id': 308002}]; // 立直-花天月地
 
-editdata.config = {
+config = {
     'category': 1,
     'meta': {'mode_id': 0},
     'mode': {

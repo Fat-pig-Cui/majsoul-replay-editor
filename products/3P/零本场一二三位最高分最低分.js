@@ -5,14 +5,14 @@ loadproject();
 // 不限制本场数一位最高分和二三位最低分都没有限制, 且二位最高分就是零本场情况下的一位最高分
 // 零本场限制了用刷本场的方法刷最高分
 
-editdata.player_datas[0].nickname = '一姬-契约';
-editdata.player_datas[1].nickname = '一姬当千';
-editdata.player_datas[2].nickname = '绮春歌';
-editdata.player_datas[0].avatar_id = 400102;
-editdata.player_datas[1].avatar_id = 400105;
-editdata.player_datas[2].avatar_id = 400106;
+player_datas[0].nickname = '一姬-契约';
+player_datas[1].nickname = '一姬当千';
+player_datas[2].nickname = '绮春歌';
+player_datas[0].avatar_id = 400102;
+player_datas[1].avatar_id = 400105;
+player_datas[2].avatar_id = 400106;
 
-editdata.config = {
+config = {
     'category': 1,
     'meta': {'mode_id': 0},
     'mode': {

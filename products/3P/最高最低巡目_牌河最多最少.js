@@ -4,14 +4,14 @@ loadproject();
 
 // 关于牌河, 这里认为, 拔的北不算牌河里面的, 因为牌河的特征是不要的牌, 丢弃的牌, 而拔的北不属于
 
-editdata.player_datas[0].nickname = '一姬-契约';
-editdata.player_datas[1].nickname = '一姬当千';
-editdata.player_datas[2].nickname = '绮春歌';
-editdata.player_datas[0].avatar_id = 400102;
-editdata.player_datas[1].avatar_id = 400105;
-editdata.player_datas[2].avatar_id = 400106;
+player_datas[0].nickname = '一姬-契约';
+player_datas[1].nickname = '一姬当千';
+player_datas[2].nickname = '绮春歌';
+player_datas[0].avatar_id = 400102;
+player_datas[1].avatar_id = 400105;
+player_datas[2].avatar_id = 400106;
 
-editdata.config = {
+config = {
     'category': 1,
     'meta': {'mode_id': 0},
     'mode': {

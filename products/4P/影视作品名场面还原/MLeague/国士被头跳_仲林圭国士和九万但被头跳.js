@@ -4,17 +4,17 @@ loadproject();
 // 对局四人: 仲林圭, 泷泽和典, 东城莉奥, 村上淳
 // 角色分别使用: 如月莲, 月见山, 七海礼奈, 石原碓海
 
-editdata.player_datas[0].nickname = '仲林圭';
-editdata.player_datas[1].nickname = '泷泽和典';
-editdata.player_datas[2].nickname = '东城莉奥';
-editdata.player_datas[3].nickname = '村上淳';
-editdata.player_datas[0].avatar_id = 403001;
-editdata.player_datas[1].avatar_id = 402701;
-editdata.player_datas[2].avatar_id = 404401;
-editdata.player_datas[3].avatar_id = 403101;
-editdata.player_datas[0].verified = editdata.player_datas[1].verified = editdata.player_datas[2].verified = editdata.player_datas[3].verified = 2;
+player_datas[0].nickname = '仲林圭';
+player_datas[1].nickname = '泷泽和典';
+player_datas[2].nickname = '东城莉奥';
+player_datas[3].nickname = '村上淳';
+player_datas[0].avatar_id = 403001;
+player_datas[1].avatar_id = 402701;
+player_datas[2].avatar_id = 404401;
+player_datas[3].avatar_id = 403101;
+player_datas[0].verified = player_datas[1].verified = player_datas[2].verified = player_datas[3].verified = 2;
 
-editdata.config = {
+config = {
     'category': 4,
     'meta': {'mode_id': 0},
     'mode': {

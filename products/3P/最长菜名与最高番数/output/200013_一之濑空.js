@@ -3,14 +3,14 @@ loadproject();
 // 第一局亲家的最长菜名(15条49番), 第二局最高番数(14条64番)
 // 最后一局子家的最长菜名(15条55番)
 
-editdata.player_datas[0].nickname = '一之濑空-契约';
-editdata.player_datas[1].nickname = '绮春歌';
-editdata.player_datas[2].nickname = '不寐之绊';
-editdata.player_datas[0].avatar_id = 401302;
-editdata.player_datas[1].avatar_id = 401305;
-editdata.player_datas[2].avatar_id = 401306;
+player_datas[0].nickname = '一之濑空-契约';
+player_datas[1].nickname = '绮春歌';
+player_datas[2].nickname = '不寐之绊';
+player_datas[0].avatar_id = 401302;
+player_datas[1].avatar_id = 401305;
+player_datas[2].avatar_id = 401306;
 
-editdata.config = {
+config = {
     'category': 1,
     'meta': {'mode_id': 0},
     'mode': {

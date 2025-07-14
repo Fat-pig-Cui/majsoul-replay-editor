@@ -3,14 +3,14 @@ loadproject();
 // 第一局亲家的最长菜名(15条49番), 第二局最高番数(14条64番)
 // 最后一局子家的最长菜名(15条55番)
 
-editdata.player_datas[0].nickname = '竹井久-契约';
-editdata.player_datas[1].nickname = '竹井久';
-editdata.player_datas[2].nickname = '兔耳派对';
-editdata.player_datas[0].avatar_id = 406202;
-editdata.player_datas[1].avatar_id = 406201;
-editdata.player_datas[2].avatar_id = 406203;
+player_datas[0].nickname = '竹井久-契约';
+player_datas[1].nickname = '竹井久';
+player_datas[2].nickname = '兔耳派对';
+player_datas[0].avatar_id = 406202;
+player_datas[1].avatar_id = 406201;
+player_datas[2].avatar_id = 406203;
 
-editdata.player_datas[0].views = editdata.player_datas[1].views = editdata.player_datas[2].views = [
+player_datas[0].views = player_datas[1].views = player_datas[2].views = [
     {'slot': 0, 'item_id': 308023}, // 立直棒-爱心便当
     {'slot': 1, 'item_id': 308021}, // 和牌-高岭之花
     {'slot': 2, 'item_id': 308022}, // 立直-未来视
@@ -18,7 +18,7 @@ editdata.player_datas[0].views = editdata.player_datas[1].views = editdata.playe
     {'slot': 7, 'item_id': 308025}, // 牌背-摇曳彩球
 ];
 
-editdata.config = {
+config = {
     'category': 1,
     'meta': {'mode_id': 0},
     'mode': {

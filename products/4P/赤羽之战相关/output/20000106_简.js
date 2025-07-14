@@ -2,16 +2,16 @@ loadproject();
 
 // 为了方便编辑不考虑换三张的过程
 
-editdata.player_datas[0].nickname = '简-契约';
-editdata.player_datas[1].nickname = '简';
-editdata.player_datas[2].nickname = '简-契约';
-editdata.player_datas[3].nickname = '简';
-editdata.player_datas[0].avatar_id = 40010602;
-editdata.player_datas[1].avatar_id = 40010601;
-editdata.player_datas[2].avatar_id = 40010602;
-editdata.player_datas[3].avatar_id = 40010601;
+player_datas[0].nickname = '简-契约';
+player_datas[1].nickname = '简';
+player_datas[2].nickname = '简-契约';
+player_datas[3].nickname = '简';
+player_datas[0].avatar_id = 40010602;
+player_datas[1].avatar_id = 40010601;
+player_datas[2].avatar_id = 40010602;
+player_datas[3].avatar_id = 40010601;
 
-editdata.config = {
+config = {
     'category': 1,
     'meta': {'mode_id': 0},
     'mode': {

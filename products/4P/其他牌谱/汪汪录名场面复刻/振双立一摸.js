@@ -2,17 +2,17 @@ loadproject();
 
 // 2018雀魂TOP15, 其中的NO.2: '振w立一摸' https://www.bilibili.com/video/BV1ub411r7Qh/?t=785
 
-editdata.player_datas[0].nickname = '猫肆镹';
-editdata.player_datas[1].nickname = '魅魂';
-editdata.player_datas[2].nickname = '红烧拉拉肥';
-editdata.player_datas[3].nickname = '马猴烧酒小圆酱';
-editdata.player_datas[0].avatar_id = 400201;
-editdata.player_datas[1].avatar_id = 400401;
-editdata.player_datas[2].avatar_id = 400101;
-editdata.player_datas[3].avatar_id = 400101;
-editdata.player_datas[1].title = 600008; // 称号-魂之启迪者 初阶
+player_datas[0].nickname = '猫肆镹';
+player_datas[1].nickname = '魅魂';
+player_datas[2].nickname = '红烧拉拉肥';
+player_datas[3].nickname = '马猴烧酒小圆酱';
+player_datas[0].avatar_id = 400201;
+player_datas[1].avatar_id = 400401;
+player_datas[2].avatar_id = 400101;
+player_datas[3].avatar_id = 400101;
+player_datas[1].title = 600008; // 称号-魂之启迪者 初阶
 
-editdata.config = {
+config = {
     'category': 2,
     'meta': {'mode_id': 2},
     'mode': {

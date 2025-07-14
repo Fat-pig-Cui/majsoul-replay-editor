@@ -1,13 +1,13 @@
 loadproject();
 
-editdata.player_datas[0].nickname = '桃喰绮罗莉-契约';
-editdata.player_datas[1].nickname = '桃喰绮罗莉';
-editdata.player_datas[2].nickname = '百花缭乱';
-editdata.player_datas[0].avatar_id = 404302;
-editdata.player_datas[1].avatar_id = 404301;
-editdata.player_datas[2].avatar_id = 404303;
+player_datas[0].nickname = '桃喰绮罗莉-契约';
+player_datas[1].nickname = '桃喰绮罗莉';
+player_datas[2].nickname = '百花缭乱';
+player_datas[0].avatar_id = 404302;
+player_datas[1].avatar_id = 404301;
+player_datas[2].avatar_id = 404303;
 
-editdata.player_datas[0].views = editdata.player_datas[1].views = editdata.player_datas[2].views = [
+player_datas[0].views = player_datas[1].views = player_datas[2].views = [
     {'slot': 0, 'item_id': 308008}, // 立直棒-生死之剑
     {'slot': 1, 'item_id': 308006}, // 和牌-命运之轮
     {'slot': 2, 'item_id': 308007}, // 立直-纸牌花火
@@ -15,7 +15,7 @@ editdata.player_datas[0].views = editdata.player_datas[1].views = editdata.playe
     {'slot': 7, 'item_id': 308010}, // 牌背-百花境界
 ];
 
-editdata.config = {
+config = {
     'category': 1,
     'meta': {'mode_id': 0},
     'mode': {

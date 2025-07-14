@@ -2,16 +2,16 @@ loadproject();
 
 // 为了方便编辑不考虑换三张的过程
 
-editdata.player_datas[0].nickname = '希里-契约';
-editdata.player_datas[1].nickname = '希里';
-editdata.player_datas[2].nickname = '希里-契约';
-editdata.player_datas[3].nickname = '希里';
-editdata.player_datas[0].avatar_id = 409102;
-editdata.player_datas[1].avatar_id = 409101;
-editdata.player_datas[2].avatar_id = 409102;
-editdata.player_datas[3].avatar_id = 409101;
+player_datas[0].nickname = '希里-契约';
+player_datas[1].nickname = '希里';
+player_datas[2].nickname = '希里-契约';
+player_datas[3].nickname = '希里';
+player_datas[0].avatar_id = 409102;
+player_datas[1].avatar_id = 409101;
+player_datas[2].avatar_id = 409102;
+player_datas[3].avatar_id = 409101;
 
-editdata.config = {
+config = {
     'category': 1,
     'meta': {'mode_id': 0},
     'mode': {

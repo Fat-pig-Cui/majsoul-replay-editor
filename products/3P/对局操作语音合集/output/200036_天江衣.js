@@ -1,15 +1,15 @@
 loadproject();
 
-editdata.player_datas[0].nickname = '天江衣-契约';
-editdata.player_datas[1].nickname = '凛然花开';
-editdata.player_datas[2].nickname = '兔耳派对';
-editdata.player_datas[0].avatar_id = 403602;
-editdata.player_datas[1].avatar_id = 403603;
-editdata.player_datas[2].avatar_id = 403604;
+player_datas[0].nickname = '天江衣-契约';
+player_datas[1].nickname = '凛然花开';
+player_datas[2].nickname = '兔耳派对';
+player_datas[0].avatar_id = 403602;
+player_datas[1].avatar_id = 403603;
+player_datas[2].avatar_id = 403604;
 
 // 头像框-大小姐发带
-editdata.player_datas[0].avatar_frame = editdata.player_datas[1].avatar_frame = editdata.player_datas[2].avatar_frame = 305552;
-editdata.player_datas[0].views = editdata.player_datas[1].views = editdata.player_datas[2].views = [
+player_datas[0].avatar_frame = player_datas[1].avatar_frame = player_datas[2].avatar_frame = 305552;
+player_datas[0].views = player_datas[1].views = player_datas[2].views = [
     {'slot': 0, 'item_id': 308003}, // 立直棒-墨西哥卷饼
     {'slot': 1, 'item_id': 308001}, // 和牌-龙卷雷霆
     {'slot': 2, 'item_id': 308002}, // 立直-花天月地
@@ -18,7 +18,7 @@ editdata.player_datas[0].views = editdata.player_datas[1].views = editdata.playe
     {'slot': 7, 'item_id': 308005}, // 牌背-艾托企鹅
 ];
 
-editdata.config = {
+config = {
     'category': 1,
     'meta': {'mode_id': 0},
     'mode': {

@@ -1,19 +1,19 @@
 loadproject();
 
-editdata.player_datas[0].nickname = '藤田佳奈-契约';
-editdata.player_datas[1].nickname = '暗夜法则';
-editdata.player_datas[2].nickname = '假日之滨';
-editdata.player_datas[3].nickname = '惊鸿岁';
-editdata.player_datas[0].avatar_id = 400302;
-editdata.player_datas[1].avatar_id = 400304;
-editdata.player_datas[2].avatar_id = 400305;
-editdata.player_datas[3].avatar_id = 400306;
+player_datas[0].nickname = '藤田佳奈-契约';
+player_datas[1].nickname = '暗夜法则';
+player_datas[2].nickname = '假日之滨';
+player_datas[3].nickname = '惊鸿岁';
+player_datas[0].avatar_id = 400302;
+player_datas[1].avatar_id = 400304;
+player_datas[2].avatar_id = 400305;
+player_datas[3].avatar_id = 400306;
 
-editdata.player_datas[0].views = editdata.player_datas[1].views = editdata.player_datas[2].views = editdata.player_datas[3].views = [
+player_datas[0].views = player_datas[1].views = player_datas[2].views = player_datas[3].views = [
     {'slot': 6, 'item_id': 305048}, // 桌布-雀魂祭一周年
 ];
 
-editdata.config = {
+config = {
     'category': 1,
     'meta': {'mode_id': 0},
     'mode': {

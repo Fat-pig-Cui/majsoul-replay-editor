@@ -3,21 +3,21 @@ loadproject();
 // 第一局亲家的最长菜名(15条49番), 第二局最高番数(14条64番)
 // 最后一局子家的最长菜名(15条55番)
 
-editdata.player_datas[0].nickname = '三上千织-契约';
-editdata.player_datas[1].nickname = '天黑请闭眼';
-editdata.player_datas[2].nickname = '惊鸿岁';
-editdata.player_datas[0].avatar_id = 400402;
-editdata.player_datas[1].avatar_id = 400406;
-editdata.player_datas[2].avatar_id = 400407;
+player_datas[0].nickname = '三上千织-契约';
+player_datas[1].nickname = '天黑请闭眼';
+player_datas[2].nickname = '惊鸿岁';
+player_datas[0].avatar_id = 400402;
+player_datas[1].avatar_id = 400406;
+player_datas[2].avatar_id = 400407;
 
 // 头像框-大小姐发带
-editdata.player_datas[0].avatar_frame = editdata.player_datas[1].avatar_frame = editdata.player_datas[2].avatar_frame = 305552;
-editdata.player_datas[0].views = editdata.player_datas[1].views = editdata.player_datas[2].views = [
+player_datas[0].avatar_frame = player_datas[1].avatar_frame = player_datas[2].avatar_frame = 305552;
+player_datas[0].views = player_datas[1].views = player_datas[2].views = [
     {'slot': 5, 'item_id': 305552}, // 头像框-大小姐发带
     {'slot': 6, 'item_id': 305802}, // 桌布-冲鸭！
 ];
 
-editdata.config = {
+config = {
     'category': 1,
     'meta': {'mode_id': 0},
     'mode': {

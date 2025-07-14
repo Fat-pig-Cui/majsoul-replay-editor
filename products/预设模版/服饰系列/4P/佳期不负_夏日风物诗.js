@@ -14,17 +14,17 @@ loadproject();
 // 桌布-小黄鸭冲浪里
 // 牌背-鸭鸭牌背
 
-editdata.player_datas[0].nickname = '明智英树';
-editdata.player_datas[1].nickname = '寺崎千穗理';
-editdata.player_datas[2].nickname = '小野寺七羽';
-editdata.player_datas[3].nickname = '泽克斯';
-editdata.player_datas[0].avatar_id = 401405;
-editdata.player_datas[1].avatar_id = 403303;
-editdata.player_datas[2].avatar_id = 405303;
-editdata.player_datas[3].avatar_id = 406003;
+player_datas[0].nickname = '明智英树';
+player_datas[1].nickname = '寺崎千穗理';
+player_datas[2].nickname = '小野寺七羽';
+player_datas[3].nickname = '泽克斯';
+player_datas[0].avatar_id = 401405;
+player_datas[1].avatar_id = 403303;
+player_datas[2].avatar_id = 405303;
+player_datas[3].avatar_id = 406003;
 
 // 明智英树, 寺崎千穗理
-editdata.player_datas[0].views = editdata.player_datas[1].views = [
+player_datas[0].views = player_datas[1].views = [
     {'slot': 0, 'item_id': 305604}, // 立直棒-乘风破浪
     {'slot': 1, 'item_id': 305208}, // 和牌-海浪的馈赠
     {'slot': 2, 'item_id': 305308}, // 立直-浪之声
@@ -32,7 +32,7 @@ editdata.player_datas[0].views = editdata.player_datas[1].views = [
     {'slot': 7, 'item_id': 305702}, // 牌背-浪花朵朵
 ];
 // 小野寺七羽, 泽克斯
-editdata.player_datas[2].views = editdata.player_datas[3].views = [
+player_datas[2].views = player_datas[3].views = [
     {'slot': 0, 'item_id': 305613}, // 立直棒-波子汽水
     {'slot': 1, 'item_id': 305220}, // 和牌-泰山鸭顶
     {'slot': 2, 'item_id': 305320}, // 立直-立直鸭
@@ -40,7 +40,7 @@ editdata.player_datas[2].views = editdata.player_datas[3].views = [
     {'slot': 7, 'item_id': 305709}, // 牌背-鸭鸭牌背
 ];
 
-editdata.config = {
+config = {
     'category': 1,
     'meta': {'mode_id': 0},
     'mode': {

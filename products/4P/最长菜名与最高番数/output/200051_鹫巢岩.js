@@ -1,15 +1,15 @@
 loadproject();
 
-editdata.player_datas[0].nickname = '鹫巢岩-契约';
-editdata.player_datas[1].nickname = '鹫巢岩';
-editdata.player_datas[2].nickname = '鹫巢岩-契约';
-editdata.player_datas[3].nickname = '光暗对决';
-editdata.player_datas[0].avatar_id = 405102;
-editdata.player_datas[1].avatar_id = 405101;
-editdata.player_datas[2].avatar_id = 405102;
-editdata.player_datas[3].avatar_id = 405103;
+player_datas[0].nickname = '鹫巢岩-契约';
+player_datas[1].nickname = '鹫巢岩';
+player_datas[2].nickname = '鹫巢岩-契约';
+player_datas[3].nickname = '光暗对决';
+player_datas[0].avatar_id = 405102;
+player_datas[1].avatar_id = 405101;
+player_datas[2].avatar_id = 405102;
+player_datas[3].avatar_id = 405103;
 
-editdata.player_datas[0].views = editdata.player_datas[1].views = editdata.player_datas[2].views = editdata.player_datas[3].views = [
+player_datas[0].views = player_datas[1].views = player_datas[2].views = player_datas[3].views = [
     {'slot': 0, 'item_id': 308013}, // 立直棒-命悬一线
     {'slot': 1, 'item_id': 308011}, // 和牌-地狱低语
     {'slot': 2, 'item_id': 308012}, // 立直-幽冥之焰
@@ -17,7 +17,7 @@ editdata.player_datas[0].views = editdata.player_datas[1].views = editdata.playe
     {'slot': 7, 'item_id': 308015}, // 牌背-双鹫纹章
 ];
 
-editdata.config = {
+config = {
     'category': 1,
     'meta': {'mode_id': 0},
     'mode': {

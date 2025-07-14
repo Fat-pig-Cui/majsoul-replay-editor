@@ -2,16 +2,16 @@ loadproject();
 
 // 为了方便编辑不考虑换三张的过程
 
-editdata.player_datas[0].nickname = '小鸟游雏田-契约';
-editdata.player_datas[1].nickname = '魂色幻想';
-editdata.player_datas[2].nickname = '无拘乐趣';
-editdata.player_datas[3].nickname = '圣谛遗章';
-editdata.player_datas[0].avatar_id = 401902;
-editdata.player_datas[1].avatar_id = 401905;
-editdata.player_datas[2].avatar_id = 401906;
-editdata.player_datas[3].avatar_id = 401907;
+player_datas[0].nickname = '小鸟游雏田-契约';
+player_datas[1].nickname = '魂色幻想';
+player_datas[2].nickname = '无拘乐趣';
+player_datas[3].nickname = '圣谛遗章';
+player_datas[0].avatar_id = 401902;
+player_datas[1].avatar_id = 401905;
+player_datas[2].avatar_id = 401906;
+player_datas[3].avatar_id = 401907;
 
-editdata.config = {
+config = {
     'category': 1,
     'meta': {'mode_id': 0},
     'mode': {

@@ -3,14 +3,14 @@ loadproject();
 // 第一局亲家的最长菜名(15条49番), 第二局最高番数(14条64番)
 // 最后一局子家的最长菜名(15条55番)
 
-editdata.player_datas[0].nickname = '浅黄睦月-契约';
-editdata.player_datas[1].nickname = '浅黄睦月';
-editdata.player_datas[2].nickname = '华芳雅韵';
-editdata.player_datas[0].avatar_id = 408902;
-editdata.player_datas[1].avatar_id = 408901;
-editdata.player_datas[2].avatar_id = 408903;
+player_datas[0].nickname = '浅黄睦月-契约';
+player_datas[1].nickname = '浅黄睦月';
+player_datas[2].nickname = '华芳雅韵';
+player_datas[0].avatar_id = 408902;
+player_datas[1].avatar_id = 408901;
+player_datas[2].avatar_id = 408903;
 
-editdata.player_datas[0].views = editdata.player_datas[1].views = editdata.player_datas[2].views = [
+player_datas[0].views = player_datas[1].views = player_datas[2].views = [
     {'slot': 0, 'item_id': 308038}, // 立直棒-大蛇比纳
     {'slot': 1, 'item_id': 308036}, // 和牌-冷血射击
     {'slot': 2, 'item_id': 308037}, // 立直-虹色轨迹
@@ -18,7 +18,7 @@ editdata.player_datas[0].views = editdata.player_datas[1].views = editdata.playe
     {'slot': 7, 'item_id': 308040}, // 牌背-佩洛之星
 ];
 
-editdata.config = {
+config = {
     'category': 1,
     'meta': {'mode_id': 0},
     'mode': {

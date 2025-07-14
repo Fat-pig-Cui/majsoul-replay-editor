@@ -3,14 +3,14 @@ loadproject();
 // 第一局亲家的最长菜名(15条49番), 第二局最高番数(14条64番)
 // 最后一局子家的最长菜名(15条55番)
 
-editdata.player_datas[0].nickname = '莱恩-契约';
-editdata.player_datas[1].nickname = '甜蜜魔法';
-editdata.player_datas[2].nickname = '天黑请闭眼';
-editdata.player_datas[0].avatar_id = 404702;
-editdata.player_datas[1].avatar_id = 404703;
-editdata.player_datas[2].avatar_id = 404704;
+player_datas[0].nickname = '莱恩-契约';
+player_datas[1].nickname = '甜蜜魔法';
+player_datas[2].nickname = '天黑请闭眼';
+player_datas[0].avatar_id = 404702;
+player_datas[1].avatar_id = 404703;
+player_datas[2].avatar_id = 404704;
 
-editdata.config = {
+config = {
     'category': 1,
     'meta': {'mode_id': 0},
     'mode': {

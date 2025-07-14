@@ -4,17 +4,17 @@ loadproject();
 // 对局四人: 鱼谷侑未, 佐佐木寿人, 石桥伸洋, 泽崎诚
 // 角色分别使用: 七海礼奈, 月见山, 如月莲, 石原碓海
 
-editdata.player_datas[0].nickname = '鱼谷侑未';
-editdata.player_datas[1].nickname = '佐佐木寿人';
-editdata.player_datas[2].nickname = '石桥伸洋';
-editdata.player_datas[3].nickname = '泽崎诚';
-editdata.player_datas[0].avatar_id = 404401;
-editdata.player_datas[1].avatar_id = 402701;
-editdata.player_datas[2].avatar_id = 403001;
-editdata.player_datas[3].avatar_id = 403101;
-editdata.player_datas[0].verified = editdata.player_datas[1].verified = editdata.player_datas[2].verified = editdata.player_datas[3].verified = 2;
+player_datas[0].nickname = '鱼谷侑未';
+player_datas[1].nickname = '佐佐木寿人';
+player_datas[2].nickname = '石桥伸洋';
+player_datas[3].nickname = '泽崎诚';
+player_datas[0].avatar_id = 404401;
+player_datas[1].avatar_id = 402701;
+player_datas[2].avatar_id = 403001;
+player_datas[3].avatar_id = 403101;
+player_datas[0].verified = player_datas[1].verified = player_datas[2].verified = player_datas[3].verified = 2;
 
-editdata.config = {
+config = {
     'category': 4,
     'meta': {'mode_id': 0},
     'mode': {

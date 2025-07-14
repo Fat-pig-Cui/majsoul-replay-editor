@@ -2,16 +2,16 @@ loadproject();
 
 // 为了方便编辑不考虑换三张的过程
 
-editdata.player_datas[0].nickname = '四宫辉夜-契约';
-editdata.player_datas[1].nickname = '四宫辉夜';
-editdata.player_datas[2].nickname = '四宫辉夜-契约';
-editdata.player_datas[3].nickname = '偷心怪盗';
-editdata.player_datas[0].avatar_id = 405502;
-editdata.player_datas[1].avatar_id = 405501;
-editdata.player_datas[2].avatar_id = 405502;
-editdata.player_datas[3].avatar_id = 405503;
+player_datas[0].nickname = '四宫辉夜-契约';
+player_datas[1].nickname = '四宫辉夜';
+player_datas[2].nickname = '四宫辉夜-契约';
+player_datas[3].nickname = '偷心怪盗';
+player_datas[0].avatar_id = 405502;
+player_datas[1].avatar_id = 405501;
+player_datas[2].avatar_id = 405502;
+player_datas[3].avatar_id = 405503;
 
-editdata.player_datas[0].views = editdata.player_datas[1].views = editdata.player_datas[2].views = editdata.player_datas[3].views = [
+player_datas[0].views = player_datas[1].views = player_datas[2].views = player_datas[3].views = [
     {'slot': 0, 'item_id': 308018}, // 立直棒-恋之反省
     {'slot': 1, 'item_id': 308016}, // 和牌-恋之降临
     {'slot': 2, 'item_id': 308017}, // 立直-恋之箭矢
@@ -19,7 +19,7 @@ editdata.player_datas[0].views = editdata.player_datas[1].views = editdata.playe
     {'slot': 7, 'item_id': 308020}, // 牌背-恋之背影
 ];
 
-editdata.config = {
+config = {
     'category': 1,
     'meta': {'mode_id': 0},
     'mode': {

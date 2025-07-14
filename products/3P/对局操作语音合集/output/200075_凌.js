@@ -1,13 +1,13 @@
 loadproject();
 
-editdata.player_datas[0].nickname = '凌-契约';
-editdata.player_datas[1].nickname = '凌';
-editdata.player_datas[2].nickname = '玩转夏日';
-editdata.player_datas[0].avatar_id = 407502;
-editdata.player_datas[1].avatar_id = 407501;
-editdata.player_datas[2].avatar_id = 407503;
+player_datas[0].nickname = '凌-契约';
+player_datas[1].nickname = '凌';
+player_datas[2].nickname = '玩转夏日';
+player_datas[0].avatar_id = 407502;
+player_datas[1].avatar_id = 407501;
+player_datas[2].avatar_id = 407503;
 
-editdata.config = {
+config = {
     'category': 1,
     'meta': {'mode_id': 0},
     'mode': {

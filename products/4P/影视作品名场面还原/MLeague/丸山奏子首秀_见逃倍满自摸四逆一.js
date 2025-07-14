@@ -4,17 +4,17 @@ loadproject();
 // 对局四人: 丸山奏子, 佐佐木寿人, 多井隆晴, 泷泽和典
 // 角色分别使用: 二之宫花-契约, 月见山, 如月莲, 石原碓海
 
-editdata.player_datas[0].nickname = '丸山奏子';
-editdata.player_datas[1].nickname = '佐佐木寿人';
-editdata.player_datas[2].nickname = '多井隆晴';
-editdata.player_datas[3].nickname = '泷泽和典';
-editdata.player_datas[0].avatar_id = 401702;
-editdata.player_datas[1].avatar_id = 402701;
-editdata.player_datas[2].avatar_id = 403001;
-editdata.player_datas[3].avatar_id = 403101;
-editdata.player_datas[0].verified = editdata.player_datas[1].verified = editdata.player_datas[2].verified = editdata.player_datas[3].verified = 2;
+player_datas[0].nickname = '丸山奏子';
+player_datas[1].nickname = '佐佐木寿人';
+player_datas[2].nickname = '多井隆晴';
+player_datas[3].nickname = '泷泽和典';
+player_datas[0].avatar_id = 401702;
+player_datas[1].avatar_id = 402701;
+player_datas[2].avatar_id = 403001;
+player_datas[3].avatar_id = 403101;
+player_datas[0].verified = player_datas[1].verified = player_datas[2].verified = player_datas[3].verified = 2;
 
-editdata.config = {
+config = {
     'category': 4,
     'meta': {'mode_id': 0},
     'mode': {

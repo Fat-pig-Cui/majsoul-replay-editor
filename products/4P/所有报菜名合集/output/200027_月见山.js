@@ -1,15 +1,15 @@
 loadproject();
 
-editdata.player_datas[0].nickname = '月见山-契约';
-editdata.player_datas[1].nickname = '春日返校季';
-editdata.player_datas[2].nickname = '禁锢之地';
-editdata.player_datas[3].nickname = '温存韶光';
-editdata.player_datas[0].avatar_id = 402702;
-editdata.player_datas[1].avatar_id = 402703;
-editdata.player_datas[2].avatar_id = 402704;
-editdata.player_datas[3].avatar_id = 402705;
+player_datas[0].nickname = '月见山-契约';
+player_datas[1].nickname = '春日返校季';
+player_datas[2].nickname = '禁锢之地';
+player_datas[3].nickname = '温存韶光';
+player_datas[0].avatar_id = 402702;
+player_datas[1].avatar_id = 402703;
+player_datas[2].avatar_id = 402704;
+player_datas[3].avatar_id = 402705;
 
-editdata.config = {
+config = {
     'category': 1,
     'meta': {'mode_id': 0},
     'mode': {
