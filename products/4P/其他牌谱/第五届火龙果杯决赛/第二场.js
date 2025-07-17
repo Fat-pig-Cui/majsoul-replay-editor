@@ -2,7 +2,7 @@ loadproject();
 
 player_datas[0] = {
     'nickname': '114231',
-    'avatar_id': 405001, // 雏桃-契约
+    'avatar_id': 405001, // 赤木茂
     'level': {'id': 10501, 'score': 2000},
     'views': [
         {'slot': 0, 'item_id': 305002}, // 大葱立直棒
@@ -24,7 +24,7 @@ player_datas[1] = {
 player_datas[2] = {
     'nickname': '领取好运',
     'avatar_id': 402202, // 约瑟夫-契约
-    'title': 600038, // 神社贵宾, 牌谱问题这个修改无效
+    'title': 600038, // 神社贵宾
     'avatar_frame': 305523, // 头像框-猫咪军团的身份
     'level': {'id': 10501, 'score': 2000},
     'views': [

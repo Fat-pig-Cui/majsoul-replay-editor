@@ -135,7 +135,9 @@
     - 对局操作语音合集
         - [Generator_3P.py](3P/对局操作语音合集/Generator_3P.py)
 
-## 牌谱信息文件 [paipu_record.json](paipu_record.json) 及 获取脚本 [GetPaipuJSON.js](GetPaipuJSON.js)
+## 其他文件 
+
+### 牌谱信息文件 [paipu_record.json](paipu_record.json) 及 获取脚本 [GetPaipuJSON.js](GetPaipuJSON.js)
 
 这个文件是在仓库 [misc-code](https://github.com/Fat-pig-Cui/misc-code/tree/main/paipu) 中的示例牌谱信息文件及获取所用的脚本,
 这里用于查看对局所包含的玩家信息
@@ -147,3 +149,9 @@ doc: [牌谱里面到底记载了什么](https://github.com/Fat-pig-Cui/misc-cod
 改编自网站: [牌譜をファイルに保存するにゃ](https://wikiwiki.jp/majsoul-api/%E7%89%8C%E8%AD%9C%E3%82%92%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%81%AB%E4%BF%9D%E5%AD%98%E3%81%99%E3%82%8B%E3%81%AB%E3%82%83)
 
 牌谱相关人: 雀魂吧小吧主 [甜甜cbstt](https://space.bilibili.com/437346309)
+
+### 真实牌谱转自制牌谱 [RealPaipu2Fake.js](./RealPaipu2Fake.js)
+
+这是基于上述 GetPaipuJSON.js 制作的一个真实牌谱转自制牌谱的脚本, 用法类似
+
+目前只支持段位场规则和修罗与川麻规则, 其他活动场规则可能会出问题

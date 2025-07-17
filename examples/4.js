@@ -41,7 +41,6 @@ qiepai('5m');
 mopai();
 qiepai();
 hupai(0, true);
-roundend();
 
 // 第2局 对对和
 tiles0 = '222333777888m37p';
@@ -55,7 +54,6 @@ qiepai('3p');
 mopai();
 qiepai();
 hupai(0, true);
-roundend();
 
 // 第3局 清一色
 tiles0 = '1112345678999m5p';
@@ -69,7 +67,6 @@ qiepai('5p');
 mopai();
 qiepai();
 hupai(0, true);
-roundend();
 
 // 第4局 七对子
 tiles0 = '112258899m33577p';
@@ -83,7 +80,6 @@ qiepai('5m');
 mopai();
 qiepai();
 hupai(0, true);
-roundend();
 
 // 第5局 带幺九
 tiles0 = '11123778899m199p';
@@ -97,7 +93,6 @@ qiepai('1p');
 mopai();
 qiepai();
 hupai(0, true);
-roundend();
 
 // 第6局 金钩钓
 tiles0 = '22337788m123456p';
@@ -127,7 +122,6 @@ qiepai('5p');
 mopai();
 qiepai();
 hupai(0, true);
-roundend();
 
 // 第7局 清对
 tiles0 = '2223335777888m3p';
@@ -141,7 +135,6 @@ qiepai('3p');
 mopai();
 qiepai();
 hupai(0, true);
-roundend();
 
 // 第8局 将对
 tiles0 = '222555888m23555p';
@@ -155,7 +148,6 @@ qiepai('3p');
 mopai();
 qiepai();
 hupai(0, true);
-roundend();
 
 // 第9局 龙七对
 tiles0 = '112259999m33577p';
@@ -169,7 +161,6 @@ qiepai('5m');
 mopai();
 qiepai();
 hupai(0, true);
-roundend();
 
 // 第10局 清七对
 tiles0 = '2233445667788m5p';
@@ -183,7 +174,6 @@ qiepai('5p');
 mopai();
 qiepai();
 hupai(0, true);
-roundend();
 
 // 第11局 清金钩钓
 tiles0 = '223367788m12345p';
@@ -213,7 +203,6 @@ qiepai('5p');
 mopai();
 qiepai();
 hupai(0, true);
-roundend();
 
 // 第12局 清龙七对
 tiles0 = '1122335779999m5p';
@@ -227,7 +216,6 @@ qiepai('5p');
 mopai();
 qiepai();
 hupai(0, true);
-roundend();
 
 // 第13局 十八罗汉
 tiles0 = '222888m13335777p';
@@ -261,7 +249,6 @@ qiepai();
 mopai();
 qiepai();
 hupai(0, true);
-roundend();
 
 // 第14局 清十八罗汉
 tiles0 = '2223334777888m1p';
@@ -295,7 +282,6 @@ qiepai();
 mopai();
 qiepai();
 hupai(0, true);
-roundend();
 
 // 第15局 清幺九
 tiles0 = '11122233378995m';
@@ -309,7 +295,6 @@ qiepai('5m');
 mopai();
 qiepai();
 hupai(0, true);
-roundend();
 
 // 第16局 天和
 tiles0 = '234678m23455678p';
@@ -320,7 +305,6 @@ paishan = randompaishan('5p');
 roundbegin();
 dingque('smps');
 hupai(0, true);
-roundend();
 
 // 第17局 地和
 tiles0 = '5m1112345678999p';
@@ -333,7 +317,6 @@ dingque('ssmp');
 qiepai();
 mopai();
 hupai(1, true);
-roundend();
 
 // 第18局 根
 tiles1 = '222234m11122235p';
@@ -347,7 +330,6 @@ qiepai('5p');
 mopai();
 qiepai();
 hupai(1, true);
-roundend();
 
 // 第19局 杠上花
 tiles1 = '222233m11122235p';
@@ -360,7 +342,6 @@ dingque('ssmp');
 leimingpai();
 mopai();
 hupai(1, true);
-roundend();
 
 // 第20局 杠上炮
 tiles1 = '222233m11122235p';
@@ -374,7 +355,6 @@ leimingpai();
 mopai();
 qiepai('3p');
 hupai(2, true);
-roundend();
 
 // 第21局 枪杠
 tiles2 = '22m66p33m11122235p';
@@ -398,7 +378,6 @@ qiepai();
 mopai();
 leimingpai();
 hupai(0, true);
-roundend();
 
 // 第22局 海底捞月
 tiles0 = '111m2345678p999m1s';
@@ -414,4 +393,3 @@ while (paishan.length !== 0) {
     qiepai();
 }
 hupai(0, true);
-roundend();

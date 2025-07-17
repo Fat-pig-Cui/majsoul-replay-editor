@@ -30,4 +30,4 @@ config = {
 };
 
 // 示例对局
-demogame_3P();
+demogame();

@@ -74,6 +74,7 @@ B站视频教程(偏过时): [【雀魂】如何自制牌谱回放](https://www.
           这种情况需要导入 [add_function.js](add_function.js))
         - 食断
         - 番缚
+        - 负分立直
         - 有无自摸损(三麻)
         - 是否公开手牌
     - 比赛场规则:
@@ -120,7 +121,7 @@ B站视频教程(偏过时): [【雀魂】如何自制牌谱回放](https://www.
 
 ## TODO(欢迎contribute)
 
-- 真实牌谱转自制牌谱
+- mopai(tile)
 - 在牌谱回放中发送表情 (暂没有实现方式)
 - 关于GUI(图形化用户界面): 有玩家反映写代码门槛过高, 能否搞个GUI. 但目前有以下因素导致短期内无法实现:
     - 核心脚本的代码很少考虑健壮性, 而且很难保证稳定性
@@ -140,7 +141,7 @@ B站视频教程(偏过时): [【雀魂】如何自制牌谱回放](https://www.
    greasyfork [2938137849](https://greasyfork.org/zh-CN/users/749724-2938137849)
    的 [雀魂麻将脚本](https://greasyfork.org/zh-CN/scripts/423689-%E9%9B%80%E9%AD%82%E9%BA%BB%E5%B0%86%E8%84%9A%E6%9C%AC)
 
-4. 有少部分代码来自于雀魂源码, 以及特别感谢猫粮工作室老板娘"丝茉茉"的鼎力相助
+4. 有少部分代码来自于雀魂网页端源码, 以及特别感谢猫粮工作室老板娘"丝茉茉"的鼎力相助
 
 5. 其他部分由两位作者共同编写, 具体贡献:
     - [GrandDawn](https://github.com/GrandDawn) (原作者):
@@ -173,8 +174,8 @@ B站视频教程(偏过时): [【雀魂】如何自制牌谱回放](https://www.
 - 真·字一色 (注意: 这里更改立绘使用到了 [Majsoul Plus](https://github.com/MajsoulPlus/majsoul-plus), 自制牌谱只实现了牌谱部分,
   教程见 [README.md](using_MJSP/README.md))
   ![doc/pic/img06.jpg](doc/pic/img06.jpg)
-- 国标麻将不算花牌情况下理论最大牌型(总共324番, 总番数百位显示不出来, 有些番种名称无法正常显示的问题也通过 Majsoul Plus
-  解决了, 详见 [报菜名界面加入无法显示的汉字](using_MJSP/报菜名界面加入无法显示的汉字.md))
+- 国标麻将不算花牌情况下理论最大牌型(有些番种名称无法正常显示的问题通过 Majsoul Plus 解决了,
+  详见 [报菜名界面加入无法显示的汉字](using_MJSP/报菜名界面加入无法显示的汉字.md))
   ![doc/pic/img07.jpg](doc/pic/img07.jpg)
 - 立直麻将版血流成河模式
   ![doc/pic/img08.jpg](doc/pic/img08.jpg)

@@ -1,8 +1,10 @@
 function GetPaipuJSON(paipulink = '') {
     if (paipulink === '')
         paipulink = prompt('Please Enter a Paipu Link or Paipu UUID.');
-    if (paipulink === '')
+    if (!paipulink) {
+        console.log('User canceled input');
         return;
+    }
     paipulink = paipulink.split('=');
     paipulink = paipulink[paipulink.length - 1].split('_');
     let uuid = paipulink[0];
@@ -31,9 +33,9 @@ function GetPaipuJSON(paipulink = '') {
                     }
                 }
             } else
-                throw ('Unknown version: ' + gameDetailRecords.version);
+                console.error('Unknown version: ' + gameDetailRecords.version);
         } catch (e) {
-            console.log(e);
+            console.error(e);
         }
         return json;
     }
@@ -49,7 +51,7 @@ function GetPaipuJSON(paipulink = '') {
         a.href = URL.createObjectURL(
             new Blob([JSON.stringify(data, null, '  ')],
                 {type: 'text/plain'}));
-        a.download = 'paipu_' + uuid + '.json';
+        a.download = `paipu_${uuid}.json`;
         a.style.display = 'none';
         document.body.appendChild(a);
         a.click();

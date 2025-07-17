@@ -29,7 +29,7 @@ player_datas[1] = {
 player_datas[2] = {
     'nickname': '北雨听海',
     'avatar_id': 402602, // 雏桃-契约
-    'title': 600006, // 魂之契约者-中阶 牌谱问题这个修改无效
+    'title': 600006, // 魂之契约者-中阶
     'level': {'id': 10302, 'score': 700},
     'views': [
         {'slot': 0, 'item_id': 305003}, // 狗骨头立直棒
@@ -39,7 +39,7 @@ player_datas[2] = {
 };
 player_datas[3] = {
     'nickname': '114231',
-    'avatar_id': 405001, // 雏桃-契约
+    'avatar_id': 405001, // 赤木茂
     'level': {'id': 10501, 'score': 2000},
     'views': [
         {'slot': 0, 'item_id': 305002}, // 大葱立直棒

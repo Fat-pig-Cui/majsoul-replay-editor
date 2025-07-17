@@ -22,9 +22,9 @@
 
 ## 函数特殊说明
 
-### 换三张换牌: `huansanzhang(tiles0, tiles1, tiles2, tiles3, type)`
+### 换三张换牌: `huansanzhang(tls0, tls1, tls2, tls3, type)`
 
-`tiles0, tiles1, tiles2, tiles3` : 表示四个人要交出去的三张牌
+`tls0, tls1, tls2, tls3` : 表示四个人要交出去的三张牌
 
 `type` : 0 表示逆时针换牌, 1 表示对家换牌, 2 表示顺时针换牌
 

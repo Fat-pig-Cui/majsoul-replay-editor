@@ -1,5 +1,6 @@
 """
     会运行所有 python 脚本进行刷新操作
+    最后要 Reformat 一下 字典
 """
 import os
 
