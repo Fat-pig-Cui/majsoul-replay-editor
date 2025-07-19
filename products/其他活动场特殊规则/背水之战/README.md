@@ -10,7 +10,7 @@
 
 ## 函数特殊说明
 
-### 切牌: `qiepai(seat, kind, is_liqi, beishui_type)`
+### 切牌: `qiepai(seat, tile, is_liqi, beishui_type)`
 
 与段位场的切牌相比, 多了一个参数 `beishui_type`, `beishui_type` 的值可以是 `[0]`, `[1]`, `[2]`
 

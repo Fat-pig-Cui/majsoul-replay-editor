@@ -1,6 +1,5 @@
 loadproject();
 
-// 开杠"刮风下雨"使得玩家被击飞导致牌局结束时, 在 leimingpai 后调用 roundend 即可
 // 忽略换三张, 初始点数设为 1000
 
 player_datas[0].nickname = '一姬-契约';
@@ -32,5 +31,4 @@ tiles3 = '2223455567888s';
 paishan = randompaishan();
 roundbegin();
 dingque('psmp');
-leimingpai();
-roundend();
+leimingpai(true);

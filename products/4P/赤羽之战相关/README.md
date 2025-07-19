@@ -58,9 +58,11 @@
 
 例子: `dingque('smps')`
 
-### 开杠击飞: `roundend()`
+### 开杠击飞(川麻): `mingpai(seat, tiles, jifei)` 和 `leimingpai(seat, tile, type, jifei)`
 
-需要手动调用该函数表示该小局的情况只有一个: 开杠收取玩家点数时导致击飞, 在 `leimingpai` 之后调用该函数可以实现该情况
+与段位场相比多了个参数 `jifei`, 与 `hupai` 类似, 在川麻中开杠刮风下雨导致玩家击飞也可以在这两个函数中输入参数 `true`, 表示完场
+
+例子: `leimingpai(1, true);`
 
 # template.js: 赤羽之战报菜名合集
 

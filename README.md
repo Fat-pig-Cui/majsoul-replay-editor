@@ -140,7 +140,7 @@ B站视频教程(偏过时): [【雀魂】如何自制牌谱回放](https://www.
    greasyfork [2938137849](https://greasyfork.org/zh-CN/users/749724-2938137849)
    的 [雀魂麻将脚本](https://greasyfork.org/zh-CN/scripts/423689-%E9%9B%80%E9%AD%82%E9%BA%BB%E5%B0%86%E8%84%9A%E6%9C%AC)
 
-4. 有少部分代码来自于雀魂网页端源码, 特别感谢猫粮工作室老板娘"丝茉茉"的鼎力相助
+4. 有少部分代码来自雀魂网页端源码, 特别感谢猫粮工作室老板娘"丝茉茉"的鼎力相助
 
 5. 其他部分由两位作者共同编写, 具体贡献:
     - [GrandDawn](https://github.com/GrandDawn) (原作者):

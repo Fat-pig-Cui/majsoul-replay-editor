@@ -101,11 +101,18 @@ function RealPaipu2Fake(paipulink = '') {
                     txt += `roundbegin();\n`;
                 }
                 if (actions[i].result.name === 'RecordDiscardTile') {
-                    let tile = Data.tile, is_liqi = Data.is_liqi;
-                    if (is_liqi)
-                        txt += `qiepai('${tile}', true);\n`;
-                    else
-                        txt += `qiepai('${tile}');\n`;
+                    let tile = Data.tile, is_liqi = Data.is_liqi, moqie = Data.moqie;
+                    if (is_liqi) {
+                        if (moqie)
+                            txt += `qiepai(true);\n`;
+                        else
+                            txt += `qiepai('${tile}', true);\n`;
+                    } else {
+                        if (moqie)
+                            txt += `qiepai();\n`;
+                        else
+                            txt += `qiepai('${tile}');\n`;
+                    }
                 }
                 if (actions[i].result.name === 'RecordChangeTile') {
                     let tiles = ['', '', '', ''];
