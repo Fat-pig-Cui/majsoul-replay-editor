@@ -265,203 +265,32 @@ function editfunction() {
         K.muyu && O['DesktopMgr'].Inst['onMuyuChange'](K.muyu, !1);
     }
     // 修正6/9/12赤的暗杠和听牌
-    view.ActionAnGangAddGang.getAngangTile = function (K, U) {
-        var O = view;
+    view.ActionAnGangAddGang.getAngangTile = function (tile, seat) {
+        let hand = view.DesktopMgr.Inst.players[view.DesktopMgr.Inst.seat2LocalPosition(seat)].hand;
+        let mj_tile = mjcore.MJPai.Create(tile);
+        let dora_cnt = 0; // 红宝牌数量
 
-        var V = [];
-        if (O['DesktopMgr'].Inst['is_chuanma_mode']() || O['DesktopMgr'].Inst['is_tianming_mode']() ||
-            '0' !== K['charAt'](0) && '5' !== K['charAt'](0) || 'z' === K['charAt'](1))
-            if (O['DesktopMgr'].Inst['is_tianming_mode']()) {
-                var N = O['DesktopMgr'].Inst['seat2LocalPosition'](U)
-                    , q = O['DesktopMgr'].Inst['players'][N]
-                    , _ = 0;
-                if (('0' === K['charAt'](0) || '5' === K['charAt'](0)) && 'z' !== K['charAt'](1) && (_ = 1,
-                    O['DesktopMgr'].Inst['game_config'])) {
-                    var h = O['DesktopMgr'].Inst['game_config'].mode;
-                    if (h && h['extendinfo']) {
-                        var t = JSON['parse'](h['extendinfo']);
-                        if (t && null != t['dora_count'])
-                            switch (t['dora_count']) {
-                                case 0:
-                                    _ = 0;
-                                    break;
-                                case 2:
-                                    _ = 1;
-                                    break;
-                                case 3:
-                                    _ = 1;
-                                    break;
-                                case 4:
-                                    _ = 'p' === K['charAt'](1) ? 2 : 1;
-                                    break;
-
-                                // 添加 6/9/12 赤的情况
-                                case 6:
-                                    _ = 2;
-                                    break;
-                                case 9:
-                                    _ = 3;
-                                    break;
-                                case 12:
-                                    _ = 4;
-                                    break;
-                            }
-                    }
-                    if (h && h['detail_rule'] && h['detail_rule'] && null != h['detail_rule']['dora_count'])
-                        switch (h['detail_rule']['dora_count']) {
-                            case 0:
-                                _ = 0;
-                                break;
-                            case 2:
-                                _ = 1;
-                                break;
-                            case 3:
-                                _ = 1;
-                                break;
-                            case 4:
-                                _ = 'p' === K['charAt'](1) ? 2 : 1;
-                                break;
-
-                            // 添加 6/9/12 赤的情况
-                            case 6:
-                                _ = 2;
-                                break;
-                            case 9:
-                                _ = 3;
-                                break;
-                            case 12:
-                                _ = 4;
-                                break;
-                        }
-                }
-                var X = mjcore['MJPai']['Create'](K)
-                    , m = 0
-                    , y = 0;
-                if (0 === N)
-                    for (var w = 0, A = q.hand; w < A['length']; w++) {
-                        var l = A[w];
-                        l.val['numValue']() === X['numValue']() && l.val['touming'] && (l.val.dora ? (_--,
-                            y++) : m++);
-                    }
-                else
-                    for (var r = 0, i = q.hand; r < i['length']; r++) {
-                        var l = i[r];
-                        l.val['numValue']() === X['numValue']() && l.val['touming'] && (l.val.dora ? (_--,
-                            y++) : m++);
-                    }
-                for (var Q = 0; 4 > Q; Q++) {
-                    var u = mjcore['MJPai']['Create'](K);
-                    u.dora = !1,
-                        u['touming'] = !1,
-                        V.push(u);
-                }
-                for (var j = [1, 2, 0, 3], Q = 0; Q < Math.min(y + m + _, 4); Q++)
-                    y > Q ? (V[j[Q]].dora = !0,
-                        V[j[Q]]['touming'] = !0) : y + m > Q ? V[j[Q]]['touming'] = !0 : V[j[Q]].dora = !0;
-            } else
-                for (var Q = 0; 4 > Q; Q++) {
-                    var X = mjcore['MJPai']['Create'](K);
-                    O['DesktopMgr'].Inst['is_jiuchao_mode']() && (X['touming'] = 3 !== Q),
-                        V.push(X);
-                }
-        else {
-            var _ = 1;
-            if (O['DesktopMgr'].Inst['game_config']) {
-                var h = O['DesktopMgr'].Inst['game_config'].mode;
-                if (h && h['extendinfo']) {
-                    var t = JSON['parse'](h['extendinfo']);
-                    if (t && null != t['dora_count'])
-                        switch (t['dora_count']) {
-                            case 0:
-                                _ = 0;
-                                break;
-                            case 2:
-                                _ = 1;
-                                break;
-                            case 3:
-                                _ = 1;
-                                break;
-                            case 4:
-                                _ = 'p' === K['charAt'](1) ? 2 : 1;
-                                break;
-
-                            // 添加 6/9/12 赤的情况
-                            case 6:
-                                _ = 2;
-                                break;
-                            case 9:
-                                _ = 3;
-                                break;
-                            case 12:
-                                _ = 4;
-                                break;
-                        }
-                }
-                if (h && h['detail_rule'] && h['detail_rule'] && null != h['detail_rule']['dora_count'])
-                    switch (h['detail_rule']['dora_count']) {
-                        case 0:
-                            _ = 0;
-                            break;
-                        case 2:
-                            _ = 1;
-                            break;
-                        case 3:
-                            _ = 1;
-                            break;
-                        case 4:
-                            _ = 'p' === K['charAt'](1) ? 2 : 1;
-                            break;
-
-                        // 添加 6/9/12 赤的情况
-                        case 6:
-                            _ = 2;
-                            break;
-                        case 9:
-                            _ = 3;
-                            break;
-                        case 12:
-                            _ = 4;
-                            break;
-                    }
-            }
-            /* 原文 在 if (O['DesktopMgr'].Inst['game_config']) 之后
-
-            for (var Q = 0; 4 > Q; Q++) {
-                var X = mjcore['MJPai']['Create'](K);
-                O['DesktopMgr'].Inst['is_jiuchao_mode']() && (X['touming'] = 3 !== Q),
-                    X.dora = 0 === Q ? !1 : _ >= Q,
-                    V.push(X);
-            }
-            */
-            // 贪心策略: 优先杠出赤宝牌
-            var N = O['DesktopMgr'].Inst['seat2LocalPosition'](U)
-                , q = O['DesktopMgr'].Inst['players'][N]
-            var X = mjcore['MJPai']['Create'](K);
-            var dora_cnt = 0;
-
-            for (var w = 0, A = q.hand; w < A['length']; w++) {
-                if (dora_cnt === 4)
-                    break;
-                if (A[w].val['numValue']() === X['numValue']() && A[w].val.dora)
-                    dora_cnt++;
-            }
-            for (var Q = 0; Q < 4; Q++)
-                V.push(mjcore['MJPai']['Create'](K));
-            if (O['DesktopMgr'].Inst['is_jiuchao_mode']())
-                V[0]['touming'] = V[1]['touming'] = V[2]['touming'] = true;
-            switch (dora_cnt) {
-                case 4:
-                    V[0].dora = true;
-                case 3:
-                    V[3].dora = true;
-                case 2:
-                    V[2].dora = true;
-                case 1:
-                    V[1].dora = true;
-            }
+        // 贪心策略: 优先杠出赤宝牌
+        for (let i = 0; i < hand.length; i++) {
+            if (dora_cnt === 4)
+                break;
+            if (hand[i].val.numValue() === mj_tile.numValue() && hand[i].val.dora)
+                dora_cnt++;
         }
-        return O['DesktopMgr'].Inst['waiting_lingshang_deal_tile'] = !0,
-            V;
+
+        let angang_tiles = [];
+        for (let i = 0; i < 4; i++) {
+            let mjp = mjcore.MJPai.Create(tile);
+            mjp.dora = false;
+            angang_tiles.push(mjp);
+        }
+        if (view.DesktopMgr.Inst.is_jiuchao_mode())
+            angang_tiles[0].touming = angang_tiles[1].touming = angang_tiles[2].touming = true;
+        for (let i = 1; i <= dora_cnt; i++)
+            angang_tiles[i % 4].dora = true;
+
+        view.DesktopMgr.Inst.waiting_lingshang_deal_tile = true;
+        return angang_tiles;
     }
 
     // ActionBabei 改动: 拔的牌可以是其他牌
@@ -602,6 +431,7 @@ function editfunction() {
                 O.DesktopMgr.Inst.ActionRunComplete()
             })
         })
+        O['DesktopMgr'].Inst['waiting_lingshang_deal_tile'] = !1;
         return 4e3;
     }
     view.ActionHuleXueLiu.fastrecord = function (K) {
@@ -647,6 +477,7 @@ function editfunction() {
         }
         K.liqi ? O.ActionLiqi.fastplay(K.liqi, 0) :
             uiscript.UI_DesktopInfo.Inst.setLiqibang(0), O.DesktopMgr.Inst.setScores(K.scores)
+        O['DesktopMgr'].Inst['waiting_lingshang_deal_tile'] = !1;
     }
 
     // 自创函数: ActionHuleXueLiuEnd, 改编自 ActionHuleXueZhanEnd
@@ -1148,11 +979,13 @@ function editfunction2() {
     uiscript.UI_Replay.Inst.page_paishan.setInfo = function () {
         var z = uiscript;
         if (!this['noinfo']) {
+            // I: 牌山显示剩余牌, C: 宝牌数
             var I = view['DesktopMgr'].Inst['left_tile_count']
                 , C = view['DesktopMgr'].Inst.dora['length'];
             view['DesktopMgr'].Inst['is_zhanxing_mode']() && (I -= z['UI_Astrology'].Inst['getTileCount']());
+            // W: 岭上摸牌个数, R: 王牌数
             var r = view['DesktopMgr'].Inst['get_gang_count']()
-                , B = view['DesktopMgr'].Inst['get_babei_count']()
+                , B = is_xueliu() ? 0 : view['DesktopMgr'].Inst['get_babei_count']()
                 , W = r + B;
             W > 0 && view['DesktopMgr'].Inst['waiting_lingshang_deal_tile'] && W--;
             var R = 14;
@@ -1161,8 +994,10 @@ function editfunction2() {
             if (view.DesktopMgr.Inst.rule_mode === view.ERuleMode.Liqi2)
                 R = 18;
 
-            (view['DesktopMgr'].Inst['is_chuanma_mode']() || is_guobiao()) && (W = 0,
-                R = 0);
+            view['DesktopMgr'].Inst['is_chuanma_mode']() && (W = 0, R = 0);
+            // 添加内容: 国标麻将无王牌
+            is_guobiao() && (R = 0);
+            // L: 玩家的起手显示牌数, G: 可摸牌数
             var L = view['DesktopMgr'].Inst['sha256'] ? view['DesktopMgr'].Inst['rule_mode'] === view['ERuleMode']['Liqi3'] ? 40 : view['DesktopMgr'].Inst['is_wanxiangxiuluo_mode']() ? 49 : 53 : 0
                 , G = this['tile_count'] - W - R - L;
             0 > G && (G = 0);
