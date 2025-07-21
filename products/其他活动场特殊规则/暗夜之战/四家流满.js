@@ -2,16 +2,16 @@ loadproject();
 
 // 暗牌如果没有被开, 那么可以当成幺九牌, 所以这个模式可以做到四家流满
 
-editdata.player_datas[0].nickname = '一姬-契约';
-editdata.player_datas[1].nickname = '新年初诣';
-editdata.player_datas[2].nickname = '一姬当千';
-editdata.player_datas[3].nickname = '绮春歌';
-editdata.player_datas[0].avatar_id = 400102;
-editdata.player_datas[1].avatar_id = 400104;
-editdata.player_datas[2].avatar_id = 400105;
-editdata.player_datas[3].avatar_id = 400106;
+player_datas[0].nickname = '一姬-契约';
+player_datas[1].nickname = '新年初诣';
+player_datas[2].nickname = '一姬当千';
+player_datas[3].nickname = '绮春歌';
+player_datas[0].avatar_id = 400102;
+player_datas[1].avatar_id = 400104;
+player_datas[2].avatar_id = 400105;
+player_datas[3].avatar_id = 400106;
 
-editdata.config = {
+config = {
     'category': 1,
     'meta': {'mode_id': 0},
     'mode': {
@@ -33,13 +33,7 @@ qiepai(true);
 for (let i = 0; i < 65; i++) {
     mopai();
     let tile = getlstaction().data.tile;
-    let is_yaojiu = false;
-    for (let i = 0; i < non_sptiles.duanyaojiu.length; i++)
-        if (equaltile(tile, non_sptiles.duanyaojiu[i])) {
-            is_yaojiu = true;
-            break;
-        }
-    if (is_yaojiu)
+    if (judgetile(tile, 'Y'))
         qiepai();
     else
         qiepai('anpai');
