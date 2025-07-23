@@ -6,7 +6,7 @@
 // ==========================================
 // ==========================================
 // 编写自制牌谱时, 使用的函数与变量不建议超过这个范围
-// 除了常量, 全局变量的初始化全在 loadproject, gamebegin, roundbegin, init 函数中
+// 除了常量, 全局变量的初始化全在 clearproject, gamebegin, roundbegin, init 函数中
 
 // 玩家的个人信息
 var player_datas = [
@@ -24,13 +24,39 @@ var playertiles = [[], [], [], []], discardtiles = [[], [], [], []], dealtiles =
 // muyuseats: 拥有目玉的玩家队列
 var muyuseats = '';
 
+// 初始化必要变量
+function clearproject() {
+    gamebegin_once = true;
+    tiles0 = tiles1 = tiles2 = tiles3 = muyuseats = '';
+    paishan = [];
+    chang = ju = ben = lianzhuangcnt = 0;
+    juc = -1;
+    config = null;
+    playertiles = [[], [], [], []];
+    discardtiles = [[], [], [], []];
+    dealtiles = [[], [], [], []];
+    player_datas = [
+        {'nickname': '电脑0', 'avatar_id': 400101, 'title': 600001, 'avatar_frame': 0, 'verified': 0, 'views': []},
+        {'nickname': '电脑1', 'avatar_id': 400101, 'title': 600001, 'avatar_frame': 0, 'verified': 0, 'views': []},
+        {'nickname': '电脑2', 'avatar_id': 400101, 'title': 600001, 'avatar_frame': 0, 'verified': 0, 'views': []},
+        {'nickname': '电脑3', 'avatar_id': 400101, 'title': 600001, 'avatar_frame': 0, 'verified': 0, 'views': []},
+    ];
+    editdata = {
+        'actions': [],
+        'xun': [],
+        'players': players,
+        'config': config,
+        'player_datas': player_datas,
+    };
+}
+
 // 随机牌山函数
 function randompaishan(pshead = '', psback = '') {
     function randomcmp() {
         return Math.random() - 0.5;
     }
 
-    if (editdata.actions.length === 0 && gamebegin_run_once)
+    if (editdata.actions.length === 0 && gamebegin_once)
         gamebegin();
 
     tiles0 = separatetile(tiles0);
@@ -232,7 +258,7 @@ function randompaishan(pshead = '', psback = '') {
 
 // 开局, 数据初始化
 function roundbegin() {
-    if (editdata.actions.length === 0 && gamebegin_run_once)
+    if (editdata.actions.length === 0 && gamebegin_once)
         gamebegin();
 
     init();
@@ -466,123 +492,6 @@ function roundbegin() {
     }
 }
 
-// 清空部分可能影响初始化的数据(加载)
-function loadproject(x) {
-    if (x !== undefined) {
-        scores = JSON.parse(JSON.stringify(x.scores));
-        tiles0 = JSON.parse(JSON.stringify(x.tiles0));
-        tiles1 = JSON.parse(JSON.stringify(x.tiles1));
-        tiles2 = JSON.parse(JSON.stringify(x.tiles2));
-        tiles3 = JSON.parse(JSON.stringify(x.tiles3));
-        base_points = JSON.parse(JSON.stringify(x.base_points));
-        baopai = JSON.parse(JSON.stringify(x.baopai));
-        liqibang = JSON.parse(JSON.stringify(x.liqibang));
-        lstliqi = JSON.parse(JSON.stringify(x.lstliqi));
-        doracnt = JSON.parse(JSON.stringify(x.doracnt));
-        playertiles = JSON.parse(JSON.stringify(x.playertiles));
-        fulu = JSON.parse(JSON.stringify(x.fulu));
-        paihe = JSON.parse(JSON.stringify(x.paihe));
-        muyu = JSON.parse(JSON.stringify(x.muyu));
-        liqiinfo = JSON.parse(JSON.stringify(x.liqiinfo));
-        drawtype = JSON.parse(JSON.stringify(x.drawtype));
-        lstdrawtype = JSON.parse(JSON.stringify(x.lstdrawtype));
-        doras = JSON.parse(JSON.stringify(x.doras));
-        li_doras = JSON.parse(JSON.stringify(x.li_doras));
-        delta_scores = JSON.parse(JSON.stringify(x.delta_scores));
-        muyutimes = JSON.parse(JSON.stringify(x.muyutimes));
-        muyuseats = JSON.parse(JSON.stringify(x.muyuseats));
-        mingpais = JSON.parse(JSON.stringify(x.mingpais));
-        chang = JSON.parse(JSON.stringify(x.chang));
-        ju = JSON.parse(JSON.stringify(x.ju));
-        ben = JSON.parse(JSON.stringify(x.ben));
-        lianzhuangcnt = JSON.parse(JSON.stringify(x.lianzhuangcnt));
-        playercnt = JSON.parse(JSON.stringify(x.playercnt));
-        actions = JSON.parse(JSON.stringify(x.actions));
-        xun = JSON.parse(JSON.stringify(x.xun));
-        players = JSON.parse(JSON.stringify(x.players));
-        benchangbang = JSON.parse(JSON.stringify(x.benchangbang));
-        chuanmagangs = JSON.parse(JSON.stringify(x.chuanmagangs));
-        config = JSON.parse(JSON.stringify(x.config));
-        liqi_need = JSON.parse(JSON.stringify(x.liqi_need));
-        ben_times = JSON.parse(JSON.stringify(x.ben_times));
-        fafu_1ting = JSON.parse(JSON.stringify(x.fafu_1ting));
-        fafu_2ting = JSON.parse(JSON.stringify(x.fafu_2ting));
-        fafu_3ting = JSON.parse(JSON.stringify(x.fafu_3ting));
-        fafu_3p_1ting = JSON.parse(JSON.stringify(x.fafu_3p_1ting));
-        fafu_3p_2ting = JSON.parse(JSON.stringify(x.fafu_3p_2ting));
-        fafu_2p = JSON.parse(JSON.stringify(x.fafu_2p));
-        hules_history = JSON.parse(JSON.stringify(x.hules_history));
-        hupaied = JSON.parse(JSON.stringify(x.hupaied));
-        paishan = JSON.parse(JSON.stringify(x.paishan));
-        discardtiles = JSON.parse(JSON.stringify(x.discardtiles));
-        dealtiles = JSON.parse(JSON.stringify(x.dealtiles));
-        gaps = JSON.parse(JSON.stringify(x.gaps));
-        juc = JSON.parse(JSON.stringify(x.juc));
-        editdata = JSON.parse(JSON.stringify(x.editdata));
-        baogangseat = JSON.parse(JSON.stringify(x.baogangseat));
-        shezhangzt = JSON.parse(JSON.stringify(x.shezhangzhenting));
-        pretongxunzt = JSON.parse(JSON.stringify(x.pretongxunzhenting));
-        tongxunzt = JSON.parse(JSON.stringify(x.tongxunzhenting));
-        prelizhizt = JSON.parse(JSON.stringify(x.prelizhizhenting));
-        lizhizt = JSON.parse(JSON.stringify(x.lizhizhenting));
-        zhenting = JSON.parse(JSON.stringify(x.zhenting));
-        sigangbao = JSON.parse(JSON.stringify(x.sigangbao));
-        spell_triple = JSON.parse(JSON.stringify(x.spell_triple));
-        hunzhiyiji_info = JSON.parse(JSON.stringify(x.hunzhiyiji_info));
-        shoumoqie = JSON.parse(JSON.stringify(x.shoumoqie));
-        shoumoqiemaxlen = JSON.parse(JSON.stringify(x.shoumoqiemaxlen));
-        awaiting_tiles = JSON.parse(JSON.stringify(x.awaiting_tiles));
-        cuohu = JSON.parse(JSON.stringify(x.cuohu));
-        return;
-    }
-    gamebegin_run_once = true;
-    tiles0 = tiles1 = tiles2 = tiles3 = muyuseats = '';
-    paishan = [];
-    chang = ju = ben = lianzhuangcnt = 0;
-    juc = -1;
-    config = null;
-    playertiles = [[], [], [], []];
-    discardtiles = [[], [], [], []];
-    dealtiles = [[], [], [], []];
-    player_datas = [
-        {'nickname': '电脑0', 'avatar_id': 400101, 'title': 600001, 'avatar_frame': 0, 'verified': 0, 'views': []},
-        {'nickname': '电脑1', 'avatar_id': 400101, 'title': 600001, 'avatar_frame': 0, 'verified': 0, 'views': []},
-        {'nickname': '电脑2', 'avatar_id': 400101, 'title': 600001, 'avatar_frame': 0, 'verified': 0, 'views': []},
-        {'nickname': '电脑3', 'avatar_id': 400101, 'title': 600001, 'avatar_frame': 0, 'verified': 0, 'views': []},
-    ];
-    editdata = {
-        'actions': [],
-        'xun': [],
-        'players': players,
-        'config': config,
-        'player_datas': player_datas,
-    };
-}
-
-// 复原以查看真实牌谱
-function resetpaipu() {
-    if (resetData !== undefined)
-        uiscript.UI_Replay.prototype.resetData = function () {
-            return resetData.call(this);
-        }
-    if (checkPaiPu !== undefined)
-        GameMgr.Inst.checkPaiPu = function (game_uuid, account_id, paipu_config, is_maka) {
-            return checkPaiPu.call(this, game_uuid, account_id, paipu_config, is_maka);
-        }
-    if (showRecord !== undefined)
-        uiscript.UI_Win.prototype.showRecord = function (K) {
-            return showRecord.call(this, K);
-        }
-    if (showInfo_record !== undefined)
-        uiscript.UI_Win.prototype._showInfo_record = function (K) {
-            return showInfo_record.call(this, K);
-        }
-    if (setFanFu !== undefined)
-        uiscript.UI_Win.prototype.setFanFu = function (B, K) {
-            return setFanFu.call(this, B, K);
-        }
-}
-
 // ==========================================
 
 // 摸牌
@@ -601,8 +510,8 @@ function mopai(seat, tile, index) {
                 obj.tile = mat[i];
             else if (typeof mat[i] == 'number')
                 obj.seat = mat[i];
-            else if (mat[i] instanceof Array)
-                obj.index = mat[i];
+            else if (mat[i] instanceof Array && typeof mat[i][0] == 'number')
+                obj.index = mat[i][0];
         }
         return [obj.seat, obj.tile, obj.index];
     }
@@ -694,8 +603,6 @@ function mopai(seat, tile, index) {
     if (is_zhanxing()) {
         if (index === undefined)
             index = 0;
-        else if (index instanceof Array)
-            index = index[0];
         if (drawtype === 0)
             awaiting_tiles.push(paishan.pop());
         while (awaiting_tiles.length < 3 && paishan.length > 14)
@@ -793,8 +700,8 @@ function qiepai(seat, tile, is_liqi, anpai, beishui_type) {
                 obj.seat = mat[i];
             else if (typeof mat[i] == 'boolean' || mat[i] === 'kailiqi')
                 obj.is_liqi = mat[i];
-            else if (mat[i] instanceof Array)
-                obj.beishui_type = mat[i];
+            else if (mat[i] instanceof Array && typeof mat[i][0] === 'number')
+                obj.beishui_type = mat[i][0];
             else if (typeof mat[i] == 'string')
                 obj.tile = mat[i];
         }
@@ -817,8 +724,6 @@ function qiepai(seat, tile, is_liqi, anpai, beishui_type) {
         anpai = false;
     if (beishui_type === undefined)
         beishui_type = 0;
-    else
-        beishui_type = beishui_type[0];
 
     let moqie = true;
     if (tile === playertiles[seat][playertiles[seat].length - 1] && !judge_unique(seat, tile))
@@ -926,6 +831,7 @@ function qiepai(seat, tile, is_liqi, anpai, beishui_type) {
         update_shezhangzt(seat);
         update_prezhenting(seat, tile);
     }
+    playertiles[seat].sort(cmp);
     saveproject();
 }
 
@@ -982,7 +888,7 @@ function mingpai(seat, tiles, jifei) {
             else if (typeof mat[i] == 'boolean')
                 obj.jifei = mat[i];
             else if (mat[i] instanceof Array || typeof mat[i] == 'string' && mat[i].length >= 3)
-                obj.tiles = mat[i];
+                obj.tiles = separatetile(mat[i]);
         }
         return [obj.seat, obj.tiles, obj.jifei];
     }
@@ -1032,7 +938,6 @@ function mingpai(seat, tiles, jifei) {
         console.error(roundinfo() + `seat: ${getlstaction().data.seat} 的切牌: ${lastile} 没有玩家能 mingpai`);
         return;
     }
-    tiles = separatetile(tiles);
 
     // pass掉上个操作的牌的, pre同巡振听和pre立直振听 转 真实振听
     for (let i = 0; i < playercnt; i++) {
@@ -1254,7 +1159,7 @@ function leimingpai(seat, tile, type, jifei) {
                 obj.seat = mat[i];
             else if (typeof mat[i] == 'boolean')
                 obj.jifei = mat[i];
-            else if (typeof mat[i] == 'string' && mat[i].length >= 2)
+            else if (typeof mat[i] == 'string')
                 obj.tile = mat[i];
         }
         return [obj.seat, obj.tile, obj.type, obj.jifei];
@@ -1266,12 +1171,13 @@ function leimingpai(seat, tile, type, jifei) {
     if (seat === undefined) {
         if (lstaction.name === 'RecordNewRound')
             seat = ju;
-        else
+        else {
             seat = lstaction.data.seat;
-    }
-    if (seat === undefined) {
-        console.error(roundinfo() + `无法判断谁 leimingpai, lstaction.name: ${lstaction.name}`)
-        return;
+            if (seat === undefined) {
+                console.error(roundinfo() + `无法判断谁 leimingpai, lstaction.name: ${lstaction.name}`)
+                return;
+            }
+        }
     }
     if (jifei === undefined)
         jifei = false;
@@ -1649,24 +1555,18 @@ function notileliuju() {
         liqibang = 0;
     }
 
-    let playerleft = 0;
-    for (let i = 0; i < playercnt; i++)
-        if (!hupaied[i])
-            playerleft++;
     let tingcnt = 0;
-    let liujumanguan = false;
     let ret = [];
     for (let i = 0; i < playercnt; i++) {
         let tings = calctingpai(i);
-        if (tings.length === 0 || hupaied[i]) {
+        if (tings.length === 0 || hupaied[i])
             ret.push({
                 'tingpai': false,
                 'hand': [],
                 'tings': [],
             });
-        } else {
+        else {
             tingcnt++;
-            playertiles[i].sort(cmp);
             ret.push({
                 'tingpai': true,
                 'hand': playertiles[i].slice(),
@@ -1682,16 +1582,18 @@ function notileliuju() {
         times = 2;
 
     let ret2 = [];
+
     if (!no_liujumanguan()) {
+        // 有流满
+        let liujumanguan = false;
         for (let i = ju; i < playercnt + ju; i++) {
             if (is_chuanma() || is_guobiao())
                 break;
-            const seat = i % playercnt;
+            let seat = i % playercnt;
             if (!paihe[seat].liujumanguan || hupaied[seat])
                 continue;
             liujumanguan = true;
             let score = 0;
-            playertiles[seat].sort(cmp);
             for (let i = 0; i < playercnt; i++) {
                 if (seat === i || hupaied[i])
                     continue;
@@ -1706,33 +1608,19 @@ function notileliuju() {
                     score += 2000 * times;
                 }
             }
-            if (playercnt === 3 && no_zimosun()) {
-                for (let i = 0; i < playercnt; i++) {
-                    if (seat === i || hupaied[i])
+            if ((playercnt === 3 || playercnt === 2) && no_zimosun()) {
+                let base_points = playercnt === 3 ? 1000 : 4000;
+                for (let j = 0; j < playercnt; j++) {
+                    if (seat === j || hupaied[j])
                         continue;
                     if (seat === ju) {
-                        delta_scores[i] -= 2000;
-                        delta_scores[seat] += 2000;
-                        score += 2000;
+                        delta_scores[j] -= base_points * 2;
+                        delta_scores[seat] += base_points * 2;
+                        score += base_points * 2;
                     } else {
-                        delta_scores[i] -= 1000;
-                        delta_scores[seat] += 1000;
-                        score += 1000;
-                    }
-                }
-            }
-            if (playercnt === 2 && no_zimosun()) {
-                for (let i = 0; i < playercnt; i++) {
-                    if (seat === i || hupaied[i])
-                        continue;
-                    if (seat === ju) {
-                        delta_scores[i] -= 8000;
-                        delta_scores[seat] += 8000;
-                        score += 8000;
-                    } else {
-                        delta_scores[i] -= 4000;
-                        delta_scores[seat] += 4000;
-                        score += 4000;
+                        delta_scores[j] -= base_points;
+                        delta_scores[seat] += base_points;
+                        score += base_points;
                     }
                 }
             }
@@ -1755,7 +1643,7 @@ function notileliuju() {
                 'ming': ming,
                 'old_scores': scores.slice(),
                 'score': score,
-                'seat': seat
+                'seat': seat,
             });
             for (let i = 0; i < playercnt; i++) {
                 scores[i] += delta_scores[i];
@@ -1780,6 +1668,10 @@ function notileliuju() {
         }
     }
     ret2 = [{'delta_scores': [], 'old_scores': []}];
+    let playerleft = 0;
+    for (let i = 0; i < playercnt; i++)
+        if (!hupaied[i])
+            playerleft++;
     let notingcnt = playerleft - tingcnt;
     if (tingcnt !== 0 && notingcnt !== 0) {
         if (!is_chuanma() && !is_guobiao()) {
@@ -1826,6 +1718,7 @@ function notileliuju() {
     ret2[0].old_scores = scores.slice();
     ret2[0].delta_scores = delta_scores.slice();
     if (is_chuanma()) {
+        // 未听返税
         let taxes = [0, 0, 0, 0];
         for (let i = 0; i < chuanmagangs.over.length; i++) {
             let from = chuanmagangs.over[i].from, to = chuanmagangs.over[i].to, val = chuanmagangs.over[i].val;
@@ -1836,7 +1729,7 @@ function notileliuju() {
         }
         ret2[0].taxes = taxes;
         for (let i = 0; i < playercnt; i++)
-            scores[i] += taxes[i];
+            delta_scores[i] += taxes[i];
     }
     for (let i = 0; i < playercnt; i++) {
         scores[i] += delta_scores[i];
@@ -1868,14 +1761,12 @@ function liuju(liuju_type) {
     let all_liuju = [jiuzhongjiupai, sifenglianda, sigangsanle, sijializhi, sanjiahule];
 
     let allplayertiles = ['', '', '', ''];
-    for (let seat = 0; seat < playercnt; seat++) {
-        playertiles[seat].sort(cmp);
+    for (let seat = 0; seat < playercnt; seat++)
         for (let i = 0; i < playertiles[seat].length; i++) {
             allplayertiles[seat] += playertiles[seat][i];
             if (i !== playertiles[seat].length - 1)
                 allplayertiles[seat] += '|';
         }
-    }
 
     if (typeof liuju_type == 'number')
         all_liuju[liuju_type - 1]();
@@ -1896,17 +1787,12 @@ function liuju(liuju_type) {
         for (let i = 1; i <= nxt2.length; i++)
             if ((i === 1 || i === 9 || i === 10 || i === 18 || i === 19 || i >= 27 && i <= 34) && cnt[i] >= 1)
                 yaojiutype++;
-        if (yaojiutype >= 9 && liqiinfo[seat].liqi === 0 && liqiinfo[seat].yifa === 1 && playertiles[seat].length === 14) {
-            let lastile = playertiles[seat][playertiles[seat].length - 1];
-            playertiles[seat].pop();
-            playertiles[seat].sort(cmp);
-            playertiles[seat].push(lastile);
+        if (yaojiutype >= 9 && liqiinfo[seat].liqi === 0 && liqiinfo[seat].yifa === 1 && playertiles[seat].length === 14)
             liuju_data = {
                 'seat': seat,
                 'tiles': playertiles[seat].slice(),
                 'type': 1,
             };
-        }
     }
 
     // 四风连打
@@ -2083,7 +1969,7 @@ function huansanzhang(tls0, tls1, tls2, tls3, type) {
         ret.push({
             'out_tiles': tiles[seat],
             'in_tile_states': [0, 0, 0],
-            'in_tiles': tiles[(seat - type - 1 + playercnt * 2) % playercnt],
+            'in_tiles': tiles[(seat - type + 3) % playercnt],
             'out_tile_states': [0, 0, 0],
         });
 
@@ -2096,19 +1982,12 @@ function huansanzhang(tls0, tls1, tls2, tls3, type) {
 
 // 定缺(川麻), 注意 gaps 的 012 分别对应 pms, 而不是 mps
 function dingque(x) {
-    if (typeof x == 'number')
-        x = x.toString();
     if (typeof x == 'string')
         x = x.split('');
+    let dict = {'m': 1, 'p': 0, 's': 2};
     let ret = [];
-    for (let i = 0; i < x.length; i++) {
-        if (x[i] === 'm' || x[i] === '1')
-            ret.push(1);
-        if (x[i] === 'p' || x[i] === '0')
-            ret.push(0);
-        if (x[i] === 's' || x[i] === '2')
-            ret.push(2);
-    }
+    for (let i = 0; i < x.length; i++)
+        ret.push(dict[x[i]]);
     gaps = ret;
 
     addSelectGap(ret);
@@ -2150,10 +2029,11 @@ function unveil_lock(seat) {
         let seat_tile = getlstaction().data.seat;
         scores[seat] -= 2000;
         liqibang += 2;
-        scores[seat_tile] -= 4000;
-        liqibang += 4;
 
         addUnveilTile(seat, seat_tile);
+
+        scores[seat_tile] -= 4000;
+        liqibang += 4;
 
         addLockTile(seat_tile, 1);
 
@@ -2280,16 +2160,9 @@ function moqieliuju() {
     notileliuju();
 
     function get_left_tile_cnt() {
-        let tmp_action;
-        if (actions.length !== 0)
-            tmp_action = actions;
-        else
-            tmp_action = editdata.actions[editdata.actions.length - 1];
-
-        for (let i = tmp_action.length - 1; i >= 0; i--)
-            if (tmp_action[i].name === 'RecordNewRound' || tmp_action[i].name === 'RecordDealTile' || tmp_action[i].name === 'RecordFillAwaitingTiles')
-                return tmp_action[i].data.left_tile_count;
-
+        for (let i = actions.length - 1; i >= 0; i--)
+            if (actions[i].name === 'RecordNewRound' || actions[i].name === 'RecordDealTile' || actions[i].name === 'RecordFillAwaitingTiles')
+                return actions[i].data.left_tile_count;
         return 0;
     }
 }
@@ -2364,7 +2237,7 @@ function decompose(tiles) {
         if (x[i] !== 'm' && x[i] !== 'p' && x[i] !== 's' && x[i] !== 'z')
             for (let j = i + 1; j < x.length; j++) {
                 if (x[j] === 'm' || x[j] === 'p' || x[j] === 's' || x[j] === 'z') {
-                    if (j + 1 < x.length && x[j + 1] === sptile_suf) { // 以 't' 结尾的特殊牌
+                    if (j + 1 < x.length && x[j + 1] === sptile_suf) { // 以 sptile_suf 结尾的特殊牌
                         if (j !== i + 1)
                             x = x.substring(0, i + 1) + x[j] + x[j + 1] + x.substring(i + 1);
                         i += 2;
@@ -2383,12 +2256,14 @@ function decompose(tiles) {
 
 // 拆分牌为数组
 function separatetile(tiles) {
+    if (!tiles)
+        return [];
     if (tiles instanceof Array)
         return tiles;
     tiles = decompose(tiles);
     let ret = [];
     while (tiles.length > 0) {
-        if (tiles.length > 2 && tiles[2] === sptile_suf) { // 第3位是't', 则是特殊牌
+        if (tiles.length > 2 && tiles[2] === sptile_suf) { // 第3位是 sptile_suf, 则是特殊牌
             ret.push(tiles.substring(0, 3));
             tiles = tiles.substring(3);
         } else {
@@ -2409,18 +2284,6 @@ function separatetile(tiles) {
 // 6-11: 国标中不含全不靠的组合龙和牌
 // 12: 一番街古役'十三不搭'
 function calchupai(tiles, type = false) {
-    function deletetile(tiles, num) {
-        for (let i = 0; i < tiles.length; i++)
-            if (tiletoint(tiles[i]) === num) {
-                let tmp = tiles[i];
-                tiles[i] = tiles[tiles.length - 1];
-                tiles[tiles.length - 1] = tmp;
-                tiles.pop();
-                return tiles;
-            }
-        return tiles;
-    }
-
     let cnt = [], tmp = [];
     for (let i = 0; i < nxt2.length; i++)
         cnt[i] = tmp[i] = 0;
@@ -2433,23 +2296,18 @@ function calchupai(tiles, type = false) {
                 return 0;
 
     if (is_wanxiangxiuluo() && cnt[tiletoint(tile_bd)] === 1 && !type) {
-        cnt[tiletoint(tile_bd)]--;
         let tmp_tiles = [];
-        for (let i = 0; i < tiles.length; i++) {
-            if (tiles[i] === tile_bd)
-                continue;
-            tmp_tiles.push(tiles[i]);
-        }
-
-        for (let i = 1; i <= 34; i++) { // 试所有百搭牌
+        for (let i = 0; i < tiles.length; i++)
+            if (tiles[i] !== tile_bd)
+                tmp_tiles.push(tiles[i]);
+        for (let i = 1; i <= 34; i++) { // 百搭牌试所有牌
             tmp_tiles.push(inttotile(i));
-            cnt[i]++;
             let result = calchupai(tmp_tiles, true);
             if (result !== 0) // 存在百搭牌使得成为和牌型, 则返回
                 return result;
             tmp_tiles.pop();
-            cnt[i]--;
         }
+        return 0;
     }
 
     for (let i = 1; i <= 34; i++) {
@@ -2472,7 +2330,7 @@ function calchupai(tiles, type = false) {
                 }
                 tmp[35] = tmp[36] = 0;
             }
-            // 字牌不能构成暗刻
+            // 若字牌不能构成暗刻
             for (let j = 28; j <= 34; j++)
                 if (tmp[j] % 3 !== 0)
                     ok = false;
@@ -2567,7 +2425,11 @@ function calchupai(tiles, type = false) {
             if (flag[row]) {
                 let new_tiles = tiles.slice();
                 for (let i = 0; i < condition[row].length; i++)
-                    new_tiles = deletetile(new_tiles, condition[row][i]);
+                    for (let j = 0; j < new_tiles.length; j++)
+                        if (new_tiles[j] === inttotile(condition[row][i])) {
+                            new_tiles.splice(j, 1);
+                            break;
+                        }
                 if (calchupai(new_tiles) === 1)
                     return 6 + row;
             }
@@ -2612,19 +2474,18 @@ function calctingpai(seat, type = false) {
             if (tiles[i] === huapai)
                 return [];
 
-    let res = [];
-
+    let ret = [];
     for (let i = 1; i <= 34; i++) { // 试所有牌作为听牌, 检查是否为和牌型
         tiles.push(inttotile(i));
         cnt[i]++;
         // cnt[i] <= 4 为了除去虚听
         if ((cnt[i] <= 4 || type) && calchupai(tiles) !== 0 && calchupai(tiles) !== 12)
-            res.push({'tile': inttotile(i)});
+            ret.push({'tile': inttotile(i)});
 
         tiles.pop();
         cnt[i]--;
     }
-    return res;
+    return ret;
 }
 
 // ==========================================
@@ -2643,12 +2504,308 @@ function getlstaction(num = 1) {
         return editdata.actions[editdata.actions.length - 1][editdata.actions[editdata.actions.length - 1].length - 1];
 }
 
+// 复原以查看真实牌谱
+function resetpaipu() {
+    if (checkPaiPu !== undefined)
+        GameMgr.Inst.checkPaiPu = function (game_uuid, account_id, paipu_config, is_maka) {
+            return checkPaiPu.call(this, game_uuid, account_id, paipu_config, is_maka);
+        }
+    if (resetData !== undefined)
+        uiscript.UI_Replay.prototype.resetData = function () {
+            return resetData.call(this);
+        }
+    if (showRecord !== undefined)
+        uiscript.UI_Win.prototype.showRecord = function (K) {
+            return showRecord.call(this, K);
+        }
+    if (showInfo_record !== undefined)
+        uiscript.UI_Win.prototype._showInfo_record = function (K) {
+            return showInfo_record.call(this, K);
+        }
+    if (setFanFu !== undefined)
+        uiscript.UI_Win.prototype.setFanFu = function (B, K) {
+            return setFanFu.call(this, B, K);
+        }
+}
+
+// ==========================================
+// ==========================================
+// ================ private =================
+// ==========================================
+// ==========================================
+// 编辑自制牌谱时, 除非知道自己在做什么,
+// 否则不建议使用下面的所有变量与函数, 或仅限只读
+
+// 回放接口, 在 edit_offline 中重写, 并在 resetpaipu 中复原
+// 其中 OnChoosedPai, seat2LocalPosition, localPosition2Seat 在 add_function.js 中
+var checkPaiPu, resetData, showRecord, showInfo_record, setFanFu;
+var OnChoosedPai, seat2LocalPosition, localPosition2Seat;
+
+// playercnt: 玩家数, players: 玩家终局信息
+var playercnt = 4, players = [];
+// liqi_need: 立直所需要的棒子数, ben_times: 本场点数的倍数
+var liqi_need = 1, ben_times = 1;
+// 荒牌流局罚符(未听牌玩家向听牌玩家支付的点数)
+var fafu_1ting = 3000, fafu_2ting = 1500, fafu_3ting = 1000;
+var fafu_3p_1ting = 2000, fafu_3p_2ting = 1000, fafu_2p = 1000;
+// fulu: 玩家的副露信息, paihe: 玩家的牌河, xun: 玩家的巡目
+var fulu = [[], [], [], []], paihe = [null, null, null, null], xun = [[], [], [], []];
+// liqiinfo: 立直信息, lstliqi: 宣言立直的玩家信息
+var liqiinfo = [null, null, null, null], lstliqi = null;
+// doras: 表宝牌, li_doras: 里宝牌, doracnt: 表里dora数量, 及最近类型: 1表示即翻指示牌(暗杠), 2表示过一个操作才翻指示牌(明杠),
+// bonus 是幻境传说模式下能否多一个dora的表现
+var doras = [], li_doras = [], doracnt = {'cnt': 1, 'licnt': 1, 'lastype': 0, 'bonus': 0};
+// chang: 场(东/南/西/北), ju: 局(东1/2/3/4对应0/1/2/3), ben: 本场数, liqibang: 场上立直棒个数, benchangbang: 本场棒个数
+var chang = 0, ju = 0, ben = 0, liqibang = 0, benchangbang = 0;
+// delta_scores: 玩家点数变动, base_points: 各家原点分数
+var delta_scores = [], base_points = 25000;
+// drawtype: 摸牌方向: 1 表示正常摸牌, 0 表示岭上摸牌, lstdrawtype: 最近玩家摸牌方向
+var drawtype = 1, lstdrawtype = 1;
+// 最终要注入到牌谱回放中的内容的内容, 每局结束后 push 到 editdata 中并清空
+var actions = [];
+// hules_history: 和牌历史, hupaied: 玩家是否已和牌
+var hules_history = [], hupaied = [];
+// baopai: 玩家的包牌信息, sigangbao: 第四个明杠时, 前三副露是否都是杠子(然后第四个杠才构成包牌)
+// baogangseat: 包杠的玩家
+var baopai = [[], [], [], []], sigangbao = [false, false, false, false];
+var baogangseat = -1;
+
+// mingpais: 配牌明牌模式玩家所亮明的牌
+var mingpais = [[], [], [], []];
+// muyu: 龙之目玉模式中的目玉位置, muyutimes: 打点的倍数
+var muyu = {'count': 5, 'seat': 0, 'id': 0}, muyutimes = [1, 1, 1, 1];
+// juc: 川麻第一位和牌玩家的 seat, gaps: 玩家的定缺, chuanmagangs: 川麻的开杠
+var juc = -1, gaps = [], chuanmagangs = {'over': [], 'notover': []};
+// 幻境传说: 命运卡3(厄运沙漏): 各家立直后舍牌数量
+var spell_triple = [0, 0, 0, 0];
+// 魂之一击模式中各家相关信息
+var hunzhiyiji_info = [null, null, null, null];
+// 咏唱之战所有玩家手摸切, max_Len 各家第1位是摸切最大长度, 第2位是手切最大长度
+var shoumoqie = [[], [], [], []], shoumoqiemaxlen = [[0, 0], [0, 0], [0, 0], [0, 0]];
+// 占星之战长度为3的牌候选池
+var awaiting_tiles = [];
+// 庄家连续和牌连庄数量, 用于八连庄
+var lianzhuangcnt = 0;
+// 国标玩家是否已错和
+var cuohu = [false, false, false, false];
+// -----振听-----
+// 造成振听的因素
+// 1. 自家牌河中有听的牌 (qiepai)
+// 2. 其他家切牌(qiepai), 加杠(leimingpai), 拔北(leimingpai), 暗杠(国士, leimingpai)有听的牌
+// 只有切牌的时候会解除舍张振听
+// 只有在摸牌和自家鸣牌的时候会解除同巡振听
+// 同巡和立直振听在pass掉这张牌之后才会振听, 紧跟的操作可能是 mopai, mingpai (hupai 不影响)
+var pretongxunzt = [false, false, false, false], prelizhizt = [false, false, false, false],
+    shezhangzt = [false, false, false, false];
+var tongxunzt = [false, false, false, false], lizhizt = [false, false, false, false],
+    zhenting = [false, false, false, false];
+
+var lastscene = null;
+var gamebegin_once = true;
+
+// 完成编辑后的所有信息集合
+var editdata = {
+    'actions': [],
+    'xun': [],
+    'players': players,
+    'config': config,
+    'player_datas': player_datas,
+};
+
+// 常量, 万象修罗百搭牌编码
+var tile_bd = 'bd';
+// 常量, 特殊牌的后缀以及和普通牌编码的差值
+var sptile_suf = 't', sptile_offset = 40;
+// 常量, 国标麻将起和番, 花牌
+var qihu_fan = 8, huapai = '0m';
+// 常量
+// nxt2 表示顺子中比它大的牌, 如果不存在则直接指向 35 和 36
+// 即 j, nxt2[j], nxt2[nxt2[j]] 构成递增的顺子
+// doranxt 表示指示牌对应的宝牌
+// dora_spell 表示'宝牌指示牌也是宝牌', 幻境传说使用
+var nxt2 = [0, 2, 3, 4, 5, 6, 7, 8, 9, 35, 11, 12, 13, 14, 15, 16, 17, 18, 35, 20, 21, 22, 23, 24, 25, 26, 27, 35, 35, 35, 35, 35, 35, 35, 35, 36, 0];
+var doranxt = [0, 2, 3, 4, 5, 6, 7, 8, 9, 1, 11, 12, 13, 14, 15, 16, 17, 18, 10, 20, 21, 22, 23, 24, 25, 26, 27, 19, 29, 30, 31, 28, 33, 34, 32];
+var dora_spell = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34];
+
+// 快照当前所有数据到 lastscene
+function saveproject() {
+    let x = {};
+    x.scores = JSON.parse(JSON.stringify(scores));
+    x.tiles0 = JSON.parse(JSON.stringify(tiles0));
+    x.tiles1 = JSON.parse(JSON.stringify(tiles1));
+    x.tiles2 = JSON.parse(JSON.stringify(tiles2));
+    x.tiles3 = JSON.parse(JSON.stringify(tiles3));
+    x.base_points = JSON.parse(JSON.stringify(base_points));
+    x.baopai = JSON.parse(JSON.stringify(baopai));
+    x.liqibang = JSON.parse(JSON.stringify(liqibang));
+    x.lstliqi = JSON.parse(JSON.stringify(lstliqi));
+    x.doracnt = JSON.parse(JSON.stringify(doracnt));
+    x.playertiles = JSON.parse(JSON.stringify(playertiles));
+    x.fulu = JSON.parse(JSON.stringify(fulu));
+    x.paihe = JSON.parse(JSON.stringify(paihe));
+    x.muyu = JSON.parse(JSON.stringify(muyu));
+    x.liqiinfo = JSON.parse(JSON.stringify(liqiinfo));
+    x.drawtype = JSON.parse(JSON.stringify(drawtype));
+    x.lstdrawtype = JSON.parse(JSON.stringify(lstdrawtype));
+    x.doras = JSON.parse(JSON.stringify(doras));
+    x.li_doras = JSON.parse(JSON.stringify(li_doras));
+    x.delta_scores = JSON.parse(JSON.stringify(delta_scores));
+    x.muyutimes = JSON.parse(JSON.stringify(muyutimes));
+    x.muyuseats = JSON.parse(JSON.stringify(muyuseats));
+    x.mingpais = JSON.parse(JSON.stringify(mingpais));
+    x.chang = JSON.parse(JSON.stringify(chang));
+    x.ju = JSON.parse(JSON.stringify(ju));
+    x.ben = JSON.parse(JSON.stringify(ben));
+    x.lianzhuangcnt = JSON.parse(JSON.stringify(lianzhuangcnt));
+    x.playercnt = JSON.parse(JSON.stringify(playercnt));
+    x.actions = JSON.parse(JSON.stringify(actions));
+    x.xun = JSON.parse(JSON.stringify(xun));
+    x.players = JSON.parse(JSON.stringify(players));
+    x.benchangbang = JSON.parse(JSON.stringify(benchangbang));
+    x.chuanmagangs = JSON.parse(JSON.stringify(chuanmagangs));
+    x.config = JSON.parse(JSON.stringify(config));
+    x.liqi_need = JSON.parse(JSON.stringify(liqi_need));
+    x.ben_times = JSON.parse(JSON.stringify(ben_times));
+    x.fafu_1ting = JSON.parse(JSON.stringify(fafu_1ting));
+    x.fafu_2ting = JSON.parse(JSON.stringify(fafu_2ting));
+    x.fafu_3ting = JSON.parse(JSON.stringify(fafu_3ting));
+    x.fafu_3p_1ting = JSON.parse(JSON.stringify(fafu_3p_1ting));
+    x.fafu_3p_2ting = JSON.parse(JSON.stringify(fafu_3p_2ting));
+    x.fafu_2p = JSON.parse(JSON.stringify(fafu_2p));
+    x.hules_history = JSON.parse(JSON.stringify(hules_history));
+    x.hupaied = JSON.parse(JSON.stringify(hupaied));
+    x.paishan = JSON.parse(JSON.stringify(paishan));
+    x.discardtiles = JSON.parse(JSON.stringify(discardtiles));
+    x.dealtiles = JSON.parse(JSON.stringify(dealtiles));
+    x.gaps = JSON.parse(JSON.stringify(gaps));
+    x.juc = JSON.parse(JSON.stringify(juc));
+    x.editdata = JSON.parse(JSON.stringify(editdata));
+    x.baogangseat = JSON.parse(JSON.stringify(baogangseat));
+    x.shezhangzhenting = JSON.parse(JSON.stringify(shezhangzt));
+    x.pretongxunzhenting = JSON.parse(JSON.stringify(pretongxunzt));
+    x.tongxunzhenting = JSON.parse(JSON.stringify(tongxunzt));
+    x.prelizhizhenting = JSON.parse(JSON.stringify(prelizhizt));
+    x.lizhizhenting = JSON.parse(JSON.stringify(lizhizt));
+    x.zhenting = JSON.parse(JSON.stringify(zhenting));
+    x.sigangbao = JSON.parse(JSON.stringify(sigangbao));
+    x.spell_triple = JSON.parse(JSON.stringify(spell_triple));
+    x.hunzhiyiji_info = JSON.parse(JSON.stringify(hunzhiyiji_info));
+    x.shoumoqie = JSON.parse(JSON.stringify(shoumoqie));
+    x.shoumoqiemaxlen = JSON.parse(JSON.stringify(shoumoqiemaxlen));
+    x.awaiting_tiles = JSON.parse(JSON.stringify(awaiting_tiles));
+    x.cuohu = JSON.parse(JSON.stringify(cuohu));
+    lastscene = x;
+}
+
+// 加载 lastscene
+function loadproject() {
+    let x = lastscene;
+    scores = JSON.parse(JSON.stringify(x.scores));
+    tiles0 = JSON.parse(JSON.stringify(x.tiles0));
+    tiles1 = JSON.parse(JSON.stringify(x.tiles1));
+    tiles2 = JSON.parse(JSON.stringify(x.tiles2));
+    tiles3 = JSON.parse(JSON.stringify(x.tiles3));
+    base_points = JSON.parse(JSON.stringify(x.base_points));
+    baopai = JSON.parse(JSON.stringify(x.baopai));
+    liqibang = JSON.parse(JSON.stringify(x.liqibang));
+    lstliqi = JSON.parse(JSON.stringify(x.lstliqi));
+    doracnt = JSON.parse(JSON.stringify(x.doracnt));
+    playertiles = JSON.parse(JSON.stringify(x.playertiles));
+    fulu = JSON.parse(JSON.stringify(x.fulu));
+    paihe = JSON.parse(JSON.stringify(x.paihe));
+    muyu = JSON.parse(JSON.stringify(x.muyu));
+    liqiinfo = JSON.parse(JSON.stringify(x.liqiinfo));
+    drawtype = JSON.parse(JSON.stringify(x.drawtype));
+    lstdrawtype = JSON.parse(JSON.stringify(x.lstdrawtype));
+    doras = JSON.parse(JSON.stringify(x.doras));
+    li_doras = JSON.parse(JSON.stringify(x.li_doras));
+    delta_scores = JSON.parse(JSON.stringify(x.delta_scores));
+    muyutimes = JSON.parse(JSON.stringify(x.muyutimes));
+    muyuseats = JSON.parse(JSON.stringify(x.muyuseats));
+    mingpais = JSON.parse(JSON.stringify(x.mingpais));
+    chang = JSON.parse(JSON.stringify(x.chang));
+    ju = JSON.parse(JSON.stringify(x.ju));
+    ben = JSON.parse(JSON.stringify(x.ben));
+    lianzhuangcnt = JSON.parse(JSON.stringify(x.lianzhuangcnt));
+    playercnt = JSON.parse(JSON.stringify(x.playercnt));
+    actions = JSON.parse(JSON.stringify(x.actions));
+    xun = JSON.parse(JSON.stringify(x.xun));
+    players = JSON.parse(JSON.stringify(x.players));
+    benchangbang = JSON.parse(JSON.stringify(x.benchangbang));
+    chuanmagangs = JSON.parse(JSON.stringify(x.chuanmagangs));
+    config = JSON.parse(JSON.stringify(x.config));
+    liqi_need = JSON.parse(JSON.stringify(x.liqi_need));
+    ben_times = JSON.parse(JSON.stringify(x.ben_times));
+    fafu_1ting = JSON.parse(JSON.stringify(x.fafu_1ting));
+    fafu_2ting = JSON.parse(JSON.stringify(x.fafu_2ting));
+    fafu_3ting = JSON.parse(JSON.stringify(x.fafu_3ting));
+    fafu_3p_1ting = JSON.parse(JSON.stringify(x.fafu_3p_1ting));
+    fafu_3p_2ting = JSON.parse(JSON.stringify(x.fafu_3p_2ting));
+    fafu_2p = JSON.parse(JSON.stringify(x.fafu_2p));
+    hules_history = JSON.parse(JSON.stringify(x.hules_history));
+    hupaied = JSON.parse(JSON.stringify(x.hupaied));
+    paishan = JSON.parse(JSON.stringify(x.paishan));
+    discardtiles = JSON.parse(JSON.stringify(x.discardtiles));
+    dealtiles = JSON.parse(JSON.stringify(x.dealtiles));
+    gaps = JSON.parse(JSON.stringify(x.gaps));
+    juc = JSON.parse(JSON.stringify(x.juc));
+    editdata = JSON.parse(JSON.stringify(x.editdata));
+    baogangseat = JSON.parse(JSON.stringify(x.baogangseat));
+    shezhangzt = JSON.parse(JSON.stringify(x.shezhangzhenting));
+    pretongxunzt = JSON.parse(JSON.stringify(x.pretongxunzhenting));
+    tongxunzt = JSON.parse(JSON.stringify(x.tongxunzhenting));
+    prelizhizt = JSON.parse(JSON.stringify(x.prelizhizhenting));
+    lizhizt = JSON.parse(JSON.stringify(x.lizhizhenting));
+    zhenting = JSON.parse(JSON.stringify(x.zhenting));
+    sigangbao = JSON.parse(JSON.stringify(x.sigangbao));
+    spell_triple = JSON.parse(JSON.stringify(x.spell_triple));
+    hunzhiyiji_info = JSON.parse(JSON.stringify(x.hunzhiyiji_info));
+    shoumoqie = JSON.parse(JSON.stringify(x.shoumoqie));
+    shoumoqiemaxlen = JSON.parse(JSON.stringify(x.shoumoqiemaxlen));
+    awaiting_tiles = JSON.parse(JSON.stringify(x.awaiting_tiles));
+    cuohu = JSON.parse(JSON.stringify(x.cuohu));
+}
+
+// 选择在线编辑还是离线编辑
+function edit() {
+    saveproject();
+    if (actions.length !== 0)
+        roundend(true);
+    gameend(true);
+    if (view && view.DesktopMgr && view.DesktopMgr.Inst && view.DesktopMgr.Inst.active)
+        edit_online(JSON.parse(JSON.stringify(editdata)));
+    else
+        edit_offline(JSON.parse(JSON.stringify(editdata)));
+    loadproject();
+}
+
+// 在线编辑(进入牌谱之后的修改, 包括切换视角和切换巡目, 注意在线编辑不会更改玩家的信息, 只会变动对局信息)
+function edit_online(x) {
+    try {
+        let UI_Replay = uiscript.UI_Replay.Inst;
+        let rounds = [];
+        for (let i = 0; i < x.actions.length; i++) {
+            let whatever = {'actions': x.actions[i], 'xun': []};
+            // 线上修改
+            if (view && view.DesktopMgr && view.DesktopMgr.Inst && typeof view.DesktopMgr.Inst.seat == 'number')
+                whatever.xun = x.xun[i][view.DesktopMgr.Inst.seat];
+            else // 线下修改
+                whatever.xun = x.xun[i][0];
+            rounds.push(whatever);
+        }
+        UI_Replay.rounds = rounds;
+        UI_Replay.gameResult.result.players = x.players;
+    } catch (e) {
+        console.error(e);
+    }
+}
+
 // 离线编辑(进入牌谱之前改)
 function edit_offline(x) {
-    if (resetData === undefined)
-        resetData = uiscript.UI_Replay.prototype.resetData;
     if (checkPaiPu === undefined)
         checkPaiPu = GameMgr.Inst.checkPaiPu;
+    if (resetData === undefined)
+        resetData = uiscript.UI_Replay.prototype.resetData;
     if (showRecord === undefined)
         showRecord = uiscript.UI_Win.prototype.showRecord;
     if (showInfo_record === undefined)
@@ -2670,40 +2827,34 @@ function edit_offline(x) {
         guobiao_function();
 
     // 编辑玩家信息
-    function edit_player_datas(a) {
+    function edit_player_datas() {
         let ret = [];
-        let views_pool = [];
-        views_pool[0] = liqibangs, views_pool[1] = hupais, views_pool[2] = liqis;
-        views_pool[5] = avatar_frames, views_pool[6] = tablecloths, views_pool[11] = titles;
-        views_pool[7] = mjps, views_pool[13] = mjp_surfaces;
-        let slot_num = [0, 1, 2, 5, 6, 7, 11, 13];
+        let slots = [0, 1, 2, 5, 6, 7, 11, 13];
         // 建议玩家随机的装扮: 立直棒(0), 和牌特效(1), 立直特效(2), 头像框(5), 桌布(6), 牌背(7), 称号(11), 牌面(13)
         for (let seat = 0; seat < x.player_datas.length; seat++) {
             ret[seat] = {
-                'account_id': x.player_datas[seat].avatar_id * 10 + seat,
-                'seat': seat,
-                'nickname': x.player_datas[seat].nickname,
-                'avatar_id': x.player_datas[seat].avatar_id,
-                'character': {
-                    'charid': cfg.item_definition.skin.map_[x.player_datas[seat].avatar_id].character_id,
-                    'level': 5,
-                    'exp': 0,
-                    'skin': x.player_datas[seat].avatar_id,
-                    'is_upgraded': true,
-                    'extra_emoji': [10, 11, 12],
+                'account_id': x.player_datas[seat].avatar_id * 10 + seat, // 账号唯一id, 这里没什么用随便设的
+                'seat': seat, // 座次
+                'nickname': x.player_datas[seat].nickname, // 昵称
+                'avatar_id': x.player_datas[seat].avatar_id, // 头像id
+                'character': { // 角色信息
+                    'charid': cfg.item_definition.skin.map_[x.player_datas[seat].avatar_id].character_id, // 角色id
+                    'level': 5, // 角色好感等级, 即好感几颗心
+                    'exp': 0, // 好感经验, 契约之后值是0
+                    'skin': x.player_datas[seat].avatar_id, // 皮肤, 和 avatar_id 一样
+                    'is_upgraded': true, // 是否已契约
+                    'extra_emoji': [10, 11, 12], // 额外表情, 除了初始的九个外其他都是额外表情, 包括契约后的三个
                 },
-                'title': x.player_datas[seat].title,
-                'level': {'id': 10503, 'score': 4500},
-                'level3': {'id': 20503, 'score': 4500},
-                'avatar_frame': x.player_datas[seat].avatar_frame,
-                'verified': x.player_datas[seat].verified,
-                'views': x.player_datas[seat].views,
+                'title': x.player_datas[seat].title, // 称号
+                'level': {'id': 10503, 'score': 4500}, // 四麻段位分, 这里是圣三原点, 下同
+                'level3': {'id': 20503, 'score': 4500}, // 三麻段位分
+                'avatar_frame': x.player_datas[seat].avatar_frame, // 头像框
+                'verified': x.player_datas[seat].verified, // 是否已认证
+                'views': x.player_datas[seat].views, // 装扮槽
             }
-            if (a[seat].account_id !== undefined)
-                ret[seat].account_id = a[seat].account_id;
             if (is_random_views()) {
-                for (let i = 0; i < slot_num.length; i++) {
-                    let slot = slot_num[i];
+                for (let i = 0; i < slots.length; i++) {
+                    let slot = slots[i];
                     let item_id = views_pool[slot][Math.floor(Math.random() * views_pool[slot].length)];
                     if (slot === 11) {
                         ret[seat].title = item_id;
@@ -2716,6 +2867,7 @@ function edit_offline(x) {
                         if (ret[seat].views[j].slot === slot) {
                             ret[seat].views[j].item_id = item_id;
                             existed = true;
+                            break;
                         }
                     if (!existed)
                         ret[seat].views.push({
@@ -2726,15 +2878,14 @@ function edit_offline(x) {
             }
             if (is_random_skin()) {
                 let skin_len = cfg.item_definition.skin.rows_.length;
-                let skin = cfg.item_definition.skin.rows_[Math.floor(Math.random() * skin_len)].id;
-                while (skin === 400000 || skin === 400001)
-                    skin = cfg.item_definition.skin.rows_[Math.floor(Math.random() * skin_len)].id;
-                ret[seat].avatar_id = skin;
-                ret[seat].character.skin = skin;
-                ret[seat].character.charid = cfg.item_definition.skin.map_[skin].character_id;
+                let skin_id = cfg.item_definition.skin.rows_[Math.floor(Math.random() * skin_len)].id;
+                while (skin_id === 400000 || skin_id === 400001)
+                    skin_id = cfg.item_definition.skin.rows_[Math.floor(Math.random() * skin_len)].id;
+                ret[seat].avatar_id = ret[seat].character.skin = skin_id;
+                ret[seat].character.charid = cfg.item_definition.skin.map_[skin_id].character_id;
             }
         }
-        x.playerdatas = ret;
+        x.player_datas = ret;
         return ret;
     }
 
@@ -2938,11 +3089,10 @@ function edit_offline(x) {
                             var X = [];
                             X = X['concat'](n.head['accounts']);
 
-                            // 修改的地方: 本来是 openMJRoom 的第二个参数(单个字母), 现在套上了 edit_player_datas 函数
+                            // 修改的地方: 本来是 openMJRoom 的第二个参数(单个字母), 现在是 edit_player_datas 函数
                             // 本来是 openMJRoom 的第一个参数(如 X.config), 现在是 x.config
-                            // 修改 account_id 主要是为了强制修改一开始的主视角为东起, 防止一些bug
                             // 添加下面
-                            let new_player_datas = edit_player_datas(z);
+                            let new_player_datas = edit_player_datas();
                             X = new_player_datas;
 
                             if (cfg.item_definition.view.get(get_tablecloth_id()) !== undefined)
@@ -3028,208 +3178,6 @@ function edit_offline(x) {
             console.error(e);
         }
     }
-}
-
-// ==========================================
-// ==========================================
-// ================ private =================
-// ==========================================
-// ==========================================
-// 编辑自制牌谱时, 除非知道自己在做什么,
-// 否则不建议使用下面的所有变量与函数, 或仅限只读
-
-// 在线编辑(进入牌谱之后的修改, 如切换视角和切换巡目)
-function edit_online(x) {
-    try {
-        let UI_Replay = uiscript.UI_Replay.Inst;
-        let rounds = [];
-        for (let i = 0; i < x.actions.length; i++) {
-            let whatever = {'actions': x.actions[i], 'xun': []};
-            // 线上修改
-            if (view && view.DesktopMgr && view.DesktopMgr.Inst && typeof view.DesktopMgr.Inst.seat == 'number')
-                whatever.xun = x.xun[i][view.DesktopMgr.Inst.seat];
-            else // 线下修改
-                whatever.xun = x.xun[i][0];
-            rounds.push(whatever);
-        }
-        UI_Replay.rounds = rounds;
-        UI_Replay.gameResult.result.players = x.players;
-    } catch (e) {
-        console.error(e);
-    }
-}
-
-// 回放接口, 在 edit_offline 中重写, 并在 resetpaipu 中复原
-// 其中 OnChoosedPai, seat2LocalPosition, localPosition2Seat 在 add_function.js 中
-var resetData, checkPaiPu, showRecord, showInfo_record, setFanFu;
-var OnChoosedPai, seat2LocalPosition, localPosition2Seat;
-
-// playercnt: 玩家数, players: 玩家终局信息
-var playercnt = 4, players = [];
-// liqi_need: 立直所需要的棒子数, ben_times: 本场点数的倍数
-var liqi_need = 1, ben_times = 1;
-// 荒牌流局罚符(未听牌玩家向听牌玩家支付的点数)
-var fafu_1ting = 3000, fafu_2ting = 1500, fafu_3ting = 1000;
-var fafu_3p_1ting = 2000, fafu_3p_2ting = 1000, fafu_2p = 1000;
-// fulu: 玩家的副露信息, paihe: 玩家的牌河, xun: 玩家的巡目
-var fulu = [[], [], [], []], paihe = [null, null, null, null], xun = [[], [], [], []];
-// liqiinfo: 立直信息, lstliqi: 宣言立直的玩家信息
-var liqiinfo = [null, null, null, null], lstliqi = null;
-// doras: 表宝牌, li_doras: 里宝牌, doracnt: 表里dora数量, 及最近类型: 1表示即翻指示牌(暗杠), 2表示过一个操作才翻指示牌(明杠),
-// bonus 是幻境传说模式下能否多一个dora的表现
-var doras = [], li_doras = [], doracnt = {'cnt': 1, 'licnt': 1, 'lastype': 0, 'bonus': 0};
-// chang: 场(东/南/西/北), ju: 局(东1/2/3/4对应0/1/2/3), ben: 本场数, liqibang: 场上立直棒个数, benchangbang: 本场棒个数
-var chang = 0, ju = 0, ben = 0, liqibang = 0, benchangbang = 0;
-// delta_scores: 玩家点数变动, base_points: 各家原点分数
-var delta_scores = [], base_points = 25000;
-// drawtype: 摸牌方向: 1 表示正常摸牌, 0 表示岭上摸牌, lstdrawtype: 最近玩家摸牌方向
-var drawtype = 1, lstdrawtype = 1;
-// 最终要注入到牌谱回放中的内容的内容, 每局结束后 push 到 editdata 中并清空
-var actions = [];
-// hules_history: 和牌历史, hupaied: 玩家是否已和牌
-var hules_history = [], hupaied = [];
-// baopai: 玩家的包牌信息, sigangbao: 第四个明杠时, 前三副露是否都是杠子(然后第四个杠才构成包牌)
-// baogangseat: 包杠的玩家
-var baopai = [[], [], [], []], sigangbao = [false, false, false, false];
-var baogangseat = -1;
-
-// mingpais: 配牌明牌模式玩家所亮明的牌
-var mingpais = [[], [], [], []];
-// muyu: 龙之目玉模式中的目玉位置, muyutimes: 打点的倍数
-var muyu = {'count': 5, 'seat': 0, 'id': 0}, muyutimes = [1, 1, 1, 1];
-// juc: 川麻第一位和牌玩家的 seat, gaps: 玩家的定缺, chuanmagangs: 川麻的开杠
-var juc = -1, gaps = [], chuanmagangs = {'over': [], 'notover': []};
-// 幻境传说: 命运卡3(厄运沙漏): 各家立直后舍牌数量
-var spell_triple = [0, 0, 0, 0];
-// 魂之一击模式中各家相关信息
-var hunzhiyiji_info = [null, null, null, null];
-// 咏唱之战所有玩家手摸切, max_Len 各家第1位是摸切最大长度, 第2位是手切最大长度
-var shoumoqie = [[], [], [], []], shoumoqiemaxlen = [[0, 0], [0, 0], [0, 0], [0, 0]];
-// 占星之战长度为3的牌候选池
-var awaiting_tiles = [];
-// 庄家连续和牌连庄数量, 用于八连庄
-var lianzhuangcnt = 0;
-// 国标玩家是否已错和
-var cuohu = [false, false, false, false];
-// -----振听-----
-// 造成振听的因素
-// 1. 自家牌河中有听的牌 (qiepai)
-// 2. 其他家切牌(qiepai), 加杠(leimingpai), 拔北(leimingpai), 暗杠(国士, leimingpai)有听的牌
-// 只有切牌的时候会解除舍张振听
-// 只有在摸牌和自家鸣牌的时候会解除同巡振听
-// 同巡和立直振听在pass掉这张牌之后才会振听, 紧跟的操作可能是 mopai, mingpai (hupai 不影响)
-var pretongxunzt = [false, false, false, false], prelizhizt = [false, false, false, false],
-    shezhangzt = [false, false, false, false];
-var tongxunzt = [false, false, false, false], lizhizt = [false, false, false, false],
-    zhenting = [false, false, false, false];
-
-var lastscene;
-var gamebegin_run_once = true;
-
-// 完成编辑后的所有信息集合
-var editdata = {
-    'actions': [],
-    'xun': [],
-    'players': players,
-    'config': config,
-    'player_datas': player_datas,
-};
-
-// 常量, 万象修罗百搭牌编码
-var tile_bd = 'bd';
-// 常量, 特殊牌的后缀以及和普通牌编码的差值
-var sptile_suf = 't', sptile_offset = 40;
-// 常量, 国标麻将起和番, 花牌
-var qihu_fan = 8, huapai = '0m';
-// 常量
-// nxt2 表示顺子中比它大的牌, 如果不存在则直接指向 35 和 36
-// 即 j, nxt2[j], nxt2[nxt2[j]] 构成递增的顺子
-// doranxt 表示指示牌对应的宝牌
-// dora_spell 表示'宝牌指示牌也是宝牌', 幻境传说使用
-var nxt2 = [0, 2, 3, 4, 5, 6, 7, 8, 9, 35, 11, 12, 13, 14, 15, 16, 17, 18, 35, 20, 21, 22, 23, 24, 25, 26, 27, 35, 35, 35, 35, 35, 35, 35, 35, 36, 0];
-var doranxt = [0, 2, 3, 4, 5, 6, 7, 8, 9, 1, 11, 12, 13, 14, 15, 16, 17, 18, 10, 20, 21, 22, 23, 24, 25, 26, 27, 19, 29, 30, 31, 28, 33, 34, 32];
-var dora_spell = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34];
-
-function saveproject() {
-    let x = {};
-    x.scores = JSON.parse(JSON.stringify(scores));
-    x.tiles0 = JSON.parse(JSON.stringify(tiles0));
-    x.tiles1 = JSON.parse(JSON.stringify(tiles1));
-    x.tiles2 = JSON.parse(JSON.stringify(tiles2));
-    x.tiles3 = JSON.parse(JSON.stringify(tiles3));
-    x.base_points = JSON.parse(JSON.stringify(base_points));
-    x.baopai = JSON.parse(JSON.stringify(baopai));
-    x.liqibang = JSON.parse(JSON.stringify(liqibang));
-    x.lstliqi = JSON.parse(JSON.stringify(lstliqi));
-    x.doracnt = JSON.parse(JSON.stringify(doracnt));
-    x.playertiles = JSON.parse(JSON.stringify(playertiles));
-    x.fulu = JSON.parse(JSON.stringify(fulu));
-    x.paihe = JSON.parse(JSON.stringify(paihe));
-    x.muyu = JSON.parse(JSON.stringify(muyu));
-    x.liqiinfo = JSON.parse(JSON.stringify(liqiinfo));
-    x.drawtype = JSON.parse(JSON.stringify(drawtype));
-    x.lstdrawtype = JSON.parse(JSON.stringify(lstdrawtype));
-    x.doras = JSON.parse(JSON.stringify(doras));
-    x.li_doras = JSON.parse(JSON.stringify(li_doras));
-    x.delta_scores = JSON.parse(JSON.stringify(delta_scores));
-    x.muyutimes = JSON.parse(JSON.stringify(muyutimes));
-    x.muyuseats = JSON.parse(JSON.stringify(muyuseats));
-    x.mingpais = JSON.parse(JSON.stringify(mingpais));
-    x.chang = JSON.parse(JSON.stringify(chang));
-    x.ju = JSON.parse(JSON.stringify(ju));
-    x.ben = JSON.parse(JSON.stringify(ben));
-    x.lianzhuangcnt = JSON.parse(JSON.stringify(lianzhuangcnt));
-    x.playercnt = JSON.parse(JSON.stringify(playercnt));
-    x.actions = JSON.parse(JSON.stringify(actions));
-    x.xun = JSON.parse(JSON.stringify(xun));
-    x.players = JSON.parse(JSON.stringify(players));
-    x.benchangbang = JSON.parse(JSON.stringify(benchangbang));
-    x.chuanmagangs = JSON.parse(JSON.stringify(chuanmagangs));
-    x.config = JSON.parse(JSON.stringify(config));
-    x.liqi_need = JSON.parse(JSON.stringify(liqi_need));
-    x.ben_times = JSON.parse(JSON.stringify(ben_times));
-    x.fafu_1ting = JSON.parse(JSON.stringify(fafu_1ting));
-    x.fafu_2ting = JSON.parse(JSON.stringify(fafu_2ting));
-    x.fafu_3ting = JSON.parse(JSON.stringify(fafu_3ting));
-    x.fafu_3p_1ting = JSON.parse(JSON.stringify(fafu_3p_1ting));
-    x.fafu_3p_2ting = JSON.parse(JSON.stringify(fafu_3p_2ting));
-    x.fafu_2p = JSON.parse(JSON.stringify(fafu_2p));
-    x.hules_history = JSON.parse(JSON.stringify(hules_history));
-    x.hupaied = JSON.parse(JSON.stringify(hupaied));
-    x.paishan = JSON.parse(JSON.stringify(paishan));
-    x.discardtiles = JSON.parse(JSON.stringify(discardtiles));
-    x.dealtiles = JSON.parse(JSON.stringify(dealtiles));
-    x.gaps = JSON.parse(JSON.stringify(gaps));
-    x.juc = JSON.parse(JSON.stringify(juc));
-    x.editdata = JSON.parse(JSON.stringify(editdata));
-    x.baogangseat = JSON.parse(JSON.stringify(baogangseat));
-    x.shezhangzhenting = JSON.parse(JSON.stringify(shezhangzt));
-    x.pretongxunzhenting = JSON.parse(JSON.stringify(pretongxunzt));
-    x.tongxunzhenting = JSON.parse(JSON.stringify(tongxunzt));
-    x.prelizhizhenting = JSON.parse(JSON.stringify(prelizhizt));
-    x.lizhizhenting = JSON.parse(JSON.stringify(lizhizt));
-    x.zhenting = JSON.parse(JSON.stringify(zhenting));
-    x.sigangbao = JSON.parse(JSON.stringify(sigangbao));
-    x.spell_triple = JSON.parse(JSON.stringify(spell_triple));
-    x.hunzhiyiji_info = JSON.parse(JSON.stringify(hunzhiyiji_info));
-    x.shoumoqie = JSON.parse(JSON.stringify(shoumoqie));
-    x.shoumoqiemaxlen = JSON.parse(JSON.stringify(shoumoqiemaxlen));
-    x.awaiting_tiles = JSON.parse(JSON.stringify(awaiting_tiles));
-    x.cuohu = JSON.parse(JSON.stringify(cuohu));
-    lastscene = x;
-}
-
-// 选择在线编辑还是离线编辑
-function edit() {
-    saveproject();
-    if (actions.length !== 0)
-        roundend(true);
-    gameend(true);
-    if (view && view.DesktopMgr && view.DesktopMgr.Inst && view.DesktopMgr.Inst.active)
-        edit_online(JSON.parse(JSON.stringify(editdata)));
-    else
-        edit_offline(JSON.parse(JSON.stringify(editdata)));
-    loadproject(lastscene);
 }
 
 // 更新舍张振听状态
@@ -3415,7 +3363,7 @@ function gamebegin() {
     if (config && config.mode && config.mode.detail_rule && config.mode.detail_rule._scores_ instanceof Array)
         scores = config.mode.detail_rule._scores_;
 
-    gamebegin_run_once = false;
+    gamebegin_once = false;
     edit();
 }
 
@@ -3522,8 +3470,10 @@ function init() {
         delta_scores[i] = 0;
 
     let tiles = [tiles0, tiles1, tiles2, tiles3];
-    for (let i = 0; i < playercnt; i++)
+    for (let i = 0; i < playercnt; i++) {
         playertiles[i] = tiles[i].slice();
+        playertiles[i].sort(cmp);
+    }
 }
 
 // 玩家的巡目所对应的操作位置
@@ -3554,11 +3504,11 @@ function calcdoras() {
 // ===========================================
 
 // type 表示是否区分红宝牌, false 表示不区分, true 表示区分
-// special_tile 表示是否区分以 't' 结尾的特殊牌, false 表示不区分, true 表示区分
-function tiletoint(tile, type = false, special_tile = false) {
+// sptile 表示是否区分以 sptile_suf 结尾的特殊牌, false 表示不区分, true 表示区分
+function tiletoint(tile, type = false, sptile = false) {
     if (tile === tile_bd) // 万象修罗百搭牌
         return 0;
-    if (!special_tile || tile.length <= 2) {
+    if (!sptile || tile.length <= 2) {
         if (type && tile[0] === '0') {
             if (tile[1] === 'm')
                 return 35;
@@ -3578,7 +3528,7 @@ function tiletoint(tile, type = false, special_tile = false) {
             return 18 + parseInt(tile);
         if (tile[1] === 'z')
             return 27 + parseInt(tile);
-    } else if (tile[2] === 't') {
+    } else if (tile[2] === sptile_suf) {
         if (type && tile[0] === '0') {
             if (tile[1] === 'm')
                 return 35 + sptile_offset;
@@ -3604,7 +3554,7 @@ function tiletoint(tile, type = false, special_tile = false) {
     return -1;
 }
 
-// type 表示是否生成带 't' 结尾的特殊牌
+// type 表示是否生成带 sptile_suf 结尾的特殊牌
 function inttotile(x, type = false) {
     if (x === 0)
         return tile_bd;
@@ -3786,6 +3736,7 @@ function calcyongchang(val, type) {
 
 // ===========================================
 
+// hupaioneplayer 组
 // 计算 seat 号玩家的和牌导致的各家点数变动
 function hupaioneplayer(seat) {
     function qieshang(x) {
@@ -4495,6 +4446,7 @@ function hupaioneplayer_guobiao(seat) {
     return ret;
 }
 
+// calcfan 组
 // 根据牌算番, tiles 是完整的和牌(如14张)
 function calcfan(tiles, seat, zimo, fangchong) {
     let lastile = tiles[tiles.length - 1], fulucnt = 0;
@@ -7059,7 +7011,11 @@ function calcfan_guobiao(tiles, seat, zimo) {
             partition.push({'type': 9, 'tile': new_shunzi});
         }
         for (let i = 0; i < condition[row].length; i++)
-            tiles = deletetile(tiles, condition[row][i]);
+            for (let j = 0; j < tiles.length; j++)
+                if (tiles[j] === inttotile(condition[row][i])) {
+                    tiles.splice(j, 1);
+                    break;
+                }
 
         for (let i = 0; i < nxt2.length; i++)
             cnt[i] = 0;
@@ -7069,23 +7025,12 @@ function calcfan_guobiao(tiles, seat, zimo) {
         ret.fans.push({'val': 12, 'id': 8034}); // 组合龙
     }
 
-    function deletetile(tiles, int) {
-        for (let i = 0; i < tiles.length; i++)
-            if (tiletoint(tiles[i]) === int) {
-                let tmp = tiles[i];
-                tiles[i] = tiles[tiles.length - 1];
-                tiles[tiles.length - 1] = tmp;
-                tiles.pop();
-                return tiles;
-            }
-        return tiles;
-    }
-
     if (ret.fu === 0)
         ret.fu = 25;
     return ret;
 }
 
+// calcsudian 组
 // 根据算得的番计算打点, type: 0 表示一般模式, 1 表示比较模式
 function calcsudian(x, type = 0) {
     let fanfu = 1;
@@ -7265,7 +7210,7 @@ function gameend(type = false) {
         edit_offline();
 }
 
-// chang, ju, ben 转换为控制台输出的所在小局
+// 辅助函数, chang, ju, ben 转换为控制台输出的所在小局
 function roundinfo() {
     let chang_word = [`东`, `南`, `西`, `北`];
     return `${chang_word[chang]}${ju + 1}局${ben}本场: `;
@@ -8116,11 +8061,8 @@ function is_cuohupeida() {
 // ============ 随机装扮与自定义番种 ============
 // ===========================================
 
-// 回放用装扮
-var liqibangs = [], hupais = [], liqis = [];
-var avatar_frames = [], tablecloths = [], titles = [];
-var mjps = [], mjp_surfaces = [];
-
+// 回放用装扮随机池
+var views_pool = {};
 // 中文服无法加载和排除的装扮
 var invalid_frames = [
     305501,  // 头像框-默认
@@ -8231,50 +8173,29 @@ function update_views() {
         return;
     update_views_once = false;
 
-    let slots = [0, 1, 2, 5, 6, 7, 13];
-    let ITEM = cfg.item_definition.item.rows_;
-    let TITLE = cfg.item_definition.title.rows_;
+    // 建议玩家随机的装扮: 立直棒(0), 和牌特效(1), 立直特效(2), 头像框(5), 桌布(6), 牌背(7), 称号(11), 牌面(13)
+    let slots = [0, 1, 2, 5, 6, 7, 11, 13];
+    for (let i = 0; i < slots.length; i++)
+        views_pool[slots[i]] = [];
+
+    let ITEM = cfg.item_definition.item.rows_, TITLE = cfg.item_definition.title.rows_;
     for (let i = 0; i < ITEM.length; i++) {
-        if (ITEM[i].name_chs === '(已过期)')
+        if (ITEM[i].name_chs === '(已过期)' || ITEM[i].category !== 5 || ITEM[i].type === 11)
             continue;
-        let category = ITEM[i].category, item_slot = ITEM[i].type;
-        let same_slot = false;
+        let item_slot = ITEM[i].type, same_slot = false;
         for (let j = 0; j < slots.length; j++)
             if (slots[j] === item_slot)
                 same_slot = true;
-        if (category === 5 && same_slot) {
+        if (same_slot) {
             let is_banned = false;
-            switch (item_slot) {
-                case 0:
-                    liqibangs.push(ITEM[i].id);
-                    break;
-                case 1:
-                    hupais.push(ITEM[i].id);
-                    break;
-                case 2:
-                    liqis.push(ITEM[i].id);
-                    break;
-                case 5:
-                    for (let j = 0; j < invalid_frames.length; j++)
-                        if (invalid_frames[j] === ITEM[i].id) {
-                            is_banned = true;
-                            break;
-                        }
-                    if (!is_banned)
-                        avatar_frames.push(ITEM[i].id);
-                    break;
-                case 6:
-                    tablecloths.push(ITEM[i].id);
-                    break;
-                case 7:
-                    mjps.push(ITEM[i].id);
-                    break;
-                case 13:
-                    mjp_surfaces.push(ITEM[i].id);
-                    break;
-                default:
-                    break;
-            }
+            if (item_slot === 5)
+                for (let j = 0; j < invalid_frames.length; j++)
+                    if (invalid_frames[j] === ITEM[i].id) {
+                        is_banned = true;
+                        break;
+                    }
+            if (!is_banned)
+                views_pool[item_slot].push(ITEM[i].id);
         }
     }
     for (let i = 0; i < TITLE.length; i++) {
@@ -8285,7 +8206,7 @@ function update_views() {
                 break;
             }
         if (!is_banned)
-            titles.push(TITLE[i].id)
+            views_pool[11].push(TITLE[i].id)
     }
 }
 
@@ -11956,88 +11877,4 @@ function guobiao_function() {
                 alpha: 1
             }, 200);
     }
-}
-
-// ===========================================
-// ================ 调试备用 ==================
-// ===========================================
-
-function loadreplay() {
-    loadproject();
-    let rounds = uiscript.UI_Replay.Inst.rounds;
-    config = view.DesktopMgr.Inst.game_config;
-    if (uiscript.UI_Replay.Inst.gameResult.accounts[0])
-        player_datas[0] = view.DesktopMgr.Inst.player_datas[0];
-    if (uiscript.UI_Replay.Inst.gameResult.accounts[1])
-        player_datas[1] = view.DesktopMgr.Inst.player_datas[1];
-    if (uiscript.UI_Replay.Inst.gameResult.accounts[2])
-        player_datas[2] = view.DesktopMgr.Inst.player_datas[2];
-    if (uiscript.UI_Replay.Inst.gameResult.accounts[3])
-        player_datas[3] = view.DesktopMgr.Inst.player_datas[3];
-    player_datas[0].views = [];
-    player_datas[1].views = [];
-    player_datas[2].views = [];
-    player_datas[3].views = [];
-    gamebegin();
-    for (let i = 0; i < rounds.length; i++) {
-        let tt = rounds[i].actions;
-        tiles0 = rounds[i].actions[0].data.tiles0;
-        tiles1 = rounds[i].actions[0].data.tiles1;
-        tiles2 = rounds[i].actions[0].data.tiles2;
-        if (rounds[i].actions[0].data.tiles3)
-            tiles3 = rounds[i].actions[0].data.tiles3;
-        paishan = separatetile(rounds[i].actions[0].data.paishan);
-        roundbegin();
-        for (let j = 1; j < tt.length; j++) {
-            if (tt[j].name === 'RecordDealTile')
-                mopai();
-            if (tt[j].name === 'RecordDiscardTile' || tt[j].name === 'RecordRevealTile')
-                qiepai(tt[j].data.tile, tt[j].data.is_liqi);
-            if (tt[j].name === 'RecordChiPengGang') {
-                let tmp = [];
-                for (let k = 0; k < tt[j].data.tiles.length; k++)
-                    if (tt[j].data.froms[k] === tt[j].data.seat)
-                        tmp.push(tt[j].data.tiles[k]);
-                mingpai(tmp);
-            }
-            if (tt[j].name === 'RecordAnGangAddGang') {
-                if (tt[j].data.type === 3)
-                    leimingpai(tt[j].data.tiles, 'angang');
-                else
-                    leimingpai(tt[j].data.tiles, 'jiagang');
-            }
-            if (tt[j].name === 'RecordBaBei')
-                leimingpai('4z', 'babei');
-            if (tt[j].name === 'RecordLiuJu')
-                liuju();
-            if (tt[j].name === 'RecordNoTile')
-                notileliuju();
-            if (tt[j].name === 'RecordHule' || tt[j].name === 'RecordHuleXueZhanMid' || tt[j].name === 'RecordHuleXueZhanEnd') {
-                let tmp = [];
-                for (let k = 0; k < tt[j].data.hules.length; k++)
-                    tmp.push(tt[j].data.hules[k].seat);
-                if (tt[j].name === 'RecordHuleXueZhanEnd')
-                    hupai(tmp, true);
-                else
-                    hupai(tmp);
-            }
-            if (tt[j].name === 'RecordChangeTile')
-                huansanzhang(tt[j].data.change_tile_infos[0].out_tiles, tt[j].data.change_tile_infos[1].out_tiles, tt[j].data.change_tile_infos[2].out_tiles, tt[j].data.change_tile_infos[3].out_tiles, tt[j].data.change_type);
-
-            if (tt[j].name === 'RecordSelectGap') {
-                let tmp = '';
-                for (let k = 0; k < tt[j].data.gap_types.length; k++) {
-                    if (tt[j].data.gap_types[k] === 0)
-                        tmp += 'p';
-                    if (tt[j].data.gap_types[k] === 1)
-                        tmp += 'm';
-                    if (tt[j].data.gap_types[k] === 2)
-                        tmp += 's';
-                }
-                dingque(tmp);
-            }
-        }
-        roundend();
-    }
-    gameend();
 }

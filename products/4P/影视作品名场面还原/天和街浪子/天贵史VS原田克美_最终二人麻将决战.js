@@ -1,4 +1,4 @@
-loadproject();
+clearproject();
 
 // 南北两家的作用是在 Stage B 的时候分别代表另外两家摸打牌, 起手是随机的, 没什么用
 

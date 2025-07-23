@@ -1,4 +1,4 @@
-loadproject();
+clearproject();
 
 // 参考视频: https://www.bilibili.com/video/BV1jT41167Mg
 // 对局四人: 丸山奏子, 佐佐木寿人, 多井隆晴, 泷泽和典

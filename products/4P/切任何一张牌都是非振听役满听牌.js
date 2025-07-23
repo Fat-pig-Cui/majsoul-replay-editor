@@ -1,4 +1,4 @@
-loadproject();
+clearproject();
 
 // Q: 有牌型满足这样的条件:
 //      1. 门清且没有暗杠

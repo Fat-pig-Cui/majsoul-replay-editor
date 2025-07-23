@@ -1,4 +1,4 @@
-loadproject();
+clearproject();
 
 // 春日返校季UP装扮:
 // 立直棒-仿生喵

@@ -1,4 +1,4 @@
-loadproject();
+clearproject();
 
 // 天黑请闭眼UP装扮:
 // 立直棒-喵星棒

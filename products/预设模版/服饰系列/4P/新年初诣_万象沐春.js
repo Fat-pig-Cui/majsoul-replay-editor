@@ -1,4 +1,4 @@
-loadproject();
+clearproject();
 
 // 新年初诣UP装扮:
 // 立直棒-魔法棒

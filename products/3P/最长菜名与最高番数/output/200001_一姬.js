@@ -1,14 +1,14 @@
-loadproject();
+clearproject();
 
 // 第一局亲家的最长菜名(15条49番), 第二局最高番数(14条64番)
 // 最后一局子家的最长菜名(15条55番)
 
 player_datas[0].nickname = '一姬-契约';
-player_datas[1].nickname = '一姬当千';
-player_datas[2].nickname = '绮春歌';
+player_datas[1].nickname = '绮春歌';
+player_datas[2].nickname = '校园微风';
 player_datas[0].avatar_id = 400102;
-player_datas[1].avatar_id = 400105;
-player_datas[2].avatar_id = 400106;
+player_datas[1].avatar_id = 400106;
+player_datas[2].avatar_id = 400107;
 
 // 称号-一姬当千
 player_datas[0].title = player_datas[1].title = player_datas[2].title = 600045;

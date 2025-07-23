@@ -1,4 +1,4 @@
-loadproject();
+clearproject();
 
 player_datas[0].nickname = '宫永五峰';
 player_datas[1].nickname = '仓木幽魂　';

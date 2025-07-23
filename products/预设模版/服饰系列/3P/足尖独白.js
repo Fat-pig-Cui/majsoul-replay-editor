@@ -1,4 +1,4 @@
-loadproject();
+clearproject();
 
 // 同期UP装扮:
 // 立直音乐-舞之序曲 (没加入 views)

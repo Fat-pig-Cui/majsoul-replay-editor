@@ -1,4 +1,4 @@
-loadproject();
+clearproject();
 
 // 甜蜜魔法和新岁添喜完全同期, UP装扮:
 // 立直棒-仙境密匙

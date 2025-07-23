@@ -1,4 +1,4 @@
-loadproject();
+clearproject();
 
 player_datas[0].nickname = '浅仓透-契约';
 player_datas[1].nickname = '樋口圆香-契约';

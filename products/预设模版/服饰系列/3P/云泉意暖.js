@@ -1,4 +1,4 @@
-loadproject();
+clearproject();
 
 // 同期UP装扮:
 // 立直棒-夺笋

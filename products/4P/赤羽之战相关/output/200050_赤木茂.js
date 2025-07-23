@@ -1,4 +1,4 @@
-loadproject();
+clearproject();
 
 // 为了方便编辑不考虑换三张的过程
 

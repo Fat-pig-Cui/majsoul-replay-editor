@@ -1,4 +1,4 @@
-loadproject();
+clearproject();
 
 // 昭华年UP装扮:
 // 立直棒-冰糖葫芦(咸)

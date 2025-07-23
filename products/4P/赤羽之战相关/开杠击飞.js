@@ -1,4 +1,4 @@
-loadproject();
+clearproject();
 
 // 忽略换三张, 初始点数设为 1000
 

@@ -264,7 +264,7 @@ function editfunction() {
         O['DesktopMgr'].Inst['waiting_lingshang_deal_tile'] = !0,
         K.muyu && O['DesktopMgr'].Inst['onMuyuChange'](K.muyu, !1);
     }
-    // 修正6/9/12赤的暗杠和听牌
+    // 修正6/9/12赤的暗杠
     view.ActionAnGangAddGang.getAngangTile = function (tile, seat) {
         let hand = view.DesktopMgr.Inst.players[view.DesktopMgr.Inst.seat2LocalPosition(seat)].hand;
         let mj_tile = mjcore.MJPai.Create(tile);

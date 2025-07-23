@@ -1,4 +1,4 @@
-loadproject();
+clearproject();
 
 // 惊鸿岁UP装扮:
 // 立直棒-青竹伞

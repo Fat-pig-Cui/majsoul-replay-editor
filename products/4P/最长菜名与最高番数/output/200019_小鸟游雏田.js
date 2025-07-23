@@ -1,4 +1,4 @@
-loadproject();
+clearproject();
 
 player_datas[0].nickname = '小鸟游雏田-契约';
 player_datas[1].nickname = '魂色幻想';

@@ -1,4 +1,4 @@
-loadproject();
+clearproject();
 
 player_datas[0].nickname = 'A-37-契约';
 player_datas[1].nickname = '花火之约';

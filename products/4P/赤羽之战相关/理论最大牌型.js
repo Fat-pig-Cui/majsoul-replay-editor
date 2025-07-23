@@ -1,4 +1,4 @@
-loadproject();
+clearproject();
 
 // 川麻的理论最大牌型是 花天月地清十八罗汉
 

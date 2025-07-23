@@ -1,4 +1,4 @@
-loadproject();
+clearproject();
 
 // 这个其实在'所有报菜名合集'中已经有了, 在最后一局
 

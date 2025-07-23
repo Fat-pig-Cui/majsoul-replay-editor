@@ -1,4 +1,4 @@
-loadproject();
+clearproject();
 
 // 月夜华尔兹UP装扮:
 // 立直棒-应援棒

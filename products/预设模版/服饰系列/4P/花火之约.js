@@ -1,4 +1,4 @@
-loadproject();
+clearproject();
 
 // 花火之约UP装扮:
 // 立直棒-绯月荆棘

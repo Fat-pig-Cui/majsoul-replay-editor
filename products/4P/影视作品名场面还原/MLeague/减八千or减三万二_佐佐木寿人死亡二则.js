@@ -1,4 +1,4 @@
-loadproject();
+clearproject();
 
 // 参考视频: https://www.bilibili.com/video/BV1a7411H7pS
 // 对局四人: 鱼谷侑未, 佐佐木寿人, 石桥伸洋, 泽崎诚

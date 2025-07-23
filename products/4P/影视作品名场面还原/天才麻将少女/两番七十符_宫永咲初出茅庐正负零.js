@@ -1,4 +1,4 @@
-loadproject();
+clearproject();
 
 // 动画版 天才麻将少女 第一季第1集19min开始
 // 清澄高校内部友人场, 四赤东风战

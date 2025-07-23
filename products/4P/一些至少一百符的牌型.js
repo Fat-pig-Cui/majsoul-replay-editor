@@ -1,4 +1,4 @@
-loadproject();
+clearproject();
 
 //     门清自摸 门清荣和 副露自摸
 // 1番 100符    110符   100符

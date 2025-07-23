@@ -1,4 +1,4 @@
-loadproject();
+clearproject();
 
 // 海滩派对实装时没有UP装扮, 但有以下装扮加入
 // 立直棒-雪糕

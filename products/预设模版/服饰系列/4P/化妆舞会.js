@@ -1,4 +1,4 @@
-loadproject();
+clearproject();
 
 // 化妆舞会当时并没有UP装扮, 但有以下装扮加入常驻:
 // 立直棒-小恶魔蝙蝠

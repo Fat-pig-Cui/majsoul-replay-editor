@@ -1,4 +1,4 @@
-loadproject();
+clearproject();
 
 // 2020雀魂TOP20, 其中的TOP3: '仓颉造字' https://www.bilibili.com/video/BV1BV411B7nw/?t=403
 

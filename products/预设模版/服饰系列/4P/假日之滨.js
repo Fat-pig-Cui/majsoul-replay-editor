@@ -1,4 +1,4 @@
-loadproject();
+clearproject();
 
 // 假日之滨UP装扮:
 // 立直棒-包甜好瓜

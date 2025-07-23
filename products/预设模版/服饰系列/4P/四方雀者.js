@@ -1,4 +1,4 @@
-loadproject();
+clearproject();
 
 // 四方雀者UP装扮:
 // 立直棒-秘传之卷

@@ -1,11 +1,11 @@
-loadproject();
+clearproject();
 
 player_datas[0].nickname = '藤本绮罗-契约';
-player_datas[1].nickname = '满分假期';
-player_datas[2].nickname = '温存韶光';
+player_datas[1].nickname = '温存韶光';
+player_datas[2].nickname = '校园微风';
 player_datas[0].avatar_id = 402802;
-player_datas[1].avatar_id = 402804;
-player_datas[2].avatar_id = 402805;
+player_datas[1].avatar_id = 402805;
+player_datas[2].avatar_id = 402806;
 
 config = {
     'category': 1,

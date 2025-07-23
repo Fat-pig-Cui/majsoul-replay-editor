@@ -1,4 +1,4 @@
-loadproject();
+clearproject();
 
 // 立直麻将和牌算鸣牌的一种, 所以会'天和破地和', 有视频佐证: https://www.bilibili.com/video/BV1mf4y1M7cw
 

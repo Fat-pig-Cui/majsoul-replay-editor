@@ -1,4 +1,4 @@
-loadproject();
+clearproject();
 
 player_datas[0].nickname = '寺崎千穗理-契约';
 player_datas[1].nickname = '佳期不负';

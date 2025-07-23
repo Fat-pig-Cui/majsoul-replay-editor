@@ -1,4 +1,4 @@
-loadproject();
+clearproject();
 
 // 从第 1 局到第 18 局
 

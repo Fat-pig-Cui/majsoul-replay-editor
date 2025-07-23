@@ -1,4 +1,4 @@
-loadproject();
+clearproject();
 
 // 参考视频: https://www.bilibili.com/video/BV1jo4y1k729?p=2
 // 对局四人: 仲林圭, 泷泽和典, 东城莉奥, 村上淳

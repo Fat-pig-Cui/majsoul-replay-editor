@@ -1,4 +1,4 @@
-loadproject();
+clearproject();
 
 player_datas[0] = {
     'nickname': '北雨听海',

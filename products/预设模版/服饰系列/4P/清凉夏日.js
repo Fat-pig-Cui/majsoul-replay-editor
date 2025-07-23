@@ -1,4 +1,4 @@
-loadproject();
+clearproject();
 
 // 除了轻库娘
 

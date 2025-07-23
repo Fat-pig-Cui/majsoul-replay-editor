@@ -1,4 +1,4 @@
-loadproject();
+clearproject();
 
 // 需要导入 add_function.js
 

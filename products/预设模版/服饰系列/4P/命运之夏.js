@@ -1,4 +1,4 @@
-loadproject();
+clearproject();
 
 // 命运之夏UP装扮:
 // 立直棒-喵切丸

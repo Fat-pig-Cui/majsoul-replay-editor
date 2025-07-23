@@ -1,4 +1,4 @@
-loadproject();
+clearproject();
 
 // 这里不考虑换三张的情况, 没有什么必要
 

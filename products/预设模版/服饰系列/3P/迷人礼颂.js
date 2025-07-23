@@ -1,4 +1,4 @@
-loadproject();
+clearproject();
 
 // 同期UP装扮:
 // 立直音乐-所向披靡 (没加入 views)

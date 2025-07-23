@@ -1,11 +1,11 @@
-loadproject();
+clearproject();
 
 player_datas[0].nickname = '泽尼娅-契约';
-player_datas[1].nickname = '绮春歌';
-player_datas[2].nickname = '异想烂漫';
+player_datas[1].nickname = '异想烂漫';
+player_datas[2].nickname = '校园微风';
 player_datas[0].avatar_id = 400902;
-player_datas[1].avatar_id = 400905;
-player_datas[2].avatar_id = 400906;
+player_datas[1].avatar_id = 400906;
+player_datas[2].avatar_id = 400907;
 
 player_datas[0].views = player_datas[1].views = player_datas[2].views = [
     {'slot': 6, 'item_id': 30580008}, // 桌布-小恶魔日记

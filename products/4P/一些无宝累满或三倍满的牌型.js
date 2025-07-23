@@ -1,4 +1,4 @@
-loadproject();
+clearproject();
 
 // 无宝累满
 // 111999m5556677z 6z

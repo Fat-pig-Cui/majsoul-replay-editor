@@ -1,4 +1,4 @@
-loadproject();
+clearproject();
 
 player_datas[0].nickname = '宫永咲-兔耳派对';
 player_datas[1].nickname = '原村和-兔耳派对';

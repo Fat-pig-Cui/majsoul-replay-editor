@@ -1,4 +1,4 @@
-loadproject();
+clearproject();
 
 // 佳期不负UP装扮:
 // 立直棒-乘风破浪

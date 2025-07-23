@@ -76,7 +76,7 @@ function RealPaipu2Fake(paipulink = '') {
 
     function json2js(json, uuid) {
         let txt = '';
-        txt += `loadproject();\n\n// ${uuid}\n\n`;
+        txt += `clearproject();\n\n// ${uuid}\n\n`;
 
         for (let i in json.head.accounts)
             txt += `player_datas[${i}]=${JSON.stringify(json.head.accounts[i])};\n`;

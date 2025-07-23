@@ -1,4 +1,4 @@
-loadproject();
+clearproject();
 
 // 魇魔之约没有UP装扮
 

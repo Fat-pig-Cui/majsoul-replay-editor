@@ -1,4 +1,4 @@
-loadproject();
+clearproject();
 
 player_datas[0].nickname = '北见纱和子-契约';
 player_datas[1].nickname = '枕边私语';

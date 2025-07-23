@@ -1,4 +1,4 @@
-loadproject();
+clearproject();
 
 // 白色礼赞和细雪呈瑞完全同期, UP装扮:
 // 冬日心愿簿UP装扮:

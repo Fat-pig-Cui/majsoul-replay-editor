@@ -1,4 +1,4 @@
-loadproject();
+clearproject();
 
 // 甜蜜茶点和醇香初夏UP装扮完全一样:
 // 立直棒-夹心猫团子

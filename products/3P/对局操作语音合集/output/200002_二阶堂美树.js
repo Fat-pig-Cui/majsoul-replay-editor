@@ -1,4 +1,4 @@
-loadproject();
+clearproject();
 
 player_datas[0].nickname = '二阶堂美树-契约';
 player_datas[1].nickname = '鸢尾花之夜';

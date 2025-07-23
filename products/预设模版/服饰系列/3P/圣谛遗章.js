@@ -1,4 +1,4 @@
-loadproject();
+clearproject();
 
 // 同期UP装扮:
 // 对局音乐-优雅格调 (没加入 views)

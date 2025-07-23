@@ -1,4 +1,4 @@
-loadproject();
+clearproject();
 
 // 圣诞嘉年华实装时没有UP装扮
 

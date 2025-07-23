@@ -1,4 +1,4 @@
-loadproject();
+clearproject();
 
 player_datas[0].nickname = '鲁鲁修·兰佩洛基';
 player_datas[1].nickname = 'C.C.';

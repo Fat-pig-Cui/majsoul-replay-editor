@@ -1,4 +1,4 @@
-loadproject();
+clearproject();
 
 player_datas[0].nickname = '电脑0';
 player_datas[1].nickname = '电脑1';

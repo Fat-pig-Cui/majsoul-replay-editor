@@ -1,4 +1,4 @@
-loadproject();
+clearproject();
 
 // 2018雀魂TOP15, 其中的NO.7: '无役岭上累满' https://www.bilibili.com/video/BV1ub411r7Qh/?t=460
 

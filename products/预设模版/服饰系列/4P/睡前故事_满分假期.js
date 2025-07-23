@@ -1,4 +1,4 @@
-loadproject();
+clearproject();
 
 // 睡前故事UP装扮:
 // 立直棒-魔法棒

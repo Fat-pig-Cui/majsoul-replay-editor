@@ -1,11 +1,11 @@
-loadproject();
+clearproject();
 
 player_datas[0].nickname = '九条璃雨-契约';
-player_datas[1].nickname = '魂色幻想';
-player_datas[2].nickname = '心跳时速';
+player_datas[1].nickname = '心跳时速';
+player_datas[2].nickname = '校园微风';
 player_datas[0].avatar_id = 400802;
-player_datas[1].avatar_id = 400805;
-player_datas[2].avatar_id = 400806;
+player_datas[1].avatar_id = 400806;
+player_datas[2].avatar_id = 400807;
 
 player_datas[0].views = player_datas[1].views = player_datas[2].views = [
     {'slot': 6, 'item_id': 305805}, // 动态桌布-捞金鱼

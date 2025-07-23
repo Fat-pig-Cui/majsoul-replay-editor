@@ -1,4 +1,4 @@
-loadproject();
+clearproject();
 
 // 八连庄放最后, 并且中间加了一个荒牌流局来破坏连续和牌
 

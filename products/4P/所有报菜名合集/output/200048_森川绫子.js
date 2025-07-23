@@ -1,4 +1,4 @@
-loadproject();
+clearproject();
 
 player_datas[0].nickname = '森川绫子-契约';
 player_datas[1].nickname = '满分假期';

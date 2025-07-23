@@ -1,4 +1,4 @@
-loadproject();
+clearproject();
 
 // 2018雀魂TOP15, 其中的NO.2: '振w立一摸' https://www.bilibili.com/video/BV1ub411r7Qh/?t=785
 

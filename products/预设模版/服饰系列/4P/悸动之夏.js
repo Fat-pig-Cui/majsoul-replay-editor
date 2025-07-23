@@ -1,4 +1,4 @@
-loadproject();
+clearproject();
 
 // 悸动之夏UP装扮:
 // 立直棒-波子汽水

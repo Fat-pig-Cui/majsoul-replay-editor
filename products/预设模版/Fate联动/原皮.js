@@ -1,4 +1,4 @@
-loadproject();
+clearproject();
 
 player_datas[0].nickname = '间桐樱';
 player_datas[1].nickname = '远坂凛';

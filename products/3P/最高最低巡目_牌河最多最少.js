@@ -1,4 +1,4 @@
-loadproject();
+clearproject();
 
 // 关于巡目, 巡目的计数方式是自家摸到或鸣到牌时, 巡目就加一
 

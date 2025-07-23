@@ -1,4 +1,4 @@
-loadproject();
+clearproject();
 
 // 同期UP装扮:
 // 立直音乐-炽热时刻 (没加入 views)

@@ -1,4 +1,4 @@
-loadproject();
+clearproject();
 
 player_datas[0].nickname = '四宫辉夜-怪盗';
 player_datas[1].nickname = '白银御行-怪盗';

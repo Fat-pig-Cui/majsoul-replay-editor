@@ -1,4 +1,4 @@
-loadproject();
+clearproject();
 
 // 赤羽之战的天和是不破地和的, 有汪汪录佐证: 137期片尾 https://www.bilibili.com/video/BV1jX4y1P7zi
 

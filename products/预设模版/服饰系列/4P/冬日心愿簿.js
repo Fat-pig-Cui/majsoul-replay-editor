@@ -1,4 +1,4 @@
-loadproject();
+clearproject();
 
 // 冬日心愿簿UP装扮:
 // 和牌-得胜达摩
