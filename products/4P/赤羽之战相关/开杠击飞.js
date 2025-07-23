@@ -19,7 +19,6 @@ config = {
         'detail_rule': {
             'chuanma': true,
             'init_point': 1000,
-            'xuezhandaodi': true,
         }
     }
 };

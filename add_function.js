@@ -346,9 +346,9 @@ function editfunction() {
         O['DesktopMgr'].Inst['waiting_lingshang_deal_tile'] = !0;
     }
 
-    // 自创函数: ActionHuleXueLiu, 改编自 ActionHuleXueZhanMid
-    view.ActionHuleXueLiu = {};
-    view.ActionHuleXueLiu.record = function (K) {
+    // 自创函数: ActionHuleXueLiuMid, 改编自 ActionHuleXueZhanMid
+    view.ActionHuleXueLiuMid = {};
+    view.ActionHuleXueLiuMid.record = function (K) {
         var O = view;
 
         var U = this;
@@ -434,7 +434,7 @@ function editfunction() {
         O['DesktopMgr'].Inst['waiting_lingshang_deal_tile'] = !1;
         return 4e3;
     }
-    view.ActionHuleXueLiu.fastrecord = function (K) {
+    view.ActionHuleXueLiuMid.fastrecord = function (K) {
         var O = view;
 
         K['tingpais'] && K.hules[0].zimo && O['DesktopMgr'].Inst['setTingpai'](K.hules[0].seat, K['tingpais']);
@@ -733,9 +733,9 @@ function editfunction() {
                     K = view['ActionFillAwaitingTiles']['record'](O.data);
                     break;
 
-                // 添加内容: RecordHuleXueLiu 和 RecordHuleXueLiuEnd
-                case 'RecordHuleXueLiu':
-                    K = view.ActionHuleXueLiu.record(O.data);
+                // 添加内容: RecordHuleXueLiuMid 和 RecordHuleXueLiuEnd
+                case 'RecordHuleXueLiuMid':
+                    K = view.ActionHuleXueLiuMid.record(O.data);
                     break;
                 case 'RecordHuleXueLiuEnd':
                     K = view.ActionHuleXueLiuEnd.record(O.data);
@@ -827,9 +827,9 @@ function editfunction() {
                     view['ActionFillAwaitingTiles']['fastrecord'](O.data);
                     break;
 
-                // 添加内容: RecordHuleXueLiu 和 RecordHuleXueLiuEnd
-                case 'RecordHuleXueLiu':
-                    view.ActionHuleXueLiu.fastrecord(O.data);
+                // 添加内容: RecordHuleXueLiuMid 和 RecordHuleXueLiuEnd
+                case 'RecordHuleXueLiuMid':
+                    view.ActionHuleXueLiuMid.fastrecord(O.data);
                     break;
                 case 'RecordHuleXueLiuEnd':
                     view.ActionHuleXueLiuEnd.fastrecord(O.data);
@@ -883,8 +883,8 @@ function editfunction() {
             case 'RecordLockTile':
                 return 1000;
 
-            // 添加内容: RecordHuleXueLiu 和 RecordCuohu
-            case 'RecordHuleXueLiu':
+            // 添加内容: RecordHuleXueLiuMid 和 RecordCuohu
+            case 'RecordHuleXueLiuMid':
                 return 500;
             case 'RecordCuohu':
                 return 500;

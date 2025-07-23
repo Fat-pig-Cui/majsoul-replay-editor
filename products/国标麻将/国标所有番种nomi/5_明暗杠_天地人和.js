@@ -27,7 +27,7 @@ config = {
 // 第1(83)局: 明暗杠
 tiles0 = '2222333m123p67s55z';
 tiles1 = '1112223334445z';
-tiles2 = '111234478899p1z';
+tiles2 = '111234478899p5z';
 tiles3 = '1112225555888s';
 paishan = randompaishan('3m8s');
 roundbegin();

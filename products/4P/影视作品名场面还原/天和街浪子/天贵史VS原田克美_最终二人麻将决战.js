@@ -51,8 +51,8 @@ qiepai = function (seat, tile, is_liqi, anpai, beishui_type) {
                 obj.seat = mat[i];
             else if (typeof mat[i] == 'boolean' || mat[i] === 'kailiqi')
                 obj.is_liqi = mat[i];
-            else if (mat[i] instanceof Array)
-                obj.beishui_type = mat[i];
+            else if (mat[i] instanceof Array && typeof mat[i][0] === 'number')
+                obj.beishui_type = mat[i][0];
             else if (typeof mat[i] == 'string')
                 obj.tile = mat[i];
         }
@@ -75,8 +75,6 @@ qiepai = function (seat, tile, is_liqi, anpai, beishui_type) {
         anpai = false;
     if (beishui_type === undefined)
         beishui_type = 0;
-    else
-        beishui_type = beishui_type[0];
 
     let moqie = true;
     if (tile === playertiles[seat][playertiles[seat].length - 1] && !judge_unique(seat, tile))
@@ -178,7 +176,7 @@ qiepai = function (seat, tile, is_liqi, anpai, beishui_type) {
         update_shezhangzt(seat);
         update_prezhenting(seat, tile);
     }
-    saveproject();
+    playertiles[seat].sort(cmp);
 }
 // 修改点数变化
 origin_endHule = endHule;
@@ -196,7 +194,6 @@ endHule = function (HuleInfo) {
             'baopai': 0
         }
     });
-    edit();
 }
 
 tiles0 = '6m6779p135s123455z';

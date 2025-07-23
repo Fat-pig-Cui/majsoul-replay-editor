@@ -24,9 +24,7 @@ config = {
         'mode': 1,
         'detail_rule': {
             'chuanma': true,
-            'huansanzhang': false,
             'init_point': 200000,
-            'xuezhandaodi': true,
         }
     }
 };

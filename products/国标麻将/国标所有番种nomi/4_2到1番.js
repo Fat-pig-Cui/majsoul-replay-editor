@@ -158,7 +158,7 @@ hupai();
 // 第11(69)局: 暗杠
 tiles0 = '222245m33p678s116z';
 tiles1 = '1114446667799m';
-tiles2 = '33367799m199p11z';
+tiles2 = '33367799m113p11z';
 tiles3 = '1112225559999s';
 paishan = randompaishan('3p3m');
 roundbegin();

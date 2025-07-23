@@ -17,7 +17,6 @@ config = {
     'mode': {
         'mode': 1,
         'detail_rule': {
-            'huansanzhang': true,
             'wanxiangxiuluo_mode': true,
         }
     }

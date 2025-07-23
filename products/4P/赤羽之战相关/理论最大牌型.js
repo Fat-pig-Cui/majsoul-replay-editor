@@ -18,8 +18,6 @@ config = {
         'mode': 1,
         'detail_rule': {
             'chuanma': true,
-            'huansanzhang': true,
-            'xuezhandaodi': true,
         }
     }
 };
