@@ -12,14 +12,14 @@ player_datas[0].title = player_datas[1].title = player_datas[2].title = 600038;
 // 主播(猫爪子)认证
 player_datas[0].verified = player_datas[1].verified = player_datas[2].verified = 1;
 player_datas[0].views = player_datas[1].views = player_datas[2].views = [
-    {'slot': 6, 'item_id': 30580005}, // 桌布-预热开场
+    {slot: 6, item_id: 30580005}, // 桌布-预热开场
 ];
 
 config = {
-    'category': 1,
-    'meta': {'mode_id': 0},
-    'mode': {
-        'mode': 11,
+    category: 1,
+    meta: {mode_id: 0},
+    mode: {
+        mode: 11,
     }
 };
 

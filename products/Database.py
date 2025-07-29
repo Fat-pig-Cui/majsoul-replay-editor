@@ -55,7 +55,7 @@ def generate_views(slots, item_ids, player_num=4):
         temp = template_views_3P
     result = temp + '[\n'
     for index in range(len(slots)):
-        result += ('    {\'slot\': ' + str(slots[index]) + ', \'item_id\': ' + str(item_ids[index]) + '}, // ' +
+        result += ('    {slot: ' + str(slots[index]) + ', item_id: ' + str(item_ids[index]) + '}, // ' +
                    get_view(item_ids[index])['name'] + '\n')
     result += '];\n'
     return result

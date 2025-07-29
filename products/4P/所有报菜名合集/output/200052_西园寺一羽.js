@@ -12,18 +12,18 @@ player_datas[3].avatar_id = 405201;
 // 头像框-秋霜切玉
 player_datas[0].avatar_frame = player_datas[1].avatar_frame = player_datas[2].avatar_frame = player_datas[3].avatar_frame = 305529;
 player_datas[0].views = player_datas[1].views = player_datas[2].views = player_datas[3].views = [
-    {'slot': 1, 'item_id': 305215}, // 和牌-剑吟虎啸
-    {'slot': 2, 'item_id': 305315}, // 立直-虎啸长风
-    {'slot': 5, 'item_id': 305529}, // 头像框-秋霜切玉
+    {slot: 1, item_id: 305215}, // 和牌-剑吟虎啸
+    {slot: 2, item_id: 305315}, // 立直-虎啸长风
+    {slot: 5, item_id: 305529}, // 头像框-秋霜切玉
 ];
 
 config = {
-    'category': 1,
-    'meta': {'mode_id': 0},
-    'mode': {
-        'mode': 1,
-        'detail_rule': {
-            'init_point': 200000,
+    category: 1,
+    meta: {mode_id: 0},
+    mode: {
+        mode: 1,
+        detail_rule: {
+            init_point: 200000,
         }
     }
 };

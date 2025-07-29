@@ -12,13 +12,13 @@ player_datas[2].avatar_id = 401606;
 player_datas[3].avatar_id = 401607;
 
 config = {
-    'category': 1,
-    'meta': {'mode_id': 0},
-    'mode': {
-        'mode': 1,
-        'detail_rule': {
-            'chuanma': true,
-            'init_point': 500000,
+    category: 1,
+    meta: {mode_id: 0},
+    mode: {
+        mode: 1,
+        detail_rule: {
+            chuanma: true,
+            init_point: 500000,
         }
     }
 };

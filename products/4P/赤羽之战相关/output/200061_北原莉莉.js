@@ -14,19 +14,19 @@ player_datas[3].avatar_id = 406101;
 // 头像框-圣堂百合
 player_datas[0].avatar_frame = player_datas[1].avatar_frame = player_datas[2].avatar_frame = player_datas[3].avatar_frame = 305537;
 player_datas[0].views = player_datas[1].views = player_datas[2].views = player_datas[3].views = [
-    {'slot': 1, 'item_id': 305219}, // 和牌-银链飞雪
-    {'slot': 2, 'item_id': 305319}, // 立直-蛇行诡道
-    {'slot': 5, 'item_id': 305537}, // 头像框-圣堂百合
+    {slot: 1, item_id: 305219}, // 和牌-银链飞雪
+    {slot: 2, item_id: 305319}, // 立直-蛇行诡道
+    {slot: 5, item_id: 305537}, // 头像框-圣堂百合
 ];
 
 config = {
-    'category': 1,
-    'meta': {'mode_id': 0},
-    'mode': {
-        'mode': 1,
-        'detail_rule': {
-            'chuanma': true,
-            'init_point': 500000,
+    category: 1,
+    meta: {mode_id: 0},
+    mode: {
+        mode: 1,
+        detail_rule: {
+            chuanma: true,
+            init_point: 500000,
         }
     }
 };

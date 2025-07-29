@@ -25,30 +25,30 @@ player_datas[3].avatar_id = 403204;
 
 // 相原舞, 雏桃
 player_datas[0].views = player_datas[1].views = player_datas[2].views = player_datas[3].views = [
-    {'slot': 0, 'item_id': 305606}, // 立直棒-冰糖葫芦(咸)
-    {'slot': 1, 'item_id': 305210}, // 和牌-鸿运开年
-    {'slot': 2, 'item_id': 305310}, // 立直-生财有道
-    {'slot': 6, 'item_id': 305804}, // 桌布-贺华岁
-    {'slot': 7, 'item_id': 305707}, // 牌背-花灯
+    {slot: 0, item_id: 305606}, // 立直棒-冰糖葫芦(咸)
+    {slot: 1, item_id: 305210}, // 和牌-鸿运开年
+    {slot: 2, item_id: 305310}, // 立直-生财有道
+    {slot: 6, item_id: 305804}, // 桌布-贺华岁
+    {slot: 7, item_id: 305707}, // 牌背-花灯
 ];
 // 辉夜姬, 艾丽莎
 player_datas[0].views = player_datas[1].views = player_datas[2].views = player_datas[3].views = [
-    {'slot': 0, 'item_id': 305611}, // 立直棒-如意
-    {'slot': 1, 'item_id': 305217}, // 和牌-金屏春色
-    {'slot': 2, 'item_id': 305317}, // 立直-暗香梅影
-    {'slot': 6, 'item_id': 305808}, // 桌布-乾坤福袋
-    {'slot': 7, 'item_id': 305707}, // 牌背-花灯
+    {slot: 0, item_id: 305611}, // 立直棒-如意
+    {slot: 1, item_id: 305217}, // 和牌-金屏春色
+    {slot: 2, item_id: 305317}, // 立直-暗香梅影
+    {slot: 6, item_id: 305808}, // 桌布-乾坤福袋
+    {slot: 7, item_id: 305707}, // 牌背-花灯
 ];
 
 config = {
-    'category': 1,
-    'meta': {'mode_id': 0},
-    'mode': {
-        'mode': 1,
-        'detail_rule': {
-            'init_point': 100000,
-            '_tablecloth_id': 305808, // 桌布-乾坤福袋
-            '_mjp_id': 305707, // 牌背-花灯
+    category: 1,
+    meta: {mode_id: 0},
+    mode: {
+        mode: 1,
+        detail_rule: {
+            init_point: 100000,
+            _tablecloth_id: 305808, // 桌布-乾坤福袋
+            _mjp_id: 305707, // 牌背-花灯
         }
     }
 };

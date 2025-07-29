@@ -22,30 +22,30 @@ player_datas[3].avatar_id = 404804;
 
 // 八木唯, 北见纱和子
 player_datas[0].views = player_datas[2].views = [
-    {'slot': 0, 'item_id': 305605}, // 立直棒-应援棒
-    {'slot': 1, 'item_id': 305209}, // 和牌-安可
-    {'slot': 2, 'item_id': 305309}, // 立直-开场曲
-    {'slot': 6, 'item_id': 305807}, // 桌布-暖屋圣夜
-    {'slot': 7, 'item_id': 305706}, // 牌背-圣诞树
+    {slot: 0, item_id: 305605}, // 立直棒-应援棒
+    {slot: 1, item_id: 305209}, // 和牌-安可
+    {slot: 2, item_id: 305309}, // 立直-开场曲
+    {slot: 6, item_id: 305807}, // 桌布-暖屋圣夜
+    {slot: 7, item_id: 305706}, // 牌背-圣诞树
 ];
 // 卡维, 森川绫子
 player_datas[1].views = player_datas[3].views = [
-    {'slot': 0, 'item_id': 305605}, // 立直棒-应援棒
-    {'slot': 1, 'item_id': 305216}, // 和牌-槲寄生下
-    {'slot': 2, 'item_id': 305316}, // 立直-鹿雪冬至
-    {'slot': 6, 'item_id': 305807}, // 桌布-暖屋圣夜
-    {'slot': 7, 'item_id': 305706}, // 牌背-圣诞树
+    {slot: 0, item_id: 305605}, // 立直棒-应援棒
+    {slot: 1, item_id: 305216}, // 和牌-槲寄生下
+    {slot: 2, item_id: 305316}, // 立直-鹿雪冬至
+    {slot: 6, item_id: 305807}, // 桌布-暖屋圣夜
+    {slot: 7, item_id: 305706}, // 牌背-圣诞树
 ];
 
 config = {
-    'category': 1,
-    'meta': {'mode_id': 0},
-    'mode': {
-        'mode': 1,
-        'detail_rule': {
-            'init_point': 100000,
-            '_tablecloth_id': 305807, // 桌布-暖屋圣夜
-            '_mjp_id': 305706, // 牌背-圣诞树
+    category: 1,
+    meta: {mode_id: 0},
+    mode: {
+        mode: 1,
+        detail_rule: {
+            init_point: 100000,
+            _tablecloth_id: 305807, // 桌布-暖屋圣夜
+            _mjp_id: 305706, // 牌背-圣诞树
         }
     }
 };

@@ -4,35 +4,35 @@ clearproject();
 
 player_datas[0].nickname = player_datas[2].nickname = player_datas[3].nickname = '电脑(简单)';
 player_datas[1] = {
-    'nickname': '$nickname$',
-    'avatar_id': 407002, // 鲁鲁修-契约
-    'title': 600034, // 称号也可以看, 不过称号不属于严格意义上的装扮, 这里用 天选之证 举例
-    'avatar_frame': 305552, // 头像框, 用 大小姐发带 举例
-    'views': [
-        {'slot': 0, 'item_id': 308028}, // 立直棒, 用 骑士的钥匙 举例
-        {'slot': 1, 'item_id': 308026}, // 和牌特效, 用 绝对的命令 举例
-        {'slot': 2, 'item_id': 308027}, // 立直特效, 用 王者的决意 举例
-        {'slot': 3, 'item_id': 309500}, // 手的样式, 用 橘色虎爪 举例
-        // {'slot': 4, 'item_id': 305025}, // 立直音乐, 这个回放中无法展现, 用 真剑胜负 举例
-        {'slot': 5, 'item_id': 305552}, // 头像框, 用 大小姐发带 举例
-        // {'slot': 6, 'item_id': 308029}, // 桌布, 这个与对局玩家无关, 在 config 中修改, 用 魔女的契约 举例
-        // {'slot': 7, 'item_id': 308030}, // 牌背, 这个与对局玩家无关, 在 config 中修改, 用 假面的裁决 举例
-        // {'slot': 10, 'item_id': 305901}, // 鸣牌指示, 这个回放中无法展现, 用 雷驰电掣 举例
-        // {'slot': 13, 'item_id': 305718}, // 牌面, 这个与对局玩家无关, 在 config 中修改, 用 猫咪雀圣 举例
+    nickname: '$nickname$',
+    avatar_id: 407002, // 鲁鲁修-契约
+    title: 600034, // 称号也可以看, 不过称号不属于严格意义上的装扮, 这里用 天选之证 举例
+    avatar_frame: 305552, // 头像框, 用 大小姐发带 举例
+    views: [
+        {slot: 0, item_id: 308028}, // 立直棒, 用 骑士的钥匙 举例
+        {slot: 1, item_id: 308026}, // 和牌特效, 用 绝对的命令 举例
+        {slot: 2, item_id: 308027}, // 立直特效, 用 王者的决意 举例
+        {slot: 3, item_id: 309500}, // 手的样式, 用 橘色虎爪 举例
+        // {slot: 4, item_id: 305025}, // 立直音乐, 这个回放中无法展现, 用 真剑胜负 举例
+        {slot: 5, item_id: 305552}, // 头像框, 用 大小姐发带 举例
+        // {slot: 6, item_id: 308029}, // 桌布, 这个与对局玩家无关, 在 config 中修改, 用 魔女的契约 举例
+        // {slot: 7, item_id: 308030}, // 牌背, 这个与对局玩家无关, 在 config 中修改, 用 假面的裁决 举例
+        // {slot: 10, item_id: 305901}, // 鸣牌指示, 这个回放中无法展现, 用 雷驰电掣 举例
+        // {slot: 13, item_id: 305718}, // 牌面, 这个与对局玩家无关, 在 config 中修改, 用 猫咪雀圣 举例
     ]
 };
 
 config = {
-    'category': 1,
-    'meta': {'mode_id': 0},
-    'mode': {
-        'mode': 1,
-        'detail_rule': {
-            '_tablecloth_id': 308029, // 桌布-魔女的契约
-            '_mjp_id': 308030, // 牌背-假面的裁决
-            '_mjpsurface_id': 305718, // 牌面-猫咪雀圣
+    category: 1,
+    meta: {mode_id: 0},
+    mode: {
+        mode: 1,
+        detail_rule: {
+            _tablecloth_id: 308029, // 桌布-魔女的契约
+            _mjp_id: 308030, // 牌背-假面的裁决
+            _mjpsurface_id: 305718, // 牌面-猫咪雀圣
 
-            '_local_position_': 1,
+            _local_position_: 1,
         }
     }
 };

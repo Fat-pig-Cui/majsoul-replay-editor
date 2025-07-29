@@ -12,20 +12,20 @@ player_datas[2].avatar_id = 408502; // 袁枫-契约
 player_datas[3].avatar_id = 408501; // 袁枫-初始
 
 config = {
-    'category': 4,
-    'meta': {'mode_id': 0},
-    'mode': {
-        'mode': 1,
-        'detail_rule': {
-            'reveal_discard': true,
+    category: 4,
+    meta: {mode_id: 0},
+    mode: {
+        mode: 1,
+        detail_rule: {
+            reveal_discard: true,
 
-            '_tablecloth_id': 305012,
-            '_mjp_id': 305724,
-            'dora_count': 0,
-            '_no_liujumanguan': true,
-            '_chang_ju_ben_num_': [0, 0, 1],
-            '_scores_': [9200, 0, 20300, 0],
-            '_buquanshoupai': true,
+            _tablecloth_id: 305012,
+            _mjp_id: 305724,
+            dora_count: 0,
+            _no_liujumanguan: true,
+            _chang_ju_ben_num_: [0, 0, 1],
+            _scores_: [9200, 0, 20300, 0],
+            _buquanshoupai: true,
         }
     }
 };
@@ -95,46 +95,14 @@ qiepai = function (seat, tile, is_liqi, anpai, beishui_type) {
     } else if (is_liqi)
         is_liqi = true;
     if (is_liqi)
-        lstliqi = {'seat': seat, 'type': 1};
+        lstliqi = {seat: seat, type: 1};
     if (is_wliqi)
         lstliqi.type = 2;
-    if (is_kailiqi)
-        lstliqi.kai = 1;
-    if (is_beishuizhizhan() && is_liqi)
-        lstliqi.beishui_type = beishui_type;
     if (doracnt.lastype === 1) {
         doracnt.cnt += 1 + doracnt.bonus;
         doracnt.licnt += 1 + doracnt.bonus;
         doracnt.bonus = doracnt.lastype = 0;
     }
-
-    // 幻境传说: 命运卡3
-    if (get_field_spell_mode3() === 3)
-        if (liqiinfo[seat].liqi !== 0)
-            spell_triple[seat]++;
-
-    // 咏唱之战相关
-    if (is_yongchang()) {
-        if (tile === playertiles[seat][playertiles[seat].length - 1] && moqie)
-            shoumoqie[seat].push(false);
-        else
-            shoumoqie[seat].push(true);
-        let moqiemaxlen = shoumoqie_length(shoumoqie[seat], false);
-        let shouqiemaxlen = shoumoqie_length(shoumoqie[seat], true);
-        shoumoqiemaxlen[seat] = [moqiemaxlen, shouqiemaxlen];
-    }
-
-    // 魂之一击相关
-    if (is_hunzhiyiji() && lstliqi != null)
-        hunzhiyiji_info[seat] = {
-            'liqi': lstliqi.type,
-            'yifa': true,
-            'cnt': 6,
-            'overload': false,
-            'is_push': false
-        };
-    if (is_hunzhiyiji() && hunzhiyiji_info[seat].cnt <= 0)
-        hunzhiyiji_info[seat].yifa = false;
 
     for (let i = playertiles[seat].length - 1; i >= 0; i--) {
         if (tile === playertiles[seat][i]) {
@@ -184,14 +152,13 @@ endHule = function (HuleInfo) {
     delta_scores = [12300, 0, 0, 0];
     scores = [21500, 0, 20300, 0];
     actions.push({
-        'name': 'RecordHule',
-        'data': {
-            'delta_scores': delta_scores.slice(),
-            'gameend': {},
-            'hules': HuleInfo,
-            'old_scores': [9200, 0, 20300, 0],
-            'scores': scores.slice(),
-            'baopai': 0
+        name: 'RecordHule',
+        data: {
+            delta_scores: delta_scores.slice(),
+            hules: HuleInfo,
+            old_scores: [9200, 0, 20300, 0],
+            scores: scores.slice(),
+            baopai: 0
         }
     });
 }

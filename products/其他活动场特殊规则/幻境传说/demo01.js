@@ -10,13 +10,12 @@ player_datas[2].avatar_id = 400105;
 player_datas[3].avatar_id = 400106;
 
 config = {
-    'category': 1,
-    'meta': {'mode_id': 0},
-    'mode': {
-        'mode': 1,
-        'detail_rule': {
-            // 炒作, 胜负手, 厄运沙漏
-            'field_spell_mode': 30504,
+    category: 1,
+    meta: {mode_id: 0},
+    mode: {
+        mode: 1,
+        detail_rule: {
+            field_spell_mode: 30504, // 炒作, 胜负手, 厄运沙漏
         }
     }
 };

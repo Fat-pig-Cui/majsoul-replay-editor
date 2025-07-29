@@ -17,20 +17,20 @@ player_datas[2].avatar_id = 401103;
 player_datas[3].avatar_id = 401203;
 
 player_datas[0].views = player_datas[1].views = player_datas[2].views = player_datas[3].views = [
-    {'slot': 0, 'item_id': 305600}, // 立直棒-小恶魔蝙蝠
-    {'slot': 1, 'item_id': 305200}, // 和牌-幽灵嗷嗷
-    {'slot': 2, 'item_id': 305300}, // 立直-蝙蝠桀桀
-    {'slot': 7, 'item_id': 305700}, // 牌背-天然呆幽灵
+    {slot: 0, item_id: 305600}, // 立直棒-小恶魔蝙蝠
+    {slot: 1, item_id: 305200}, // 和牌-幽灵嗷嗷
+    {slot: 2, item_id: 305300}, // 立直-蝙蝠桀桀
+    {slot: 7, item_id: 305700}, // 牌背-天然呆幽灵
 ];
 
 config = {
-    'category': 1,
-    'meta': {'mode_id': 0},
-    'mode': {
-        'mode': 1,
-        'detail_rule': {
-            'init_point': 100000,
-            '_mjp_id': 305700, // 牌背-天然呆幽灵
+    category: 1,
+    meta: {mode_id: 0},
+    mode: {
+        mode: 1,
+        detail_rule: {
+            init_point: 100000,
+            _mjp_id: 305700, // 牌背-天然呆幽灵
         }
     }
 };

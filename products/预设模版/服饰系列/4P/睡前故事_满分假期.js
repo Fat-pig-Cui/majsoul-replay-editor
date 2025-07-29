@@ -23,30 +23,30 @@ player_datas[3].avatar_id = 404803;
 
 // 凉宫杏树
 player_datas[0].views = [
-    {'slot': 0, 'item_id': 305601}, // 立直棒-魔法棒
-    {'slot': 1, 'item_id': 305201}, // 和牌-歌剧魅影
-    {'slot': 2, 'item_id': 305301}, // 立直-非常事态
+    {slot: 0, item_id: 305601}, // 立直棒-魔法棒
+    {slot: 1, item_id: 305201}, // 和牌-歌剧魅影
+    {slot: 2, item_id: 305301}, // 立直-非常事态
 ];
 // 艾丽莎
 player_datas[0].views = [
-    {'slot': 0, 'item_id': 305601}, // 立直棒-魔法棒
-    {'slot': 1, 'item_id': 305202}, // 和牌-魔法少女
-    {'slot': 2, 'item_id': 305302}, // 立直-魔法少女
+    {slot: 0, item_id: 305601}, // 立直棒-魔法棒
+    {slot: 1, item_id: 305202}, // 和牌-魔法少女
+    {slot: 2, item_id: 305302}, // 立直-魔法少女
 ];
 // 藤本绮罗, 森川绫子
 player_datas[1].views = player_datas[3].views = [
-    {'slot': 0, 'item_id': 305609}, // 立直棒-虚无传送门
-    {'slot': 1, 'item_id': 305212}, // 和牌-无间契印
-    {'slot': 2, 'item_id': 305312}, // 立直-灵魂契约
+    {slot: 0, item_id: 305609}, // 立直棒-虚无传送门
+    {slot: 1, item_id: 305212}, // 和牌-无间契印
+    {slot: 2, item_id: 305312}, // 立直-灵魂契约
 ];
 
 config = {
-    'category': 1,
-    'meta': {'mode_id': 0},
-    'mode': {
-        'mode': 1,
-        'detail_rule': {
-            'init_point': 100000,
+    category: 1,
+    meta: {mode_id: 0},
+    mode: {
+        mode: 1,
+        detail_rule: {
+            init_point: 100000,
         }
     }
 };

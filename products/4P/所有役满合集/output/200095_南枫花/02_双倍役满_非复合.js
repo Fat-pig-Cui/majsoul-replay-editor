@@ -12,18 +12,18 @@ player_datas[3].avatar_id = 400107;
 // 头像框-赤丹霞羽
 player_datas[0].avatar_frame = player_datas[1].avatar_frame = player_datas[2].avatar_frame = player_datas[3].avatar_frame = 30550012;
 player_datas[0].views = player_datas[1].views = player_datas[2].views = player_datas[3].views = [
-    {'slot': 1, 'item_id': 30520006}, // 和牌-落羽涅槃
-    {'slot': 2, 'item_id': 30530006}, // 立直-有凤来仪
-    {'slot': 5, 'item_id': 30550012}, // 头像框-赤丹霞羽
+    {slot: 1, item_id: 30520006}, // 和牌-落羽涅槃
+    {slot: 2, item_id: 30530006}, // 立直-有凤来仪
+    {slot: 5, item_id: 30550012}, // 头像框-赤丹霞羽
 ];
 
 config = {
-    'category': 1,
-    'meta': {'mode_id': 0},
-    'mode': {
-        'mode': 1,
-        'detail_rule': {
-            'init_point': 200000,
+    category: 1,
+    meta: {mode_id: 0},
+    mode: {
+        mode: 1,
+        detail_rule: {
+            init_point: 200000,
         }
     }
 };

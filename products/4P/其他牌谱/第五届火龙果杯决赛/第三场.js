@@ -1,58 +1,58 @@
 clearproject();
 
 player_datas[0] = {
-    'nickname': '领取好运',
-    'avatar_id': 402202, // 约瑟夫-契约
-    'title': 600038, // 神社贵宾
-    'avatar_frame': 305523, // 头像框-猫咪军团的身份
-    'level': {'id': 10501, 'score': 2000},
-    'views': [
-        {'slot': 0, 'item_id': 305049}, // 立直棒-炎夏型一姬甜筒
-        {'slot': 1, 'item_id': 308021}, // 和牌-高岭之花
-        {'slot': 2, 'item_id': 308022}, // 立直-未来视
-        {'slot': 5, 'item_id': 305523}, // 头像框-猫咪军团的身份
+    nickname: '领取好运',
+    avatar_id: 402202, // 约瑟夫-契约
+    title: 600038, // 神社贵宾
+    avatar_frame: 305523, // 头像框-猫咪军团的身份
+    level: {id: 10501, score: 2000},
+    views: [
+        {slot: 0, item_id: 305049}, // 立直棒-炎夏型一姬甜筒
+        {slot: 1, item_id: 308021}, // 和牌-高岭之花
+        {slot: 2, item_id: 308022}, // 立直-未来视
+        {slot: 5, item_id: 305523}, // 头像框-猫咪军团的身份
     ]
 };
 player_datas[1] = {
-    'nickname': '114231',
-    'avatar_id': 405001, // 赤木茂
-    'level': {'id': 10501, 'score': 2000},
-    'views': [
-        {'slot': 0, 'item_id': 305621}, // 立直棒-盆栽
-        {'slot': 1, 'item_id': 305034}, // 和牌-爆炎龙卷
-        {'slot': 2, 'item_id': 305038}, // 立直-龙腾
+    nickname: '114231',
+    avatar_id: 405001, // 赤木茂
+    level: {id: 10501, score: 2000},
+    views: [
+        {slot: 0, item_id: 305621}, // 立直棒-盆栽
+        {slot: 1, item_id: 305034}, // 和牌-爆炎龙卷
+        {slot: 2, item_id: 305038}, // 立直-龙腾
     ]
 };
 player_datas[2] = {
-    'nickname': '猛吞',
-    'avatar_id': 400102, // 一姬-契约
-    'title': 600045, // 一姬当千
-    'avatar_frame': 305500, // 头像框-豆芽
-    'level': {'id': 10401, 'score': 1400},
-    'views': [
-        {'slot': 0, 'item_id': 305019}, // 24K金棒
-        {'slot': 1, 'item_id': 308026}, // 和牌-绝对的命令
-        {'slot': 2, 'item_id': 308017}, // 立直-恋之箭矢
-        {'slot': 5, 'item_id': 305500}, // 头像框-豆芽
+    nickname: '猛吞',
+    avatar_id: 400102, // 一姬-契约
+    title: 600045, // 一姬当千
+    avatar_frame: 305500, // 头像框-豆芽
+    level: {id: 10401, score: 1400},
+    views: [
+        {slot: 0, item_id: 305019}, // 24K金棒
+        {slot: 1, item_id: 308026}, // 和牌-绝对的命令
+        {slot: 2, item_id: 308017}, // 立直-恋之箭矢
+        {slot: 5, item_id: 305500}, // 头像框-豆芽
     ]
 };
 player_datas[3] = {
-    'nickname': '北雨听海',
-    'avatar_id': 402602, // 雏桃-契约
-    'title': 600006, // 魂之契约者-中阶
-    'level': {'id': 10302, 'score': 700},
-    'views': [
-        {'slot': 0, 'item_id': 305003}, // 狗骨头立直棒
-        {'slot': 1, 'item_id': 305209}, // 和牌-安可
-        {'slot': 2, 'item_id': 305316}, // 立直-鹿雪冬至
+    nickname: '北雨听海',
+    avatar_id: 402602, // 雏桃-契约
+    title: 600006, // 魂之契约者-中阶
+    level: {id: 10302, score: 700},
+    views: [
+        {slot: 0, item_id: 305003}, // 狗骨头立直棒
+        {slot: 1, item_id: 305209}, // 和牌-安可
+        {slot: 2, item_id: 305316}, // 立直-鹿雪冬至
     ]
 };
 
 config = {
-    'category': 4,
-    'meta': {'mode_id': 0},
-    'mode': {
-        'mode': 2,
+    category: 4,
+    meta: {mode_id: 0},
+    mode: {
+        mode: 2,
     }
 };
 

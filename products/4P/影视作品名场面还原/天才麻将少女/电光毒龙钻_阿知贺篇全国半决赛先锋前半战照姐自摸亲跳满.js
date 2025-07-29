@@ -12,19 +12,19 @@ player_datas[1].avatar_id = 407401;
 player_datas[2].avatar_id = 408301;
 player_datas[3].avatar_id = 406501;
 
-player_datas[3].views = [{'slot': 1, 'item_id': 305206}, {'slot': 2, 'item_id': 308022}]; // 和牌-天降正义 和 立直-未来视
+player_datas[3].views = [{slot: 1, item_id: 305206}, {slot: 2, item_id: 308022}]; // 和牌-天降正义 和 立直-未来视
 
 config = {
-    'category': 4,
-    'meta': {'mode_id': 0},
-    'mode': {
-        'mode': 2,
-        'detail_rule': {
-            'dora_count': 4,
-            'init_point': 100000,
+    category: 4,
+    meta: {mode_id: 0},
+    mode: {
+        mode: 2,
+        detail_rule: {
+            dora_count: 4,
+            init_point: 100000,
 
-            '_chang_ju_ben_num_': [1, 0, 2], // 南1局2本场
-            '_scores_': [123300, 85200, 91900, 99600],
+            _chang_ju_ben_num_: [1, 0, 2], // 南1局2本场
+            _scores_: [123300, 85200, 91900, 99600],
         }
     }
 };

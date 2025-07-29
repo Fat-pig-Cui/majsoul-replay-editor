@@ -12,17 +12,17 @@ player_datas[2].avatar_id = 400707;
 player_datas[3].avatar_id = 400708;
 
 player_datas[0].views = player_datas[1].views = player_datas[2].views = player_datas[3].views = [
-    {'slot': 6, 'item_id': 30580007}, // 动态桌布-星间飞行
+    {slot: 6, item_id: 30580007}, // 动态桌布-星间飞行
 ];
 
 config = {
-    'category': 1,
-    'meta': {'mode_id': 0},
-    'mode': {
-        'mode': 1,
-        'detail_rule': {
-            'chuanma': true,
-            'init_point': 500000,
+    category: 1,
+    meta: {mode_id: 0},
+    mode: {
+        mode: 1,
+        detail_rule: {
+            chuanma: true,
+            init_point: 500000,
         }
     }
 };

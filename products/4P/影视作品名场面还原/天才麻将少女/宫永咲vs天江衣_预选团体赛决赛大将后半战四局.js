@@ -18,23 +18,23 @@ player_datas[1].avatar_id = 403601;
 player_datas[2].avatar_id = 403401;
 player_datas[3].avatar_id = 401901;
 
-player_datas[0].views = [{'slot': 1, 'item_id': 305206}, {'slot': 2, 'item_id': 305324}]; // 和牌-天降正义 和 立直-猫过留痕
-player_datas[1].views = [{'slot': 1, 'item_id': 308001}]; // 和牌-龙卷雷霆
-player_datas[2].views = [{'slot': 1, 'item_id': 308021}]; // 和牌-高岭之花
+player_datas[0].views = [{slot: 1, item_id: 305206}, {slot: 2, item_id: 305324}]; // 和牌-天降正义 和 立直-猫过留痕
+player_datas[1].views = [{slot: 1, item_id: 308001}]; // 和牌-龙卷雷霆
+player_datas[2].views = [{slot: 1, item_id: 308021}]; // 和牌-高岭之花
 
 config = {
-    'category': 4,
-    'meta': {'mode_id': 0},
-    'mode': {
-        'mode': 2,
-        'detail_rule': {
-            'dora_count': 4,
-            'init_point': 100000,
-            '_baogang': true,
+    category: 4,
+    meta: {mode_id: 0},
+    mode: {
+        mode: 2,
+        detail_rule: {
+            dora_count: 4,
+            init_point: 100000,
+            _baogang: true,
 
-            '_chang_ju_ben_num_': [0, 1, 3], // 东2局3本场
-            '_scores_': [0, 187900, 113200, 98900],
-            '_local_position_': 2,
+            _chang_ju_ben_num_: [0, 1, 3], // 东2局3本场
+            _scores_: [0, 187900, 113200, 98900],
+            _local_position_: 2,
         }
     }
 };

@@ -18,24 +18,24 @@ player_datas[3].avatar_id = 404503;
 
 // 凉宫杏树, A-37 (俩动态服饰)
 player_datas[1].views = player_datas[3].views = [
-    {'slot': 0, 'item_id': 305603}, // 立直棒-绯月荆棘
-    {'slot': 1, 'item_id': 305204}, // 和牌-群星之寂
-    {'slot': 2, 'item_id': 305304}, // 立直-星陨
+    {slot: 0, item_id: 305603}, // 立直棒-绯月荆棘
+    {slot: 1, item_id: 305204}, // 和牌-群星之寂
+    {slot: 2, item_id: 305304}, // 立直-星陨
 ];
 // 小鸟游雏田, 斋藤治 (俩静态服饰)
 player_datas[0].views = player_datas[2].views = [
-    {'slot': 0, 'item_id': 305603}, // 立直棒-绯月荆棘
-    {'slot': 1, 'item_id': 305205}, // 和牌-厄里斯之瞳
-    {'slot': 2, 'item_id': 305305}, // 立直-血·朗基努斯枪
+    {slot: 0, item_id: 305603}, // 立直棒-绯月荆棘
+    {slot: 1, item_id: 305205}, // 和牌-厄里斯之瞳
+    {slot: 2, item_id: 305305}, // 立直-血·朗基努斯枪
 ];
 
 config = {
-    'category': 1,
-    'meta': {'mode_id': 0},
-    'mode': {
-        'mode': 1,
-        'detail_rule': {
-            'init_point': 100000,
+    category: 1,
+    meta: {mode_id: 0},
+    mode: {
+        mode: 1,
+        detail_rule: {
+            init_point: 100000,
         }
     }
 };

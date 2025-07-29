@@ -19,22 +19,22 @@ player_datas[3].avatar_id = 403003;
 
 // 八木唯, 明智英树
 player_datas[1].views = player_datas[2].views = [
-    {'slot': 1, 'item_id': 305206}, // 和牌-天降正义
-    {'slot': 2, 'item_id': 305306}, // 立直-断罪
+    {slot: 1, item_id: 305206}, // 和牌-天降正义
+    {slot: 2, item_id: 305306}, // 立直-断罪
 ];
 // 藤田佳奈, 如月莲
 player_datas[0].views = player_datas[3].views = [
-    {'slot': 1, 'item_id': 305207}, // 和牌-黄金之蝶
-    {'slot': 2, 'item_id': 305307}, // 立直-蝶惑
+    {slot: 1, item_id: 305207}, // 和牌-黄金之蝶
+    {slot: 2, item_id: 305307}, // 立直-蝶惑
 ];
 
 config = {
-    'category': 1,
-    'meta': {'mode_id': 0},
-    'mode': {
-        'mode': 1,
-        'detail_rule': {
-            'init_point': 100000,
+    category: 1,
+    meta: {mode_id: 0},
+    mode: {
+        mode: 1,
+        detail_rule: {
+            init_point: 100000,
         }
     }
 };

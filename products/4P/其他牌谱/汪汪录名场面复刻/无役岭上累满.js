@@ -11,16 +11,16 @@ player_datas[1].avatar_id = 400101;
 player_datas[2].avatar_id = 400101;
 player_datas[3].avatar_id = 400101;
 player_datas[3].views = [
-    {'slot': 1, 'item_id': 305009}, // 和牌-樱花
+    {slot: 1, item_id: 305009}, // 和牌-樱花
 ]
 
 config = {
-    'category': 2,
-    'meta': {'mode_id': 6},
-    'mode': {
-        'mode': 2,
-        'detail_rule': {
-            '_local_position_': 3,
+    category: 2,
+    meta: {mode_id: 6},
+    mode: {
+        mode: 2,
+        detail_rule: {
+            _local_position_: 3,
         }
     }
 };

@@ -12,16 +12,16 @@ player_datas[3].avatar_id = 400107;
 // 头像框-猫咪军团的身份
 player_datas[0].avatar_frame = player_datas[1].avatar_frame = player_datas[2].avatar_frame = player_datas[3].avatar_frame = 305523;
 player_datas[0].views = player_datas[1].views = player_datas[2].views = player_datas[3].views = [
-    {'slot': 5, 'item_id': 305523}, // 头像框-猫咪军团的身份
+    {slot: 5, item_id: 305523}, // 头像框-猫咪军团的身份
 ];
 
 config = {
-    'category': 1,
-    'meta': {'mode_id': 0},
-    'mode': {
-        'mode': 1,
-        'detail_rule': {
-            'init_point': 750000,
+    category: 1,
+    meta: {mode_id: 0},
+    mode: {
+        mode: 1,
+        detail_rule: {
+            init_point: 750000,
         }
     }
 };

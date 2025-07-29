@@ -13,14 +13,14 @@ player_datas[3].avatar_id = 400101;
 player_datas[1].title = 600008; // 称号-魂之启迪者 初阶
 
 config = {
-    'category': 2,
-    'meta': {'mode_id': 2},
-    'mode': {
-        'mode': 1,
-        'detail_rule': {
-            '_chang_ju_ben_num_': [0, 2, 0], // 东3局0本场
-            '_scores_': [24600, 25300, 24600, 25500],
-            '_local_position_': 3,
+    category: 2,
+    meta: {mode_id: 2},
+    mode: {
+        mode: 1,
+        detail_rule: {
+            _chang_ju_ben_num_: [0, 2, 0], // 东3局0本场
+            _scores_: [24600, 25300, 24600, 25500],
+            _local_position_: 3,
         }
     }
 };

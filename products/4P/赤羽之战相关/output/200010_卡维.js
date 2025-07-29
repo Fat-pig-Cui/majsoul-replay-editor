@@ -12,18 +12,18 @@ player_datas[2].avatar_id = 401003;
 player_datas[3].avatar_id = 401004;
 
 player_datas[0].views = player_datas[1].views = player_datas[2].views = player_datas[3].views = [
-    {'slot': 0, 'item_id': 305612}, // 立直棒-陨石法杖
-    {'slot': 6, 'item_id': 305809}, // 动态桌布-紫霞海岸
+    {slot: 0, item_id: 305612}, // 立直棒-陨石法杖
+    {slot: 6, item_id: 305809}, // 动态桌布-紫霞海岸
 ];
 
 config = {
-    'category': 1,
-    'meta': {'mode_id': 0},
-    'mode': {
-        'mode': 1,
-        'detail_rule': {
-            'chuanma': true,
-            'init_point': 500000,
+    category: 1,
+    meta: {mode_id: 0},
+    mode: {
+        mode: 1,
+        detail_rule: {
+            chuanma: true,
+            init_point: 500000,
         }
     }
 };

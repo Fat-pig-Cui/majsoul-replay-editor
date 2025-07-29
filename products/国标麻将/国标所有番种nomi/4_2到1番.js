@@ -12,15 +12,15 @@ player_datas[2].avatar_id = 400105;
 player_datas[3].avatar_id = 400106;
 
 config = {
-    'category': 1,
-    'meta': {'mode_id': 0},
-    'mode': {
-        'mode': 1,
-        'detail_rule': {
-            'init_point': 300000,
-            '_guobiao': true,
-            '_guobiao_no_8fanfu': true,
-            '_guobiao_lianzhuang': true,
+    category: 1,
+    meta: {mode_id: 0},
+    mode: {
+        mode: 1,
+        detail_rule: {
+            init_point: 300000,
+            _guobiao: true,
+            _guobiao_no_8fanfu: true,
+            _guobiao_lianzhuang: true,
         }
     }
 };

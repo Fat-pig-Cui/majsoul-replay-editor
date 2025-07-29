@@ -8,22 +8,21 @@ player_datas[1].avatar_id = 400101;
 player_datas[2].avatar_id = 400101;
 
 config = {
-    'category': 1,
-    'meta': {'mode_id': 0},
-    'mode': {
-        'mode': 11,
-        'detail_rule': {
-            'init_point': 100000,
-            'dora_count': 2,
-            'fanfu': 1,
-            'begin_open_mode': false,
-            'chuanma': false,
-            'dora3_mode': false,
-            'guyi_mode': false,
-            'huansanzhang': false,
-            'open_hand': false,
-            'muyu_mode': false,
-            'xuezhandaodi': false,
+    category: 1,
+    meta: {mode_id: 0},
+    mode: {
+        mode: 11,
+        detail_rule: {
+            init_point: 100000,
+            dora_count: 2,
+            fanfu: 1,
+            begin_open_mode: false,
+            chuanma: false,
+            dora3_mode: false,
+            guyi_mode: false,
+            open_hand: false,
+            muyu_mode: false,
+            xuezhandaodi: false,
         }
     }
 };

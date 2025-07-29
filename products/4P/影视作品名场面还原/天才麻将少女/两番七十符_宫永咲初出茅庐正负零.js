@@ -13,20 +13,20 @@ player_datas[1].avatar_id = 401701;
 player_datas[2].avatar_id = 403401;
 player_datas[3].avatar_id = 403501;
 
-player_datas[2].views = [{'slot': 1, 'item_id': 308021}]; // 和牌-高岭之花
-player_datas[3].views = [{'slot': 2, 'item_id': 308002}]; // 立直-花天月地
+player_datas[2].views = [{slot: 1, item_id: 308021}]; // 和牌-高岭之花
+player_datas[3].views = [{slot: 2, item_id: 308002}]; // 立直-花天月地
 
 config = {
-    'category': 1,
-    'meta': {'mode_id': 0},
-    'mode': {
-        'mode': 1,
-        'detail_rule': {
-            'dora_count': 4,
+    category: 1,
+    meta: {mode_id: 0},
+    mode: {
+        mode: 1,
+        detail_rule: {
+            dora_count: 4,
 
-            '_chang_ju_ben_num_': [0, 3, 0], // 东4局0本场
-            '_scores_': [32600, 18700, 24500, 24200],
-            '_local_position_': 2,
+            _chang_ju_ben_num_: [0, 3, 0], // 东4局0本场
+            _scores_: [32600, 18700, 24500, 24200],
+            _local_position_: 2,
         }
     }
 };

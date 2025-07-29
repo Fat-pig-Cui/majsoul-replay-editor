@@ -13,18 +13,18 @@ player_datas[2].avatar_id = 401709;
 // 头像框-豆芽
 player_datas[0].avatar_frame = player_datas[1].avatar_frame = player_datas[2].avatar_frame = 305500;
 player_datas[0].views = player_datas[1].views = player_datas[2].views = [
-    {'slot': 0, 'item_id': 305621}, // 立直棒-盆栽
-    {'slot': 5, 'item_id': 305500}, // 头像框-豆芽
-    {'slot': 6, 'item_id': 305801}, // 桌布-锦鲤游
+    {slot: 0, item_id: 305621}, // 立直棒-盆栽
+    {slot: 5, item_id: 305500}, // 头像框-豆芽
+    {slot: 6, item_id: 305801}, // 桌布-锦鲤游
 ];
 
 config = {
-    'category': 1,
-    'meta': {'mode_id': 0},
-    'mode': {
-        'mode': 11,
-        'detail_rule': {
-            'init_point': 100000,
+    category: 1,
+    meta: {mode_id: 0},
+    mode: {
+        mode: 11,
+        detail_rule: {
+            init_point: 100000,
         }
     }
 };

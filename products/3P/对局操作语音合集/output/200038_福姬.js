@@ -13,10 +13,10 @@ player_datas[0].title = player_datas[1].title = player_datas[2].title = 600038;
 player_datas[0].verified = player_datas[1].verified = player_datas[2].verified = 1;
 
 config = {
-    'category': 1,
-    'meta': {'mode_id': 0},
-    'mode': {
-        'mode': 11,
+    category: 1,
+    meta: {mode_id: 0},
+    mode: {
+        mode: 11,
     }
 };
 

@@ -12,16 +12,16 @@ player_datas[3].avatar_id = 400107;
 // 称号-神社贵宾
 player_datas[0].title = player_datas[1].title = player_datas[2].title = player_datas[3].title = 600038;
 player_datas[0].views = player_datas[1].views = player_datas[2].views = player_datas[3].views = [
-    {'slot': 6, 'item_id': 305804}, // 桌布-贺华岁
+    {slot: 6, item_id: 305804}, // 桌布-贺华岁
 ];
 
 config = {
-    'category': 1,
-    'meta': {'mode_id': 0},
-    'mode': {
-        'mode': 1,
-        'detail_rule': {
-            'init_point': 500000,
+    category: 1,
+    meta: {mode_id: 0},
+    mode: {
+        mode: 1,
+        detail_rule: {
+            init_point: 500000,
         }
     }
 };

@@ -18,17 +18,17 @@ function RealPaipu2Fake(paipulink = '') {
         try {
             if (gameDetailRecords.version === 0) {
                 for (let i in gameDetailRecords.records) {
-                    const record = (pbWrapper.decode(gameDetailRecords.records[i]));
+                    const record = pbWrapper.decode(gameDetailRecords.records[i]);
                     const pb = net.ProtobufManager.lookupType(record.name);
-                    const data = JSON.parse(JSON.stringify((pb.decode(record.data))));
+                    const data = JSON.parse(JSON.stringify(pb.decode(record.data)));
                     json.records[i] = {name: record.name, data: data};
                 }
             } else if (gameDetailRecords.version === 210715) {
                 for (let i in gameDetailRecords.actions) {
                     if (gameDetailRecords.actions[i].type === 1) {
-                        const record = (pbWrapper.decode(gameDetailRecords.actions[i].result));
+                        const record = pbWrapper.decode(gameDetailRecords.actions[i].result);
                         const pb = net.ProtobufManager.lookupType(record.name);
-                        const data = JSON.parse(JSON.stringify((pb.decode(record.data))));
+                        const data = JSON.parse(JSON.stringify(pb.decode(record.data)));
                         json.actions[i].result = {name: record.name, data: data};
                     }
                 }
@@ -97,7 +97,17 @@ function RealPaipu2Fake(paipulink = '') {
                     txt += `tiles2='${Data.tiles2.join('')}';\n`;
                     if (Data.tiles3 && Data.tiles3.length !== 0)
                         txt += `tiles3='${Data.tiles3.join('')}';\n`;
-                    txt += `paishan='${Data.paishan}';\n`;
+                    txt += `paishan=separatetile('${Data.paishan}');\n`;
+                    if (json.head.config.mode && json.head.config.mode.detail_rule && json.head.config.mode.detail_rule.muyu_mode) {
+                        let muyuseats = '', tmp = [];
+                        for (let j = i + 1; j < actions.length; j++)
+                            if (actions[j].result && actions[j].result.data.muyu) {
+                                if (!tmp[actions[i].result.data.muyu.seat])
+                                    muyuseats += actions[i].result.data.muyu.seat.toString();
+                                tmp[actions[i].result.data.muyu.seat] = actions[i].result.data.muyu.count !== 0;
+                            }
+                        txt += `muyuseats='${muyuseats}';\n`;
+                    }
                     txt += `roundbegin();\n`;
                 }
                 if (actions[i].result.name === 'RecordDiscardTile') {
@@ -106,35 +116,37 @@ function RealPaipu2Fake(paipulink = '') {
                         if (moqie)
                             txt += `qiepai(true);\n`;
                         else
-                            txt += `qiepai('${tile}', true);\n`;
+                            txt += `qiepai('${tile}',true);\n`;
                     } else {
                         if (moqie)
                             txt += `qiepai();\n`;
                         else
                             txt += `qiepai('${tile}');\n`;
                     }
+                    let beishui_type = Data.liqi_type_beishuizhizhan;
+                    if (beishui_type !== undefined)
+                        txt = txt.substring(0, txt.length - 3) + `,[${beishui_type}]);\n`;
                 }
                 if (actions[i].result.name === 'RecordChangeTile') {
-                    let tiles = ['', '', '', ''];
-                    for (let i = 0; i < tiles.length; i++)
-                        tiles[i] = Data.chang_tile_infos[i].out_tiles.join('');
+                    let tls = ['', '', '', ''];
+                    for (let i = 0; i < tls.length; i++)
+                        tls[i] = Data.chang_tile_infos[i].out_tiles.join('');
                     let type = Data.change_type;
-                    txt += `huansanzhang('${tiles[0]}', '${tiles[1]}', '${tiles[2]}', '${tiles[3]}', ${type});\n`;
+                    txt += `huansanzhang('${tls[0]}','${tls[1]}','${tls[2]}','${tls[3]}',${type});\n`;
                 }
                 if (actions[i].result.name === 'RecordSelectGap') {
                     let gap_types = Data.gap_types;
-                    let words = {
-                        '0': 'p',
-                        '1': 'm',
-                        '2': 's',
-                    };
+                    let words = {'0': 'p', '1': 'm', '2': 's'};
                     let ret = '';
                     for (let i in gap_types)
                         ret += words[gap_types[i]];
                     txt += `dingque('${ret}');\n`;
                 }
                 if (actions[i].result.name === 'RecordDealTile') {
-                    txt += `mopai();\n`;
+                    if (Data.tile_index)
+                        txt += `mopai([${Data.tile_index}]);\n`;
+                    else
+                        txt += `mopai();\n`;
                 }
                 if (actions[i].result.name === 'RecordChiPengGang') {
                     let froms = Data.froms, seat = Data.seat, tiles = Data.tiles;
@@ -143,17 +155,29 @@ function RealPaipu2Fake(paipulink = '') {
                     for (let i in tiles)
                         if (froms[i] === seat)
                             c_tiles += tiles[i];
-
-                    txt += `mingpai(${seat}, '${c_tiles}');\n`;
+                    let j = i + 1;
+                    while (!actions[j].result)
+                        j++;
+                    if (actions[j].result.name === 'RecordGangResultEnd')
+                        txt += `mingpai(${seat},'${c_tiles}',true);\n`;
+                    else
+                        txt += `mingpai(${seat},'${c_tiles}');\n`;
                 }
                 if (actions[i].result.name === 'RecordAnGangAddGang') {
-                    let seat = Data.seat, tile = Data.tiles, type = Data.type;
+                    let tile = Data.tiles, type = Data.type;
                     let c_type = type === 3 ? 'angang' : 'jiagang';
-                    txt += `leimingpai(${seat}, '${tile}', '${c_type}');\n`;
+
+                    let j = i + 1;
+                    while (!actions[j].result)
+                        j++;
+                    if (actions[j].result.name === 'RecordGangResultEnd')
+                        txt += `leimingpai('${tile}','${c_type}',true);\n`;
+                    else
+                        txt += `leimingpai('${tile}','${c_type}');\n`;
                 }
                 if (actions[i].result.name === 'RecordBaBei') {
-                    let seat = Data.seat, tile = Data.tile;
-                    txt += `leimingpai(${seat}, '${tile}', 'babei');\n`;
+                    let tile = Data.tile;
+                    txt += `leimingpai('${tile}','babei');\n`;
                 }
                 if (actions[i].result.name === 'RecordHule') {
                     let allseats = [];
@@ -177,39 +201,36 @@ function RealPaipu2Fake(paipulink = '') {
                     let allseats = [];
                     for (let i in Data.hules)
                         allseats.push(Data.hules[i].seat);
-                    txt += `hupai(${allseats}, true);\n\n\n\n`;
+                    txt += `hupai(${allseats},true);\n\n\n\n`;
                 }
-                if (actions[i].result.name === 'RecordGangResult') {
+                if (actions[i].result.name === 'RecordGangResult') { // 不需要
                 }
-                if (actions[i].result.name === 'RecordGangResultEnd') {
-                    txt += `roundend();\n\n`;
+                if (actions[i].result.name === 'RecordGangResultEnd') { // 不需要
                 }
                 if (actions[i].result.name === 'RecordRevealTile') {
                     let tile = Data.tile, is_liqi = Data.is_liqi;
                     if (is_liqi)
-                        txt += `qiepai('${tile}', true, 'anpai');\n`;
+                        txt += `qiepai('${tile}',true,'anpai');\n`;
                     else
-                        txt += `qiepai('${tile}', 'anpai');\n`;
+                        txt += `qiepai('${tile}','anpai');\n`;
                 }
                 if (actions[i].result.name === 'RecordLockTile') {
-                    let seat = Data.seat;
-
                     let j = i - 1;
-                    while (!(actions[j].result))
+                    while (!actions[j].result)
                         j--;
-                    if (actions[j].result.name === 'RecordUnveilTile') {
-                        let lock_state = Data.lock_state;
-                        if (lock_state === 1)
+                    if (actions[j].result.name === 'RecordUnveilTile'){
+                        let seat = actions[j].result.data.seat;
+                        if (actions[j].result.data.lock_state === 1)
                             txt += `unveil_lock(${seat});\n`;
+                        else if (actions[j].result.data.lock_state === 0)
+                            txt += `unveil(${seat});\n`;
                     }
                 }
-                if (actions[i].result.name === 'RecordUnveilTile') {
-                    let seat = Data.seat;
-                    txt += `unveil(${seat});\n`;
+                if (actions[i].result.name === 'RecordUnveilTile') { // 不需要
                 }
-                if (actions[i].result.name === 'RecordNewCard') { //
+                if (actions[i].result.name === 'RecordNewCard') { // 不需要
                 }
-                if (actions[i].result.name === 'RecordFillAwaitingTiles') { //
+                if (actions[i].result.name === 'RecordFillAwaitingTiles') { // 不需要
                 }
             }
         // txt += `editdata.players = ${JSON.stringify(json.head.result.players)};\n`;

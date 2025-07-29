@@ -13,10 +13,10 @@ player_datas[3].avatar_id = 400101;
 player_datas[1].title = 600008;
 
 config = {
-    'category': 2,
-    'meta': {'mode_id': 2},
-    'mode': {
-        'mode': 1,
+    category: 2,
+    meta: {mode_id: 2},
+    mode: {
+        mode: 1,
     }
 };
 

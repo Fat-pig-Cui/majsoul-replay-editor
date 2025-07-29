@@ -17,18 +17,18 @@ player_datas[2].avatar_id = 400907;
 player_datas[3].avatar_id = 402806;
 
 player_datas[0].views = player_datas[1].views = player_datas[2].views = player_datas[3].views = [
-    {'slot': 0, 'item_id': 30560003}, // 立直棒-小鳄霸
-    {'slot': 1, 'item_id': 30520005}, // 和牌-喵——呜！
-    {'slot': 2, 'item_id': 30530005}, // 立直-萌爪狂欢
+    {slot: 0, item_id: 30560003}, // 立直棒-小鳄霸
+    {slot: 1, item_id: 30520005}, // 和牌-喵——呜！
+    {slot: 2, item_id: 30530005}, // 立直-萌爪狂欢
 ];
 
 config = {
-    'category': 1,
-    'meta': {'mode_id': 0},
-    'mode': {
-        'mode': 1,
-        'detail_rule': {
-            'init_point': 100000,
+    category: 1,
+    meta: {mode_id: 0},
+    mode: {
+        mode: 1,
+        detail_rule: {
+            init_point: 100000,
         }
     }
 };

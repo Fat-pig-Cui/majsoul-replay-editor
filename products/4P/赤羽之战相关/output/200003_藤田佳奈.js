@@ -12,17 +12,17 @@ player_datas[2].avatar_id = 400305;
 player_datas[3].avatar_id = 400306;
 
 player_datas[0].views = player_datas[1].views = player_datas[2].views = player_datas[3].views = [
-    {'slot': 6, 'item_id': 305048}, // 桌布-雀魂祭一周年
+    {slot: 6, item_id: 305048}, // 桌布-雀魂祭一周年
 ];
 
 config = {
-    'category': 1,
-    'meta': {'mode_id': 0},
-    'mode': {
-        'mode': 1,
-        'detail_rule': {
-            'chuanma': true,
-            'init_point': 500000,
+    category: 1,
+    meta: {mode_id: 0},
+    mode: {
+        mode: 1,
+        detail_rule: {
+            chuanma: true,
+            init_point: 500000,
         }
     }
 };

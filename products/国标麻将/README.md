@@ -2,21 +2,21 @@
 
 与雀魂的立直麻将相比: 国标麻将**8番起和**, 有头跳, 无振听, 任何情况下没有连庄
 
-开启国标模式需要在 `'detail_rule'` 中注明 `'_guobiao': true`
+开启国标模式需要在 `detail_rule` 中注明 `_guobiao: true`
 
 以下番种主要根据 [雀渣平台](https://tziakcha.net/scoring) 规则(明暗杠设为5番, 有天地人和)
 
-对于诈和, 以及在 `'detail_rule'` 中没有设置 `'_guobiao_no_8fanfu'` 的情况下不足8番的错和,
-按照赔每家 `'detail_rule'` 中 `'_cuohu_points'` 设置的点数, 默认是 10, 若又设置了 `'_cuohupeida'` 
+对于诈和, 以及在 `detail_rule` 中没有设置 `_guobiao_no_8fanfu` 的情况下不足8番的错和,
+按照赔每家 `detail_rule` 中 `_cuohu_points` 设置的点数, 默认是 10, 若又设置了 `_cuohupeida` 
 且导入了 [add_function.js](../../add_function.js), 则诈和, 错和的玩家会听和陪打, 否则该小局结束, 
 已诈和, 错和的玩家再次和牌, 无论是否够番, 都是错和
 
-为了使得各家点数更加美观, `'detail_rule'` 中将各家及结算点数都放大了 `'_scale_points'` 倍, 默认是 100
+为了使得各家点数更加美观, `detail_rule` 中将各家及结算点数都放大了 `_scale_points` 倍, 默认是 100
 
-为方便编辑复杂牌谱, `'detail_rule'` 中提供了参数 `'_guobiao_lianzhuang'`, 若为 `true`, 则可以连庄, 规则同立直麻将
+为方便编辑复杂牌谱, `detail_rule` 中提供了参数 `_guobiao_lianzhuang`, 若为 `true`, 则可以连庄, 规则同立直麻将
 
-正常情况下是没有花牌的, 但还是实现了花牌的功能(需要导入 add_function.js, 并在 `'detail_rule'`
-中注明 `'_guobiao_huapai': true`), 使用8张"0m"表示8张花牌, 补花操作类似拔北, 还添加了手牌有花牌不能和的判断, 但受限于实现方式,
+正常情况下是没有花牌的, 但还是实现了花牌的功能(需要导入 add_function.js, 并在 `detail_rule`
+中注明 `_guobiao_huapai: true`), 使用8张"0m"表示8张花牌, 补花操作类似拔北, 还添加了手牌有花牌不能和的判断, 但受限于实现方式,
 与花牌有关的以下问题暂时没有很好的解决方法:
 
 - 有玩家听"5m"时, 作为花牌的"0m"也会在铳牌提示中显示为红色

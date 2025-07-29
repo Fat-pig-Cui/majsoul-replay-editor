@@ -21,27 +21,27 @@ player_datas[3].avatar_id = 405403;
 
 // 福姬, 夏弥尔
 player_datas[1].views = player_datas[3].views = [
-    {'slot': 0, 'item_id': 305607}, // 立直棒-仿生喵
-    {'slot': 1, 'item_id': 305211}, // 和牌-核心裂变
-    {'slot': 2, 'item_id': 305311}, // 立直-虚拟导航
-    {'slot': 7, 'item_id': 305713}, // 牌背-魂之元件
+    {slot: 0, item_id: 305607}, // 立直棒-仿生喵
+    {slot: 1, item_id: 305211}, // 和牌-核心裂变
+    {slot: 2, item_id: 305311}, // 立直-虚拟导航
+    {slot: 7, item_id: 305713}, // 牌背-魂之元件
 ];
 // 辉夜姬, 泷川夏彦
 player_datas[0].views = player_datas[2].views = [
-    {'slot': 0, 'item_id': 305607}, // 立直棒-仿生喵
-    {'slot': 1, 'item_id': 305221}, // 和牌-机械哲学
-    {'slot': 2, 'item_id': 305321}, // 立直-量子智能
-    {'slot': 7, 'item_id': 305713}, // 牌背-魂之元件
+    {slot: 0, item_id: 305607}, // 立直棒-仿生喵
+    {slot: 1, item_id: 305221}, // 和牌-机械哲学
+    {slot: 2, item_id: 305321}, // 立直-量子智能
+    {slot: 7, item_id: 305713}, // 牌背-魂之元件
 ];
 
 config = {
-    'category': 1,
-    'meta': {'mode_id': 0},
-    'mode': {
-        'mode': 1,
-        'detail_rule': {
-            'init_point': 100000,
-            '_mjp_id': 305713, // 牌背-魂之元件
+    category: 1,
+    meta: {mode_id: 0},
+    mode: {
+        mode: 1,
+        detail_rule: {
+            init_point: 100000,
+            _mjp_id: 305713, // 牌背-魂之元件
         }
     }
 };

@@ -18,22 +18,22 @@ player_datas[2].avatar_id = 401805;
 player_datas[3].avatar_id = 402605;
 
 player_datas[0].views = player_datas[1].views = player_datas[2].views = player_datas[3].views = [
-    {'slot': 0, 'item_id': 30560006}, // 立直棒-立奇棒
-    {'slot': 1, 'item_id': 30520008}, // 和牌-得胜达摩
-    {'slot': 2, 'item_id': 30530008}, // 立直-一锤定音
-    {'slot': 6, 'item_id': 30580012}, // 桌布-瑞雪祈狐
-    {'slot': 7, 'item_id': 30570008}, // 牌背-圣夜雪人
+    {slot: 0, item_id: 30560006}, // 立直棒-立奇棒
+    {slot: 1, item_id: 30520008}, // 和牌-得胜达摩
+    {slot: 2, item_id: 30530008}, // 立直-一锤定音
+    {slot: 6, item_id: 30580012}, // 桌布-瑞雪祈狐
+    {slot: 7, item_id: 30570008}, // 牌背-圣夜雪人
 ];
 
 config = {
-    'category': 1,
-    'meta': {'mode_id': 0},
-    'mode': {
-        'mode': 1,
-        'detail_rule': {
-            'init_point': 100000,
-            '_tablecloth_id': 30580012, // 桌布-瑞雪祈狐
-            '_mjp_id': 30570008, // 牌背-圣夜雪人
+    category: 1,
+    meta: {mode_id: 0},
+    mode: {
+        mode: 1,
+        detail_rule: {
+            init_point: 100000,
+            _tablecloth_id: 30580012, // 桌布-瑞雪祈狐
+            _mjp_id: 30570008, // 牌背-圣夜雪人
         }
     }
 };

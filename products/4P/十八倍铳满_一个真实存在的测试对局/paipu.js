@@ -13,19 +13,18 @@ player_datas[2].title = 600027;
 player_datas[3].title = 600012;
 
 config = {
-    'category': 1,
-    'meta': {'room_id': 63031},
-    'mode': {
-        'mode': 4,
-        'detail_rule': {
-            'init_point': 200000,
-            'guyi_mode': 1,
+    category: 1,
+    meta: {room_id: 63031},
+    mode: {
+        mode: 4,
+        detail_rule: {
+            init_point: 200000,
+            guyi_mode: 1,
         },
-        'testing_environment': {
-            'paixing': 3,
+        testing_environment: {
+            paixing: 3,
         }
     },
-
 };
 
 tiles0 = '11122233344467z';

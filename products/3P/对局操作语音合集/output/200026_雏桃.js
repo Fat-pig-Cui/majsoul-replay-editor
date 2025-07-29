@@ -8,14 +8,14 @@ player_datas[1].avatar_id = 402604;
 player_datas[2].avatar_id = 402605;
 
 player_datas[0].views = player_datas[1].views = player_datas[2].views = [
-    {'slot': 6, 'item_id': 305804}, // 桌布-贺华岁
+    {slot: 6, item_id: 305804}, // 桌布-贺华岁
 ];
 
 config = {
-    'category': 1,
-    'meta': {'mode_id': 0},
-    'mode': {
-        'mode': 11,
+    category: 1,
+    meta: {mode_id: 0},
+    mode: {
+        mode: 11,
     }
 };
 

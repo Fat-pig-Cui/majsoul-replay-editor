@@ -4,7 +4,7 @@
 
 雀魂早期开的活动场"乱斗之间"支持古役, 该活动场对应 `mode_id` 是 13 和 14 (四人东 和 四人南)
 
-开启古役需要在 `'detail_rule'` 中注明 `'guyi_mode': true`
+开启古役需要在 `detail_rule` 中注明 `guyi_mode: true`
 
 示例牌谱: [雀魂古役.js](雀魂古役.js)
 
@@ -29,7 +29,7 @@
 
 ## 一番街特色古役
 
-开启一番街古役需要在 `'detail_rule'` 中注明 `'_yifanjieguyi': true`
+开启一番街古役需要在 `detail_rule` 中注明 `_yifanjieguyi: true`
 
 示例牌谱: [一番街特色古役.js](一番街特色古役.js)
 

@@ -19,21 +19,21 @@ player_datas[2].avatar_id = 402705;
 player_datas[3].avatar_id = 402805;
 
 player_datas[0].views = player_datas[1].views = player_datas[2].views = player_datas[3].views = [
-    {'slot': 1, 'item_id': 305221}, // 和牌-机械哲学
-    {'slot': 2, 'item_id': 305321}, // 立直-量子智能
-    {'slot': 6, 'item_id': 30580005}, // 桌布-预热开场
-    {'slot': 7, 'item_id': 30570003}, // 牌背-喵呜TV
+    {slot: 1, item_id: 305221}, // 和牌-机械哲学
+    {slot: 2, item_id: 305321}, // 立直-量子智能
+    {slot: 6, item_id: 30580005}, // 桌布-预热开场
+    {slot: 7, item_id: 30570003}, // 牌背-喵呜TV
 ];
 
 config = {
-    'category': 1,
-    'meta': {'mode_id': 0},
-    'mode': {
-        'mode': 1,
-        'detail_rule': {
-            'init_point': 100000,
-            '_tablecloth_id': 30580005, // 桌布-预热开场
-            '_mjp_id': 30570003, // 牌背-喵呜TV
+    category: 1,
+    meta: {mode_id: 0},
+    mode: {
+        mode: 1,
+        detail_rule: {
+            init_point: 100000,
+            _tablecloth_id: 30580005, // 桌布-预热开场
+            _mjp_id: 30570003, // 牌背-喵呜TV
         }
     }
 };

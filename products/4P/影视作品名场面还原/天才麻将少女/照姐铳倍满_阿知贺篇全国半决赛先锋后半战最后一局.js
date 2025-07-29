@@ -12,20 +12,20 @@ player_datas[1].avatar_id = 406501;
 player_datas[2].avatar_id = 408301;
 player_datas[3].avatar_id = 403701;
 
-player_datas[2].views = [{'slot': 1, 'item_id': 305206}, {'slot': 2, 'item_id': 308022}]; // 和牌-天降正义 和 立直-未来视
-player_datas[3].views = [{'slot': 2, 'item_id': 308002}]; // 立直-花天月地
+player_datas[2].views = [{slot: 1, item_id: 305206}, {slot: 2, item_id: 308022}]; // 和牌-天降正义 和 立直-未来视
+player_datas[3].views = [{slot: 2, item_id: 308002}]; // 立直-花天月地
 
 config = {
-    'category': 4,
-    'meta': {'mode_id': 0},
-    'mode': {
-        'mode': 2,
-        'detail_rule': {
-            'dora_count': 4,
-            'init_point': 100000,
+    category: 4,
+    meta: {mode_id: 0},
+    mode: {
+        mode: 2,
+        detail_rule: {
+            dora_count: 4,
+            init_point: 100000,
 
-            '_chang_ju_ben_num_': [1, 3, 2], // 南4局2本场
-            '_scores_': [48200, 80900, 57100, 213800],
+            _chang_ju_ben_num_: [1, 3, 2], // 南4局2本场
+            _scores_: [48200, 80900, 57100, 213800],
         }
     }
 };

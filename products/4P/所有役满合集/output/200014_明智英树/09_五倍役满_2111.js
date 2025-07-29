@@ -10,16 +10,16 @@ player_datas[2].avatar_id = 400106;
 player_datas[3].avatar_id = 400107;
 
 player_datas[0].views = player_datas[1].views = player_datas[2].views = player_datas[3].views = [
-    {'slot': 6, 'item_id': 305810}, // 桌布-中光波——————！
+    {slot: 6, item_id: 305810}, // 桌布-中光波——————！
 ];
 
 config = {
-    'category': 1,
-    'meta': {'mode_id': 0},
-    'mode': {
-        'mode': 1,
-        'detail_rule': {
-            'init_point': 500000,
+    category: 1,
+    meta: {mode_id: 0},
+    mode: {
+        mode: 1,
+        detail_rule: {
+            init_point: 500000,
         }
     }
 };

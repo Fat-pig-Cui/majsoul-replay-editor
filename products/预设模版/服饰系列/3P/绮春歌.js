@@ -16,19 +16,19 @@ player_datas[2].avatar_id = 401305;
 // 头像框-窗外
 player_datas[0].avatar_frame = player_datas[1].avatar_frame = player_datas[2].avatar_frame = 305545;
 player_datas[0].views = player_datas[1].views = player_datas[2].views = [
-    {'slot': 0, 'item_id': 305619}, // 立直棒-可口喵乐
-    {'slot': 5, 'item_id': 305545}, // 头像框-窗外
-    {'slot': 7, 'item_id': 305711}, // 牌背-祥云兔
+    {slot: 0, item_id: 305619}, // 立直棒-可口喵乐
+    {slot: 5, item_id: 305545}, // 头像框-窗外
+    {slot: 7, item_id: 305711}, // 牌背-祥云兔
 ];
 
 config = {
-    'category': 1,
-    'meta': {'mode_id': 0},
-    'mode': {
-        'mode': 11,
-        'detail_rule': {
-            'init_point': 100000,
-            '_mjp_id': 305711, // 牌背-祥云兔
+    category: 1,
+    meta: {mode_id: 0},
+    mode: {
+        mode: 11,
+        detail_rule: {
+            init_point: 100000,
+            _mjp_id: 305711, // 牌背-祥云兔
         }
     }
 };

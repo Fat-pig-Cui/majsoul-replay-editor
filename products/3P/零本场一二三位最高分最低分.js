@@ -13,12 +13,12 @@ player_datas[1].avatar_id = 400105;
 player_datas[2].avatar_id = 400106;
 
 config = {
-    'category': 1,
-    'meta': {'mode_id': 0},
-    'mode': {
-        'mode': 11,
-        'detail_rule': {
-            '_scores_': [105000, 0, 0],
+    category: 1,
+    meta: {mode_id: 0},
+    mode: {
+        mode: 11,
+        detail_rule: {
+            _scores_: [105000, 0, 0],
         }
     }
 };

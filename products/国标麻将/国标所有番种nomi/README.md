@@ -4,9 +4,9 @@
 
 B站演示视频: [【雀魂自制牌谱】在雀魂中实现国标麻将](https://www.bilibili.com/video/BV1XsEBzsEKx)
 
-因为可能出现和牌小于8番的情况, 故这里取消番缚: `'_guobiao_no_8fanfu': true`
+因为可能出现和牌小于8番的情况, 故这里取消番缚: `_guobiao_no_8fanfu: true`
 
-为方便演示, 这里有连庄 `'_guobiao_lianzhuang': true`
+为方便演示, 这里有连庄 `_guobiao_lianzhuang: true`
 
 牌谱回放文件:
 

@@ -11,12 +11,12 @@ player_datas[1].avatar_id = 409401;
 player_datas[2].avatar_id = 409403;
 
 config = {
-    'category': 1,
-    'meta': {'mode_id': 0},
-    'mode': {
-        'mode': 11,
-        'detail_rule': {
-            'init_point': 100000,
+    category: 1,
+    meta: {mode_id: 0},
+    mode: {
+        mode: 11,
+        detail_rule: {
+            init_point: 100000,
         }
     }
 };

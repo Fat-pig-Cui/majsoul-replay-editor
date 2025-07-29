@@ -14,17 +14,17 @@ player_datas[2].avatar_id = 400703;
 player_datas[3].avatar_id = 401303;
 
 player_datas[0].views = player_datas[1].views = player_datas[2].views = player_datas[3].views = [
-    {'slot': 6, 'item_id': 305020}, // 圣夜桌布
+    {slot: 6, item_id: 305020}, // 圣夜桌布
 ];
 
 config = {
-    'category': 1,
-    'meta': {'mode_id': 0},
-    'mode': {
-        'mode': 1,
-        'detail_rule': {
-            'init_point': 100000,
-            '_tablecloth_id': 305020, // 圣夜桌布
+    category: 1,
+    meta: {mode_id: 0},
+    mode: {
+        mode: 1,
+        detail_rule: {
+            init_point: 100000,
+            _tablecloth_id: 305020, // 圣夜桌布
         }
     }
 };

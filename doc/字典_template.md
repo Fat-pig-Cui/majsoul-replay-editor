@@ -28,9 +28,9 @@ id 以 2 开头
 
 id 以 3 开头, 包含头像框在内的装扮, 此外还有礼物, 宝玉, 加载图等杂七杂八的没列出来
 
-这部分对应牌谱里面 `views` 这一项, `'slot': 0` 之类也是这个意思
+这部分对应牌谱里面 `views` 这一项, `slot: 0` 之类也是这个意思
 
-具体哪种装扮对应哪个 `'slot'` 可以使用命令行 `game.EView`
+具体哪种装扮对应哪个 `slot` 可以使用命令行 `game.EView`
 
 由于猫粮奇葩的管理导致id的使用很乱, 我这里直接分类, 而不是只按照 id 大小排序了
 
@@ -38,67 +38,67 @@ id 以 3 开头, 包含头像框在内的装扮, 此外还有礼物, 宝玉, 加
 
 ### 立直棒
 
-**所在(牌谱信息文件的)'slot': 0**
+**所在(牌谱信息文件的) slot: 0**
 
 ##########
 
 ### 和牌特效
 
-**所在 'slot': 1**
+**所在 slot: 1**
 
 ##########
 
 ### 立直特效
 
-**所在 'slot': 2**
+**所在 slot: 2**
 
 ##########
 
 ### 鸣牌指示 (回放中无法展现)
 
-**所在 'slot': 10**
+**所在 slot: 10**
 
 ##########
 
 ### 手的样式
 
-**所在 'slot': 3**
+**所在 slot: 3**
 
 ##########
 
 ### 立直音乐 (回放中无法展现)
 
-**所在 'slot': 4**
+**所在 slot: 4**
 
 ##########
 
 ### 头像框
 
-**所在 'slot': 5**
+**所在 slot: 5**
 
 ##########
 
 ### 桌布 (与对局玩家无关)
 
-**所在 'slot': 6**
+**所在 slot: 6**
 
 ##########
 
 ### 牌背 (与对局玩家无关)
 
-**所在 'slot': 7**
+**所在 slot: 7**
 
 ##########
 
 ### 牌面 (与对局玩家无关)
 
-**所在 'slot': 13**
+**所在 slot: 13**
 
 ##########
 
 ### 大厅背景 (与对局无关)
 
-**所在 'slot': 8**
+**所在 slot: 8**
 
 ##########
 
@@ -426,8 +426,8 @@ id 以 6 开头, 而且有点乱, 很多都限时且无法获得, 乱用可能�
         a[r.interval - 1] === undefined ?
             a[r.interval - 1] = [] :
             a[r.interval - 1].push({
-                'name': cfg.item_definition.item.map_[cfg.shops.goods.map_[r.goods_id].item_id].name_chs,
-                'jade': cfg.item_definition.item.map_[parseInt(cfg.shops.goods.map_[r.goods_id].price.split('-')[0])].name_chs
+                name: cfg.item_definition.item.map_[cfg.shops.goods.map_[r.goods_id].item_id].name_chs,
+                jade: cfg.item_definition.item.map_[parseInt(cfg.shops.goods.map_[r.goods_id].price.split('-')[0])].name_chs
             })
     );
     a
@@ -441,8 +441,8 @@ id 以 6 开头, 而且有点乱, 很多都限时且无法获得, 乱用可能�
     let a = [];
     cfg.achievement.badge_group.forEach(r =>
         a.push({
-            'name': game.Tools.strOfLocalization(r.name),
-            'desc': game.Tools.strOfLocalization(r.desc)
+            name: game.Tools.strOfLocalization(r.name),
+            desc: game.Tools.strOfLocalization(r.desc)
         })
     );
     a
@@ -565,9 +565,10 @@ id 以 6 开头, 而且有点乱, 很多都限时且无法获得, 乱用可能�
 
 ### 牌谱界面显示操作按钮
 
-操作按钮分两类: 自家巡目的操作, 他家巡目的操作, 后面的数字是操作种类的 `type` 和属性名, 具体可见 `mjcore.E_PlayOperation`
+操作按钮分两类: 自家巡目的操作, 他家巡目的操作, 后面的数字是操作种类的 `type` 和属性名, 具体可见
+`mjcore.E_PlayOperation`
 
-自家巡目的操作需要使用函数 `uiscript.UIMgr.Inst.ShowLiqiZimo`, 操作有 
+自家巡目的操作需要使用函数 `uiscript.UIMgr.Inst.ShowLiqiZimo`, 操作有
 
 - 暗杠: 4, `an_gang`
 - 加杠: 6, `add_gang`
@@ -593,22 +594,28 @@ id 以 6 开头, 而且有点乱, 很多都限时且无法获得, 乱用可能�
 
 两个函数不是互斥的, 可以叠加(但会很乱看不清)
 
-使用方式是 函数名 + `([{'type': ${type}])`, 把 `${type}` 换成对应操作的数字, 如 
+使用方式是 函数名 + `([{type: ${type}])`, 把 `${type}` 换成对应操作的数字, 如
 
-`uiscript.UIMgr.Inst.ShowLiqiZimo([{'type': 8}])`
+`uiscript.UIMgr.Inst.ShowLiqiZimo([{type: 8}])`
 
 暗杠, 加杠的按钮一样, 而且还需要加上 `combination` 属性, 值只要为数组或者字符串且不为空即可, 如
 
-`uiscript.UIMgr.Inst.ShowLiqiZimo([{'type': 4, 'combination': [1]}])`
+`uiscript.UIMgr.Inst.ShowLiqiZimo([{type: 4, combination: [1]}])`
 
-不止一个操作时, 在数组内添加即可, 如 
+不止一个操作时, 在数组内添加即可, 如
 
-`uiscript.UIMgr.Inst.ShowChipenghu([{'type': 2}, {'type': 3}, {'type': 5}, {'type': 9}, {'type': 15}])`
+`uiscript.UIMgr.Inst.ShowChipenghu([{type: 2}, {type: 3}, {type: 5}, {type: 9}, {type: 15}])`
 
-`uiscript.UIMgr.Inst.ShowLiqiZimo([{'type': 4, 'combination': [1]}, {'type': 7}, {'type': 8}, {'type': 10}, {'type': 11}, {'type': 14}, {'type': 16}, {'type': 17}, {'type': 19}, {'type': 20}])`
+`uiscript.UIMgr.Inst.ShowLiqiZimo([{type: 4, combination: [1]}, {type: 7}, {type: 8}, {type: 10}, {type: 11}, {type: 14}, {type: 16}, {type: 17}, {type: 19}, {type: 20}])`
 
 后者显示不下了, 真·立直和流局重叠了
 
-若要消除该显示, 切换视角就行
+需要注意在运行 `ShowChipenghu` 之前最好让牌谱中玩家切一下牌, 否则虽然会显示按钮, 但控制台会报错, 且没有音效
+
+若要消除按钮显示, 切换视角就行
 
 注意点击按钮是没有效果的, 就像在观战界面一样
+
+### 中文服稀有称号用户
+
+- 天选之证: 10566203

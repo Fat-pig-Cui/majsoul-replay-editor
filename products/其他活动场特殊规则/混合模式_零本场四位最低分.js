@@ -13,15 +13,15 @@ player_datas[2].avatar_id = 400105;
 player_datas[3].avatar_id = 400106;
 
 config = {
-    'category': 1,
-    'meta': {'mode_id': 0},
-    'mode': {
-        'mode': 1,
-        'detail_rule': {
-            'muyu_mode': true,
-            'field_spell_mode': 10205,
-            'tianming_mode': true,
-            '_scores_': [100000, 0, 0, 0],
+    category: 1,
+    meta: {mode_id: 0},
+    mode: {
+        mode: 1,
+        detail_rule: {
+            muyu_mode: true,
+            field_spell_mode: 10205, // 赠品, 三倍速, 夸大其词
+            tianming_mode: true,
+            _scores_: [100000, 0, 0, 0],
         }
     }
 };

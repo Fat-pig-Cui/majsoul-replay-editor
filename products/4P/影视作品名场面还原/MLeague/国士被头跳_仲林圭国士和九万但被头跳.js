@@ -15,24 +15,24 @@ player_datas[3].avatar_id = 403101;
 player_datas[0].verified = player_datas[1].verified = player_datas[2].verified = player_datas[3].verified = 2;
 
 config = {
-    'category': 4,
-    'meta': {'mode_id': 0},
-    'mode': {
-        'mode': 2,
-        'detail_rule': {
-            '_qieshangmanguan': true,
-            '_toutiao': true,
-            '_sigangbaopai': true,
-            '_no_liujumanguan': true,
-            '_no_lianfengsifu': true,
-            '_dora_jifan': true,
-            '_no_leijiyiman': true,
-            '_no_wyakuman': true,
-            '_no_guoshiangang': true,
+    category: 4,
+    meta: {mode_id: 0},
+    mode: {
+        mode: 2,
+        detail_rule: {
+            _qieshangmanguan: true,
+            _toutiao: true,
+            _sigangbaopai: true,
+            _no_liujumanguan: true,
+            _no_lianfengsifu: true,
+            _dora_jifan: true,
+            _no_leijiyiman: true,
+            _no_wyakuman: true,
+            _no_guoshiangang: true,
 
-            '_chang_ju_ben_num_': [1, 1, 5], // 南2局5本场
-            '_scores_': [35500, 35100, 17000, 12400],
-            '_local_position_': 0,
+            _chang_ju_ben_num_: [1, 1, 5], // 南2局5本场
+            _scores_: [35500, 35100, 17000, 12400],
+            _local_position_: 0,
         }
     }
 };

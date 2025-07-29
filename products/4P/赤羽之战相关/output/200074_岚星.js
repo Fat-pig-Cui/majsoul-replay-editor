@@ -12,19 +12,19 @@ player_datas[2].avatar_id = 407402;
 player_datas[3].avatar_id = 407403;
 
 player_datas[0].views = player_datas[1].views = player_datas[2].views = player_datas[3].views = [
-    {'slot': 0, 'item_id': 305620}, // 立直棒-秘传之卷
-    {'slot': 1, 'item_id': 305222}, // 和牌-天地无用
-    {'slot': 2, 'item_id': 305322}, // 立直-毒烟玉
+    {slot: 0, item_id: 305620}, // 立直棒-秘传之卷
+    {slot: 1, item_id: 305222}, // 和牌-天地无用
+    {slot: 2, item_id: 305322}, // 立直-毒烟玉
 ];
 
 config = {
-    'category': 1,
-    'meta': {'mode_id': 0},
-    'mode': {
-        'mode': 1,
-        'detail_rule': {
-            'chuanma': true,
-            'init_point': 500000,
+    category: 1,
+    meta: {mode_id: 0},
+    mode: {
+        mode: 1,
+        detail_rule: {
+            chuanma: true,
+            init_point: 500000,
         }
     }
 };

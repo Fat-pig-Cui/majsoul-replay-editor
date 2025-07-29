@@ -5,7 +5,7 @@
 
 川麻模式的演示可见仓库原作者的视频: [【雀魂】（自制回放）假设雀魂有了血流成河（快速版）](https://www.bilibili.com/video/BV1dB4y1F78x)
 
-使用该模式需要在 `'detail_rule'` 中注明 `'_xueliu': true`
+使用该模式需要在 `detail_rule` 中注明 `_xueliu: true`
 
 稍微提一点: 该模式玩家放铳后的摸牌家是放铳家的下一家, 而不是离放铳家最远的和牌家的下一家
 

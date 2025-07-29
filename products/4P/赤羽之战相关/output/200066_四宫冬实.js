@@ -12,17 +12,17 @@ player_datas[2].avatar_id = 406604;
 player_datas[3].avatar_id = 406605;
 
 player_datas[0].views = player_datas[1].views = player_datas[2].views = player_datas[3].views = [
-    {'slot': 6, 'item_id': 305812}, // 桌布-仙境茶话会
+    {slot: 6, item_id: 305812}, // 桌布-仙境茶话会
 ];
 
 config = {
-    'category': 1,
-    'meta': {'mode_id': 0},
-    'mode': {
-        'mode': 1,
-        'detail_rule': {
-            'chuanma': true,
-            'init_point': 500000,
+    category: 1,
+    meta: {mode_id: 0},
+    mode: {
+        mode: 1,
+        detail_rule: {
+            chuanma: true,
+            init_point: 500000,
         }
     }
 };

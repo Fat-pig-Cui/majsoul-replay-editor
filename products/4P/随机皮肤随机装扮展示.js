@@ -11,13 +11,13 @@ player_datas[2].nickname = '西毒欧阳锋';
 player_datas[3].nickname = '北丐洪七公';
 
 config = {
-    'category': 1,
-    'meta': {'mode_id': 0},
-    'mode': {
-        'mode': 1,
-        'detail_rule': {
-            '_random_views': true,
-            '_random_skin': true,
+    category: 1,
+    meta: {mode_id: 0},
+    mode: {
+        mode: 1,
+        detail_rule: {
+            _random_views: true,
+            _random_skin: true,
         }
     }
 };

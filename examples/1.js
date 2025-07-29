@@ -10,22 +10,21 @@ player_datas[2].avatar_id = 400101;
 player_datas[3].avatar_id = 400101;
 
 config = {
-    'category': 1,
-    'meta': {'mode_id': 0},
-    'mode': {
-        'mode': 1,
-        'detail_rule': {
-            'init_point': 25000,
-            'dora_count': 3,
-            'fanfu': 1,
-            'begin_open_mode': false,
-            'chuanma': false,
-            'dora3_mode': false,
-            'guyi_mode': false,
-            'huansanzhang': false,
-            'open_hand': false,
-            'muyu_mode': false,
-            'xuezhandaodi': false,
+    category: 1,
+    meta: {mode_id: 0},
+    mode: {
+        mode: 1,
+        detail_rule: {
+            init_point: 25000,
+            dora_count: 3,
+            fanfu: 1,
+            begin_open_mode: false,
+            chuanma: false,
+            dora3_mode: false,
+            guyi_mode: false,
+            open_hand: false,
+            muyu_mode: false,
+            xuezhandaodi: false,
         }
     }
 };
@@ -38,7 +37,7 @@ tiles3 = '1112223334447z';
 paishan = separatetile('55555555555555555555555555555555555555555555555555555555555555555555555555555555555z');
 roundbegin();
 qiepai('5z');
-for (let i = 69; i >= 1; i--) {
+for (let i = 0; i < 69; i++) {
     mopai();
     qiepai();
 }

@@ -13,17 +13,17 @@ player_datas[2].avatar_id = 400407;
 // 头像框-大小姐发带
 player_datas[0].avatar_frame = player_datas[1].avatar_frame = player_datas[2].avatar_frame = 305552;
 player_datas[0].views = player_datas[1].views = player_datas[2].views = [
-    {'slot': 5, 'item_id': 305552}, // 头像框-大小姐发带
-    {'slot': 6, 'item_id': 305802}, // 桌布-冲鸭！
+    {slot: 5, item_id: 305552}, // 头像框-大小姐发带
+    {slot: 6, item_id: 305802}, // 桌布-冲鸭！
 ];
 
 config = {
-    'category': 1,
-    'meta': {'mode_id': 0},
-    'mode': {
-        'mode': 11,
-        'detail_rule': {
-            'init_point': 100000,
+    category: 1,
+    meta: {mode_id: 0},
+    mode: {
+        mode: 11,
+        detail_rule: {
+            init_point: 100000,
         }
     }
 };
