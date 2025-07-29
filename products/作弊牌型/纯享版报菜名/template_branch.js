@@ -42,7 +42,7 @@ hupaioneplayer = function (seat) {
         {val: 1, id: 30},
         {val: 1, id: 3},
     ];
-    playertiles[seat].length--;
+    playertiles[seat].pop();
     delta_scores = [-16000, -8000, 32000, -8000];
     return {
         count: 64,
@@ -96,7 +96,7 @@ hupaioneplayer = function (seat) {
         {val: 1, id: 9103},
         {val: 1, id: 9104},
     ];
-    playertiles[seat].length--;
+    playertiles[seat].pop();
     delta_scores = [-16000, -8000, 32000, -8000];
     return {
         count: 64,
@@ -150,7 +150,7 @@ hupaioneplayer = function (seat) {
         {val: 2, id: 24},
         {val: 3, id: 26},
     ];
-    playertiles[seat].length--;
+    playertiles[seat].pop();
     delta_scores = [-16000, -8000, 32000, -8000];
     return {
         count: 64,
@@ -204,7 +204,7 @@ hupaioneplayer = function (seat) {
         {val: 12, id: 34},
         {val: 13, id: 33},
     ];
-    playertiles[seat].length--;
+    playertiles[seat].pop();
     delta_scores = [-16000, -8000, 32000, -8000];
     return {
         count: 64,
@@ -258,7 +258,7 @@ hupaioneplayer = function (seat) {
         {val: 0, id: 9309},
         {val: 0, id: 9502}, // 登录语音满羁绊
     ];
-    playertiles[seat].length--;
+    playertiles[seat].pop();
     delta_scores = [-16000, -8000, 32000, -8000];
     return {
         count: 64,
@@ -305,7 +305,7 @@ hupaioneplayer = function (seat) {
         {val: 1, id: 41},
         {val: 1, id: 42},
     ];
-    playertiles[seat].length--;
+    playertiles[seat].pop();
     delta_scores = [-96000, -48000, 192000, -48000];
     return {
         count: 6,
@@ -352,7 +352,7 @@ hupaioneplayer = function (seat) {
         {val: 2, id: 50},
         {val: 0, id: 9208},
     ];
-    playertiles[seat].length--;
+    playertiles[seat].pop();
     delta_scores = [-96000, -48000, 192000, -48000];
     return {
         count: 6,
@@ -403,7 +403,7 @@ hupaioneplayer = function (seat) {
         {val: 5, id: 1020},
         {val: 1, id: 1021},
     ];
-    playertiles[seat].length--;
+    playertiles[seat].pop();
     delta_scores = [-16000, -8000, 32000, -8000];
     return {
         count: 64,
@@ -454,7 +454,7 @@ hupaioneplayer = function (seat) {
         {val: 0, id: 9311}, // 听牌
         {val: 0, id: 9312}, // 未听牌
     ];
-    playertiles[seat].length--;
+    playertiles[seat].pop();
     delta_scores = [-16000, -8000, 32000, -8000];
     return {
         count: 64,
@@ -508,7 +508,7 @@ hupaioneplayer = function (seat) {
         {val: 0, id: 9513},
         {val: 0, id: 9514},
     ];
-    playertiles[seat].length--;
+    playertiles[seat].pop();
     delta_scores = [0, 0, 0, 0];
     return {
         count: 0,
@@ -558,7 +558,7 @@ hupaioneplayer = function (seat) {
         {val: 0, id: 9603},
         {val: 0, id: 9604},
     ];
-    playertiles[seat].length--;
+    playertiles[seat].pop();
     delta_scores = [0, 0, 0, 0];
     return {
         count: 0,

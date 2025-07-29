@@ -44,7 +44,7 @@ hupaioneplayer = function (seat) {
         {val: 2, id: 25}, // 七对子
         {val: 1, id: 7}, // 役牌 白
     ];
-    playertiles[seat].length--;
+    playertiles[seat].pop();
     delta_scores = [-16000, -8000, 32000, -8000];
     return {
         count: 64,
@@ -96,7 +96,7 @@ hupaioneplayer = function (seat) {
         {val: 2, id: 15}, // 混全带幺九
         {val: 2, id: 16}, // 一气通贯
     ];
-    playertiles[seat].length--;
+    playertiles[seat].pop();
     delta_scores = [-16000, -8000, 32000, -8000];
     return {
         count: 64,
@@ -148,7 +148,7 @@ hupaioneplayer = function (seat) {
         {val: 2, id: 31}, // 宝牌
         {val: 3, id: 31}, // 宝牌
     ];
-    playertiles[seat].length--;
+    playertiles[seat].pop();
     delta_scores = [-16000, -8000, 32000, -8000];
     return {
         count: 64,
@@ -200,7 +200,7 @@ hupaioneplayer = function (seat) {
         {val: 15, id: 33}, // 里宝牌
         {val: 5, id: 9100}, // 流局满贯
     ];
-    playertiles[seat].length--;
+    playertiles[seat].pop();
     delta_scores = [-16000, -8000, 32000, -8000];
     return {
         count: 64,
@@ -247,7 +247,7 @@ hupaioneplayer = function (seat) {
         {val: 1, id: 41}, // 清老头
         {val: 1, id: 42}, // 国士无双
     ];
-    playertiles[seat].length--;
+    playertiles[seat].pop();
     delta_scores = [-96000, -48000, 192000, -48000];
     return {
         count: 6,
@@ -294,7 +294,7 @@ hupaioneplayer = function (seat) {
         {val: 2, id: 49}, // 国士无双十三面
         {val: 2, id: 50}, // 大四喜
     ];
-    playertiles[seat].length--;
+    playertiles[seat].pop();
     delta_scores = [-96000, -48000, 192000, -48000];
     return {
         count: 6,
@@ -346,7 +346,7 @@ hupaioneplayer = function (seat) {
         {val: 1, id: 1000}, // 根
         {val: 1, id: 1002}, // 杠上炮
     ];
-    playertiles[seat].length--;
+    playertiles[seat].pop();
     delta_scores = [-16000, -8000, 32000, -8000];
     return {
         count: 64,
