@@ -23,6 +23,14 @@ let config = null, paishan = [], scores = [];
 let playertiles = [[], [], [], []], discardtiles = [[], [], [], []], dealtiles = [[], [], [], []];
 // muyuseats: 拥有目玉的玩家队列
 let muyuseats = '';
+// 完成编辑后的所有信息集合, 只读
+let editdata = {
+    actions: [],
+    xun: [],
+    players: [],
+    config: config,
+    player_datas: player_datas,
+};
 
 // 初始化必要变量
 function clearproject() {
@@ -48,7 +56,7 @@ function clearproject() {
     editdata = {
         actions: [],
         xun: [],
-        players: players,
+        players: [],
         config: config,
         player_datas: player_datas,
     };
@@ -2600,15 +2608,6 @@ let pretongxunzt = [false, false, false, false], prelizhizt = [false, false, fal
     shezhangzt = [false, false, false, false];
 let tongxunzt = [false, false, false, false], lizhizt = [false, false, false, false],
     zhenting = [false, false, false, false];
-
-// 完成编辑后的所有信息集合
-let editdata = {
-    actions: [],
-    xun: [],
-    players: players,
-    config: config,
-    player_datas: player_datas,
-};
 
 // 常量, 万象修罗百搭牌编码
 let tile_bd = 'bd';

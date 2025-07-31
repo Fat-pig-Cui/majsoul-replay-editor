@@ -1,0 +1,67 @@
+# public变量函数汇总
+
+详细的说明在对应的文档
+
+## 变量
+
+1. `player_datas`: [玩家信息, 编辑游戏信息](1_编辑游戏信息.md#玩家信息-player_datas)
+2. `config`: [对局的模式, 编辑游戏信息](1_编辑游戏信息.md#对局的模式-config)
+3. `tiles0`: [起手, 编辑每个小局](2_编辑每个小局.md#起手)
+4. `tiles1`: [起手, 编辑每个小局](2_编辑每个小局.md#起手)
+5. `tiles2`: [起手, 编辑每个小局](2_编辑每个小局.md#起手)
+6. `tiles3`: [起手, 编辑每个小局](2_编辑每个小局.md#起手)
+7. `scores`: [玩家点数, 部分进阶功能](6_部分进阶功能.md#修改玩家点数-scores)
+8. `discardtiles`: [每个玩家的切牌, 编辑每个小局](2_编辑每个小局.md#每个玩家的切牌可选)
+9. `dealtiles`: [每个玩家的摸牌, 编辑每个小局](2_编辑每个小局.md#每个玩家的摸牌可选)
+10. `muyuseats`: [目玉位置(龙之目玉), 对局操作相关函数(活动场)](4_对局操作相关函数（活动场）.md#目玉位置龙之目玉-muyuseats)
+11. `playertiles` (只读): [玩家实时的手牌, 部分进阶功能](6_部分进阶功能.md#玩家实时的手牌-playertiles-只读)
+12. `editdata` (只读): [牌谱信息集合, 部分进阶功能](6_部分进阶功能.md#牌谱信息集合-editdata-只读)
+
+## 函数
+
+1. `randompaishan`: [生成牌山, 编辑每个小局](2_编辑每个小局.md#牌山)
+2. `roundbegin`: [对局流程开始, 编辑每个小局](2_编辑每个小局.md#对局的流程)
+3. `mopai`: 摸牌
+    - [对局操作相关函数](3_对局操作相关函数.md#摸牌-mopaiseat-tile)
+    - [占星之战, 对局操作相关函数(活动场)](4_对局操作相关函数（活动场）.md#摸牌占星之战-mopaiseat-tile-index)
+4. `qiepai`: 切牌
+    - [对局操作相关函数](3_对局操作相关函数.md#切牌-qiepaiseat-tile-moqie-is_liqi)
+    - [暗夜之战, 对局操作相关函数(活动场)](4_对局操作相关函数（活动场）.md#切牌暗夜之战-qiepaiseat-tile-is_liqi-anpai)
+    - [背水之战, 对局操作相关函数(活动场)](4_对局操作相关函数（活动场）.md#切牌背水之战-qiepaiseat-tile-is_liqi-beishui_type)
+5. `mingpai`:
+    - [鸣牌(吃/碰/明杠), 对局操作相关函数](3_对局操作相关函数.md#鸣牌吃碰明杠-mingpaiseat-tiles)
+    - [开杠击飞(川麻), 对局操作相关函数(活动场)](4_对局操作相关函数（活动场）.md#开杠击飞川麻-mingpaiseat-tiles-jifei-和-leimingpaiseat-tile-type-jifei)
+6. `leimingpai`:
+    - [鸣牌(暗杠/加杠/拔北), 对局操作相关函数](3_对局操作相关函数.md#鸣牌暗杠加杠拔北-leimingpaiseat-tile-type)
+    - [开杠击飞(川麻), 对局操作相关函数(活动场)](4_对局操作相关函数（活动场）.md#开杠击飞川麻-mingpaiseat-tiles-jifei-和-leimingpaiseat-tile-type-jifei)
+7. `hupai`: 和牌
+    - [对局操作相关函数](3_对局操作相关函数.md#和牌-hupaiallseats)
+    - [修罗/川麻, 对局操作相关函数(活动场)](4_对局操作相关函数（活动场）.md#和牌修罗川麻-hupaiallseats-type)
+8. `notileliuju`: [荒牌流局, 对局操作相关函数](3_对局操作相关函数.md#荒牌流局-notileliuju)
+9. `liuju`: [途中流局, 对局操作相关函数](3_对局操作相关函数.md#途中流局-liujuliuju_type)
+
+10. `gotoju`: [跳转局数, 对局操作相关函数](3_对局操作相关函数.md#跳转局数-gotojuc-j-b)
+11. `demogame`: [示例对局(专用函数), 对局操作相关函数](3_对局操作相关函数.md#专用函数-示例对局-demogame)
+12. `normalmoqie`: [正常摸切(便捷函数), 对局操作相关函数](3_对局操作相关函数.md#便捷函数-正常摸切-normalmoqietile_cnt)
+13. `moqieliqi`: [摸牌立直(便捷函数), 对局操作相关函数](3_对局操作相关函数.md#便捷函数-摸牌立直-moqieliqitile_cnt)
+14. `combomopai`: [连续岭上摸牌(便捷函数), 对局操作相关函数](3_对局操作相关函数.md#便捷函数-连续岭上摸牌-combomopaitile_cnt)
+15. `mingqiepai`: [鸣牌并切牌(便捷函数), 对局操作相关函数](3_对局操作相关函数.md#便捷函数-鸣牌并切牌-mingqiepaitls_cnt)
+16. `zimohu`: [自摸和牌(便捷函数), 对局操作相关函数](3_对局操作相关函数.md#便捷函数-自摸和牌-zimohuflag)
+17. `moqieliuju`: [摸切到荒牌流局(便捷函数), 对局操作相关函数](3_对局操作相关函数.md#便捷函数-摸切到荒牌流局-moqieliuju)
+
+18. `huansanzhang`: [换三张换牌(修罗/川麻), 对局操作相关函数(活动场)](4_对局操作相关函数（活动场）.md#换三张换牌修罗川麻-huansanzhangtls0-tls1-tls2-tls3-type)
+19. `dingque`: [定缺(川麻), 对局操作相关函数(活动场)](4_对局操作相关函数（活动场）.md#定缺川麻-dingquegaps)
+20. `unveil`: [开牌并成功(暗夜之战), 对局操作相关函数(活动场)](4_对局操作相关函数（活动场）.md#开牌并成功暗夜之战-unveilseat)
+21. `unveil_lock`: [开牌后锁定(暗夜之战), 对局操作相关函数(活动场)](4_对局操作相关函数（活动场）.md#开牌后锁定暗夜之战-unveil_lockseat)
+
+22. `judgetile`: [判断牌是否满足规则, 部分进阶功能](6_部分进阶功能.md#判断牌是否满足规则-judgetiletile-type)
+23. `allequaltiles`: [等效牌集合, 部分进阶功能](6_部分进阶功能.md#等效牌集合-allequaltilestile)
+24. `equaltile`: [判断两个牌是否等效, 部分进阶功能](6_部分进阶功能.md#判断两个牌是否等效-equaltilex-y)
+25. `decompose`: [解析牌, 部分进阶功能](6_部分进阶功能.md#解析牌-decomposex)
+26. `separatetile`: [拆分牌为数组, 部分进阶功能](6_部分进阶功能.md#拆分牌为数组-separatetilex)
+27. `calchupai`: [牌是否为和牌型, 部分进阶功能](6_部分进阶功能.md#牌是否为和牌型-calchupaitiles-type)
+28. `calctingpai`: [计算听牌型, 部分进阶功能](6_部分进阶功能.md#计算听牌型-calctingpaiseat-type)
+29. `getlstaction`: [获取最近操作信息, 部分进阶功能](6_部分进阶功能.md#获取最近操作信息-getlstactionnum)
+
+30. `clearproject`: [清空, 编辑游戏信息](1_编辑游戏信息.md#清空与复原)
+31. `resetpaipu`: [复原, 编辑游戏信息](1_编辑游戏信息.md#清空与复原)
