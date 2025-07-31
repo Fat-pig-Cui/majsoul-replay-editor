@@ -12,7 +12,7 @@ function editfunction() {
             _ = !(null === K.is_liqi || void 0 === K.is_liqi || !K.is_liqi),
             h = !1;
 
-        // 添加内容: kailiqi
+        // 添加 kailiqi
         if (K.is_kailiqi) {
             if (K.seat !== view.DesktopMgr.Inst.seat)
                 for (let i = 0; i < view.DesktopMgr.Inst.players[view.DesktopMgr.Inst.seat2LocalPosition(K.seat)].hand.length; i++) {
@@ -57,7 +57,7 @@ function editfunction() {
             , q = !(null == K.is_liqi || void 0 === K.is_liqi || !K.is_liqi)
             , _ = !1;
 
-        // 添加内容: kailiqi
+        // 添加 kailiqi
         if (K.is_kailiqi) {
             if (K.seat !== view.DesktopMgr.Inst.seat)
                 for (let i = 0; i < view.DesktopMgr.Inst.players[view.DesktopMgr.Inst.seat2LocalPosition(K.seat)].hand.length; i++) {
@@ -252,7 +252,7 @@ function editfunction() {
         view.DesktopMgr.Inst.waiting_lingshang_deal_tile = !0,
         K.muyu && view.DesktopMgr.Inst.onMuyuChange(K.muyu, !1);
     }
-    // 修正6/9/12赤的暗杠
+    // 修正多赤的暗杠
     view.ActionAnGangAddGang.getAngangTile = function (tile, seat) {
         let hand = view.DesktopMgr.Inst.players[view.DesktopMgr.Inst.seat2LocalPosition(seat)].hand;
         let mj_tile = mjcore.MJPai.Create(tile);
@@ -281,7 +281,7 @@ function editfunction() {
         return angang_tiles;
     }
 
-    // ActionBabei 改动: 拔的牌可以是其他牌
+    // ActionBabei 改动: 拔的牌可以是其他牌, 且国标模式不播放语音
     view.ActionBabei.record = function (K, U) {
         void 0 === U && (U = 0),
             app.Log.log('ActionBabei record data:' + JSON.stringify(K)), K.doras && view.DesktopMgr.Inst.WhenDoras(K.doras, !0);
@@ -291,7 +291,7 @@ function editfunction() {
         N = K.tile ? mjcore.MJPai.Create(K.tile) : mjcore.MJPai.Create('4z');
 
         view.DesktopMgr.Inst.players[view.DesktopMgr.Inst.seat2LocalPosition(V)].AddBabei(N, K.moqie, !0);
-        if (!is_guobiao())
+        if (!view.DesktopMgr.Inst.game_config.mode.detail_rule._guobiao)
             view.DesktopMgr.Inst.players[view.DesktopMgr.Inst.seat2LocalPosition(V)].PlaySound('act_babei');
         var q = !1;
         if (K.tile_state && K.tile_state > 0 && (q = !0),
@@ -313,8 +313,6 @@ function editfunction() {
 
         // 添加内容: 拔的牌可以是其他牌
         N = K.tile ? mjcore.MJPai.Create(K.tile) : mjcore.MJPai.Create('4z');
-        // 添加听牌
-        K.tingpais && view.DesktopMgr.Inst.setTingpai(K.seat, K.tingpais);
 
         view.DesktopMgr.Inst.players[view.DesktopMgr.Inst.seat2LocalPosition(V)].AddBabei(N, K.moqie, !1);
         var q = !1;
@@ -940,7 +938,7 @@ function editfunction2() {
             view.DesktopMgr.Inst.is_zhanxing_mode() && (I -= uiscript.UI_Astrology.Inst.getTileCount());
             // W: 岭上摸牌个数, R: 王牌数
             var r = view.DesktopMgr.Inst.get_gang_count()
-                , B = is_xueliu() ? 0 : view.DesktopMgr.Inst.get_babei_count()
+                , B = view.DesktopMgr.Inst.game_config.mode.detail_rule._xueliu ? 0 : view.DesktopMgr.Inst.get_babei_count()
                 , W = r + B;
             W > 0 && view.DesktopMgr.Inst.waiting_lingshang_deal_tile && W--;
             var R = 14;
@@ -951,7 +949,7 @@ function editfunction2() {
 
             view.DesktopMgr.Inst.is_chuanma_mode() && (W = 0, R = 0);
             // 添加内容: 国标麻将无王牌
-            is_guobiao() && (R = 0);
+            view.DesktopMgr.Inst.game_config.mode.detail_rule._guobiao && (R = 0);
             // L: 玩家的起手显示牌数, G: 可摸牌数
             var L = view.DesktopMgr.Inst.sha256 ? view.DesktopMgr.Inst.rule_mode === view.ERuleMode.Liqi3 ? 40 : view.DesktopMgr.Inst.is_wanxiangxiuluo_mode() ? 49 : 53 : 0
                 , G = this.tile_count - W - R - L;
