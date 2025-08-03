@@ -9,7 +9,7 @@ player_datas[1].avatar_id = 400105;
 player_datas[2].avatar_id = 400106;
 player_datas[3].avatar_id = 400107;
 
-// 主播(猫爪子)认证
+// 主播(猫爪)认证
 player_datas[0].verified = player_datas[1].verified = player_datas[2].verified = player_datas[3].verified = 1;
 
 config = {
@@ -28,7 +28,6 @@ tiles0 = '11122555666777z';
 tiles1 = '1112340678999m';
 tiles2 = '1112340678999p';
 tiles3 = '1112340678999s';
-paishan = randompaishan();
 roundbegin();
 hupai();
 
@@ -37,7 +36,6 @@ tiles0 = '11122233344555z';
 tiles1 = '1112340678999m';
 tiles2 = '1112340678999p';
 tiles3 = '1112340678999s';
-paishan = randompaishan();
 roundbegin();
 hupai();
 
@@ -46,7 +44,7 @@ tiles0 = '1112340678999m4z';
 tiles1 = '1112555666777z';
 tiles2 = '1112340678999p';
 tiles3 = '1112340678999s';
-paishan = randompaishan('2z');
+randompaishan('2z');
 roundbegin();
 qiepai();
 zimohu();
@@ -56,7 +54,7 @@ tiles1 = '1112340678999m7z';
 tiles2 = '1112223334455z';
 tiles3 = '1112340678999p';
 tiles0 = '1112340678999s';
-paishan = randompaishan('4z');
+randompaishan('4z');
 roundbegin();
 qiepai();
 zimohu();
@@ -66,7 +64,7 @@ tiles2 = '1112340678999m7z';
 tiles3 = '1112223334555z';
 tiles0 = '1112340678999p';
 tiles1 = '1112340678999s';
-paishan = randompaishan('4z');
+randompaishan('4z');
 roundbegin();
 qiepai();
 zimohu();
@@ -76,7 +74,7 @@ tiles3 = '11112555666777z';
 tiles0 = '1112340678999m';
 tiles1 = '1112340678999p';
 tiles2 = '1112340678999s';
-paishan = randompaishan('', '2567z');
+randompaishan('', '2567z');
 roundbegin();
 combomopai(4);
 hupai();
@@ -86,7 +84,7 @@ tiles3 = '11112223334555z';
 tiles0 = '1112340678999m';
 tiles1 = '1112340678999p';
 tiles2 = '1112340678999s';
-paishan = randompaishan('', '4532z');
+randompaishan('', '4532z');
 roundbegin();
 combomopai(4);
 hupai();

@@ -26,7 +26,7 @@ tiles0 = '2223444666888s5z';
 tiles1 = '1112340678999m';
 tiles2 = '1112340678999p';
 tiles3 = '1112340678999s';
-paishan = randompaishan('555z');
+randompaishan('555z');
 roundbegin();
 qiepai(true);
 moqieliqi(3);

@@ -27,7 +27,7 @@ tiles0 = '11234567899m159s';
 tiles1 = '357m1123467899p';
 tiles2 = '159m1123467899s';
 tiles3 = '2224466888m159p';
-paishan = randompaishan('5p5s5m');
+randompaishan('5p5s5m');
 roundbegin();
 huansanzhang('159s', '357m', '159m', '159p', 1);
 dingque('psmp');

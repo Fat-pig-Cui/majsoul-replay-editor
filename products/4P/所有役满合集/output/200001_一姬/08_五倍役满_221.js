@@ -11,7 +11,7 @@ player_datas[3].avatar_id = 400107;
 
 // 称号-一姬当千
 player_datas[0].title = player_datas[1].title = player_datas[2].title = player_datas[3].title = 600045;
-// 主播(猫爪子)认证
+// 主播(猫爪)认证
 player_datas[0].verified = player_datas[1].verified = player_datas[2].verified = player_datas[3].verified = 1;
 player_datas[0].views = player_datas[1].views = player_datas[2].views = player_datas[3].views = [
     {slot: 0, item_id: 305049}, // 立直棒-炎夏型一姬甜筒
@@ -37,7 +37,6 @@ tiles0 = '22m111222333444z';
 tiles1 = '1112340678999m';
 tiles2 = '1112340678999p';
 tiles3 = '1112340678999s';
-paishan = randompaishan();
 roundbegin();
 hupai();
 
@@ -46,7 +45,7 @@ tiles0 = '1112340678999s5z';
 tiles1 = '2m111222333444z';
 tiles2 = '1112340678999m';
 tiles3 = '1112340678999p';
-paishan = randompaishan('2m');
+randompaishan('2m');
 roundbegin();
 qiepai();
 zimohu();
@@ -56,7 +55,7 @@ tiles1 = '111222333444z57z';
 tiles2 = '1112340678999m';
 tiles3 = '1112340678999p';
 tiles0 = '1112340678999s';
-paishan = randompaishan('5z');
+randompaishan('5z');
 roundbegin();
 qiepai();
 normalmoqie();
@@ -67,7 +66,7 @@ tiles1 = '2m1111222333444z';
 tiles2 = '1112340678999m';
 tiles3 = '1112340678999p';
 tiles0 = '1112340678999s';
-paishan = randompaishan('', '2m432z');
+randompaishan('', '2m432z');
 roundbegin();
 combomopai(4);
 hupai();

@@ -11,6 +11,13 @@ player_datas[1].avatar_id = 404501; // A-37-初始
 player_datas[2].avatar_id = 408502; // 袁枫-契约
 player_datas[3].avatar_id = 408501; // 袁枫-初始
 
+player_datas[0].verified = player_datas[2].verified = 2;
+player_datas[0].title = 600034; // 称号-天选之证
+player_datas[0].views = [
+    {slot: 1, item_id: 308011}, // 和牌-地狱低语
+];
+player_datas[2].title = 600039; // 称号-森罗万象
+
 config = {
     category: 4,
     meta: {mode_id: 0},
@@ -30,33 +37,23 @@ config = {
     }
 };
 
-// qiepai 去掉暗牌需要支付 1000 点
+// qiepai 去掉暗牌需要支付 1000 点和其他冗余判断
 origin_qiepai = qiepai;
 qiepai = function (seat, tile, is_liqi, anpai, beishui_type) {
-    // 判断手牌中 tile 牌是否只有刚摸的牌
-    function judge_unique(seat, tile) {
-        for (let i = 0; i < playertiles[seat].length - 1; i++)
-            if (playertiles[seat][i] === tile)
-                return false;
-        return true;
-    }
-
     function preprocess() {
-        let obj = {};
-        let mat = [seat, tile, is_liqi, anpai, beishui_type];
-        for (let i = 0; i < mat.length; i++) {
+        let x = {}, mat = [seat, tile, is_liqi, anpai, beishui_type];
+        for (let i = 0; i < mat.length; i++)
             if (mat[i] === 'anpai')
-                obj.anpai = mat[i];
+                x.anpai = mat[i];
             else if (typeof mat[i] == 'number')
-                obj.seat = mat[i];
+                x.seat = mat[i];
             else if (typeof mat[i] == 'boolean' || mat[i] === 'kailiqi')
-                obj.is_liqi = mat[i];
+                x.is_liqi = mat[i];
             else if (mat[i] instanceof Array && typeof mat[i][0] === 'number')
-                obj.beishui_type = mat[i][0];
+                x.beishui_type = mat[i][0];
             else if (typeof mat[i] == 'string')
-                obj.tile = mat[i];
-        }
-        return [obj.seat, obj.tile, obj.is_liqi, obj.anpai, obj.beishui_type];
+                x.tile = mat[i];
+        return [x.seat, x.tile, x.is_liqi, x.anpai, x.beishui_type];
     }
 
     baogangseat = -1;
@@ -77,14 +74,14 @@ qiepai = function (seat, tile, is_liqi, anpai, beishui_type) {
         beishui_type = 0;
 
     let moqie = true;
-    if (tile === playertiles[seat][playertiles[seat].length - 1] && !judge_unique(seat, tile))
+    if (tile !== undefined && playertiles[seat].indexOf(tile) !== playertiles[seat].length - 1)
         moqie = false;
     if (tile === undefined && discardtiles[seat].length !== 0)
         tile = discardtiles[seat].shift();
     if (tile === undefined || tile === '..')
-        tile = playertiles[seat][playertiles[seat].length - 1];
+        tile = playertiles[seat].at(-1);
     let lstaction = getlstaction();
-    moqie = moqie && playertiles[seat][playertiles[seat].length - 1] === tile && lstaction.name !== 'RecordNewRound' && lstaction.name !== 'RecordChiPengGang';
+    moqie = moqie && playertiles[seat].at(-1) === tile && lstaction.name !== 'RecordNewRound' && lstaction.name !== 'RecordChiPengGang';
 
     let is_wliqi = false, is_kailiqi = false;
     if (is_liqi && liqiinfo[seat].yifa !== 0 && liqiinfo[seat].liqi === 0)
@@ -98,53 +95,43 @@ qiepai = function (seat, tile, is_liqi, anpai, beishui_type) {
         lstliqi = {seat: seat, type: 1};
     if (is_wliqi)
         lstliqi.type = 2;
+    if (is_kailiqi)
+        lstliqi.kai = 1;
+    if (is_beishuizhizhan() && is_liqi)
+        lstliqi.beishui_type = beishui_type;
     if (doracnt.lastype === 1) {
         doracnt.cnt += 1 + doracnt.bonus;
         doracnt.licnt += 1 + doracnt.bonus;
         doracnt.bonus = doracnt.lastype = 0;
     }
 
-    for (let i = playertiles[seat].length - 1; i >= 0; i--) {
-        if (tile === playertiles[seat][i]) {
-            playertiles[seat][i] = playertiles[seat][playertiles[seat].length - 1];
-            playertiles[seat][playertiles[seat].length - 1] = tile;
-            break;
-        }
-        if (i === 0) { // 要切的牌手牌中没有, 则报错
-            console.error(roundinfo() + `seat: ${seat} 手牌不存在要切的牌: ${tile}`);
-            return;
-        }
+    let index = playertiles[seat].lastIndexOf(tile);
+    if (index === -1) {  // 要切的牌手牌中没有, 则报错
+        console.error(roundinfo() + `seat: ${seat} 手牌不存在要切的牌: ${tile}`);
+        return;
     }
+    playertiles[seat].splice(index, 1);
 
-    let tile_state;
+    let tile_state = false;
     if (is_openhand())
-        tile_state = 1;
-
+        tile_state = true;
     if (is_peipaimingpai())
         tile_state = erasemingpai(seat, tile);
+
     paihe[seat].tiles.push(tile);
-    let abc = tiletoint(tile);
-    if (!(is_anye() && anpai === 'anpai'))
-        if (abc !== 1 && abc !== 9 && abc !== 10 && abc !== 18 && abc !== 19 && abc !== 27 && abc <= 27)
-            paihe[seat].liujumanguan = false;
+    if (!(is_anye() && anpai === 'anpai') && judgetile(tile, 'D'))
+        paihe[seat].liujumanguan = false;
     if (liqiinfo[seat].yifa > 0)
         liqiinfo[seat].yifa--;
-    for (let i = 0; i < playertiles[seat].length; i++)
-        if (playertiles[seat][i] === tile) {
-            playertiles[seat][i] = playertiles[seat][playertiles[seat].length - 1];
-            playertiles[seat].pop();
-            break;
-        }
 
     if (is_anye() && anpai === 'anpai')
         addRevealTile(is_liqi, is_wliqi, moqie, seat, tile);
     else {
-        addDiscardTile(is_liqi, is_wliqi, moqie, seat, tile, calctingpai(seat), tile_state, is_kailiqi, beishui_type);
+        addDiscardTile(is_liqi, is_wliqi, moqie, seat, tile, tile_state, is_kailiqi, beishui_type);
 
         update_shezhangzt(seat);
         update_prezhenting(seat, tile);
     }
-    playertiles[seat].sort(cmp);
 }
 // 修改点数变化
 origin_endHule = endHule;
@@ -165,9 +152,9 @@ endHule = function (HuleInfo) {
 
 tiles0 = '6m6779p135s123455z';
 tiles2 = '33m888p24679s136z';
-paishan = randompaishan('3z7z8m7z9m5z4z4m1m6z6s2m6s1p2m9s3z2m7z3s1z9p1m6s2z5m2z4z5m2z9p4p3p1s4z2s..1z3m5m5p4m..1s2p6z9p7s..3p7z3m', '8p.1m...4p');
 dealtiles = ['', '', '', '9s7z1s5z6s1p'];
 discardtiles = ['4z9p7p2z3z1m1z7p6p3z6m1z4m2z2z5m9p3p4z5s', '', '1z8m9m6z9s4z6z1p9s4s2s9p3s5m4z2z4p1s2s', ''];
+randompaishan('3z7z8m7z9m5z4z4m1m6z6s2m6s1p2m9s3z2m7z3s1z9p1m6s2z5m2z4z5m2z9p4p3p1s4z2s..1z3m5m5p4m..1s2p6z9p7s..3p7z3m', '8p.1m...4p');
 roundbegin();
 // Stage A
 qiepai();

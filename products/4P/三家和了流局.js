@@ -24,7 +24,6 @@ tiles0 = '1112340678999m6z';
 tiles1 = '1112223334446z';
 tiles2 = '19m19p19s1234567z';
 tiles3 = '222444666888s6z';
-paishan = randompaishan();
 roundbegin();
 qiepai(true);
 liuju(5);

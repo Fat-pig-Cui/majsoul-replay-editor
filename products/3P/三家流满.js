@@ -18,7 +18,7 @@ config = {
 tiles0 = '2222333444555p8s';
 tiles1 = '5566667777888s';
 tiles2 = '2223333444405s';
-paishan = randompaishan('YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY', 'Y043p');
+randompaishan('YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY', 'Y043p');
 roundbegin();
 combomopai(4);
 qiepai();

@@ -28,7 +28,7 @@ tiles0 = '55555555555556z';
 tiles1 = '1112340678999m';
 tiles2 = '1112340678999p';
 tiles3 = '1112340678999s';
-paishan = randompaishan('65z', '1p.7z.7z.7z.7z5555z');
+randompaishan('65z', '1p.7z.7z.7z.7z5555z');
 roundbegin();
 qiepai();
 normalmoqie(2);

@@ -25,7 +25,7 @@
     - [对局操作相关函数](3_对局操作相关函数.md#摸牌-mopaiseat-tile)
     - [占星之战, 对局操作相关函数(活动场)](4_对局操作相关函数（活动场）.md#摸牌占星之战-mopaiseat-tile-index)
 4. `qiepai`: 切牌
-    - [对局操作相关函数](3_对局操作相关函数.md#切牌-qiepaiseat-tile-moqie-is_liqi)
+    - [对局操作相关函数](3_对局操作相关函数.md#切牌-qiepaiseat-tile-is_liqi)
     - [暗夜之战, 对局操作相关函数(活动场)](4_对局操作相关函数（活动场）.md#切牌暗夜之战-qiepaiseat-tile-is_liqi-anpai)
     - [背水之战, 对局操作相关函数(活动场)](4_对局操作相关函数（活动场）.md#切牌背水之战-qiepaiseat-tile-is_liqi-beishui_type)
 5. `mingpai`:

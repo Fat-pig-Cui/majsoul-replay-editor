@@ -24,7 +24,7 @@ tiles0 = 'b19m12489p159s127z';
 tiles1 = 'b368m223344s666z';
 tiles2 = 'b111356799p345z';
 tiles3 = 'b112457999m248s';
-paishan = randompaishan('6z', '5z....');
+randompaishan('6z', '5z....');
 roundbegin();
 huansanzhang('248p', '368m', '345z', '248s', 1);
 qiepai('5s');

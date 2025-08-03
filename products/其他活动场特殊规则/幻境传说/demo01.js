@@ -24,7 +24,7 @@ tiles0 = '22288m22288p222s1z';
 tiles1 = '1111340678999m';
 tiles2 = '1111340678999p';
 tiles3 = '1111340678999s';
-paishan = randompaishan('...2m', '8m.....22223333z8p.2s2p');
+randompaishan('...2m', '8m.....22223333z8p.2s2p');
 roundbegin();
 qiepai(true);
 normalmoqie(3);

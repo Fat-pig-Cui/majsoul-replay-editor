@@ -26,7 +26,7 @@ tiles0 = '22335777889p159s';
 tiles1 = '2589m445569p159s';
 tiles2 = '112346689p3467s';
 tiles3 = '114699m469p3467s';
-paishan = randompaishan('', '23785p');
+randompaishan('', '23785p');
 roundbegin();
 huansanzhang('159s', '159s', '238p', '469p', 1);
 dingque('msmp');

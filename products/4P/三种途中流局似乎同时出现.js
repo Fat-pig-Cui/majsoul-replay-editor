@@ -31,7 +31,7 @@ tiles0 = '11112224445556z';
 tiles1 = '111999m111999p6z';
 tiles2 = '222444666888s6z';
 tiles3 = '111333777999s6z';
-paishan = randompaishan('1m2s1s', '23333z');
+randompaishan('1m2s1s', '23333z');
 roundbegin();
 combomopai();
 qiepai(true);

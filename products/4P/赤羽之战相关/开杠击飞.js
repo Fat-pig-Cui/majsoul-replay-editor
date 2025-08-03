@@ -27,7 +27,6 @@ tiles0 = '11113334448889m';
 tiles1 = '1112345678999p';
 tiles2 = '1112345678999s';
 tiles3 = '2223455567888s';
-paishan = randompaishan();
 roundbegin();
 dingque('psmp');
 leimingpai(true);

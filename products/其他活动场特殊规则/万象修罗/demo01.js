@@ -24,7 +24,7 @@ tiles0 = 'b145678m22349p19s';
 tiles1 = 'b23p237s1236666z';
 tiles2 = 'b19m14569p23688s';
 tiles3 = 'b1p17s112233444z';
-paishan = randompaishan('7s7s', '7z....');
+randompaishan('7s7s', '7z....');
 roundbegin();
 huansanzhang('9p19s', '123z', '19m1p', '1p17s', 1);
 hupai();

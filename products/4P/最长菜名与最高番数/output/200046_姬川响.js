@@ -9,7 +9,7 @@ player_datas[1].avatar_id = 404601;
 player_datas[2].avatar_id = 404603;
 player_datas[3].avatar_id = 404604;
 
-// 主播(猫爪子)认证
+// 主播(猫爪)认证
 player_datas[0].verified = player_datas[1].verified = player_datas[2].verified = player_datas[3].verified = 1;
 
 config = {
@@ -30,7 +30,7 @@ tiles0 = '789s1111z5556667z';
 tiles1 = '222205588889m3s';
 tiles2 = '1122224055599s';
 tiles3 = '3333444467777p';
-paishan = randompaishan('', '7z.....66s444477z.9s65z');
+randompaishan('', '7z.....66s444477z.9s65z');
 roundbegin();
 combomopai(3);
 qiepai('9s');
@@ -48,7 +48,7 @@ tiles0 = '1999p1115556677z';
 tiles1 = '222205558888m6z';
 tiles2 = '222205558888s3z';
 tiles3 = '3333444467777s';
-paishan = randompaishan('...9p', '4444z8888p776z.51z');
+randompaishan('...9p', '4444z8888p776z.51z');
 roundbegin();
 qiepai('1p', true);
 normalmoqie(3);

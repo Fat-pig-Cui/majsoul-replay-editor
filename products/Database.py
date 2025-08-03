@@ -39,7 +39,7 @@ def generate_verified(verified, player_num=4):
         temp = template_verified_3P
     if verified != 1:
         return '// 职业(P标)认证\n' + temp + str(verified) + ';\n'
-    return '// 主播(猫爪子)认证\n' + temp + str(verified) + ';\n'
+    return '// 主播(猫爪)认证\n' + temp + str(verified) + ';\n'
 
 
 def generate_frame(frame_id, player_num=4):

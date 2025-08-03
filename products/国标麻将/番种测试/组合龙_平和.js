@@ -22,11 +22,12 @@ config = {
     }
 };
 
+// 组合龙, 门前请, 平和, 四归一, 坎张
 tiles0 = '147m258p2333469s1z';
 tiles1 = '2223334445556z';
 tiles2 = '1122336678999p';
 tiles3 = '1122445678999s';
-paishan = randompaishan('3s');
+randompaishan('3s');
 roundbegin();
 qiepai();
 normalmoqie();

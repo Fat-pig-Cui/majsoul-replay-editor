@@ -23,6 +23,6 @@ tiles0 = '11122233344444z';
 tiles1 = '1112340678999m';
 tiles2 = '1112340678999p';
 tiles3 = '1112340678999s';
-paishan = randompaishan('', '1z....');
+randompaishan('', '1z....');
 roundbegin();
 hupai();

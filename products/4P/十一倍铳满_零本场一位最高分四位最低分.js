@@ -29,7 +29,7 @@ tiles0 = '11112223334446z';
 tiles1 = '1112340678999m';
 tiles2 = '111333777999s6z';
 tiles3 = '222444666888s6z';
-paishan = randompaishan('6z', '0p432z');
+randompaishan('6z', '0p432z');
 roundbegin();
 combomopai(4);
 qiepai();

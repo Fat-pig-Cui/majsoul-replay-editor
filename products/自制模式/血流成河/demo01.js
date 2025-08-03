@@ -25,7 +25,7 @@ tiles0 = '19m19p19s12345677z';
 tiles1 = '1112340678999m';
 tiles2 = '1112340678999p';
 tiles3 = '1112340678999s';
-paishan = randompaishan('', 'HHMPSHMPSHMPSH');
+randompaishan('', 'HHMPSHMPSHMPSH');
 roundbegin();
 hupai();
 for (let cnt = 0; cnt < 69; cnt++) {

@@ -27,7 +27,7 @@ config = {
 tiles0 = '11112223334446z';
 tiles1 = '1112340678999p';
 tiles2 = '222444666888s6z';
-paishan = randompaishan('6z', '1m432z');
+randompaishan('6z', '1m432z');
 roundbegin();
 for (let i = 0; i < 4; i++) {
     leimingpai(i + 1 + 'z', 'angang');
@@ -44,7 +44,7 @@ scores = [36500, 68500, 0];
 tiles0 = '2222444666888s6z';
 tiles1 = '1112223334446z';
 tiles2 = '1112340678999p';
-paishan = randompaishan('76z', '1m864s');
+randompaishan('76z', '1m864s');
 roundbegin();
 for (let i = 0; i < 4; i++) {
     leimingpai((i + 1) * 2 + 's', 'angang');
@@ -61,6 +61,5 @@ scores = [105000, 0, 0];
 tiles0 = '11122233344466z';
 tiles1 = '1112340678999p';
 tiles2 = '1112340678999s';
-paishan = randompaishan();
 roundbegin();
 hupai();

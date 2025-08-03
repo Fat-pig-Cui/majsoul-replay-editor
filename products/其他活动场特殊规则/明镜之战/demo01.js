@@ -24,7 +24,7 @@ tiles0 = '11122233344457zt';
 tiles1 = '111666mt225pt5p6pt8st8s';
 tiles2 = '345mt34pt23334455st';
 tiles3 = '1p1112pt88st55zt5z77zt7z';
-paishan = randompaishan('3s..5pt', '44pt242st2s..5pt2p');
+randompaishan('3s..5pt', '44pt242st2s..5pt2p');
 roundbegin();
 qiepai();
 mingpai();

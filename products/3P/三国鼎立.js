@@ -18,7 +18,7 @@ config = {
 tiles0 = '19m19p189s1234567z';
 tiles1 = '19m19p19s1234567z';
 tiles2 = '19m19p19s1234567z';
-paishan = randompaishan('', 'YYYYYDYYYYYYYY');
+randompaishan('', 'YYYYYDYYYYYYYY');
 roundbegin();
 qiepai('8s');
 moqieliuju();

@@ -1,3 +1,9 @@
+/**
+ * @file: add_function.js - additional functions
+ * @author: GrandDawn, Fat-pig-Cui
+ * @email: chubbypig@qq.com
+ * @github: https://github.com/Fat-pig-Cui/majsoul-replay-editor
+ */
 'use strict';
 
 function editfunction() {
@@ -530,12 +536,6 @@ function editfunction() {
                 Laya.timer.once(200, i, function () {
                     view.DesktopMgr.Inst.setScores(K.scores)
                 }), uiscript.UI_Hu_Xuezhan.Inst.showScoreChange(s)
-            }), r += 2500, Laya.timer.once(r, this, function () {
-                for (var i = 0; i < K.allplayertiles.length; i++) {
-                    for (var n = K.allplayertiles[i].split('|'), r = [], s = 0; s < n.length; s++)
-                        r.push(mjcore.MJPai.Create(n[s]));
-                    r = r.sort(mjcore.MJPai.Distance), view.DesktopMgr.Inst.players[view.DesktopMgr.Inst.seat2LocalPosition(i)].Huangpai(!0, r, !1)
-                }
             }), r += 2500, Laya.timer.once(r, i, function () {
                 uiscript.UIMgr.Inst.ShowWin(K, !1), view.DesktopMgr.Inst.ActionRunComplete()
             })
@@ -554,12 +554,12 @@ function editfunction() {
         var A = view.DesktopMgr.Inst.record_show_anim,
             F = true,
             E = uiscript.UI_Replay.Inst.enable && uiscript.UI_Replay.Inst.auto_play,
-            I = 1200, d = X.CuohuInfo, S = !1, P = [];
+            I = 1200, d = X.cuohu_info, S = !1, P = [];
 
         if (d.zimo)
-            uiscript.UI_Huleshow.Inst.showZimo([view.DesktopMgr.Inst.seat2LocalPosition(X.seat)]);
+            uiscript.UI_Huleshow.Inst.showZimo([view.DesktopMgr.Inst.seat2LocalPosition(X.cuohu_info.seat)]);
         else
-            uiscript.UI_Huleshow.Inst.showRong([view.DesktopMgr.Inst.seat2LocalPosition(X.seat)]);
+            uiscript.UI_Huleshow.Inst.showRong([view.DesktopMgr.Inst.seat2LocalPosition(X.cuohu_info.seat)]);
 
         for (var B = 0; B < d.delta_scores.length; B++) {
             var m = {
@@ -590,7 +590,7 @@ function editfunction() {
         return 4000;
     }
     view.ActionCuohu.fastrecord = function (X) {
-        view.DesktopMgr.Inst.setScores(X.CuohuInfo.scores);
+        view.DesktopMgr.Inst.setScores(X.cuohu_info.scores);
     }
 
     view.ViewPai.prototype.OnChoosedPai = function () {

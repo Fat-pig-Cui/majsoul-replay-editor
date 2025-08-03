@@ -11,7 +11,7 @@ player_datas[3].avatar_id = 400107;
 
 // 称号-神社贵宾
 player_datas[0].title = player_datas[1].title = player_datas[2].title = player_datas[3].title = 600038;
-// 主播(猫爪子)认证
+// 主播(猫爪)认证
 player_datas[0].verified = player_datas[1].verified = player_datas[2].verified = player_datas[3].verified = 1;
 player_datas[0].views = player_datas[1].views = player_datas[2].views = player_datas[3].views = [
     {slot: 6, item_id: 305810}, // 桌布-中光波——————！
@@ -33,7 +33,7 @@ tiles0 = '1p1s111222333444z';
 tiles1 = '2223405567888m';
 tiles2 = '2223405567888p';
 tiles3 = '2223405567888s';
-paishan = randompaishan('1s');
+randompaishan('1s');
 roundbegin();
 qiepai('1p');
 normalmoqie();
@@ -44,7 +44,7 @@ tiles0 = '1112340678999s3z';
 tiles1 = '1122555666777z';
 tiles2 = '1112340678999m';
 tiles3 = '1112340678999p';
-paishan = randompaishan('1z');
+randompaishan('1z');
 roundbegin();
 qiepai();
 zimohu();
@@ -54,7 +54,7 @@ tiles1 = '1112340678999s7z';
 tiles2 = '1112223334455z';
 tiles3 = '1112340678999m';
 tiles0 = '1112340678999p';
-paishan = randompaishan('5z');
+randompaishan('5z');
 roundbegin();
 qiepai();
 zimohu();

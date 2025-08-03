@@ -1,0 +1,9 @@
+{
+  "dependencies": {
+    "flow-bin": "^0.278.0",
+    "flow-remove-types": "^2.278.0"
+  },
+  "scripts": {
+    "flow": "flow"
+  }
+}

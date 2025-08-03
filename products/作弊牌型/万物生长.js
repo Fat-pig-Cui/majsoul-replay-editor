@@ -29,7 +29,7 @@ tiles0 = '66666666666667z';
 tiles1 = '1112340678999m';
 tiles2 = '1112340678999p';
 tiles3 = '9s111222334477z';
-paishan = randompaishan('6z', '55555555556666z');
+randompaishan('6z', '55555555556666z');
 roundbegin();
 qiepai(true);
 mingqiepai('9s');

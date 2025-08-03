@@ -15,7 +15,7 @@ config = {
 
 tiles0 = '11112223334445z';
 tiles1 = '1112340678999m';
-paishan = randompaishan('', '5m432z');
+randompaishan('', '5m432z');
 roundbegin();
 combomopai('1z');
 combomopai('2z');

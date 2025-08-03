@@ -27,7 +27,7 @@ tiles0 = '238999p11z556677z';
 tiles1 = '11345678m23456p';
 tiles2 = '2223405567888m';
 tiles3 = '2223405567888s';
-paishan = randompaishan('5677z1p', '1z....');
+randompaishan('5677z1p', '1z....');
 roundbegin();
 qiepai('8p');
 for (let i = 0; i < 3; i++) {
@@ -44,7 +44,7 @@ tiles0 = '19999p112233445z';
 tiles1 = '11345678m23456p';
 tiles2 = '2223405567888m';
 tiles3 = '2223405567888s';
-paishan = randompaishan('12344z1p', '5z....');
+randompaishan('12344z1p', '5z....');
 roundbegin();
 qiepai();
 for (let i = 0; i < 4; i++) {
