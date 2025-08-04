@@ -15,28 +15,24 @@ function RealPaipu2Fake(paipulink = '') {
     const pbGameDetailRecords = net.ProtobufManager.lookupType('.lq.GameDetailRecords');
 
     function parseRecords(gameDetailRecords, json) {
-        try {
-            if (gameDetailRecords.version === 0) {
-                for (let i in gameDetailRecords.records) {
-                    const record = pbWrapper.decode(gameDetailRecords.records[i]);
+        if (gameDetailRecords.version === 0) {
+            for (let i in gameDetailRecords.records) {
+                const record = pbWrapper.decode(gameDetailRecords.records[i]);
+                const pb = net.ProtobufManager.lookupType(record.name);
+                const data = JSON.parse(JSON.stringify(pb.decode(record.data)));
+                json.records[i] = {name: record.name, data: data};
+            }
+        } else if (gameDetailRecords.version === 210715) {
+            for (let i in gameDetailRecords.actions) {
+                if (gameDetailRecords.actions[i].type === 1) {
+                    const record = pbWrapper.decode(gameDetailRecords.actions[i].result);
                     const pb = net.ProtobufManager.lookupType(record.name);
                     const data = JSON.parse(JSON.stringify(pb.decode(record.data)));
-                    json.records[i] = {name: record.name, data: data};
+                    json.actions[i].result = {name: record.name, data: data};
                 }
-            } else if (gameDetailRecords.version === 210715) {
-                for (let i in gameDetailRecords.actions) {
-                    if (gameDetailRecords.actions[i].type === 1) {
-                        const record = pbWrapper.decode(gameDetailRecords.actions[i].result);
-                        const pb = net.ProtobufManager.lookupType(record.name);
-                        const data = JSON.parse(JSON.stringify(pb.decode(record.data)));
-                        json.actions[i].result = {name: record.name, data: data};
-                    }
-                }
-            } else
-                console.error('Unknown version: ' + gameDetailRecords.version);
-        } catch (e) {
-            console.error(e);
-        }
+            }
+        } else
+            throw new Error('Unknown version: ' + gameDetailRecords.version);
         return json;
     }
 
@@ -195,13 +191,13 @@ function RealPaipu2Fake(paipulink = '') {
                     let allseats = [];
                     for (let i in Data.hules)
                         allseats.push(Data.hules[i].seat);
-                    txt += `hupai(${allseats});\n\n`;
+                    txt += `hupai([${allseats}]);\n\n`;
                 }
                 if (actions[i].result.name === 'RecordHuleXueZhanEnd') {
                     let allseats = [];
                     for (let i in Data.hules)
                         allseats.push(Data.hules[i].seat);
-                    txt += `hupai(${allseats},true);\n\n\n\n`;
+                    txt += `hupai([${allseats}],true);\n\n\n\n`;
                 }
                 if (actions[i].result.name === 'RecordGangResult') { // 不需要
                 }

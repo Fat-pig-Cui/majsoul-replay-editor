@@ -1,5 +1,7 @@
 clearproject();
 
+// 比赛场真实牌谱(匿名): jnjrmv-205u0327-6yaa-668f-iifh-cihittojzwws__2
+
 player_datas[0].nickname = '一姬-契约';
 player_datas[1].nickname = '新年初诣';
 player_datas[2].nickname = '一姬当千';

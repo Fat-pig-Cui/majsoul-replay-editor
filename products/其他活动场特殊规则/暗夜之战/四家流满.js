@@ -26,14 +26,13 @@ tiles0 = '22223444666888s';
 tiles1 = '2228m333557777s';
 tiles2 = '233344447777m0s';
 tiles3 = '05556666888m08p';
-paishan = randompaishan('', 'Y864s');
+randompaishan('', 'Y864s');
 roundbegin();
 combomopai(4);
 qiepai(true);
 for (let i = 0; i < 65; i++) {
     mopai();
-    let tile = getlstaction().data.tile;
-    if (judgetile(tile, 'Y'))
+    if (judgetile(getlstaction().data.tile, 'Y'))
         qiepai();
     else
         qiepai('anpai');

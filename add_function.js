@@ -297,7 +297,7 @@ function editfunction() {
         N = K.tile ? mjcore.MJPai.Create(K.tile) : mjcore.MJPai.Create('4z');
 
         view.DesktopMgr.Inst.players[view.DesktopMgr.Inst.seat2LocalPosition(V)].AddBabei(N, K.moqie, !0);
-        if (!view.DesktopMgr.Inst.game_config.mode.detail_rule._guobiao)
+        if (!(view.DesktopMgr.Inst.game_config.mode.detail_rule && view.DesktopMgr.Inst.game_config.mode.detail_rule._guobiao))
             view.DesktopMgr.Inst.players[view.DesktopMgr.Inst.seat2LocalPosition(V)].PlaySound('act_babei');
         var q = !1;
         if (K.tile_state && K.tile_state > 0 && (q = !0),
@@ -927,9 +927,62 @@ function editfunction() {
         }
         return n === t.index;
     }
+
+    game.Tools.room_mode_desc = function (mode_id) {
+        let desc = '';
+        switch (mode_id) {
+            case 0:
+                desc = game['Tools']['strOfLocalization'](2026);
+                break;
+            case 1:
+                desc = game['Tools']['strOfLocalization'](2027);
+                break;
+            case 2:
+                desc = game['Tools']['strOfLocalization'](2028);
+                break;
+            case 3:
+                desc = game['Tools']['strOfLocalization'](2029);
+                break;
+            case 4:
+                desc = game['Tools']['strOfLocalization'](2026);
+                break;
+            case 10:
+                desc = game['Tools']['strOfLocalization'](2030);
+                break;
+            case 11:
+                desc = game['Tools']['strOfLocalization'](2031);
+                break;
+            case 12:
+                desc = game['Tools']['strOfLocalization'](2032);
+                break;
+            case 13:
+                desc = game['Tools']['strOfLocalization'](2033);
+                break;
+            case 14:
+                desc = game['Tools']['strOfLocalization'](2030);
+                break;
+            case 20:
+                desc = '二人一局';
+                break;
+            case 21:
+                desc = '二人东';
+                break;
+            case 22:
+                desc = '二人南';
+                break;
+            case 23:
+                desc = '二人人机';
+                break;
+            case 24:
+                desc = '二人一局';
+                break;
+        }
+        return desc;
+    }
 }
 
 function editfunction2() {
+    // 牌谱界面牌山信息
     uiscript.UI_Replay.Inst.page_paishan.setInfo = function () {
         if (!this.noinfo) {
             // I: 牌山显示剩余牌, C: 宝牌数
@@ -938,7 +991,8 @@ function editfunction2() {
             view.DesktopMgr.Inst.is_zhanxing_mode() && (I -= uiscript.UI_Astrology.Inst.getTileCount());
             // W: 岭上摸牌个数, R: 王牌数
             var r = view.DesktopMgr.Inst.get_gang_count()
-                , B = view.DesktopMgr.Inst.game_config.mode.detail_rule._xueliu ? 0 : view.DesktopMgr.Inst.get_babei_count()
+                , B = view.DesktopMgr.Inst.game_config.mode.detail_rule &&
+            view.DesktopMgr.Inst.game_config.mode.detail_rule._xueliu ? 0 : view.DesktopMgr.Inst.get_babei_count()
                 , W = r + B;
             W > 0 && view.DesktopMgr.Inst.waiting_lingshang_deal_tile && W--;
             var R = 14;
@@ -949,6 +1003,7 @@ function editfunction2() {
 
             view.DesktopMgr.Inst.is_chuanma_mode() && (W = 0, R = 0);
             // 添加内容: 国标麻将无王牌
+            view.DesktopMgr.Inst.game_config.mode.detail_rule &&
             view.DesktopMgr.Inst.game_config.mode.detail_rule._guobiao && (R = 0);
             // L: 玩家的起手显示牌数, G: 可摸牌数
             var L = view.DesktopMgr.Inst.sha256 ? view.DesktopMgr.Inst.rule_mode === view.ERuleMode.Liqi3 ? 40 : view.DesktopMgr.Inst.is_wanxiangxiuluo_mode() ? 49 : 53 : 0
