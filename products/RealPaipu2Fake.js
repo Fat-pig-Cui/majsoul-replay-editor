@@ -93,7 +93,7 @@ function RealPaipu2Fake(paipulink = '') {
                     txt += `tiles2='${Data.tiles2.join('')}';\n`;
                     if (Data.tiles3 && Data.tiles3.length !== 0)
                         txt += `tiles3='${Data.tiles3.join('')}';\n`;
-                    txt += `paishan=separatetile('${Data.paishan}');\n`;
+                    txt += `paishan=separate('${Data.paishan}');\n`;
                     if (json.head.config.mode && json.head.config.mode.detail_rule && json.head.config.mode.detail_rule.muyu_mode) {
                         let muyuseats = '', tmp = [];
                         for (let j = i + 1; j < actions.length; j++)

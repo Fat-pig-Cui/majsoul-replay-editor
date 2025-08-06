@@ -35,7 +35,7 @@ tiles0 = '12399m789s12233p1z';
 tiles1 = '23567m1369p24s13z';
 tiles2 = '139m267p14599s25z';
 tiles3 = '234s449m249p4467z';
-discardtiles = ['1z8p4s', '4z7z9s', '1z2z1m', '1z3z7z'];
+qiepaiset = ['1z8p4s', '4z7z9s', '1z2z1m', '1z3z7z'];
 randompaishan('4z1z1z8p7z2z3z4s9s1m4p1p', '7z....');
 roundbegin();
 qiepai();

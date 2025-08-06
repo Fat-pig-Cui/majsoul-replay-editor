@@ -45,8 +45,8 @@ tiles0 = '1112345678999m6z';
 tiles1 = '366s1234556677z';
 tiles2 = '12389s11223344z';
 tiles3 = '1112223s888999s';
+qiepaiset = ['6z3s', '1234z', '1289s', '57z67s'];
 randompaishan('3s', '76s75z');
-discardtiles = ['6z3s', '1234z', '1289s', '57z67s'];
 roundbegin();
 qiepai(true);
 for (let i = 0; i < 4; i++) {

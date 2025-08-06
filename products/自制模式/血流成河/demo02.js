@@ -17,7 +17,6 @@ config = {
         detail_rule: {
             init_point: 200000,
             chuanma: true,
-            huansanzhang: true,
             _xueliu: true,
         }
     }

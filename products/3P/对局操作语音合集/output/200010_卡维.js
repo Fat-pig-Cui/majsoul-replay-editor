@@ -17,6 +17,8 @@ config = {
     meta: {mode_id: 0},
     mode: {
         mode: 11,
+        detail_rule: {
+        }
     }
 };
 

@@ -39,10 +39,11 @@ config = {
 
 // qiepai 去掉暗牌需要支付 1000 点和其他冗余判断
 origin_qiepai = qiepai;
-qiepai = function (seat, tile, is_liqi, anpai, beishui_type) {
+qiepai = function (seat, tile, is_liqi, anpai, bs_type) {
+    // 参数预处理
     function preprocess() {
-        let x = {}, mat = [seat, tile, is_liqi, anpai, beishui_type];
-        for (let i = 0; i < mat.length; i++)
+        let x = {}, mat = [seat, tile, is_liqi, anpai, bs_type];
+        for (let i in mat)
             if (mat[i] === 'anpai')
                 x.anpai = mat[i];
             else if (typeof mat[i] == 'number')
@@ -56,54 +57,33 @@ qiepai = function (seat, tile, is_liqi, anpai, beishui_type) {
         return [x.seat, x.tile, x.is_liqi, x.anpai, x.beishui_type];
     }
 
-    baogangseat = -1;
-    [seat, tile, is_liqi, anpai, beishui_type] = preprocess()
+    let beishui_type;
+    [seat, tile, is_liqi, anpai, beishui_type] = preprocess();
 
-    if (seat === undefined) {
-        let lstaction = getlstaction();
-        if (lstaction.name === 'RecordNewRound')
-            seat = ju;
-        else
-            seat = lstaction.data.seat;
-    }
+    let lstaction = getlstaction();
+    if (seat === undefined)
+        seat = lstaction.name === 'RecordNewRound' ? ju : lstaction.data.seat;
     if (is_liqi === undefined)
         is_liqi = false;
-    if (anpai === undefined)
-        anpai = false;
-    if (beishui_type === undefined)
-        beishui_type = 0;
 
     let moqie = true;
+    // 如果 tile 参数原生不空, 且在手牌出现不止一次, 则一定是手切
     if (tile !== undefined && playertiles[seat].indexOf(tile) !== playertiles[seat].length - 1)
         moqie = false;
     if (tile === undefined && discardtiles[seat].length !== 0)
         tile = discardtiles[seat].shift();
     if (tile === undefined || tile === '..')
         tile = playertiles[seat].at(-1);
-    let lstaction = getlstaction();
     moqie = moqie && playertiles[seat].at(-1) === tile && lstaction.name !== 'RecordNewRound' && lstaction.name !== 'RecordChiPengGang';
 
     let is_wliqi = false, is_kailiqi = false;
+    if (is_liqi === 'kailiqi')
+        is_liqi = is_kailiqi = true;
     if (is_liqi && liqiinfo[seat].yifa !== 0 && liqiinfo[seat].liqi === 0)
         is_wliqi = true;
-    if (is_liqi === 'kailiqi') {
-        is_liqi = true;
-        is_kailiqi = true;
-    } else if (is_liqi)
-        is_liqi = true;
+
     if (is_liqi)
-        lstliqi = {seat: seat, type: 1};
-    if (is_wliqi)
-        lstliqi.type = 2;
-    if (is_kailiqi)
-        lstliqi.kai = 1;
-    if (is_beishuizhizhan() && is_liqi)
-        lstliqi.beishui_type = beishui_type;
-    if (doracnt.lastype === 1) {
-        doracnt.cnt += 1 + doracnt.bonus;
-        doracnt.licnt += 1 + doracnt.bonus;
-        doracnt.bonus = doracnt.lastype = 0;
-    }
+        lstliqi = {seat: seat, type: is_wliqi ? 2 : 1, kai: is_kailiqi ? 1 : 0, beishui_type: 0};
 
     let index = playertiles[seat].lastIndexOf(tile);
     if (index === -1) {  // 要切的牌手牌中没有, 则报错
@@ -111,23 +91,22 @@ qiepai = function (seat, tile, is_liqi, anpai, beishui_type) {
         return;
     }
     playertiles[seat].splice(index, 1);
+    playertiles[seat].sort(cmp);
 
-    let tile_state = false;
-    if (is_openhand())
-        tile_state = true;
+    let tile_state = is_openhand();
     if (is_peipaimingpai())
         tile_state = erasemingpai(seat, tile);
 
     paihe[seat].tiles.push(tile);
-    if (!(is_anye() && anpai === 'anpai') && judgetile(tile, 'D'))
+    if (!(is_anye() && anpai === 'anpai') && !judgetile(tile, 'Y'))
         paihe[seat].liujumanguan = false;
     if (liqiinfo[seat].yifa > 0)
         liqiinfo[seat].yifa--;
 
     if (is_anye() && anpai === 'anpai')
-        addRevealTile(is_liqi, is_wliqi, moqie, seat, tile);
+        addRevealTile(seat, tile, moqie, is_liqi, is_wliqi);
     else {
-        addDiscardTile(is_liqi, is_wliqi, moqie, seat, tile, tile_state, is_kailiqi, beishui_type);
+        addDiscardTile(seat, tile, moqie, is_liqi, is_wliqi, is_kailiqi, tile_state, beishui_type);
 
         update_shezhangzt(seat);
         update_prezhenting(seat, tile);
@@ -152,8 +131,8 @@ endHule = function (HuleInfo) {
 
 tiles0 = '6m6779p135s123455z';
 tiles2 = '33m888p24679s136z';
-dealtiles = ['', '', '', '9s7z1s5z6s1p'];
-discardtiles = ['4z9p7p2z3z1m1z7p6p3z6m1z4m2z2z5m9p3p4z5s', '', '1z8m9m6z9s4z6z1p9s4s2s9p3s5m4z2z4p1s2s', ''];
+mopaiset = ['', '', '', '9s7z1s5z6s1p'];
+qiepaiset = ['4z9p7p2z3z1m1z7p6p3z6m1z4m2z2z5m9p3p4z5s', '', '1z8m9m6z9s4z6z1p9s4s2s9p3s5m4z2z4p1s2s', ''];
 randompaishan('3z7z8m7z9m5z4z4m1m6z6s2m6s1p2m9s3z2m7z3s1z9p1m6s2z5m2z4z5m2z9p4p3p1s4z2s..1z3m5m5p4m..1s2p6z9p7s..3p7z3m', '8p.1m...4p');
 roundbegin();
 // Stage A

@@ -297,7 +297,7 @@ function editfunction() {
         N = K.tile ? mjcore.MJPai.Create(K.tile) : mjcore.MJPai.Create('4z');
 
         view.DesktopMgr.Inst.players[view.DesktopMgr.Inst.seat2LocalPosition(V)].AddBabei(N, K.moqie, !0);
-        if (!(view.DesktopMgr.Inst.game_config.mode.detail_rule && view.DesktopMgr.Inst.game_config.mode.detail_rule._guobiao))
+        if (!view.DesktopMgr.Inst.game_config.mode.detail_rule._guobiao)
             view.DesktopMgr.Inst.players[view.DesktopMgr.Inst.seat2LocalPosition(V)].PlaySound('act_babei');
         var q = !1;
         if (K.tile_state && K.tile_state > 0 && (q = !0),
@@ -350,11 +350,11 @@ function editfunction() {
                 uiscript.UI_Huleshow.Inst.showZimo([view.DesktopMgr.Inst.seat2LocalPosition(_)]),
                     q += n ? 1200 : 200,
                     Laya.timer.once(q, U, function () {
+                        _ === view.DesktopMgr.Inst.seat ? view.DesktopMgr.Inst.mainrole.OnDiscardTile(mjcore.MJPai.Create(N[0].hu_tile), 0, 0) :
+                            view.DesktopMgr.Inst.players[view.DesktopMgr.Inst.seat2LocalPosition(_)].recordDiscardTile(mjcore.MJPai.Create(N[0].hu_tile), true, 0, 0);
                         view.DesktopMgr.Inst.players[view.DesktopMgr.Inst.seat2LocalPosition(_)].AddBabei(mjcore.MJPai.Create(N[0].hu_tile), true, 1);
                         if (view.DesktopMgr.Inst.lastqipai)
                             view.DesktopMgr.Inst.lastqipai.isxuezhanhu = !0, view.DesktopMgr.Inst.lastqipai.OnChoosedPai();
-                        _ === view.DesktopMgr.Inst.seat ? view.DesktopMgr.Inst.mainrole.OnDiscardTile(mjcore.MJPai.Create(N[0].hu_tile), 0, 0) :
-                            view.DesktopMgr.Inst.players[view.DesktopMgr.Inst.seat2LocalPosition(_)].recordDiscardTile(mjcore.MJPai.Create(N[0].hu_tile), true, 0, 0);
                     })
                 if (view.DesktopMgr.Inst.lastqipai)
                     view.DesktopMgr.Inst.lastqipai.isxuezhanhu = !0;
@@ -364,20 +364,22 @@ function editfunction() {
                     h.push(view.DesktopMgr.Inst.seat2LocalPosition(_)), -1 === l && (l = _)
                 }
                 l >= 0 && (view.DesktopMgr.Inst.player_effects[l][game.EView.hupai_effect]), n && uiscript.UI_Huleshow.Inst.showRong(h), q += n ? 1200 : 200, Laya.timer.once(q, U, function () {
-                    if (!view.DesktopMgr.Inst.isLastPaiMingPai()) view.DesktopMgr.Inst.players[view.DesktopMgr.Inst.seat2LocalPosition(view.DesktopMgr.Inst.lastpai_seat)].QiPaiNoPass();
+                    if (!view.DesktopMgr.Inst.isLastPaiMingPai())
+                        view.DesktopMgr.Inst.players[view.DesktopMgr.Inst.seat2LocalPosition(view.DesktopMgr.Inst.lastpai_seat)].QiPaiNoPass();
                     else {
                         view.DesktopMgr.Inst.lastqipai.lastColor = new Laya.Vector4(1, .78, .78, .4);
-                        view.DesktopMgr.Inst.lastqipai.val.type += 10;
                         view.DesktopMgr.Inst.lastqipai.isxuezhanhu = !0, view.DesktopMgr.Inst.lastqipai.OnChoosedPai()
                     }
                     for (var e = 0; e < N.length; e++) {
                         var i = N[e].seat;
                         var s = mjcore.MJPai.Create(N[0].hu_tile);
                         view.DesktopMgr.Inst.players[view.DesktopMgr.Inst.seat2LocalPosition(i)].AddBabei(s, true, 1);
-                        if (e !== 0) view.DesktopMgr.Inst.lastqipai.lastColor = new Laya.Vector4(1, .78, .78, .4);
-                        else view.DesktopMgr.Inst.lastqipai.lastColor = new Laya.Vector4(1, .78, .78, 1);
-                        if (view.DesktopMgr.Inst.lastqipai) view.DesktopMgr.Inst.lastqipai.val.type += 10;
-                        if (view.DesktopMgr.Inst.lastqipai) view.DesktopMgr.Inst.lastqipai.isxuezhanhu = !0, view.DesktopMgr.Inst.lastqipai.OnChoosedPai()
+                        if (e !== 0)
+                            view.DesktopMgr.Inst.lastqipai.lastColor = new Laya.Vector4(1, .78, .78, .4);
+                        else
+                            view.DesktopMgr.Inst.lastqipai.lastColor = new Laya.Vector4(1, .78, .78, 1);
+                        if (view.DesktopMgr.Inst.lastqipai)
+                            view.DesktopMgr.Inst.lastqipai.isxuezhanhu = !0, view.DesktopMgr.Inst.lastqipai.OnChoosedPai();
                     }
                 })
             }
@@ -420,15 +422,15 @@ function editfunction() {
         var n = K.hules;
         if (n[0].zimo) {
             var a = n[0].seat;
-            view.DesktopMgr.Inst.players[view.DesktopMgr.Inst.seat2LocalPosition(a)].AddBabei(mjcore.MJPai.Create(n[0].hu_tile), true, 0);
             a === view.DesktopMgr.Inst.seat ? view.DesktopMgr.Inst.mainrole.OnDiscardTile(mjcore.MJPai.Create(n[0].hu_tile), 0, 1) : view.DesktopMgr.Inst.players[view.DesktopMgr.Inst.seat2LocalPosition(a)].recordDiscardTile(mjcore.MJPai.Create(n[0].hu_tile), true, 0, 1);
-            if (view.DesktopMgr.Inst.lastqipai) view.DesktopMgr.Inst.lastqipai.isxuezhanhu = !0, view.DesktopMgr.Inst.lastqipai.OnChoosedPai();
+            view.DesktopMgr.Inst.players[view.DesktopMgr.Inst.seat2LocalPosition(a)].AddBabei(mjcore.MJPai.Create(n[0].hu_tile), true, 0);
+            if (view.DesktopMgr.Inst.lastqipai)
+                view.DesktopMgr.Inst.lastqipai.isxuezhanhu = !0, view.DesktopMgr.Inst.lastqipai.OnChoosedPai();
         } else {
             if (!view.DesktopMgr.Inst.isLastPaiMingPai())
                 view.DesktopMgr.Inst.players[view.DesktopMgr.Inst.seat2LocalPosition(view.DesktopMgr.Inst.lastpai_seat)].QiPaiNoPass();
             else {
                 view.DesktopMgr.Inst.lastqipai.lastColor = new Laya.Vector4(1, .78, .78, .4);
-                view.DesktopMgr.Inst.lastqipai.val.type += 10;
                 view.DesktopMgr.Inst.lastqipai.isxuezhanhu = !0, view.DesktopMgr.Inst.lastqipai.OnChoosedPai()
             }
             for (let s = 0; s < n.length; s++) {
@@ -438,8 +440,6 @@ function editfunction() {
                     view.DesktopMgr.Inst.lastqipai.lastColor = new Laya.Vector4(1, .78, .78, .4);
                 else
                     view.DesktopMgr.Inst.lastqipai.lastColor = new Laya.Vector4(1, .78, .78, 1);
-                if (view.DesktopMgr.Inst.lastqipai)
-                    view.DesktopMgr.Inst.lastqipai.val.type += 10;
                 if (view.DesktopMgr.Inst.lastqipai)
                     view.DesktopMgr.Inst.lastqipai.isxuezhanhu = !0, view.DesktopMgr.Inst.lastqipai.OnChoosedPai()
             }
@@ -474,9 +474,11 @@ function editfunction() {
                 var s = a[0].seat;
                 uiscript.UI_Huleshow.Inst.showZimo([view.DesktopMgr.Inst.seat2LocalPosition(s)]), r += n ? 1200 : 200,
                     Laya.timer.once(r, i, function () {
+                        s === view.DesktopMgr.Inst.seat ? view.DesktopMgr.Inst.mainrole.OnDiscardTile(mjcore.MJPai.Create(a[0].hu_tile), 0, 0) :
+                            view.DesktopMgr.Inst.players[view.DesktopMgr.Inst.seat2LocalPosition(s)].recordDiscardTile(mjcore.MJPai.Create(a[0].hu_tile), true, 0, 0);
                         view.DesktopMgr.Inst.players[view.DesktopMgr.Inst.seat2LocalPosition(s)].AddBabei(mjcore.MJPai.Create(a[0].hu_tile), true, 1);
-                        if (view.DesktopMgr.Inst.lastqipai) view.DesktopMgr.Inst.lastqipai.isxuezhanhu = !0, view.DesktopMgr.Inst.lastqipai.OnChoosedPai();
-                        s === view.DesktopMgr.Inst.seat ? view.DesktopMgr.Inst.mainrole.OnDiscardTile(mjcore.MJPai.Create(a[0].hu_tile), 0, 0) : view.DesktopMgr.Inst.players[view.DesktopMgr.Inst.seat2LocalPosition(s)].recordDiscardTile(mjcore.MJPai.Create(a[0].hu_tile), true, 0, 0);
+                        if (view.DesktopMgr.Inst.lastqipai)
+                            view.DesktopMgr.Inst.lastqipai.isxuezhanhu = !0, view.DesktopMgr.Inst.lastqipai.OnChoosedPai();
                     })
                 if (view.DesktopMgr.Inst.lastqipai) view.DesktopMgr.Inst.lastqipai.isxuezhanhu = !0;
             } else {
@@ -489,7 +491,6 @@ function editfunction() {
                         view.DesktopMgr.Inst.players[view.DesktopMgr.Inst.seat2LocalPosition(view.DesktopMgr.Inst.lastpai_seat)].QiPaiNoPass();
                     else {
                         view.DesktopMgr.Inst.lastqipai.lastColor = new Laya.Vector4(1, .78, .78, .4);
-                        view.DesktopMgr.Inst.lastqipai.val.type += 10;
                         view.DesktopMgr.Inst.lastqipai.isxuezhanhu = !0, view.DesktopMgr.Inst.lastqipai.OnChoosedPai()
                     }
                     for (let e = 0; e < a.length; e++) {
@@ -500,8 +501,6 @@ function editfunction() {
                             view.DesktopMgr.Inst.lastqipai.lastColor = new Laya.Vector4(1, .78, .78, .4);
                         else
                             view.DesktopMgr.Inst.lastqipai.lastColor = new Laya.Vector4(1, .78, .78, 1);
-                        if (view.DesktopMgr.Inst.lastqipai)
-                            view.DesktopMgr.Inst.lastqipai.val.type += 10;
                         if (view.DesktopMgr.Inst.lastqipai)
                             view.DesktopMgr.Inst.lastqipai.isxuezhanhu = !0, view.DesktopMgr.Inst.lastqipai.OnChoosedPai()
                     }
@@ -991,8 +990,7 @@ function editfunction2() {
             view.DesktopMgr.Inst.is_zhanxing_mode() && (I -= uiscript.UI_Astrology.Inst.getTileCount());
             // W: 岭上摸牌个数, R: 王牌数
             var r = view.DesktopMgr.Inst.get_gang_count()
-                , B = view.DesktopMgr.Inst.game_config.mode.detail_rule &&
-            view.DesktopMgr.Inst.game_config.mode.detail_rule._xueliu ? 0 : view.DesktopMgr.Inst.get_babei_count()
+                , B = view.DesktopMgr.Inst.game_config.mode.detail_rule._xueliu ? 0 : view.DesktopMgr.Inst.get_babei_count()
                 , W = r + B;
             W > 0 && view.DesktopMgr.Inst.waiting_lingshang_deal_tile && W--;
             var R = 14;
@@ -1003,7 +1001,6 @@ function editfunction2() {
 
             view.DesktopMgr.Inst.is_chuanma_mode() && (W = 0, R = 0);
             // 添加内容: 国标麻将无王牌
-            view.DesktopMgr.Inst.game_config.mode.detail_rule &&
             view.DesktopMgr.Inst.game_config.mode.detail_rule._guobiao && (R = 0);
             // L: 玩家的起手显示牌数, G: 可摸牌数
             var L = view.DesktopMgr.Inst.sha256 ? view.DesktopMgr.Inst.rule_mode === view.ERuleMode.Liqi3 ? 40 : view.DesktopMgr.Inst.is_wanxiangxiuluo_mode() ? 49 : 53 : 0
