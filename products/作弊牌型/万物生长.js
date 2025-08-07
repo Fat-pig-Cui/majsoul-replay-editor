@@ -23,6 +23,7 @@ config = {
     mode: {
         mode: 1,
         detail_rule: {
+            _wanwushengzhang: true,
         }
     }
 };
