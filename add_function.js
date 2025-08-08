@@ -6,6 +6,15 @@
  */
 'use strict';
 
+/**
+ * editfunction 实现了以下功能:
+ * 1. 血流成河模式
+ * 2. 开立直开牌
+ * 3. 拔北可以拔其他牌, 且国标补花不播放语音
+ * 4. 二人麻将, 并加入房间描述
+ * 5. 明杠, 暗杠后立即显示听牌变化
+ * 6. 国标麻将错和
+ */
 function editfunction() {
     // ActionDiscardTile 改动: 添加 kailiqi
     view.ActionDiscardTile.record = function (K, U) {
@@ -259,7 +268,7 @@ function editfunction() {
         K.muyu && view.DesktopMgr.Inst.onMuyuChange(K.muyu, !1);
     }
 
-    // ActionBabei 改动: 拔的牌可以是其他牌, 且国标模式不播放语音
+    // ActionBabei 改动: 拔的牌可以是其他牌, 且国标补花不播放语音
     view.ActionBabei.record = function (K, U) {
         void 0 === U && (U = 0),
             app.Log.log('ActionBabei record data:' + JSON.stringify(K)), K.doras && view.DesktopMgr.Inst.WhenDoras(K.doras, !0);
@@ -952,6 +961,12 @@ function editfunction() {
     }
 }
 
+/**
+ * editfunction2 实现了以下功能:
+ * 1. 二人麻将牌山的显示
+ * 2. 国标不显示王牌
+ * 3. 血流成河不计算拔牌数
+ */
 function editfunction2() {
     // 牌谱界面牌山信息
     uiscript.UI_Replay.Inst.page_paishan.setInfo = function () {

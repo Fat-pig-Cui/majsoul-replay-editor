@@ -158,3 +158,9 @@ doc: [牌谱里面到底记载了什么](https://github.com/Fat-pig-Cui/misc-cod
 这是基于上述 GetPaipuJSON.js 制作的一个真实牌谱转自制牌谱的脚本, 用法类似
 
 目前支持段位场规则和其他活动场规则, 但没有测试
+
+### 天凤牌谱编辑器JSON文件转雀魂格式
+
+脚本: [touhou_json_2_majsoul.js](天凤牌谱编辑器数据转雀魂格式/touhou_json_2_majsoul.js), 需要先载入 main.js 使用
+
+详见 [README.md](天凤牌谱编辑器数据转雀魂格式/README.md)
