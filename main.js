@@ -959,12 +959,12 @@ function mingpai(seat, tiles, jifei) {
         type = 0;
         froms = [seat, seat, from];
         split_tiles = [tiles[0], tiles[1], tile];
-        fulu[seat].push({type: 0, tile: split_tiles, from: from});
+        fulu[seat].push({type: 0, tile: split_tiles.slice(), from: from});
     } else if (tiles.length === 2) { // 碰
         type = 1;
         froms = [seat, seat, from];
         split_tiles = [tiles[0], tiles[1], tile];
-        fulu[seat].push({type: 1, tile: split_tiles, from: from});
+        fulu[seat].push({type: 1, tile: split_tiles.slice(), from: from});
 
         // 幻境传说: 庄家卡4
         if (get_field_spell_mode1() === 4 && seat === ju)
@@ -973,7 +973,7 @@ function mingpai(seat, tiles, jifei) {
         type = 2;
         froms = [seat, seat, seat, from];
         split_tiles = [tiles[0], tiles[1], tiles[2], tile];
-        fulu[seat].push({type: 2, tile: split_tiles, from: from});
+        fulu[seat].push({type: 2, tile: split_tiles.slice(), from: from});
 
         // 幻境传说: 庄家卡4
         if (get_field_spell_mode1() === 4 && seat === ju)
@@ -1514,7 +1514,7 @@ function hupai(allseats, type) {
         // '包'字的选择
         // 包牌比包杠优先, 因为雀魂目前没有包杠, 以雀魂为主
         if (!is_guobiao() && baogangseat > -1)
-            baopait = baogangseat + 1
+            baopait = baogangseat + 1;
         baogangseat = -1;
         // 多家包牌, 自摸情况下以最先包牌的玩家为准
         // 荣和情况下, 以距放铳玩家最近的玩家的最先包牌的玩家为准
@@ -10246,7 +10246,7 @@ function edit_offline() {
             update_views();
             DIY_fans();
             guobiao_fans();
-            guobiao_function();
+            optimize_function();
             if (editdata.actions.length === 0) {
                 console.error('没有载入自制牌谱, 不可查看, 若要查看真实牌谱, 请输入 resetpaipu()');
                 return;
@@ -10391,13 +10391,16 @@ function edit_offline() {
 }
 
 // ===========================================
-// ============== 国标的优化函数 ===============
+// ============== 一些的优化函数 ===============
 // ===========================================
 
-function guobiao_function() {
+function optimize_function() {
     // 修正多赤的暗杠
     view.ActionAnGangAddGang.getAngangTile = function (tile, seat) {
         let hand = view.DesktopMgr.Inst.players[view.DesktopMgr.Inst.seat2LocalPosition(seat)].hand;
+        tile = tile.substring(0, 2);
+        if (tile[0] === '0')
+            tile[0] = '5';
         let mj_tile = mjcore.MJPai.Create(tile);
         let dora_cnt = 0; // 红宝牌数量
 
@@ -10412,16 +10415,100 @@ function guobiao_function() {
         let angang_tiles = [];
         for (let i = 0; i < 4; i++) {
             let mjp = mjcore.MJPai.Create(tile);
-            mjp.dora = false;
             angang_tiles.push(mjp);
         }
         if (view.DesktopMgr.Inst.is_jiuchao_mode())
             angang_tiles[0].touming = angang_tiles[1].touming = angang_tiles[2].touming = true;
+
         for (let i = 1; i <= dora_cnt; i++)
             angang_tiles[i % 4].dora = true;
 
         view.DesktopMgr.Inst.waiting_lingshang_deal_tile = true;
         return angang_tiles;
+    }
+
+    // 添加 category 为 3: '段位场' , 99: '装扮预览' 的情况
+    // 逐渐取代 '四人东' 为对应模式的名称
+    game.Tools.get_room_desc = function(config) {
+        if (!config)
+            return {
+                text: '',
+                isSimhei: !1
+            };
+        let text = '';
+        if (config.meta && config.meta.tournament_id) {
+            let n = cfg.tournament.tournaments.get(config.meta.tournament_id);
+            return n && (text = n.name),
+                {
+                    text: text,
+                    isSimhei: !0
+                };
+        }
+        if (1 === config.category) {
+            if (config.mode.detail_rule)
+            text += '友人场\xB7';
+        }
+        else if (4 === config.category)
+            text += '比赛场\xB7';
+        else if (2 === config.category) {
+            let S = config.meta;
+            if (S) {
+                let M = cfg.desktop.matchmode.get(S.mode_id);
+                M && (text += M['room_name_' + GameMgr.client_language] + '\xB7');
+            }
+        } else if (100 === config.category)
+            return {
+                text: '新手教程',
+                isSimhei: !1
+            };
+        // 添加下面
+        else if (99 === config.category)
+            return {
+                text: '装扮预览',
+                isSimhei: !1
+            };
+        else if (3 === config.category)
+            text += '段位场\xB7';
+        if (config.category && config.mode.detail_rule) {
+            let x = config.mode.detail_rule;
+            if (x.xuezhandaodi)
+                text += '修罗之战';
+            else if (x.chuanma)
+                text += '赤羽之战';
+            else if (x.dora3_mode)
+                text += '宝牌狂热';
+            else if (x.begin_open_mode)
+                text += '配牌明牌';
+            else if (x.muyu_mode)
+                text += '龙之目玉';
+            else if (x.jiuchao_mode)
+                text += '明镜之战';
+            else if (x.reveal_discard)
+                text += '暗夜之战';
+            else if (x.field_spell_mode)
+                text += '幻境传说';
+            else if (x.zhanxing)
+                text += '占星之战';
+            else if (x.tianming_mode)
+                text += '天命之战';
+            else if (x.yongchang_mode)
+                text += '咏唱之战';
+            else if (x.hunzhiyiji_mode)
+                text += '魂之一击';
+            else if (x.wanxiangxiuluo_mode)
+                text += '万象修罗';
+            else if (x.beishuizhizhan_mode)
+                text += '背水之战';
+            else if (x._random_views || x._random_skin)
+                text += '随机装扮';
+            else
+                text += this.room_mode_desc(config.mode.mode)
+        }
+        // 添加上面
+        return {
+            text: text,
+            isSimhei: !1
+        };
     }
 
     // 国标添加圈风刻, 门风刻语音, 并不显示宝牌指示牌

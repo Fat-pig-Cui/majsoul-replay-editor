@@ -1,13 +1,4 @@
-// 将从天凤牌谱编辑的数据赋值给 json 变量, 例子:
-/*
-{"title":["",""],"name":["COM0","COM1","COM2","COM3"],"rule":{"disp":"玉の間四人南","aka":1},"log":[[[0,0,0],[25000,25000,25000,25000],[13],[],[13,14,41,41,43,31,11,28,26,17,36,29,36],[26,"p414141",17,"c121314",43,45,37,31,26,23,19,43,21,24,32,11,35,52],[43,31,11,28,26,17,45,36,37,26,43,60,23,19,17,36,32,60],[39,47,46,41,22,34,17,33,14,37,25,19,18],[45,53,23,28,13,32,34,33,47,46,19,43,27,23,24,32,25,16],[39,47,46,60,41,22,34,17,33,14,37,33,23,18,46,45,43,47],[19,31,32,38,13,37,14,22,26,16,12,14,22],[12,38,39,28,39,35,47,42,25,42,21,23,46,44,27,37,34,18],[19,31,32,38,60,60,60,60,60,60,60,60,60,60,60,60,60,60],[41,11,42,11,18,15,21,36,33,33,45,21,38],[24,44,12,44,27,31,17,16,22,18,51,46,35,15,39,15,38,29],[41,11,60,42,11,60,60,60,60,60,60,38,21,18,60,27,60,46],["不明"]]]}
-*/
-
 clearproject();
-
-let json = JSON.parse(prompt('Please Enter JSON from touhou.net/6/:'));
-if (!json)
-    throw new Error('User canceled input');
 
 player_datas[0].avatar_id = 400102;
 player_datas[1].avatar_id = 400104;
@@ -15,11 +6,11 @@ player_datas[2].avatar_id = 400105;
 player_datas[3].avatar_id = 400106;
 
 config = {
-    category: 1,
+    category: 3,
     meta: {mode_id: 0},
     mode: {
         mode: 2,
-        detail_rule: {
+        detail_rule: { // 无流满, 无罚符
             _no_liujumanguan: true,
             _fafu_1ting: 0,
             _fafu_2ting: 0,
@@ -27,22 +18,23 @@ config = {
             _fafu_3p_1ting: 0,
             _fafu_3p_2ting: 0,
             _fafu_2p: 0,
-
             _local_position_: 0,
+            _buquanshoupai: true,
         }
     }
 };
 
-function main_function(){
-
-    // 玩家数
-    playercnt = 4;
-
+function main_function() {
+    /* 将从天凤牌谱编辑的数据赋值给 json 变量, 两个例子:
+    {"title":["",""],"name":["COM0","COM1","COM2","COM3"],"rule":{"aka":1},"log":[[[0,0,0],[25000,25000,25000,25000],[13],[],[13,14,41,41,43,31,11,28,26,17,36,29,36],[26,"p414141",17,"c121314",43,45,37,31,26,23,19,43,21,24,32,11,35,52],[43,31,11,28,26,17,45,36,37,26,43,60,23,19,17,36,32,60],[39,47,46,41,22,34,17,33,14,37,25,19,18],[45,53,23,28,13,32,34,33,47,46,19,43,27,23,24,32,25,16],[39,47,46,60,41,22,34,17,33,14,37,33,23,18,46,45,43,47],[19,31,32,38,13,37,14,22,26,16,12,14,22],[12,38,39,28,39,35,47,42,25,42,21,23,46,44,27,37,34,18],[19,31,32,38,60,60,60,60,60,60,60,60,60,60,60,60,60,60],[41,11,42,11,18,15,21,36,33,33,45,21,38],[24,44,12,44,27,31,17,16,22,18,51,46,35,15,39,15,38,29],[41,11,60,42,11,60,60,60,60,60,60,38,21,18,60,27,60,46],["全員聴牌"]]]}
+    {"title":["",""],"name":["COM0","COM1","COM2","COM3"],"rule":{"aka":1},"log":[[[0,0,1],[25000,25000,25000,25000],[52],[],[43,39,21,18,29,41,34,42,31,19,18,31,36],[15,28,37,22,27,42,33,15,19,37,46,13,27,17,26,43,35,12,42],[43,39,21,60,18,29,41,34,"r15",60,60,60,60,60,60,60,60,60,60],[47,42,13,45,45,21,19,11,23,35,14,12,24],[26,24,14,25,31,41,44,44,34,16,17,17,38,14,46,21,34,36],[47,42,13,45,60,60,60,60,14,19,16,45,12,35,21,14,26,34],[15,51,41,41,45,45,29,47,46,22,18,34,26],[16,16,39,"p454545",38,"p414141",44,11,"15p1551",36,23,33,25,23,14,11,17,12],[29,47,46,22,18,34,60,60,26,60,60,60,60,60,60,60,60,60],[29,39,44,24,13,32,38,22,28,39,16,23,36],[46,47,19,37,35,38,31,27,29,12,47,21,28,27,43,32,24,25],[29,60,39,60,60,44,24,60,31,32,60,36,13,39,29,27,23,19],["全員聴牌"]]]}
+    */
+    let json = JSON.parse(prompt('Please Enter JSON from touhou.net/6/:'));
+    if (!json)
+        throw new Error('User canceled input');
     const log = json.log;
-    config.mode.detail_rule._chang_ju_ben_num_ = [chang, ju, ben] = log[0].shift();
+    config.mode.detail_rule._chang_ju_ben_num_ = [, ju,] = log[0].shift();
     config.mode.detail_rule._scores_ = log[0].shift();
-    config.mode.mode = playercnt === 4 ? 2 : 12;
-
     const biao_dora = log[0].shift();
     const li_dora = log[0].shift();
     const dict = {
@@ -71,7 +63,18 @@ function main_function(){
         new_qiepaiset[i] = log[0][3 * i + 2];
     }
 
-    // while 循环关键变量, seati 表示要操作的玩家, nxt_step 表示下个操作的类型
+    if (tiles[2].length !== 0 && tiles[3].length === 0)
+        config.mode.mode = 12; // 三麻
+    if (config.mode.mode === 12) { // 三麻点数修正
+        let all_4p_points = true;
+        for (let i in config.mode.detail_rule._scores_)
+            if (config.mode.detail_rule._scores_[i] !== 25000)
+                all_4p_points = false;
+        if (all_4p_points) // 三麻点数修正
+            config.mode.detail_rule._scores_ = [35000, 35000, 35000];
+    }
+
+    // while 循环关键变量: seati 表示要操作的玩家, nxt_step 表示下个操作的类型
     let seati = ju, nxt_step = 'mopai';
     while (true) {
         switch (nxt_step) {
@@ -93,14 +96,15 @@ function main_function(){
             case 'babei':
                 break;
         }
-        if (nxt_step === 'liuju'){
+        if (nxt_step === 'liuju') {
             notileliuju();
             break;
         }
     }
+
     // new_mopai 不会改变 seati
-    function new_mopai(){
-        if (mopai_xunmu[seati] >= new_mopaiset[seati].length){
+    function new_mopai() {
+        if (mopai_xunmu[seati] >= new_mopaiset[seati].length) {
             nxt_step = 'liuju';
             return;
         }
@@ -119,7 +123,8 @@ function main_function(){
             }
             randompaishan('', zhishipais + '....');
             roundbegin();
-            function process(tiles){
+
+            function process(tiles) {
                 let ret = '';
                 for (let i in tiles)
                     ret += dict[tiles[i]];
@@ -141,12 +146,12 @@ function main_function(){
     }
 
     function new_qiepai() {
-        if (qiepai_xunmu[seati] >= new_qiepaiset[seati].length){
+        if (qiepai_xunmu[seati] >= new_qiepaiset[seati].length) {
             nxt_step = 'liuju';
             return;
         }
         let is_liqi = false, tile;
-        if (typeof new_qiepaiset[seati][qiepai_xunmu[seati]] == 'string'){
+        if (typeof new_qiepaiset[seati][qiepai_xunmu[seati]] == 'string') {
             tile = dict[parseInt(new_qiepaiset[seati][qiepai_xunmu[seati]].substring(1))];
             is_liqi = true;
         } else
@@ -162,7 +167,7 @@ function main_function(){
                 let tmp_fulu_from_seat;
                 let tmp_fulu_type;
                 [tmp_fulu_from_seat, tmp_fulu_type] = judgefulu(tmp_fulu, tmp_seat);
-                if (tmp_fulu_from_seat === seati && tmp_fulu_type === 'a'){
+                if (tmp_fulu_from_seat === seati && tmp_fulu_type === 'a') {
                     nxt_step = 'minggang';
                     seati = tmp_seat;
                     return;
@@ -177,7 +182,7 @@ function main_function(){
                 let tmp_fulu_from_seat;
                 let tmp_fulu_type;
                 [tmp_fulu_from_seat, tmp_fulu_type] = judgefulu(tmp_fulu, tmp_seat);
-                if (tmp_fulu_from_seat === seati && tmp_fulu_type === 'p'){
+                if (tmp_fulu_from_seat === seati && tmp_fulu_type === 'p') {
                     nxt_step = 'pon';
                     seati = tmp_seat;
                     return;
@@ -191,7 +196,7 @@ function main_function(){
             let tmp_fulu_from_seat;
             let tmp_fulu_type;
             [tmp_fulu_from_seat, tmp_fulu_type] = judgefulu(tmp_fulu, tmp_seat);
-            if (tmp_fulu_from_seat === seati && tmp_fulu_type === 'c'){
+            if (tmp_fulu_from_seat === seati && tmp_fulu_type === 'c') {
                 nxt_step = 'chi';
                 seati = tmp_seat;
                 return;
@@ -227,11 +232,12 @@ function main_function(){
             for (let i in fulu_types)
                 if (fulu.indexOf(fulu_types[i]) !== -1) {
                     fulu_type = fulu_types[i];
-                    let index = fulu_types.indexOf(fulu_types[i]);
-                    return [fulu.substring(0,index) + fulu.substring(index + 3), fulu_type];
+                    let index = fulu.indexOf(fulu_types[i]);
+                    return [fulu.substring(0, index) + fulu.substring(index + 3), fulu_type];
                 }
             return [];
         }
+
         let fulu = new_mopaiset[seati][mopai_xunmu[seati]];
         mopai_xunmu[seati]++;
         let tmp_tiles, fulu_type;
@@ -246,8 +252,7 @@ function main_function(){
         if (fulu_type === 'm') {
             qiepai_xunmu[seati]++;
             nxt_step = 'mopai';
-        }
-        else
+        } else
             nxt_step = 'qiepai';
     }
 
@@ -259,18 +264,23 @@ function main_function(){
             for (let i in fulu_types)
                 if (fulu.indexOf(fulu_types[i]) !== -1) {
                     fulu_type = fulu_types[i];
-                    let index = fulu_types.indexOf(fulu_types[i]);
-                    return [fulu.substring(0,index) + fulu.substring(index + 3), fulu_type];
+                    let index = fulu.indexOf(fulu_types[i]);
+                    return [fulu.substring(0, index) + fulu.substring(index + 3), fulu_type];
                 }
             return [];
         }
 
+        let fulu = new_qiepaiset[seati][qiepai_xunmu[seati]];
+        qiepai_xunmu[seati]++;
+
         let tmp_tiles;
         let fulu_type;
-        [tmp_tiles, fulu_type] = parse_fulu();
+        [tmp_tiles, fulu_type] = parse_fulu(fulu);
         let tile = dict[parseInt(tmp_tiles.substring(0, 2))];
-        let type = fulu_type === 'a'?'angang':'jiagang';
+        let type = fulu_type === 'a' ? 'angang' : 'jiagang';
         leimingpai(seati, tile, type);
+
+        nxt_step = 'mopai';
     }
 }
 

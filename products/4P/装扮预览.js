@@ -23,7 +23,7 @@ player_datas[1] = {
 };
 
 config = {
-    category: 1,
+    category: 99,
     meta: {mode_id: 0},
     mode: {
         mode: 1,
