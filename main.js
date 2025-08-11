@@ -10281,30 +10281,30 @@ function optimize_function() {
     // 修正多赤的暗杠
     view.ActionAnGangAddGang.getAngangTile = function (tile, seat) {
         let hand = view.DesktopMgr.Inst.players[view.DesktopMgr.Inst.seat2LocalPosition(seat)].hand;
-        tile = tile.substring(0, 2);
-        if (tile[0] === '0')
-            tile[0] = '5';
         let mj_tile = mjcore.MJPai.Create(tile);
         let dora_cnt = 0; // 红宝牌数量
+        let touming_cnt = 0; // 透明牌数量
 
         // 贪心策略: 优先杠出赤宝牌
         for (let i = 0; i < hand.length; i++) {
-            if (dora_cnt === 4)
-                break;
-            if (hand[i].val.numValue() === mj_tile.numValue() && hand[i].val.dora)
-                dora_cnt++;
+            if (mjcore.MJPai.Distance(hand[i].val, mj_tile) === 0 && hand[i].val.dora)
+                dora_cnt = Math.min(dora_cnt + 1, 4);
+            if (mjcore.MJPai.Distance(hand[i].val, mj_tile) === 0 && hand[i].val.touming)
+                touming_cnt = Math.min(touming_cnt + 1, 4);
         }
 
         let angang_tiles = [];
         for (let i = 0; i < 4; i++) {
             let mjp = mjcore.MJPai.Create(tile);
+            mjp.dora = false;
+            mjp.touming = false;
             angang_tiles.push(mjp);
         }
-        if (view.DesktopMgr.Inst.is_jiuchao_mode())
-            angang_tiles[0].touming = angang_tiles[1].touming = angang_tiles[2].touming = true;
 
         for (let i = 1; i <= dora_cnt; i++)
             angang_tiles[i % 4].dora = true;
+        for (let i = 0; i < touming_cnt; i++)
+            angang_tiles[i].touming = true;
 
         view.DesktopMgr.Inst.waiting_lingshang_deal_tile = true;
         return angang_tiles;
