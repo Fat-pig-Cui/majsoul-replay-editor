@@ -32,7 +32,7 @@ config = {
             _mjp_id: 308030, // 牌背-假面的裁决
             _mjpsurface_id: 305718, // 牌面-猫咪雀圣
 
-            _local_position_: 1,
+            _mainrole_: 1,
         }
     }
 };

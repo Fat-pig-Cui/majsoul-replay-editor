@@ -20,7 +20,7 @@ config = {
     mode: {
         mode: 2,
         detail_rule: {
-            _local_position_: 3,
+            _mainrole_: 3,
         }
     }
 };

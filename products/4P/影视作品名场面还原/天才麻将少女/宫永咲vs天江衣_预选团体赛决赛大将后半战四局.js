@@ -34,7 +34,7 @@ config = {
 
             _chang_ju_ben_num_: [0, 1, 3], // 东2局3本场
             _scores_: [0, 187900, 113200, 98900],
-            _local_position_: 2,
+            _mainrole_: 2,
         }
     }
 };

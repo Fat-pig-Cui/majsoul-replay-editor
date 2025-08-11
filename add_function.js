@@ -693,8 +693,8 @@ function editfunction() {
                 V.name = O.name,
                 V.data = O.data,
                 // GameMgr.Inst.onFatalError(V),
-                console.error(U),
-                1000000;
+                // 1000000;
+                throw new Error(V);
         }
     };
     uiscript.UI_Replay.prototype.doFastRecord = function (O) {
@@ -785,8 +785,8 @@ function editfunction() {
                 U.name = O.name,
                 U.data = O.data,
                 // GameMgr.Inst.onFatalError(U),
-                console.error(U),
-                1000000;
+                // 1000000;
+                throw new Error(U);
         }
         return 0;
     }
@@ -977,7 +977,8 @@ function editfunction2() {
             view.DesktopMgr.Inst.is_zhanxing_mode() && (I -= uiscript.UI_Astrology.Inst.getTileCount());
             // W: 岭上摸牌个数, R: 王牌数
             var r = view.DesktopMgr.Inst.get_gang_count()
-                , B = view.DesktopMgr.Inst.game_config.mode.detail_rule._xueliu ? 0 : view.DesktopMgr.Inst.get_babei_count()
+                ,
+                B = view.DesktopMgr.Inst.game_config.mode.detail_rule._xueliu ? 0 : view.DesktopMgr.Inst.get_babei_count()
                 , W = r + B;
             W > 0 && view.DesktopMgr.Inst.waiting_lingshang_deal_tile && W--;
             var R = 14;

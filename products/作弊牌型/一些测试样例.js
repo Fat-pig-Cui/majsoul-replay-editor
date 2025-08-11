@@ -48,7 +48,7 @@ tiles3 = '1112340678999s';
 randompaishan('', '666z............');
 roundbegin();
 qiepai(true);
-for (let i = 0; i < 17; i++){
+for (let i = 0; i < 17; i++) {
     normalmoqie(3);
     moqieliqi();
 }

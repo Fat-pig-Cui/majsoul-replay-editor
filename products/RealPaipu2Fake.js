@@ -1,10 +1,7 @@
-function RealPaipu2Fake(paipulink = '') {
-    if (paipulink === '')
-        paipulink = prompt('Please Enter a Paipu Link or Paipu UUID.');
-    if (!paipulink) {
-        console.log('User canceled input');
-        return;
-    }
+(function () {
+    let paipulink = prompt('Please Enter a Paipu Link or Paipu UUID.');
+    if (!paipulink)
+        throw new Error('User canceled input')
     paipulink = paipulink.split('=');
     paipulink = paipulink[paipulink.length - 1].split('_');
     let uuid = paipulink[0];
@@ -214,7 +211,7 @@ function RealPaipu2Fake(paipulink = '') {
                     let j = i - 1;
                     while (!actions[j].result)
                         j--;
-                    if (actions[j].result.name === 'RecordUnveilTile'){
+                    if (actions[j].result.name === 'RecordUnveilTile') {
                         let seat = actions[j].result.data.seat;
                         if (actions[j].result.data.lock_state === 1)
                             txt += `unveil_lock(${seat});\n`;
@@ -239,6 +236,4 @@ function RealPaipu2Fake(paipulink = '') {
             return `${chang_word[chang]}${ju + 1}局${ben}本场`;
         }
     }
-}
-
-RealPaipu2Fake();
+})();

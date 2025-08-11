@@ -1,10 +1,7 @@
-function GetPaipuJSON(paipulink = '') {
-    if (paipulink === '')
-        paipulink = prompt('Please Enter a Paipu Link or Paipu UUID.');
-    if (!paipulink) {
-        console.log('User canceled input');
-        return;
-    }
+(function () {
+    let paipulink = prompt('Please Enter a Paipu Link or Paipu UUID.');
+    if (!paipulink)
+        throw new Error('User canceled input');
     paipulink = paipulink.split('=');
     paipulink = paipulink[paipulink.length - 1].split('_');
     let uuid = paipulink[0];
@@ -70,6 +67,4 @@ function GetPaipuJSON(paipulink = '') {
             gameRecordJson.data = {name: gameDetailRecordsWrapper.name, data: gameDetailRecordsJson};
             download(gameRecordJson, uuid);
         });
-}
-
-GetPaipuJSON();
+})();

@@ -138,7 +138,7 @@
     - 对局操作语音合集
         - [Generator_3P.py](3P/对局操作语音合集/Generator_3P.py)
 
-## 其他文件 
+## 其他文件
 
 ### 牌谱信息文件 [paipu_record.json](paipu_record.json) 及 获取脚本 [GetPaipuJSON.js](GetPaipuJSON.js)
 

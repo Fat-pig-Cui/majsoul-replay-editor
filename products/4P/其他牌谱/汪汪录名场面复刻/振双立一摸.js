@@ -20,7 +20,7 @@ config = {
         detail_rule: {
             _chang_ju_ben_num_: [0, 2, 0], // 东3局0本场
             _scores_: [24600, 25300, 24600, 25500],
-            _local_position_: 3,
+            _mainrole_: 3,
         }
     }
 };

@@ -133,7 +133,7 @@ B站视频教程(偏过时): [【雀魂】如何自制牌谱回放](https://www.
 
 1. md5算法源自 [百度百科](https://baike.baidu.com/item/MD5)
 
-2. 更改回放的方法参考了B站 [一般通过彳亍人](https://space.bilibili.com/23019265)
+2. 更改回放的方法参考了B站 [一般通过彳亍人(现: 一般通过转转)](https://space.bilibili.com/23019265)
    的 [BV1HE411Q7JM](https://www.bilibili.com/video/BV1HE411Q7JM)
 
 3. 血流成河的实现方式中的使牌颜色变淡参考了

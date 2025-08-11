@@ -1,7 +1,8 @@
 {
   "dependencies": {
     "flow-bin": "^0.278.0",
-    "flow-remove-types": "^2.278.0"
+    "flow-remove-types": "^2.278.0",
+    "typescript": "^5.9.2"
   },
   "scripts": {
     "flow": "flow"

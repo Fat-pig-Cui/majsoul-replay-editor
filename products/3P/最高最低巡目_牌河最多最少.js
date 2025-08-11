@@ -16,8 +16,7 @@ config = {
     meta: {mode_id: 0},
     mode: {
         mode: 11,
-        detail_rule: {
-        }
+        detail_rule: {}
     }
 };
 
@@ -60,7 +59,6 @@ for (let i = 0; i < 4; i++) {
     normalmoqie(2);
 }
 moqieliuju();
-
 
 
 // 要让一家牌河最多, 那该家最好是亲家

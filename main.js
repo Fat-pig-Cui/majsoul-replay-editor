@@ -43,9 +43,8 @@ let player_datas;
  *          - init_point: 各玩家初始点数, 默认根据玩家数和模式自动选择
  *          - dora_count: 红宝牌数量, 默认为3
  *          - chuanma: 是否是赤羽之战模式, 默认否
- *          - _qieshangmanguan: 是否切上满管, 默认否
- *          - _guobiao: 是否为过百哦模式, 默认否
- *
+ *          - _qieshangmanguan: 是否切上满贯, 默认否
+ *          - _guobiao: 是否为国标模式, 默认否
  * @type {{category: number, meta: {mode_id: number}, mode: {mode: number, detail_rule: {}}}}
  */
 let config;
@@ -120,9 +119,7 @@ function clearproject() {
  * @param {string} [psback] - 牌山结尾
  */
 function randompaishan(pshead = '', psback = '') {
-    function randomcmp() {
-        return Math.random() - 0.5;
-    }
+    const randomcmp = () => Math.random() - 0.5;
 
     if (editdata.actions.length === 0 && gamebegin_once)
         gamebegin();
@@ -135,9 +132,9 @@ function randompaishan(pshead = '', psback = '') {
         let tiles_len = tiles[i].length;
         if (i === ju) {
             if (tiles_len > Qin_tiles_num || tiles_len < Qin_tiles_num && !is_buquanshoupai())
-                console.warn(roundinfo() + `tiles${i} 作为庄家牌数量不对: ${tiles_len}`);
+                console.warn(roundinfo() + `tiles${i} 作为亲家牌数量不对: ${tiles_len}`);
             else if (tiles_len < Qin_tiles_num && is_buquanshoupai())
-                console.log(roundinfo() + `tiles${i} 作为庄家牌数量不够: ${tiles_len}, 自动补全至14张`);
+                console.log(roundinfo() + `tiles${i} 作为亲家牌数量不够: ${tiles_len}, 自动补全至14张`);
         } else {
             if (tiles_len > Xian_tiles_num || tiles_len < Xian_tiles_num && !is_buquanshoupai())
                 console.warn(roundinfo() + `tiles${i} 作为闲家牌数量不对: ${tiles_len}`);
@@ -313,7 +310,7 @@ function roundbegin() {
     if (is_dora3())
         doracnt.cnt = doracnt.licnt = 3;
 
-    // 计算各玩家开局的听牌, 庄家开局听的牌无法显示
+    // 计算各玩家开局的听牌, 亲家开局听的牌无法显示
     let lastile = playertiles[ju].pop();
     let tingpai = [];
     for (let seat = 0; seat < playercnt; seat++) {
@@ -1532,7 +1529,7 @@ function hupai(allseats, type) {
 
         for (let i = 0; i < playercnt; i++)
             delta_scores[i] = 0;
-        if (hupaied[ju]) { // 庄家和牌, 则连庄
+        if (hupaied[ju]) { // 亲家和牌, 则连庄
             // 国标正常情况下不连庄, 除了设置了 '_guobiao_lianzhuang'
             if (!is_guobiao() || is_guobiao() && is_guobiao_lianzhuang())
                 ben++;
@@ -2389,9 +2386,7 @@ function allequaltiles(tile) {
  * @param {string} y - 牌2
  * @returns {boolean}
  */
-function equaltile(x, y) {
-    return allequaltiles(x).indexOf(y) > -1;
-}
+const equaltile = (x, y) => allequaltiles(x).indexOf(y) > -1;
 
 /**
  * 解析牌, 会将简化后牌编码恢复成单个并列样子
@@ -2405,7 +2400,7 @@ function decompose(tiles) {
     let x = tiles.replace(/\s*/g, '');
     let random_tiles = '.HTYDMPS'; // 随机牌
     let bd_tile_num = x.match(/b/g) ? x.match(/b/g).length : 0;
-    let matches = x.match(/\d+[mpsz]t?|.|H|T|Y|D|M|P|S/g);
+    let matches = x.match(/\d+[mpsz]t?|\.|H|T|Y|D|M|P|S/g);
 
     let ret = '';
     for (let i = 0; i < bd_tile_num; i++)
@@ -3111,7 +3106,7 @@ function gamebegin() {
     if (get_field_spell_mode3() === 2) // 幻境传说: 命运卡2
         liqi_need = 2;
 
-    [chang, ju, ben, liqibang] = get_chang_ju_ben_num_();
+    [chang, ju, ben, liqibang] = get_chang_ju_ben_num();
     if (!liqibang)
         liqibang = 0;
     lianzhuangcnt = 0;
@@ -3374,9 +3369,7 @@ function inttotile(x, type = false) {
  * @param {string} y - tile y
  * @returns {number}
  */
-function cmp(x, y) {
-    return tiletoint(x) - tiletoint(y);
-}
+const cmp = (x, y) => tiletoint(x) - tiletoint(y);
 
 // ===========================================
 
@@ -3574,7 +3567,7 @@ function update_shoumoqie(seat) {
                 i = j + 1;
             }
         yongchang_data[seat][flag ? 'shouqie_count' : 'moqie_count'] = len;
-        yongchang_data[seat][flag ? 'shouqie_bonus' : 'moqie_bonus'] = calcyongchang(seat, flag);
+        yongchang_data[seat][flag ? 'shouqie_bonus' : 'moqie_bonus'] = calcbonus(seat, flag);
     }
 
     /**
@@ -3583,7 +3576,7 @@ function update_shoumoqie(seat) {
      * @param {boolean} flag - 计算类型, false 表示摸切, true 表示手切
      * @returns {number}
      */
-    function calcyongchang(seat, flag) {
+    function calcbonus(seat, flag) {
         const val = yongchang_data[seat][flag ? 'shouqie_count' : 'moqie_count'];
         if (!flag) { // 摸切
             if (val < 3)
@@ -3630,9 +3623,7 @@ function hupaioneplayer(seat) {
      * @param {number} point - 原点数
      * @returns {number}
      */
-    function qieshang(point) {
-        return Math.ceil(point / 100) * 100;
-    }
+    const qieshang = point => Math.ceil(point / 100) * 100;
 
     let lstaction = getlstaction(), zimo = false;
     if (lstaction.name === 'RecordDealTile' || lstaction.name === 'RecordNewRound')
@@ -7332,7 +7323,7 @@ function get_fanfu() {
  * 牌谱第一局的 chang, ju, ben 和场供中的立直棒个数(最后一个参数可以省略)
  * @returns {number[]}
  */
-function get_chang_ju_ben_num_() {
+function get_chang_ju_ben_num() {
     if (config.mode.detail_rule._chang_ju_ben_num_ instanceof Array && config.mode.detail_rule._chang_ju_ben_num_.length >= 3)
         return config.mode.detail_rule._chang_ju_ben_num_;
     return [0, 0, 0, 0];
@@ -7353,8 +7344,8 @@ function get_init_scores() {
  * @returns {number}
  */
 function get_mainrole_seat() {
-    if (typeof config.mode.detail_rule._local_position_ == 'number' && config.mode.detail_rule._local_position_ > -1)
-        return config.mode.detail_rule._local_position_;
+    if (typeof config.mode.detail_rule._mainrole_ == 'number' && config.mode.detail_rule._mainrole_ > -1)
+        return config.mode.detail_rule._mainrole_;
     return -1;
 }
 
@@ -7363,65 +7354,49 @@ function get_mainrole_seat() {
  * 是否为修罗之战模式
  * @returns {boolean}
  */
-function is_xuezhandaodi() {
-    return config.mode.detail_rule.xuezhandaodi;
-}
+const is_xuezhandaodi = () => config.mode.detail_rule.xuezhandaodi;
 
 /**
  * 是否是赤羽之战模式
  * @returns {boolean}
  */
-function is_chuanma() {
-    return config.mode.detail_rule.chuanma;
-}
+const is_chuanma = () => config.mode.detail_rule.chuanma;
 
 /**
  * 是否为宝牌狂热模式
  * @returns {boolean}
  */
-function is_dora3() {
-    return config.mode.detail_rule.dora3_mode;
-}
+const is_dora3 = () => config.mode.detail_rule.dora3_mode;
 
 /**
  * 是否为配牌明牌模式
  * @returns {boolean}
  */
-function is_peipaimingpai() {
-    return config.mode.detail_rule.begin_open_mode;
-}
+const is_peipaimingpai = () => config.mode.detail_rule.begin_open_mode;
 
 /**
  * 是否为龙之目玉模式
  * @returns {boolean}
  */
-function is_muyu() {
-    return config.mode.detail_rule.muyu_mode;
-}
+const is_muyu = () => config.mode.detail_rule.muyu_mode;
 
 /**
  * 是否为明镜之战模式
  * @returns {boolean}
  */
-function is_mingjing() {
-    return config.mode.detail_rule.jiuchao_mode;
-}
+const is_mingjing = () => config.mode.detail_rule.jiuchao_mode;
 
 /**
  * 是否为暗夜之战模式
  * @returns {boolean}
  */
-function is_anye() {
-    return config.mode.detail_rule.reveal_discard;
-}
+const is_anye = () => config.mode.detail_rule.reveal_discard;
 
 /**
  * 是否为幻境传说模式
  * @returns {boolean}
  */
-function is_field_spell() {
-    return typeof config.mode.detail_rule.field_spell_mode == 'number';
-}
+const is_field_spell = () => typeof config.mode.detail_rule.field_spell_mode == 'number';
 
 /**
  * 获取幻境传说模式的庄家卡
@@ -7457,98 +7432,74 @@ function get_field_spell_mode3() {
  * 是否为占星之战模式
  * @returns {boolean}
  */
-function is_zhanxing() {
-    return config.mode.detail_rule.zhanxing;
-}
+const is_zhanxing = () => config.mode.detail_rule.zhanxing;
 
 /**
  * 是否为天命之战模式
  * @returns {boolean}
  */
-function is_tianming() {
-    return config.mode.detail_rule.tianming_mode;
-}
+const is_tianming = () => config.mode.detail_rule.tianming_mode;
 
 /**
  * 是否为咏唱之战模式
  * @returns {boolean}
  */
-function is_yongchang() {
-    return config.mode.detail_rule.yongchang_mode;
-}
+const is_yongchang = () => config.mode.detail_rule.yongchang_mode;
 
 /**
  * 是否为魂之一击模式
  * @returns {boolean}
  */
-function is_hunzhiyiji() {
-    return config.mode.detail_rule.hunzhiyiji_mode;
-}
+const is_hunzhiyiji = () => config.mode.detail_rule.hunzhiyiji_mode;
 
 /**
  * 是否为万象修罗模式
  * @returns {boolean}
  */
-function is_wanxiangxiuluo() {
-    return config.mode.detail_rule.wanxiangxiuluo_mode;
-}
+const is_wanxiangxiuluo = () => config.mode.detail_rule.wanxiangxiuluo_mode;
 
 /**
  * 是否为背水之战模式
  * @returns {boolean}
  */
-function is_beishuizhizhan() {
-    return config.mode.detail_rule.beishuizhizhan_mode;
-}
+const is_beishuizhizhan = () => config.mode.detail_rule.beishuizhizhan_mode;
 
 /**
  * 是否为血流成河模式
  * @returns {boolean}
  */
-function is_xueliu() {
-    return config.mode.detail_rule._xueliu;
-}
+const is_xueliu = () => config.mode.detail_rule._xueliu;
 
 // -------------------------------------------
 /**
  * 是否开启古役
  * @returns {boolean}
  */
-function is_guyi() {
-    return config.mode.detail_rule.guyi_mode;
-}
+const is_guyi = () => config.mode.detail_rule.guyi_mode;
 
 /**
  * 是否开启一番街的古役
  * @returns {boolean}
  */
-function is_yifanjieguyi() {
-    return config.mode.detail_rule._yifanjieguyi;
-}
+const is_yifanjieguyi = () => config.mode.detail_rule._yifanjieguyi;
 
 /**
  * 是否为无食断模式
  * @returns {boolean}
  */
-function no_shiduan() {
-    return config.mode.detail_rule._no_shiduan;
-}
+const no_shiduan = () => config.mode.detail_rule._no_shiduan;
 
 /**
  * 是否为无自摸损模式
  * @returns {boolean}
  */
-function no_zimosun() {
-    return config.mode.detail_rule._no_zimosun;
-}
+const no_zimosun = () => config.mode.detail_rule._no_zimosun;
 
 /**
  * 是否公开手牌
  * @returns {boolean}
  */
-function is_openhand() {
-    return config.mode.detail_rule.open_hand;
-}
+const is_openhand = () => config.mode.detail_rule.open_hand;
 
 // -------------------------------------------
 
@@ -7636,245 +7587,183 @@ function get_fafu_2p() {
  * 是否有切上满贯
  * @returns {boolean}
  */
-function is_qieshang() {
-    return config.mode.detail_rule._qieshangmanguan;
-}
+const is_qieshang = () => config.mode.detail_rule._qieshangmanguan;
 
 /**
  * 是否有头跳
  * @returns {boolean}
  */
-function is_toutiao() {
-    return config.mode.detail_rule._toutiao;
-}
+const is_toutiao = () => config.mode.detail_rule._toutiao;
 
 /**
  * 是否开启人和, 而且打点为满贯(5番)
  * @returns {boolean}
  */
-function is_renhumanguan() {
-    return config.mode.detail_rule._renhumanguan;
-}
+const is_renhumanguan = () => config.mode.detail_rule._renhumanguan;
 
 /**
  * 是否无大三元大四喜包牌, 修罗模式强制无包牌
  * @returns {boolean}
  */
-function no_normalbaopai() {
-    return config.mode.detail_rule._no_normalbaopai;
-}
+const no_normalbaopai = () => config.mode.detail_rule._no_normalbaopai;
 
 /**
  * 是否有四杠子包牌
  * @returns {boolean}
  */
-function is_sigangbaopai() {
-    return config.mode.detail_rule._sigangbaopai;
-}
+const is_sigangbaopai = () => config.mode.detail_rule._sigangbaopai;
 
 /**
  * 是否禁用流局满贯
  * @returns {boolean}
  */
-function no_liujumanguan() {
-    return config.mode.detail_rule._no_liujumanguan;
-}
+const no_liujumanguan = () => config.mode.detail_rule._no_liujumanguan;
 
 /**
  * 是否禁用一发
  * @returns {boolean}
  */
-function no_yifa() {
-    return config.mode.detail_rule._no_yifa;
-}
+const no_yifa = () => config.mode.detail_rule._no_yifa;
 
 /**
  * 是否不算连风4符
  * @returns {boolean}
  */
-function no_lianfengsifu() {
-    return config.mode.detail_rule._no_lianfengsifu;
-}
+const no_lianfengsifu = () => config.mode.detail_rule._no_lianfengsifu;
 
 /**
  * 是否禁用表宝牌
  * @returns {boolean}
  */
-function no_dora() {
-    return config.mode.detail_rule._no_dora;
-}
+const no_dora = () => config.mode.detail_rule._no_dora;
 
 /**
  * 是否禁用里宝牌
  * @returns {boolean}
  */
-function no_lidora() {
-    return config.mode.detail_rule._no_lidora;
-}
+const no_lidora = () => config.mode.detail_rule._no_lidora;
 
 /**
  * 是否禁用杠表宝牌
  * @returns {boolean}
  */
-function no_gangdora() {
-    return config.mode.detail_rule._no_gangdora;
-}
+const no_gangdora = () => config.mode.detail_rule._no_gangdora;
 
 /**
  * 是否禁用杠里宝牌
  * @returns {boolean}
  */
-function no_ganglidora() {
-    return config.mode.detail_rule._no_ganglidora;
-}
+const no_ganglidora = () => config.mode.detail_rule._no_ganglidora;
 
 /**
  * 明杠表宝牌是否即翻
  * @returns {boolean}
  */
-function is_dora_jifan() {
-    return config.mode.detail_rule._dora_jifan;
-}
+const is_dora_jifan = () => config.mode.detail_rule._dora_jifan;
 
 /**
  * 是否有三家和了流局
  * @returns {boolean}
  */
-function is_sanxiangliuju() {
-    return config.mode.detail_rule._sanxiangliuju;
-}
+const is_sanxiangliuju = () => config.mode.detail_rule._sanxiangliuju;
 
 /**
  * 是否禁用累计役满(番数最高三倍满)
  * @returns {boolean}
  */
-function no_leijiyiman() {
-    return config.mode.detail_rule._no_leijiyiman;
-}
+const no_leijiyiman = () => config.mode.detail_rule._no_leijiyiman;
 
 /**
  * 是否无双倍役满(纯九, 四暗刻单骑, 十三面, 大四喜算单倍役满)
  * @returns {boolean}
  */
-function no_wyakuman() {
-    return config.mode.detail_rule._no_wyakuman;
-}
+const no_wyakuman = () => config.mode.detail_rule._no_wyakuman;
 
 /**
  * 是否禁用国士枪暗杠
  * @returns {boolean}
  */
-function no_guoshiangang() {
-    return config.mode.detail_rule._no_guoshiangang;
-}
+const no_guoshiangang = () => config.mode.detail_rule._no_guoshiangang;
 
 /**
  * 是否禁用立直需要点数限制(点数不够及负分的情况是否能立直)
  * @returns {boolean}
  */
-function is_fufenliqi() {
-    return config.mode.detail_rule._fufenliqi;
-}
+const is_fufenliqi = () => config.mode.detail_rule._fufenliqi;
 
 // -------------------------------------------
 /**
  * 是否有包杠, 只适用于非修罗立直麻将
  * @returns {boolean}
  */
-function is_baogang() {
-    return config.mode.detail_rule._baogang;
-}
+const is_baogang = () => config.mode.detail_rule._baogang;
 
 /**
  * 是否为青天井模式(谨慎使用, 高打点时很容易崩溃)
  * @returns {boolean}
  */
-function is_qingtianjing() {
-    return config.mode.detail_rule._qingtianjing;
-}
+const is_qingtianjing = () => config.mode.detail_rule._qingtianjing;
 
 /**
  * 是否为无振听模式
  * @returns {boolean}
  */
-function no_zhenting() {
-    return config.mode.detail_rule._no_zhenting;
-}
+const no_zhenting = () => config.mode.detail_rule._no_zhenting;
 
 /**
  * 是否 hupai 无参数时无役荣和自动诈和
  * @returns {boolean}
  */
-function is_ronghuzhahu() {
-    return config.mode.detail_rule._ronghuzhahu;
-}
-
+const is_ronghuzhahu = () => config.mode.detail_rule._ronghuzhahu;
 
 /**
  * 是否开启自定义番种'天地创造'
  * @returns {boolean}
  */
-function is_tiandichuangzao() {
-    return config.mode.detail_rule._tiandichuangzao;
-}
+const is_tiandichuangzao = () => config.mode.detail_rule._tiandichuangzao;
 
 /**
  * 是否开启自定义番种'万物生长'
  * @returns {boolean}
  */
-function is_wanwushengzhang() {
-    return config.mode.detail_rule._wanwushengzhang;
-}
+const is_wanwushengzhang = () => config.mode.detail_rule._wanwushengzhang;
 
 /**
  * 是否自动补全玩家的起手(随机选牌)
  * @returns {boolean}
  */
-function is_buquanshoupai() {
-    return config.mode.detail_rule._buquanshoupai;
-}
-
+const is_buquanshoupai = () => config.mode.detail_rule._buquanshoupai;
 
 /**
  * 是否根据 mopaiset 确定牌山
  * @returns {boolean}
  */
-function is_mopai_paishan() {
-    return config.mode.detail_rule._mopai_paishan;
-}
+const is_mopai_paishan = () => config.mode.detail_rule._mopai_paishan;
 
 // -------------------------------------------
 /**
  * 是否为国标模式
  * @returns {boolean}
  */
-function is_guobiao() {
-    return config.mode.detail_rule._guobiao;
-}
+const is_guobiao = () => config.mode.detail_rule._guobiao;
 
 /**
  * 是否启用国标花牌(用 Huapai 即 0m 当作花牌)
  * @returns {boolean}
  */
-function is_guobiao_huapai() {
-    return config.mode.detail_rule._guobiao_huapai;
-}
+const is_guobiao_huapai = () => config.mode.detail_rule._guobiao_huapai;
 
 /**
  * 国标模式是否禁用8番缚
  * @returns {boolean}
  */
-function is_guobiao_no_8fanfu() {
-    return config.mode.detail_rule._guobiao_no_8fanfu;
-}
+const is_guobiao_no_8fanfu = () => config.mode.detail_rule._guobiao_no_8fanfu;
 
 /**
  * 国标模式是否可以连庄
  * @returns {boolean}
  */
-function is_guobiao_lianzhuang() {
-    return config.mode.detail_rule._guobiao_lianzhuang;
-}
+const is_guobiao_lianzhuang = () => config.mode.detail_rule._guobiao_lianzhuang;
 
 /**
  * 国标模式为了美观, 将点数放大的倍数
@@ -7900,23 +7789,21 @@ function cuohu_points() {
  * 国标诈和, 错和后玩家是否陪打
  * @returns {boolean}
  */
-function is_cuohupeida() {
-    return config.mode.detail_rule._cuohupeida;
-}
+const is_cuohupeida = () => config.mode.detail_rule._cuohupeida;
 
 // -------------------------------------------
 
-function is_random_skin() {
-    return config.mode.detail_rule._random_skin;
-}
+/**
+ * 是否随机皮肤, 开启此选项后设置的皮肤无效
+ * @returns {boolean}
+ */
+const is_random_skin = () => config.mode.detail_rule._random_skin;
 
 /**
  * 是否随机装扮, 范围包括立直棒, 和牌特效, 立直特效, 头像框, 桌布, 称号, 开启此选项后设置的对应装扮均无效
  * @returns {boolean}
  */
-function is_random_views() {
-    return config.mode.detail_rule._random_views;
-}
+const is_random_views = () => config.mode.detail_rule._random_views;
 
 // ===========================================
 // ============ 随机装扮与自定义番种 ============
@@ -7925,7 +7812,7 @@ function is_random_views() {
  * 回放用装扮随机池和中文服无法加载和排除的装扮, 键是 slot, 值是对应的装扮id数组
  * @type {{}}
  */
-let views_pool = {}, invalid_views = {
+const views_pool = {}, invalid_views = {
     // 头像框
     5: [
         305501,  // 头像框-默认
@@ -10145,29 +10032,6 @@ function edit_online() {
 
 // 离线编辑(进入牌谱之前改, 只在 gameend 中调用)
 function edit_offline() {
-    function override() {
-        if (checkPaiPu === undefined)
-            checkPaiPu = GameMgr.Inst.checkPaiPu;
-        if (resetData === undefined)
-            resetData = uiscript.UI_Replay.prototype.resetData;
-        if (showRecord === undefined)
-            showRecord = uiscript.UI_Win.prototype.showRecord;
-        if (showInfo_record === undefined)
-            showInfo_record = uiscript.UI_Win.prototype._showInfo_record;
-        if (setFanFu === undefined)
-            setFanFu = uiscript.UI_Win.prototype.setFanFu;
-        if (OnChoosedPai === undefined)
-            OnChoosedPai = view.ViewPai.prototype.OnChoosedPai
-        if (seat2LocalPosition === undefined)
-            seat2LocalPosition = view.DesktopMgr.prototype.seat2LocalPosition;
-        if (localPosition2Seat === undefined)
-            localPosition2Seat = view.DesktopMgr.prototype.localPosition2Seat;
-        if (typeof editfunction == 'function')
-            editfunction();
-    }
-
-    override();
-
     // 修改玩家信息
     function edit_player_datas() {
         let ret = [];
@@ -10229,6 +10093,25 @@ function edit_offline() {
         editdata.player_datas = player_datas = ret;
         return ret;
     }
+
+    if (checkPaiPu === undefined)
+        checkPaiPu = GameMgr.Inst.checkPaiPu;
+    if (resetData === undefined)
+        resetData = uiscript.UI_Replay.prototype.resetData;
+    if (showRecord === undefined)
+        showRecord = uiscript.UI_Win.prototype.showRecord;
+    if (showInfo_record === undefined)
+        showInfo_record = uiscript.UI_Win.prototype._showInfo_record;
+    if (setFanFu === undefined)
+        setFanFu = uiscript.UI_Win.prototype.setFanFu;
+    if (OnChoosedPai === undefined)
+        OnChoosedPai = view.ViewPai.prototype.OnChoosedPai
+    if (seat2LocalPosition === undefined)
+        seat2LocalPosition = view.DesktopMgr.prototype.seat2LocalPosition;
+    if (localPosition2Seat === undefined)
+        localPosition2Seat = view.DesktopMgr.prototype.localPosition2Seat;
+    if (typeof editfunction == 'function')
+        editfunction();
 
     // 重写对局信息
     uiscript.UI_Replay.prototype.resetData = function () {
@@ -10429,7 +10312,7 @@ function optimize_function() {
 
     // 添加 category 为 3: '段位场' , 99: '装扮预览' 的情况
     // 逐渐取代 '四人东' 为对应模式的名称
-    game.Tools.get_room_desc = function(config) {
+    game.Tools.get_room_desc = function (config) {
         if (!config)
             return {
                 text: '',
@@ -10446,9 +10329,8 @@ function optimize_function() {
         }
         if (1 === config.category) {
             if (config.mode.detail_rule)
-            text += '友人场\xB7';
-        }
-        else if (4 === config.category)
+                text += '友人场\xB7';
+        } else if (4 === config.category)
             text += '比赛场\xB7';
         else if (2 === config.category) {
             let S = config.meta;

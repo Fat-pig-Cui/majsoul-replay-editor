@@ -507,6 +507,34 @@ id 以 6 开头, 而且有点乱, 很多都限时且无法获得, 乱用可能�
 }
 ```
 
+### 获取最近一次活动的奖励信息
+
+```js
+{
+    let reward = [];
+    let index = cfg.activity.activity.rows_.length - 1;
+    while (!cfg.activity.activity.rows_[index].name_chs)
+        index--;
+    let activity_id = cfg.activity.activity.rows_[index].id, activity_type = cfg.activity.activity.rows_[index].type;
+
+    cfg.activity[activity_type].forEach(function (x) {
+        if (x.activity_id === activity_id)
+            add_reward(parseInt(x.reward.split('-')[0]), parseInt(x.reward.split('-')[1]));
+    });
+    reward.sort((x, y) => y.id - x.id);
+    reward
+
+    function add_reward(id, num) {
+        for (let i in reward)
+            if (reward[i].id === id) {
+                reward[i].num += num;
+                return;
+            }
+        reward.push({desc: id === 100002 ? '铜币' : cfg.item_definition.item.get(id).name_chs, num: num, id: id});
+    }
+}
+```
+
 ### 查看高光时刻所有类型勋章方法
 
 ```js
@@ -717,10 +745,10 @@ id 以 6 开头, 而且有点乱, 很多都限时且无法获得, 乱用可能�
 
 #### id互转
 
-用户的id有三种: 
+用户的id有三种:
 
 - 账号id, 这个是最基本的id, 也是牌谱屋界面网址所显示的id, 游戏内通常不可见
-- 牌谱id, 在分享的牌谱链接最后有个以 `_a` 开头的一串数字, 那就是牌谱id
+- 牌谱id, 在分享的牌谱链接最后有个以 `_a` 开头的一串数字, 那就是牌谱id, 用于确定进入牌谱的主视角
 - 好友id, 加好友用的id
 
 于是就有了6种情况, 其中最后2种是完全通过现有函数调用实现的
@@ -751,12 +779,13 @@ id 以 6 开头, 而且有点乱, 很多都限时且无法获得, 乱用可能�
 
 #### 位置偏移量
 
-经研究, 位置偏移量只与原文的长度有关, 如果原文的长度为 `len`, 则原文下标为 `i` 的字符, 
+经研究, 位置偏移量只与原文的长度有关, 如果原文的长度为 `len`, 则原文下标为 `i` 的字符,
 在密文中的下标为 `(Math.floor(len / 3) + 17 + len - i) % len`
 
 由于原文密文长度一致, 且下标对应关系近似负相关, 则明密文中字符下标具有对称性
 
-直观上解释, 有个分割点下标 `split_index`, 值为 `(Math.floor(len / 3) + 17) % len`, 下标不超过这个的子串划分为一部分, 剩下的为另一部分
+直观上解释, 有个分割点下标 `split_index`, 值为 `(Math.floor(len / 3) + 17) % len`, 下标不超过这个的子串划分为一部分,
+剩下的为另一部分
 两部分分别逆序, 就得到了该位置偏移的效果
 
 #### 字符偏移量
@@ -772,7 +801,8 @@ id 以 6 开头, 而且有点乱, 很多都限时且无法获得, 乱用可能�
 
 原文下标为 `i` 的字符, 在 `dict` 中下标为 `j`, 则对应的密文字符在 `dict` 中的下标为 `(j + 2 + 3 * i ^ 11) % 90`
 
-密文下标为 `k` 的字符, 在 `dict` 中下标为 `l`, 则对应的原文字符在 `dict` 中的下标为 `((l - (2 + 3 * k ^ 11)) % 90 + 90) % 90`
+密文下标为 `k` 的字符, 在 `dict` 中下标为 `l`, 则对应的原文字符在 `dict` 中的下标为
+`((l - (2 + 3 * k ^ 11)) % 90 + 90) % 90`
 
 可以发现, 原文的长度不影响字符偏移量, 二者差别仅在加号变减号, 以及保证值为正数的额外求模和加法
 
