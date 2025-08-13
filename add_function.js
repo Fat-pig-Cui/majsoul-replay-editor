@@ -603,191 +603,167 @@ function editfunction() {
     }
 
     uiscript.UI_Replay.prototype.doRecord = function (O) {
-        try {
-            let K = 0;
-            switch (O.name) {
-                case 'RecordNewRound':
-                    K = view.ActionNewRound.record(O.data);
-                    break;
-                case 'RecordChangeTile':
-                    K = view.ActionChangeTile.record(O.data);
-                    break;
-                case 'RecordSelectGap':
-                    K = view.ActionSelectGap.record(O.data);
-                    break;
-                case 'RecordDiscardTile':
-                    K = view.ActionDiscardTile.record(O.data);
-                    break;
-                case 'RecordDealTile':
-                    K = view.ActionDealTile.record(O.data);
-                    break;
-                case 'RecordChiPengGang':
-                    K = view.ActionChiPengGang.record(O.data);
-                    break;
-                case 'RecordAnGangAddGang':
-                    K = view.ActionAnGangAddGang.record(O.data);
-                    break;
-                case 'RecordBaBei':
-                    K = view.ActionBabei.record(O.data);
-                    break;
-                case 'RecordHule':
-                    K = view.ActionHule.record(O.data);
-                    break;
-                case 'RecordLiuJu':
-                    K = view.ActionLiuJu.record(O.data);
-                    break;
-                case 'RecordNoTile':
-                    K = view.ActionNoTile.record(O.data);
-                    break;
-                case 'RecordHuleXueZhanMid':
-                    K = view.ActionHuleXueZhanMid.record(O.data);
-                    break;
-                case 'RecordHuleXueZhanEnd':
-                    K = view.ActionHuleXueZhanEnd.record(O.data);
-                    break;
-                case 'RecordGangResult':
-                    K = view.ActionGangResult.record(O.data);
-                    break;
-                case 'RecordGangResultEnd':
-                    K = view.ActionGangResultEnd.record(O.data);
-                    break;
-                case 'RecordRevealTile':
-                    K = view.ActionRevealTile.record(O.data);
-                    break;
-                case 'RecordLockTile':
-                    K = view.ActionLockTile.record(O.data);
-                    break;
-                case 'RecordUnveilTile':
-                    K = view.ActionUnveilTile.record(O.data);
-                    break;
-                case 'RecordNewCard':
-                    K = view.ActionNewCard.record(O.data);
-                    break;
-                case 'RecordFillAwaitingTiles':
-                    K = view.ActionFillAwaitingTiles.record(O.data);
-                    break;
+        let K = 0;
+        switch (O.name) {
+            case 'RecordNewRound':
+                K = view.ActionNewRound.record(O.data);
+                break;
+            case 'RecordChangeTile':
+                K = view.ActionChangeTile.record(O.data);
+                break;
+            case 'RecordSelectGap':
+                K = view.ActionSelectGap.record(O.data);
+                break;
+            case 'RecordDiscardTile':
+                K = view.ActionDiscardTile.record(O.data);
+                break;
+            case 'RecordDealTile':
+                K = view.ActionDealTile.record(O.data);
+                break;
+            case 'RecordChiPengGang':
+                K = view.ActionChiPengGang.record(O.data);
+                break;
+            case 'RecordAnGangAddGang':
+                K = view.ActionAnGangAddGang.record(O.data);
+                break;
+            case 'RecordBaBei':
+                K = view.ActionBabei.record(O.data);
+                break;
+            case 'RecordHule':
+                K = view.ActionHule.record(O.data);
+                break;
+            case 'RecordLiuJu':
+                K = view.ActionLiuJu.record(O.data);
+                break;
+            case 'RecordNoTile':
+                K = view.ActionNoTile.record(O.data);
+                break;
+            case 'RecordHuleXueZhanMid':
+                K = view.ActionHuleXueZhanMid.record(O.data);
+                break;
+            case 'RecordHuleXueZhanEnd':
+                K = view.ActionHuleXueZhanEnd.record(O.data);
+                break;
+            case 'RecordGangResult':
+                K = view.ActionGangResult.record(O.data);
+                break;
+            case 'RecordGangResultEnd':
+                K = view.ActionGangResultEnd.record(O.data);
+                break;
+            case 'RecordRevealTile':
+                K = view.ActionRevealTile.record(O.data);
+                break;
+            case 'RecordLockTile':
+                K = view.ActionLockTile.record(O.data);
+                break;
+            case 'RecordUnveilTile':
+                K = view.ActionUnveilTile.record(O.data);
+                break;
+            case 'RecordNewCard':
+                K = view.ActionNewCard.record(O.data);
+                break;
+            case 'RecordFillAwaitingTiles':
+                K = view.ActionFillAwaitingTiles.record(O.data);
+                break;
 
-                // 添加内容: RecordHuleXueLiuMid 和 RecordHuleXueLiuEnd
-                case 'RecordHuleXueLiuMid':
-                    K = view.ActionHuleXueLiuMid.record(O.data);
-                    break;
-                case 'RecordHuleXueLiuEnd':
-                    K = view.ActionHuleXueLiuEnd.record(O.data);
-                    break;
-                // 添加内容: 国标麻将 RecordCuohu
-                case 'RecordCuohu':
-                    K = view.ActionCuohu.record(O.data);
-                    break;
-                default:
-                    break;
-            }
-            return this.auto_play && (K += this._get_autoplay_delay(O)),
-            ('RecordNewRound' === O.name || 'RecordDealTile' === O.name || view.DesktopMgr.Inst.is_zhanxing_mode() &&
-                'RecordDiscardTile' === O.name || 'RecordFillAwaitingTiles' === O.name) && this.page_paishan.refresh(),
-                K;
-        } catch (U) {
-            const V = {};
-            return V.error = U.message,
-                V.stack = U.stack,
-                V.method = 'ui_replay doRecord',
-                V.name = O.name,
-                V.data = O.data,
-                // GameMgr.Inst.onFatalError(V),
-                // 1000000;
-                throw new Error(V);
+            // 添加内容: RecordHuleXueLiuMid 和 RecordHuleXueLiuEnd
+            case 'RecordHuleXueLiuMid':
+                K = view.ActionHuleXueLiuMid.record(O.data);
+                break;
+            case 'RecordHuleXueLiuEnd':
+                K = view.ActionHuleXueLiuEnd.record(O.data);
+                break;
+            // 添加内容: 国标麻将 RecordCuohu
+            case 'RecordCuohu':
+                K = view.ActionCuohu.record(O.data);
+                break;
+            default:
+                break;
         }
+        return this.auto_play && (K += this._get_autoplay_delay(O)),
+        ('RecordNewRound' === O.name || 'RecordDealTile' === O.name || view.DesktopMgr.Inst.is_zhanxing_mode() &&
+            'RecordDiscardTile' === O.name || 'RecordFillAwaitingTiles' === O.name) && this.page_paishan.refresh(),
+            K;
     };
     uiscript.UI_Replay.prototype.doFastRecord = function (O) {
-        try {
-            switch (O.name) {
-                case 'RecordNewRound':
-                    view.ActionNewRound.fastrecord(O.data);
-                    break;
-                case 'RecordChangeTile':
-                    view.ActionChangeTile.fastrecord(O.data);
-                    break;
-                case 'RecordSelectGap':
-                    view.ActionSelectGap.fastrecord(O.data);
-                    break;
-                case 'RecordDiscardTile':
-                    view.ActionDiscardTile.fastrecord(O.data);
-                    break;
-                case 'RecordDealTile':
-                    view.ActionDealTile.fastrecord(O.data);
-                    break;
-                case 'RecordChiPengGang':
-                    view.ActionChiPengGang.fastrecord(O.data);
-                    break;
-                case 'RecordAnGangAddGang':
-                    view.ActionAnGangAddGang.fastrecord(O.data);
-                    break;
-                case 'RecordHule':
-                    view.ActionHule.fastrecord(O.data);
-                    break;
-                case 'RecordLiuJu':
-                    view.ActionLiuJu.fastrecord(O.data);
-                    break;
-                case 'RecordNoTile':
-                    view.ActionNoTile.fastrecord(O.data);
-                    break;
-                case 'RecordBaBei':
-                    view.ActionBabei.fastrecord(O.data);
-                    break;
-                case 'RecordHuleXueZhanMid':
-                    view.ActionHuleXueZhanMid.fastrecord(O.data);
-                    break;
-                case 'RecordHuleXueZhanEnd':
-                    view.ActionHuleXueZhanEnd.fastrecord(O.data);
-                    break;
-                case 'RecordRevealTile':
-                    view.ActionRevealTile.fastrecord(O.data);
-                    break;
-                case 'RecordLockTile':
-                    view.ActionLockTile.fastrecord(O.data);
-                    break;
-                case 'RecordUnveilTile':
-                    view.ActionUnveilTile.fastrecord(O.data);
-                    break;
-                case 'RecordGangResult':
-                    view.ActionGangResult.fastrecord(O.data);
-                    break;
-                case 'RecordGangResultEnd':
-                    view.ActionGangResultEnd.fastrecord(O.data);
-                    break;
-                case 'RecordNewCard':
-                    view.ActionNewCard.fastrecord(O.data);
-                    break;
-                case 'RecordFillAwaitingTiles':
-                    view.ActionFillAwaitingTiles.fastrecord(O.data);
-                    break;
+        switch (O.name) {
+            case 'RecordNewRound':
+                view.ActionNewRound.fastrecord(O.data);
+                break;
+            case 'RecordChangeTile':
+                view.ActionChangeTile.fastrecord(O.data);
+                break;
+            case 'RecordSelectGap':
+                view.ActionSelectGap.fastrecord(O.data);
+                break;
+            case 'RecordDiscardTile':
+                view.ActionDiscardTile.fastrecord(O.data);
+                break;
+            case 'RecordDealTile':
+                view.ActionDealTile.fastrecord(O.data);
+                break;
+            case 'RecordChiPengGang':
+                view.ActionChiPengGang.fastrecord(O.data);
+                break;
+            case 'RecordAnGangAddGang':
+                view.ActionAnGangAddGang.fastrecord(O.data);
+                break;
+            case 'RecordHule':
+                view.ActionHule.fastrecord(O.data);
+                break;
+            case 'RecordLiuJu':
+                view.ActionLiuJu.fastrecord(O.data);
+                break;
+            case 'RecordNoTile':
+                view.ActionNoTile.fastrecord(O.data);
+                break;
+            case 'RecordBaBei':
+                view.ActionBabei.fastrecord(O.data);
+                break;
+            case 'RecordHuleXueZhanMid':
+                view.ActionHuleXueZhanMid.fastrecord(O.data);
+                break;
+            case 'RecordHuleXueZhanEnd':
+                view.ActionHuleXueZhanEnd.fastrecord(O.data);
+                break;
+            case 'RecordRevealTile':
+                view.ActionRevealTile.fastrecord(O.data);
+                break;
+            case 'RecordLockTile':
+                view.ActionLockTile.fastrecord(O.data);
+                break;
+            case 'RecordUnveilTile':
+                view.ActionUnveilTile.fastrecord(O.data);
+                break;
+            case 'RecordGangResult':
+                view.ActionGangResult.fastrecord(O.data);
+                break;
+            case 'RecordGangResultEnd':
+                view.ActionGangResultEnd.fastrecord(O.data);
+                break;
+            case 'RecordNewCard':
+                view.ActionNewCard.fastrecord(O.data);
+                break;
+            case 'RecordFillAwaitingTiles':
+                view.ActionFillAwaitingTiles.fastrecord(O.data);
+                break;
 
-                // 添加内容: RecordHuleXueLiuMid 和 RecordHuleXueLiuEnd
-                case 'RecordHuleXueLiuMid':
-                    view.ActionHuleXueLiuMid.fastrecord(O.data);
-                    break;
-                case 'RecordHuleXueLiuEnd':
-                    view.ActionHuleXueLiuEnd.fastrecord(O.data);
-                    break;
-                // 添加内容: 国标麻将 RecordCuohu
-                case 'RecordCuohu':
-                    view.ActionCuohu.fastrecord(O.data);
-                    break;
-                default:
-                    break;
-            }
-            ('RecordNewRound' === O.name || 'RecordDealTile' === O.name || view.DesktopMgr.Inst.is_zhanxing_mode() &&
-                'RecordDiscardTile' === O.name || 'RecordFillAwaitingTiles' === O.name) && this.page_paishan.refresh();
-        } catch (K) {
-            const U = {};
-            return U.error = K.message,
-                U.stack = K.stack,
-                U.method = 'ui_replay doRecord',
-                U.name = O.name,
-                U.data = O.data,
-                // GameMgr.Inst.onFatalError(U),
-                // 1000000;
-                throw new Error(U);
+            // 添加内容: RecordHuleXueLiuMid 和 RecordHuleXueLiuEnd
+            case 'RecordHuleXueLiuMid':
+                view.ActionHuleXueLiuMid.fastrecord(O.data);
+                break;
+            case 'RecordHuleXueLiuEnd':
+                view.ActionHuleXueLiuEnd.fastrecord(O.data);
+                break;
+            // 添加内容: 国标麻将 RecordCuohu
+            case 'RecordCuohu':
+                view.ActionCuohu.fastrecord(O.data);
+                break;
+            default:
+                break;
         }
+        ('RecordNewRound' === O.name || 'RecordDealTile' === O.name || view.DesktopMgr.Inst.is_zhanxing_mode() &&
+            'RecordDiscardTile' === O.name || 'RecordFillAwaitingTiles' === O.name) && this.page_paishan.refresh();
         return 0;
     }
     uiscript.UI_Replay.prototype._get_autoplay_delay = function (t) {
@@ -991,7 +967,9 @@ function editfunction2() {
             // 添加内容: 国标麻将无王牌
             view.DesktopMgr.Inst.game_config.mode.detail_rule._guobiao && (R = 0);
             // L: 玩家的起手显示牌数, G: 可摸牌数
-            var L = view.DesktopMgr.Inst.sha256 ? view.DesktopMgr.Inst.rule_mode === view.ERuleMode.Liqi3 ? 40 : view.DesktopMgr.Inst.is_wanxiangxiuluo_mode() ? 49 : 53 : 0
+            var L = view.DesktopMgr.Inst.sha256 ? view.DesktopMgr.Inst.rule_mode === view.ERuleMode.Liqi2 ? 27 :
+                view.DesktopMgr.Inst.rule_mode === view.ERuleMode.Liqi3 ? 40 :
+                view.DesktopMgr.Inst.is_wanxiangxiuluo_mode() ? 49 : 53 : 0
                 , G = this.tile_count - W - R - L;
             0 > G && (G = 0);
             for (var T = this.tiles[0].me.width, Z = this.tiles[0].me.height + 5, U = view.DesktopMgr.Inst.index_ju,

@@ -19,7 +19,6 @@ config = {
             _fafu_3p_2ting: 0,
             _fafu_2p: 0,
             _mainrole_: 0,
-            _buquanshoupai: true,
         }
     }
 };

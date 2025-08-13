@@ -32,7 +32,6 @@ config = {
             _no_liujumanguan: true,
             _chang_ju_ben_num_: [0, 0, 1],
             _scores_: [9200, 0, 20300, 0],
-            _buquanshoupai: true,
         }
     }
 };
