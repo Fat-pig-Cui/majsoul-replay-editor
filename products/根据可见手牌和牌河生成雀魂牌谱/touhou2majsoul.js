@@ -169,8 +169,7 @@ config = {
             let tmp_seat = i % playercnt;
             if (typeof new_mopaiset[tmp_seat][mopai_xunmu[tmp_seat]] == 'string') {
                 let tmp_fulu = new_mopaiset[tmp_seat][mopai_xunmu[tmp_seat]];
-                let tmp_fulu_from_seat;
-                let tmp_fulu_type;
+                let tmp_fulu_from_seat, tmp_fulu_type;
                 [tmp_fulu_from_seat, tmp_fulu_type] = judgefulu(tmp_fulu, tmp_seat);
                 if (tmp_fulu_from_seat === seat && tmp_fulu_type === 'a') {
                     nxt_step = 'minggang';
@@ -184,8 +183,7 @@ config = {
             let tmp_seat = i % playercnt;
             if (typeof new_mopaiset[tmp_seat][mopai_xunmu[tmp_seat]] == 'string') {
                 let tmp_fulu = new_mopaiset[tmp_seat][mopai_xunmu[tmp_seat]];
-                let tmp_fulu_from_seat;
-                let tmp_fulu_type;
+                let tmp_fulu_from_seat, tmp_fulu_type;
                 [tmp_fulu_from_seat, tmp_fulu_type] = judgefulu(tmp_fulu, tmp_seat);
                 if (tmp_fulu_from_seat === seat && tmp_fulu_type === 'p') {
                     nxt_step = 'peng';
@@ -198,8 +196,7 @@ config = {
         let tmp_seat = (seat + 1) % playercnt;
         if (typeof new_mopaiset[tmp_seat][mopai_xunmu[tmp_seat]] == 'string') {
             let tmp_fulu = new_mopaiset[tmp_seat][mopai_xunmu[tmp_seat]];
-            let tmp_fulu_from_seat;
-            let tmp_fulu_type;
+            let tmp_fulu_from_seat, tmp_fulu_type;
             [tmp_fulu_from_seat, tmp_fulu_type] = judgefulu(tmp_fulu, tmp_seat);
             if (tmp_fulu_from_seat === seat && tmp_fulu_type === 'c') {
                 nxt_step = 'chi';

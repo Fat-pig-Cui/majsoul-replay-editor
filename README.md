@@ -131,32 +131,29 @@ B站视频教程(偏过时): [【雀魂】如何自制牌谱回放](https://www.
 
 ## 版权声明
 
-1. md5算法源自 [百度百科](https://baike.baidu.com/item/MD5)
+1. 更改回放的方法参考了B站 [一般通过转转](https://space.bilibili.com/23019265)
+   的 [[雀魂+](自制回放)听说有人想看石上三年的七倍役满](https://www.bilibili.com/video/BV1HE411Q7JM)
 
-2. 更改回放的方法参考了B站 [一般通过彳亍人(现: 一般通过转转)](https://space.bilibili.com/23019265)
-   的 [BV1HE411Q7JM](https://www.bilibili.com/video/BV1HE411Q7JM)
+2. 血流成河的某些功能同样参照了上述作者的
+   [雀魂麻将脚本](https://greasyfork.org/zh-CN/scripts/423689-%E9%9B%80%E9%AD%82%E9%BA%BB%E5%B0%86%E8%84%9A%E6%9C%AC)
 
-3. 血流成河的实现方式中的使牌颜色变淡参考了
-   greasyfork [2938137849](https://greasyfork.org/zh-CN/users/749724-2938137849)
-   的 [雀魂麻将脚本](https://greasyfork.org/zh-CN/scripts/423689-%E9%9B%80%E9%AD%82%E9%BA%BB%E5%B0%86%E8%84%9A%E6%9C%AC)
+3. 有少部分代码来自雀魂网页端源码, 特别感谢猫粮工作室老板娘"丝茉茉"的鼎力相助
 
-4. 有少部分代码来自雀魂网页端源码, 特别感谢猫粮工作室老板娘"丝茉茉"的鼎力相助
-
-5. 其他部分由两位作者共同编写, 具体贡献:
+4. 其他部分由两位作者共同编写, 具体贡献:
     - [GrandDawn](https://github.com/GrandDawn) (原作者):
         - main.js 核心功能的算法实现
         - add_function.js 重写函数的算法实现
         - 说明文档(wiki)的编写
         - 示例牌谱的编写
     - [Fat-pig-Cui](https://github.com/Fat-pig-Cui) (我, 维护者):
-        - main.js 的功能的大量扩充(包括国标功能的实现)
+        - main.js 的重构, 添加 JSDoc, 功能的大量扩充(包括国标功能的实现)
         - add_function.js 的维护与扩充
         - 说明文档的重排优化, 细节补充
         - 自制牌谱的大量补充, 及批处理脚本刷新牌谱的编写
 
    目前原作者已很少接触雀魂, 故相关问题尽量找我
 
-6. github 是本仓库唯一的发布平台, 开源协议 Apache 2.0
+5. github 是本仓库唯一的发布平台, 开源协议 Apache 2.0
 
 ## 实机截图
 

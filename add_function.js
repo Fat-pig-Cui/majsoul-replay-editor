@@ -11,7 +11,7 @@
  * 1. 血流成河模式
  * 2. 开立直开牌
  * 3. 拔北可以拔其他牌, 且国标补花不播放语音
- * 4. 二人麻将, 并加入房间描述
+ * 4. 二人麻将
  * 5. 明杠, 暗杠后立即显示听牌变化
  * 6. 国标麻将错和
  */
@@ -888,34 +888,34 @@ function editfunction() {
         let desc = '';
         switch (mode_id) {
             case 0:
-                desc = game['Tools']['strOfLocalization'](2026);
+                desc = game.Tools.strOfLocalization(2026);
                 break;
             case 1:
-                desc = game['Tools']['strOfLocalization'](2027);
+                desc = game.Tools.strOfLocalization(2027);
                 break;
             case 2:
-                desc = game['Tools']['strOfLocalization'](2028);
+                desc = game.Tools.strOfLocalization(2028);
                 break;
             case 3:
-                desc = game['Tools']['strOfLocalization'](2029);
+                desc = game.Tools.strOfLocalization(2029);
                 break;
             case 4:
-                desc = game['Tools']['strOfLocalization'](2026);
+                desc = game.Tools.strOfLocalization(2026);
                 break;
             case 10:
-                desc = game['Tools']['strOfLocalization'](2030);
+                desc = game.Tools.strOfLocalization(2030);
                 break;
             case 11:
-                desc = game['Tools']['strOfLocalization'](2031);
+                desc = game.Tools.strOfLocalization(2031);
                 break;
             case 12:
-                desc = game['Tools']['strOfLocalization'](2032);
+                desc = game.Tools.strOfLocalization(2032);
                 break;
             case 13:
-                desc = game['Tools']['strOfLocalization'](2033);
+                desc = game.Tools.strOfLocalization(2033);
                 break;
             case 14:
-                desc = game['Tools']['strOfLocalization'](2030);
+                desc = game.Tools.strOfLocalization(2030);
                 break;
             case 20:
                 desc = '二人一局';

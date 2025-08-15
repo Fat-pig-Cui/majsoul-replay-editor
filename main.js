@@ -314,11 +314,12 @@ function roundbegin() {
     // 计算各玩家开局的听牌, 亲家开局听的牌无法显示
     let lastile = playertiles[ju].pop();
     let tingpai = [];
-    for (let seat = 0; seat < playercnt; seat++) {
-        let tingpais1 = calctingpai(seat);
-        if (tingpais1.length > 0)
-            tingpai.push({seat: seat, tingpais1: tingpais1});
-    }
+    if (!is_heqie_mode())
+        for (let seat = 0; seat < playercnt; seat++) {
+            let tingpais1 = calctingpai(seat);
+            if (tingpais1.length > 0)
+                tingpai.push({seat: seat, tingpais1: tingpais1});
+        }
     playertiles[ju].push(lastile);
 
     let left_cnt = paishan.length - 14;
@@ -356,8 +357,7 @@ function roundbegin() {
         if (i === ju) {
             if (playertiles[i].length !== Qin_tiles_num)
                 is_intergrity = false;
-        }
-        else if (playertiles[i].length !== Xian_tiles_num)
+        } else if (playertiles[i].length !== Xian_tiles_num)
             is_intergrity = false;
 
         for (let j in playertiles[i])
@@ -433,9 +433,9 @@ function mopai(seat, tile, index) {
             seat = is_hunzhiyiji() && hunzhiyiji_info[lstseat].liqi && !hunzhiyiji_info[lstseat].overload ? lstseat : (lstseat + 1) % playercnt;
 
         let lst2action = getlstaction(2), lst2seat = lst2action.data.seat;
-        // 血战到底和牌, 若为枪杠, 则摸牌家为开杠家的下一家, 否则为最后和牌家的下一家
+        // 血战到底和牌, 若为枪杠, 则摸牌家为开杠家, 否则为最后和牌家的下一家
         if (lstaction.name === 'RecordHuleXueZhanMid')
-            seat = lst2action.name === 'RecordAnGangAddGang' ? (lst2seat + 1) % playercnt : (lstaction.data.hules.at(-1).seat + 1) % playercnt;
+            seat = lst2action.name === 'RecordAnGangAddGang' ? lst2seat : (lstaction.data.hules.at(-1).seat + 1) % playercnt;
         // 血流成河或国标错和, 摸牌家为和牌之前最后操作玩家的下一家
         if (lstaction.name === 'RecordHuleXueLiuMid' || lstaction.name === 'RecordCuohu')
             seat = lst2action.name === 'RecordNewRound' ? (ju + 1) % playercnt : (lst2seat + 1) % playercnt;
@@ -589,16 +589,19 @@ function mopai(seat, tile, index) {
  * @param {number} [seat] - 切牌的玩家, 没有此参数时按照正常对局流程
  * @param {string} [tile] - 切的牌, 没有此参数时将根据 qiepaiset 确定或摸切
  * @param {boolean|string} [is_liqi] - 是否立直, 默认不立直, 若为 'kailiqi', 则为开立直
+ * @param {string} [f_moqie] - 何切模式: 值为 'moqie' 表示强制显示摸切, 值为 'shouqie' 或其他情况则强制显示手切
  * @param {string} [anpai] - 暗夜之战: 当值为字符串 'anpai' 时, 表示暗牌, 默认不暗牌
  * @param {number[]} [bs_type] - 背水之战: 立直类型, 有效值为 '[0]', '[1]', '[2]', 默认为普通立直, 需要配合 is_liqi 使用
  */
-function qiepai(seat, tile, is_liqi, anpai, bs_type) {
+function qiepai(seat, tile, is_liqi, f_moqie, anpai, bs_type) {
     // 参数预处理
     function preprocess() {
-        let x = {}, mat = [seat, tile, is_liqi, anpai, bs_type];
+        let x = {}, mat = [seat, tile, is_liqi, f_moqie, anpai, bs_type];
         for (let i in mat)
             if (mat[i] === 'anpai')
                 x.anpai = mat[i];
+            else if (mat[i] === 'moqie' || mat[i] === 'shouqie')
+                x.f_moqie = mat[i];
             else if (typeof mat[i] == 'number')
                 x.seat = mat[i];
             else if (typeof mat[i] == 'boolean' || mat[i] === 'kailiqi')
@@ -607,11 +610,11 @@ function qiepai(seat, tile, is_liqi, anpai, bs_type) {
                 x.beishui_type = mat[i][0];
             else if (typeof mat[i] == 'string')
                 x.tile = mat[i];
-        return [x.seat, x.tile, x.is_liqi, x.anpai, x.beishui_type];
+        return [x.seat, x.tile, x.is_liqi, x.f_moqie, x.anpai, x.beishui_type];
     }
 
     let beishui_type;
-    [seat, tile, is_liqi, anpai, beishui_type] = preprocess();
+    [seat, tile, is_liqi, f_moqie, anpai, beishui_type] = preprocess();
 
     lstaction_completion();
 
@@ -630,6 +633,8 @@ function qiepai(seat, tile, is_liqi, anpai, bs_type) {
     if (tile === undefined || tile === '..')
         tile = playertiles[seat].at(-1);
     moqie = moqie && playertiles[seat].at(-1) === tile && lstaction.name !== 'RecordNewRound' && lstaction.name !== 'RecordChiPengGang';
+    if (is_heqie_mode())
+        moqie = f_moqie === 'moqie';
 
     let is_wliqi = false, is_kailiqi = false;
     if (is_liqi === 'kailiqi')
@@ -675,10 +680,14 @@ function qiepai(seat, tile, is_liqi, anpai, bs_type) {
             overload: false,
         };
 
-    let index = playertiles[seat].lastIndexOf(tile);
-    if (index === -1)   // 要切的牌手牌中没有, 则报错
-        throw new Error(roundinfo() + `seat: ${seat} 手牌不存在要切的牌: ${tile}`);
-    playertiles[seat].splice(index, 1);
+    if (is_heqie_mode())
+        playertiles[seat].pop();
+    else {
+        let index = playertiles[seat].lastIndexOf(tile);
+        if (index === -1) // 要切的牌手牌中没有, 则报错
+            throw new Error(roundinfo() + `seat: ${seat} 手牌不存在要切的牌: ${tile}`);
+        playertiles[seat].splice(index, 1);
+    }
     playertiles[seat].sort(cmp);
 
     let tile_state = is_openhand();
@@ -1459,7 +1468,7 @@ function notileliuju() {
     let tingcnt = 0;
     let ret = [];
     for (let i = 0; i < playercnt; i++) {
-        let tings = calctingpai(i);
+        let tings = is_heqie_mode() ? [] : calctingpai(i);
         if (tings.length === 0 || hupaied[i])
             ret.push({
                 tingpai: false,
@@ -1898,11 +1907,12 @@ function huansanzhang(tls0, tls1, tls2, tls3, type) {
     let lastile = playertiles[ju].at(-1);
     playertiles[ju].pop();
     let tingpais = [];
-    for (let i = 0; i < playercnt; i++) {
-        let tingpais1 = calctingpai(i);
-        if (tingpais1.length !== 0)
-            tingpais.push({seat: i, tingpais1: tingpais1});
-    }
+    if (!is_heqie_mode())
+        for (let i = 0; i < playercnt; i++) {
+            let tingpais1 = calctingpai(i);
+            if (tingpais1.length !== 0)
+                tingpais.push({seat: i, tingpais1: tingpais1});
+        }
     playertiles[ju].push(lastile);
 
     addChangeTile(ret, type, tingpais);
@@ -1924,11 +1934,12 @@ function dingque(x) {
     gaps = ret;
 
     let tingpai = [];
-    for (let i = 0; i < playercnt; i++) {
-        let tingpais1 = calctingpai(i);
-        if (tingpais1.length !== 0)
-            tingpai.push({seat: i, tingpais1: tingpais1});
-    }
+    if (!is_heqie_mode())
+        for (let i = 0; i < playercnt; i++) {
+            let tingpais1 = calctingpai(i);
+            if (tingpais1.length !== 0)
+                tingpai.push({seat: i, tingpais1: tingpais1});
+        }
 
     addSelectGap(ret, tingpai);
 }
@@ -2803,6 +2814,11 @@ let lianzhuangcnt;
  */
 let cuohu;
 /**
+ * 何切模式: 主视角要保护的牌(防止切出去)
+ * @type {{seat: number, tiles: string[]}}
+ */
+let protected_tiles;
+/**
  * 各种振听, 有效长度为玩家数, 不超过4
  *
  * 影响振听的因素
@@ -3069,6 +3085,7 @@ function init() {
         tiles[i].sort(cmp);
         playertiles[i] = tiles[i];
     }
+    protected_tiles = {};
 }
 
 // 玩家的巡目所对应的操作位置
@@ -6721,7 +6738,7 @@ function addDiscardTile(seat, tile, moqie, is_liqi, is_wliqi, is_kailiqi, tile_s
             is_wliqi: is_wliqi,
             is_kailiqi: is_kailiqi,
             doras: calcdoras(),
-            tingpais: calctingpai(seat),
+            tingpais: is_heqie_mode() ? [] : calctingpai(seat),
             tile_state: tile_state,
             muyu: is_muyu() ? JSON.parse(JSON.stringify(muyu)) : undefined,
             yongchang: is_yongchang() ? JSON.parse(JSON.stringify(yongchang_data[seat])) : undefined,
@@ -6750,7 +6767,7 @@ function addRevealTile(seat, tile, moqie, is_liqi, is_wliqi) {
             is_wliqi: is_wliqi,
             liqibang: liqibang,
             scores: scores.slice(),
-            tingpais: calctingpai(seat),
+            tingpais: is_heqie_mode() ? [] : calctingpai(seat),
         }
     });
 }
@@ -6807,7 +6824,7 @@ function addChiPengGang(seat, tiles, froms, type, liqi, tile_states) {
             type: type,
             froms: froms,
             liqi: liqi,
-            tingpais: calctingpai(seat),
+            tingpais: is_heqie_mode() ? [] : calctingpai(seat),
             tile_states: tile_states,
             muyu: is_muyu() ? JSON.parse(JSON.stringify(muyu)) : undefined,
             yongchang: is_yongchang() ? JSON.parse(JSON.stringify(yongchang_data[froms.at(-1)])) : undefined,
@@ -6832,7 +6849,7 @@ function addAnGangAddGang(seat, tile, type, tile_states) {
             tiles: tile,
             type: type,
             doras: calcdoras(),
-            tingpais: calctingpai(seat),
+            tingpais: is_heqie_mode() ? [] : calctingpai(seat),
             tile_states: tile_states,
         }
     });
@@ -6852,7 +6869,7 @@ function addBaBei(seat, tile, tile_states) {
             tile: tile,
             tile_states: tile_states,
             doras: calcdoras(),
-            tingpais: calctingpai(seat),
+            tingpais: is_heqie_mode() ? [] : calctingpai(seat),
         }
     });
 }
@@ -6930,7 +6947,7 @@ function addHuleXueLiuMid(HuleInfo, old_scores) {
         }
     };
     if (getlstaction().name === 'RecordNewRound')
-        ret.data.tingpais = calctingpai(ju);
+        ret.data.tingpais = is_heqie_mode() ? [] : calctingpai(ju);
     actions.push(ret);
 }
 
@@ -7570,6 +7587,13 @@ const is_wanwushengzhang = () => config.mode.detail_rule._wanwushengzhang;
  * @returns {boolean}
  */
 const is_mopai_paishan = () => config.mode.detail_rule._mopai_paishan;
+
+/**
+ * 是否为何切模式
+ * @returns {boolean}
+ */
+const is_heqie_mode = () => config.mode.detail_rule._heqie_mode;
+
 
 // -------------------------------------------
 /**
@@ -9957,14 +9981,14 @@ function edit_offline() {
     GameMgr.Inst.checkPaiPu = function (game_uuid, account_id, paipu_config) {
         try {
             // 添加下面
-            update_views();
-            DIY_fans();
-            guobiao_fans();
-            optimize_function();
             if (editdata.actions.length === 0) {
                 console.error('没有载入自制牌谱, 不可查看, 若要查看真实牌谱, 请输入 resetpaipu()');
                 return;
             }
+            update_views();
+            DIY_fans();
+            guobiao_fans();
+            optimize_function();
             // 添加上面
 
             const W = this;
@@ -10213,7 +10237,7 @@ function optimize_function() {
             else if (x.beishuizhizhan_mode)
                 text += '背水之战';
             else if (x._random_views || x._random_skin)
-                text += '随机装扮';
+                text = '随机装扮';
             else
                 text += this.room_mode_desc(config.mode.mode)
         }
@@ -10788,5 +10812,103 @@ function optimize_function() {
             this.tweenManager.addTweenTo(this.container_fu, {
                 alpha: 1
             }, 200);
+    }
+
+    // 牌偷梁换柱, 用于何切模式, 其他家视角
+    // P: mjcore 生成的 tile
+    // T: -1 配牌明牌, 0: 正常牌, 1: 透明牌
+    // n: 从左到右扫描还是从右到左扫描, 默认从左到右
+    view.ViewPlayer_Other.prototype._RecordRemoveHandPai = function (P, T, n) {
+        void 0 === n && (n = !0);
+        let S, M, A, o;
+        n ? (S = 0,
+            M = this.hand.length - 1,
+            A = 1) : (S = this.hand.length - 1,
+            M = 0,
+            A = -1),
+        view.DesktopMgr.Inst.is_peipai_open_mode && (T = -1);
+        let F = -1;
+        if (-1 === T || 1 === T)
+            for (o = S; o !== M + A; o += A)
+                if (this.hand[o].is_open && mjcore.MJPai.isSame(P, this.hand[o].val)) {
+                    F = o;
+                    break;
+                }
+        if (-1 === F && (-1 === T || 0 === T))
+            for (o = S; o !== M + A; o += A)
+                if (!this.hand[o].is_open && mjcore.MJPai.isSame(P, this.hand[o].val)) {
+                    F = o;
+                    break;
+                }
+
+        if (is_heqie_mode() && this.hand.length > 0)
+            if (this.seat === protected_tiles.seat) {
+                for (let i = 0; i < this.hand.length; i++)
+                    if (this.hand[i].val.toString() !== protected_tiles.tiles[i]) {
+                        F = i;
+                        break;
+                    }
+            } else
+                F = 0;
+
+        if (-1 !== F) {
+            this.hand[F].Destory();
+            for (o = F; o < this.hand.length - 1; o++)
+                this.hand[o] = this.hand[o + 1];
+            this.hand.pop();
+        }
+    }
+    // 自家视角
+    view.ViewPlayer_Me.prototype._RemoveHandPai = function (r, P, T) {
+        void 0 === T && (T = !0);
+        let S, n = -1;
+        if (-1 === P || 1 === P)
+            if (T) {
+                for (S = this.hand.length - 1; S >= 0; S--)
+                    if (mjcore.MJPai.isSame(r, this.hand[S].val) && this.hand[S].is_open) {
+                        n = S;
+                        break;
+                    }
+            } else
+                for (S = 0; S < this.hand.length; S++)
+                    if (mjcore.MJPai.isSame(r, this.hand[S].val) && this.hand[S].is_open) {
+                        n = S;
+                        break;
+                    }
+        if (-1 === n && (-1 === P || 0 === P))
+            if (T) {
+                for (S = this.hand.length - 1; S >= 0; S--)
+                    if (mjcore.MJPai.isSame(r, this.hand[S].val) && !this.hand[S].is_open) {
+                        n = S;
+                        break;
+                    }
+            } else
+                for (S = 0; S < this.hand.length; S++)
+                    if (mjcore.MJPai.isSame(r, this.hand[S].val) && !this.hand[S].is_open) {
+                        n = S;
+                        break;
+                    }
+
+        if (is_heqie_mode() && this.hand.length > 0)
+            if (this.seat === protected_tiles.seat) {
+                for (let i = 0; i < this.hand.length; i++)
+                    if (this.hand[i].val.toString() !== protected_tiles.tiles[i]) {
+                        n = i;
+                        break;
+                    }
+            } else
+                n = 0;
+
+        if (-1 !== n) {
+            for (var M = this.hand[n], A = n; A < this.hand.length - 1; A++)
+                this.hand[A] = this.hand[A + 1],
+                    this.hand[A].SetIndex(A, !1, !0);
+            return this.hand.pop(),
+                this._OnRemovePai(M),
+                M.Reset(),
+                this.handpool.push(M),
+                !0;
+        }
+        return !1;
     }
 }

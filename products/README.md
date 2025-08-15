@@ -159,8 +159,8 @@ doc: [牌谱里面到底记载了什么](https://github.com/Fat-pig-Cui/misc-cod
 
 目前支持段位场规则和其他活动场规则, 但没有测试
 
-### 天凤牌谱编辑器JSON文件转雀魂格式
+### 根据可见手牌和牌河生成雀魂牌谱
 
-脚本: [touhou_json_2_majsoul.js](天凤牌谱编辑器数据转雀魂格式/touhou_json_2_majsoul.js), 需要先载入 main.js 使用
+脚本: [pic2majsoul.js](根据可见手牌和牌河生成雀魂牌谱/pic2majsoul.js), 需要先载入 main.js 使用
 
-详见 [README.md](天凤牌谱编辑器数据转雀魂格式/README.md)
+详见 [README.md](根据可见手牌和牌河生成雀魂牌谱/README.md)
