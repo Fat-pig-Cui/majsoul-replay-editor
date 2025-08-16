@@ -1048,6 +1048,15 @@ function leimingpai(seat, tile, type, jifei) {
                 break;
             }
 
+    if (is_heqie_mode()) {
+        if (type === 'angang')
+            is_angang = true;
+        else if (type === 'jiagang')
+            is_jiagang = true;
+        else if (type === 'babei')
+            is_babei = true;
+    }
+
     for (let i = 0; i < playercnt; i++)
         if (liqiinfo[i].yifa > 0)
             liqiinfo[i].yifa = -1;
@@ -1493,89 +1502,88 @@ function notileliuju() {
 
     let ret2 = [];
 
-    if (!no_liujumanguan()) {
-        // 有流满
-        let liujumanguan = false;
-        for (let i = ju; i < playercnt + ju; i++) {
-            if (is_chuanma() || is_guobiao())
-                break;
-            let seat = i % playercnt;
-            if (!paihe[seat].liujumanguan || hupaied[seat])
+    // 假设有流满
+    let liujumanguan = false;
+    for (let i = ju; i < playercnt + ju; i++) {
+        if (is_chuanma() || is_guobiao())
+            break;
+        let seat = i % playercnt;
+        if (!paihe[seat].liujumanguan || hupaied[seat])
+            continue;
+        liujumanguan = true;
+        let score = 0;
+        for (let i = 0; i < playercnt; i++) {
+            if (seat === i || hupaied[i])
                 continue;
-            liujumanguan = true;
-            let score = 0;
-            for (let i = 0; i < playercnt; i++) {
-                if (seat === i || hupaied[i])
-                    continue;
-                // 幻境传说: 命运卡1
-                if (seat === ju || i === ju) {
-                    delta_scores[i] -= 4000 * times;
-                    delta_scores[seat] += 4000 * times;
-                    score += 4000 * times;
-                } else {
-                    delta_scores[i] -= 2000 * times;
-                    delta_scores[seat] += 2000 * times;
-                    score += 2000 * times;
-                }
-            }
-            if ((playercnt === 3 || playercnt === 2) && no_zimosun()) {
-                let base_points = playercnt === 3 ? 1000 : 4000;
-                for (let j = 0; j < playercnt; j++) {
-                    if (seat === j || hupaied[j])
-                        continue;
-                    if (seat === ju) {
-                        delta_scores[j] -= base_points * 2;
-                        delta_scores[seat] += base_points * 2;
-                        score += base_points * 2;
-                    } else {
-                        delta_scores[j] -= base_points;
-                        delta_scores[seat] += base_points;
-                        score += base_points;
-                    }
-                }
-            }
-            let ming = [];
-            for (let i in fulu[seat]) {
-                let tiles = fulu[seat][i].tile;
-                if (fulu[seat][i].type === 0)
-                    ming.push(`shunzi(${tiles[0]},${tiles[1]},${tiles[2]})`);
-                else if (fulu[seat][i].type === 1)
-                    ming.push(`kezi(${tiles[0]},${tiles[1]},${tiles[2]})`);
-                else if (fulu[seat][i].type === 2)
-                    ming.push(`minggang(${tiles[0]},${tiles[1]},${tiles[2]},${tiles[3]})`);
-                else if (fulu[seat][i].type === 3)
-                    ming.push(`angang(${tiles[0]},${tiles[1]},${tiles[2]},${tiles[3]})`);
-            }
-            ret2.push({
-                delta_scores: delta_scores.slice(),
-                doras: calcdoras(),
-                hand: playertiles[seat].slice(),
-                ming: ming,
-                old_scores: scores.slice(),
-                score: score,
-                seat: seat,
-            });
-            for (let i = 0; i < playercnt; i++) {
-                scores[i] += delta_scores[i];
-                delta_scores[i] = 0;
+            // 幻境传说: 命运卡1
+            if (seat === ju || i === ju) {
+                delta_scores[i] -= 4000 * times;
+                delta_scores[seat] += 4000 * times;
+                score += 4000 * times;
+            } else {
+                delta_scores[i] -= 2000 * times;
+                delta_scores[seat] += 2000 * times;
+                score += 2000 * times;
             }
         }
-        if (liujumanguan && !is_chuanma() && !is_guobiao()) {
-
-            endNoTile(true, ret, ret2);
-
-            if (!is_xuezhandaodi() && !is_wanxiangxiuluo() && !is_xueliu()) {
-                ben++;
-                // 幻境传说: 庄家卡2
-                if (get_field_spell_mode1() === 2)
-                    ben += 4;
+        if ((playercnt === 3 || playercnt === 2) && no_zimosun()) {
+            let base_points = playercnt === 3 ? 1000 : 4000;
+            for (let j = 0; j < playercnt; j++) {
+                if (seat === j || hupaied[j])
+                    continue;
+                if (seat === ju) {
+                    delta_scores[j] -= base_points * 2;
+                    delta_scores[seat] += base_points * 2;
+                    score += base_points * 2;
+                } else {
+                    delta_scores[j] -= base_points;
+                    delta_scores[seat] += base_points;
+                    score += base_points;
+                }
             }
-            if (!ret[ju].tingpai || is_xuezhandaodi() || is_wanxiangxiuluo())
-                ju++;
-            roundend();
-            return;
+        }
+        let ming = [];
+        for (let i in fulu[seat]) {
+            let tiles = fulu[seat][i].tile;
+            if (fulu[seat][i].type === 0)
+                ming.push(`shunzi(${tiles[0]},${tiles[1]},${tiles[2]})`);
+            else if (fulu[seat][i].type === 1)
+                ming.push(`kezi(${tiles[0]},${tiles[1]},${tiles[2]})`);
+            else if (fulu[seat][i].type === 2)
+                ming.push(`minggang(${tiles[0]},${tiles[1]},${tiles[2]},${tiles[3]})`);
+            else if (fulu[seat][i].type === 3)
+                ming.push(`angang(${tiles[0]},${tiles[1]},${tiles[2]},${tiles[3]})`);
+        }
+        ret2.push({
+            delta_scores: delta_scores.slice(),
+            doras: calcdoras(),
+            hand: playertiles[seat].slice(),
+            ming: ming,
+            old_scores: scores.slice(),
+            score: score,
+            seat: seat,
+        });
+        for (let i = 0; i < playercnt; i++) {
+            scores[i] += delta_scores[i];
+            delta_scores[i] = 0;
         }
     }
+    if (liujumanguan && !is_chuanma() && !is_guobiao()) {
+
+        endNoTile(true, ret, ret2);
+
+        if (!is_xuezhandaodi() && !is_wanxiangxiuluo() && !is_xueliu()) {
+            ben++;
+            // 幻境传说: 庄家卡2
+            if (get_field_spell_mode1() === 2)
+                ben += 4;
+        }
+        if (!ret[ju].tingpai || is_xuezhandaodi() || is_wanxiangxiuluo())
+            ju++;
+        roundend();
+        return;
+    }
+    // 无流满
     ret2 = [{delta_scores: [], old_scores: []}];
     let playerleft = 0;
     for (let i = 0; i < playercnt; i++)
@@ -1586,17 +1594,17 @@ function notileliuju() {
         if (!is_chuanma() && !is_guobiao()) {
             let fafu = 1000;
             if (tingcnt === 1 && notingcnt === 1)
-                fafu = fafu_2p;
+                fafu = get_fafu_2p();
             else if (tingcnt === 1 && notingcnt === 2)
-                fafu = fafu_3p_1ting;
+                fafu = get_fafu_3p_1ting();
             else if (tingcnt === 2 && notingcnt === 1)
-                fafu = fafu_3p_2ting;
+                fafu = get_fafu_3p_2ting();
             else if (tingcnt === 1 && notingcnt === 3)
-                fafu = fafu_1ting;
+                fafu = get_fafu_1ting();
             else if (tingcnt === 2 && notingcnt === 2)
-                fafu = fafu_2ting;
+                fafu = get_fafu_2ting();
             else if (tingcnt === 3 && notingcnt === 1)
-                fafu = fafu_3ting;
+                fafu = get_fafu_3ting();
 
             for (let i = 0; i < playercnt; i++) {
                 if (hupaied[i])
@@ -2588,16 +2596,6 @@ let playercnt;
  */
 let liqi_need;
 /**
- * 本场点数的倍数, 默认为1(即1倍的 (playercnt - 1) * 100)
- * @type {number}
- */
-let ben_times;
-/**
- * 荒牌流局罚符(未听牌玩家向听牌玩家支付的点数), 默认为段位场配置
- * @type {number}
- */
-let fafu_1ting, fafu_2ting, fafu_3ting, fafu_3p_1ting, fafu_3p_2ting, fafu_2p;
-/**
  * - chang: 场(东/南/西/北对应0/1/2/3)
  * - ju: 局(东1/2/3/4对应0/1/2/3)
  * - ben: 本场数
@@ -2947,13 +2945,6 @@ function gamebegin() {
         playercnt = 4;
 
     liqi_need = get_liqi_need();
-    ben_times = get_ben_times();
-    fafu_1ting = get_fafu_1ting();
-    fafu_2ting = get_fafu_2ting();
-    fafu_3ting = get_fafu_3ting();
-    fafu_3p_1ting = get_fafu_3p_2ting();
-    fafu_3p_2ting = get_fafu_3p_1ting();
-    fafu_2p = get_fafu_2p();
     if (get_field_spell_mode3() === 2) // 幻境传说: 命运卡2
         liqi_need = 2;
 
@@ -3012,10 +3003,10 @@ function init() {
     hules_history = [];
     fulu = [[], [], [], []];
     paihe = [
-        {liujumanguan: true, tiles: []},
-        {liujumanguan: true, tiles: []},
-        {liujumanguan: true, tiles: []},
-        {liujumanguan: true, tiles: []}
+        {liujumanguan: !(no_liujumanguan() || is_heqie_mode()), tiles: []},
+        {liujumanguan: !(no_liujumanguan() || is_heqie_mode()), tiles: []},
+        {liujumanguan: !(no_liujumanguan() || is_heqie_mode()), tiles: []},
+        {liujumanguan: !(no_liujumanguan() || is_heqie_mode()), tiles: []}
     ];
     liqiinfo = [
         {liqi: 0, yifa: 1, kai: false},
@@ -3811,11 +3802,11 @@ function hupaioneplayer(seat) {
 
         let delta_point;
         if (equ_seat !== undefined) {
-            delta_point = (playercnt - 1) * 100 * benchangbang * ben_times;
+            delta_point = (playercnt - 1) * 100 * benchangbang * get_ben_times();
             delta_scores[equ_seat] -= delta_point;
             delta_scores[seat] += delta_point;
         } else {
-            delta_point = 100 * benchangbang * ben_times;
+            delta_point = 100 * benchangbang * get_ben_times();
             for (let i = 0; i < playercnt; i++) {
                 if (i === seat || hupaied[i])
                     continue;
@@ -10841,6 +10832,7 @@ function optimize_function() {
                     break;
                 }
 
+        // 添加下面
         if (is_heqie_mode() && this.hand.length > 0)
             if (this.seat === protected_tiles.seat) {
                 for (let i = 0; i < this.hand.length; i++)
@@ -10849,7 +10841,8 @@ function optimize_function() {
                         break;
                     }
             } else
-                F = 0;
+                F = this.hand.length - 1;
+        // 添加上面
 
         if (-1 !== F) {
             this.hand[F].Destory();
@@ -10889,6 +10882,7 @@ function optimize_function() {
                         break;
                     }
 
+        // 添加下面
         if (is_heqie_mode() && this.hand.length > 0)
             if (this.seat === protected_tiles.seat) {
                 for (let i = 0; i < this.hand.length; i++)
@@ -10897,7 +10891,8 @@ function optimize_function() {
                         break;
                     }
             } else
-                n = 0;
+                n = this.hand.length - 1;
+        // 添加上面
 
         if (-1 !== n) {
             for (var M = this.hand[n], A = n; A < this.hand.length - 1; A++)

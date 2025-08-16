@@ -4,27 +4,36 @@
  * 2. 其他家切牌后自家是否要鸣牌, 和鸣牌后切什么牌(第二类何切)
  */
 !(function () {
-    // 用户修改 json 数据
-    let json = {
-        player_count: 4, // 玩家数
-        chang_ju_ben: [0, 0, 0], // 所在小局, 第一个是什么场, 第二个是谁坐庄, 第三个是本场数
-        mainrole: 2, // 主视角的 seat
-        tiles: '0566m6p89s', // 主视角在何切的巡目的手牌(若是第一类何切, 则不包含刚摸的牌)
-        lst_mopai: '', // 第一类何切中何切巡目刚摸的牌, 若是第二类何切, 则要置为空
-        dora: ['0p'], // 宝牌指示牌, 从左到右
-
-        // 各家的牌河, 牌不要缩写, 包含被鸣走的牌
-        // 牌有后缀g表示摸切, 无g则为手切
-        // 有后缀r表示立直, 无r表示非立直
+    /**
+     * 用户修改 json 数据
+     * - player_count: 玩家数
+     * - chang_ju_ben_num: 所在小局, 第一个是什么场, 第二个是谁坐庄, 第三个是本场数, 第四个是刚开局时场上立直棒个数(默认为0)
+     * - mainrole: 主视角的 seat
+     * - tiles: 主视角在何切的巡目的手牌(若是第一类何切, 则不包含刚摸的牌)
+     * - lst_mopai: 第一类何切中何切巡目刚摸的牌, 若是第二类何切, 则要置为空
+     * - dora: 宝牌指示牌, 从左到右
+     * - paihe0-3: 各家的牌河, 牌不要缩写, 包含被鸣走的牌
+     *             牌有后缀g表示摸切, 无g则为手切
+     *             有后缀r表示立直, 无r表示非立直
+     *             g和r顺序不分先后
+     * - fulu0-3: 各家的副露, 按时间顺序从左到右
+     *            '_'表示下一张牌是倾倒的鸣的其他家的牌, '^'表示加杠, 先'_'后'^'
+     *            大明杠对家的牌的'_'放在第二个数字前
+     *            暗杠的巡目在轮到该暗杠副露时的下一个摸牌巡, 加杠的巡目在碰对应副露之后下一个摸牌巡
+     * @type {{player_count: number, chang_ju_ben_num: number[], mainrole: number, tiles: string, lst_mopai: string, dora: string[], paihe0: string, paihe1: string, paihe2: string, paihe3: string, fulu0: string[], fulu1: string[], fulu2: string[], fulu3: string[]}}
+     */
+    let json;
+    json = {
+        player_count: 4,
+        chang_ju_ben_num: [0, 0, 0],
+        mainrole: 2,
+        tiles: '0566m6p89s',
+        lst_mopai: '',
+        dora: ['0p'],
         paihe0: '3z9s1p2pg8m9p1z4s5mr',
         paihe1: '7z2z3m5z1sg1zg4zg4zg',
         paihe2: '9p7z6z2p8m4s4zg1mg',
         paihe3: '9p7zg9s7sg5sg4z4p7pg',
-
-        // 各家的副露, 按时间顺序从左到右
-        // '_'表示下一张牌是倾倒的鸣的其他家的牌, '^'表示加杠, 先'_'后'^'
-        // 大明杠对家的牌的'_'放在第二个数字前
-        // 暗杠的巡目在轮到该暗杠副露时的下一个摸牌巡, 加杠的巡目在碰对应副露之后下一个摸牌巡
         fulu0: [],
         fulu1: [],
         fulu2: ['_555z', '_111z'],
@@ -51,22 +60,16 @@
             meta: {mode_id: 0},
             mode: {
                 mode: 2,
-                detail_rule: { // 无流满, 无罚符
-                    _no_liujumanguan: true,
-                    _fafu_1ting: 0,
-                    _fafu_2ting: 0,
-                    _fafu_3ting: 0,
-                    _fafu_3p_1ting: 0,
-                    _fafu_3p_2ting: 0,
-                    _fafu_2p: 0,
+                detail_rule: {
+                    _no_liujumanguan: true, // 无流满
                     _mainrole_: 0,
                     _chang_ju_ben_num_: [0, 0, 0],
-                    _heqie_mode: true,
+                    _heqie_mode: true, // 何切模式一定要开启, 否则会报错
                 }
             }
         };
 
-        config.mode.detail_rule._chang_ju_ben_num_ = json.chang_ju_ben;
+        config.mode.detail_rule._chang_ju_ben_num_ = json.chang_ju_ben_num;
         config.mode.detail_rule._mainrole_ = json.mainrole;
         if (json.player_count === 3)
             config.mode.mode = 12;
@@ -172,7 +175,7 @@
                 // 1. 长度为4, 类似 1pgr, 即摸切1p&立直
                 // 2. 长度为3, 类似 1pr 和 1pg, 摸切1p, 或手切1p立直
                 // 3. 长度为2, 如 1p, 即摸切1p
-                if (tiles.length > 3 && tiles[2] === 'g' && tiles[3] === 'r') {
+                if (tiles.length > 3 && (tiles[2] === 'g' && tiles[3] === 'r' || tiles[2] === 'r' && tiles[3] === 'g')) {
                     ret.push(tiles.substring(0, 4));
                     tiles = tiles.substring(4);
                 } else if (tiles.length > 2 && (tiles[2] === 'g' || tiles[2] === 'r')) {
@@ -239,7 +242,7 @@
                     let tmp_fulu = fulus_info[tmp_seat][fulu_index[tmp_seat]];
                     if (tmp_fulu && tmp_fulu.type === op[j] && tmp_fulu.from === seati && tmp_fulu.ming_tile === tile) {
                         nxt_step = op[j];
-                        seati = i;
+                        seati = tmp_seat;
                         return;
                     }
                 }
