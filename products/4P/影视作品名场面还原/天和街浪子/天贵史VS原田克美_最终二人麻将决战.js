@@ -38,13 +38,15 @@ config = {
 
 // qiepai 去掉暗牌需要支付 1000 点和其他冗余判断
 origin_qiepai = qiepai;
-qiepai = function (seat, tile, is_liqi, anpai, bs_type) {
+qiepai = function (seat, tile, is_liqi, f_moqie, anpai, bs_type) {
     // 参数预处理
     function preprocess() {
-        let x = {}, mat = [seat, tile, is_liqi, anpai, bs_type];
+        let x = {}, mat = [seat, tile, is_liqi, f_moqie, anpai, bs_type];
         for (let i in mat)
             if (mat[i] === 'anpai')
                 x.anpai = mat[i];
+            else if (mat[i] === 'moqie' || mat[i] === 'shouqie')
+                x.f_moqie = mat[i];
             else if (typeof mat[i] == 'number')
                 x.seat = mat[i];
             else if (typeof mat[i] == 'boolean' || mat[i] === 'kailiqi')
@@ -53,52 +55,93 @@ qiepai = function (seat, tile, is_liqi, anpai, bs_type) {
                 x.beishui_type = mat[i][0];
             else if (typeof mat[i] == 'string')
                 x.tile = mat[i];
-        return [x.seat, x.tile, x.is_liqi, x.anpai, x.beishui_type];
+        return [x.seat, x.tile, x.is_liqi, x.f_moqie, x.anpai, x.beishui_type];
     }
 
     let beishui_type;
-    [seat, tile, is_liqi, anpai, beishui_type] = preprocess();
+    [seat, tile, is_liqi, f_moqie, anpai, beishui_type] = preprocess();
 
-    let lstaction = getlstaction();
+    lstaction_completion();
+
+    let lstname = getlstaction().name, lstseat = getlstaction().data.seat;
     if (seat === undefined)
-        seat = lstaction.name === 'RecordNewRound' ? ju : lstaction.data.seat;
+        seat = lstseat;
     if (is_liqi === undefined)
         is_liqi = false;
+    if (is_beishuizhizhan() && beishui_type === undefined)
+        beishui_type = 0;
 
     let moqie = true;
     // 如果 tile 参数原生不空, 且在手牌出现不止一次, 则一定是手切
     if (tile !== undefined && playertiles[seat].indexOf(tile) !== playertiles[seat].length - 1)
         moqie = false;
-    if (tile === undefined && discardtiles[seat].length !== 0)
+    if (tile === undefined && discardtiles[seat].length > 0)
         tile = discardtiles[seat].shift();
     if (tile === undefined || tile === '..')
         tile = playertiles[seat].at(-1);
-    moqie = moqie && playertiles[seat].at(-1) === tile && lstaction.name !== 'RecordNewRound' && lstaction.name !== 'RecordChiPengGang';
+    moqie = moqie && playertiles[seat].at(-1) === tile && lstname !== 'RecordNewRound' && lstname !== 'RecordChiPengGang';
+    if (is_heqie_mode())
+        moqie = f_moqie === 'moqie';
 
+    // 确定立直类型
     let is_wliqi = false, is_kailiqi = false;
     if (is_liqi === 'kailiqi')
         is_liqi = is_kailiqi = true;
     if (is_liqi && liqiinfo[seat].yifa !== 0 && liqiinfo[seat].liqi === 0)
         is_wliqi = true;
 
-    if (is_liqi)
-        lstliqi = {seat: seat, type: is_wliqi ? 2 : 1, kai: is_kailiqi ? 1 : 0, beishui_type: 0};
+    // 确定 lstliqi
+    if (is_liqi && liqiinfo[seat].liqi === 0)
+        lstliqi = {
+            seat: seat,
+            liqi: is_wliqi ? 2 : 1,
+            kai: is_kailiqi,
+            beishui_type: beishui_type,
+        };
 
-    let index = playertiles[seat].lastIndexOf(tile);
-    if (index === -1) {  // 要切的牌手牌中没有, 则报错
-        console.error(roundinfo() + `seat: ${seat} 手牌不存在要切的牌: ${tile}`);
-        return;
+    // 切的牌是否为明牌
+    let tile_state = is_openhand() || is_begin_open() && erasemingpai(seat, tile);
+
+    // 龙之目玉: 更新目玉数据
+    if (is_muyu() && seat === muyu.seat)
+        update_muyu();
+
+    // 幻境传说: 命运卡3
+    if (get_field_spell_mode3() === 3)
+        if (liqiinfo[seat].liqi !== 0)
+            spell_hourglass[seat]++;
+
+    // 咏唱之战: 更新手摸切数据
+    if (is_yongchang()) {
+        shoumoqie[seat].push(!moqie);
+        update_shoumoqie(seat);
     }
-    playertiles[seat].splice(index, 1);
+
+    // 魂之一击: 宣布魂之一击立直
+    if (is_hunzhiyiji() && lstliqi != null)
+        hunzhiyiji_info[seat] = {
+            seat: seat,
+            liqi: lstliqi.liqi,
+            continue_deal_count: 6,
+            overload: false,
+        };
+
+    // 切的牌从 playertiles 中移除
+    if (is_heqie_mode())
+        playertiles[seat].pop();
+    else {
+        let index = playertiles[seat].lastIndexOf(tile);
+        if (index === -1) // 要切的牌手牌中没有, 则报错
+            throw new Error(roundinfo() + `seat: ${seat} 手牌不存在要切的牌: ${tile}`);
+        playertiles[seat].splice(index, 1);
+    }
     playertiles[seat].sort(cmp);
 
-    let tile_state = is_openhand();
-    if (is_peipaimingpai())
-        tile_state = erasemingpai(seat, tile);
-
+    // 切的牌 push 到 paihe 中, 并计算流局满贯
     paihe[seat].tiles.push(tile);
     if (!(is_anye() && anpai === 'anpai') && !judgetile(tile, 'Y'))
         paihe[seat].liujumanguan = false;
+
     if (liqiinfo[seat].yifa > 0)
         liqiinfo[seat].yifa--;
 
@@ -110,17 +153,31 @@ qiepai = function (seat, tile, is_liqi, anpai, bs_type) {
         update_shezhangzt(seat);
         update_prezhenting(seat, tile);
     }
+
+    // 完成上个操作的后续
+    function lstaction_completion() {
+        // 包杠失效
+        baogangseat = -1;
+
+        // 开杠翻指示牌
+        if (doracnt.lastype === 1) {
+            doracnt.cnt += 1 + doracnt.bonus;
+            doracnt.licnt += 1 + doracnt.bonus;
+            doracnt.bonus = doracnt.lastype = 0;
+        }
+    }
 }
+
 // 修改点数变化
 origin_endHule = endHule;
-endHule = function (HuleInfo) {
+endHule = function (hule_info) {
     delta_scores = [12300, 0, 0, 0];
     scores = [21500, 0, 20300, 0];
     actions.push({
         name: 'RecordHule',
         data: {
             delta_scores: delta_scores.slice(),
-            hules: HuleInfo,
+            hules: hule_info,
             old_scores: [9200, 0, 20300, 0],
             scores: scores.slice(),
             baopai: 0

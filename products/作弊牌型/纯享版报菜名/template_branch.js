@@ -350,7 +350,7 @@ hupaioneplayer = function (seat) {
         {val: 2, id: 48},
         {val: 2, id: 49},
         {val: 2, id: 50},
-        {val: 0, id: 9208},
+        {val: 0, id: 9209},
     ];
     playertiles[seat].pop();
     delta_scores = [-96000, -48000, 192000, -48000];

@@ -5,11 +5,11 @@ clearproject();
 player_datas[0].nickname = '玖辻-契约';
 player_datas[1].nickname = '玖辻';
 player_datas[2].nickname = '玖辻-契约';
-player_datas[3].nickname = '玖辻';
+player_datas[3].nickname = '夏风吹拂';
 player_datas[0].avatar_id = 409002;
 player_datas[1].avatar_id = 409001;
 player_datas[2].avatar_id = 409002;
-player_datas[3].avatar_id = 409001;
+player_datas[3].avatar_id = 409003;
 
 config = {
     category: 1,
@@ -87,7 +87,8 @@ mopai();
 leimingpai();
 hupai();
 
-zimohu(true);
+normalmoqie();
+hupai(true);
 
 
 // 第4局: 将对;         清对;             金钩钓

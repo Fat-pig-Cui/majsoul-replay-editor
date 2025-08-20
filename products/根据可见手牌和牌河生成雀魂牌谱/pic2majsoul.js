@@ -12,6 +12,7 @@
      * - tiles: 主视角在何切的巡目的手牌(若是第一类何切, 则不包含刚摸的牌)
      * - lst_mopai: 第一类何切中何切巡目刚摸的牌, 若是第二类何切, 则要置为空
      * - dora: 宝牌指示牌, 从左到右
+     * - scores: 所有玩家这小局开始时的点数
      * - paihe0-3: 各家的牌河, 牌不要缩写, 包含被鸣走的牌
      *             牌有后缀g表示摸切, 无g则为手切
      *             有后缀r表示立直, 无r表示非立直
@@ -20,7 +21,7 @@
      *            '_'表示下一张牌是倾倒的鸣的其他家的牌, '^'表示加杠, 先'_'后'^'
      *            大明杠对家的牌的'_'放在第二个数字前
      *            暗杠的巡目在轮到该暗杠副露时的下一个摸牌巡, 加杠的巡目在碰对应副露之后下一个摸牌巡
-     * @type {{player_count: number, chang_ju_ben_num: number[], mainrole: number, tiles: string, lst_mopai: string, dora: string[], paihe0: string, paihe1: string, paihe2: string, paihe3: string, fulu0: string[], fulu1: string[], fulu2: string[], fulu3: string[]}}
+     * @type {{player_count: number, chang_ju_ben_num: number[], mainrole: number, tiles: string, lst_mopai: string, dora: string[], scores: number[], paihe0: string, paihe1: string, paihe2: string, paihe3: string, fulu0: string[], fulu1: string[], fulu2: string[], fulu3: string[]}}
      */
     let json;
     json = {
@@ -30,6 +31,7 @@
         tiles: '0566m6p89s',
         lst_mopai: '',
         dora: ['0p'],
+        scores: [25000, 25000, 25000, 25000],
         paihe0: '3z9s1p2pg8m9p1z4s5mr',
         paihe1: '7z2z3m5z1sg1zg4zg4zg',
         paihe2: '9p7z6z2p8m4s4zg1mg',
@@ -59,20 +61,17 @@
             category: 3,
             meta: {mode_id: 0},
             mode: {
-                mode: 2,
+                mode: json.player_count === 3 ? 12 : 2,
                 detail_rule: {
-                    _no_liujumanguan: true, // 无流满
-                    _mainrole_: 0,
-                    _chang_ju_ben_num_: [0, 0, 0],
                     _heqie_mode: true, // 何切模式一定要开启, 否则会报错
+                    _no_liujumanguan: true, // 无流满
+                    _chang_ju_ben_num_: json.chang_ju_ben_num,
+                    _mainrole_: json.mainrole,
+                    _scores_: json.scores,
                 }
             }
         };
 
-        config.mode.detail_rule._chang_ju_ben_num_ = json.chang_ju_ben_num;
-        config.mode.detail_rule._mainrole_ = json.mainrole;
-        if (json.player_count === 3)
-            config.mode.mode = 12;
         // 解析 fulu 至 fulus_info
         let new_fulus = [json.fulu0, json.fulu1, json.fulu2, json.fulu3];
         for (let i = 0; i < json.player_count; i++) {

@@ -58,7 +58,8 @@ CHARACTER = {
         "ur_liqi": 0,
         "ur_cutin": "",
         "limited": 0,
-        "treasure_sp": 0
+        "treasure_sp": 0,
+        "blink": 0
     },
     "200002": {
         "id": 200002,
@@ -114,7 +115,8 @@ CHARACTER = {
         "ur_liqi": 0,
         "ur_cutin": "",
         "limited": 0,
-        "treasure_sp": 0
+        "treasure_sp": 0,
+        "blink": 0
     },
     "200003": {
         "id": 200003,
@@ -170,7 +172,8 @@ CHARACTER = {
         "ur_liqi": 0,
         "ur_cutin": "",
         "limited": 0,
-        "treasure_sp": 0
+        "treasure_sp": 0,
+        "blink": 0
     },
     "200004": {
         "id": 200004,
@@ -226,7 +229,8 @@ CHARACTER = {
         "ur_liqi": 0,
         "ur_cutin": "",
         "limited": 0,
-        "treasure_sp": 0
+        "treasure_sp": 0,
+        "blink": 0
     },
     "200005": {
         "id": 200005,
@@ -282,7 +286,8 @@ CHARACTER = {
         "ur_liqi": 0,
         "ur_cutin": "",
         "limited": 0,
-        "treasure_sp": 0
+        "treasure_sp": 0,
+        "blink": 0
     },
     "200006": {
         "id": 200006,
@@ -338,7 +343,8 @@ CHARACTER = {
         "ur_liqi": 0,
         "ur_cutin": "",
         "limited": 0,
-        "treasure_sp": 0
+        "treasure_sp": 0,
+        "blink": 0
     },
     "200007": {
         "id": 200007,
@@ -394,7 +400,8 @@ CHARACTER = {
         "ur_liqi": 0,
         "ur_cutin": "",
         "limited": 0,
-        "treasure_sp": 0
+        "treasure_sp": 0,
+        "blink": 1
     },
     "200008": {
         "id": 200008,
@@ -450,7 +457,8 @@ CHARACTER = {
         "ur_liqi": 0,
         "ur_cutin": "",
         "limited": 0,
-        "treasure_sp": 0
+        "treasure_sp": 0,
+        "blink": 0
     },
     "200009": {
         "id": 200009,
@@ -506,7 +514,8 @@ CHARACTER = {
         "ur_liqi": 0,
         "ur_cutin": "",
         "limited": 0,
-        "treasure_sp": 0
+        "treasure_sp": 0,
+        "blink": 0
     },
     "200010": {
         "id": 200010,
@@ -562,7 +571,8 @@ CHARACTER = {
         "ur_liqi": 0,
         "ur_cutin": "",
         "limited": 0,
-        "treasure_sp": 0
+        "treasure_sp": 0,
+        "blink": 0
     },
     "200011": {
         "id": 200011,
@@ -618,7 +628,8 @@ CHARACTER = {
         "ur_liqi": 0,
         "ur_cutin": "",
         "limited": 0,
-        "treasure_sp": 1
+        "treasure_sp": 1,
+        "blink": 0
     },
     "200012": {
         "id": 200012,
@@ -674,7 +685,8 @@ CHARACTER = {
         "ur_liqi": 0,
         "ur_cutin": "",
         "limited": 0,
-        "treasure_sp": 0
+        "treasure_sp": 0,
+        "blink": 0
     },
     "200013": {
         "id": 200013,
@@ -730,7 +742,8 @@ CHARACTER = {
         "ur_liqi": 0,
         "ur_cutin": "",
         "limited": 0,
-        "treasure_sp": 0
+        "treasure_sp": 0,
+        "blink": 0
     },
     "200014": {
         "id": 200014,
@@ -786,7 +799,8 @@ CHARACTER = {
         "ur_liqi": 0,
         "ur_cutin": "",
         "limited": 0,
-        "treasure_sp": 0
+        "treasure_sp": 0,
+        "blink": 0
     },
     "200015": {
         "id": 200015,
@@ -842,7 +856,8 @@ CHARACTER = {
         "ur_liqi": 0,
         "ur_cutin": "",
         "limited": 1,
-        "treasure_sp": 0
+        "treasure_sp": 0,
+        "blink": 0
     },
     "200016": {
         "id": 200016,
@@ -898,7 +913,8 @@ CHARACTER = {
         "ur_liqi": 0,
         "ur_cutin": "",
         "limited": 0,
-        "treasure_sp": 2
+        "treasure_sp": 2,
+        "blink": 0
     },
     "200017": {
         "id": 200017,
@@ -954,7 +970,8 @@ CHARACTER = {
         "ur_liqi": 0,
         "ur_cutin": "",
         "limited": 0,
-        "treasure_sp": 0
+        "treasure_sp": 0,
+        "blink": 0
     },
     "200018": {
         "id": 200018,
@@ -1010,7 +1027,8 @@ CHARACTER = {
         "ur_liqi": 0,
         "ur_cutin": "",
         "limited": 0,
-        "treasure_sp": 1
+        "treasure_sp": 1,
+        "blink": 0
     },
     "200019": {
         "id": 200019,
@@ -1066,7 +1084,8 @@ CHARACTER = {
         "ur_liqi": 0,
         "ur_cutin": "",
         "limited": 0,
-        "treasure_sp": 0
+        "treasure_sp": 0,
+        "blink": 0
     },
     "200020": {
         "id": 200020,
@@ -1122,7 +1141,8 @@ CHARACTER = {
         "ur_liqi": 0,
         "ur_cutin": "",
         "limited": 0,
-        "treasure_sp": 0
+        "treasure_sp": 0,
+        "blink": 0
     },
     "200021": {
         "id": 200021,
@@ -1178,7 +1198,8 @@ CHARACTER = {
         "ur_liqi": 0,
         "ur_cutin": "",
         "limited": 0,
-        "treasure_sp": 0
+        "treasure_sp": 0,
+        "blink": 0
     },
     "200022": {
         "id": 200022,
@@ -1234,7 +1255,8 @@ CHARACTER = {
         "ur_liqi": 0,
         "ur_cutin": "",
         "limited": 0,
-        "treasure_sp": 0
+        "treasure_sp": 0,
+        "blink": 0
     },
     "200023": {
         "id": 200023,
@@ -1290,7 +1312,8 @@ CHARACTER = {
         "ur_liqi": 0,
         "ur_cutin": "",
         "limited": 0,
-        "treasure_sp": 0
+        "treasure_sp": 0,
+        "blink": 0
     },
     "200024": {
         "id": 200024,
@@ -1346,7 +1369,8 @@ CHARACTER = {
         "ur_liqi": 0,
         "ur_cutin": "",
         "limited": 0,
-        "treasure_sp": 0
+        "treasure_sp": 0,
+        "blink": 0
     },
     "200025": {
         "id": 200025,
@@ -1402,7 +1426,8 @@ CHARACTER = {
         "ur_liqi": 0,
         "ur_cutin": "",
         "limited": 0,
-        "treasure_sp": 0
+        "treasure_sp": 0,
+        "blink": 0
     },
     "200026": {
         "id": 200026,
@@ -1458,7 +1483,8 @@ CHARACTER = {
         "ur_liqi": 0,
         "ur_cutin": "",
         "limited": 0,
-        "treasure_sp": 0
+        "treasure_sp": 0,
+        "blink": 0
     },
     "200027": {
         "id": 200027,
@@ -1514,7 +1540,8 @@ CHARACTER = {
         "ur_liqi": 0,
         "ur_cutin": "",
         "limited": 0,
-        "treasure_sp": 0
+        "treasure_sp": 0,
+        "blink": 0
     },
     "200028": {
         "id": 200028,
@@ -1570,7 +1597,8 @@ CHARACTER = {
         "ur_liqi": 0,
         "ur_cutin": "",
         "limited": 0,
-        "treasure_sp": 0
+        "treasure_sp": 0,
+        "blink": 0
     },
     "200029": {
         "id": 200029,
@@ -1626,7 +1654,8 @@ CHARACTER = {
         "ur_liqi": 0,
         "ur_cutin": "",
         "limited": 0,
-        "treasure_sp": 0
+        "treasure_sp": 0,
+        "blink": 0
     },
     "200030": {
         "id": 200030,
@@ -1682,7 +1711,8 @@ CHARACTER = {
         "ur_liqi": 0,
         "ur_cutin": "",
         "limited": 0,
-        "treasure_sp": 0
+        "treasure_sp": 0,
+        "blink": 0
     },
     "200031": {
         "id": 200031,
@@ -1738,7 +1768,8 @@ CHARACTER = {
         "ur_liqi": 0,
         "ur_cutin": "",
         "limited": 0,
-        "treasure_sp": 0
+        "treasure_sp": 0,
+        "blink": 0
     },
     "200032": {
         "id": 200032,
@@ -1794,7 +1825,8 @@ CHARACTER = {
         "ur_liqi": 0,
         "ur_cutin": "",
         "limited": 0,
-        "treasure_sp": 0
+        "treasure_sp": 0,
+        "blink": 0
     },
     "200033": {
         "id": 200033,
@@ -1850,7 +1882,8 @@ CHARACTER = {
         "ur_liqi": 0,
         "ur_cutin": "",
         "limited": 0,
-        "treasure_sp": 1
+        "treasure_sp": 1,
+        "blink": 0
     },
     "200034": {
         "id": 200034,
@@ -1906,7 +1939,8 @@ CHARACTER = {
         "ur_liqi": 0,
         "ur_cutin": "",
         "limited": 1,
-        "treasure_sp": 0
+        "treasure_sp": 0,
+        "blink": 0
     },
     "200035": {
         "id": 200035,
@@ -1962,7 +1996,8 @@ CHARACTER = {
         "ur_liqi": 0,
         "ur_cutin": "",
         "limited": 1,
-        "treasure_sp": 0
+        "treasure_sp": 0,
+        "blink": 0
     },
     "200036": {
         "id": 200036,
@@ -2018,7 +2053,8 @@ CHARACTER = {
         "ur_liqi": 0,
         "ur_cutin": "",
         "limited": 1,
-        "treasure_sp": 0
+        "treasure_sp": 0,
+        "blink": 0
     },
     "200037": {
         "id": 200037,
@@ -2074,7 +2110,8 @@ CHARACTER = {
         "ur_liqi": 0,
         "ur_cutin": "",
         "limited": 1,
-        "treasure_sp": 0
+        "treasure_sp": 0,
+        "blink": 0
     },
     "200038": {
         "id": 200038,
@@ -2130,7 +2167,8 @@ CHARACTER = {
         "ur_liqi": 0,
         "ur_cutin": "",
         "limited": 0,
-        "treasure_sp": 0
+        "treasure_sp": 0,
+        "blink": 0
     },
     "200039": {
         "id": 200039,
@@ -2186,7 +2224,8 @@ CHARACTER = {
         "ur_liqi": 0,
         "ur_cutin": "",
         "limited": 0,
-        "treasure_sp": 0
+        "treasure_sp": 0,
+        "blink": 0
     },
     "200040": {
         "id": 200040,
@@ -2242,7 +2281,8 @@ CHARACTER = {
         "ur_liqi": 0,
         "ur_cutin": "",
         "limited": 1,
-        "treasure_sp": 0
+        "treasure_sp": 0,
+        "blink": 0
     },
     "200041": {
         "id": 200041,
@@ -2298,7 +2338,8 @@ CHARACTER = {
         "ur_liqi": 0,
         "ur_cutin": "",
         "limited": 1,
-        "treasure_sp": 0
+        "treasure_sp": 0,
+        "blink": 0
     },
     "200042": {
         "id": 200042,
@@ -2354,7 +2395,8 @@ CHARACTER = {
         "ur_liqi": 0,
         "ur_cutin": "",
         "limited": 1,
-        "treasure_sp": 0
+        "treasure_sp": 0,
+        "blink": 0
     },
     "200043": {
         "id": 200043,
@@ -2410,7 +2452,8 @@ CHARACTER = {
         "ur_liqi": 0,
         "ur_cutin": "",
         "limited": 1,
-        "treasure_sp": 0
+        "treasure_sp": 0,
+        "blink": 0
     },
     "200044": {
         "id": 200044,
@@ -2466,7 +2509,8 @@ CHARACTER = {
         "ur_liqi": 0,
         "ur_cutin": "",
         "limited": 0,
-        "treasure_sp": 0
+        "treasure_sp": 0,
+        "blink": 0
     },
     "200045": {
         "id": 200045,
@@ -2522,7 +2566,8 @@ CHARACTER = {
         "ur_liqi": 0,
         "ur_cutin": "",
         "limited": 0,
-        "treasure_sp": 0
+        "treasure_sp": 0,
+        "blink": 0
     },
     "200046": {
         "id": 200046,
@@ -2578,7 +2623,8 @@ CHARACTER = {
         "ur_liqi": 0,
         "ur_cutin": "",
         "limited": 0,
-        "treasure_sp": 1
+        "treasure_sp": 1,
+        "blink": 0
     },
     "200047": {
         "id": 200047,
@@ -2634,7 +2680,8 @@ CHARACTER = {
         "ur_liqi": 0,
         "ur_cutin": "",
         "limited": 0,
-        "treasure_sp": 0
+        "treasure_sp": 0,
+        "blink": 0
     },
     "200048": {
         "id": 200048,
@@ -2690,7 +2737,8 @@ CHARACTER = {
         "ur_liqi": 0,
         "ur_cutin": "",
         "limited": 0,
-        "treasure_sp": 0
+        "treasure_sp": 0,
+        "blink": 0
     },
     "200049": {
         "id": 200049,
@@ -2746,7 +2794,8 @@ CHARACTER = {
         "ur_liqi": 0,
         "ur_cutin": "",
         "limited": 0,
-        "treasure_sp": 0
+        "treasure_sp": 0,
+        "blink": 0
     },
     "200050": {
         "id": 200050,
@@ -2802,7 +2851,8 @@ CHARACTER = {
         "ur_liqi": 0,
         "ur_cutin": "",
         "limited": 1,
-        "treasure_sp": 0
+        "treasure_sp": 0,
+        "blink": 0
     },
     "200051": {
         "id": 200051,
@@ -2858,7 +2908,8 @@ CHARACTER = {
         "ur_liqi": 0,
         "ur_cutin": "",
         "limited": 1,
-        "treasure_sp": 0
+        "treasure_sp": 0,
+        "blink": 0
     },
     "200052": {
         "id": 200052,
@@ -2914,7 +2965,8 @@ CHARACTER = {
         "ur_liqi": 0,
         "ur_cutin": "",
         "limited": 1,
-        "treasure_sp": 0
+        "treasure_sp": 0,
+        "blink": 0
     },
     "200053": {
         "id": 200053,
@@ -2970,7 +3022,8 @@ CHARACTER = {
         "ur_liqi": 0,
         "ur_cutin": "",
         "limited": 0,
-        "treasure_sp": 0
+        "treasure_sp": 0,
+        "blink": 0
     },
     "200054": {
         "id": 200054,
@@ -3026,7 +3079,8 @@ CHARACTER = {
         "ur_liqi": 0,
         "ur_cutin": "",
         "limited": 0,
-        "treasure_sp": 0
+        "treasure_sp": 0,
+        "blink": 0
     },
     "200055": {
         "id": 200055,
@@ -3082,7 +3136,8 @@ CHARACTER = {
         "ur_liqi": 0,
         "ur_cutin": "",
         "limited": 1,
-        "treasure_sp": 0
+        "treasure_sp": 0,
+        "blink": 0
     },
     "200056": {
         "id": 200056,
@@ -3138,7 +3193,8 @@ CHARACTER = {
         "ur_liqi": 0,
         "ur_cutin": "",
         "limited": 1,
-        "treasure_sp": 0
+        "treasure_sp": 0,
+        "blink": 0
     },
     "200057": {
         "id": 200057,
@@ -3194,7 +3250,8 @@ CHARACTER = {
         "ur_liqi": 0,
         "ur_cutin": "",
         "limited": 1,
-        "treasure_sp": 0
+        "treasure_sp": 0,
+        "blink": 0
     },
     "200058": {
         "id": 200058,
@@ -3250,7 +3307,8 @@ CHARACTER = {
         "ur_liqi": 0,
         "ur_cutin": "",
         "limited": 1,
-        "treasure_sp": 0
+        "treasure_sp": 0,
+        "blink": 0
     },
     "200059": {
         "id": 200059,
@@ -3306,7 +3364,8 @@ CHARACTER = {
         "ur_liqi": 0,
         "ur_cutin": "",
         "limited": 0,
-        "treasure_sp": 4
+        "treasure_sp": 4,
+        "blink": 0
     },
     "200060": {
         "id": 200060,
@@ -3362,7 +3421,8 @@ CHARACTER = {
         "ur_liqi": 0,
         "ur_cutin": "",
         "limited": 0,
-        "treasure_sp": 0
+        "treasure_sp": 0,
+        "blink": 0
     },
     "200061": {
         "id": 200061,
@@ -3418,7 +3478,8 @@ CHARACTER = {
         "ur_liqi": 0,
         "ur_cutin": "",
         "limited": 1,
-        "treasure_sp": 0
+        "treasure_sp": 0,
+        "blink": 0
     },
     "200062": {
         "id": 200062,
@@ -3474,7 +3535,8 @@ CHARACTER = {
         "ur_liqi": 0,
         "ur_cutin": "",
         "limited": 1,
-        "treasure_sp": 0
+        "treasure_sp": 0,
+        "blink": 0
     },
     "200063": {
         "id": 200063,
@@ -3530,7 +3592,8 @@ CHARACTER = {
         "ur_liqi": 0,
         "ur_cutin": "",
         "limited": 1,
-        "treasure_sp": 0
+        "treasure_sp": 0,
+        "blink": 0
     },
     "200064": {
         "id": 200064,
@@ -3586,7 +3649,8 @@ CHARACTER = {
         "ur_liqi": 0,
         "ur_cutin": "",
         "limited": 1,
-        "treasure_sp": 0
+        "treasure_sp": 0,
+        "blink": 0
     },
     "200065": {
         "id": 200065,
@@ -3642,7 +3706,8 @@ CHARACTER = {
         "ur_liqi": 0,
         "ur_cutin": "",
         "limited": 1,
-        "treasure_sp": 0
+        "treasure_sp": 0,
+        "blink": 0
     },
     "200066": {
         "id": 200066,
@@ -3698,7 +3763,8 @@ CHARACTER = {
         "ur_liqi": 0,
         "ur_cutin": "",
         "limited": 0,
-        "treasure_sp": 0
+        "treasure_sp": 0,
+        "blink": 0
     },
     "200067": {
         "id": 200067,
@@ -3754,7 +3820,8 @@ CHARACTER = {
         "ur_liqi": 0,
         "ur_cutin": "",
         "limited": 0,
-        "treasure_sp": 5
+        "treasure_sp": 5,
+        "blink": 0
     },
     "200068": {
         "id": 200068,
@@ -3810,7 +3877,8 @@ CHARACTER = {
         "ur_liqi": 0,
         "ur_cutin": "",
         "limited": 0,
-        "treasure_sp": 0
+        "treasure_sp": 0,
+        "blink": 0
     },
     "200069": {
         "id": 200069,
@@ -3866,7 +3934,8 @@ CHARACTER = {
         "ur_liqi": 0,
         "ur_cutin": "",
         "limited": 0,
-        "treasure_sp": 3
+        "treasure_sp": 3,
+        "blink": 0
     },
     "200070": {
         "id": 200070,
@@ -3922,7 +3991,8 @@ CHARACTER = {
         "ur_liqi": 0,
         "ur_cutin": "",
         "limited": 1,
-        "treasure_sp": 0
+        "treasure_sp": 0,
+        "blink": 0
     },
     "200071": {
         "id": 200071,
@@ -3978,7 +4048,8 @@ CHARACTER = {
         "ur_liqi": 0,
         "ur_cutin": "",
         "limited": 1,
-        "treasure_sp": 0
+        "treasure_sp": 0,
+        "blink": 0
     },
     "200072": {
         "id": 200072,
@@ -4034,7 +4105,8 @@ CHARACTER = {
         "ur_liqi": 0,
         "ur_cutin": "",
         "limited": 1,
-        "treasure_sp": 0
+        "treasure_sp": 0,
+        "blink": 0
     },
     "200073": {
         "id": 200073,
@@ -4090,7 +4162,8 @@ CHARACTER = {
         "ur_liqi": 0,
         "ur_cutin": "",
         "limited": 1,
-        "treasure_sp": 0
+        "treasure_sp": 0,
+        "blink": 0
     },
     "200074": {
         "id": 200074,
@@ -4146,7 +4219,8 @@ CHARACTER = {
         "ur_liqi": 0,
         "ur_cutin": "",
         "limited": 0,
-        "treasure_sp": 0
+        "treasure_sp": 0,
+        "blink": 0
     },
     "200075": {
         "id": 200075,
@@ -4202,7 +4276,8 @@ CHARACTER = {
         "ur_liqi": 0,
         "ur_cutin": "",
         "limited": 0,
-        "treasure_sp": 0
+        "treasure_sp": 0,
+        "blink": 0
     },
     "200076": {
         "id": 200076,
@@ -4258,7 +4333,8 @@ CHARACTER = {
         "ur_liqi": 0,
         "ur_cutin": "",
         "limited": 1,
-        "treasure_sp": 0
+        "treasure_sp": 0,
+        "blink": 0
     },
     "200077": {
         "id": 200077,
@@ -4314,7 +4390,8 @@ CHARACTER = {
         "ur_liqi": 0,
         "ur_cutin": "",
         "limited": 0,
-        "treasure_sp": 0
+        "treasure_sp": 0,
+        "blink": 0
     },
     "200078": {
         "id": 200078,
@@ -4370,7 +4447,8 @@ CHARACTER = {
         "ur_liqi": 0,
         "ur_cutin": "",
         "limited": 0,
-        "treasure_sp": 0
+        "treasure_sp": 0,
+        "blink": 0
     },
     "200079": {
         "id": 200079,
@@ -4426,7 +4504,8 @@ CHARACTER = {
         "ur_liqi": 0,
         "ur_cutin": "",
         "limited": 1,
-        "treasure_sp": 0
+        "treasure_sp": 0,
+        "blink": 0
     },
     "200080": {
         "id": 200080,
@@ -4482,7 +4561,8 @@ CHARACTER = {
         "ur_liqi": 0,
         "ur_cutin": "",
         "limited": 1,
-        "treasure_sp": 0
+        "treasure_sp": 0,
+        "blink": 0
     },
     "200081": {
         "id": 200081,
@@ -4538,7 +4618,8 @@ CHARACTER = {
         "ur_liqi": 0,
         "ur_cutin": "",
         "limited": 1,
-        "treasure_sp": 0
+        "treasure_sp": 0,
+        "blink": 0
     },
     "200082": {
         "id": 200082,
@@ -4594,7 +4675,8 @@ CHARACTER = {
         "ur_liqi": 0,
         "ur_cutin": "",
         "limited": 1,
-        "treasure_sp": 0
+        "treasure_sp": 0,
+        "blink": 0
     },
     "200083": {
         "id": 200083,
@@ -4650,7 +4732,8 @@ CHARACTER = {
         "ur_liqi": 0,
         "ur_cutin": "",
         "limited": 0,
-        "treasure_sp": 0
+        "treasure_sp": 0,
+        "blink": 0
     },
     "200084": {
         "id": 200084,
@@ -4706,7 +4789,8 @@ CHARACTER = {
         "ur_liqi": 0,
         "ur_cutin": "",
         "limited": 0,
-        "treasure_sp": 0
+        "treasure_sp": 0,
+        "blink": 0
     },
     "200085": {
         "id": 200085,
@@ -4762,7 +4846,8 @@ CHARACTER = {
         "ur_liqi": 0,
         "ur_cutin": "",
         "limited": 0,
-        "treasure_sp": 0
+        "treasure_sp": 0,
+        "blink": 0
     },
     "200086": {
         "id": 200086,
@@ -4818,7 +4903,8 @@ CHARACTER = {
         "ur_liqi": 0,
         "ur_cutin": "",
         "limited": 1,
-        "treasure_sp": 0
+        "treasure_sp": 0,
+        "blink": 0
     },
     "200087": {
         "id": 200087,
@@ -4874,7 +4960,8 @@ CHARACTER = {
         "ur_liqi": 0,
         "ur_cutin": "",
         "limited": 1,
-        "treasure_sp": 0
+        "treasure_sp": 0,
+        "blink": 0
     },
     "200088": {
         "id": 200088,
@@ -4930,7 +5017,8 @@ CHARACTER = {
         "ur_liqi": 0,
         "ur_cutin": "",
         "limited": 1,
-        "treasure_sp": 0
+        "treasure_sp": 0,
+        "blink": 0
     },
     "200089": {
         "id": 200089,
@@ -4986,7 +5074,8 @@ CHARACTER = {
         "ur_liqi": 0,
         "ur_cutin": "",
         "limited": 1,
-        "treasure_sp": 0
+        "treasure_sp": 0,
+        "blink": 0
     },
     "200090": {
         "id": 200090,
@@ -5042,7 +5131,8 @@ CHARACTER = {
         "ur_liqi": 0,
         "ur_cutin": "",
         "limited": 0,
-        "treasure_sp": 0
+        "treasure_sp": 0,
+        "blink": 0
     },
     "200091": {
         "id": 200091,
@@ -5098,7 +5188,8 @@ CHARACTER = {
         "ur_liqi": 0,
         "ur_cutin": "",
         "limited": 0,
-        "treasure_sp": 0
+        "treasure_sp": 0,
+        "blink": 0
     },
     "200092": {
         "id": 200092,
@@ -5154,7 +5245,8 @@ CHARACTER = {
         "ur_liqi": 0,
         "ur_cutin": "",
         "limited": 0,
-        "treasure_sp": 0
+        "treasure_sp": 0,
+        "blink": 0
     },
     "200093": {
         "id": 200093,
@@ -5210,7 +5302,8 @@ CHARACTER = {
         "ur_liqi": 0,
         "ur_cutin": "",
         "limited": 0,
-        "treasure_sp": 0
+        "treasure_sp": 0,
+        "blink": 0
     },
     "200094": {
         "id": 200094,
@@ -5266,7 +5359,8 @@ CHARACTER = {
         "ur_liqi": 0,
         "ur_cutin": "",
         "limited": 0,
-        "treasure_sp": 0
+        "treasure_sp": 0,
+        "blink": 0
     },
     "200095": {
         "id": 200095,
@@ -5322,7 +5416,8 @@ CHARACTER = {
         "ur_liqi": 0,
         "ur_cutin": "",
         "limited": 1,
-        "treasure_sp": 0
+        "treasure_sp": 0,
+        "blink": 0
     },
     "200096": {
         "id": 200096,
@@ -5378,7 +5473,8 @@ CHARACTER = {
         "ur_liqi": 0,
         "ur_cutin": "",
         "limited": 0,
-        "treasure_sp": 0
+        "treasure_sp": 0,
+        "blink": 0
     },
     "200097": {
         "id": 200097,
@@ -5434,7 +5530,8 @@ CHARACTER = {
         "ur_liqi": 0,
         "ur_cutin": "",
         "limited": 0,
-        "treasure_sp": 0
+        "treasure_sp": 0,
+        "blink": 0
     },
     "200098": {
         "id": 200098,
@@ -5490,7 +5587,8 @@ CHARACTER = {
         "ur_liqi": 0,
         "ur_cutin": "",
         "limited": 0,
-        "treasure_sp": 0
+        "treasure_sp": 0,
+        "blink": 0
     },
     "200099": {
         "id": 200099,
@@ -5546,7 +5644,8 @@ CHARACTER = {
         "ur_liqi": 0,
         "ur_cutin": "",
         "limited": 0,
-        "treasure_sp": 0
+        "treasure_sp": 0,
+        "blink": 0
     },
     "20000100": {
         "id": 20000100,
@@ -5602,7 +5701,8 @@ CHARACTER = {
         "ur_liqi": 0,
         "ur_cutin": "",
         "limited": 1,
-        "treasure_sp": 0
+        "treasure_sp": 0,
+        "blink": 0
     },
     "20000101": {
         "id": 20000101,
@@ -5658,7 +5758,8 @@ CHARACTER = {
         "ur_liqi": 0,
         "ur_cutin": "",
         "limited": 1,
-        "treasure_sp": 0
+        "treasure_sp": 0,
+        "blink": 0
     },
     "20000102": {
         "id": 20000102,
@@ -5714,7 +5815,8 @@ CHARACTER = {
         "ur_liqi": 0,
         "ur_cutin": "",
         "limited": 1,
-        "treasure_sp": 0
+        "treasure_sp": 0,
+        "blink": 0
     },
     "20000103": {
         "id": 20000103,
@@ -5770,7 +5872,8 @@ CHARACTER = {
         "ur_liqi": 0,
         "ur_cutin": "",
         "limited": 1,
-        "treasure_sp": 0
+        "treasure_sp": 0,
+        "blink": 0
     },
     "20000106": {
         "id": 20000106,
@@ -5826,7 +5929,8 @@ CHARACTER = {
         "ur_liqi": 0,
         "ur_cutin": "",
         "limited": 0,
-        "treasure_sp": 0
+        "treasure_sp": 0,
+        "blink": 0
     },
     "20000107": {
         "id": 20000107,
@@ -5882,7 +5986,8 @@ CHARACTER = {
         "ur_liqi": 0,
         "ur_cutin": "",
         "limited": 0,
-        "treasure_sp": 0
+        "treasure_sp": 0,
+        "blink": 0
     },
     "20000108": {
         "id": 20000108,
@@ -5938,7 +6043,8 @@ CHARACTER = {
         "ur_liqi": 0,
         "ur_cutin": "",
         "limited": 1,
-        "treasure_sp": 0
+        "treasure_sp": 0,
+        "blink": 0
     },
     "20000109": {
         "id": 20000109,
@@ -5994,7 +6100,8 @@ CHARACTER = {
         "ur_liqi": 0,
         "ur_cutin": "",
         "limited": 1,
-        "treasure_sp": 0
+        "treasure_sp": 0,
+        "blink": 0
     },
     "20000110": {
         "id": 20000110,
@@ -6050,7 +6157,8 @@ CHARACTER = {
         "ur_liqi": 0,
         "ur_cutin": "",
         "limited": 1,
-        "treasure_sp": 0
+        "treasure_sp": 0,
+        "blink": 0
     },
     "20000111": {
         "id": 20000111,
@@ -6106,7 +6214,65 @@ CHARACTER = {
         "ur_liqi": 0,
         "ur_cutin": "",
         "limited": 1,
-        "treasure_sp": 0
+        "treasure_sp": 0,
+        "blink": 0
+    },
+    "20000112": {
+        "id": 20000112,
+        "sort": 110,
+        "launch_time": "",
+        "name_chs": "璃央",
+        "name_chs2": "",
+        "name_chs_t": "璃央",
+        "name_chs_t2": "",
+        "name_jp": "璃央",
+        "name_jp2": "",
+        "name_en": "Li Yang",
+        "name_kr": "리오",
+        "open": 1,
+        "init_skin": 40011201,
+        "full_fetter_skin": 40011202,
+        "hand": 309997,
+        "favorite": 4,
+        "star_5_material": "302010-10,302008-10,303143|303043-5,302002-10,302004-100",
+        "star_5_cost": 0,
+        "can_marry": 1,
+        "exchange_item_id": 302002,
+        "exchange_item_num": 150,
+        "emo": "extendRes/emo/e20000112",
+        "sound": 112,
+        "sound_volume": 1,
+        "sex": 1,
+        "desc_stature_chs": "175厘米",
+        "desc_birth_chs": "7月16日",
+        "desc_age_chs": "不明",
+        "desc_bloodtype_chs": "不明",
+        "desc_cv_chs": "下地紫野",
+        "desc_cv_chs_t": "下地紫野",
+        "desc_cv_jp": "下地紫野",
+        "desc_cv_en": "Shino Shimoji",
+        "desc_cv_kr": "시모지 시노",
+        "desc_hobby_chs": "观察人类行为，睡觉",
+        "desc_chs": "神通广大的巳蛇宫宫主，行踪捉摸不定，曾在一番市现身，之后却又杳无踪影。\r\n如今，云游归来的她要做的第一件事便是兑现承诺——享用她那可口的“贡品”。",
+        "desc_item_chs": "",
+        "desc_item_chs_t": "",
+        "desc_item_jp": "",
+        "desc_item_en": "",
+        "desc_item_kr": "",
+        "collaboration": 0,
+        "region_limit": 0,
+        "skin_lib": [
+            0,
+            0,
+            0
+        ],
+        "ur": 1,
+        "ur_ron": 0,
+        "ur_liqi": 0,
+        "ur_cutin": "",
+        "limited": 1,
+        "treasure_sp": 0,
+        "blink": 0
     }
 }
 
@@ -8630,7 +8796,7 @@ SKIN = {
         "greeting_init": 0,
         "click2": 0,
         "celebrate_idle": 0,
-        "illust_data": ""
+        "illust_data": "bamuwei"
     },
     "400702": {
         "id": 400702,
@@ -14967,17 +15133,17 @@ SKIN = {
         "ck_half_2_offset": "",
         "ck_half_3_offset": "",
         "ck_half_single_offset": "",
-        "smallhead_x": 1908,
-        "smallhead_y": 909,
-        "smallhead_width": 400,
-        "full_x": 1133,
-        "full_y": 806,
-        "full_width": 1845,
-        "full_height": 2185,
-        "half_x": 1133,
-        "half_y": 806,
-        "half_width": 1845,
-        "half_height": 1063,
+        "smallhead_x": 0,
+        "smallhead_y": 0,
+        "smallhead_width": 0,
+        "full_x": 0,
+        "full_y": 0,
+        "full_width": 0,
+        "full_height": 0,
+        "half_x": 0,
+        "half_y": 0,
+        "half_width": 0,
+        "half_height": 0,
         "spine_type": 0,
         "spine_width": 0,
         "spine_height": 0,
@@ -14990,7 +15156,7 @@ SKIN = {
         "greeting_init": 0,
         "click2": 0,
         "celebrate_idle": 0,
-        "illust_data": ""
+        "illust_data": "chutao"
     },
     "402602": {
         "id": 402602,
@@ -15027,17 +15193,17 @@ SKIN = {
         "ck_half_2_offset": "",
         "ck_half_3_offset": "",
         "ck_half_single_offset": "",
-        "smallhead_x": 2027,
-        "smallhead_y": 942,
-        "smallhead_width": 400,
-        "full_x": 900,
-        "full_y": 248,
-        "full_width": 2107,
-        "full_height": 2715,
-        "half_x": 900,
-        "half_y": 641,
-        "half_width": 2107,
-        "half_height": 1261,
+        "smallhead_x": 0,
+        "smallhead_y": 0,
+        "smallhead_width": 0,
+        "full_x": 0,
+        "full_y": 0,
+        "full_width": 0,
+        "full_height": 0,
+        "half_x": 0,
+        "half_y": 0,
+        "half_width": 0,
+        "half_height": 0,
         "spine_type": 0,
         "spine_width": 0,
         "spine_height": 0,
@@ -15050,7 +15216,7 @@ SKIN = {
         "greeting_init": 0,
         "click2": 0,
         "celebrate_idle": 0,
-        "illust_data": ""
+        "illust_data": "chutao_0"
     },
     "402603": {
         "id": 402603,
@@ -15087,17 +15253,17 @@ SKIN = {
         "ck_half_2_offset": "",
         "ck_half_3_offset": "",
         "ck_half_single_offset": "",
-        "smallhead_x": 1829,
-        "smallhead_y": 904,
-        "smallhead_width": 437,
-        "full_x": 830,
-        "full_y": 427,
-        "full_width": 2381,
-        "full_height": 2528,
-        "half_x": 830,
-        "half_y": 622,
-        "half_width": 2381,
-        "half_height": 1261,
+        "smallhead_x": 0,
+        "smallhead_y": 0,
+        "smallhead_width": 0,
+        "full_x": 0,
+        "full_y": 0,
+        "full_width": 0,
+        "full_height": 0,
+        "half_x": 0,
+        "half_y": 0,
+        "half_width": 0,
+        "half_height": 0,
         "spine_type": 0,
         "spine_width": 0,
         "spine_height": 0,
@@ -15110,7 +15276,7 @@ SKIN = {
         "greeting_init": 0,
         "click2": 0,
         "celebrate_idle": 0,
-        "illust_data": ""
+        "illust_data": "chutao_cj"
     },
     "402604": {
         "id": 402604,
@@ -15147,17 +15313,17 @@ SKIN = {
         "ck_half_2_offset": "",
         "ck_half_3_offset": "",
         "ck_half_single_offset": "",
-        "smallhead_x": 1785,
-        "smallhead_y": 853,
-        "smallhead_width": 444,
-        "full_x": 355,
-        "full_y": 382,
-        "full_width": 3118,
-        "full_height": 2832,
-        "half_x": 463,
-        "half_y": 574,
-        "half_width": 2902,
-        "half_height": 1261,
+        "smallhead_x": 0,
+        "smallhead_y": 0,
+        "smallhead_width": 0,
+        "full_x": 0,
+        "full_y": 0,
+        "full_width": 0,
+        "full_height": 0,
+        "half_x": 0,
+        "half_y": 0,
+        "half_width": 0,
+        "half_height": 0,
         "spine_type": 0,
         "spine_width": 0,
         "spine_height": 0,
@@ -15170,7 +15336,7 @@ SKIN = {
         "greeting_init": 0,
         "click2": 0,
         "celebrate_idle": 0,
-        "illust_data": ""
+        "illust_data": "chutao_np"
     },
     "402605": {
         "id": 402605,
@@ -15207,17 +15373,17 @@ SKIN = {
         "ck_half_2_offset": "",
         "ck_half_3_offset": "",
         "ck_half_single_offset": "",
-        "smallhead_x": 1844,
-        "smallhead_y": 906,
-        "smallhead_width": 398,
-        "full_x": 873,
-        "full_y": 60,
-        "full_width": 2442,
-        "full_height": 2734,
-        "half_x": 873,
-        "half_y": 604,
-        "half_width": 2442,
-        "half_height": 1261,
+        "smallhead_x": 0,
+        "smallhead_y": 0,
+        "smallhead_width": 0,
+        "full_x": 0,
+        "full_y": 0,
+        "full_width": 0,
+        "full_height": 0,
+        "half_x": 0,
+        "half_y": 0,
+        "half_width": 0,
+        "half_height": 0,
         "spine_type": 0,
         "spine_width": 0,
         "spine_height": 0,
@@ -15230,7 +15396,67 @@ SKIN = {
         "greeting_init": 0,
         "click2": 0,
         "celebrate_idle": 0,
-        "illust_data": ""
+        "illust_data": "chutao_sd"
+    },
+    "402606": {
+        "id": 402606,
+        "type": 2,
+        "name_chs": "夏风吹拂",
+        "desc_chs": "夏风吹拂活动限定\\n“哇——！雏桃变成柠檬水里的小人鱼啦！这次茶会的泳池装备是仙境主题特供对不对？和兔子先生在一起，雏桃的运气绝、绝对满格了！”",
+        "desc_jp2": "「わぁ……！　雛桃、レモネードの海をおよぐ人魚さんになったのです！\r\nということは、つぎのお茶会のテーマは、ふしぎの国でのプールあそびなのです？\r\nこんないいことがおこるのは、うさぎさんといっしょにいるからなのです！」",
+        "character_id": 200026,
+        "lock_tips_chs": "活动限定",
+        "path": "extendRes/charactor/chutao_xr",
+        "exchange_item_id": 0,
+        "exchange_item_num": 0,
+        "direction": 0,
+        "no_reverse": 0,
+        "lock_reverse": 0,
+        "offset_x": 0,
+        "offset_y": 0,
+        "spot_scale": "",
+        "effective_time": "",
+        "lobby_offset": "",
+        "liaoshe_offset": "",
+        "shop_offset": "",
+        "win_offset": "",
+        "gameend_offset": "",
+        "starup_offset": "",
+        "treasure_offset": "",
+        "ck_full_0_offset": "",
+        "ck_full_1_offset": "",
+        "ck_full_2_offset": "",
+        "ck_full_3_offset": "",
+        "ck_full_single_offset": "",
+        "ck_half_0_offset": "",
+        "ck_half_1_offset": "",
+        "ck_half_2_offset": "",
+        "ck_half_3_offset": "",
+        "ck_half_single_offset": "",
+        "smallhead_x": 0,
+        "smallhead_y": 0,
+        "smallhead_width": 0,
+        "full_x": 0,
+        "full_y": 0,
+        "full_width": 0,
+        "full_height": 0,
+        "half_x": 0,
+        "half_y": 0,
+        "half_width": 0,
+        "half_height": 0,
+        "spine_type": 1,
+        "spine_width": 3816,
+        "spine_height": 5000,
+        "pivot_x": 2038,
+        "pivot_y": 3806,
+        "idle": 6666,
+        "greeting": 5900,
+        "celebrate": 10000,
+        "click": 5533,
+        "greeting_init": 12000,
+        "click2": 8000,
+        "celebrate_idle": 3333,
+        "illust_data": "chutao_xr"
     },
     "402701": {
         "id": 402701,
@@ -21747,17 +21973,17 @@ SKIN = {
         "ck_half_2_offset": "",
         "ck_half_3_offset": "",
         "ck_half_single_offset": "",
-        "smallhead_x": 1845,
-        "smallhead_y": 854,
-        "smallhead_width": 392,
-        "full_x": 875,
-        "full_y": 772,
-        "full_width": 1938,
-        "full_height": 2716,
-        "half_x": 875,
-        "half_y": 772,
-        "half_width": 1938,
-        "half_height": 1038,
+        "smallhead_x": 0,
+        "smallhead_y": 0,
+        "smallhead_width": 0,
+        "full_x": 0,
+        "full_y": 0,
+        "full_width": 0,
+        "full_height": 0,
+        "half_x": 0,
+        "half_y": 0,
+        "half_width": 0,
+        "half_height": 0,
         "spine_type": 0,
         "spine_width": 0,
         "spine_height": 0,
@@ -21770,7 +21996,7 @@ SKIN = {
         "greeting_init": 0,
         "click2": 0,
         "celebrate_idle": 0,
-        "illust_data": ""
+        "illust_data": "xiaoyesiqiyu"
     },
     "405302": {
         "id": 405302,
@@ -21807,17 +22033,17 @@ SKIN = {
         "ck_half_2_offset": "",
         "ck_half_3_offset": "",
         "ck_half_single_offset": "",
-        "smallhead_x": 1860,
-        "smallhead_y": 866,
-        "smallhead_width": 393,
-        "full_x": 723,
-        "full_y": 750,
-        "full_width": 2602,
-        "full_height": 2580,
-        "half_x": 723,
-        "half_y": 750,
-        "half_width": 2602,
-        "half_height": 1073,
+        "smallhead_x": 0,
+        "smallhead_y": 0,
+        "smallhead_width": 0,
+        "full_x": 0,
+        "full_y": 0,
+        "full_width": 0,
+        "full_height": 0,
+        "half_x": 0,
+        "half_y": 0,
+        "half_width": 0,
+        "half_height": 0,
         "spine_type": 0,
         "spine_width": 0,
         "spine_height": 0,
@@ -21830,7 +22056,7 @@ SKIN = {
         "greeting_init": 0,
         "click2": 0,
         "celebrate_idle": 0,
-        "illust_data": ""
+        "illust_data": "xiaoyesiqiyu_0"
     },
     "405303": {
         "id": 405303,
@@ -21867,17 +22093,17 @@ SKIN = {
         "ck_half_2_offset": "",
         "ck_half_3_offset": "",
         "ck_half_single_offset": "",
-        "smallhead_x": 1800,
-        "smallhead_y": 941,
-        "smallhead_width": 398,
-        "full_x": 1110,
-        "full_y": 618,
-        "full_width": 2331,
-        "full_height": 2215,
-        "half_x": 1110,
-        "half_y": 639,
-        "half_width": 2331,
-        "half_height": 1261,
+        "smallhead_x": 0,
+        "smallhead_y": 0,
+        "smallhead_width": 0,
+        "full_x": 0,
+        "full_y": 0,
+        "full_width": 0,
+        "full_height": 0,
+        "half_x": 0,
+        "half_y": 0,
+        "half_width": 0,
+        "half_height": 0,
         "spine_type": 0,
         "spine_width": 0,
         "spine_height": 0,
@@ -21890,7 +22116,67 @@ SKIN = {
         "greeting_init": 0,
         "click2": 0,
         "celebrate_idle": 0,
-        "illust_data": ""
+        "illust_data": "xiaoyesiqiyu_yy"
+    },
+    "405304": {
+        "id": 405304,
+        "type": 2,
+        "name_chs": "夏风吹拂",
+        "desc_chs": "夏风吹拂活动限定\\n“想听着浪声找找写作灵感，但是你的目光真的很难忽视呢……也好，夏夜的晚风到了，我们一起先听听它带来的故事吧。”",
+        "desc_jp2": "「波の音を聞いてインスピレーションを得ようと思ったのですが、あなたの視線は無視しにくいですね。\r\n……まあいいでしょう。夏の夜の風が運んできた物語を、一緒に聞きましょうか。」",
+        "character_id": 200053,
+        "lock_tips_chs": "活动限定",
+        "path": "extendRes/charactor/xiaoyesiqiyu_xr",
+        "exchange_item_id": 0,
+        "exchange_item_num": 0,
+        "direction": 0,
+        "no_reverse": 0,
+        "lock_reverse": 0,
+        "offset_x": 0,
+        "offset_y": 0,
+        "spot_scale": "",
+        "effective_time": "",
+        "lobby_offset": "",
+        "liaoshe_offset": "",
+        "shop_offset": "",
+        "win_offset": "",
+        "gameend_offset": "",
+        "starup_offset": "",
+        "treasure_offset": "",
+        "ck_full_0_offset": "",
+        "ck_full_1_offset": "",
+        "ck_full_2_offset": "",
+        "ck_full_3_offset": "",
+        "ck_full_single_offset": "",
+        "ck_half_0_offset": "",
+        "ck_half_1_offset": "",
+        "ck_half_2_offset": "",
+        "ck_half_3_offset": "",
+        "ck_half_single_offset": "",
+        "smallhead_x": 0,
+        "smallhead_y": 0,
+        "smallhead_width": 0,
+        "full_x": 0,
+        "full_y": 0,
+        "full_width": 0,
+        "full_height": 0,
+        "half_x": 0,
+        "half_y": 0,
+        "half_width": 0,
+        "half_height": 0,
+        "spine_type": 0,
+        "spine_width": 0,
+        "spine_height": 0,
+        "pivot_x": 0,
+        "pivot_y": 0,
+        "idle": 0,
+        "greeting": 0,
+        "celebrate": 0,
+        "click": 0,
+        "greeting_init": 0,
+        "click2": 0,
+        "celebrate_idle": 0,
+        "illust_data": "xiaoyesiqiyu_xr"
     },
     "405401": {
         "id": 405401,
@@ -24687,17 +24973,17 @@ SKIN = {
         "ck_half_2_offset": "-10,60,1",
         "ck_half_3_offset": "0,60,1",
         "ck_half_single_offset": "0,40,1",
-        "smallhead_x": 1867,
-        "smallhead_y": 947,
-        "smallhead_width": 386,
-        "full_x": 757,
-        "full_y": 783,
-        "full_width": 2301,
-        "full_height": 2479,
-        "half_x": 757,
-        "half_y": 783,
-        "half_width": 2301,
-        "half_height": 1117,
+        "smallhead_x": 0,
+        "smallhead_y": 0,
+        "smallhead_width": 0,
+        "full_x": 0,
+        "full_y": 0,
+        "full_width": 0,
+        "full_height": 0,
+        "half_x": 0,
+        "half_y": 0,
+        "half_width": 0,
+        "half_height": 0,
         "spine_type": 0,
         "spine_width": 0,
         "spine_height": 0,
@@ -24710,7 +24996,7 @@ SKIN = {
         "greeting_init": 0,
         "click2": 0,
         "celebrate_idle": 0,
-        "illust_data": ""
+        "illust_data": "qingluan"
     },
     "406702": {
         "id": 406702,
@@ -24747,17 +25033,17 @@ SKIN = {
         "ck_half_2_offset": "",
         "ck_half_3_offset": "",
         "ck_half_single_offset": "",
-        "smallhead_x": 1830,
-        "smallhead_y": 883,
-        "smallhead_width": 392,
-        "full_x": 414,
-        "full_y": 36,
-        "full_width": 3302,
-        "full_height": 3790,
-        "half_x": 614,
-        "half_y": 578,
-        "half_width": 2902,
-        "half_height": 1261,
+        "smallhead_x": 0,
+        "smallhead_y": 0,
+        "smallhead_width": 0,
+        "full_x": 0,
+        "full_y": 0,
+        "full_width": 0,
+        "full_height": 0,
+        "half_x": 0,
+        "half_y": 0,
+        "half_width": 0,
+        "half_height": 0,
         "spine_type": 0,
         "spine_width": 0,
         "spine_height": 0,
@@ -24770,7 +25056,7 @@ SKIN = {
         "greeting_init": 0,
         "click2": 0,
         "celebrate_idle": 0,
-        "illust_data": ""
+        "illust_data": "qingluan_0"
     },
     "406703": {
         "id": 406703,
@@ -24807,17 +25093,17 @@ SKIN = {
         "ck_half_2_offset": "",
         "ck_half_3_offset": "",
         "ck_half_single_offset": "",
-        "smallhead_x": 1826,
-        "smallhead_y": 850,
-        "smallhead_width": 380,
-        "full_x": 201,
-        "full_y": 471,
-        "full_width": 3692,
-        "full_height": 3256,
-        "half_x": 596,
-        "half_y": 539,
-        "half_width": 2902,
-        "half_height": 1261,
+        "smallhead_x": 0,
+        "smallhead_y": 0,
+        "smallhead_width": 0,
+        "full_x": 0,
+        "full_y": 0,
+        "full_width": 0,
+        "full_height": 0,
+        "half_x": 0,
+        "half_y": 0,
+        "half_width": 0,
+        "half_height": 0,
         "spine_type": 1,
         "spine_width": 5520,
         "spine_height": 5000,
@@ -24830,7 +25116,67 @@ SKIN = {
         "greeting_init": 15000,
         "click2": 8000,
         "celebrate_idle": 8000,
-        "illust_data": ""
+        "illust_data": "qingluan_cj"
+    },
+    "406704": {
+        "id": 406704,
+        "type": 2,
+        "name_chs": "夏风吹拂",
+        "desc_chs": "夏风吹拂活动限定\\n“这涧水能洗净肌肤发羽，却无法荡涤凡尘俗念呢。阁下实在好奇……不妨亲自踏足，与我一同消消暑气。”",
+        "desc_jp2": "「清冽なる水は身の穢れを祓うが、其の内の卑俗なる欲を洗い流すには至らぬ。\r\n……そなたが関心を抱いておるのなら、我は構わぬぞ。共に暑気を払うとしよう。」",
+        "character_id": 200067,
+        "lock_tips_chs": "活动限定",
+        "path": "extendRes/charactor/qingluan_xr",
+        "exchange_item_id": 0,
+        "exchange_item_num": 0,
+        "direction": 0,
+        "no_reverse": 0,
+        "lock_reverse": 0,
+        "offset_x": 0,
+        "offset_y": 0,
+        "spot_scale": "",
+        "effective_time": "",
+        "lobby_offset": "",
+        "liaoshe_offset": "",
+        "shop_offset": "",
+        "win_offset": "",
+        "gameend_offset": "",
+        "starup_offset": "",
+        "treasure_offset": "",
+        "ck_full_0_offset": "",
+        "ck_full_1_offset": "",
+        "ck_full_2_offset": "",
+        "ck_full_3_offset": "",
+        "ck_full_single_offset": "",
+        "ck_half_0_offset": "",
+        "ck_half_1_offset": "",
+        "ck_half_2_offset": "",
+        "ck_half_3_offset": "",
+        "ck_half_single_offset": "",
+        "smallhead_x": 0,
+        "smallhead_y": 0,
+        "smallhead_width": 0,
+        "full_x": 0,
+        "full_y": 0,
+        "full_width": 0,
+        "full_height": 0,
+        "half_x": 0,
+        "half_y": 0,
+        "half_width": 0,
+        "half_height": 0,
+        "spine_type": 1,
+        "spine_width": 2686,
+        "spine_height": 5000,
+        "pivot_x": 1327,
+        "pivot_y": 2513,
+        "idle": 4000,
+        "greeting": 8000,
+        "celebrate": 8000,
+        "click": 8000,
+        "greeting_init": 18867,
+        "click2": 8000,
+        "celebrate_idle": 8000,
+        "illust_data": "qingluan_xr"
     },
     "406801": {
         "id": 406801,
@@ -28767,17 +29113,17 @@ SKIN = {
         "ck_half_2_offset": "",
         "ck_half_3_offset": "",
         "ck_half_single_offset": "-80,0,1",
-        "smallhead_x": 1962,
-        "smallhead_y": 808,
-        "smallhead_width": 390,
-        "full_x": 1466,
-        "full_y": 719,
-        "full_width": 1263,
-        "full_height": 3094,
-        "half_x": 1466,
-        "half_y": 719,
-        "half_width": 1263,
-        "half_height": 1044,
+        "smallhead_x": 0,
+        "smallhead_y": 0,
+        "smallhead_width": 0,
+        "full_x": 0,
+        "full_y": 0,
+        "full_width": 0,
+        "full_height": 0,
+        "half_x": 0,
+        "half_y": 0,
+        "half_width": 0,
+        "half_height": 0,
         "spine_type": 0,
         "spine_width": 0,
         "spine_height": 0,
@@ -28790,7 +29136,7 @@ SKIN = {
         "greeting_init": 0,
         "click2": 0,
         "celebrate_idle": 0,
-        "illust_data": ""
+        "illust_data": "jiushi"
     },
     "409002": {
         "id": 409002,
@@ -28827,17 +29173,17 @@ SKIN = {
         "ck_half_2_offset": "",
         "ck_half_3_offset": "",
         "ck_half_single_offset": "",
-        "smallhead_x": 1937,
-        "smallhead_y": 849,
-        "smallhead_width": 390,
-        "full_x": 861,
-        "full_y": 394,
-        "full_width": 2542,
-        "full_height": 2873,
-        "half_x": 861,
-        "half_y": 543,
-        "half_width": 2542,
-        "half_height": 1261,
+        "smallhead_x": 0,
+        "smallhead_y": 0,
+        "smallhead_width": 0,
+        "full_x": 0,
+        "full_y": 0,
+        "full_width": 0,
+        "full_height": 0,
+        "half_x": 0,
+        "half_y": 0,
+        "half_width": 0,
+        "half_height": 0,
         "spine_type": 0,
         "spine_width": 0,
         "spine_height": 0,
@@ -28850,7 +29196,67 @@ SKIN = {
         "greeting_init": 0,
         "click2": 0,
         "celebrate_idle": 0,
-        "illust_data": ""
+        "illust_data": "jiushi_0"
+    },
+    "409003": {
+        "id": 409003,
+        "type": 2,
+        "name_chs": "夏风吹拂",
+        "desc_chs": "夏风吹拂活动限定\\n“老板你让我说你什么好呢，跟情报贩子比反侦察意识，我很难装作不知道啊。再说你这眼神的热度都快赶上头顶的太阳了，是怕我防晒做得太充分吗？给，按你喜好准备的饮料，今天陪你玩一会儿也不是不行。嗯？当然，我早就知道老板你会来。”",
+        "desc_jp2": "「旦那って奴は……隠れようったって、こっちは腐っても情報屋だぜ？\r\nああもこの日差しよりアツい視線をくれちゃ、どこにいるのかバレバレだ。\r\nま、一日くらいなら遊びに付き合ってやってもいいぜ。\r\nやるよ、旦那好みのドリンクだ。……ん？ 当然、来るのがわかってたんで用意しといたモンだ、それがどうかしたか？」",
+        "character_id": 200090,
+        "lock_tips_chs": "活动限定",
+        "path": "extendRes/charactor/jiushi_xr",
+        "exchange_item_id": 0,
+        "exchange_item_num": 0,
+        "direction": 0,
+        "no_reverse": 0,
+        "lock_reverse": 0,
+        "offset_x": 0,
+        "offset_y": 0,
+        "spot_scale": "",
+        "effective_time": "",
+        "lobby_offset": "",
+        "liaoshe_offset": "",
+        "shop_offset": "",
+        "win_offset": "",
+        "gameend_offset": "",
+        "starup_offset": "",
+        "treasure_offset": "",
+        "ck_full_0_offset": "",
+        "ck_full_1_offset": "",
+        "ck_full_2_offset": "",
+        "ck_full_3_offset": "",
+        "ck_full_single_offset": "",
+        "ck_half_0_offset": "",
+        "ck_half_1_offset": "",
+        "ck_half_2_offset": "",
+        "ck_half_3_offset": "",
+        "ck_half_single_offset": "",
+        "smallhead_x": 0,
+        "smallhead_y": 0,
+        "smallhead_width": 0,
+        "full_x": 0,
+        "full_y": 0,
+        "full_width": 0,
+        "full_height": 0,
+        "half_x": 0,
+        "half_y": 0,
+        "half_width": 0,
+        "half_height": 0,
+        "spine_type": 1,
+        "spine_width": 2913,
+        "spine_height": 5000,
+        "pivot_x": 1429,
+        "pivot_y": 2732,
+        "idle": 5333,
+        "greeting": 6333,
+        "celebrate": 7566,
+        "click": 10666,
+        "greeting_init": 15933,
+        "click2": 8000,
+        "celebrate_idle": 5333,
+        "illust_data": "jiushi_xr"
     },
     "409101": {
         "id": 409101,
@@ -31731,6 +32137,186 @@ SKIN = {
         "click2": 8000,
         "celebrate_idle": 16000,
         "illust_data": "yinglingweigong_1"
+    },
+    "40011201": {
+        "id": 40011201,
+        "type": 0,
+        "name_chs": "璃央",
+        "desc_chs": "璃央的初始形象",
+        "desc_jp2": "",
+        "character_id": 20000112,
+        "lock_tips_chs": "",
+        "path": "extendRes/charactor/liyang",
+        "exchange_item_id": 302002,
+        "exchange_item_num": 60,
+        "direction": 0,
+        "no_reverse": 0,
+        "lock_reverse": 0,
+        "offset_x": 0,
+        "offset_y": 0,
+        "spot_scale": "1",
+        "effective_time": "",
+        "lobby_offset": "",
+        "liaoshe_offset": "",
+        "shop_offset": "",
+        "win_offset": "",
+        "gameend_offset": "",
+        "starup_offset": "",
+        "treasure_offset": "",
+        "ck_full_0_offset": "",
+        "ck_full_1_offset": "",
+        "ck_full_2_offset": "",
+        "ck_full_3_offset": "",
+        "ck_full_single_offset": "",
+        "ck_half_0_offset": "",
+        "ck_half_1_offset": "",
+        "ck_half_2_offset": "",
+        "ck_half_3_offset": "",
+        "ck_half_single_offset": "",
+        "smallhead_x": 0,
+        "smallhead_y": 0,
+        "smallhead_width": 0,
+        "full_x": 0,
+        "full_y": 0,
+        "full_width": 0,
+        "full_height": 0,
+        "half_x": 0,
+        "half_y": 0,
+        "half_width": 0,
+        "half_height": 0,
+        "spine_type": 0,
+        "spine_width": 0,
+        "spine_height": 0,
+        "pivot_x": 0,
+        "pivot_y": 0,
+        "idle": 0,
+        "greeting": 0,
+        "celebrate": 0,
+        "click": 0,
+        "greeting_init": 0,
+        "click2": 0,
+        "celebrate_idle": 0,
+        "illust_data": "liyang"
+    },
+    "40011202": {
+        "id": 40011202,
+        "type": 1,
+        "name_chs": "契约",
+        "desc_chs": "与角色【璃央】缔结契约后获得\\n“凡人的双腿真妙，能钩起物什把玩一番，亦能踩住猎物咽喉……不过嘛，要彻底绞杀战利品最后一丝逃跑想法，还得是蛇灵活有力的尾尖呢……说吧，作为我最期待享用的贡品，今夜，你更偏爱哪一种被擒获的方式呢？”",
+        "desc_jp2": "「人間の両足って素晴らしいわよね、さっと足を引っ掛けたりもできるし、獲物を踏んで逃がさないようにもできるもの。とはいえ、確実に獲物を絞め上げるには、やはり蛇の尾の方が使いやすいわ。……それで、あなたは今夜、どんな風に捕えられたいのかしら？」",
+        "character_id": 20000112,
+        "lock_tips_chs": "缔结契约",
+        "path": "extendRes/charactor/liyang_0",
+        "exchange_item_id": 302002,
+        "exchange_item_num": 60,
+        "direction": 0,
+        "no_reverse": 0,
+        "lock_reverse": 0,
+        "offset_x": 0,
+        "offset_y": 0,
+        "spot_scale": "1",
+        "effective_time": "",
+        "lobby_offset": "",
+        "liaoshe_offset": "",
+        "shop_offset": "",
+        "win_offset": "",
+        "gameend_offset": "",
+        "starup_offset": "",
+        "treasure_offset": "",
+        "ck_full_0_offset": "",
+        "ck_full_1_offset": "",
+        "ck_full_2_offset": "",
+        "ck_full_3_offset": "",
+        "ck_full_single_offset": "",
+        "ck_half_0_offset": "",
+        "ck_half_1_offset": "",
+        "ck_half_2_offset": "",
+        "ck_half_3_offset": "",
+        "ck_half_single_offset": "",
+        "smallhead_x": 0,
+        "smallhead_y": 0,
+        "smallhead_width": 0,
+        "full_x": 0,
+        "full_y": 0,
+        "full_width": 0,
+        "full_height": 0,
+        "half_x": 0,
+        "half_y": 0,
+        "half_width": 0,
+        "half_height": 0,
+        "spine_type": 2,
+        "spine_width": 4657,
+        "spine_height": 5000,
+        "pivot_x": 2421,
+        "pivot_y": 3923,
+        "idle": 3333,
+        "greeting": 10000,
+        "celebrate": 6666,
+        "click": 8000,
+        "greeting_init": 12000,
+        "click2": 6666,
+        "celebrate_idle": 0,
+        "illust_data": "liyang_0"
+    },
+    "40011203": {
+        "id": 40011203,
+        "type": 998,
+        "name_chs": "绛夜缠仪",
+        "desc_chs": "绛夜缠仪活动限定\\n“蛇的求偶舞该在月下温存，这不过是本宫主为你准备的演练而已……擅自闯入的信徒啊，本宫主该怪你恃宠而骄，还是罚你提前感受一番——这本就是为你安排的缠绵仪式呢……？”",
+        "desc_jp2": "「蛇は本来、こういう月が明るい夜には求愛の舞なんてしないのよ。これはあくまで予行演習……\r\nしかし、あなたは見てしまった。可愛いあなたであっても、罰を与えなくてはね。\r\nそうね……では、あなたのために準備していたこの儀式を、前もって味わわせてあげようかしら？」",
+        "character_id": 20000112,
+        "lock_tips_chs": "活动限定",
+        "path": "extendRes/charactor/liyang_1",
+        "exchange_item_id": 0,
+        "exchange_item_num": 0,
+        "direction": 0,
+        "no_reverse": 0,
+        "lock_reverse": 0,
+        "offset_x": 0,
+        "offset_y": 0,
+        "spot_scale": "1",
+        "effective_time": "",
+        "lobby_offset": "",
+        "liaoshe_offset": "",
+        "shop_offset": "",
+        "win_offset": "",
+        "gameend_offset": "",
+        "starup_offset": "",
+        "treasure_offset": "",
+        "ck_full_0_offset": "",
+        "ck_full_1_offset": "",
+        "ck_full_2_offset": "",
+        "ck_full_3_offset": "",
+        "ck_full_single_offset": "",
+        "ck_half_0_offset": "",
+        "ck_half_1_offset": "",
+        "ck_half_2_offset": "",
+        "ck_half_3_offset": "",
+        "ck_half_single_offset": "",
+        "smallhead_x": 0,
+        "smallhead_y": 0,
+        "smallhead_width": 0,
+        "full_x": 0,
+        "full_y": 0,
+        "full_width": 0,
+        "full_height": 0,
+        "half_x": 0,
+        "half_y": 0,
+        "half_width": 0,
+        "half_height": 0,
+        "spine_type": 2,
+        "spine_width": 5318,
+        "spine_height": 5000,
+        "pivot_x": 2715,
+        "pivot_y": 4510,
+        "idle": 3333,
+        "greeting": 8000,
+        "celebrate": 8000,
+        "click": 8000,
+        "greeting_init": 18400,
+        "click2": 8000,
+        "celebrate_idle": 8000,
+        "illust_data": "liyang_1"
     }
 }
 
@@ -48956,6 +49542,90 @@ ITEM = {
         "cross_view": 0,
         "database_cache": 0
     },
+    "307275": {
+        "id": 307275,
+        "sort": 15075,
+        "name_chs": "烟火盛典-2025",
+        "name_chs_t2": "",
+        "desc_func_chs": "点击仓库-插画更换",
+        "desc_chs": "今夜，是焰火，是晚风，是心跳，是无可替代。",
+        "desc_chs_t2": "",
+        "icon": "extendRes/loading_cg/250801_thumb.jpg",
+        "icon_transparent": "",
+        "category": 8,
+        "type": 12,
+        "is_unique": 1,
+        "max_stack": 0,
+        "access": "",
+        "accessinfo": 0,
+        "func": "",
+        "iargs": [
+            250801,
+            0,
+            0,
+            0,
+            0,
+            0
+        ],
+        "sargs": [
+            "",
+            ""
+        ],
+        "can_sell": 0,
+        "sell_reward_id": 0,
+        "sell_reward_count": 0,
+        "item_expire": "2025-09-10 05:00:00",
+        "expire_desc_chs": "2025-09-10 05:00:00",
+        "expire_desc_chs_t": "2025-09-10 05:00:00",
+        "expire_desc_jp": "2025/09/10 5:59 まで",
+        "expire_desc_en": "2025-09-09 14:00:00 (UTC-7)",
+        "expire_desc_kr": "2025.09.10 06:00(GMT+9)",
+        "region_limit": 0,
+        "cross_view": 0,
+        "database_cache": 0
+    },
+    "307276": {
+        "id": 307276,
+        "sort": 15076,
+        "name_chs": "水色谧语-2025",
+        "name_chs_t2": "",
+        "desc_func_chs": "点击仓库-插画更换",
+        "desc_chs": "骄阳似火的夏日，清凉的海风显得更为珍贵。",
+        "desc_chs_t2": "",
+        "icon": "extendRes/loading_cg/250802_thumb.jpg",
+        "icon_transparent": "",
+        "category": 8,
+        "type": 12,
+        "is_unique": 1,
+        "max_stack": 0,
+        "access": "",
+        "accessinfo": 0,
+        "func": "",
+        "iargs": [
+            250802,
+            0,
+            0,
+            0,
+            0,
+            0
+        ],
+        "sargs": [
+            "",
+            ""
+        ],
+        "can_sell": 0,
+        "sell_reward_id": 0,
+        "sell_reward_count": 0,
+        "item_expire": "2025-09-10 05:00:00",
+        "expire_desc_chs": "2025-09-10 05:00:00",
+        "expire_desc_chs_t": "2025-09-10 05:00:00",
+        "expire_desc_jp": "2025/09/10 5:59 まで",
+        "expire_desc_en": "2025-09-09 14:00:00 (UTC-7)",
+        "expire_desc_kr": "2025.09.10 06:00(GMT+9)",
+        "region_limit": 0,
+        "cross_view": 0,
+        "database_cache": 0
+    },
     "307401": {
         "id": 307401,
         "sort": 16201,
@@ -52041,6 +52711,90 @@ ITEM = {
         "func": "",
         "iargs": [
             250701,
+            0,
+            0,
+            0,
+            0,
+            0
+        ],
+        "sargs": [
+            "",
+            ""
+        ],
+        "can_sell": 0,
+        "sell_reward_id": 0,
+        "sell_reward_count": 0,
+        "item_expire": "",
+        "expire_desc_chs": "",
+        "expire_desc_chs_t": "",
+        "expire_desc_jp": "",
+        "expire_desc_en": "",
+        "expire_desc_kr": "",
+        "region_limit": 0,
+        "cross_view": 0,
+        "database_cache": 0
+    },
+    "307475": {
+        "id": 307475,
+        "sort": 15075,
+        "name_chs": "烟火盛典-2025",
+        "name_chs_t2": "",
+        "desc_func_chs": "点击仓库-插画更换",
+        "desc_chs": "今夜，是焰火，是晚风，是心跳，是无可替代。",
+        "desc_chs_t2": "",
+        "icon": "extendRes/loading_cg/250801_thumb.jpg",
+        "icon_transparent": "",
+        "category": 8,
+        "type": 12,
+        "is_unique": 1,
+        "max_stack": 0,
+        "access": "",
+        "accessinfo": 0,
+        "func": "",
+        "iargs": [
+            250801,
+            0,
+            0,
+            0,
+            0,
+            0
+        ],
+        "sargs": [
+            "",
+            ""
+        ],
+        "can_sell": 0,
+        "sell_reward_id": 0,
+        "sell_reward_count": 0,
+        "item_expire": "",
+        "expire_desc_chs": "",
+        "expire_desc_chs_t": "",
+        "expire_desc_jp": "",
+        "expire_desc_en": "",
+        "expire_desc_kr": "",
+        "region_limit": 0,
+        "cross_view": 0,
+        "database_cache": 0
+    },
+    "307476": {
+        "id": 307476,
+        "sort": 15076,
+        "name_chs": "水色谧语-2025",
+        "name_chs_t2": "",
+        "desc_func_chs": "点击仓库-插画更换",
+        "desc_chs": "骄阳似火的夏日，清凉的海风显得更为珍贵。",
+        "desc_chs_t2": "",
+        "icon": "extendRes/loading_cg/250802_thumb.jpg",
+        "icon_transparent": "",
+        "category": 8,
+        "type": 12,
+        "is_unique": 1,
+        "max_stack": 0,
+        "access": "",
+        "accessinfo": 0,
+        "func": "",
+        "iargs": [
+            250802,
             0,
             0,
             0,
@@ -60716,6 +61470,48 @@ ITEM = {
         "cross_view": 0,
         "database_cache": 0
     },
+    "30505007": {
+        "id": 30505007,
+        "sort": 2016,
+        "name_chs": "未来之弦",
+        "name_chs_t2": "",
+        "desc_func_chs": "点击寮舍-装扮更换",
+        "desc_chs": "立直音乐 未来之弦。未来的一切都取决于当下的选择……",
+        "desc_chs_t2": "",
+        "icon": "extendRes/items/liqibgm.jpg",
+        "icon_transparent": "",
+        "category": 5,
+        "type": 4,
+        "is_unique": 1,
+        "max_stack": 0,
+        "access": "",
+        "accessinfo": 0,
+        "func": "",
+        "iargs": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+        ],
+        "sargs": [
+            "music/liqi_25achivement.mp3",
+            ""
+        ],
+        "can_sell": 0,
+        "sell_reward_id": 0,
+        "sell_reward_count": 0,
+        "item_expire": "",
+        "expire_desc_chs": "",
+        "expire_desc_chs_t": "",
+        "expire_desc_jp": "",
+        "expire_desc_en": "",
+        "expire_desc_kr": "",
+        "region_limit": 0,
+        "cross_view": 0,
+        "database_cache": 0
+    },
     "30520001": {
         "id": 30520001,
         "sort": 3028,
@@ -61052,6 +61848,90 @@ ITEM = {
         "cross_view": 0,
         "database_cache": 0
     },
+    "30520009": {
+        "id": 30520009,
+        "sort": 3036,
+        "name_chs": "和牌-静伏蛰影",
+        "name_chs_t2": "",
+        "desc_func_chs": "点击寮舍-装扮更换",
+        "desc_chs": "猎物，落网了呢～",
+        "desc_chs_t2": "",
+        "icon": "extendRes/items2/ron_liyang.jpg",
+        "icon_transparent": "",
+        "category": 5,
+        "type": 1,
+        "is_unique": 1,
+        "max_stack": 0,
+        "access": "",
+        "accessinfo": 0,
+        "func": "",
+        "iargs": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+        ],
+        "sargs": [
+            "",
+            ""
+        ],
+        "can_sell": 0,
+        "sell_reward_id": 0,
+        "sell_reward_count": 0,
+        "item_expire": "",
+        "expire_desc_chs": "",
+        "expire_desc_chs_t": "",
+        "expire_desc_jp": "",
+        "expire_desc_en": "",
+        "expire_desc_kr": "",
+        "region_limit": 0,
+        "cross_view": 0,
+        "database_cache": 0
+    },
+    "30520010": {
+        "id": 30520010,
+        "sort": 3037,
+        "name_chs": "和牌-一击必鲨",
+        "name_chs_t2": "",
+        "desc_func_chs": "点击寮舍-装扮更换",
+        "desc_chs": "在确认猎物无法逃脱后，深海的顶级掠食者露出自己的利齿……(当期活动限定，活动结束后将从卡池中下架)",
+        "desc_chs_t2": "",
+        "icon": "extendRes/items2/ron_25summer.jpg",
+        "icon_transparent": "",
+        "category": 5,
+        "type": 1,
+        "is_unique": 1,
+        "max_stack": 0,
+        "access": "",
+        "accessinfo": 0,
+        "func": "",
+        "iargs": [
+            302003,
+            5,
+            0,
+            0,
+            0,
+            0
+        ],
+        "sargs": [
+            "",
+            ""
+        ],
+        "can_sell": 0,
+        "sell_reward_id": 0,
+        "sell_reward_count": 0,
+        "item_expire": "",
+        "expire_desc_chs": "",
+        "expire_desc_chs_t": "",
+        "expire_desc_jp": "",
+        "expire_desc_en": "",
+        "expire_desc_kr": "",
+        "region_limit": 0,
+        "cross_view": 0,
+        "database_cache": 0
+    },
     "30530001": {
         "id": 30530001,
         "sort": 4028,
@@ -61355,6 +62235,90 @@ ITEM = {
         "desc_chs": "金锤一响，黄金万两。(当期活动限定，活动结束后将从卡池中下架)",
         "desc_chs_t2": "",
         "icon": "extendRes/items2/effect_liqi_24winter.jpg",
+        "icon_transparent": "",
+        "category": 5,
+        "type": 2,
+        "is_unique": 1,
+        "max_stack": 0,
+        "access": "",
+        "accessinfo": 0,
+        "func": "",
+        "iargs": [
+            302003,
+            5,
+            0,
+            0,
+            0,
+            0
+        ],
+        "sargs": [
+            "",
+            ""
+        ],
+        "can_sell": 0,
+        "sell_reward_id": 0,
+        "sell_reward_count": 0,
+        "item_expire": "",
+        "expire_desc_chs": "",
+        "expire_desc_chs_t": "",
+        "expire_desc_jp": "",
+        "expire_desc_en": "",
+        "expire_desc_kr": "",
+        "region_limit": 0,
+        "cross_view": 0,
+        "database_cache": 0
+    },
+    "30530009": {
+        "id": 30530009,
+        "sort": 4036,
+        "name_chs": "立直-曲径通幽",
+        "name_chs_t2": "",
+        "desc_func_chs": "点击寮舍-装扮更换",
+        "desc_chs": "青尾簪花引步深，一痕苔径万木春。",
+        "desc_chs_t2": "",
+        "icon": "extendRes/items2/effect_liqi_liyang.jpg",
+        "icon_transparent": "",
+        "category": 5,
+        "type": 2,
+        "is_unique": 1,
+        "max_stack": 0,
+        "access": "",
+        "accessinfo": 0,
+        "func": "",
+        "iargs": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+        ],
+        "sargs": [
+            "",
+            ""
+        ],
+        "can_sell": 0,
+        "sell_reward_id": 0,
+        "sell_reward_count": 0,
+        "item_expire": "",
+        "expire_desc_chs": "",
+        "expire_desc_chs_t": "",
+        "expire_desc_jp": "",
+        "expire_desc_en": "",
+        "expire_desc_kr": "",
+        "region_limit": 0,
+        "cross_view": 0,
+        "database_cache": 0
+    },
+    "30530010": {
+        "id": 30530010,
+        "sort": 4037,
+        "name_chs": "立直-暗藏鲨机",
+        "name_chs_t2": "",
+        "desc_func_chs": "点击寮舍-装扮更换",
+        "desc_chs": "看到鱼鳍的那一刻，胜负已分！(当期活动限定，活动结束后将从卡池中下架)",
+        "desc_chs_t2": "",
+        "icon": "extendRes/items2/effect_liqi_25summer.jpg",
         "icon_transparent": "",
         "category": 5,
         "type": 2,
@@ -62602,6 +63566,90 @@ ITEM = {
         "expire_desc_jp": "2026年7月1日まで",
         "expire_desc_en": "2026年7月1日まで",
         "expire_desc_kr": "2026年7月1日まで",
+        "region_limit": 0,
+        "cross_view": 0,
+        "database_cache": 0
+    },
+    "30550030": {
+        "id": 30550030,
+        "sort": 5076,
+        "name_chs": "头像框-星点鳞光",
+        "name_chs_t2": "",
+        "desc_func_chs": "点击寮舍-装扮更换",
+        "desc_chs": "蛇行静听万象息，玄鳞暗刻地脉声。",
+        "desc_chs_t2": "",
+        "icon": "extendRes/items2/headframe_liyang.jpg",
+        "icon_transparent": "",
+        "category": 5,
+        "type": 5,
+        "is_unique": 1,
+        "max_stack": 0,
+        "access": "",
+        "accessinfo": 0,
+        "func": "",
+        "iargs": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+        ],
+        "sargs": [
+            "",
+            ""
+        ],
+        "can_sell": 0,
+        "sell_reward_id": 0,
+        "sell_reward_count": 0,
+        "item_expire": "",
+        "expire_desc_chs": "",
+        "expire_desc_chs_t": "",
+        "expire_desc_jp": "",
+        "expire_desc_en": "",
+        "expire_desc_kr": "",
+        "region_limit": 0,
+        "cross_view": 1,
+        "database_cache": 0
+    },
+    "30550031": {
+        "id": 30550031,
+        "sort": 5070,
+        "name_chs": "双聖の眷属たち",
+        "name_chs_t2": "",
+        "desc_func_chs": "点击寮舍-装扮更换",
+        "desc_chs": "年に二回行われる双聖戦の上位入賞者たちが使用できるアイコンフレーム（有効期限：2026年9月1日00：00まで）",
+        "desc_chs_t2": "",
+        "icon": "extendRes/items2/headframe_ssz.jpg",
+        "icon_transparent": "",
+        "category": 5,
+        "type": 5,
+        "is_unique": 1,
+        "max_stack": 0,
+        "access": "",
+        "accessinfo": 0,
+        "func": "",
+        "iargs": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+        ],
+        "sargs": [
+            "",
+            ""
+        ],
+        "can_sell": 0,
+        "sell_reward_id": 0,
+        "sell_reward_count": 0,
+        "item_expire": "2026-09-01 00:00:00",
+        "expire_desc_chs": "2026年9月1日00：00まで",
+        "expire_desc_chs_t": "2026年9月1日00：00まで",
+        "expire_desc_jp": "2026年9月1日00：00まで",
+        "expire_desc_en": "2026年9月1日00：00まで",
+        "expire_desc_kr": "2026年9月1日00：00まで",
         "region_limit": 0,
         "cross_view": 0,
         "database_cache": 0
@@ -64076,6 +65124,132 @@ ITEM = {
         "cross_view": 0,
         "database_cache": 0
     },
+    "30557037": {
+        "id": 30557037,
+        "sort": 6063,
+        "name_chs": "双聖戦優勝",
+        "name_chs_t2": "",
+        "desc_func_chs": "双聖戦優勝記念称号",
+        "desc_chs": "",
+        "desc_chs_t2": "",
+        "icon": "extendRes/title/24sszy_item.jpg",
+        "icon_transparent": "",
+        "category": 7,
+        "type": 11,
+        "is_unique": 1,
+        "max_stack": 0,
+        "access": "",
+        "accessinfo": 0,
+        "func": "",
+        "iargs": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+        ],
+        "sargs": [
+            "",
+            ""
+        ],
+        "can_sell": 0,
+        "sell_reward_id": 0,
+        "sell_reward_count": 0,
+        "item_expire": "2026-09-01 00:00:00",
+        "expire_desc_chs": "2026年9月1日00：00まで",
+        "expire_desc_chs_t": "2026年9月1日00：00まで",
+        "expire_desc_jp": "2026年9月1日00：00まで",
+        "expire_desc_en": "2026年9月1日00：00まで",
+        "expire_desc_kr": "2026年9月1日00：00まで",
+        "region_limit": 0,
+        "cross_view": 0,
+        "database_cache": 0
+    },
+    "30557038": {
+        "id": 30557038,
+        "sort": 6064,
+        "name_chs": "豪運渋川ユリ組",
+        "name_chs_t2": "",
+        "desc_func_chs": "ななし雀魂杯夏の陣優勝記念称号",
+        "desc_chs": "",
+        "desc_chs_t2": "",
+        "icon": "extendRes/title/25haoyun_item.jpg",
+        "icon_transparent": "",
+        "category": 7,
+        "type": 11,
+        "is_unique": 1,
+        "max_stack": 0,
+        "access": "",
+        "accessinfo": 0,
+        "func": "",
+        "iargs": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+        ],
+        "sargs": [
+            "",
+            ""
+        ],
+        "can_sell": 0,
+        "sell_reward_id": 0,
+        "sell_reward_count": 0,
+        "item_expire": "2026-09-01 00:00:00",
+        "expire_desc_chs": "2026年9月1日00：00まで",
+        "expire_desc_chs_t": "2026年9月1日00：00まで",
+        "expire_desc_jp": "2026年9月1日00：00まで",
+        "expire_desc_en": "2026年9月1日00：00まで",
+        "expire_desc_kr": "2026年9月1日00：00まで",
+        "region_limit": 0,
+        "cross_view": 0,
+        "database_cache": 0
+    },
+    "30557039": {
+        "id": 30557039,
+        "sort": 6065,
+        "name_chs": "Limited Title",
+        "name_chs_t2": "",
+        "desc_func_chs": "A reward for Mahjong Soul official tournament Catfood Bowl - Major #Battle of Kirin S3 winner",
+        "desc_chs": "",
+        "desc_chs_t2": "",
+        "icon": "extendRes/title/2509qilinzhan_item.jpg",
+        "icon_transparent": "",
+        "category": 7,
+        "type": 11,
+        "is_unique": 1,
+        "max_stack": 0,
+        "access": "",
+        "accessinfo": 0,
+        "func": "",
+        "iargs": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+        ],
+        "sargs": [
+            "",
+            ""
+        ],
+        "can_sell": 0,
+        "sell_reward_id": 0,
+        "sell_reward_count": 0,
+        "item_expire": "2026-09-08 15:00:00",
+        "expire_desc_chs": "2026-09-08 00:00:00",
+        "expire_desc_chs_t": "2026-09-08 00:00:00",
+        "expire_desc_jp": "2026-09-08 00:00:00",
+        "expire_desc_en": "2026-09-08 00:00:00",
+        "expire_desc_kr": "2026-09-08 00:00:00",
+        "region_limit": 0,
+        "cross_view": 0,
+        "database_cache": 0
+    },
     "30560001": {
         "id": 30560001,
         "sort": 7028,
@@ -64379,6 +65553,48 @@ ITEM = {
         "desc_chs": "古文明掌管点数的神向你抛出的圣枝。(当期活动限定，活动结束后将从卡池中下架)",
         "desc_chs_t2": "",
         "icon": "extendRes/items2/liqi_25xila.jpg",
+        "icon_transparent": "",
+        "category": 5,
+        "type": 0,
+        "is_unique": 1,
+        "max_stack": 0,
+        "access": "",
+        "accessinfo": 0,
+        "func": "",
+        "iargs": [
+            302003,
+            5,
+            0,
+            0,
+            0,
+            0
+        ],
+        "sargs": [
+            "",
+            ""
+        ],
+        "can_sell": 0,
+        "sell_reward_id": 0,
+        "sell_reward_count": 0,
+        "item_expire": "",
+        "expire_desc_chs": "",
+        "expire_desc_chs_t": "",
+        "expire_desc_jp": "",
+        "expire_desc_en": "",
+        "expire_desc_kr": "",
+        "region_limit": 0,
+        "cross_view": 0,
+        "database_cache": 0
+    },
+    "30560009": {
+        "id": 30560009,
+        "sort": 7036,
+        "name_chs": "立直棒-绚烂烟花",
+        "name_chs_t2": "",
+        "desc_func_chs": "点击寮舍-装扮更换",
+        "desc_chs": "不仅光彩夺目，更为神奇的是它不会点燃麻将桌。(当期活动限定，活动结束后将从卡池中下架)",
+        "desc_chs_t2": "",
+        "icon": "extendRes/items2/liqi_25summer.jpg",
         "icon_transparent": "",
         "category": 5,
         "type": 0,
@@ -64841,6 +66057,216 @@ ITEM = {
         "desc_chs": "对局过程中严禁食用自己或者其他人的手牌，违者将被拉入一番市麻将道馆黑名单。",
         "desc_chs_t2": "",
         "icon": "extendRes/items2/mjp_25xila2.jpg",
+        "icon_transparent": "",
+        "category": 5,
+        "type": 7,
+        "is_unique": 1,
+        "max_stack": 0,
+        "access": "",
+        "accessinfo": 0,
+        "func": "",
+        "iargs": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+        ],
+        "sargs": [
+            "",
+            ""
+        ],
+        "can_sell": 0,
+        "sell_reward_id": 0,
+        "sell_reward_count": 0,
+        "item_expire": "",
+        "expire_desc_chs": "",
+        "expire_desc_chs_t": "",
+        "expire_desc_jp": "",
+        "expire_desc_en": "",
+        "expire_desc_kr": "",
+        "region_limit": 0,
+        "cross_view": 0,
+        "database_cache": 0
+    },
+    "30570012": {
+        "id": 30570012,
+        "sort": 8037,
+        "name_chs": "牌背-星幕绘卷",
+        "name_chs_t2": "",
+        "desc_func_chs": "点击寮舍-装扮更换",
+        "desc_chs": "以光为笔，在荒芜的银河中画出涟漪。(当期活动限定，活动结束后将从卡池中下架)",
+        "desc_chs_t2": "",
+        "icon": "extendRes/items2/mjp_25summer.jpg",
+        "icon_transparent": "",
+        "category": 5,
+        "type": 7,
+        "is_unique": 1,
+        "max_stack": 0,
+        "access": "",
+        "accessinfo": 0,
+        "func": "",
+        "iargs": [
+            302003,
+            5,
+            0,
+            0,
+            0,
+            0
+        ],
+        "sargs": [
+            "",
+            ""
+        ],
+        "can_sell": 0,
+        "sell_reward_id": 0,
+        "sell_reward_count": 0,
+        "item_expire": "",
+        "expire_desc_chs": "",
+        "expire_desc_chs_t": "",
+        "expire_desc_jp": "",
+        "expire_desc_en": "",
+        "expire_desc_kr": "",
+        "region_limit": 0,
+        "cross_view": 0,
+        "database_cache": 0
+    },
+    "30570013": {
+        "id": 30570013,
+        "sort": 8038,
+        "name_chs": "牌背-青龙",
+        "name_chs_t2": "",
+        "desc_func_chs": "点击寮舍-装扮更换",
+        "desc_chs": "召唤神龙的不是七颗龙珠，而是七……七对子？！",
+        "desc_chs_t2": "",
+        "icon": "extendRes/items2/mjp_25achivement1.jpg",
+        "icon_transparent": "",
+        "category": 5,
+        "type": 7,
+        "is_unique": 1,
+        "max_stack": 0,
+        "access": "",
+        "accessinfo": 0,
+        "func": "",
+        "iargs": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+        ],
+        "sargs": [
+            "",
+            ""
+        ],
+        "can_sell": 0,
+        "sell_reward_id": 0,
+        "sell_reward_count": 0,
+        "item_expire": "",
+        "expire_desc_chs": "",
+        "expire_desc_chs_t": "",
+        "expire_desc_jp": "",
+        "expire_desc_en": "",
+        "expire_desc_kr": "",
+        "region_limit": 0,
+        "cross_view": 0,
+        "database_cache": 0
+    },
+    "30570014": {
+        "id": 30570014,
+        "sort": 8039,
+        "name_chs": "牌背-朱雀",
+        "name_chs_t2": "",
+        "desc_func_chs": "点击寮舍-装扮更换",
+        "desc_chs": "朱雀的红色往往被人们认为是好运的象征。",
+        "desc_chs_t2": "",
+        "icon": "extendRes/items2/mjp_25achivement2.jpg",
+        "icon_transparent": "",
+        "category": 5,
+        "type": 7,
+        "is_unique": 1,
+        "max_stack": 0,
+        "access": "",
+        "accessinfo": 0,
+        "func": "",
+        "iargs": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+        ],
+        "sargs": [
+            "",
+            ""
+        ],
+        "can_sell": 0,
+        "sell_reward_id": 0,
+        "sell_reward_count": 0,
+        "item_expire": "",
+        "expire_desc_chs": "",
+        "expire_desc_chs_t": "",
+        "expire_desc_jp": "",
+        "expire_desc_en": "",
+        "expire_desc_kr": "",
+        "region_limit": 0,
+        "cross_view": 0,
+        "database_cache": 0
+    },
+    "30570015": {
+        "id": 30570015,
+        "sort": 8040,
+        "name_chs": "牌背-白虎",
+        "name_chs_t2": "",
+        "desc_func_chs": "点击寮舍-装扮更换",
+        "desc_chs": "摸牌的时候总感觉下一秒就会被咬住手指头。",
+        "desc_chs_t2": "",
+        "icon": "extendRes/items2/mjp_25achivement3.jpg",
+        "icon_transparent": "",
+        "category": 5,
+        "type": 7,
+        "is_unique": 1,
+        "max_stack": 0,
+        "access": "",
+        "accessinfo": 0,
+        "func": "",
+        "iargs": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+        ],
+        "sargs": [
+            "",
+            ""
+        ],
+        "can_sell": 0,
+        "sell_reward_id": 0,
+        "sell_reward_count": 0,
+        "item_expire": "",
+        "expire_desc_chs": "",
+        "expire_desc_chs_t": "",
+        "expire_desc_jp": "",
+        "expire_desc_en": "",
+        "expire_desc_kr": "",
+        "region_limit": 0,
+        "cross_view": 0,
+        "database_cache": 0
+    },
+    "30570016": {
+        "id": 30570016,
+        "sort": 8041,
+        "name_chs": "牌背-玄武",
+        "name_chs_t2": "",
+        "desc_func_chs": "点击寮舍-装扮更换",
+        "desc_chs": "玄武的两个兽首会为了出哪张牌而吵架吗？",
+        "desc_chs_t2": "",
+        "icon": "extendRes/items2/mjp_25achivement4.jpg",
         "icon_transparent": "",
         "category": 5,
         "type": 7,
@@ -65672,6 +67098,216 @@ ITEM = {
         "cross_view": 0,
         "database_cache": 0
     },
+    "30580020": {
+        "id": 30580020,
+        "sort": 10039,
+        "name_chs": "桌布-星月夜",
+        "name_chs_t2": "",
+        "desc_func_chs": "点击寮舍-装扮更换",
+        "desc_chs": "缥缈的夜空中，好像点着无数的街灯。(当期活动限定，活动结束后将从卡池中下架)",
+        "desc_chs_t2": "",
+        "icon": "extendRes/items2/tablecloth_25summer.jpg",
+        "icon_transparent": "",
+        "category": 5,
+        "type": 6,
+        "is_unique": 1,
+        "max_stack": 0,
+        "access": "",
+        "accessinfo": 0,
+        "func": "",
+        "iargs": [
+            302003,
+            5,
+            0,
+            0,
+            0,
+            0
+        ],
+        "sargs": [
+            "",
+            ""
+        ],
+        "can_sell": 0,
+        "sell_reward_id": 0,
+        "sell_reward_count": 0,
+        "item_expire": "",
+        "expire_desc_chs": "",
+        "expire_desc_chs_t": "",
+        "expire_desc_jp": "",
+        "expire_desc_en": "",
+        "expire_desc_kr": "",
+        "region_limit": 0,
+        "cross_view": 0,
+        "database_cache": 0
+    },
+    "30580021": {
+        "id": 30580021,
+        "sort": 10040,
+        "name_chs": "桌布-春木化龙",
+        "name_chs_t2": "",
+        "desc_func_chs": "点击寮舍-装扮更换",
+        "desc_chs": "青龙腾云之际，雀士凯旋之时。",
+        "desc_chs_t2": "",
+        "icon": "extendRes/items2/tablecloth_25achievement1.jpg",
+        "icon_transparent": "",
+        "category": 5,
+        "type": 6,
+        "is_unique": 1,
+        "max_stack": 0,
+        "access": "",
+        "accessinfo": 0,
+        "func": "",
+        "iargs": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+        ],
+        "sargs": [
+            "",
+            ""
+        ],
+        "can_sell": 0,
+        "sell_reward_id": 0,
+        "sell_reward_count": 0,
+        "item_expire": "",
+        "expire_desc_chs": "",
+        "expire_desc_chs_t": "",
+        "expire_desc_jp": "",
+        "expire_desc_en": "",
+        "expire_desc_kr": "",
+        "region_limit": 0,
+        "cross_view": 0,
+        "database_cache": 0
+    },
+    "30580022": {
+        "id": 30580022,
+        "sort": 10041,
+        "name_chs": "桌布-赤焰流风",
+        "name_chs_t2": "",
+        "desc_func_chs": "点击寮舍-装扮更换",
+        "desc_chs": "朱雀凌空之际，雀士告捷之时。",
+        "desc_chs_t2": "",
+        "icon": "extendRes/items2/tablecloth_25achievement2.jpg",
+        "icon_transparent": "",
+        "category": 5,
+        "type": 6,
+        "is_unique": 1,
+        "max_stack": 0,
+        "access": "",
+        "accessinfo": 0,
+        "func": "",
+        "iargs": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+        ],
+        "sargs": [
+            "",
+            ""
+        ],
+        "can_sell": 0,
+        "sell_reward_id": 0,
+        "sell_reward_count": 0,
+        "item_expire": "",
+        "expire_desc_chs": "",
+        "expire_desc_chs_t": "",
+        "expire_desc_jp": "",
+        "expire_desc_en": "",
+        "expire_desc_kr": "",
+        "region_limit": 0,
+        "cross_view": 0,
+        "database_cache": 0
+    },
+    "30580023": {
+        "id": 30580023,
+        "sort": 10042,
+        "name_chs": "桌布-虎啸八荒",
+        "name_chs_t2": "",
+        "desc_func_chs": "点击寮舍-装扮更换",
+        "desc_chs": "白虎嗷啸之际，雀士得胜之时。",
+        "desc_chs_t2": "",
+        "icon": "extendRes/items2/tablecloth_25achievement3.jpg",
+        "icon_transparent": "",
+        "category": 5,
+        "type": 6,
+        "is_unique": 1,
+        "max_stack": 0,
+        "access": "",
+        "accessinfo": 0,
+        "func": "",
+        "iargs": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+        ],
+        "sargs": [
+            "",
+            ""
+        ],
+        "can_sell": 0,
+        "sell_reward_id": 0,
+        "sell_reward_count": 0,
+        "item_expire": "",
+        "expire_desc_chs": "",
+        "expire_desc_chs_t": "",
+        "expire_desc_jp": "",
+        "expire_desc_en": "",
+        "expire_desc_kr": "",
+        "region_limit": 0,
+        "cross_view": 0,
+        "database_cache": 0
+    },
+    "30580024": {
+        "id": 30580024,
+        "sort": 10043,
+        "name_chs": "桌布-玄镇四海",
+        "name_chs_t2": "",
+        "desc_func_chs": "点击寮舍-装扮更换",
+        "desc_chs": "玄武寐醒之际，雀士夺魁之时。",
+        "desc_chs_t2": "",
+        "icon": "extendRes/items2/tablecloth_25achievement4.jpg",
+        "icon_transparent": "",
+        "category": 5,
+        "type": 6,
+        "is_unique": 1,
+        "max_stack": 0,
+        "access": "",
+        "accessinfo": 0,
+        "func": "",
+        "iargs": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+        ],
+        "sargs": [
+            "",
+            ""
+        ],
+        "can_sell": 0,
+        "sell_reward_id": 0,
+        "sell_reward_count": 0,
+        "item_expire": "",
+        "expire_desc_chs": "",
+        "expire_desc_chs_t": "",
+        "expire_desc_jp": "",
+        "expire_desc_en": "",
+        "expire_desc_kr": "",
+        "region_limit": 0,
+        "cross_view": 0,
+        "database_cache": 0
+    },
     "30590001": {
         "id": 30590001,
         "sort": 11003,
@@ -65721,6 +67357,48 @@ ITEM = {
         "name_chs_t2": "",
         "desc_func_chs": "大厅音乐，可以在设置-通用-音乐中调整",
         "desc_chs": "动画ED「杠杠姬姬」arrange版。动画「雀魂 KANG！！」播放纪念。",
+        "desc_chs_t2": "",
+        "icon": "extendRes/items/datingbgm.jpg",
+        "icon_transparent": "",
+        "category": 5,
+        "type": 9,
+        "is_unique": 1,
+        "max_stack": 0,
+        "access": "",
+        "accessinfo": 0,
+        "func": "",
+        "iargs": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+        ],
+        "sargs": [
+            "",
+            ""
+        ],
+        "can_sell": 0,
+        "sell_reward_id": 0,
+        "sell_reward_count": 0,
+        "item_expire": "",
+        "expire_desc_chs": "",
+        "expire_desc_chs_t": "",
+        "expire_desc_jp": "",
+        "expire_desc_en": "",
+        "expire_desc_kr": "",
+        "region_limit": 0,
+        "cross_view": 0,
+        "database_cache": 0
+    },
+    "30600002": {
+        "id": 30600002,
+        "sort": 12008,
+        "name_chs": "闲暇炒面",
+        "name_chs_t2": "",
+        "desc_func_chs": "大厅音乐，可以在设置-通用-音乐中调整",
+        "desc_chs": "立直闲着没事干，来碗蛋黄酱炒面！",
         "desc_chs_t2": "",
         "icon": "extendRes/items/datingbgm.jpg",
         "icon_transparent": "",
@@ -66230,6 +67908,48 @@ ITEM = {
         "icon_transparent": "",
         "category": 5,
         "type": 8,
+        "is_unique": 1,
+        "max_stack": 0,
+        "access": "",
+        "accessinfo": 0,
+        "func": "",
+        "iargs": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+        ],
+        "sargs": [
+            "",
+            ""
+        ],
+        "can_sell": 0,
+        "sell_reward_id": 0,
+        "sell_reward_count": 0,
+        "item_expire": "",
+        "expire_desc_chs": "",
+        "expire_desc_chs_t": "",
+        "expire_desc_jp": "",
+        "expire_desc_en": "",
+        "expire_desc_kr": "",
+        "region_limit": 0,
+        "cross_view": 0,
+        "database_cache": 0
+    },
+    "30710001": {
+        "id": 30710001,
+        "sort": 21001,
+        "name_chs": "牌面-飞鸟与鱼",
+        "name_chs_t2": "",
+        "desc_func_chs": "点击寮舍-装扮更换",
+        "desc_chs": "最遥远的距离？仔细一看都是一姬喵！",
+        "desc_chs_t2": "",
+        "icon": "extendRes/items2/mjpface_25summer.jpg",
+        "icon_transparent": "",
+        "category": 5,
+        "type": 13,
         "is_unique": 1,
         "max_stack": 0,
         "access": "",
@@ -66951,6 +68671,48 @@ ITEM = {
         "func": "",
         "iargs": [
             30740017,
+            0,
+            0,
+            0,
+            0,
+            0
+        ],
+        "sargs": [
+            "",
+            ""
+        ],
+        "can_sell": 0,
+        "sell_reward_id": 0,
+        "sell_reward_count": 0,
+        "item_expire": "",
+        "expire_desc_chs": "",
+        "expire_desc_chs_t": "",
+        "expire_desc_jp": "",
+        "expire_desc_en": "",
+        "expire_desc_kr": "",
+        "region_limit": 0,
+        "cross_view": 0,
+        "database_cache": 0
+    },
+    "30740018": {
+        "id": 30740018,
+        "sort": 16018,
+        "name_chs": "八木唯的守护者",
+        "name_chs_t2": "",
+        "desc_func_chs": "点击仓库-插画更换",
+        "desc_chs": "【八木唯的守护者】成就纪念插图",
+        "desc_chs_t2": "",
+        "icon": "extendRes/loading_cg/CG200007_thumb.jpg",
+        "icon_transparent": "",
+        "category": 8,
+        "type": 12,
+        "is_unique": 1,
+        "max_stack": 0,
+        "access": "",
+        "accessinfo": 0,
+        "func": "",
+        "iargs": [
+            30740018,
             0,
             0,
             0,
@@ -70796,6 +72558,48 @@ ITEM = {
         "cross_view": 0,
         "database_cache": 0
     },
+    "30900092": {
+        "id": 30900092,
+        "sort": 20164,
+        "name_chs": "指南针",
+        "name_chs_t2": "",
+        "desc_func_chs": "活动限定道具",
+        "desc_chs": "航海寻宝活动限定道具，是探索茫茫大海时的必备之物。根据收集的数量可以获得奖励。",
+        "desc_chs_t2": "",
+        "icon": "extendRes/items2/25summer.jpg",
+        "icon_transparent": "extendRes/items2/25summer_0.png",
+        "category": 6,
+        "type": 0,
+        "is_unique": 0,
+        "max_stack": 0,
+        "access": "",
+        "accessinfo": 0,
+        "func": "",
+        "iargs": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+        ],
+        "sargs": [
+            "",
+            ""
+        ],
+        "can_sell": 0,
+        "sell_reward_id": 0,
+        "sell_reward_count": 0,
+        "item_expire": "",
+        "expire_desc_chs": "",
+        "expire_desc_chs_t": "",
+        "expire_desc_jp": "",
+        "expire_desc_en": "",
+        "expire_desc_kr": "",
+        "region_limit": 0,
+        "cross_view": 0,
+        "database_cache": 0
+    },
     "30910001": {
         "id": 30910001,
         "sort": 90060,
@@ -73946,7 +75750,7 @@ TITLE = {
         "desc_kr": "청운의 꿈 이벤트 기념 칭호",
         "icon": "extendRes/title/24qyzz.png",
         "icon_item": "extendRes/title/24qyzz_item.jpg",
-        "priority": 40004,
+        "priority": 30004,
         "unlock_type": 0,
         "unlock_param": [
             0,
@@ -74724,6 +76528,30 @@ TITLE = {
         ],
         "cross_view": 0
     },
+    "600127": {
+        "id": 600127,
+        "name_chs": "勇喵小队",
+        "name_chs_t": "勇喵小隊",
+        "name_jp": "伝説の勇にゃん",
+        "name_en": "The Nyavengers",
+        "name_kr": "용사냥냥 파티",
+        "desc_chs": "航海寻宝活动纪念限定称号",
+        "desc_chs_t": "航海尋寶活動紀念限定稱號",
+        "desc_jp": "イベント「海の秘宝を求めて」を記念した限定称号",
+        "desc_en": "Limited commemorative title for the High Seas Hunt event.",
+        "desc_kr": "보물찾기 항해 이벤트 기념 칭호",
+        "icon": "extendRes/title/25qyzz.png",
+        "icon_item": "extendRes/title/25qyzz_item.jpg",
+        "priority": 30005,
+        "unlock_type": 0,
+        "unlock_param": [
+            0,
+            0,
+            0,
+            0
+        ],
+        "cross_view": 0
+    },
     "600128": {
         "id": 600128,
         "name_chs": "双圣战冠军",
@@ -74738,10 +76566,82 @@ TITLE = {
         "desc_kr": "赠予双圣战冠军",
         "icon": "extendRes/title/ssz_l.png",
         "icon_item": "extendRes/title/ssz_l_item.jpg",
-        "priority": 40073,
+        "priority": 40072,
         "unlock_type": 1,
         "unlock_param": [
             30557036,
+            0,
+            0,
+            0
+        ],
+        "cross_view": 0
+    },
+    "600129": {
+        "id": 600129,
+        "name_chs": "双聖戦優勝",
+        "name_chs_t": "双聖戦優勝",
+        "name_jp": "双聖戦優勝",
+        "name_en": "双聖戦優勝",
+        "name_kr": "双聖戦優勝",
+        "desc_chs": "双聖戦優勝記念称号",
+        "desc_chs_t": "双聖戦優勝記念称号",
+        "desc_jp": "双聖戦優勝記念称号",
+        "desc_en": "双聖戦優勝記念称号",
+        "desc_kr": "双聖戦優勝記念称号",
+        "icon": "extendRes/title/24sszy.png",
+        "icon_item": "extendRes/title/24sszy_item.jpg",
+        "priority": 40073,
+        "unlock_type": 1,
+        "unlock_param": [
+            30557037,
+            0,
+            0,
+            0
+        ],
+        "cross_view": 0
+    },
+    "600130": {
+        "id": 600130,
+        "name_chs": "豪運渋川ユリ組",
+        "name_chs_t": "豪運渋川ユリ組",
+        "name_jp": "豪運渋川ユリ組",
+        "name_en": "豪運渋川ユリ組",
+        "name_kr": "豪運渋川ユリ組",
+        "desc_chs": "ななし雀魂杯夏の陣優勝記念称号",
+        "desc_chs_t": "ななし雀魂杯夏の陣優勝記念称号",
+        "desc_jp": "ななし雀魂杯夏の陣優勝記念称号",
+        "desc_en": "ななし雀魂杯夏の陣優勝記念称号",
+        "desc_kr": "ななし雀魂杯夏の陣優勝記念称号",
+        "icon": "extendRes/title/25haoyun.png",
+        "icon_item": "extendRes/title/25haoyun_item.jpg",
+        "priority": 40074,
+        "unlock_type": 1,
+        "unlock_param": [
+            30557038,
+            0,
+            0,
+            0
+        ],
+        "cross_view": 0
+    },
+    "600131": {
+        "id": 600131,
+        "name_chs": "Limited Title",
+        "name_chs_t": "Limited Title",
+        "name_jp": "Limited Title",
+        "name_en": "Limited Title",
+        "name_kr": "Limited Title",
+        "desc_chs": "A reward for Mahjong Soul official tournament Catfood Bowl - Major #Battle of Kirin S3 winner",
+        "desc_chs_t": "A reward for Mahjong Soul official tournament Catfood Bowl - Major #Battle of Kirin S3 winner",
+        "desc_jp": "A reward for Mahjong Soul official tournament Catfood Bowl - Major #Battle of Kirin S3 winner",
+        "desc_en": "A reward for Mahjong Soul official tournament Catfood Bowl - Major #Battle of Kirin S3 winner",
+        "desc_kr": "A reward for Mahjong Soul official tournament Catfood Bowl - Major #Battle of Kirin S3 winner",
+        "icon": "extendRes/title/2509qilinzhan.png",
+        "icon_item": "extendRes/title/2509qilinzhan_item.jpg",
+        "priority": 40075,
+        "unlock_type": 1,
+        "unlock_param": [
+            30557039,
             0,
             0,
             0

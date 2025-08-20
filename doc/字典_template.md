@@ -733,8 +733,6 @@ id 以 6 开头, 而且有点乱, 很多都限时且无法获得, 乱用可能�
 
 假设 `input` 是下面过程"=>"左边的内容, 则函数返回的就是右边的内容
 
----
-
 #### 牌谱互转
 
 这里的 `input` 是牌谱的 UUID, 只是链接的一部分,
@@ -759,6 +757,32 @@ id 以 6 开头, 而且有点乱, 很多都限时且无法获得, 乱用可能�
 - 账号id => 好友id: `game.Tools.encode_account_id2(input)`
 - 牌谱id => 好友id: `game.Tools.encode_account_id2(game.Tools.decode_account_id(input))`
 - 好友id => 牌谱id: `game.Tools.decode_account_id2(game.Tools.encode_account_id(input))`
+
+### 通过uuid观战
+
+```js
+!(function (uuid = GameMgr.Inst.mj_game_uuid){
+    let ui_bc = uiscript.UI_Live_Broadcast1, ui_inst = uiscript.UI_PaiPu.Inst;
+    uuid && ui_bc.fetchInfo(uuid,
+        Laya.Handler.create(ui_inst,
+            (x) => x.success && ui_inst.close(Laya.Handler.create(ui_inst,
+                () => ui_bc.goToWatch(uuid, 0))),
+            null, !1)
+    )
+})();
+```
+
+将 `GameMgr.Inst.mj_game_uuid` 换成牌谱的 `uuid` 即可, 默认会观战自己刚打的谱(若有) 
+
+### Laya 定时器, 定时播放牌谱
+
+`Laya.timer.once(10000, this, () => uiscript.UI_Replay.Inst._auto_play = true);`
+
+定时 10 秒
+
+### 弹出窗口封禁(伪)
+
+`uiscript.UI_Entrance_Prohibition.Inst.show({u32_params: [0, 0, 0], str_params: ['违反用户协议5.6.1, 5.6.6, 曾使用非法第三方工具']})`
 
 ### 中文服稀有称号用户
 
@@ -807,19 +831,3 @@ id 以 6 开头, 而且有点乱, 很多都限时且无法获得, 乱用可能�
 可以发现, 原文的长度不影响字符偏移量, 二者差别仅在加号变减号, 以及保证值为正数的额外求模和加法
 
 如果出现不在 `dict` 中的字符(如空格), 则该字符不会变化, 原文与密文差别仅在位置
-
-### 通过uuid观战
-
-```js
-!(function (uuid = GameMgr.Inst.mj_game_uuid){
-    let ui_bc = uiscript.UI_Live_Broadcast1, ui_inst = uiscript.UI_PaiPu.Inst;
-    uuid && ui_bc.fetchInfo(uuid,
-        Laya.Handler.create(ui_inst,
-            (x) => x.success && ui_inst.close(Laya.Handler.create(ui_inst,
-                () => ui_bc.goToWatch(uuid, 0))),
-            null, !1)
-    )
-})();
-```
-
-将 `GameMgr.Inst.mj_game_uuid` 换成牌谱的 `uuid` 即可, 默认会观战自己刚打的谱(若有) 

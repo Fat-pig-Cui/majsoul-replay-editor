@@ -1,11 +1,11 @@
 clearproject();
 
 player_datas[0].nickname = '小野寺七羽-契约';
-player_datas[1].nickname = '小野寺七羽';
-player_datas[2].nickname = '夏日风物诗';
+player_datas[1].nickname = '夏日风物诗';
+player_datas[2].nickname = '夏风吹拂';
 player_datas[0].avatar_id = 405302;
-player_datas[1].avatar_id = 405301;
-player_datas[2].avatar_id = 405303;
+player_datas[1].avatar_id = 405303;
+player_datas[2].avatar_id = 405304;
 
 config = {
     category: 1,

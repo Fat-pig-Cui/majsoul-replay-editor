@@ -1,11 +1,11 @@
 clearproject();
 
 player_datas[0].nickname = '青鸾-契约';
-player_datas[1].nickname = '青鸾';
-player_datas[2].nickname = '贺今朝';
+player_datas[1].nickname = '贺今朝';
+player_datas[2].nickname = '夏风吹拂';
 player_datas[0].avatar_id = 406702;
-player_datas[1].avatar_id = 406701;
-player_datas[2].avatar_id = 406703;
+player_datas[1].avatar_id = 406703;
+player_datas[2].avatar_id = 406704;
 
 player_datas[0].views = player_datas[1].views = player_datas[2].views = [
     {slot: 6, item_id: 305812}, // 桌布-仙境茶话会

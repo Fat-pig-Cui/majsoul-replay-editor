@@ -4,7 +4,6 @@
  * @email: chubbypig@qq.com
  * @github: https://github.com/Fat-pig-Cui/majsoul-replay-editor
  */
-
 'use strict';
 
 // 除了常量, 全局变量的初始化全在 clearproject, gamebegin, roundbegin, init 函数中
@@ -76,7 +75,7 @@ let muyuseats;
 
 // 初始化必要变量
 function clearproject() {
-    if (view && view.DesktopMgr && view.DesktopMgr.Inst && view.DesktopMgr.Inst.active)
+    if (view?.DesktopMgr?.Inst?.active)
         throw new Error('请退出当前牌谱后再载入自制牌谱');
 
     gamebegin_once = true;
@@ -97,7 +96,6 @@ function clearproject() {
     tiles0 = tiles1 = tiles2 = tiles3 = muyuseats = '';
     paishan = [];
     chang = ju = ben = liqibang = lianzhuangcnt = 0;
-    juc = -1;
     playertiles = [[], [], [], []];
     qiepaiset = ['', '', '', ''];
     mopaiset = ['', '', '', ''];
@@ -217,7 +215,7 @@ function randompaishan(pshead = '', psback = '') {
             else
                 cnt[tiletoint(tiles[j][i], true)]--;
 
-    if (is_mopai_paishan() && mopaiset[ju].length !== 0) {
+    if (is_mopai_paishan() && mopaiset[ju].length > 0) {
         para_tiles[0] = [];
         for (let i = 0; i < playercnt; i++)
             dealtiles[i] = separate(mopaiset[i]);
@@ -303,25 +301,12 @@ function roundbegin() {
     if (editdata.actions.length === 0 && gamebegin_once)
         gamebegin();
 
-    const randomcmp = () => Math.random() - 0.5;
-
     init();
-    benchangbang = ben;
 
-    if (is_dora3())
+    if (is_dora3() || is_muyu())
         doracnt.cnt = doracnt.licnt = 3;
 
-    // 计算各玩家开局的听牌, 亲家开局听的牌无法显示
-    let lastile = playertiles[ju].pop();
-    let tingpai = [];
-    if (!is_heqie_mode())
-        for (let seat = 0; seat < playercnt; seat++) {
-            let tingpais1 = calctingpai(seat);
-            if (tingpais1.length > 0)
-                tingpai.push({seat: seat, tingpais1: tingpais1});
-        }
-    playertiles[ju].push(lastile);
-
+    // 剩余牌数量
     let left_cnt = paishan.length - 14;
     if (playercnt === 2)
         left_cnt = paishan.length - 18;
@@ -329,7 +314,7 @@ function roundbegin() {
         left_cnt = paishan.length;
 
     let opens = [];
-    if (is_peipaimingpai() || is_openhand())
+    if (is_begin_open() || is_openhand())
         for (let seat = 0; seat < playercnt; seat++) {
             let ret = {seat: seat, tiles: [], count: []};
             let tiles = playertiles[seat], cnt = [];
@@ -351,14 +336,15 @@ function roundbegin() {
         update_muyu(true);
 
     // 添加起手进牌山
-    let qishou_len = 0, is_sha256 = false, is_intergrity = true;
+    let qishou_len = 0, is_sha256 = false, has_intergrity = true;
     let qishou_tiles = [], random_tiles = [[], [], [], []];
     for (let i = 0; i < playercnt; i++) {
+        const randomcmp = () => Math.random() - 0.5;
         if (i === ju) {
             if (playertiles[i].length !== Qin_tiles_num)
-                is_intergrity = false;
+                has_intergrity = false;
         } else if (playertiles[i].length !== Xian_tiles_num)
-            is_intergrity = false;
+            has_intergrity = false;
 
         for (let j in playertiles[i])
             if (playertiles[i][j] !== Tbd) {
@@ -367,7 +353,7 @@ function roundbegin() {
             }
         random_tiles[i].sort(randomcmp);
     }
-    if (is_intergrity && qishou_len + paishan.length <= 136) {
+    if (has_intergrity && qishou_len + paishan.length <= 136) {
         is_sha256 = true;
         for (let i = 0; i < 3; i++)
             for (let j = ju; j < ju + playercnt; j++)
@@ -387,7 +373,7 @@ function roundbegin() {
     for (let i = 0; i < (is_sha256 ? 64 : 32); i++)
         fake_hash_code += hash_code_set[Math.floor(hash_code_set.length * Math.random())];
 
-    addNewRound(left_cnt, fake_hash_code, tingpai, opens, is_sha256);
+    addNewRound(left_cnt, fake_hash_code, opens, is_sha256);
 
     if (is_sha256)
         paishan.splice(0, qishou_len);
@@ -416,35 +402,42 @@ function mopai(seat, tile, index) {
     }
 
     let zhanxing_index;
-    let lstaction = getlstaction();
     let liqi = null;
+    let hunzhiyiji_data = null;
 
     [seat, tile, zhanxing_index] = preprocess();
 
     lstaction_completion();
 
     if (seat === undefined) {
-        let lstseat = lstaction.data.seat;
+        let lstname = getlstaction().name, lstseat = getlstaction().data.seat;
         // 自家鸣牌, 摸牌家仍然是上个操作的玩家
-        if (lstaction.name === 'RecordChiPengGang' || lstaction.name === 'RecordBaBei' || lstaction.name === 'RecordAnGangAddGang')
+        if (lstname === 'RecordChiPengGang' || lstname === 'RecordBaBei' || lstname === 'RecordAnGangAddGang')
             seat = lstseat;
         // 广义切牌, 摸牌家是上个操作玩家的下一家
-        if (lstaction.name === 'RecordDiscardTile' || lstaction.name === 'RecordLockTile')
+        if (lstname === 'RecordDiscardTile' || lstname === 'RecordLockTile')
             seat = is_hunzhiyiji() && hunzhiyiji_info[lstseat].liqi && !hunzhiyiji_info[lstseat].overload ? lstseat : (lstseat + 1) % playercnt;
 
-        let lst2action = getlstaction(2), lst2seat = lst2action.data.seat;
-        // 血战到底和牌, 若为枪杠, 则摸牌家为开杠家, 否则为最后和牌家的下一家
-        if (lstaction.name === 'RecordHuleXueZhanMid')
-            seat = lst2action.name === 'RecordAnGangAddGang' ? lst2seat : (lstaction.data.hules.at(-1).seat + 1) % playercnt;
+        // 血战到底和牌, 摸牌家为最后和牌家的下一家
+        if (lstname === 'RecordHuleXueZhanMid')
+            seat = (getlstaction().data.hules.at(-1).seat + 1) % playercnt;
         // 血流成河或国标错和, 摸牌家为和牌之前最后操作玩家的下一家
-        if (lstaction.name === 'RecordHuleXueLiuMid' || lstaction.name === 'RecordCuohu')
-            seat = lst2action.name === 'RecordNewRound' ? (ju + 1) % playercnt : (lst2seat + 1) % playercnt;
+        if (lstname === 'RecordHuleXueLiuMid' || lstname === 'RecordCuohu')
+            seat = (getlstaction(2).data.seat + 1) % playercnt;
 
         while (hupaied[seat])
             seat = (seat + 1) % playercnt;
         if (isNaN(seat))
-            throw new Error(roundinfo() + `mopai: 无法判断谁摸牌, lstaction.name: ${lstaction.name}`);
+            throw new Error(roundinfo() + `mopai: 无法判断谁摸牌, getlstaction().name: ${lstname}`);
     }
+    if (tile === undefined && dealtiles[seat].length > 0) {
+        tile = dealtiles[seat].shift();
+        if (tile === '..')
+            tile = undefined;
+    }
+
+    // 是否明牌
+    let tile_state = is_openhand() || liqiinfo[seat].kai;
 
     // 占星之战, 填充牌候选池供 seat 号玩家选择
     if (is_zhanxing()) {
@@ -459,38 +452,29 @@ function mopai(seat, tile, index) {
     }
 
     // 魂之一击, 摸牌家 seat 没过载, 则减少次数
-    let hunzhiyiji_data = null;
     if (is_hunzhiyiji() && hunzhiyiji_info[seat].liqi && !hunzhiyiji_info[seat].overload) {
-        hunzhiyiji_info[seat].continue_deal_count--;
+        if (hunzhiyiji_info[seat].continue_deal_count > 0)
+            hunzhiyiji_info[seat].continue_deal_count--;
         hunzhiyiji_data = JSON.parse(JSON.stringify(hunzhiyiji_info[seat]));
     }
 
-    let tile_state = is_openhand() || liqiinfo[seat].kai;
-
-    let tmp_paishan_len = paishan.length;
-    if (is_zhanxing())
-        tmp_paishan_len += awaiting_tiles.length;
-    let left_cnt = tmp_paishan_len - 15;
+    // 剩余牌数
+    let left_cnt = paishan.length - 15;
     if (playercnt === 2)
-        left_cnt = tmp_paishan_len - 19;
+        left_cnt = paishan.length - 19;
     else if (is_chuanma() || is_guobiao())
-        left_cnt = tmp_paishan_len - 1;
-
-    let drawcard;
+        left_cnt = paishan.length - 1;
     if (is_zhanxing())
+        left_cnt += awaiting_tiles.length;
+
+    // 实际摸的牌
+    let drawcard = paishan.at(-1);
+    if (tile !== undefined)
+        drawcard = tile;
+    else if (is_zhanxing())
         drawcard = awaiting_tiles.splice(zhanxing_index, 1)[0];
     else if (drawtype === 1)
         drawcard = paishan[0];
-    else
-        drawcard = paishan.at(-1);
-
-    if (tile === undefined && dealtiles[seat].length !== 0) {
-        tile = dealtiles[seat].shift();
-        if (tile === '..')
-            tile = undefined;
-    }
-    if (tile !== undefined)
-        drawcard = tile;
 
     playertiles[seat].push(drawcard);
 
@@ -503,6 +487,7 @@ function mopai(seat, tile, index) {
 
     // 完成上个操作的后续
     function lstaction_completion() {
+        let lstname = getlstaction().name, lstseat = getlstaction().data.seat;
         // 开杠翻指示牌
         if (doracnt.lastype === 2) {
             doracnt.cnt += 1 + doracnt.bonus;
@@ -510,31 +495,10 @@ function mopai(seat, tile, index) {
             doracnt.bonus = doracnt.lastype = 0;
         }
 
-        // pass 掉自家鸣牌, 则破一发
+        // pass掉自家鸣牌, 则破一发
         for (let i = 0; i < playercnt; i++)
             if (liqiinfo[i].yifa === -1)
                 liqiinfo[i].yifa = 0;
-
-        // 龙之目玉: 更新目玉数据
-        if (is_muyu() && muyu.count === 0)
-            update_muyu(true);
-
-        // 川麻: 刮风下雨结算结算点数
-        if (is_chuanma())
-            calcgangpoint();
-
-        // 暗夜之战: 暗牌无人开
-        if (is_anye() && lstaction.name === 'RecordRevealTile')
-            addLockTile(lstaction.data.seat, 2);
-
-        // 魂之一击: 已过载的玩家, push 一次过载数据
-        if (is_hunzhiyiji()) {
-            let lstseat = lstaction.data.seat, count = hunzhiyiji_info[lstseat].continue_deal_count;
-            if (hunzhiyiji_info[lstseat].liqi && count === 0 && !hunzhiyiji_info[lstseat].overload) {
-                hunzhiyiji_info[lstseat].overload = true;
-                hunzhiyiji_data = JSON.parse(JSON.stringify(hunzhiyiji_info[lstseat]));
-            }
-        }
 
         // pass掉上个操作的牌的, pre同巡振听和pre立直振听 转 真实振听
         for (let i = 0; i < playercnt; i++) {
@@ -547,40 +511,30 @@ function mopai(seat, tile, index) {
         pretongxunzt[seat] = tongxunzt[seat] = false;
         update_zhenting();
 
-        // 立直
-        if (lstliqi != null) {
-            let need_bangzi = liqi_need;
-            if (is_beishuizhizhan()) {
-                if (lstliqi.beishui_type === 1)
-                    need_bangzi = 5;
-                else if (lstliqi.beishui_type === 2)
-                    need_bangzi = 10;
-            }
-            if (scores[lstliqi.seat] >= need_bangzi * 1000 || is_fufenliqi()) {
-                liqibang += need_bangzi;
-                scores[lstliqi.seat] -= need_bangzi * 1000;
-                liqiinfo[lstliqi.seat] = {liqi: lstliqi.liqi, yifa: 1, kai: lstliqi.kai};
-                // 幻境传说: 机会卡2
-                if (get_field_spell_mode2() === 2)
-                    liqiinfo[lstliqi.seat].yifa = 3;
-                liqi = {
-                    seat: lstliqi.seat,
-                    liqibang: liqibang,
-                    score: scores[lstliqi.seat],
-                };
-                if (is_beishuizhizhan())
-                    liqi.liqi_type_beishuizhizhan = liqiinfo[lstliqi.seat].beishui_type = lstliqi.beishui_type;
-            } else
-                liqi = {
-                    seat: lstliqi.seat,
-                    liqibang: liqibang,
-                    score: scores[lstliqi.seat],
-                    failed: true,
-                };
+        // 龙之目玉: 更新目玉数据
+        if (is_muyu() && muyu.count === 0)
+            update_muyu(true);
+
+        // 川麻: 刮风下雨结算点数
+        if (is_chuanma())
+            calcgangpoint();
+
+        // 暗夜之战: 暗牌无人开
+        if (is_anye() && lstname === 'RecordRevealTile')
+            addLockTile(lstseat, 2);
+
+        // 魂之一击: 已过载的玩家, push 一次过载数据
+        if (is_hunzhiyiji()) {
+            let count = hunzhiyiji_info[lstseat].continue_deal_count;
+            if (lstname !== 'RecordAnGangAddGang')
+                if (hunzhiyiji_info[lstseat].liqi && count === 0 && !hunzhiyiji_info[lstseat].overload) {
+                    hunzhiyiji_info[lstseat].overload = true;
+                    hunzhiyiji_data = JSON.parse(JSON.stringify(hunzhiyiji_info[lstseat]));
+                }
         }
 
-        lstliqi = null;
-        lstaction = getlstaction();
+        // 立直成功
+        liqi = lstliqi2liqi(true);
     }
 }
 
@@ -618,41 +572,48 @@ function qiepai(seat, tile, is_liqi, f_moqie, anpai, bs_type) {
 
     lstaction_completion();
 
-    let lstaction = getlstaction();
+    let lstname = getlstaction().name, lstseat = getlstaction().data.seat;
     if (seat === undefined)
-        seat = lstaction.name === 'RecordNewRound' ? ju : lstaction.data.seat;
+        seat = lstseat;
     if (is_liqi === undefined)
         is_liqi = false;
+    if (is_beishuizhizhan() && beishui_type === undefined)
+        beishui_type = 0;
 
     let moqie = true;
     // 如果 tile 参数原生不空, 且在手牌出现不止一次, 则一定是手切
     if (tile !== undefined && playertiles[seat].indexOf(tile) !== playertiles[seat].length - 1)
         moqie = false;
-    if (tile === undefined && discardtiles[seat].length !== 0)
+    if (tile === undefined && discardtiles[seat].length > 0)
         tile = discardtiles[seat].shift();
     if (tile === undefined || tile === '..')
         tile = playertiles[seat].at(-1);
-    moqie = moqie && playertiles[seat].at(-1) === tile && lstaction.name !== 'RecordNewRound' && lstaction.name !== 'RecordChiPengGang';
+    moqie = moqie && playertiles[seat].at(-1) === tile && lstname !== 'RecordNewRound' && lstname !== 'RecordChiPengGang';
     if (is_heqie_mode())
         moqie = f_moqie === 'moqie';
 
+    // 确定立直类型
     let is_wliqi = false, is_kailiqi = false;
     if (is_liqi === 'kailiqi')
         is_liqi = is_kailiqi = true;
     if (is_liqi && liqiinfo[seat].yifa !== 0 && liqiinfo[seat].liqi === 0)
         is_wliqi = true;
 
+    // 确定 lstliqi
     if (is_liqi && liqiinfo[seat].liqi === 0)
         lstliqi = {
             seat: seat,
             liqi: is_wliqi ? 2 : 1,
             kai: is_kailiqi,
-            beishui_type: is_beishuizhizhan() ? beishui_type : 0
+            beishui_type: beishui_type,
         };
+
+    // 切的牌是否为明牌
+    let tile_state = is_openhand() || is_begin_open() && erasemingpai(seat, tile);
 
     // 龙之目玉: 更新目玉数据
     if (is_muyu() && seat === muyu.seat)
-        update_muyu(false);
+        update_muyu();
 
     // 暗夜之战: 暗牌支付1000点
     if (is_anye() && anpai === 'anpai') {
@@ -667,11 +628,11 @@ function qiepai(seat, tile, is_liqi, f_moqie, anpai, bs_type) {
 
     // 咏唱之战: 更新手摸切数据
     if (is_yongchang()) {
-        shoumoqie[seat].push(!(tile === playertiles[seat].at(-1) && moqie));
+        shoumoqie[seat].push(!moqie);
         update_shoumoqie(seat);
     }
 
-    // 魂之一击相关
+    // 魂之一击: 宣布魂之一击立直
     if (is_hunzhiyiji() && lstliqi != null)
         hunzhiyiji_info[seat] = {
             seat: seat,
@@ -680,6 +641,7 @@ function qiepai(seat, tile, is_liqi, f_moqie, anpai, bs_type) {
             overload: false,
         };
 
+    // 切的牌从 playertiles 中移除
     if (is_heqie_mode())
         playertiles[seat].pop();
     else {
@@ -690,13 +652,11 @@ function qiepai(seat, tile, is_liqi, f_moqie, anpai, bs_type) {
     }
     playertiles[seat].sort(cmp);
 
-    let tile_state = is_openhand();
-    if (is_peipaimingpai())
-        tile_state = erasemingpai(seat, tile);
-
+    // 切的牌 push 到 paihe 中, 并计算流局满贯
     paihe[seat].tiles.push(tile);
     if (!(is_anye() && anpai === 'anpai') && !judgetile(tile, 'Y'))
         paihe[seat].liujumanguan = false;
+
     if (liqiinfo[seat].yifa > 0)
         liqiinfo[seat].yifa--;
 
@@ -711,8 +671,10 @@ function qiepai(seat, tile, is_liqi, f_moqie, anpai, bs_type) {
 
     // 完成上个操作的后续
     function lstaction_completion() {
+        // 包杠失效
         baogangseat = -1;
 
+        // 开杠翻指示牌
         if (doracnt.lastype === 1) {
             doracnt.cnt += 1 + doracnt.bonus;
             doracnt.licnt += 1 + doracnt.bonus;
@@ -752,9 +714,8 @@ function mingpai(seat, tiles, jifei) {
         if (tiles !== undefined && !equaltile(tiles[0], tile))
             seat = (from + 1) % playercnt;
         else if (tiles !== undefined)
-            for (let seat2 = 0; seat2 < playercnt; seat2++) {
-                if (seat2 === from)
-                    continue;
+            for (let i = from + 1; i < from + playercnt; i++) {
+                let seat2 = i % playercnt;
                 let cnt = [];
                 for (let i = C1m; i <= C7z; i++)
                     cnt[i] = 0;
@@ -790,8 +751,9 @@ function mingpai(seat, tiles, jifei) {
         throw new Error(roundinfo() + `seat: ${from} 的切牌: ${tile} 没有玩家能 mingpai`);
     }
 
+    // 鸣出去的牌是否为明牌
     let tile_states = [];
-    if (is_peipaimingpai())
+    if (is_begin_open())
         for (let i in tiles)
             tile_states.push(erasemingpai(seat, tiles[i]));
 
@@ -800,12 +762,10 @@ function mingpai(seat, tiles, jifei) {
         type = 0;
         froms = [seat, seat, from];
         split_tiles = [tiles[0], tiles[1], tile];
-        fulu[seat].push({type: 0, tile: split_tiles.slice(), from: from});
     } else if (tiles.length === 2) { // 碰
         type = 1;
         froms = [seat, seat, from];
         split_tiles = [tiles[0], tiles[1], tile];
-        fulu[seat].push({type: 1, tile: split_tiles.slice(), from: from});
 
         // 幻境传说: 庄家卡4
         if (get_field_spell_mode1() === 4 && seat === ju)
@@ -814,31 +774,33 @@ function mingpai(seat, tiles, jifei) {
         type = 2;
         froms = [seat, seat, seat, from];
         split_tiles = [tiles[0], tiles[1], tiles[2], tile];
-        fulu[seat].push({type: 2, tile: split_tiles.slice(), from: from});
 
         // 幻境传说: 庄家卡4
         if (get_field_spell_mode1() === 4 && seat === ju)
             doracnt.bonus = 1;
-
         doracnt.lastype = is_dora_jifan() ? 2 : 1;
-        if (!is_chuanma()) {
+
+        if (is_chuanma())
+            chuanmagangs.notover.push({from: from, to: seat, val: 2000});
+        else {
             if (!is_guobiao()) {
-                if (!sigangbao[seat]) { // 查是否四杠子确定, 用于包牌
-                    let gang_num = 0;
-                    for (let j in fulu[seat])
-                        if (fulu[seat][j].type === 2 || fulu[seat][j].type === 3) // 查杠子个数
-                            gang_num++;
-                    if (gang_num === 3) // 之前已经有3个杠子, 则第4个杠构成四杠子包牌
-                        sigangbao[seat] = true;
-                }
-                if (is_baogang())
+                let gang_num = 0; // 查是否四杠子确定, 用于包牌
+                for (let j in fulu[seat])
+                    if (fulu[seat][j].type === 2 || fulu[seat][j].type === 3) // 查杠子个数
+                        gang_num++;
+                if (gang_num === 3) // 之前已经有3个杠子, 则第4个杠构成四杠子包牌
+                    sigangbao[seat] = true;
+
+                if (is_baogang()) // 包杠
                     baogangseat = from;
             }
             drawtype = 0;
-        } else
-            chuanmagangs.notover.push({from: from, to: seat, val: 2000});
+        }
     }
+    // 副露信息 push 到 fulu
+    fulu[seat].push({type: type, tile: split_tiles.slice(), from: from});
 
+    // 从 playertiles 中移除鸣出去的牌
     for (let i in tiles)
         playertiles[seat].splice(playertiles[seat].indexOf(tiles[i]), 1);
 
@@ -855,7 +817,7 @@ function mingpai(seat, tiles, jifei) {
         liqibang += 2;
     }
 
-    playertiles[seat].sort(cmp);
+    // 川麻开杠击飞
     if (jifei)
         roundend();
 
@@ -889,31 +851,8 @@ function mingpai(seat, tiles, jifei) {
         if (is_hunzhiyiji() && hunzhiyiji_info[from].liqi)
             hunzhiyiji_info[from].overload = true;
 
-        // 立直
-        let need_bangzi = liqi_need;
-        if (is_beishuizhizhan() && lstliqi != null && lstliqi.beishui_type !== undefined) {
-            if (lstliqi.beishui_type === 1)
-                need_bangzi = 5;
-            else if (lstliqi.beishui_type === 2)
-                need_bangzi = 10;
-        }
-        if (lstliqi != null && (scores[lstliqi.seat] >= need_bangzi * 1000 || is_fufenliqi())) {
-            liqibang += need_bangzi;
-            scores[lstliqi.seat] -= need_bangzi * 1000;
-            liqiinfo[lstliqi.seat] = {liqi: lstliqi.liqi, yifa: 1, kai: lstliqi.kai};
-            // 幻境传说: 机会卡2
-            if (get_field_spell_mode2() === 2)
-                liqiinfo[lstliqi.seat].yifa = 3;
-
-            liqi = {
-                seat: lstliqi.seat,
-                liqibang: liqibang,
-                score: scores[lstliqi.seat],
-            };
-            if (is_beishuizhizhan())
-                liqi.liqi_type_beishuizhizhan = liqiinfo[lstliqi.seat].beishui_type = lstliqi.beishui_type;
-        }
-        lstliqi = null;
+        // 立直成功
+        liqi = lstliqi2liqi();
 
         for (let i = 0; i < playercnt; i++)
             liqiinfo[i].yifa = 0;
@@ -927,12 +866,12 @@ function mingpai(seat, tiles, jifei) {
      */
     function trying(x, seat) {
         let x0 = allequaltiles(x[0]).reverse(), x1 = allequaltiles(x[1]).reverse(), x2 = [];
-        if (x.length === 3) // 明杠
+        if (x.length === 3) // 大明杠
             x2 = allequaltiles(x[2]).reverse();
         for (let i in x0)
             for (let j in x1) {
                 let try_tiles = [x0[i], x1[j]];
-                if (x.length === 3) // 明杠
+                if (x.length === 3) // 大明杠
                     for (let k in x2) {
                         try_tiles[2] = x2[k];
                         if (trymingpai(try_tiles))
@@ -956,26 +895,6 @@ function mingpai(seat, tiles, jifei) {
                 }
             return false;
         }
-    }
-
-    /**
-     * 判断第一个参数里面的所有牌是否为第二个参数里面的牌的子集
-     * @param {string|string[]} x - 子集
-     * @param {string[]} y - 全集
-     * @returns {boolean}
-     */
-    function intiles(x, y) {
-        let cnt = [], cnt2 = [];
-        for (let i = C1m; i <= C0s + SPT_Offset; i++)
-            cnt[i] = cnt2[i] = 0;
-        for (let i in x)
-            cnt[tiletoint(x[i], true, true)]++;
-        for (let i in y)
-            cnt2[tiletoint(y[i], true, true)]++;
-        for (let i = C1m; i <= C0s + SPT_Offset; i++)
-            if (cnt[i] > cnt2[i])
-                return false;
-        return true;
     }
 }
 
@@ -1004,11 +923,10 @@ function leimingpai(seat, tile, type, jifei) {
 
     [seat, tile, type, jifei] = preprocess();
 
-    let lstaction = getlstaction();
     if (seat === undefined) {
-        seat = lstaction.name === 'RecordNewRound' ? ju : lstaction.data.seat;
+        seat = getlstaction().data.seat;
         if (seat === undefined)
-            throw new Error(roundinfo() + `无法判断谁 leimingpai, lstaction.name: ${lstaction.name}`)
+            throw new Error(roundinfo() + `无法判断谁 leimingpai, getlstaction().name: ${getlstaction().name}`)
     }
     if (jifei === undefined)
         jifei = false;
@@ -1018,12 +936,13 @@ function leimingpai(seat, tile, type, jifei) {
         throw new Error(roundinfo() + `seat: ${seat}, xun: ${xun[seat].length}: 玩家无法 leimingpai (没给 tile 情况下)`);
     }
 
+    // 上个操作补完: 开杠翻指示牌
     if (doracnt.lastype === 1) {
         doracnt.cnt += 1 + doracnt.bonus;
         doracnt.licnt += 1 + doracnt.bonus;
         doracnt.bonus = doracnt.lastype = 0;
     }
-    let tile_states = [];
+    // 和 tile 等效牌的个数
     let tilecnt = 0;
     for (let i in playertiles[seat])
         if (equaltile(tile, playertiles[seat][i]))
@@ -1041,9 +960,9 @@ function leimingpai(seat, tile, type, jifei) {
     let is_angang = tilecnt >= 4 && (!type || type === 'angang');
 
     let is_jiagang = false;
-    if (tilecnt >= 1 && (!type || type === 'jiagang'))
+    if (tilecnt > 0 && (!type || type === 'jiagang'))
         for (let i in fulu[seat])
-            if (equaltile(fulu[seat][i].tile[0], tile) && fulu[seat][i].type === 1) {
+            if (playertiles[seat].lastIndexOf(tile) > 0 && equaltile(fulu[seat][i].tile[0], tile) && fulu[seat][i].type === 1) {
                 is_jiagang = true;
                 break;
             }
@@ -1057,22 +976,24 @@ function leimingpai(seat, tile, type, jifei) {
             is_babei = true;
     }
 
+    // 自家鸣牌会使得所有玩家的一发进入特殊状态, 若pass掉则一发立即消失
     for (let i = 0; i < playercnt; i++)
         if (liqiinfo[i].yifa > 0)
             liqiinfo[i].yifa = -1;
     update_prezhenting(seat, tile, is_angang);
 
+    // 鸣出去的牌明牌状态
+    let tile_states = [];
+
+    if (!is_chuanma())
+        drawtype = 0;
+
     // 拔北
     if (is_babei) {
-        if (is_peipaimingpai())
+        if (is_begin_open())
             tile_states.push(erasemingpai(seat, tile));
         fulu[seat].push({type: 4, tile: [tile]});
-        drawtype = 0;
-        for (let i in playertiles[seat])
-            if (playertiles[seat][i] === tile) {
-                playertiles[seat].splice(parseInt(i), 1);
-                break;
-            }
+        playertiles[seat].splice(playertiles[seat].lastIndexOf(tile), 1);
         playertiles[seat].sort(cmp);
 
         addBaBei(seat, tile, tile_states);
@@ -1085,18 +1006,16 @@ function leimingpai(seat, tile, type, jifei) {
 
         doracnt.lastype = is_angang || is_jiagang && is_dora_jifan() ? 2 : 1;
 
-        if (!is_chuanma())
-            drawtype = 0;
-
         if (is_angang) {
             let tmp_fulu = {type: 3, tile: []};
             let tilenum = 0;
-            for (let i in playertiles[seat])
+            for (let i = playertiles[seat].length - 1; i >= 0; i--)
                 if (equaltile(tile, playertiles[seat][i])) {
-                    tilenum++;
-                    if (is_peipaimingpai())
+                    if (is_begin_open())
                         tile_states.push(erasemingpai(seat, playertiles[seat][i]));
                     tmp_fulu.tile.push(playertiles[seat][i]);
+                    playertiles[seat].splice(i, 1);
+                    tilenum++;
                     if (tilenum >= 4)
                         break;
                 }
@@ -1110,38 +1029,25 @@ function leimingpai(seat, tile, type, jifei) {
                         continue;
                     chuanmagangs.notover.push({from: i, to: seat, val: 2000});
                 }
-            for (let j = 0; j < 4; j++)
-                for (let i = playertiles[seat].length - 1; i >= 0; i--)
-                    if (equaltile(playertiles[seat][i], tile)) {
-                        playertiles[seat][i] = playertiles[seat].at(-1);
-                        playertiles[seat].pop();
-                        break;
-                    }
         } else {
+            if (is_begin_open())
+                tile_states.push(erasemingpai(seat, tile));
+            let index;
             for (let i in fulu[seat])
                 if (equaltile(fulu[seat][i].tile[0], tile) && fulu[seat][i].type === 1) {
                     fulu[seat][i].type = 2;
-                    for (let j in playertiles[seat])
-                        if (tile === playertiles[seat][j]) {
-                            if (is_peipaimingpai())
-                                tile_states.push(erasemingpai(seat, tile));
-                            fulu[seat][i].tile.push(tile);
-                            break;
-                        }
+                    fulu[seat][i].tile.push(tile);
+                    index = playertiles[seat].lastIndexOf(tile);
+                    playertiles[seat].splice(index, 1);
                     break;
                 }
 
-            if (playertiles[seat].at(-1) === tile)
+            // 本来应该是 playertiles[seat].length - 1, 但因上面 splice 长度减1, 这里就加1
+            if (is_chuanma() && index === playertiles[seat].length)
                 for (let i = 0; i < playercnt; i++) {
                     if (i === seat || hupaied[i])
                         continue;
                     chuanmagangs.notover.push({from: i, to: seat, val: 1000});
-                }
-            for (let i = playertiles[seat].length - 1; i >= 0; i--)
-                if (equaltile(playertiles[seat][i], tile)) {
-                    playertiles[seat][i] = playertiles[seat].at(-1);
-                    playertiles[seat].pop();
-                    break;
                 }
         }
         playertiles[seat].sort(cmp);
@@ -1214,28 +1120,6 @@ function leimingpai(seat, tile, type, jifei) {
                 }
         }
         return false;
-
-        /**
-         * 判断第一个参数里面的所有牌是否为第二个参数里面的牌的子集
-         * @param {string|string[]} x - 子集
-         * @param {string[]} y - 全集
-         * @returns {boolean}
-         */
-        function intiles(x, y) {
-            if (typeof x == 'string')
-                x = [x];
-            let cnt = [], cnt2 = [];
-            for (let i = C1m; i <= C0s + SPT_Offset; i++)
-                cnt[i] = cnt2[i] = 0;
-            for (let i in x)
-                cnt[tiletoint(x[i], true, true)]++;
-            for (let i in y)
-                cnt2[tiletoint(y[i], true, true)]++;
-            for (let i = C1m; i <= C0s + SPT_Offset; i++)
-                if (cnt[i] > cnt2[i])
-                    return false;
-            return true;
-        }
     }
 }
 
@@ -1258,43 +1142,28 @@ function hupai(allseats, type) {
         return [x.allseats, x.type];
     }
 
-    [allseats, type] = preprocess();
+    // 川麻枪杠, 则杠不收取点数
+    if (is_chuanma())
+        chuanmagangs.notover = [];
 
-    // 川麻枪杠, 则杠不成立
-    if (chuanmagangs.notover.length !== 0) {
-        let seat = getlstaction().data.seat, tile = getlstaction().data.tiles;
-        for (let i in fulu[seat])
-            if (fulu[seat][i].type === 2 && equaltile(fulu[seat][i].tile[0], tile)) {
-                fulu[seat][i].type = 1;
-                fulu[seat][i].tile.pop();
-                break;
-            }
-        chuanmagangs.notover.length = 0;
-    }
+    [allseats, type] = preprocess();
 
     if (type === undefined)
         type = false;
     if (allseats === undefined || allseats.length === 0) {
-        let lstaction = getlstaction();
-        if (lstaction.name === 'RecordDealTile')
-            allseats = [lstaction.data.seat];
-        else if (lstaction.name === 'RecordNewRound')
-            allseats = [ju];
+        let lstaction = getlstaction(), lstname = lstaction.name, lstseat = lstaction.data.seat;
+        if (lstname === 'RecordDealTile' || lstname === 'RecordNewRound')
+            allseats = [lstseat];
         else { // 荣和
             allseats = [];
-            for (let i = lstaction.data.seat + 1; i < lstaction.data.seat + playercnt; i++) {
+            for (let i = lstseat + 1; i < lstseat + playercnt; i++) {
                 const seat = i % playercnt;
-                if (seat === lstaction.data.seat || hupaied[seat])
+                if (hupaied[seat])
                     continue;
-                if (lstaction.name === 'RecordDiscardTile' || lstaction.name === 'RecordRevealTile' || lstaction.name === 'RecordLockTile')
-                    playertiles[seat].push(lstaction.data.tile);
-                else if (lstaction.name === 'RecordBaBei')
-                    playertiles[seat].push(lstaction.data.tile);
-                else if (lstaction.name === 'RecordAnGangAddGang')
-                    playertiles[seat].push(lstaction.data.tiles);
+                push2playertiles(seat);
                 if ((is_chuanma() || is_guobiao() && !cuohu[seat] || !is_chuanma() && !is_guobiao() && !zhenting[seat]) && calchupai(playertiles[seat]) !== 0) {
                     if (!is_chuanma() && !is_guobiao() && !is_ronghuzhahu()) { // 非川麻国标防止自动无役荣和诈和, 及
-                        let points = calcfan(seat, false, lstaction.data.seat);
+                        let points = calcfan(seat, false, lstseat);
                         if (calcsudian(points) !== -2000)
                             allseats.push(seat);
                     } else
@@ -1311,11 +1180,9 @@ function hupai(allseats, type) {
 
     // allseats 重新排序, 按照放铳家逆时针顺序
     if (allseats.length > 1) {
-        let lstseat = getlstaction().data.seat;
-        if (getlstaction().name === 'RecordNewRound')
-            lstseat = ju;
-        else if (getlstaction().name === 'RecordDealTile')
-            lstseat = (getlstaction().data.seat + playercnt - 1) % playercnt;
+        let lstname = getlstaction().name, lstseat = getlstaction().data.seat;
+        if (lstname === 'RecordDealTile' || lstname === 'RecordNewRound')
+            lstseat = (lstseat + playercnt - 1) % playercnt;
 
         let hupai_seats = [false, false, false, false];
         for (let i in allseats)
@@ -1370,7 +1237,7 @@ function hupai(allseats, type) {
         // 荣和情况下, 以距放铳玩家最近的玩家的最先包牌的玩家为准
         if (!is_guobiao())
             for (let i in allseats)
-                if (baopai[allseats[i]].length !== 0) {
+                if (baopai[allseats[i]].length > 0) {
                     baopait = baopai[allseats[i]][0].seat + 1;
                     break;
                 }
@@ -1383,7 +1250,6 @@ function hupai(allseats, type) {
         for (let i = 0; i < playercnt; i++)
             delta_scores[i] = 0;
         if (hupaied[ju]) { // 亲家和牌, 则连庄
-            // 国标正常情况下不连庄, 除了设置了 '_guobiao_lianzhuang'
             if (!is_guobiao() || is_guobiao() && is_guobiao_lianzhuang())
                 ben++;
             // 幻境传说: 庄家卡2
@@ -1464,9 +1330,8 @@ function hupai(allseats, type) {
 // 荒牌流局, 任何时刻都可以调用
 function notileliuju() {
     // 暗夜之战暗牌无人开
-    let lstaction = getlstaction();
-    if (is_anye() && lstaction.name === 'RecordRevealTile')
-        addLockTile(lstaction.data.seat, 2);
+    if (is_anye() && getlstaction().name === 'RecordRevealTile')
+        addLockTile(getlstaction().data.seat, 2);
 
     // 幻境传说: 庄家卡3
     if (get_field_spell_mode1() === 3) {
@@ -1474,43 +1339,137 @@ function notileliuju() {
         liqibang = 0;
     }
 
-    let tingcnt = 0;
-    let ret = [];
-    for (let i = 0; i < playercnt; i++) {
-        let tings = is_heqie_mode() ? [] : calctingpai(i);
-        if (tings.length === 0 || hupaied[i])
-            ret.push({
-                tingpai: false,
-                hand: [],
-                tings: [],
-            });
-        else {
-            tingcnt++;
-            ret.push({
-                tingpai: true,
-                hand: playertiles[i].slice(),
-                tings: tings
-            });
-        }
-    }
     lianzhuangcnt = 0; // 任意荒牌流局都会导致连庄数重置
 
+    // 剩余玩家数, 听牌玩家数, 未听玩家数
+    let playerleft = 0, tingcnt = 0, notingcnt;
+    // 川麻未听返杠的点数
+    let taxes = [0, 0, 0, 0];
+
+    // 玩家的听牌信息
+    let ting_info = [];
+    for (let i = 0; i < playercnt; i++) {
+        if (!hupaied[i])
+            playerleft++;
+        let tings = is_heqie_mode() || hupaied[i] ? [] : calctingpai(i);
+        if (tings.length === 0)
+            ting_info.push({tingpai: false, hand: [], tings: tings});
+        else {
+            tingcnt++;
+            ting_info.push({tingpai: true, hand: playertiles[i].slice(), tings: tings});
+        }
+    }
+    notingcnt = playerleft - tingcnt;
+
     // 幻境传说: 命运卡1
-    let times = 1;
-    if (get_field_spell_mode3() === 1)
-        times = 2;
+    // 流局满贯/罚符倍数
+    let times = get_field_spell_mode3() === 1 ? 2 : 1;
 
-    let ret2 = [];
+    // 玩家的点数变动信息
+    let scores_info = [];
 
-    // 假设有流满
+    // 是否有流满
     let liujumanguan = false;
-    for (let i = ju; i < playercnt + ju; i++) {
-        if (is_chuanma() || is_guobiao())
-            break;
-        let seat = i % playercnt;
-        if (!paihe[seat].liujumanguan || hupaied[seat])
-            continue;
-        liujumanguan = true;
+    if (!is_chuanma() && !is_guobiao())
+        for (let i = 0; i < playercnt; i++)
+            if (!paihe[i].liujumanguan || hupaied[i])
+                liujumanguan = true;
+
+    if (liujumanguan)
+        for (let i = ju; i < ju + playercnt; i++) {
+            let seat = i % playercnt;
+            if (!paihe[seat].liujumanguan || hupaied[seat])
+                continue;
+
+            scores_info.push({
+                seat: seat,
+                score: calcscore(seat),
+                old_scores: scores.slice(),
+                delta_scores: delta_scores.slice(),
+                hand: playertiles[seat].slice(),
+                ming: fulu2ming(seat),
+                doras: calcdoras(),
+            });
+        }
+    else {
+        // 罚符, 川麻查大叫, 花猪
+        if (tingcnt !== 0 && notingcnt !== 0 && !is_guobiao()) {
+            if (!is_chuanma()) {
+                let fafu = 1000;
+                if (tingcnt === 1 && notingcnt === 1)
+                    fafu = get_fafu_2p();
+                else if (tingcnt === 1 && notingcnt === 2)
+                    fafu = get_fafu_3p_1ting();
+                else if (tingcnt === 2 && notingcnt === 1)
+                    fafu = get_fafu_3p_2ting();
+                else if (tingcnt === 1 && notingcnt === 3)
+                    fafu = get_fafu_1ting();
+                else if (tingcnt === 2 && notingcnt === 2)
+                    fafu = get_fafu_2ting();
+                else if (tingcnt === 3 && notingcnt === 1)
+                    fafu = get_fafu_3ting();
+
+                for (let i = 0; i < playercnt; i++) {
+                    if (hupaied[i])
+                        continue;
+                    if (ting_info[i].tingpai) // 幻境传说: 命运卡1
+                        delta_scores[i] += fafu * notingcnt / tingcnt * times;
+                    else
+                        delta_scores[i] -= fafu * times;
+                }
+            } else { // seat 向 i 查大叫, 查花猪
+                for (let seat = 0; seat < playercnt; seat++) {
+                    for (let i = 0; i < playercnt; i++) {
+                        if (hupaied[seat] || hupaied[i] || i === seat)
+                            continue;
+                        let points = 0;
+                        if (huazhu(i))
+                            points = Math.max(calcsudian_chuanma(calcfan_chuanma(seat, false, true)), 8000);
+                        else if (!ting_info[i].tingpai && ting_info[seat].tingpai)
+                            points = calcsudian_chuanma(calcfan_chuanma(seat, false, true));
+                        delta_scores[seat] += points;
+                        delta_scores[i] -= points;
+                    }
+                }
+            }
+        }
+        // 川麻未听返杠
+        if (is_chuanma())
+            for (let i in chuanmagangs.over) {
+                let from = chuanmagangs.over[i].from, to = chuanmagangs.over[i].to, val = chuanmagangs.over[i].val;
+                if (!(ting_info[to].tingpai || hupaied[to])) {
+                    taxes[to] -= val;
+                    taxes[from] += val;
+                }
+            }
+
+        scores_info = [{
+            old_scores: scores.slice(),
+            delta_scores: delta_scores.slice(),
+            taxes: is_chuanma() ? taxes.slice() : undefined,
+        }];
+    }
+
+    endNoTile(liujumanguan, ting_info, scores_info);
+
+    for (let i = 0; i < playercnt; i++) {
+        scores[i] += delta_scores[i] + taxes[i];
+        delta_scores[i] = taxes[i] = 0;
+    }
+
+    if (!is_xuezhandaodi() && !is_wanxiangxiuluo() && !is_chuanma())
+        ben += get_field_spell_mode1() === 2 ? 5 : 1; // 幻境传说: 庄家卡2
+    if ((!ting_info[ju].tingpai || is_xuezhandaodi() || is_wanxiangxiuluo() || is_guobiao() && !is_guobiao_lianzhuang()) && !is_chuanma())
+        ju++;
+
+    roundend();
+
+    /**
+     * 计算 seat 号玩家的流局满贯导致的各家点数变动, 并返回流满点数
+     * @param seat - seat 号玩家
+     * @returns {number} 流满点数
+     */
+    function calcscore(seat) {
         let score = 0;
         for (let i = 0; i < playercnt; i++) {
             if (seat === i || hupaied[i])
@@ -1542,128 +1501,8 @@ function notileliuju() {
                 }
             }
         }
-        let ming = [];
-        for (let i in fulu[seat]) {
-            let tiles = fulu[seat][i].tile;
-            if (fulu[seat][i].type === 0)
-                ming.push(`shunzi(${tiles[0]},${tiles[1]},${tiles[2]})`);
-            else if (fulu[seat][i].type === 1)
-                ming.push(`kezi(${tiles[0]},${tiles[1]},${tiles[2]})`);
-            else if (fulu[seat][i].type === 2)
-                ming.push(`minggang(${tiles[0]},${tiles[1]},${tiles[2]},${tiles[3]})`);
-            else if (fulu[seat][i].type === 3)
-                ming.push(`angang(${tiles[0]},${tiles[1]},${tiles[2]},${tiles[3]})`);
-        }
-        ret2.push({
-            delta_scores: delta_scores.slice(),
-            doras: calcdoras(),
-            hand: playertiles[seat].slice(),
-            ming: ming,
-            old_scores: scores.slice(),
-            score: score,
-            seat: seat,
-        });
-        for (let i = 0; i < playercnt; i++) {
-            scores[i] += delta_scores[i];
-            delta_scores[i] = 0;
-        }
+        return score;
     }
-    if (liujumanguan && !is_chuanma() && !is_guobiao()) {
-
-        endNoTile(true, ret, ret2);
-
-        if (!is_xuezhandaodi() && !is_wanxiangxiuluo() && !is_xueliu()) {
-            ben++;
-            // 幻境传说: 庄家卡2
-            if (get_field_spell_mode1() === 2)
-                ben += 4;
-        }
-        if (!ret[ju].tingpai || is_xuezhandaodi() || is_wanxiangxiuluo())
-            ju++;
-        roundend();
-        return;
-    }
-    // 无流满
-    ret2 = [{delta_scores: [], old_scores: []}];
-    let playerleft = 0;
-    for (let i = 0; i < playercnt; i++)
-        if (!hupaied[i])
-            playerleft++;
-    let notingcnt = playerleft - tingcnt;
-    if (tingcnt !== 0 && notingcnt !== 0) {
-        if (!is_chuanma() && !is_guobiao()) {
-            let fafu = 1000;
-            if (tingcnt === 1 && notingcnt === 1)
-                fafu = get_fafu_2p();
-            else if (tingcnt === 1 && notingcnt === 2)
-                fafu = get_fafu_3p_1ting();
-            else if (tingcnt === 2 && notingcnt === 1)
-                fafu = get_fafu_3p_2ting();
-            else if (tingcnt === 1 && notingcnt === 3)
-                fafu = get_fafu_1ting();
-            else if (tingcnt === 2 && notingcnt === 2)
-                fafu = get_fafu_2ting();
-            else if (tingcnt === 3 && notingcnt === 1)
-                fafu = get_fafu_3ting();
-
-            for (let i = 0; i < playercnt; i++) {
-                if (hupaied[i])
-                    continue;
-                // 幻境传说: 命运卡1
-                if (ret[i].tingpai)
-                    delta_scores[i] += fafu * notingcnt / tingcnt * times;
-                else
-                    delta_scores[i] -= fafu * times;
-            }
-        } else if (is_chuanma()) {
-            // seat 向 i 查大叫, 查花猪
-            for (let seat = 0; seat < playercnt; seat++) {
-                for (let i = 0; i < playercnt; i++) {
-                    if (hupaied[seat] || hupaied[i] || i === seat)
-                        continue;
-                    let points = 0;
-                    if (huazhu(i))
-                        points = Math.max(calcsudian_chuanma(calcfan_chuanma(seat, false, true)), 8000);
-                    else if (!ret[i].tingpai && ret[seat].tingpai)
-                        points = calcsudian_chuanma(calcfan_chuanma(seat, false, true));
-                    delta_scores[seat] += points;
-                    delta_scores[i] -= points;
-                }
-            }
-        }
-    }
-    ret2[0].old_scores = scores.slice();
-    ret2[0].delta_scores = delta_scores.slice();
-    if (is_chuanma()) {
-        // 未听返税
-        let taxes = [0, 0, 0, 0];
-        for (let i in chuanmagangs.over) {
-            let from = chuanmagangs.over[i].from, to = chuanmagangs.over[i].to, val = chuanmagangs.over[i].val;
-            if (!(ret[to].tingpai || hupaied[to])) {
-                taxes[to] -= val;
-                taxes[from] += val;
-            }
-        }
-        ret2[0].taxes = taxes;
-        for (let i = 0; i < playercnt; i++)
-            delta_scores[i] += taxes[i];
-    }
-    for (let i = 0; i < playercnt; i++) {
-        scores[i] += delta_scores[i];
-        delta_scores[i] = 0;
-    }
-
-    endNoTile(false, ret, ret2);
-
-    if (!is_xuezhandaodi() && !is_wanxiangxiuluo() && !is_chuanma()) {
-        ben++;
-        // 幻境传说: 庄家卡2
-        if (get_field_spell_mode1() === 2)
-            ben += 4;
-    }
-    if ((!ret[ju].tingpai || is_xuezhandaodi() || is_wanxiangxiuluo() || is_guobiao() && !is_guobiao_lianzhuang()) && !is_chuanma())
-        ju++;
-    roundend();
 }
 
 /**
@@ -1678,26 +1517,34 @@ function notileliuju() {
  * 若没有该参数, 则除了"三家和了"外, 由系统自动判断属于哪种流局
  */
 function liuju(liuju_type) {
-    let lstaction = getlstaction();
-    let liuju_data, seat = lstaction.name === 'RecordNewRound' ? ju : lstaction.data.seat;
     let allliuju = [jiuzhongjiupai, sifenglianda, sigangsanle, sijializhi, sanjiahule];
+    let type, seat = getlstaction().data.seat, tiles;
 
     let allplayertiles = ['', '', '', ''];
-    for (let seat = 0; seat < playercnt; seat++)
-        for (let i in playertiles[seat]) {
-            allplayertiles[seat] += playertiles[seat][i];
-            if (i !== playertiles[seat].length - 1)
-                allplayertiles[seat] += '|';
-        }
+    for (let i = 0; i < playercnt; i++)
+        allplayertiles[i] = playertiles[i].join('|');
 
     if (typeof liuju_type == 'number')
         allliuju[liuju_type - 1]();
     else
         for (let i in allliuju) {
             allliuju[i]();
-            if (liuju_data !== undefined)
+            if (type !== undefined)
                 break;
         }
+
+    let liqi = lstliqi2liqi();
+
+    if (type !== undefined) {
+
+        endLiuJu(type, seat, liqi, tiles, allplayertiles);
+
+        if (!is_xuezhandaodi() && !is_wanxiangxiuluo() && !is_chuanma() && !is_guobiao())
+            ben += get_field_spell_mode1() === 2 ? 5 : 1; // 幻境传说: 庄家卡2
+
+        roundend();
+    } else
+        throw new Error(roundinfo() + '不符合任何途中流局条件');
 
     // 九种九牌
     function jiuzhongjiupai() {
@@ -1710,11 +1557,10 @@ function liuju(liuju_type) {
             if (cnt[i] >= 1 && judgetile(inttotile(i), 'Y'))
                 yaojiutype++;
         if (yaojiutype >= 9 && liqiinfo[seat].liqi === 0 && liqiinfo[seat].yifa === 1 && playertiles[seat].length === 14)
-            liuju_data = {
-                seat: seat,
-                tiles: playertiles[seat].slice(),
-                type: 1,
-            };
+        {
+            type = 1;
+            tiles = playertiles[seat].slice();
+        }
     }
 
     // 四风连打
@@ -1723,156 +1569,41 @@ function liuju(liuju_type) {
             if (fulu[0].length === 0 && fulu[1].length === 0 && fulu[2].length === 0 && fulu[3].length === 0)
                 if (paihe[0].tiles.length === 1 && paihe[1].tiles.length === 1 && paihe[2].tiles.length === 1 && paihe[3].tiles.length === 1)
                     if (paihe[0].tiles[0] === paihe[1].tiles[0] && paihe[1].tiles[0] === paihe[2].tiles[0] && paihe[2].tiles[0] === paihe[3].tiles[0])
-                        if (tiletoint(paihe[0].tiles[0]) >= 28 && tiletoint(paihe[0].tiles[0]) <= 31) {
-                            let need_bangzi = liqi_need;
-                            if (is_beishuizhizhan() && lstliqi != null && lstliqi.beishui_type !== undefined) {
-                                if (lstliqi.beishui_type === 1)
-                                    need_bangzi = 5;
-                                else if (lstliqi.beishui_type === 2)
-                                    need_bangzi = 10;
-                            }
-                            let liqi = null;
-                            if (lstliqi != null && (scores[lstliqi.seat] >= need_bangzi * 1000 || is_fufenliqi())) {
-                                liqibang += need_bangzi;
-                                scores[lstliqi.seat] -= need_bangzi * 1000;
-                                liqiinfo[lstliqi.seat] = {liqi: lstliqi.liqi, yifa: 1, kai: lstliqi.kai};
-                                if (is_beishuizhizhan())
-                                    liqiinfo[lstliqi.seat].beishui_type = lstliqi.beishui_type;
-                                liqi = {
-                                    seat: lstliqi.seat,
-                                    liqibang: liqibang,
-                                    score: scores[lstliqi.seat],
-                                };
-                            }
-                            liuju_data = {
-                                type: 2,
-                            };
-                            if (liqi != null)
-                                liuju_data.liqi = liqi;
-                        }
+                        if (tiletoint(paihe[0].tiles[0]) >= C1z && tiletoint(paihe[0].tiles[0]) <= C4z)
+                            type = 2;
     }
 
     // 四杠散了
     function sigangsanle() {
-        let havegang = [false, false, false, false], havegangcnt = 0;
-        for (let seat = 0; seat < playercnt; seat++) {
-            for (let i in fulu[seat])
-                if (fulu[seat][i].type === 2 || fulu[seat][i].type === 3)
-                    havegang[seat] = true;
-            if (havegang[seat])
-                havegangcnt++;
-        }
-        if (doracnt.cnt === 5 && havegangcnt >= 2) {
-            let need_bangzi = liqi_need;
-            if (is_beishuizhizhan() && lstliqi != null && lstliqi.beishui_type !== undefined) {
-                if (lstliqi.beishui_type === 1)
-                    need_bangzi = 5;
-                else if (lstliqi.beishui_type === 2)
-                    need_bangzi = 10;
-            }
-            let liqi = null;
-            if (lstliqi != null && (scores[lstliqi.seat] >= need_bangzi * 1000 || is_fufenliqi())) {
-                liqibang += need_bangzi;
-                scores[lstliqi.seat] -= need_bangzi * 1000;
-                liqiinfo[lstliqi.seat] = {liqi: lstliqi.liqi, yifa: 1, kai: lstliqi.kai};
-                if (is_beishuizhizhan())
-                    liqiinfo[lstliqi.seat].beishui_type = lstliqi.beishui_type;
-                liqi = {
-                    seat: lstliqi.seat,
-                    liqibang: liqibang,
-                    score: scores[lstliqi.seat],
-                };
-            }
-            liuju_data = {
-                type: 3,
-            };
-            if (liqi != null)
-                liuju_data.liqi = liqi;
-        }
+        let havegangcnt = 0;
+        for (let i = 0; i < playercnt; i++)
+            for (let j in fulu[i])
+                if (fulu[i][j].type === 2 || fulu[i][j].type === 3) {
+                    havegangcnt++;
+                    break;
+                }
+        if (doracnt.cnt === 5 && havegangcnt >= 2)
+            type = 3;
     }
 
     // 四家立直
     function sijializhi() {
         if (playercnt === 4) {
             let liqiplayercnt = 0;
-            for (let i = 0; i <= 3; i++)
+            for (let i = 0; i < playercnt; i++)
                 if (liqiinfo[i].liqi !== 0)
                     liqiplayercnt++;
-            let need_bangzi = liqi_need;
-            if (is_beishuizhizhan() && lstliqi != null && lstliqi.beishui_type !== undefined) {
-                if (lstliqi.beishui_type === 1)
-                    need_bangzi = 5;
-                else if (lstliqi.beishui_type === 2)
-                    need_bangzi = 10;
-            }
-            if (lstliqi != null && (scores[lstliqi.seat] >= need_bangzi * 1000 || is_fufenliqi())) {
-                liqibang += need_bangzi;
-                scores[lstliqi.seat] -= need_bangzi * 1000;
-                liqiinfo[lstliqi.seat] = {liqi: lstliqi.liqi, yifa: 1, kai: lstliqi.kai};
-                if (is_beishuizhizhan())
-                    liqiinfo[lstliqi.seat].beishui_type = lstliqi.beishui_type;
-                if (liqiplayercnt === 3)
-                    liuju_data = {
-                        type: 4,
-                        liqi: {
-                            liqibang: liqibang,
-                            score: scores[lstliqi.seat],
-                            seat: lstliqi.seat
-                        },
-                        allplayertiles: allplayertiles,
-                    };
-            }
+
+            if (lstliqi != null && liqiplayercnt === 3)
+                type = 4;
         }
     }
 
     // 三家和了, 需要设置 '_sanxiangliuju'
     function sanjiahule() {
-        if (is_sanxiangliuju()) {
-            let need_bangzi = liqi_need;
-            if (is_beishuizhizhan() && lstliqi != null && lstliqi.beishui_type !== undefined) {
-                if (lstliqi.beishui_type === 1)
-                    need_bangzi = 5;
-                else if (lstliqi.beishui_type === 2)
-                    need_bangzi = 10;
-            }
-            let liqi = null;
-            if (lstliqi != null && (scores[lstliqi.seat] >= need_bangzi * 1000 || is_fufenliqi())) {
-                liqibang += need_bangzi;
-                scores[lstliqi.seat] -= need_bangzi * 1000;
-                liqiinfo[lstliqi.seat] = {liqi: lstliqi.liqi, yifa: 1, kai: lstliqi.kai};
-                if (is_beishuizhizhan())
-                    liqiinfo[lstliqi.seat].beishui_type = lstliqi.beishui_type;
-                liqi = {
-                    seat: lstliqi.seat,
-                    liqibang: liqibang,
-                    score: scores[lstliqi.seat],
-                };
-            }
-            liuju_data = {
-                seat: seat,
-                type: 5,
-                allplayertiles: allplayertiles,
-            };
-            if (liqi != null)
-                liuju_data.liqi = liqi;
-        }
+        if (is_sanxiangliuju())
+            type = 5;
     }
-
-    if (hules_history.length !== 0 && liuju_data != null)
-        liuju_data.hules_history = hules_history.slice();
-    if (liuju_data !== undefined) {
-
-        endLiuJu(liuju_data);
-
-        if (!is_xuezhandaodi() && !is_wanxiangxiuluo() && !is_chuanma() && !is_guobiao()) {
-            ben++;
-            // 幻境传说: 庄家卡2
-            if (get_field_spell_mode1() === 2)
-                ben += 4;
-        }
-        roundend();
-    } else
-        throw new Error(roundinfo() + '不符合任何途中流局条件');
 }
 
 // ==========================================
@@ -1886,22 +1617,15 @@ function liuju(liuju_type) {
  * @param {number} type - 换牌方式, 0: 逆时针, 1: 对家, 2: 顺时针
  */
 function huansanzhang(tls0, tls1, tls2, tls3, type) {
-    let tiles = [tls0, tls1, tls2, tls3];
-    for (let i in tiles)
-        tiles[i] = separate(tiles[i]);
+    let tiles = [separate(tls0), separate(tls1), separate(tls2), separate(tls3)];
 
     let ret = [];
     for (let seat = 0; seat < playercnt; seat++) {
         let in_seat = (seat - type + 3) % playercnt;
-        for (let j = 0; j < 3; j++)
-            for (let i in playertiles[seat])
-                if (playertiles[seat][i] === tiles[seat][j]) {
-                    playertiles[seat].splice(parseInt(i), 1);
-                    break;
-                }
-        for (let j = 0; j < 3; j++)
+        for (let j = 0; j < tiles[seat].length; j++) {
+            playertiles[seat].splice(playertiles[seat].indexOf(tiles[seat][j]), 1);
             playertiles[seat].push(tiles[in_seat][j]);
-
+        }
         ret.push({
             out_tiles: tiles[seat],
             out_tile_states: [0, 0, 0],
@@ -1912,18 +1636,7 @@ function huansanzhang(tls0, tls1, tls2, tls3, type) {
     for (let i = 0; i < playercnt; i++)
         playertiles[i].sort(cmp);
 
-    let lastile = playertiles[ju].at(-1);
-    playertiles[ju].pop();
-    let tingpais = [];
-    if (!is_heqie_mode())
-        for (let i = 0; i < playercnt; i++) {
-            let tingpais1 = calctingpai(i);
-            if (tingpais1.length !== 0)
-                tingpais.push({seat: i, tingpais1: tingpais1});
-        }
-    playertiles[ju].push(lastile);
-
-    addChangeTile(ret, type, tingpais);
+    addChangeTile(ret, type);
 }
 
 /**
@@ -1941,15 +1654,7 @@ function dingque(x) {
         ret.push(dict[alldingque[i]]);
     gaps = ret;
 
-    let tingpai = [];
-    if (!is_heqie_mode())
-        for (let i = 0; i < playercnt; i++) {
-            let tingpais1 = calctingpai(i);
-            if (tingpais1.length !== 0)
-                tingpai.push({seat: i, tingpais1: tingpais1});
-        }
-
-    addSelectGap(ret, tingpai);
+    addSelectGap(ret);
 }
 
 /**
@@ -1972,7 +1677,7 @@ function unveil(seat) {
         if (!judgetile(tile, 'Y'))
             paihe[tile_seat].liujumanguan = false;
     } else
-        throw new Error(roundinfo() + `unveil: 暗夜之战开牌的前提是有人刚暗牌, lstaction.name: ${getlstaction().name}`);
+        throw new Error(roundinfo() + `unveil: 暗夜之战开牌的前提是有人刚暗牌, getlstaction().name: ${getlstaction().name}`);
 }
 
 /**
@@ -1995,7 +1700,7 @@ function unveil_lock(seat) {
         addLockTile(tile_seat, 1);
 
     } else
-        throw new Error(roundinfo() + `unveil_lock: 暗夜之战开牌的前提是有人刚暗牌, lstaction.name: ${getlstaction().name}`);
+        throw new Error(roundinfo() + `unveil_lock: 暗夜之战开牌的前提是有人刚暗牌, getlstaction().name: ${getlstaction().name}`);
 }
 
 // ==========================================
@@ -2135,10 +1840,7 @@ function moqieliuju() {
     normalmoqie(get_left_tile_cnt());
     notileliuju();
 
-    /**
-     * 获取当前位置还剩余多少牌
-     * @returns {number}
-     */
+    // 获取当前位置还剩余多少牌
     function get_left_tile_cnt() {
         for (let i = actions.length - 1; i >= 0; i--)
             if (actions[i].name === 'RecordNewRound' || actions[i].name === 'RecordDealTile' || actions[i].name === 'RecordFillAwaitingTiles')
@@ -2542,7 +2244,7 @@ function calctingpai(seat, type = false) {
  * @returns {{name: string, data: {}}}
  */
 function getlstaction(num = 1) {
-    if (actions.length !== 0) {
+    if (actions.length > 0) {
         let ret = actions.length;
         for (let i = 0; i < num; i++) {
             ret--;
@@ -2551,7 +2253,7 @@ function getlstaction(num = 1) {
         }
         return actions[ret];
     } else
-        return editdata.actions[editdata.actions.length - 1][editdata.actions[editdata.actions.length - 1].length - 1];
+        throw new Error(roundinfo() + 'actions 为空');
 }
 
 // 复原以查看真实牌谱
@@ -2649,7 +2351,7 @@ let liqiinfo;
  * - liqi: 立直的类型, 1: 普通立直, 2: 两立直
  * - kai: 是否为开立直
  * - beishui_type: 背水之战: 立直类型, 0: 普通立直, 1: 真系列, 2: 极系列
- * @type {{seat: number, liqi: number, kai: boolean, beishui_type: number}|null}
+ * @type {{seat: number, liqi: number, kai: boolean, beishui_type: number|undefined}|null}
  */
 let lstliqi;
 /**
@@ -2747,7 +2449,7 @@ let muyu;
  */
 let muyutimes;
 /**
- * 川麻: 第一位和牌玩家的 seat, 第一局为-1
+ * 川麻: 某局第一位和牌玩家的 seat, 若没有则为-1
  * @type {number}
  */
 let juc;
@@ -2930,12 +2632,8 @@ function gamebegin() {
     editdata.player_datas = player_datas;
 
     if (config.mode.mode >= 10 && config.mode.mode <= 29) { // 三麻, 二麻屏蔽以下模式
-        if (is_xuezhandaodi() || is_wanxiangxiuluo())
-            config.mode.detail_rule.wanxiangxiuluo_mode = config.mode.detail_rule.xuezhandaodi = false;
-        if (is_muyu())
-            config.mode.detail_rule.muyu_mode = false;
-        if (is_chuanma())
-            config.mode.detail_rule.chuanma = false;
+        let x = config.mode.detail_rule;
+        x.wanxiangxiuluo_mode = x.xuezhandaodi = x.muyu_mode = x.chuanma = false;
     }
     if (config.mode.mode >= 20)
         playercnt = 2;
@@ -2952,7 +2650,6 @@ function gamebegin() {
     if (!liqibang)
         liqibang = 0;
     lianzhuangcnt = 0;
-    juc = -1;
 
     let init_point = -1;
     if (get_init_point() > -1)
@@ -2994,6 +2691,8 @@ function init() {
     muyu = {id: 0, seat: 0, count: 5, count_max: 5};
     xun = [[], [], [], []];
     gaps = [];
+    juc = -1;
+    benchangbang = ben;
     baopai = [[], [], [], []];
     lstliqi = null;
     mingpais = [[], [], [], []];
@@ -3214,6 +2913,28 @@ function inttotile(x, type = false) {
  */
 const cmp = (x, y) => tiletoint(x) - tiletoint(y);
 
+/**
+ * 判断第一个参数里面的所有牌是否为第二个参数里面的牌的子集
+ * @param {string|string[]} x - 子集
+ * @param {string[]} y - 全集
+ * @returns {boolean}
+ */
+function intiles(x, y) {
+    if (typeof x == 'string')
+        x = [x];
+    let cnt = [], cnt2 = [];
+    for (let i = C1m; i <= C0s + SPT_Offset; i++)
+        cnt[i] = cnt2[i] = 0;
+    for (let i in x)
+        cnt[tiletoint(x[i], true, true)]++;
+    for (let i in y)
+        cnt2[tiletoint(y[i], true, true)]++;
+    for (let i = C1m; i <= C0s + SPT_Offset; i++)
+        if (cnt[i] > cnt2[i])
+            return false;
+    return true;
+}
+
 // ===========================================
 
 /**
@@ -3292,6 +3013,100 @@ function update_prezhenting(seat, tile, is_angang = false) {
 function update_zhenting() {
     for (let i = 0; i < playercnt; i++)
         zhenting[i] = shezhangzt[i] || tongxunzt[i] || lizhizt[i];
+}
+
+// ===========================================
+
+/**
+ * 把 lstliqi 中的信息赋值给 liqiinfo, 并返回胶水代码用的 liqi
+ * @param {boolean} [type] - 是否允许立直失败, 只会出现在血战到底模式中, 默认不允许
+ * @returns {{seat: number, liqibang: number, score: number, liqi_type_beishuizhizhan: number|undefined, failed: boolean|undefined} |null}
+ */
+function lstliqi2liqi(type = false) {
+    let ret = null;
+    if (lstliqi != null) {
+        let need_bangzi = liqi_need;
+        if (lstliqi.beishui_type === 1)
+            need_bangzi = 5;
+        else if (lstliqi.beishui_type === 2)
+            need_bangzi = 10;
+        if (scores[lstliqi.seat] >= need_bangzi * 1000 || is_fufenliqi()) {
+            liqibang += need_bangzi;
+            scores[lstliqi.seat] -= need_bangzi * 1000;
+            liqiinfo[lstliqi.seat] = {
+                liqi: lstliqi.liqi,
+                yifa: get_field_spell_mode2() === 2 ? 3 : 1, // 幻境传说: 机会卡2
+                kai: lstliqi.kai,
+                beishui_type: lstliqi.beishui_type
+            };
+            ret = {
+                seat: lstliqi.seat,
+                liqibang: liqibang,
+                score: scores[lstliqi.seat],
+                liqi_type_beishuizhizhan: lstliqi.beishui_type,
+            };
+        } else if (type)
+            ret = {
+                seat: lstliqi.seat,
+                liqibang: liqibang,
+                score: scores[lstliqi.seat],
+                failed: true,
+            };
+    }
+    lstliqi = null;
+    return ret;
+}
+
+/**
+ * 开局计算所有玩家的听牌, 亲家去掉最后一张牌后再计算, 但仍然不会显示
+ * @returns {{seat: number, tingpais1: {tile: string}[]}[]}
+ */
+function get_all_tingpai() {
+    let tingpai = [];
+    let lastile = playertiles[ju].pop();
+    if (!is_heqie_mode())
+        for (let i = 0; i < playercnt; i++) {
+            let tingpais1 = calctingpai(i);
+            if (tingpais1.length > 0)
+                tingpai.push({seat: i, tingpais1: tingpais1});
+        }
+    playertiles[ju].push(lastile);
+    return tingpai;
+}
+
+/**
+ * 通过最近其他玩家的操作把对应的牌 push 到要和牌的玩家的手牌中
+ * @param seat - seat 号玩家
+ */
+function push2playertiles(seat) {
+    let lstaction = getlstaction(), lstname = getlstaction().name;
+    if (lstname === 'RecordDiscardTile' || lstname === 'RecordRevealTile' || lstname === 'RecordLockTile')
+        playertiles[seat].push(lstaction.data.tile);
+    else if (lstname === 'RecordBaBei')
+        playertiles[seat].push(lstaction.data.tile);
+    else if (lstname === 'RecordAnGangAddGang')
+        playertiles[seat].push(lstaction.data.tiles);
+}
+
+/**
+ * 将 seat 号玩家的副露信息 fulu 赋值给 ming
+ * @param seat - seat 号玩家
+ * @returns {string[]}
+ */
+function fulu2ming(seat) {
+    let ming = [];
+    for (let i in fulu[seat]) {
+        let tiles = fulu[seat][i].tile;
+        if (fulu[seat][i].type === 0)
+            ming.push(`shunzi(${tiles[0]},${tiles[1]},${tiles[2]})`);
+        else if (fulu[seat][i].type === 1)
+            ming.push(`kezi(${tiles[0]},${tiles[1]},${tiles[2]})`);
+        else if (fulu[seat][i].type === 2)
+            ming.push(`minggang(${tiles[0]},${tiles[1]},${tiles[2]},${tiles[3]})`);
+        else if (fulu[seat][i].type === 3)
+            ming.push(`angang(${tiles[0]},${tiles[1]},${tiles[2]},${tiles[3]})`);
+    }
+    return ming;
 }
 
 // ===========================================
@@ -3468,15 +3283,11 @@ function hupaioneplayer(seat) {
      */
     const qieshang = point => Math.ceil(point / 100) * 100;
 
-    let lstaction = getlstaction(), zimo = false;
-    if (lstaction.name === 'RecordDealTile' || lstaction.name === 'RecordNewRound')
+    let lstaction = getlstaction(), lstname = getlstaction().name, zimo = false;
+    if (lstname === 'RecordDealTile' || lstname === 'RecordNewRound')
         zimo = true;
-    else if (lstaction.name === 'RecordDiscardTile' || lstaction.name === 'RecordRevealTile' || lstaction.name === 'RecordLockTile')
-        playertiles[seat].push(lstaction.data.tile);
-    else if (lstaction.name === 'RecordBaBei')
-        playertiles[seat].push(lstaction.data.tile);
-    else if (lstaction.name === 'RecordAnGangAddGang')
-        playertiles[seat].push(lstaction.data.tiles);
+    else
+        push2playertiles(seat);
     let fangchong;
     if (!zimo)
         fangchong = lstaction.data.seat;
@@ -3484,18 +3295,7 @@ function hupaioneplayer(seat) {
     if (is_hunzhiyiji() && !zimo && hunzhiyiji_info[fangchong].liqi !== 0)
         hunzhiyiji_info[fangchong].overload = true;
 
-    let ming = [];
-    for (let i in fulu[seat]) {
-        let tiles = fulu[seat][i].tile;
-        if (fulu[seat][i].type === 0)
-            ming.push(`shunzi(${tiles[0]},${tiles[1]},${tiles[2]})`);
-        else if (fulu[seat][i].type === 1)
-            ming.push(`kezi(${tiles[0]},${tiles[1]},${tiles[2]})`);
-        else if (fulu[seat][i].type === 2)
-            ming.push(`minggang(${tiles[0]},${tiles[1]},${tiles[2]},${tiles[3]})`);
-        else if (fulu[seat][i].type === 3)
-            ming.push(`angang(${tiles[0]},${tiles[1]},${tiles[2]},${tiles[3]})`);
-    }
+    let ming = fulu2ming(seat);
     let qinjia = seat === ju;
     let liqi = liqiinfo[seat].liqi !== 0;
     let hand = playertiles[seat].slice(), hu_tile;
@@ -3529,11 +3329,11 @@ function hupaioneplayer(seat) {
     let zhahu = false;
     if (calchupai(playertiles[seat]) === 0 || sudian === -2000)
         zhahu = true;
-    if ((calchupai(playertiles[seat]) !== 3 || no_guoshiangang()) && lstaction.name === 'RecordAnGangAddGang' && lstaction.data.type === 3)
+    if ((calchupai(playertiles[seat]) !== 3 || no_guoshiangang()) && lstname === 'RecordAnGangAddGang' && lstaction.data.type === 3)
         zhahu = true;
     if (!zimo && zhenting[seat])
         zhahu = true;
-    if (lstaction.name === 'RecordRevealTile' || lstaction.name === 'RecordLockTile' && lstaction.data.lock_state !== 0)
+    if (lstname === 'RecordRevealTile' || lstname === 'RecordLockTile' && lstaction.data.lock_state !== 0)
         zhahu = true;
     let point_rong, point_sum, point_zimo_qin, point_zimo_xian;
 
@@ -3592,7 +3392,7 @@ function hupaioneplayer(seat) {
     point_zimo_xian = qieshang(point_zimo_xian) * tianming_bonus;
 
     // 有包牌
-    if (baopai[seat].length !== 0) {
+    if (baopai[seat].length > 0) {
         let delta_point = 0;
         let yiman_sudian = 8000;
         let baoval = 0;
@@ -3784,7 +3584,7 @@ function hupaioneplayer(seat) {
         let equ_seat = fangchong; // 等效放铳 seat
         let baopai_same_seat = true; // true 表示当前的和牌只有一种包牌, 或只有一家包牌
         let all_baopai = true; // 包牌家是否只有一家
-        if (baopai[seat].length !== 0) { // 有包牌
+        if (baopai[seat].length > 0) { // 有包牌
             let baoval = 0;
             for (let i in baopai[seat]) {
                 baoval += baopai[seat][i].val
@@ -3797,7 +3597,7 @@ function hupaioneplayer(seat) {
         if (baogangseat > -1 && zimo && !hupaied[baogangseat])
             equ_seat = baogangseat;
         // 自摸情况下全是包牌, 且包牌家只有一家, 则那个包牌家支付全部本场
-        else if (baopai[seat].length !== 0 && zimo && all_baopai && baopai_same_seat)
+        else if (baopai[seat].length > 0 && zimo && all_baopai && baopai_same_seat)
             equ_seat = baopai[seat][0].seat;
 
         let delta_point;
@@ -3829,29 +3629,16 @@ function hupaioneplayer(seat) {
  * @returns {{}}
  */
 function hupaioneplayer_chuanma(seat) {
-    let lstaction = getlstaction(), zimo = false;
-    if (lstaction.name === 'RecordDealTile' || lstaction.name === 'RecordNewRound')
+    let lstaction = getlstaction(), lstname = getlstaction().name, zimo = false;
+    if (lstname === 'RecordDealTile' || lstname === 'RecordNewRound')
         zimo = true;
-    else if (lstaction.name === 'RecordDiscardTile')
-        playertiles[seat].push(lstaction.data.tile);
-    else if (lstaction.name === 'RecordAnGangAddGang')
-        playertiles[seat].push(lstaction.data.tiles);
+    else
+        push2playertiles(seat);
     let fangchong;
     if (!zimo)
         fangchong = lstaction.data.seat;
 
-    let ming = [];
-    for (let i in fulu[seat]) {
-        let tiles = fulu[seat][i].tile;
-        if (fulu[seat][i].type === 0)
-            ming.push(`shunzi(${tiles[0]},${tiles[1]},${tiles[2]})`);
-        else if (fulu[seat][i].type === 1)
-            ming.push(`kezi(${tiles[0]},${tiles[1]},${tiles[2]})`);
-        else if (fulu[seat][i].type === 2)
-            ming.push(`minggang(${tiles[0]},${tiles[1]},${tiles[2]},${tiles[3]})`);
-        else if (fulu[seat][i].type === 3)
-            ming.push(`angang(${tiles[0]},${tiles[1]},${tiles[2]},${tiles[3]})`);
-    }
+    let ming = fulu2ming(seat);
     let hand = playertiles[seat].slice(), hu_tile;
     hu_tile = hand[hand.length - 1];
     hand.pop();
@@ -3865,7 +3652,7 @@ function hupaioneplayer_chuanma(seat) {
     let zhahu = false;
     if (huazhu(seat) || calchupai(playertiles[seat]) === 0)
         zhahu = true;
-    if (lstaction.name === 'RecordAnGangAddGang' && lstaction.data.type === 3)
+    if (lstname === 'RecordAnGangAddGang' && lstaction.data.type === 3)
         zhahu = true;
     if (zhahu) {
         for (let i = 0; i < playercnt; i++) {
@@ -3934,31 +3721,16 @@ function hupaioneplayer_chuanma(seat) {
  * @returns {{}}
  */
 function hupaioneplayer_guobiao(seat) {
-    let lstaction = getlstaction(), zimo = false;
-    if (lstaction.name === 'RecordDealTile' || lstaction.name === 'RecordNewRound')
+    let lstaction = getlstaction(), lstname = getlstaction().name, zimo = false;
+    if (lstname === 'RecordDealTile' || lstname === 'RecordNewRound')
         zimo = true;
-    else if (lstaction.name === 'RecordDiscardTile')
-        playertiles[seat].push(lstaction.data.tile);
-    else if (lstaction.name === 'RecordAnGangAddGang')
-        playertiles[seat].push(lstaction.data.tiles);
-    else if (lstaction.name === 'RecordBaBei')
-        playertiles[seat].push(lstaction.data.tile);
+    else
+        push2playertiles(seat);
     let fangchong;
     if (!zimo)
         fangchong = lstaction.data.seat;
 
-    let ming = [];
-    for (let i in fulu[seat]) {
-        let tiles = fulu[seat][i].tile;
-        if (fulu[seat][i].type === 0)
-            ming.push(`shunzi(${tiles[0]},${tiles[1]},${tiles[2]})`);
-        else if (fulu[seat][i].type === 1)
-            ming.push(`kezi(${tiles[0]},${tiles[1]},${tiles[2]})`);
-        else if (fulu[seat][i].type === 2)
-            ming.push(`minggang(${tiles[0]},${tiles[1]},${tiles[2]},${tiles[3]})`);
-        else if (fulu[seat][i].type === 3)
-            ming.push(`angang(${tiles[0]},${tiles[1]},${tiles[2]},${tiles[3]})`);
-    }
+    let ming = fulu2ming(seat);
     let qinjia = seat === ju;
     let hand = playertiles[seat].slice(), hu_tile;
     hu_tile = hand[hand.length - 1];
@@ -3974,7 +3746,7 @@ function hupaioneplayer_guobiao(seat) {
     if (calchupai(playertiles[seat]) === 0)
         zhahu = true;
     // 国标无法听花牌, 所以和拔的花牌一定是诈和
-    if (lstaction.name === 'RecordBaBei' || lstaction.name === 'RecordAnGangAddGang' && lstaction.data.type === 3)
+    if (lstname === 'RecordBaBei' || lstname === 'RecordAnGangAddGang' && lstaction.data.type === 3)
         zhahu = true;
     if (!is_guobiao_no_8fanfu() && sudian_no_huapai < GB_Qihu * scale_points())
         is_cuohu = true;
@@ -4717,7 +4489,7 @@ function calcfan(seat, zimo, fangchong) {
                     ans.fans.push({val: 1, id: 9004});
             }
 
-            if (ans.fans.length !== 0 && !is_qingtianjing())
+            if (ans.fans.length > 0 && !is_qingtianjing())
                 return ans;
             // ------------------------------------
             ans.yiman = false;
@@ -4775,11 +4547,11 @@ function calcfan(seat, zimo, fangchong) {
                         ans.fans.push({val: 1, id: 30}); // 一发
                 }
             }
-            let lstaction = getlstaction();
+            let lstname = getlstaction().name;
             if (is_guyi() || is_yifanjieguyi()) {
-                if (lstaction.name === 'RecordDiscardTile' && lstaction.data.is_liqi)
+                if (lstname === 'RecordDiscardTile' && getlstaction().data.is_liqi)
                     ans.fans.push({val: 1, id: 51}); // 燕返
-                if (!zimo && lstdrawtype === 0 && lstaction.name === 'RecordDiscardTile')
+                if (!zimo && lstdrawtype === 0 && lstname === 'RecordDiscardTile')
                     if (getlstaction(3) !== undefined && (getlstaction(3).name === 'RecordAnGangAddGang' || getlstaction(3).name === 'RecordChiPengGang'))
                         ans.fans.push({val: 1, id: 52}); // 杠振
                 if (fulucnt === 4)
@@ -4788,7 +4560,7 @@ function calcfan(seat, zimo, fangchong) {
             if (menqing && zimo)
                 ans.fans.push({val: 1, id: 1}); // 门前清自摸和
 
-            if (lstaction.name === 'RecordAnGangAddGang')
+            if (lstname === 'RecordAnGangAddGang')
                 ans.fans.push({val: 1, id: 3}); // 枪杠
             if (zimo && lstdrawtype === 0)
                 ans.fans.push({val: 1, id: 4}); // 岭上开花
@@ -5569,7 +5341,6 @@ function calcfan_guobiao(seat, zimo) {
                 return ban_num[id - 8000];
             }
 
-            let lstaction = getlstaction();
             let menqing = fulucnt === 0;
             // 不计列表
             let ban_num = [];
@@ -6130,7 +5901,7 @@ function calcfan_guobiao(seat, zimo) {
                 // 不计 自摸
                 banfan(8081);
             }
-            if (lstaction.name === 'RecordAnGangAddGang' && !is_banned(8046)) {
+            if (getlstaction().name === 'RecordAnGangAddGang' && !is_banned(8046)) {
                 ans.fans.push({val: 8, id: 8046}); // 抢杠和
                 // 不计 和绝张
                 banfan(8057);
@@ -6203,7 +5974,7 @@ function calcfan_guobiao(seat, zimo) {
                             if (equaltile(lastile, fulu[i][j].tile[k]))
                                 lastile_num++;
             }
-            if (lastile_num === 4 && !is_banned(8057))
+            if ((lastile_num === 4 || lastile_num === 3 && zimo) && !is_banned(8057))
                 ans.fans.push({val: 4, id: 8057}); // 和绝张
             // ---------------------------
             // 2 番
@@ -6560,10 +6331,8 @@ function roundend() {
     editdata.xun.push(xun.slice());
     xun = [[], [], [], []];
     actions = [];
-    if (is_chuanma() && juc > -1) {
+    if (is_chuanma() && juc > -1)
         ju = juc;
-        juc = -1;
-    }
     if (ju === playercnt) {
         chang++;
         ju = 0;
@@ -6629,11 +6398,10 @@ function roundinfo() {
  * 胶水代码: 开局
  * @param {number} left_tile_count - 剩余牌数
  * @param {string} fake_hash_code - 牌山虚假的 md5 或 sha256 码, 由下面 is_sha256 决定类型
- * @param {{seat: number, tingpais1: {tile: string}[]}[]} tingpai - 所有玩家的听牌
  * @param {{seat: number, tiles: string[], count: number[]}[]} opens - 配牌明牌: 明的牌
  * @param {boolean} is_sha256 - 牌山是否包含起手
  */
-function addNewRound(left_tile_count, fake_hash_code, tingpai, opens, is_sha256) {
+function addNewRound(left_tile_count, fake_hash_code, opens, is_sha256) {
     actions.push({
         name: 'RecordNewRound',
         data: {
@@ -6641,6 +6409,7 @@ function addNewRound(left_tile_count, fake_hash_code, tingpai, opens, is_sha256)
             ju: ju,
             ben: ben,
             ju_count: editdata.actions.length,
+            seat: ju,
             left_tile_count: left_tile_count,
             liqibang: liqibang,
             tiles0: playertiles[0].slice(),
@@ -6649,7 +6418,7 @@ function addNewRound(left_tile_count, fake_hash_code, tingpai, opens, is_sha256)
             tiles3: playertiles[3].slice(),
             paishan: paishan.join(''),
             scores: scores.slice(),
-            tingpai: tingpai,
+            tingpai: get_all_tingpai(),
             doras: calcdoras(),
             opens: opens,
             muyu: is_muyu() ? JSON.parse(JSON.stringify(muyu)) : undefined,
@@ -6667,10 +6436,10 @@ function addNewRound(left_tile_count, fake_hash_code, tingpai, opens, is_sha256)
  * @param {number} left_tile_count - 剩余牌数
  * @param {{}} liqi - 刚立直玩家的立直信息
  * @param {boolean} tile_state - 配牌明牌: 摸的牌是否是明牌
- * @param {number} tile_index - 占星之战: 摸的牌在候选池的位置
+ * @param {number} zhanxing_index - 占星之战: 摸的牌在候选池的位置
  * @param {{}|{seat: number, liqi: number, continue_deal_count: number, overload: boolean}} hunzhiyiji_data - 魂之一击: 魂之一击立直数据
  */
-function addDealTile(seat, drawcard, left_tile_count, liqi, tile_state, tile_index, hunzhiyiji_data) {
+function addDealTile(seat, drawcard, left_tile_count, liqi, tile_state, zhanxing_index, hunzhiyiji_data) {
     actions.push({
         name: 'RecordDealTile',
         data: {
@@ -6681,7 +6450,7 @@ function addDealTile(seat, drawcard, left_tile_count, liqi, tile_state, tile_ind
             doras: calcdoras(),
             tile_state: tile_state,
             muyu: is_muyu() ? JSON.parse(JSON.stringify(muyu)) : undefined,
-            tile_index: is_zhanxing() ? tile_index : undefined,
+            tile_index: is_zhanxing() ? zhanxing_index : undefined,
             hun_zhi_yi_ji_info: is_hunzhiyiji() ? hunzhiyiji_data : undefined,
         }
     });
@@ -6692,7 +6461,7 @@ function addDealTile(seat, drawcard, left_tile_count, liqi, tile_state, tile_ind
  * 胶水代码: 占星之战: 牌候选池填充
  * @param {number} seat - 要摸牌的玩家
  * @param {number} left_tile_count - 剩余牌数
- * @param {{}|{liqibang: number, seat: number, scores: number[]}} liqi - 刚立直玩家的立直信息
+ * @param {{liqibang: number, seat: number, scores: number[]}|null} liqi - 刚立直玩家的立直信息
  */
 function addFillAwaitingTiles(seat, left_tile_count, liqi) {
     actions.push({
@@ -6800,18 +6569,18 @@ function addUnveilTile(seat) {
 /**
  * 胶水代码: 他家鸣牌(吃/碰/明杠)
  * @param {number} seat - 鸣牌的玩家
- * @param {string[]} tiles - 参与鸣牌的所有牌
+ * @param {string[]} split_tiles - 参与鸣牌的所有牌
  * @param {number[]} froms - 副露的牌来自哪些玩家
  * @param {number} type - 操作类型, 0吃, 1碰, 2明杠
  * @param {{}} liqi - 刚立直玩家的立直信息
  * @param {boolean[]} tile_states - 配牌明牌: 鸣出去的牌是否为明牌
  */
-function addChiPengGang(seat, tiles, froms, type, liqi, tile_states) {
+function addChiPengGang(seat, split_tiles, froms, type, liqi, tile_states) {
     actions.push({
         name: 'RecordChiPengGang',
         data: {
             seat: seat,
-            tiles: tiles,
+            tiles: split_tiles,
             type: type,
             froms: froms,
             liqi: liqi,
@@ -6829,16 +6598,16 @@ function addChiPengGang(seat, tiles, froms, type, liqi, tile_states) {
  * 胶水代码: 自家鸣牌(暗杠/加杠)
  * @param {number} seat - 鸣牌的玩家
  * @param {string} tile - 鸣的牌
- * @param {number} type - 操作类型, 2加杠, 3暗杠
+ * @param {number} ming_type - 操作类型, 2加杠, 3暗杠
  * @param {boolean[]} tile_states - 配牌明牌: 鸣出去的牌是否为明牌
  */
-function addAnGangAddGang(seat, tile, type, tile_states) {
+function addAnGangAddGang(seat, tile, ming_type, tile_states) {
     actions.push({
         name: 'RecordAnGangAddGang',
         data: {
             seat: seat,
             tiles: tile,
-            type: type,
+            type: ming_type,
             doras: calcdoras(),
             tingpais: is_heqie_mode() ? [] : calctingpai(seat),
             tile_states: tile_states,
@@ -6867,34 +6636,34 @@ function addBaBei(seat, tile, tile_states) {
 
 /**
  * 胶水代码: 和牌
- * @param {{}[]} HuleInfo - 本次和牌所有的和牌信息
+ * @param {{}[]} hule_info - 本次和牌所有的和牌信息
  * @param {number[]} old_scores - 结算前分数
- * @param {number} baopai - 包牌玩家, 注意和数值比 seat 大1
+ * @param {number} baopait - 包牌玩家, 注意和数值比 seat 大1
  */
-function endHule(HuleInfo, old_scores, baopai) {
+function endHule(hule_info, old_scores, baopait) {
     actions.push({
         name: 'RecordHule',
         data: {
-            hules: HuleInfo,
+            hules: hule_info,
             old_scores: old_scores,
             delta_scores: delta_scores.slice(),
             scores: scores.slice(),
-            baopai: baopai,
+            baopai: baopait,
         }
     });
 }
 
 /**
  * 胶水代码: 血战到底(修罗/川麻)中途和牌
- * @param {{}[]} HuleInfo - 本次和牌所有的和牌信息
+ * @param {{}[]} hule_info - 本次和牌所有的和牌信息
  * @param {number[]} old_scores - 结算前分数
  * @param {{}} liqi - 刚立直玩家的立直信息
  */
-function addHuleXueZhanMid(HuleInfo, old_scores, liqi) {
+function addHuleXueZhanMid(hule_info, old_scores, liqi) {
     actions.push({
         name: 'RecordHuleXueZhanMid',
         data: {
-            hules: HuleInfo,
+            hules: hule_info,
             old_scores: old_scores,
             delta_scores: delta_scores.slice(),
             scores: scores.slice(),
@@ -6905,14 +6674,14 @@ function addHuleXueZhanMid(HuleInfo, old_scores, liqi) {
 
 /**
  * 胶水代码: 血战到底(修罗/川麻)完场和牌
- * @param {{}[]} HuleInfo - 本次和牌所有的和牌信息
+ * @param {{}[]} hule_info - 本次和牌所有的和牌信息
  * @param {(number)[]} old_scores - 结算前分数
  */
-function endHuleXueZhanEnd(HuleInfo, old_scores) {
+function endHuleXueZhanEnd(hule_info, old_scores) {
     actions.push({
         name: 'RecordHuleXueZhanEnd',
         data: {
-            hules: HuleInfo,
+            hules: hule_info,
             old_scores: old_scores,
             delta_scores: delta_scores.slice(),
             scores: scores.slice(),
@@ -6923,38 +6692,36 @@ function endHuleXueZhanEnd(HuleInfo, old_scores) {
 
 /**
  * 胶水代码: 自创函数: 血流成河中途和牌
- * @param {{}[]} HuleInfo - 本次和牌所有的和牌信息
+ * @param {{}[]} hule_info - 本次和牌所有的和牌信息
  * @param {(number)[]} old_scores - 结算前分数
  */
-function addHuleXueLiuMid(HuleInfo, old_scores) {
-    let ret = {
+function addHuleXueLiuMid(hule_info, old_scores) {
+    actions.push({
         name: 'RecordHuleXueLiuMid',
         data: {
             old_scores: old_scores,
             delta_scores: delta_scores.slice(),
             scores: scores.slice(),
-            hules: HuleInfo,
-            baopai: 0
+            hules: hule_info,
+            tingpais: getlstaction().name === 'RecordNewRound' && !is_heqie_mode() ? calctingpai(ju) : [],
+            baopai: 0,
         }
-    };
-    if (getlstaction().name === 'RecordNewRound')
-        ret.data.tingpais = is_heqie_mode() ? [] : calctingpai(ju);
-    actions.push(ret);
+    });
 }
 
 /**
  * 胶水代码: 自创函数: 血流成河完场和牌
- * @param {{}[]} HuleInfo - 本次和牌所有的和牌信息
+ * @param {{}[]} hule_info - 本次和牌所有的和牌信息
  * @param {(number)[]} old_scores - 结算前分数
  */
-function endHuleXueLiuEnd(HuleInfo, old_scores) {
+function endHuleXueLiuEnd(hule_info, old_scores) {
     actions.push({
         name: 'RecordHuleXueLiuEnd',
         data: {
             old_scores: old_scores,
             delta_scores: delta_scores.slice(),
             scores: scores.slice(),
-            hules: HuleInfo,
+            hules: hule_info,
             hules_history: hules_history.slice(),
             baopai: 0,
         }
@@ -6964,15 +6731,15 @@ function endHuleXueLiuEnd(HuleInfo, old_scores) {
 /**
  * 胶水代码: 荒牌流局
  * @param {boolean} liujumanguan - 是否有流局满贯
- * @param {{}[]} players - 玩家手牌相关信息
- * @param {{}[]} scores - 结算相关信息
+ * @param {{}[]} ting_info - 玩家的听牌信息
+ * @param {{}[]} scores_info - 结算相关信息
  */
-function endNoTile(liujumanguan, players, scores) {
+function endNoTile(liujumanguan, ting_info, scores_info) {
     actions.push({
         name: 'RecordNoTile',
         data: {
-            scores: scores,
-            players: players,
+            scores: scores_info,
+            players: ting_info,
             liujumanguan: liujumanguan,
             hules_history: hules_history.slice(),
         }
@@ -6981,29 +6748,39 @@ function endNoTile(liujumanguan, players, scores) {
 
 /**
  * 胶水代码: 途中流局
- * @param {{}} liuju_data - 途中流局信息
+ * @param {number} type - 流局的类型
+ * @param {number} seat - 最后操作的玩家, 只有在九种九牌和三家和了有效
+ * @param {{}|null} liqi - 立直信息
+ * @param {string[]|undefined} tiles - 玩家的手牌, 只有在九种九牌有效
+ * @param {string[]} allplayertiles - 所有玩家的手牌, 只有在四家立直和三家和了有效
  */
-function endLiuJu(liuju_data) {
+function endLiuJu(type, seat, liqi, tiles, allplayertiles) {
     actions.push({
         name: 'RecordLiuJu',
-        data: liuju_data,
+        data: {
+            type: type,
+            seat: type === 1 || type === 5 ? seat : undefined,
+            liqi: liqi != null ? liqi : undefined,
+            tiles: type === 1 ? tiles : undefined,
+            allplayertiles: type === 4 || type === 5 ? allplayertiles : undefined,
+            hules_history: hules_history.slice(),
+        }
     });
 }
 
 /**
  * 胶水代码: 换三张换牌
  * @param {{}[]} change_tile_infos - 换三张主体信息
- * @param {number} change_type - 换牌方式, 0: 逆时针, 1: 对家, 2: 顺时针
- * @param {{seat: number, tingpais1: {tile: string}[]}[]} tingpai - 所有玩家的听牌
+ * @param {number} type - 换牌方式, 0: 逆时针, 1: 对家, 2: 顺时针
  */
-function addChangeTile(change_tile_infos, change_type, tingpai) {
+function addChangeTile(change_tile_infos, type) {
     actions.push({
         name: 'RecordChangeTile',
         data: {
             change_tile_infos: change_tile_infos,
-            change_type: change_type,
+            change_type: type,
             doras: calcdoras(),
-            tingpai: tingpai,
+            tingpai: get_all_tingpai(),
             operations: [],
         }
     });
@@ -7012,14 +6789,13 @@ function addChangeTile(change_tile_infos, change_type, tingpai) {
 /**
  * 胶水代码: 川麻: 定缺
  * @param {number[]} gap_types - 所有玩家的定缺
- * @param {{seat: number, tingpais1: {tile: string}[]}[]} tingpai - 所有玩家的听牌
  */
-function addSelectGap(gap_types, tingpai) {
+function addSelectGap(gap_types) {
     actions.push({
         name: 'RecordSelectGap',
         data: {
             gap_types: gap_types,
-            tingpai: tingpai,
+            tingpai: get_all_tingpai(),
         }
     });
 }
@@ -7071,10 +6847,10 @@ function addCuohu(seat, zimo, old_scores) {
         data: {
             cuohu_info: {
                 seat: seat,
+                zimo: zimo,
                 old_scores: old_scores,
                 delta_scores: delta_scores.slice(),
                 scores: scores.slice(),
-                zimo: zimo,
             },
         }
     });
@@ -7217,7 +6993,7 @@ const is_dora3 = () => config.mode.detail_rule.dora3_mode;
  * 是否为配牌明牌模式
  * @returns {boolean}
  */
-const is_peipaimingpai = () => config.mode.detail_rule.begin_open_mode;
+const is_begin_open = () => config.mode.detail_rule.begin_open_mode;
 
 /**
  * 是否为龙之目玉模式
@@ -7764,18 +7540,8 @@ const views_pool = {}, invalid_views = {
     ],
 };
 
-/**
- * 各使 update_views, DIY_fans, guobiao_fans 只运行一次的变量
- * @type {boolean}
- */
-let update_views_once = true, DIY_fans_once = true, guobiao_fans_once = true;
-
 // 更新装扮随机池
 function update_views() {
-    if (!update_views_once)
-        return;
-    update_views_once = false;
-
     // 建议玩家随机的装扮: 立直棒(0), 和牌特效(1), 立直特效(2), 头像框(5), 桌布(6), 牌背(7), 称号(11), 牌面(13)
     const slots = [0, 1, 2, 5, 6, 7, 11, 13];
     for (let i in slots) {
@@ -7799,9 +7565,6 @@ function update_views() {
 
 // 自定义番种: 役种名称的汉字需要在已有的里面选, 否则不会显示
 function DIY_fans() {
-    if (!DIY_fans_once)
-        return;
-    DIY_fans_once = false;
     // 9000: 诈和, '诈'字无法显示, 原名称为'振和'
     // 9001: 天地创造: '创造'无法显示, 原名称为'天地大白'
     // 9002: 万物生长: '万生长'无法显示, 原名称为'龙发杠载'
@@ -8094,9 +7857,20 @@ function DIY_fans() {
         show_index: 0,
         sound: 'act_tumo',
     };
-    // 9208: 终局一位语音(天地无双指一姬的)
     cfg.fan.fan.map_[9208] = {
         id: 9208,
+        name_chs: '对局开始',
+        name_chs_t: '对局开始',
+        name_jp: '对局开始',
+        name_en: '',
+        fan_menqing: 0,
+        fan_fulu: 0,
+        show_index: 9999,
+        sound: 'ingame_start',
+    };
+    // 9209: 终局一位语音(天地无双指一姬的)
+    cfg.fan.fan.map_[9209] = {
+        id: 9209,
         name_chs: '天地无双',
         name_chs_t: '天地无双',
         name_jp: '天地无双',
@@ -8105,6 +7879,28 @@ function DIY_fans() {
         fan_fulu: 0,
         show_index: 9999,
         sound: 'game_top',
+    };
+    cfg.fan.fan.map_[9210] = {
+        id: 9210,
+        name_chs: '荣和获胜',
+        name_chs_t: '荣和获胜',
+        name_jp: '荣和获胜',
+        name_en: '',
+        fan_menqing: 0,
+        fan_fulu: 0,
+        show_index: 9999,
+        sound: 'game_top_ron',
+    };
+    cfg.fan.fan.map_[9211] = {
+        id: 9211,
+        name_chs: '高分获胜',
+        name_chs_t: '高分获胜',
+        name_jp: '高分获胜',
+        name_en: '',
+        fan_menqing: 0,
+        fan_fulu: 0,
+        show_index: 9999,
+        sound: 'game_top_big',
     };
 
     // 满贯及以上和听牌语音
@@ -8612,6 +8408,7 @@ function DIY_fans() {
         name_chs: '役满听牌',
         name_chs_t: '役满听牌',
         name_jp: '役满听牌',
+        name_en: 'ingame_yiman',
         fan_menqing: 0,
         fan_fulu: 0,
         show_index: 0,
@@ -8627,6 +8424,28 @@ function DIY_fans() {
         fan_fulu: 0,
         show_index: 0,
         sound: 'ingame_beiman',
+    };
+    cfg.fan.fan.map_[9605] = {
+        id: 9605,
+        name_chs: '进入友人房',
+        name_chs_t: '进入友人房',
+        name_jp: '进入友人房',
+        name_en: 'lobby_room_in',
+        fan_menqing: 0,
+        fan_fulu: 0,
+        show_index: 0,
+        sound: 'lobby_room_in',
+    };
+    cfg.fan.fan.map_[9606] = {
+        id: 9606,
+        name_chs: '友人房内准备',
+        name_chs_t: '友人房内准备',
+        name_jp: '友人房内准备',
+        name_en: 'lobby_room_ready',
+        fan_menqing: 0,
+        fan_fulu: 0,
+        show_index: 0,
+        sound: 'lobby_room_ready',
     };
 
     // 一番街的特色古役
@@ -8790,9 +8609,6 @@ function DIY_fans() {
 
 // 国标麻将番种
 function guobiao_fans() {
-    if (!guobiao_fans_once)
-        return;
-    guobiao_fans_once = false;
     cfg.fan.fan.map_[8000] = {
         id: 8000,
         name_chs: '大四喜',
@@ -9867,6 +9683,9 @@ function guobiao_fans() {
  */
 var checkPaiPu, resetData, showRecord, showInfo_record, setFanFu, OnChoosedPai, seat2LocalPosition, localPosition2Seat;
 
+// 使补充和优化函数只执行一次的控制变量
+let inst_once = true;
+
 // 在线编辑(进入牌谱之后的修改, 包括切换视角和切换巡目, 只在 edit_offline 中的 resetData 中调用)
 function edit_online() {
     let rounds = [];
@@ -9956,8 +9775,6 @@ function edit_offline() {
         seat2LocalPosition = view.DesktopMgr.prototype.seat2LocalPosition;
     if (localPosition2Seat === undefined)
         localPosition2Seat = view.DesktopMgr.prototype.localPosition2Seat;
-    if (typeof editfunction == 'function')
-        editfunction();
 
     // 重写对局信息
     uiscript.UI_Replay.prototype.resetData = function () {
@@ -9976,10 +9793,14 @@ function edit_offline() {
                 console.error('没有载入自制牌谱, 不可查看, 若要查看真实牌谱, 请输入 resetpaipu()');
                 return;
             }
-            update_views();
-            DIY_fans();
-            guobiao_fans();
-            optimize_function();
+            if (inst_once) {
+                if (typeof editfunction == 'function')
+                    editfunction();
+                update_views();
+                DIY_fans();
+                guobiao_fans();
+                optimize_function();
+            }
             // 添加上面
 
             const W = this;
@@ -10051,11 +9872,13 @@ function edit_offline() {
                                             W.duringPaipu = false;
                                             view.DesktopMgr.Inst.paipu_config = paipu_config;
                                             view.DesktopMgr.Inst.initRoom(JSON.parse(JSON.stringify(editdata.config)), new_player_datas, account_id, view.EMJMode.paipu, Laya.Handler.create(W, function () {
-                                                // 添加下面4行
-                                                if (typeof editfunction2 == 'function')
+                                                // 添加下面
+                                                if (typeof editfunction2 == 'function' && inst_once)
                                                     editfunction2();
+                                                inst_once = false;
                                                 if (playercnt === 2)
                                                     view.DesktopMgr.Inst.rule_mode = view.ERuleMode.Liqi2;
+                                                // 添加上面
 
                                                 uiscript.UI_Replay.Inst.initMaka(false, false);
                                                 uiscript.UI_Replay.Inst.initData(H);
@@ -10851,6 +10674,7 @@ function optimize_function() {
             this.hand.pop();
         }
     }
+
     // 自家视角
     view.ViewPlayer_Me.prototype._RemoveHandPai = function (r, P, T) {
         void 0 === T && (T = !0);
