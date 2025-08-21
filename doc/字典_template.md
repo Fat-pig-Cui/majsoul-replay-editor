@@ -509,14 +509,15 @@ id 以 6 开头, 而且有点乱, 很多都限时且无法获得, 乱用可能�
 
 ### 获取最近一次活动的奖励信息
 
+需要查看 `cfg.activity.activity.rows_` 从后往前翻, 查找相符的活动名称(但奖励不一定就是资源, 也可能是代币, 此时附近的活动再翻翻试试)
+
+将符合的活动的 `id` 和 `type` 分别赋值给下面脚本的 `activity_id` 和 `acitvity_type`, 即可
+
 ```js
 {
-    let reward = [];
-    let index = cfg.activity.activity.rows_.length - 1;
-    while (!cfg.activity.activity.rows_[index].name_chs)
-        index--;
-    let activity_id = cfg.activity.activity.rows_[index].id, activity_type = cfg.activity.activity.rows_[index].type;
+    let activity_id = 250821, activity_type = 'period_task';
 
+    let reward = [];
     cfg.activity[activity_type].forEach(function (x) {
         if (x.activity_id === activity_id)
             add_reward(parseInt(x.reward.split('-')[0]), parseInt(x.reward.split('-')[1]));
@@ -530,7 +531,7 @@ id 以 6 开头, 而且有点乱, 很多都限时且无法获得, 乱用可能�
                 reward[i].num += num;
                 return;
             }
-        reward.push({desc: id === 100002 ? '铜币' : cfg.item_definition.item.get(id).name_chs, num: num, id: id});
+        reward.push({desc: cfg.item_definition[game.EIDType[game.GameUtility.get_id_type(id)]].get(id).name_chs, num: num, id: id});
     }
 }
 ```

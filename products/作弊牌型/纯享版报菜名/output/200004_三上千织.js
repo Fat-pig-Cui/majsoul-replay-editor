@@ -17,8 +17,8 @@ player_datas[0].views = player_datas[1].views = player_datas[2].views = player_d
 ];
 
 config = {
-    category: 1,
-    meta: {mode_id: 0},
+    category: 2,
+    meta: {mode_id: 13},
     mode: {
         mode: 1,
         detail_rule: {

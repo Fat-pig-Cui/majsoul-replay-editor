@@ -1372,7 +1372,7 @@ function notileliuju() {
     let liujumanguan = false;
     if (!is_chuanma() && !is_guobiao())
         for (let i = 0; i < playercnt; i++)
-            if (!paihe[i].liujumanguan || hupaied[i])
+            if (paihe[i].liujumanguan && !hupaied[i])
                 liujumanguan = true;
 
     if (liujumanguan)
@@ -1556,8 +1556,7 @@ function liuju(liuju_type) {
         for (let i = C1m; i <= C7z; i++)
             if (cnt[i] >= 1 && judgetile(inttotile(i), 'Y'))
                 yaojiutype++;
-        if (yaojiutype >= 9 && liqiinfo[seat].liqi === 0 && liqiinfo[seat].yifa === 1 && playertiles[seat].length === 14)
-        {
+        if (yaojiutype >= 9 && liqiinfo[seat].liqi === 0 && liqiinfo[seat].yifa === 1 && playertiles[seat].length === 14) {
             type = 1;
             tiles = playertiles[seat].slice();
         }
@@ -9787,8 +9786,7 @@ function edit_offline() {
     }
     // 重写房间信息和玩家信息
     GameMgr.Inst.checkPaiPu = function (game_uuid, account_id, paipu_config) {
-        try {
-            // 添加下面
+        try { // 添加下面
             if (editdata.actions.length === 0) {
                 console.error('没有载入自制牌谱, 不可查看, 若要查看真实牌谱, 请输入 resetpaipu()');
                 return;
@@ -9801,50 +9799,52 @@ function edit_offline() {
                 guobiao_fans();
                 optimize_function();
             }
-            // 添加上面
+        } catch (e) { // 添加上面
+            console.error(e);
+        }
+        const W = this;
+        game_uuid = game_uuid.trim();
+        app.Log.log('checkPaiPu game_uuid:' + game_uuid + ' account_id:' + account_id.toString() + ' paipu_config:' + paipu_config);
 
-            const W = this;
-            game_uuid = game_uuid.trim();
-            app.Log.log('checkPaiPu game_uuid:' + game_uuid + ' account_id:' + account_id.toString() + ' paipu_config:' + paipu_config);
+        if (this.duringPaipu)
+            app.Log.Error('已经在看牌谱了');
+        else {
+            this.duringPaipu = true;
+            uiscript.UI_Loading.Inst.show(uiscript.ELoadingType.EEnterMJ);
+            GameMgr.Inst.onLoadStart('paipu');
+            if (paipu_config === 2)
+                game_uuid = game.Tools.DecodePaipuUUID(game_uuid);
+            this.record_uuid = game_uuid;
 
-            if (this.duringPaipu)
-                app.Log.Error('已经在看牌谱了');
-            else {
-                this.duringPaipu = true;
-                uiscript.UI_Loading.Inst.show(uiscript.ELoadingType.EEnterMJ);
-                GameMgr.Inst.onLoadStart('paipu');
-                if (paipu_config === 2)
-                    game_uuid = game.Tools.DecodePaipuUUID(game_uuid);
-                this.record_uuid = game_uuid;
+            app.NetAgent.sendReq2Lobby('Lobby', 'fetchGameRecord', {
+                    game_uuid: game_uuid,
+                    client_version_string: this.getClientVersion()
+                },
+                function (l, n) {
+                    if (l || n.error) {
+                        uiscript.UIMgr.Inst.showNetReqError('fetchGameRecord', l, n);
+                        let y = 0.12;
+                        uiscript.UI_Loading.Inst.setProgressVal(y);
+                        const f = function () {
+                            y += 0.06;
+                            uiscript.UI_Loading.Inst.setProgressVal(Math.min(1, y));
+                            if (y >= 1.1) {
+                                uiscript.UI_Loading.Inst.close();
+                                uiscript.UIMgr.Inst.showLobby();
+                                Laya.timer.clear(this, f);
+                            }
+                        };
+                        Laya.timer.loop(50, W, f);
+                        W.duringPaipu = false;
+                    } else {
+                        // 添加: 接受的牌谱信息去除 robots
+                        n.head.robots = [];
 
-                app.NetAgent.sendReq2Lobby('Lobby', 'fetchGameRecord', {
-                        game_uuid: game_uuid,
-                        client_version_string: this.getClientVersion()
-                    },
-                    function (l, n) {
-                        if (l || n.error) {
-                            uiscript.UIMgr.Inst.showNetReqError('fetchGameRecord', l, n);
-                            let y = 0.12;
-                            uiscript.UI_Loading.Inst.setProgressVal(y);
-                            const f = function () {
-                                y += 0.06;
-                                uiscript.UI_Loading.Inst.setProgressVal(Math.min(1, y));
-                                if (y >= 1.1) {
-                                    uiscript.UI_Loading.Inst.close();
-                                    uiscript.UIMgr.Inst.showLobby();
-                                    Laya.timer.clear(this, f);
-                                }
-                            };
-                            Laya.timer.loop(50, W, f);
-                            W.duringPaipu = false;
-                        } else {
-                            // 添加: 接受的牌谱信息去除 robots
-                            n.head.robots = [];
-
-                            // 修改的地方: 本来是 openMJRoom 的第二个参数(单个字母), 现在是 edit_player_datas 函数
-                            // 本来是 openMJRoom 的第一个参数(如 X.config), 现在是 x.config
-                            // 添加下面
-                            let new_player_datas = edit_player_datas();
+                        // 修改的地方: 本来是 openMJRoom 的第二个参数(单个字母), 现在是 edit_player_datas 函数
+                        // 本来是 openMJRoom 的第一个参数(如 X.config), 现在是 editdata.config
+                        // 添加下面
+                        let new_player_datas = edit_player_datas();
+                        try {
                             if (cfg.item_definition.view.get(get_tablecloth_id()) !== undefined)
                                 uiscript.UI_Sushe.now_desktop_id = get_tablecloth_id();
                             if (cfg.item_definition.view.get(get_mjp_id()) !== undefined) {
@@ -9862,83 +9862,83 @@ function edit_offline() {
                                 account_id = new_player_datas[get_mainrole_seat()].account_id;
                             else // 第一局的亲家
                                 account_id = new_player_datas[editdata.actions[0][0].data.ju].account_id;
-                            // 添加上面
+                        } catch (e) { // 添加上面
+                            console.error(e);
+                        }
 
-                            const C = Laya.Handler.create(W, function (H) {
-                                const main_func = function () {
-                                    game.Scene_Lobby.Inst.active = false;
-                                    game.Scene_MJ.Inst.openMJRoom(editdata.config, new_player_datas,
-                                        Laya.Handler.create(W, function () {
-                                            W.duringPaipu = false;
-                                            view.DesktopMgr.Inst.paipu_config = paipu_config;
-                                            view.DesktopMgr.Inst.initRoom(JSON.parse(JSON.stringify(editdata.config)), new_player_datas, account_id, view.EMJMode.paipu, Laya.Handler.create(W, function () {
-                                                // 添加下面
-                                                if (typeof editfunction2 == 'function' && inst_once)
-                                                    editfunction2();
-                                                inst_once = false;
-                                                if (playercnt === 2)
-                                                    view.DesktopMgr.Inst.rule_mode = view.ERuleMode.Liqi2;
-                                                // 添加上面
+                        const C = Laya.Handler.create(W, function (H) {
+                            const main_func = function () {
+                                game.Scene_Lobby.Inst.active = false;
+                                game.Scene_MJ.Inst.openMJRoom(editdata.config, new_player_datas,
+                                    Laya.Handler.create(W, function () {
+                                        W.duringPaipu = false;
+                                        view.DesktopMgr.Inst.paipu_config = paipu_config;
+                                        view.DesktopMgr.Inst.initRoom(JSON.parse(JSON.stringify(editdata.config)), new_player_datas, account_id, view.EMJMode.paipu, Laya.Handler.create(W, function () {
+                                            // 添加下面
+                                            if (typeof editfunction2 == 'function' && inst_once)
+                                                editfunction2();
+                                            inst_once = false;
+                                            if (playercnt === 2)
+                                                view.DesktopMgr.Inst.rule_mode = view.ERuleMode.Liqi2;
+                                            // 添加上面
 
-                                                uiscript.UI_Replay.Inst.initMaka(false, false);
-                                                uiscript.UI_Replay.Inst.initData(H);
-                                                uiscript.UI_Replay.Inst.enable = true;
-                                                Laya.timer.once(1000, W, function () {
-                                                    W.EnterMJ();
-                                                });
-                                                Laya.timer.once(1500, W, function () {
-                                                    view.DesktopMgr.player_link_state = [view.ELink_State.READY, view.ELink_State.READY, view.ELink_State.READY, view.ELink_State.READY];
-                                                    uiscript.UI_DesktopInfo.Inst.refreshLinks();
-                                                    uiscript.UI_Loading.Inst.close();
-                                                });
-                                                Laya.timer.once(1000, W, function () {
-                                                    uiscript.UI_Replay.Inst.nextStep(true);
-                                                });
-                                            }));
-                                        }),
-                                        Laya.Handler.create(W,
-                                            function (H) {
-                                                return uiscript.UI_Loading.Inst.setProgressVal(0.1 + 0.9 * H);
-                                            },
-                                            null, false)
-                                    );
-                                };
-                                main_func();
-                            });
-                            let B = {};
-                            B.record = n.head;
-                            if (n.data && n.data.length) {
-                                B.game = net.MessageWrapper.decodeMessage(n.data);
-                                C.runWith(B);
-                            } else {
-                                let O = n.data_url;
-                                if (!O.startsWith('http'))
-                                    O = GameMgr.prefix_url + O;
-                                game.LoadMgr.httpload(O, 'arraybuffer', false,
+                                            uiscript.UI_Replay.Inst.initMaka(false, false);
+                                            uiscript.UI_Replay.Inst.initData(H);
+                                            uiscript.UI_Replay.Inst.enable = true;
+                                            Laya.timer.once(1000, W, function () {
+                                                W.EnterMJ();
+                                            });
+                                            Laya.timer.once(1500, W, function () {
+                                                view.DesktopMgr.player_link_state = [view.ELink_State.READY, view.ELink_State.READY, view.ELink_State.READY, view.ELink_State.READY];
+                                                uiscript.UI_DesktopInfo.Inst.refreshLinks();
+                                                uiscript.UI_Loading.Inst.close();
+                                            });
+                                            Laya.timer.once(1000, W, function () {
+                                                uiscript.UI_Replay.Inst.nextStep(true);
+                                            });
+                                        }));
+                                    }),
                                     Laya.Handler.create(W,
                                         function (H) {
-                                            if (H.success) {
-                                                const N = new Laya.Byte();
-                                                N.writeArrayBuffer(H.data);
-                                                B.game = net.MessageWrapper.decodeMessage(N.getUint8Array(0, N.length));
-                                                C.runWith(B);
-                                            } else {
-                                                uiscript.UIMgr.Inst.ShowErrorInfo(game.Tools.strOfLocalization(2005) + n.data_url);
-                                                uiscript.UI_Loading.Inst.close();
-                                                uiscript.UIMgr.Inst.showLobby();
-                                                W.duringPaipu = false;
-                                            }
-                                        }
-                                    )
+                                            return uiscript.UI_Loading.Inst.setProgressVal(0.1 + 0.9 * H);
+                                        },
+                                        null, false)
                                 );
-                            }
+                            };
+                            main_func();
+                        });
+                        let B = {};
+                        B.record = n.head;
+                        if (n.data && n.data.length) {
+                            B.game = net.MessageWrapper.decodeMessage(n.data);
+                            C.runWith(B);
+                        } else {
+                            let O = n.data_url;
+                            if (!O.startsWith('http'))
+                                O = GameMgr.prefix_url + O;
+                            game.LoadMgr.httpload(O, 'arraybuffer', false,
+                                Laya.Handler.create(W,
+                                    function (H) {
+                                        if (H.success) {
+                                            const N = new Laya.Byte();
+                                            N.writeArrayBuffer(H.data);
+                                            B.game = net.MessageWrapper.decodeMessage(N.getUint8Array(0, N.length));
+                                            C.runWith(B);
+                                        } else {
+                                            uiscript.UIMgr.Inst.ShowErrorInfo(game.Tools.strOfLocalization(2005) + n.data_url);
+                                            uiscript.UI_Loading.Inst.close();
+                                            uiscript.UIMgr.Inst.showLobby();
+                                            W.duringPaipu = false;
+                                        }
+                                    }
+                                )
+                            );
                         }
                     }
-                );
-            }
-        } catch (e) {
-            console.error(e);
+                }
+            );
         }
+
     }
 }
 

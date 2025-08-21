@@ -10,8 +10,8 @@ player_datas[2].avatar_id = 407702;
 player_datas[3].avatar_id = 407703;
 
 config = {
-    category: 1,
-    meta: {mode_id: 0},
+    category: 2,
+    meta: {mode_id: 13},
     mode: {
         mode: 1,
         detail_rule: {

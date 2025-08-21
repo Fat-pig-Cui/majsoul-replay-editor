@@ -132,7 +132,7 @@ B站视频教程(偏过时): [【雀魂】如何自制牌谱回放](https://www.
 ## 版权声明
 
 1. 更改回放的方法参考了B站 [一般通过转转](https://space.bilibili.com/23019265)
-   的 [[雀魂+](自制回放)听说有人想看石上三年的七倍役满](https://www.bilibili.com/video/BV1HE411Q7JM)
+   的 [【雀魂+】(自制回放)听说有人想看石上三年的七倍役满](https://www.bilibili.com/video/BV1HE411Q7JM)
 
 2. 血流成河的某些功能同样参照了上述作者的
    [雀魂麻将脚本](https://greasyfork.org/zh-CN/scripts/423689-%E9%9B%80%E9%AD%82%E9%BA%BB%E5%B0%86%E8%84%9A%E6%9C%AC)

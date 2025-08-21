@@ -13,8 +13,8 @@ player_datas[3].avatar_id = 406704;
 player_datas[0].verified = player_datas[1].verified = player_datas[2].verified = player_datas[3].verified = 1;
 
 config = {
-    category: 1,
-    meta: {mode_id: 0},
+    category: 2,
+    meta: {mode_id: 13},
     mode: {
         mode: 1,
         detail_rule: {
