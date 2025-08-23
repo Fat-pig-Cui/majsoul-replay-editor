@@ -885,55 +885,40 @@ function editfunction() {
     }
 
     game.Tools.room_mode_desc = function (mode_id) {
-        let desc = '';
         switch (mode_id) {
             case 0:
-                desc = game.Tools.strOfLocalization(2026);
-                break;
+                return '四人一局';
             case 1:
-                desc = game.Tools.strOfLocalization(2027);
-                break;
+                return '四人东';
             case 2:
-                desc = game.Tools.strOfLocalization(2028);
-                break;
+                return '四人南';
             case 3:
-                desc = game.Tools.strOfLocalization(2029);
-                break;
+                return '四人人机';
             case 4:
-                desc = game.Tools.strOfLocalization(2026);
-                break;
+                return '四人一局';
             case 10:
-                desc = game.Tools.strOfLocalization(2030);
-                break;
+                return '三人一局';
             case 11:
-                desc = game.Tools.strOfLocalization(2031);
-                break;
+                return '三人东';
             case 12:
-                desc = game.Tools.strOfLocalization(2032);
-                break;
+                return '三人南';
             case 13:
-                desc = game.Tools.strOfLocalization(2033);
-                break;
+                return '三人人机';
             case 14:
-                desc = game.Tools.strOfLocalization(2030);
-                break;
+                return '三人一局';
             case 20:
-                desc = '二人一局';
-                break;
+                return '二人一局';
             case 21:
-                desc = '二人东';
-                break;
+                return '二人东';
             case 22:
-                desc = '二人南';
-                break;
+                return '二人南';
             case 23:
-                desc = '二人人机';
-                break;
+                return '二人人机';
             case 24:
-                desc = '二人一局';
-                break;
+                return '二人一局';
+            default:
+                return '';
         }
-        return desc;
     }
 }
 

@@ -419,8 +419,15 @@ function mopai(seat, tile, index) {
             seat = is_hunzhiyiji() && hunzhiyiji_info[lstseat].liqi && !hunzhiyiji_info[lstseat].overload ? lstseat : (lstseat + 1) % playercnt;
 
         // 血战到底和牌, 摸牌家为最后和牌家的下一家
-        if (lstname === 'RecordHuleXueZhanMid')
-            seat = (getlstaction().data.hules.at(-1).seat + 1) % playercnt;
+        if (lstname === 'RecordHuleXueZhanMid') {
+            if (getlstaction(2).name === 'RecordAnGangAddGang') {
+                if (is_chuanma()) // 川麻枪杠, 摸牌家为被枪杠家的下一家
+                    seat = (getlstaction(2).data.seat + 1) % playercnt;
+                else // 修罗则为被枪杠家继续岭上摸牌
+                    seat = getlstaction(2).data.seat;
+            } else
+                seat = (getlstaction().data.hules.at(-1).seat + 1) % playercnt;
+        }
         // 血流成河或国标错和, 摸牌家为和牌之前最后操作玩家的下一家
         if (lstname === 'RecordHuleXueLiuMid' || lstname === 'RecordCuohu')
             seat = (getlstaction(2).data.seat + 1) % playercnt;
@@ -7360,7 +7367,6 @@ const is_mopai_paishan = () => config.mode.detail_rule._mopai_paishan;
  */
 const is_heqie_mode = () => config.mode.detail_rule._heqie_mode;
 
-
 // -------------------------------------------
 /**
  * 是否为国标模式
@@ -7491,6 +7497,7 @@ const views_pool = {}, invalid_views = {
     ],
     // 称号
     11: [
+        600001,  // 无称号
         600017,  // 认证玩家
         600025,  // 限时称号测试用
         600026,  // 雀魂公認の選ばれしプレイヤーG

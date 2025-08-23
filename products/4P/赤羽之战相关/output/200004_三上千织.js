@@ -94,8 +94,7 @@ mopai();
 leimingpai();
 hupai();
 
-normalmoqie();
-hupai(true);
+zimohu(true);
 
 
 // 第4局: 将对;         清对;             金钩钓
