@@ -1169,7 +1169,7 @@ function hupai(allseats, type) {
                     continue;
                 push2playertiles(seat);
                 if ((is_chuanma() || is_guobiao() && !cuohu[seat] || !is_chuanma() && !is_guobiao() && !zhenting[seat]) && calchupai(playertiles[seat]) !== 0) {
-                    if (!is_chuanma() && !is_guobiao() && !is_ronghuzhahu()) { // 非川麻国标防止自动无役荣和诈和, 及
+                    if (!is_chuanma() && !is_guobiao() && !is_ronghuzhahu()) { // 非川麻国标防止自动无役荣和诈和
                         let points = calcfan(seat, false, lstseat);
                         if (calcsudian(points) !== -2000)
                             allseats.push(seat);
