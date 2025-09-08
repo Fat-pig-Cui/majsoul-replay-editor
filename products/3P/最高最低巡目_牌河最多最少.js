@@ -1,4 +1,4 @@
-clearproject();
+clearProject();
 
 // 关于巡目, 巡目的计数方式是自家摸到或鸣到牌时, 巡目就加一
 
@@ -29,19 +29,19 @@ config = {
 tiles0 = '11122233345556z';
 tiles1 = '22337788p9999s6z';
 tiles2 = '1199m1199p1111s6z';
-randompaishan('9m192p.3p.7p.8p', '6z1m5321444z');
-roundbegin();
-combomopai(8);
+randomPaishan('9m192p.3p.7p.8p', '6z1m5321444z');
+roundBegin();
+comboMopai(8);
 qiepai();
 for (let i = 0; i < 4; i++) {
-    mingqiepai('1s');
-    normalmoqie();
+    mingQiepai('1s');
+    normalMoqie();
 }
 for (let i = 0; i < 4; i++) {
-    mingqiepai('9s');
-    normalmoqie(2);
+    mingQiepai('9s');
+    normalMoqie(2);
 }
-moqieliuju();
+moqieLiuju();
 
 // 要让一家巡目最少, 那该家最好是西家
 // 亲家拔四北, 且南家出的牌被亲家杠四次
@@ -49,16 +49,16 @@ moqieliuju();
 tiles0 = '11122233345556z';
 tiles1 = '222333777888p6z';
 tiles2 = '111999m111999p6z';
-randompaishan('1235z', '6z.....444z');
-roundbegin();
-combomopai(4);
+randomPaishan('1235z', '6z.....444z');
+roundBegin();
+comboMopai(4);
 qiepai();
-normalmoqie();
+normalMoqie();
 for (let i = 0; i < 4; i++) {
     mingpai();
-    normalmoqie(2);
+    normalMoqie(2);
 }
-moqieliuju();
+moqieLiuju();
 
 
 // 要让一家牌河最多, 那该家最好是亲家
@@ -70,20 +70,20 @@ moqieliuju();
 tiles0 = '9999s1122334457z';
 tiles1 = '1m566678p157s555z';
 tiles2 = '1122334469999p';
-randompaishan('1234z1p.2p.3p.4p');
-roundbegin();
+randomPaishan('1234z1p.2p.3p.4p');
+roundBegin();
 qiepai();
 for (let i = 0; i < 4; i++) {
-    normalmoqie();
-    mingqiepai('9s');
+    normalMoqie();
+    mingQiepai('9s');
 }
-normalmoqie();
-mingqiepai('9p');
+normalMoqie();
+mingQiepai('9p');
 for (let i = 0; i < 3; i++) {
-    normalmoqie(2);
-    mingqiepai('9p');
+    normalMoqie(2);
+    mingQiepai('9p');
 }
-moqieliuju();
+moqieLiuju();
 
 // 要让一家牌河最少, 那该家最好是西家
 // 且 西家出的牌
@@ -94,18 +94,18 @@ moqieliuju();
 tiles0 = '11122233344445z';
 tiles1 = '1122334469999p';
 tiles2 = '9m135666p147s555z';
-randompaishan('.1z.2z.3z.6z.1234p', '7666z');
-roundbegin();
-combomopai(4);
+randomPaishan('.1z.2z.3z.6z.1234p', '7666z');
+roundBegin();
+comboMopai(4);
 qiepai();
-normalmoqie();
+normalMoqie();
 for (let i = 0; i < 4; i++) {
-    normalmoqie();
+    normalMoqie();
     mingpai();
-    normalmoqie(2);
+    normalMoqie(2);
 }
 for (let i = 0; i < 4; i++) {
-    normalmoqie();
-    mingqiepai('9p');
+    normalMoqie();
+    mingQiepai('9p');
 }
-moqieliuju();
+moqieLiuju();

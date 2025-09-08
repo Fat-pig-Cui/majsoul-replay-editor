@@ -48,11 +48,11 @@
     /**
      * @type {[{tile: string, moqie: boolean, is_liqi: boolean}][]}
      */
-    let new_discardtiles = [[], [], [], []];
+    let new_discard_tiles = [[], [], [], []];
     let qiepai_xun = [0, 0, 0, 0], fulu_index = [0, 0, 0, 0];
     // 预处理
     !(function () {
-        clearproject();
+        clearProject();
         player_datas[0].avatar_id = 400102;
         player_datas[1].avatar_id = 400104;
         player_datas[2].avatar_id = 400105;
@@ -128,15 +128,15 @@
                 }
             }
         }
-        // 解析 paihe 至 new_discardtiles
-        let new_qiepaiset = [json.paihe0, json.paihe1, json.paihe2, json.paihe3];
+        // 解析 paihe 至 new_discard_tiles
+        let new_qiepai_set = [json.paihe0, json.paihe1, json.paihe2, json.paihe3];
         for (let i = 0; i < json.player_count; i++) {
-            new_qiepaiset[i] = separatetiles(new_qiepaiset[i]);
-            for (let j in new_qiepaiset[i])
-                new_discardtiles[i].push({
-                    tile: new_qiepaiset[i][j].substring(0, 2),
-                    moqie: new_qiepaiset[i][j].indexOf('g') !== -1,
-                    is_liqi: new_qiepaiset[i][j].indexOf('r') !== -1,
+            new_qiepai_set[i] = separate_tiles(new_qiepai_set[i]);
+            for (let j in new_qiepai_set[i])
+                new_discard_tiles[i].push({
+                    tile: new_qiepai_set[i][j].substring(0, 2),
+                    moqie: new_qiepai_set[i][j].indexOf('g') !== -1,
+                    is_liqi: new_qiepai_set[i][j].indexOf('r') !== -1,
                 });
         }
 
@@ -144,6 +144,8 @@
         let zhishipais = '';
         for (let i = dora.length - 1; i >= 0; i--)
             zhishipais += '.' + dora[i];
+        if (json.player_count === 3)
+            zhishipais += '....';
 
         switch (json.mainrole) {
             case 0:
@@ -159,13 +161,13 @@
                 tiles3 = json.tiles;
                 break;
         }
-        randompaishan('', zhishipais + '....');
-        roundbegin();
+        randomPaishan('', zhishipais + '....');
+        roundBegin();
         protected_tiles = {seat: json.mainrole, tiles: separate(json.tiles)};
         protected_tiles.tiles.sort(cmp);
 
         // paihe 经过该函数变为数组格式
-        function separatetiles(tiles) {
+        function separate_tiles(tiles) {
             if (!tiles)
                 return [];
             let ret = [];
@@ -189,7 +191,7 @@
         }
     })();
 
-    let seati = ju, nxt_step = 'qiepai';
+    let seat = ju, nxt_step = 'qiepai';
     while (true) {
         switch (nxt_step) {
             case 'mopai':
@@ -205,63 +207,63 @@
                 break;
             case 'angang':
             case 'jiagang':
-                new_leimingpai();
+                new_zimingpai();
                 break;
         }
         if (nxt_step === 'liuju')
             break;
 
         function new_mopai() {
-            if (qiepai_xun[seati] >= new_discardtiles[seati].length) {
+            if (qiepai_xun[seat] >= new_discard_tiles[seat].length) {
                 nxt_step = 'liuju';
                 return;
             }
 
-            mopai(seati);
+            mopai(seat);
 
-            if (fulus_info[seati][fulu_index[seati]] && (fulus_info[seati][fulu_index[seati]].type === 'angang' || fulus_info[seati][fulu_index[seati]].type === 'jiagang'))
+            if (fulus_info[seat][fulu_index[seat]] && (fulus_info[seat][fulu_index[seat]].type === 'angang' || fulus_info[seat][fulu_index[seat]].type === 'jiagang'))
                 nxt_step = 'angang';
             else
                 nxt_step = 'qiepai';
         }
 
         function new_qiepai() {
-            let tile_info = new_discardtiles[seati][qiepai_xun[seati]];
-            qiepai_xun[seati]++;
+            let tile_info = new_discard_tiles[seat][qiepai_xun[seat]];
+            qiepai_xun[seat]++;
             let tile = tile_info.tile;
             let f_moqie = tile_info.moqie ? 'moqie' : 'shouqie';
 
-            qiepai(seati, tile, tile_info.is_liqi, f_moqie);
+            qiepai(seat, tile, tile_info.is_liqi, f_moqie);
 
             // 明杠, 碰
             let op = ['minggang', 'peng'];
             for (let j in op)
-                for (let i = seati + 1; i < seati + playercnt; i++) {
-                    let tmp_seat = i % playercnt;
+                for (let i = seat + 1; i < seat + player_cnt; i++) {
+                    let tmp_seat = i % player_cnt;
                     let tmp_fulu = fulus_info[tmp_seat][fulu_index[tmp_seat]];
-                    if (tmp_fulu && tmp_fulu.type === op[j] && tmp_fulu.from === seati && tmp_fulu.ming_tile === tile) {
+                    if (tmp_fulu && tmp_fulu.type === op[j] && tmp_fulu.from === seat && tmp_fulu.ming_tile === tile) {
                         nxt_step = op[j];
-                        seati = tmp_seat;
+                        seat = tmp_seat;
                         return;
                     }
                 }
 
-            let tmp_seat = (seati + 1) % playercnt, tmp_fulu = fulus_info[tmp_seat][fulu_index[tmp_seat]];
-            if (tmp_fulu && tmp_fulu.type === 'chi' && tmp_fulu.from === seati && tmp_fulu.ming_tile === tile) {
+            let tmp_seat = (seat + 1) % player_cnt, tmp_fulu = fulus_info[tmp_seat][fulu_index[tmp_seat]];
+            if (tmp_fulu && tmp_fulu.type === 'chi' && tmp_fulu.from === seat && tmp_fulu.ming_tile === tile) {
                 nxt_step = 'chi';
-                seati = tmp_seat;
+                seat = tmp_seat;
                 return;
             }
 
             nxt_step = 'mopai';
-            seati = (seati + 1) % playercnt;
+            seat = (seat + 1) % player_cnt;
         }
 
         function new_mingpai() {
-            let tmp_fulu = fulus_info[seati][fulu_index[seati]];
-            fulu_index[seati]++;
+            let tmp_fulu = fulus_info[seat][fulu_index[seat]];
+            fulu_index[seat]++;
 
-            mingpai(seati, tmp_fulu.own_tiles.join(''));
+            mingpai(seat, tmp_fulu.own_tiles.join(''));
 
             if (tmp_fulu.type === 'minggang')
                 nxt_step = 'mopai';
@@ -269,11 +271,11 @@
                 nxt_step = 'qiepai';
         }
 
-        function new_leimingpai() {
-            let tmp_fulu = fulus_info[seati][fulu_index[seati]];
-            fulu_index[seati]++;
+        function new_zimingpai() {
+            let tmp_fulu = fulus_info[seat][fulu_index[seat]];
+            fulu_index[seat]++;
 
-            leimingpai(seati, tmp_fulu.own_tiles[0], tmp_fulu.type);
+            zimingpai(seat, tmp_fulu.own_tiles[0], tmp_fulu.type);
 
             nxt_step = 'mopai';
         }
@@ -281,5 +283,5 @@
     if (json.lst_mopai)
         mopai(json.mainrole, json.lst_mopai);
 
-    notileliuju();
+    huangpai();
 })();

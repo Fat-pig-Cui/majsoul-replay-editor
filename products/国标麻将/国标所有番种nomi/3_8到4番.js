@@ -1,4 +1,4 @@
-clearproject();
+clearProject();
 
 // 从第 39 局到第 58 局
 
@@ -30,12 +30,12 @@ tiles0 = '23m456p22789s1156z';
 tiles1 = '3334456789999m';
 tiles2 = '11123447889p11z';
 tiles3 = '1111445555999s';
-randompaishan('2s1m');
-roundbegin();
+randomPaishan('2s1m');
+roundBegin();
 qiepai();
-normalmoqie();
-mingqiepai();
-normalmoqie();
+normalMoqie();
+mingQiepai();
+normalMoqie();
 hupai();
 
 // 第2(40)局: 推不倒
@@ -43,12 +43,12 @@ tiles0 = '3344588p456s5567z';
 tiles1 = '1334456789999m';
 tiles2 = '11123447899p11z';
 tiles3 = '1111222244999s';
-randompaishan('8p2p');
-roundbegin();
+randomPaishan('8p2p');
+roundBegin();
 qiepai();
-normalmoqie();
-mingqiepai();
-normalmoqie();
+normalMoqie();
+mingQiepai();
+normalMoqie();
 hupai();
 
 // 第3(41)局: 三色三同顺
@@ -56,12 +56,12 @@ tiles0 = '234m234p2388s5567z';
 tiles1 = '1334456789999m';
 tiles2 = '11123447899p11z';
 tiles3 = '1111222444999s';
-randompaishan('8s4s');
-roundbegin();
+randomPaishan('8s4s');
+roundBegin();
 qiepai();
-normalmoqie();
-mingqiepai();
-normalmoqie();
+normalMoqie();
+mingQiepai();
+normalMoqie();
 hupai();
 
 // 第4(42)局: 三色三节高
@@ -69,12 +69,12 @@ tiles0 = '222m33p44567s4456z';
 tiles1 = '1334456789999m';
 tiles2 = '11123447899p11z';
 tiles3 = '1111222555999s';
-randompaishan('3p4s');
-roundbegin();
+randomPaishan('3p4s');
+roundBegin();
 qiepai();
-normalmoqie();
-mingqiepai();
-normalmoqie();
+normalMoqie();
+mingQiepai();
+normalMoqie();
 hupai();
 
 // 第5(43)局: 无番和
@@ -82,12 +82,12 @@ tiles0 = '234m2245p789s5567z';
 tiles1 = '1334456789999m';
 tiles2 = '11123447899p11z';
 tiles3 = '1111222555999s';
-randompaishan('23p');
-roundbegin();
+randomPaishan('23p');
+roundBegin();
 qiepai();
-normalmoqie();
-mingqiepai();
-normalmoqie();
+normalMoqie();
+mingQiepai();
+normalMoqie();
 hupai();
 
 // 第6(44)局: 妙手回春
@@ -95,25 +95,25 @@ tiles0 = '567m2245p789s5567z';
 tiles1 = '1334456789999m';
 tiles2 = '1111234469p166z';
 tiles3 = '33366p25555999s';
-randompaishan('2p', '6p');
-roundbegin();
+randomPaishan('2p', '6p');
+roundBegin();
 qiepai();
-normalmoqie();
-mingqiepai(2);
-normalmoqie(81);
-zimohu();
+normalMoqie();
+mingQiepai(2);
+normalMoqie(81);
+zimoHu();
 
 // 第7(45)局: 海底捞月
 tiles0 = '567m2245p789s5567z';
 tiles1 = '1334456789999m';
 tiles2 = '11112344469p66z';
 tiles3 = '33366p25555999s';
-randompaishan('2p', '6p');
-roundbegin();
+randomPaishan('2p', '6p');
+roundBegin();
 qiepai();
-normalmoqie();
-mingqiepai();
-normalmoqie(82);
+normalMoqie();
+mingQiepai();
+normalMoqie(82);
 hupai();
 
 // 第8(46)局: 杠上开花, 明杠
@@ -121,27 +121,27 @@ tiles0 = '567m22245p789s113z';
 tiles1 = '1334456789999m';
 tiles2 = '11113444669p66z';
 tiles3 = '11123458889s22z';
-randompaishan('2p', '6p');
-roundbegin();
+randomPaishan('2p', '6p');
+roundBegin();
 qiepai();
-normalmoqie();
+normalMoqie();
 mingpai();
-zimohu();
+zimoHu();
 
 // 第9(47)局: 抢杠和
 tiles0 = '567m2245p789s5567z';
 tiles1 = '1445566778899m';
 tiles2 = '11122344m266p67z';
 tiles3 = '3333p225555999s';
-randompaishan('6p.6p');
-roundbegin();
+randomPaishan('6p.6p');
+roundBegin();
 qiepai();
-normalmoqie();
-mingqiepai('2p');
-mingqiepai();
-normalmoqie();
+normalMoqie();
+mingQiepai('2p');
+mingQiepai();
+normalMoqie();
 mopai();
-leimingpai();
+zimingpai();
 hupai();
 
 // ===========================
@@ -151,13 +151,13 @@ tiles0 = '2266m33p888s22567z';
 tiles1 = '1113334455599m';
 tiles2 = '256m11122344p67z';
 tiles3 = '1111225555999s';
-randompaishan('26m3p');
-roundbegin();
+randomPaishan('26m3p');
+roundBegin();
 qiepai();
-normalmoqie();
+normalMoqie();
 for (let i = 0; i < 2; i++) {
-    mingqiepai();
-    normalmoqie();
+    mingQiepai();
+    normalMoqie();
 }
 hupai();
 
@@ -166,12 +166,12 @@ tiles0 = '2233466688s5667z';
 tiles1 = '1112223355777m';
 tiles2 = '11122344p11167z';
 tiles3 = '1122334449999s';
-randompaishan('8s1s');
-roundbegin();
+randomPaishan('8s1s');
+roundBegin();
 qiepai();
-normalmoqie();
-mingqiepai('5z');
-normalmoqie();
+normalMoqie();
+mingQiepai('5z');
+normalMoqie();
 hupai();
 
 // 第12(50)局: 三色三步高
@@ -179,12 +179,12 @@ tiles0 = '12388m34p345s2245z';
 tiles1 = '1112223355777m';
 tiles2 = '11122344p11167z';
 tiles3 = '1111225559999s';
-randompaishan('8m2p');
-roundbegin();
+randomPaishan('8m2p');
+roundBegin();
 qiepai();
-normalmoqie();
-mingqiepai();
-normalmoqie();
+normalMoqie();
+mingQiepai();
+normalMoqie();
 hupai();
 
 // 第13(51)局: 五门齐, 幺九刻
@@ -192,12 +192,12 @@ tiles0 = '123m33p345s225567z';
 tiles1 = '1112223555777m';
 tiles2 = '11122344p11167z';
 tiles3 = '1111225559999s';
-randompaishan('2z3p');
-roundbegin();
+randomPaishan('2z3p');
+roundBegin();
 qiepai();
-normalmoqie();
-mingqiepai();
-normalmoqie();
+normalMoqie();
+mingQiepai();
+normalMoqie();
 hupai();
 
 // 第14(52)局: 全求人
@@ -205,13 +205,13 @@ tiles0 = '2366m33p44s1z34567z';
 tiles1 = '1112225557799m';
 tiles2 = '11122344p11267z';
 tiles3 = '4m1112345888s77z';
-randompaishan('6m3p4s1z');
-roundbegin();
+randomPaishan('6m3p4s1z');
+roundBegin();
 qiepai();
-mingqiepai('4m');
+mingQiepai('4m');
 for (let i = 0; i < 4; i++) {
-    mingqiepai();
-    normalmoqie();
+    mingQiepai();
+    normalMoqie();
 }
 hupai();
 
@@ -220,13 +220,13 @@ tiles0 = '3333444m55p67s112z';
 tiles1 = '1116677889999m';
 tiles2 = '166m1112345p117z';
 tiles3 = '1112225555888s';
-randompaishan('5p8s', '4m');
-roundbegin();
-combomopai(2);
+randomPaishan('5p8s', '4m');
+roundBegin();
+comboMopai(2);
 qiepai();
-normalmoqie();
-mingqiepai();
-normalmoqie();
+normalMoqie();
+mingQiepai();
+normalMoqie();
 hupai();
 
 // 第16(54)局: 双箭刻
@@ -234,12 +234,12 @@ tiles0 = '234m567p33s125566z';
 tiles1 = '1112225557779m';
 tiles2 = '11122344p11267z';
 tiles3 = '1111225559999s';
-randompaishan('5z6z');
-roundbegin();
+randomPaishan('5z6z');
+roundBegin();
 qiepai('1z');
-normalmoqie();
-mingqiepai('2z');
-normalmoqie();
+normalMoqie();
+mingQiepai('2z');
+normalMoqie();
 hupai();
 
 // ===========================
@@ -249,12 +249,12 @@ tiles0 = '123m789p23s112267z';
 tiles1 = '1112225557779m';
 tiles2 = '11122344p11267z';
 tiles3 = '1112225559999s';
-randompaishan('2z1s');
-roundbegin();
+randomPaishan('2z1s');
+roundBegin();
 qiepai();
-normalmoqie();
-mingqiepai();
-normalmoqie();
+normalMoqie();
+mingQiepai();
+normalMoqie();
 hupai();
 
 // 第18(56)局: 不求人
@@ -262,24 +262,24 @@ tiles0 = '22245m567p789s556z';
 tiles1 = '1334456789999m';
 tiles2 = '11112344449p77z';
 tiles3 = '11123458889s66z';
-randompaishan('3m');
-roundbegin();
+randomPaishan('3m');
+roundBegin();
 qiepai();
-mingqiepai();
-zimohu();
+mingQiepai();
+zimoHu();
 
 // 第19(57)局: 双明杠
 tiles0 = '333444m55p678s223z';
 tiles1 = '1116677889999m';
 tiles2 = '166m1112345p227z';
 tiles3 = '1112225559999s';
-randompaishan('3m4m5p');
-roundbegin();
+randomPaishan('3m4m5p');
+roundBegin();
 qiepai();
-normalmoqie();
+normalMoqie();
 for (let i = 0; i < 2; i++) {
     mingpai();
-    normalmoqie(2);
+    normalMoqie(2);
 }
 hupai();
 
@@ -288,11 +288,11 @@ tiles0 = '567m45p33789s5567z';
 tiles1 = '1334455789999m';
 tiles2 = '11144455566p3s4z';
 tiles3 = '1111225555999s';
-randompaishan('66p');
-roundbegin();
+randomPaishan('66p');
+roundBegin();
 qiepai();
-normalmoqie();
-mingqiepai('3s');
-mingqiepai();
-normalmoqie();
+normalMoqie();
+mingQiepai('3s');
+mingQiepai();
+normalMoqie();
 hupai();

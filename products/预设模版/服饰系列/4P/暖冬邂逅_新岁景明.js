@@ -1,4 +1,4 @@
-clearproject();
+clearProject();
 
 // 除了如月莲
 
@@ -39,4 +39,4 @@ config = {
 };
 
 // 示例对局
-demogame();
+demoGame();

@@ -1,4 +1,4 @@
-clearproject();
+clearProject();
 
 // 为了方便编辑不考虑换三张的过程
 
@@ -40,22 +40,22 @@ tiles0 = '11112222333344m';
 tiles1 = '1112223334446p';
 tiles2 = '66778999m99p689s';
 tiles3 = '1122334457777s';
-randompaishan('12346p2134s9m5s');
-roundbegin();
+randomPaishan('12346p2134s9m5s');
+roundBegin();
 dingque('pspm');
 hupai();
 
 mopai();
-combomopai(4);
+comboMopai(4);
 hupai();
 
 for (let i = 0; i < 4; i++) {
-    normalmoqie();
-    mingqiepai('7s');
+    normalMoqie();
+    mingQiepai('7s');
 }
 mopai();
-leimingpai();
-normalmoqie();
+zimingpai();
+normalMoqie();
 hupai(true);
 
 
@@ -64,21 +64,21 @@ tiles0 = '4455667788999m9p';
 tiles1 = '1112223334m789p';
 tiles2 = '3344455p568999s';
 tiles3 = '111222p1112224s';
-randompaishan('49m12p1234s');
-roundbegin();
+randomPaishan('49m12p1234s');
+roundBegin();
 dingque('pspm');
 qiepai();
-zimohu();
+zimoHu();
 
-normalmoqie();
+normalMoqie();
 hupai();
 
-normalmoqie();
+normalMoqie();
 mingpai();
 mopai();
-combomopai(3);
+comboMopai(3);
 qiepai();
-normalmoqie();
+normalMoqie();
 hupai(true);
 
 
@@ -87,19 +87,19 @@ tiles1 = '7788999m445566p7s';
 tiles2 = '2m123445677889s';
 tiles3 = '1112223338999s';
 tiles0 = '2334455667788m';
-randompaishan('2m7s9m');
-roundbegin();
+randomPaishan('2m7s9m');
+roundBegin();
 dingque('pspm');
 qiepai();
-mingqiepai('2m');
+mingQiepai('2m');
 hupai();
 
-normalmoqie();
+normalMoqie();
 mopai();
-leimingpai();
+zimingpai();
 hupai();
 
-zimohu(true);
+zimoHu(true);
 
 
 // 第4局: 将对;         清对;             金钩钓
@@ -107,21 +107,21 @@ tiles0 = '222555888m22258s';
 tiles1 = '12366m66788899p';
 tiles2 = '113344m1139999s';
 tiles3 = '1112223334445p';
-randompaishan('5s5p134m13s');
-roundbegin();
+randomPaishan('5s5p134m13s');
+roundBegin();
 dingque('pspm');
 qiepai();
-normalmoqie();
+normalMoqie();
 hupai();
 
-normalmoqie();
+normalMoqie();
 hupai();
 
 for (let i = 0; i < 4; i++) {
-    normalmoqie();
-    mingqiepai('9s');
+    normalMoqie();
+    mingQiepai('9s');
 }
-normalmoqie();
+normalMoqie();
 hupai(true);
 
 
@@ -130,17 +130,17 @@ tiles0 = '123778899m23999s';
 tiles1 = '2233445566778m';
 tiles2 = '1112345678999p';
 tiles3 = '223344p2233445s';
-randompaishan('15s5p');
-roundbegin();
+randomPaishan('15s5p');
+roundBegin();
 dingque('pssm');
 qiepai();
-normalmoqie();
+normalMoqie();
 hupai();
 
-normalmoqie();
+normalMoqie();
 hupai();
 
-normalmoqie();
+normalMoqie();
 hupai(true);
 
 
@@ -149,16 +149,16 @@ tiles0 = '222333444m22235s';
 tiles1 = '8m333466788999p';
 tiles2 = '1112467999m112p';
 tiles3 = '1555678p123456s';
-randompaishan('3s', '1p');
-roundbegin();
+randomPaishan('3s', '1p');
+roundBegin();
 dingque('pssm');
 qiepai();
-normalmoqie();
+normalMoqie();
 hupai();
 
-normalmoqie(53);
-zimohu();
-notileliuju();
+normalMoqie(53);
+zimoHu();
+huangpai();
 
 
 // 第7局: 诈和示范
@@ -166,6 +166,6 @@ tiles0 = '22234555678889m';
 tiles1 = '1112345678999m';
 tiles2 = '1112345678999p';
 tiles3 = '1112345678999s';
-roundbegin();
+roundBegin();
 dingque('pssm');
 hupai(true);

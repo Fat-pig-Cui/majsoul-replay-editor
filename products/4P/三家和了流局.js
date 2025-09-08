@@ -1,4 +1,4 @@
-clearproject();
+clearProject();
 
 // 比赛场真实牌谱(匿名): jnjrmv-205u0327-6yaa-668f-iifh-cihittojzwws__2
 
@@ -26,6 +26,6 @@ tiles0 = '1112340678999m6z';
 tiles1 = '1112223334446z';
 tiles2 = '19m19p19s1234567z';
 tiles3 = '222444666888s6z';
-roundbegin();
+roundBegin();
 qiepai(true);
 liuju(5);

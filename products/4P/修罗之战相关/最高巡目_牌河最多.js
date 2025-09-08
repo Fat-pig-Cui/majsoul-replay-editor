@@ -1,4 +1,4 @@
-clearproject();
+clearProject();
 
 player_datas[0].nickname = '一姬-契约';
 player_datas[1].nickname = '新年初诣';
@@ -28,18 +28,18 @@ tiles0 = '9m16p9999s1233457z';
 tiles1 = '457m28p3577s5557z';
 tiles2 = '234569m2345p124z';
 tiles3 = '2233448m3467p18s';
-randompaishan('1m1s1234z');
-roundbegin();
+randomPaishan('1m1s1234z');
+roundBegin();
 huansanzhang('9m16p', '28p7z', '124z', '8m18s', 1);
 qiepai('7z');
 hupai();
 
-normalmoqie();
+normalMoqie();
 hupai();
 
-normalmoqie();
+normalMoqie();
 for (let i = 0; i < 4; i++) {
-    normalmoqie();
-    mingqiepai('9s');
+    normalMoqie();
+    mingQiepai('9s');
 }
-moqieliuju();
+moqieLiuju();

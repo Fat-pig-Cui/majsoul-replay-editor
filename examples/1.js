@@ -1,4 +1,4 @@
-clearproject();
+clearProject();
 
 player_datas[0].nickname = '电脑0';
 player_datas[1].nickname = '电脑1';
@@ -35,21 +35,21 @@ tiles1 = '1112340678999p';
 tiles2 = '1112340678999s';
 tiles3 = '1112223334447z';
 paishan = separate('55555555555555555555555555555555555555555555555555555555555555555555555555555555555z');
-roundbegin();
+roundBegin();
 qiepai('5z');
 for (let i = 0; i < 69; i++) {
     mopai();
     qiepai();
 }
-notileliuju();
+huangpai();
 
 // 第二局
 tiles0 = '1112340678999m1z';
 tiles1 = '1112340678999p';
 tiles2 = '1112340678999s';
 tiles3 = '1112223334447z';
-randompaishan('23z9m', '5555z');
-roundbegin();
+randomPaishan('23z9m', '5555z');
+roundBegin();
 for (let i = 0; i < 3; i++) {
     qiepai();
     mingpai();
@@ -57,7 +57,7 @@ for (let i = 0; i < 3; i++) {
     qiepai();
     mopai();
 }
-leimingpai();
+zimingpai();
 mopai();
 qiepai();
 liuju();
@@ -67,8 +67,8 @@ tiles0 = '1p1112340678999s';
 tiles1 = '1123p777888999m';
 tiles2 = '2223334445566s';
 tiles3 = '2223334445566m';
-randompaishan('4p');
-roundbegin();
+randomPaishan('4p');
+roundBegin();
 qiepai('1p', true);
 hupai();
 
@@ -77,8 +77,8 @@ tiles1 = '1112340678999m6z';
 tiles2 = '55p238s12556677z';
 tiles3 = '223446688s3457z';
 tiles0 = '59p346s11223344z';
-randompaishan('3s');
-roundbegin();
+randomPaishan('3s');
+roundBegin();
 hupai();
 
 // 第五局
@@ -86,8 +86,8 @@ tiles1 = '456m456p225588s66z';
 tiles2 = '1112223334447z';
 tiles3 = '1112340678999p';
 tiles0 = '1112340678999m';
-randompaishan('82s', '55556777z');
-roundbegin();
+randomPaishan('82s', '55556777z');
+roundBegin();
 qiepai('6z');
 mopai();
 qiepai();
@@ -102,9 +102,9 @@ tiles1 = '345m345p47s111555z';
 tiles2 = '111234067899m3s';
 tiles3 = '23344666888s66z';
 tiles0 = '1112340678999p';
-qiepaiset = ['', '7s5z', '3s', '2s'];
-randompaishan('9m9s1z93s', '11117745s');
-roundbegin();
+qiepai_set = ['', '7s5z', '3s', '2s'];
+randomPaishan('9m9s1z93s', '11117745s');
+roundBegin();
 qiepai();
 mopai();
 qiepai(true);
@@ -113,13 +113,13 @@ qiepai();
 mopai();
 qiepai(true);
 mopai();
-leimingpai();
+zimingpai();
 mopai();
 qiepai(true);
 mopai();
 qiepai();
 mopai();
-leimingpai();
+zimingpai();
 hupai();
 
 // 第七局
@@ -127,8 +127,8 @@ tiles1 = '224488s11223347z';
 tiles2 = '1112340678999m';
 tiles3 = '1112340678999p';
 tiles0 = '1112340678999s';
-randompaishan('4z', '55556666z');
-roundbegin();
+randomPaishan('4z', '55556666z');
+roundBegin();
 qiepai('7z', true);
 mopai();
 qiepai('4z', true);
@@ -139,8 +139,8 @@ tiles1 = '1112340678999m1z';
 tiles2 = '1112340678999p';
 tiles3 = '1112340678999s';
 tiles0 = '5m234678p234678s';
-randompaishan('111z');
-roundbegin();
+randomPaishan('111z');
+roundBegin();
 qiepai('1z', true);
 mopai();
 qiepai(true);
@@ -155,8 +155,8 @@ tiles1 = '1112340678999m6z';
 tiles2 = '238s55p12556677z';
 tiles3 = '223446688s3457z';
 tiles0 = '346s59p11223344z';
-randompaishan('3s');
-roundbegin();
+randomPaishan('3s');
+roundBegin();
 qiepai('6z', true);
 mingpai('66z');
 qiepai('8s');

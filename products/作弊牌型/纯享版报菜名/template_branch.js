@@ -1,4 +1,4 @@
-clearproject();
+clearProject();
 
 player_datas[0].nickname = '一姬-契约';
 player_datas[1].nickname = '新年初诣';
@@ -21,10 +21,10 @@ config = {
     }
 };
 
-origin_hupaioneplayer = hupaioneplayer;
+origin_huleOnePlayer = huleOnePlayer;
 
 // 第1局
-hupaioneplayer = function (seat) {
+huleOnePlayer = seat => {
     let fans = [
         {val: 0, id: 9500}, // 自我介绍
         {val: 0, id: 9200},
@@ -42,7 +42,7 @@ hupaioneplayer = function (seat) {
         {val: 1, id: 30},
         {val: 1, id: 3},
     ];
-    playertiles[seat].pop();
+    player_tiles[seat].pop();
     delta_scores = [-16000, -8000, 32000, -8000];
     return {
         count: 64,
@@ -50,8 +50,8 @@ hupaioneplayer = function (seat) {
         li_doras: li_doras,
         fans: fans,
         fu: 170,
-        hand: playertiles[seat].slice(),
-        hu_tile: playertiles[seat][playertiles[seat].length - 1],
+        hand: player_tiles[seat].slice(),
+        hu_tile: player_tiles[seat][player_tiles[seat].length - 1],
         liqi: false,
         ming: [],
         point_rong: 32000,
@@ -69,16 +69,16 @@ tiles0 = '1112340678999m7z';
 tiles1 = '1112340678999p';
 tiles2 = '5555555555555z';
 tiles3 = '1112340678999s';
-randompaishan('75z', '7z....');
-roundbegin();
+randomPaishan('75z', '7z....');
+roundBegin();
 qiepai();
-normalmoqie();
-zimohu();
+normalMoqie();
+zimoHu();
 
-gotoju(2, 0, 0);
+setRound(2, 0, 0);
 
 // 第2局
-hupaioneplayer = function (seat) {
+huleOnePlayer = seat => {
     let fans = [
         {val: 1, id: 4},
         {val: 1, id: 5},
@@ -96,7 +96,7 @@ hupaioneplayer = function (seat) {
         {val: 1, id: 9103},
         {val: 1, id: 9104},
     ];
-    playertiles[seat].pop();
+    player_tiles[seat].pop();
     delta_scores = [-16000, -8000, 32000, -8000];
     return {
         count: 64,
@@ -104,8 +104,8 @@ hupaioneplayer = function (seat) {
         li_doras: li_doras,
         fans: fans,
         fu: 170,
-        hand: playertiles[seat].slice(),
-        hu_tile: playertiles[seat][playertiles[seat].length - 1],
+        hand: player_tiles[seat].slice(),
+        hu_tile: player_tiles[seat][player_tiles[seat].length - 1],
         liqi: false,
         ming: [],
         point_rong: 32000,
@@ -123,16 +123,16 @@ tiles0 = '1112340678999m7z';
 tiles1 = '1112340678999p';
 tiles2 = '5555555555555z';
 tiles3 = '1112340678999s';
-randompaishan('75z', '7z....');
-roundbegin();
+randomPaishan('75z', '7z....');
+roundBegin();
 qiepai();
-normalmoqie();
-zimohu();
+normalMoqie();
+zimoHu();
 
-gotoju(2, 0, 0);
+setRound(2, 0, 0);
 
 // 第3局
-hupaioneplayer = function (seat) {
+huleOnePlayer = seat => {
     let fans = [
         {val: 1, id: 10},
         {val: 1, id: 11},
@@ -150,7 +150,7 @@ hupaioneplayer = function (seat) {
         {val: 2, id: 24},
         {val: 3, id: 26},
     ];
-    playertiles[seat].pop();
+    player_tiles[seat].pop();
     delta_scores = [-16000, -8000, 32000, -8000];
     return {
         count: 64,
@@ -158,8 +158,8 @@ hupaioneplayer = function (seat) {
         li_doras: li_doras,
         fans: fans,
         fu: 170,
-        hand: playertiles[seat].slice(),
-        hu_tile: playertiles[seat][playertiles[seat].length - 1],
+        hand: player_tiles[seat].slice(),
+        hu_tile: player_tiles[seat][player_tiles[seat].length - 1],
         liqi: false,
         ming: [],
         point_rong: 32000,
@@ -177,16 +177,16 @@ tiles0 = '1112340678999m7z';
 tiles1 = '1112340678999p';
 tiles2 = '5555555555555z';
 tiles3 = '1112340678999s';
-randompaishan('75z', '7z....');
-roundbegin();
+randomPaishan('75z', '7z....');
+roundBegin();
 qiepai();
-normalmoqie();
-zimohu();
+normalMoqie();
+zimoHu();
 
-gotoju(2, 0, 0);
+setRound(2, 0, 0);
 
 // 第4局
-hupaioneplayer = function (seat) {
+huleOnePlayer = seat => {
     let fans = [
         {val: 3, id: 27},
         {val: 6, id: 29},
@@ -204,7 +204,7 @@ hupaioneplayer = function (seat) {
         {val: 12, id: 34},
         {val: 13, id: 33},
     ];
-    playertiles[seat].pop();
+    player_tiles[seat].pop();
     delta_scores = [-16000, -8000, 32000, -8000];
     return {
         count: 64,
@@ -212,8 +212,8 @@ hupaioneplayer = function (seat) {
         li_doras: li_doras,
         fans: fans,
         fu: 170,
-        hand: playertiles[seat].slice(),
-        hu_tile: playertiles[seat][playertiles[seat].length - 1],
+        hand: player_tiles[seat].slice(),
+        hu_tile: player_tiles[seat][player_tiles[seat].length - 1],
         liqi: false,
         ming: [],
         point_rong: 32000,
@@ -231,16 +231,16 @@ tiles0 = '1112340678999m7z';
 tiles1 = '1112340678999p';
 tiles2 = '5555555555555z';
 tiles3 = '1112340678999s';
-randompaishan('75z', '7z....');
-roundbegin();
+randomPaishan('75z', '7z....');
+roundBegin();
 qiepai();
-normalmoqie();
-zimohu();
+normalMoqie();
+zimoHu();
 
-gotoju(2, 0, 0);
+setRound(2, 0, 0);
 
 // 第5局
-hupaioneplayer = function (seat) {
+huleOnePlayer = seat => {
     let fans = [
         {val: 0, id: 9400}, // 四风连打
         {val: 0, id: 9401}, // 四杠散了
@@ -258,7 +258,7 @@ hupaioneplayer = function (seat) {
         {val: 0, id: 9309},
         {val: 0, id: 9502}, // 登录语音满羁绊
     ];
-    playertiles[seat].pop();
+    player_tiles[seat].pop();
     delta_scores = [-16000, -8000, 32000, -8000];
     return {
         count: 64,
@@ -266,8 +266,8 @@ hupaioneplayer = function (seat) {
         li_doras: li_doras,
         fans: fans,
         fu: 170,
-        hand: playertiles[seat].slice(),
-        hu_tile: playertiles[seat][playertiles[seat].length - 1],
+        hand: player_tiles[seat].slice(),
+        hu_tile: player_tiles[seat][player_tiles[seat].length - 1],
         liqi: false,
         ming: [],
         point_rong: 32000,
@@ -285,16 +285,16 @@ tiles0 = '1112340678999m7z';
 tiles1 = '1112340678999p';
 tiles2 = '5555555555555z';
 tiles3 = '1112340678999s';
-randompaishan('75z', '7z....');
-roundbegin();
+randomPaishan('75z', '7z....');
+roundBegin();
 qiepai();
-normalmoqie();
-zimohu();
+normalMoqie();
+zimoHu();
 
-gotoju(2, 0, 0);
+setRound(2, 0, 0);
 
 // 第6局
-hupaioneplayer = function (seat) {
+huleOnePlayer = seat => {
     let fans = [
         {val: 1, id: 35},
         {val: 1, id: 36},
@@ -305,7 +305,7 @@ hupaioneplayer = function (seat) {
         {val: 1, id: 41},
         {val: 1, id: 42},
     ];
-    playertiles[seat].pop();
+    player_tiles[seat].pop();
     delta_scores = [-96000, -48000, 192000, -48000];
     return {
         count: 6,
@@ -313,8 +313,8 @@ hupaioneplayer = function (seat) {
         li_doras: li_doras,
         fans: fans,
         fu: 170,
-        hand: playertiles[seat].slice(),
-        hu_tile: playertiles[seat][playertiles[seat].length - 1],
+        hand: player_tiles[seat].slice(),
+        hu_tile: player_tiles[seat][player_tiles[seat].length - 1],
         liqi: false,
         ming: [],
         point_rong: 192000,
@@ -332,16 +332,16 @@ tiles0 = '1112340678999m7z';
 tiles1 = '1112340678999p';
 tiles2 = '5555555555555z';
 tiles3 = '1112340678999s';
-randompaishan('75z', '7z....');
-roundbegin();
+randomPaishan('75z', '7z....');
+roundBegin();
 qiepai();
-normalmoqie();
-zimohu();
+normalMoqie();
+zimoHu();
 
-gotoju(2, 0, 0);
+setRound(2, 0, 0);
 
 // 第7局
-hupaioneplayer = function (seat) {
+huleOnePlayer = seat => {
     let fans = [
         {val: 1, id: 43},
         {val: 1, id: 44},
@@ -352,7 +352,7 @@ hupaioneplayer = function (seat) {
         {val: 2, id: 50},
         {val: 0, id: 9209},
     ];
-    playertiles[seat].pop();
+    player_tiles[seat].pop();
     delta_scores = [-96000, -48000, 192000, -48000];
     return {
         count: 6,
@@ -360,8 +360,8 @@ hupaioneplayer = function (seat) {
         li_doras: li_doras,
         fans: fans,
         fu: 170,
-        hand: playertiles[seat].slice(),
-        hu_tile: playertiles[seat][playertiles[seat].length - 1],
+        hand: player_tiles[seat].slice(),
+        hu_tile: player_tiles[seat][player_tiles[seat].length - 1],
         liqi: false,
         ming: [],
         point_rong: 192000,
@@ -379,16 +379,16 @@ tiles0 = '1112340678999m7z';
 tiles1 = '1112340678999p';
 tiles2 = '5555555555555z';
 tiles3 = '1112340678999s';
-randompaishan('75z', '7z....');
-roundbegin();
+randomPaishan('75z', '7z....');
+roundBegin();
 qiepai();
-normalmoqie();
-zimohu();
+normalMoqie();
+zimoHu();
 
-gotoju(2, 0, 0);
+setRound(2, 0, 0);
 
 // 第8局
-hupaioneplayer = function (seat) {
+huleOnePlayer = seat => {
     let fans = [
         {val: 0, id: 9501}, // 登录语音普通
         {val: 6, id: 1018},
@@ -403,7 +403,7 @@ hupaioneplayer = function (seat) {
         {val: 5, id: 1020},
         {val: 1, id: 1021},
     ];
-    playertiles[seat].pop();
+    player_tiles[seat].pop();
     delta_scores = [-16000, -8000, 32000, -8000];
     return {
         count: 64,
@@ -411,8 +411,8 @@ hupaioneplayer = function (seat) {
         li_doras: li_doras,
         fans: fans,
         fu: 170,
-        hand: playertiles[seat].slice(),
-        hu_tile: playertiles[seat][playertiles[seat].length - 1],
+        hand: player_tiles[seat].slice(),
+        hu_tile: player_tiles[seat][player_tiles[seat].length - 1],
         liqi: false,
         ming: [],
         point_rong: 32000,
@@ -430,16 +430,16 @@ tiles0 = '1112340678999m7z';
 tiles1 = '1112340678999p';
 tiles2 = '5555555555555z';
 tiles3 = '1112340678999s';
-randompaishan('75z', '7z....');
-roundbegin();
+randomPaishan('75z', '7z....');
+roundBegin();
 qiepai();
-normalmoqie();
-zimohu();
+normalMoqie();
+zimoHu();
 
-gotoju(2, 0, 0);
+setRound(2, 0, 0);
 
 // 第9局
-hupaioneplayer = function (seat) {
+huleOnePlayer = seat => {
     let fans = [
         {val: 5, id: 1014},
         {val: 2, id: 1005},
@@ -454,7 +454,7 @@ hupaioneplayer = function (seat) {
         {val: 0, id: 9311}, // 听牌
         {val: 0, id: 9312}, // 未听牌
     ];
-    playertiles[seat].pop();
+    player_tiles[seat].pop();
     delta_scores = [-16000, -8000, 32000, -8000];
     return {
         count: 64,
@@ -462,8 +462,8 @@ hupaioneplayer = function (seat) {
         li_doras: li_doras,
         fans: fans,
         fu: 170,
-        hand: playertiles[seat].slice(),
-        hu_tile: playertiles[seat][playertiles[seat].length - 1],
+        hand: player_tiles[seat].slice(),
+        hu_tile: player_tiles[seat][player_tiles[seat].length - 1],
         liqi: false,
         ming: [],
         point_rong: 32000,
@@ -481,16 +481,16 @@ tiles0 = '1112340678999m7z';
 tiles1 = '1112340678999p';
 tiles2 = '5555555555555z';
 tiles3 = '1112340678999s';
-randompaishan('75z', '7z....');
-roundbegin();
+randomPaishan('75z', '7z....');
+roundBegin();
 qiepai();
-normalmoqie();
-zimohu();
+normalMoqie();
+zimoHu();
 
-gotoju(2, 0, 0);
+setRound(2, 0, 0);
 
 // 第10局
-hupaioneplayer = function (seat) {
+huleOnePlayer = seat => {
     let fans = [
         {val: 0, id: 9500},
         {val: 0, id: 9501},
@@ -508,7 +508,7 @@ hupaioneplayer = function (seat) {
         {val: 0, id: 9513},
         {val: 0, id: 9514},
     ];
-    playertiles[seat].pop();
+    player_tiles[seat].pop();
     delta_scores = [0, 0, 0, 0];
     return {
         count: 0,
@@ -516,8 +516,8 @@ hupaioneplayer = function (seat) {
         li_doras: li_doras,
         fans: fans,
         fu: 0,
-        hand: playertiles[seat].slice(),
-        hu_tile: playertiles[seat][playertiles[seat].length - 1],
+        hand: player_tiles[seat].slice(),
+        hu_tile: player_tiles[seat][player_tiles[seat].length - 1],
         liqi: false,
         ming: [],
         point_rong: 1000,
@@ -535,16 +535,16 @@ tiles0 = '1112340678999m7z';
 tiles1 = '1112340678999p';
 tiles2 = '5555555555555z';
 tiles3 = '1112340678999s';
-randompaishan('75z', '7z....');
-roundbegin();
+randomPaishan('75z', '7z....');
+roundBegin();
 qiepai();
-normalmoqie();
-zimohu();
+normalMoqie();
+zimoHu();
 
-gotoju(2, 0, 0);
+setRound(2, 0, 0);
 
 // 第11局
-hupaioneplayer = function (seat) {
+huleOnePlayer = seat => {
     let fans = [
         {val: 0, id: 9515},
         {val: 0, id: 9516},
@@ -558,7 +558,7 @@ hupaioneplayer = function (seat) {
         {val: 0, id: 9603},
         {val: 0, id: 9604},
     ];
-    playertiles[seat].pop();
+    player_tiles[seat].pop();
     delta_scores = [0, 0, 0, 0];
     return {
         count: 0,
@@ -566,8 +566,8 @@ hupaioneplayer = function (seat) {
         li_doras: li_doras,
         fans: fans,
         fu: 0,
-        hand: playertiles[seat].slice(),
-        hu_tile: playertiles[seat][playertiles[seat].length - 1],
+        hand: player_tiles[seat].slice(),
+        hu_tile: player_tiles[seat][player_tiles[seat].length - 1],
         liqi: false,
         ming: [],
         point_rong: 1000,
@@ -585,10 +585,10 @@ tiles0 = '1112340678999m7z';
 tiles1 = '1112340678999p';
 tiles2 = '5555555555555z';
 tiles3 = '1112340678999s';
-randompaishan('75z', '7z....');
-roundbegin();
+randomPaishan('75z', '7z....');
+roundBegin();
 qiepai();
-normalmoqie();
-zimohu();
+normalMoqie();
+zimoHu();
 
-hupaioneplayer = origin_hupaioneplayer;
+huleOnePlayer = origin_huleOnePlayer;

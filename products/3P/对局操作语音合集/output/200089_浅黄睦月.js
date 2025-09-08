@@ -1,4 +1,4 @@
-clearproject();
+clearProject();
 
 player_datas[0].nickname = '浅黄睦月-契约';
 player_datas[1].nickname = '浅黄睦月';
@@ -28,18 +28,18 @@ config = {
 tiles0 = '1112340678999p1s';
 tiles1 = '23446668889s66z';
 tiles2 = '1112223335777z';
-randompaishan('1z6s', '6z84s4z4s');
-roundbegin();
+randomPaishan('1z6s', '6z84s4z4s');
+roundBegin();
 qiepai(true);
-mingqiepai('23s');
+mingQiepai('23s');
 mopai();
-combomopai();
+comboMopai();
 qiepai(true);
-mingqiepai('6z');
-normalmoqie();
+mingQiepai('6z');
+normalMoqie();
 mingpai();
 mopai();
-combomopai(3);
+comboMopai(3);
 qiepai();
 liuju();
 
@@ -47,16 +47,16 @@ liuju();
 tiles0 = '111m23456p11123s4z';
 tiles1 = '1112340678999p';
 tiles2 = '1112223334445z';
-randompaishan('', '1m.......1p');
-roundbegin();
-combomopai();
+randomPaishan('', '1m.......1p');
+roundBegin();
+comboMopai();
 hupai();
 
 // 第3局: 荣
 tiles0 = '2p1112223334445z';
 tiles1 = '2455667p234567s';
 tiles2 = '1112340678999s';
-randompaishan('', '1m........');
-roundbegin();
+randomPaishan('', '1m........');
+roundBegin();
 qiepai('2p');
 hupai();

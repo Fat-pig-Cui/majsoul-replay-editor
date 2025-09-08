@@ -1,4 +1,4 @@
-clearproject();
+clearProject();
 
 // 悸动之夏UP装扮:
 // 立直棒-波子汽水
@@ -38,4 +38,4 @@ config = {
 };
 
 // 示例对局
-demogame();
+demoGame();

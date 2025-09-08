@@ -1,4 +1,4 @@
-clearproject();
+clearProject();
 
 // 客户端的装扮预览界面的虚假的对局(虚假是因为有些地方不符合规则逻辑, 比如作为主视角的南家比亲家先摸牌)
 
@@ -43,14 +43,14 @@ tiles1 = '123456789m1122z';
 tiles2 = '1234056789p122z';
 tiles3 = '1234056789s566z';
 qiepaiset = ['123456789s', '333444777z', '123456789m', '123456789p'];
-randompaishan('3z1m1p2s3z2m2p3s3z3m3p4s4z4m4p5s4z5m5p6s4z6m6p7s7z7m7p8s7z8m8p9s7z9m9p1z', '5z....');
-roundbegin();
+randomPaishan('3z1m1p2s3z2m2p3s3z3m3p4s4z4m4p5s4z5m5p6s4z6m6p7s7z7m7p8s7z8m8p9s7z9m9p1z', '5z....');
+roundBegin();
 qiepai();
-normalmoqie(35);
+normalMoqie(35);
 mopai(1);
 hupai();
 
-gotoju(0, 0, 0);
+setRound(0, 0, 0);
 scores = [25000, 25000, 25000, 25000];
 
 // 立直特效
@@ -59,10 +59,10 @@ tiles1 = '123456789m1122z';
 tiles2 = '1234056789p122z';
 tiles3 = '1234056789s566z';
 qiepaiset = ['123456789s', '333444777z', '123456789m', '123456789p'];
-randompaishan('3z1m1p2s3z2m2p3s3z3m3p4s4z4m4p5s4z5m5p6s4z6m6p7s7z7m7p8s7z8m8p9s7z9m9p5z', '15z....');
-roundbegin();
+randomPaishan('3z1m1p2s3z2m2p3s3z3m3p4s4z4m4p5s4z5m5p6s4z6m6p7s7z7m7p8s7z8m8p9s7z9m9p5z', '15z....');
+roundBegin();
 qiepai();
-normalmoqie(35);
+normalMoqie(35);
 mopai(1);
 qiepai(true);
-moqieliuju();
+moqieLiuju();

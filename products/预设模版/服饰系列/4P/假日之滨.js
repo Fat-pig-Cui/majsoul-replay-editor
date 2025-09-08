@@ -1,4 +1,4 @@
-clearproject();
+clearProject();
 
 // 假日之滨UP装扮:
 // 立直棒-包甜好瓜
@@ -45,4 +45,4 @@ config = {
 };
 
 // 示例对局
-demogame();
+demoGame();

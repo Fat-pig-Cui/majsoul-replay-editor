@@ -1,4 +1,4 @@
-clearproject();
+clearProject();
 
 player_datas[0].nickname = '蛇喰梦子';
 player_datas[1].nickname = '早乙女芽亚里';
@@ -31,4 +31,4 @@ config = {
 };
 
 // 示例对局
-demogame();
+demoGame();

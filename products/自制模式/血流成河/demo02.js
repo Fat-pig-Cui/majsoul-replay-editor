@@ -1,4 +1,4 @@
-clearproject();
+clearProject();
 
 player_datas[0].nickname = '一姬-契约';
 player_datas[1].nickname = '新年初诣';
@@ -26,24 +26,24 @@ tiles0 = '222888m22255s789p';
 tiles1 = '1112345699m789s';
 tiles2 = '1112345699p588s';
 tiles3 = '1112345699s789m';
-roundbegin();
+roundBegin();
 huansanzhang('789p', '789s', '588s', '789m', 1);
 dingque('psmp');
 hupai();
 for (let cnt = 0; cnt < 55; cnt++) {
     mopai();
-    if (calchupai(playertiles[getlstaction().data.seat]) !== 0)
+    if (calcHupai(player_tiles[getLstAction().data.seat]) !== 0)
         hupai();
     else {
         qiepai();
-        let seat = getlstaction().data.seat;
-        let tile = getlstaction().data.tile;
+        let seat = getLstAction().data.seat;
+        let tile = getLstAction().data.tile;
         let is_fangchong = false;
-        for (let i = seat + 1; i < seat + playercnt; i++) {
-            let tmp_seat = i % playercnt;
-            let tmp_tingpais = calctingpai(tmp_seat);
+        for (let i = seat + 1; i < seat + player_cnt; i++) {
+            let tmp_seat = i % player_cnt;
+            let tmp_tingpais = calcTingpai(tmp_seat);
             for (let j = 0; j < tmp_tingpais.length; j++)
-                if (equaltile(tile, tmp_tingpais[j].tile)) {
+                if (isEqualTile(tile, tmp_tingpais[j].tile)) {
                     is_fangchong = true;
                     break;
                 }
@@ -54,4 +54,4 @@ for (let cnt = 0; cnt < 55; cnt++) {
             hupai();
     }
 }
-notileliuju();
+huangpai();

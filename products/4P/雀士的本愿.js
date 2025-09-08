@@ -1,4 +1,4 @@
-clearproject();
+clearProject();
 
 // 雀士的本愿: 和牌役种只包含 立直, 一发, 自摸, 平和, 一杯口, 断幺九, 三色同顺
 
@@ -24,10 +24,10 @@ tiles0 = '456m45556p4456s67z';
 tiles1 = '1112340678999m';
 tiles2 = '1112340678999p';
 tiles3 = '23799s55566677z';
-randompaishan('5sHHH6s', '57z....');
-roundbegin();
+randomPaishan('5sHHH6s', '57z....');
+roundBegin();
 qiepai();
-mingqiepai('7s');
-moqieliqi('6z');
-normalmoqie(3);
-zimohu();
+mingQiepai('7s');
+moqieLiqi('6z');
+normalMoqie(3);
+zimoHu();

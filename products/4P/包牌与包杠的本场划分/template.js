@@ -1,4 +1,4 @@
-clearproject();
+clearProject();
 
 player_datas[0].nickname = '一姬-契约';
 player_datas[1].nickname = '新年初诣';
@@ -28,10 +28,10 @@ tiles0 = '23m123456p22345s7z';
 tiles1 = '2223455567888m';
 tiles2 = '1112345678999p';
 tiles3 = '1112345678999s';
-randompaishan('1m', '2z....');
-roundbegin();
+randomPaishan('1m', '2z....');
+roundBegin();
 qiepai();
-normalmoqie();
+normalMoqie();
 hupai();
 
 // 第2局: 一般自摸
@@ -39,28 +39,28 @@ tiles0 = '123m123456p345s27z';
 tiles1 = '2223455567888m';
 tiles2 = '1112345678999p';
 tiles3 = '1112345678s677z';
-randompaishan('2z', '2z....');
-roundbegin();
+randomPaishan('2z', '2z....');
+roundBegin();
 qiepai();
-mingqiepai();
-zimohu();
+mingQiepai();
+zimoHu();
 
 // 第3局: 包牌放铳, 不止一家包牌, 有非包牌部分, 第四家放铳
 tiles0 = '12444555666777z';
 tiles1 = '2223455567888m';
 tiles2 = '2223455567888p';
 tiles3 = '2223455567888s';
-randompaishan('765zT4zTT1z', 'TTTT');
-roundbegin();
+randomPaishan('765zT4zTT1z', 'TTTT');
+roundBegin();
 qiepai('2z');
-normalmoqie();
+normalMoqie();
 for (let i = 0; i < 3; i++) {
     mingpai();
-    normalmoqie(2);
+    normalMoqie(2);
 }
-normalmoqie();
+normalMoqie();
 mingpai();
-normalmoqie(4);
+normalMoqie(4);
 hupai();
 
 // 第4局: 有包杠, 不止一家包牌, 有非包牌部分
@@ -68,82 +68,82 @@ tiles0 = '12444555666777z';
 tiles1 = '2223455567888m';
 tiles2 = '2223455567888p';
 tiles3 = '2223455567888s';
-randompaishan('765zT4z', '1zTTT');
-roundbegin();
+randomPaishan('765zT4z', '1zTTT');
+roundBegin();
 qiepai('2z');
-normalmoqie();
+normalMoqie();
 for (let i = 0; i < 3; i++) {
     mingpai();
-    normalmoqie(2);
+    normalMoqie(2);
 }
-normalmoqie();
+normalMoqie();
 mingpai();
-zimohu();
+zimoHu();
 
 // 第5局: 一般包牌自摸, 只有一家包牌, 只有包牌部分
 tiles0 = '1m999m2555666777z';
 tiles1 = '2223455567888m';
 tiles2 = '2223455567888p';
 tiles3 = '2223455567888s';
-randompaishan('765z9mHHH1m', 'HHHH');
-roundbegin();
+randomPaishan('765z9mHHH1m', 'HHHH');
+roundBegin();
 qiepai('2z');
-normalmoqie();
+normalMoqie();
 for (let i = 0; i < 4; i++) {
     mingpai();
-    normalmoqie(2);
+    normalMoqie(2);
 }
-normalmoqie(2);
-zimohu();
+normalMoqie(2);
+zimoHu();
 
 // 第6局: 混合包牌自摸, 只有一家包牌, 有非包牌部分
 tiles0 = '12444555666777z';
 tiles1 = '2223455567888m';
 tiles2 = '2223455567888p';
 tiles3 = '2223455567888s';
-randompaishan('7654zTTT1z', 'TTTT');
-roundbegin();
+randomPaishan('7654zTTT1z', 'TTTT');
+roundBegin();
 qiepai('2z');
-normalmoqie();
+normalMoqie();
 for (let i = 0; i < 4; i++) {
     mingpai();
-    normalmoqie(2);
+    normalMoqie(2);
 }
-normalmoqie(2);
-zimohu();
+normalMoqie(2);
+zimoHu();
 
 // 第7局: 一般多家包牌自摸, 有多家包牌, 只有包牌部分
 tiles0 = '1999m2555666777z';
 tiles1 = '2223455567888m';
 tiles2 = '2223455567888p';
 tiles3 = '2223455567888s';
-randompaishan('765zH9mHHH1m', 'HHHH');
-roundbegin();
+randomPaishan('765zH9mHHH1m', 'HHHH');
+roundBegin();
 qiepai('2z');
-normalmoqie();
+normalMoqie();
 for (let i = 0; i < 3; i++) {
     mingpai();
-    normalmoqie(2);
+    normalMoqie(2);
 }
-normalmoqie();
+normalMoqie();
 mingpai();
-normalmoqie(4);
-zimohu();
+normalMoqie(4);
+zimoHu();
 
 // 第8局: 复合包牌自摸, 有多家包牌, 有非包牌部分
 tiles0 = '12444555666777z';
 tiles1 = '2223455567888m';
 tiles2 = '2223455567888p';
 tiles3 = '2223455567888s';
-randompaishan('765zT4zTTT1z', 'TTTT');
-roundbegin();
+randomPaishan('765zT4zTTT1z', 'TTTT');
+roundBegin();
 qiepai('2z');
-normalmoqie();
+normalMoqie();
 for (let i = 0; i < 3; i++) {
     mingpai();
-    normalmoqie(2);
+    normalMoqie(2);
 }
-normalmoqie();
+normalMoqie();
 mingpai();
-normalmoqie(4);
-zimohu();
+normalMoqie(4);
+zimoHu();

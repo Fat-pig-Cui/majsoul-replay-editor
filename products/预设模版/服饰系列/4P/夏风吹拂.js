@@ -1,4 +1,4 @@
-clearproject();
+clearProject();
 
 // 同期UP装扮:
 // 立直棒-绚烂烟花
@@ -44,4 +44,4 @@ config = {
 };
 
 // 示例对局
-demogame();
+demoGame();

@@ -1,4 +1,4 @@
-clearproject();
+clearProject();
 
 // 主要思路是用十一倍铳满变换
 // 这里分两种情况, 不限制本场数和只能零本场
@@ -32,14 +32,14 @@ tiles0 = '2222444666888s6z';
 tiles1 = '1112223334446z';
 tiles2 = '1112340678999m';
 tiles3 = '111333777999s6z';
-randompaishan('76z', '7z864s');
-roundbegin();
-combomopai(4);
+randomPaishan('76z', '7z864s');
+roundBegin();
+comboMopai(4);
 qiepai();
-normalmoqie(2);
+normalMoqie(2);
 hupai([0, 1]);
 
-gotoju(0, 0, 0);
+setRound(0, 0, 0);
 
 // 零本场三位最高分: 162000
 scores = [0, 2000, 0, 98000];
@@ -47,14 +47,14 @@ tiles0 = '2222444666888s6z';
 tiles1 = '1112223334446z';
 tiles2 = '1112340678999m';
 tiles3 = '111333777999s6z';
-randompaishan('76z', '7z864s');
-roundbegin();
-combomopai(4);
+randomPaishan('76z', '7z864s');
+roundBegin();
+comboMopai(4);
 qiepai();
-normalmoqie(2);
+normalMoqie(2);
 hupai();
 
-gotoju(0, 0, 0);
+setRound(0, 0, 0);
 
 // 零本场二位最低分和三位最低分: -96000
 scores = [100000, 0, 0, 0];
@@ -62,5 +62,5 @@ tiles0 = '11122233344477z';
 tiles1 = '1112340678999m';
 tiles2 = '1112340678999p';
 tiles3 = '1112340678999s';
-roundbegin();
+roundBegin();
 hupai();

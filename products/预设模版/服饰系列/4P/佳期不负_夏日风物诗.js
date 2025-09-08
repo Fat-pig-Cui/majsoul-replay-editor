@@ -1,4 +1,4 @@
-clearproject();
+clearProject();
 
 // 佳期不负UP装扮:
 // 立直棒-乘风破浪
@@ -54,4 +54,4 @@ config = {
 };
 
 // 示例对局
-demogame();
+demoGame();

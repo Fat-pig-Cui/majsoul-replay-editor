@@ -1,4 +1,4 @@
-clearproject();
+clearProject();
 
 // 大三元, 四杠, 字一色, 四暗刻, 妙手回春, 杠上开花, 圈风刻, 门风刻, 不计花牌共324番
 
@@ -26,12 +26,12 @@ tiles0 = '11125555666777z';
 tiles1 = '23455678m22334z';
 tiles2 = '1112223334445m';
 tiles3 = '5666777888999m';
-randompaishan('', '12376z');
-roundbegin();
-combomopai(3);
+randomPaishan('', '12376z');
+roundBegin();
+comboMopai(3);
 qiepai();
-mingqiepai();
-normalmoqie(78);
+mingQiepai();
+normalMoqie(78);
 mopai();
-combomopai();
+comboMopai();
 hupai();

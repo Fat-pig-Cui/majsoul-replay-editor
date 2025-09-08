@@ -1,4 +1,4 @@
-clearproject();
+clearProject();
 
 // 同期UP装扮:
 // 对局音乐-一心一智 (没加入 views)
@@ -31,4 +31,4 @@ config = {
 };
 
 // 示例对局
-demogame();
+demoGame();

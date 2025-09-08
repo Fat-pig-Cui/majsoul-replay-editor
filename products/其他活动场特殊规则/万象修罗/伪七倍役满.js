@@ -1,4 +1,4 @@
-clearproject();
+clearProject();
 
 // 雀魂官方的逻辑是大小四喜同时满足的话只会取大四喜, 所以只有六倍役满而不是七倍
 
@@ -26,7 +26,7 @@ tiles0 = 'b1112223344z899p';
 tiles1 = 'b112340679m899s';
 tiles2 = 'b112340679p344z';
 tiles3 = 'b112340679s899m';
-randompaishan('', '1z....');
-roundbegin();
+randomPaishan('', '1z....');
+roundBegin();
 huansanzhang('899p', '899s', '344z', '899m', 1);
 hupai(true);

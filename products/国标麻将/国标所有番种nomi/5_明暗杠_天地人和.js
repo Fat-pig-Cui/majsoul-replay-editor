@@ -1,4 +1,4 @@
-clearproject();
+clearProject();
 
 // 从第 83 局到第 87 局
 
@@ -29,13 +29,13 @@ tiles0 = '2222333m123p67s55z';
 tiles1 = '1112223334445z';
 tiles2 = '111234478899p5z';
 tiles3 = '1112225555888s';
-randompaishan('3m8s');
-roundbegin();
-combomopai();
+randomPaishan('3m8s');
+roundBegin();
+comboMopai();
 qiepai();
-normalmoqie();
+normalMoqie();
 mingpai();
-normalmoqie(2);
+normalMoqie(2);
 hupai();
 
 // 第2(84)局: 天和
@@ -43,7 +43,7 @@ tiles0 = '222345m234p789s55z';
 tiles1 = '1112223334445z';
 tiles2 = '1112345678999p';
 tiles3 = '1112345678999s';
-roundbegin();
+roundBegin();
 hupai();
 
 // 第3(85)局: 地和
@@ -51,30 +51,30 @@ tiles0 = '3m1112223334445z';
 tiles1 = '22245m234p789s55z';
 tiles2 = '1112345678999p';
 tiles3 = '1112345678999s';
-roundbegin();
+roundBegin();
 qiepai('3m');
 hupai();
 
-gotoju(0, 0, 3);
+setRound(0, 0, 3);
 
 // 第4(86)局: 人和(自摸)
 tiles0 = '11122233344456z';
 tiles1 = '22245m234p789s55z';
 tiles2 = '1112345678999p';
 tiles3 = '1112345678999s';
-randompaishan('3m');
-roundbegin();
+randomPaishan('3m');
+roundBegin();
 qiepai();
-zimohu();
+zimoHu();
 
-gotoju(0, 0, 4);
+setRound(0, 0, 4);
 // 第5(87)局: 人和(点炮)
 tiles0 = '11122233344456z';
 tiles1 = '1112345678999p';
 tiles2 = '22245m234p789s55z';
 tiles3 = '1112345678999s';
-randompaishan('3m');
-roundbegin();
+randomPaishan('3m');
+roundBegin();
 qiepai();
-normalmoqie();
+normalMoqie();
 hupai();

@@ -1,4 +1,4 @@
-clearproject();
+clearProject();
 
 player_datas[0].nickname = '伊莉雅-契约';
 player_datas[1].nickname = '美游-契约';
@@ -31,4 +31,4 @@ config = {
 };
 
 // 示例对局
-demogame();
+demoGame();

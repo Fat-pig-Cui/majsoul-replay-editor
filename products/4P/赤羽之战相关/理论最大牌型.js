@@ -1,4 +1,4 @@
-clearproject();
+clearProject();
 
 // 川麻的理论最大牌型是 花天月地清十八罗汉
 
@@ -26,14 +26,14 @@ tiles0 = '22335777889p159s';
 tiles1 = '2589m445569p159s';
 tiles2 = '112346689p3467s';
 tiles3 = '114699m469p3467s';
-randompaishan('', '23785p');
-roundbegin();
+randomPaishan('', '23785p');
+roundBegin();
 huansanzhang('159s', '159s', '238p', '469p', 1);
 dingque('msmp');
 qiepai('9p');
-mingqiepai('2m');
-normalmoqie(50);
+mingQiepai('2m');
+normalMoqie(50);
 mopai();
-combomopai(4);
+comboMopai(4);
 hupai();
-notileliuju();
+huangpai();

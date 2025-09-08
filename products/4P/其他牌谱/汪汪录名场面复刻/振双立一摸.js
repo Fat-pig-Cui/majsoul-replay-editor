@@ -1,4 +1,4 @@
-clearproject();
+clearProject();
 
 // 2018雀魂TOP15, 其中的NO.2: '振w立一摸' https://www.bilibili.com/video/BV1ub411r7Qh/?t=785
 
@@ -29,14 +29,14 @@ tiles2 = '112m48p167778s347z';
 tiles3 = '44567m12p123456s';
 tiles0 = '48m4p13699s34556z';
 tiles1 = '57889m14689p36s2z';
-randompaishan('3p7s2p1m3p', '3z3m....');
-roundbegin();
+randomPaishan('3p7s2p1m3p', '3z3m....');
+roundBegin();
 qiepai('3z');
-moqieliqi();
+moqieLiqi();
 mopai();
 qiepai('3z');
 mopai();
 qiepai('2z');
 mopai();
 qiepai('4z');
-zimohu();
+zimoHu();

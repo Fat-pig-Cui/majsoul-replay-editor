@@ -1,4 +1,4 @@
-clearproject();
+clearProject();
 
 // Q: 有牌型满足这样的条件:
 //      1. 门清且没有暗杠
@@ -37,10 +37,10 @@ tiles0 = '12m111222333444z';
 tiles1 = '9m555566667777z';
 tiles2 = '1112340678999p';
 tiles3 = '1112340678999s';
-randompaishan('2m');
-roundbegin();
+randomPaishan('2m');
+roundBegin();
 qiepai('1m');
-normalmoqie();
+normalMoqie();
 hupai();
 
 scores = [200000, 200000, 200000, 200000];
@@ -49,10 +49,10 @@ tiles0 = '12m111222333444z';
 tiles1 = '9m555566667777z';
 tiles2 = '1112340678999p';
 tiles3 = '1112340678999s';
-randompaishan('1m');
-roundbegin();
+randomPaishan('1m');
+roundBegin();
 qiepai('2m');
-normalmoqie();
+normalMoqie();
 hupai();
 
 scores = [200000, 200000, 200000, 200000];
@@ -61,10 +61,10 @@ tiles0 = '12m111222333444z';
 tiles1 = '9m555566667777z';
 tiles2 = '1112340678999p';
 tiles3 = '1112340678999s';
-randompaishan('3m');
-roundbegin();
+randomPaishan('3m');
+roundBegin();
 qiepai('1z');
-normalmoqie();
+normalMoqie();
 hupai();
 
 scores = [200000, 200000, 200000, 200000];
@@ -73,10 +73,10 @@ tiles0 = '12m111222333444z';
 tiles1 = '9m555566667777z';
 tiles2 = '1112340678999p';
 tiles3 = '1112340678999s';
-randompaishan('3m');
-roundbegin();
+randomPaishan('3m');
+roundBegin();
 qiepai('2z');
-normalmoqie();
+normalMoqie();
 hupai();
 
 scores = [200000, 200000, 200000, 200000];
@@ -85,10 +85,10 @@ tiles0 = '12m111222333444z';
 tiles1 = '9m555566667777z';
 tiles2 = '1112340678999p';
 tiles3 = '1112340678999s';
-randompaishan('3m');
-roundbegin();
+randomPaishan('3m');
+roundBegin();
 qiepai('3z');
-normalmoqie();
+normalMoqie();
 hupai();
 
 scores = [200000, 200000, 200000, 200000];
@@ -97,10 +97,10 @@ tiles0 = '12m111222333444z';
 tiles1 = '9m555566667777z';
 tiles2 = '1112340678999p';
 tiles3 = '1112340678999s';
-randompaishan('3m');
-roundbegin();
+randomPaishan('3m');
+roundBegin();
 qiepai('4z');
-normalmoqie();
+normalMoqie();
 hupai();
 
 // ===================== 第二部分 =====================
@@ -111,10 +111,10 @@ tiles0 = '22224444888s666z';
 tiles1 = '1112340678999m';
 tiles2 = '1112340678999p';
 tiles3 = '1111333055577s';
-randompaishan('3s');
-roundbegin();
+randomPaishan('3s');
+roundBegin();
 qiepai('2s');
-normalmoqie();
+normalMoqie();
 hupai();
 
 scores = [200000, 200000, 200000, 200000];
@@ -123,10 +123,10 @@ tiles0 = '22224444888s666z';
 tiles1 = '1112340678999m';
 tiles2 = '1112340678999p';
 tiles3 = '1111333055577s';
-randompaishan('3s');
-roundbegin();
+randomPaishan('3s');
+roundBegin();
 qiepai('4s');
-normalmoqie();
+normalMoqie();
 hupai();
 
 scores = [200000, 200000, 200000, 200000];
@@ -135,10 +135,10 @@ tiles0 = '22224444888s666z';
 tiles1 = '1112340678999m';
 tiles2 = '1112340678999p';
 tiles3 = '1111333055577s';
-randompaishan('3s');
-roundbegin();
+randomPaishan('3s');
+roundBegin();
 qiepai('8s');
-normalmoqie();
+normalMoqie();
 hupai();
 
 scores = [200000, 200000, 200000, 200000];
@@ -147,8 +147,8 @@ tiles0 = '22224444888s666z';
 tiles1 = '1112340678999m';
 tiles2 = '1112340678999p';
 tiles3 = '1111333055577s';
-randompaishan('3s');
-roundbegin();
+randomPaishan('3s');
+roundBegin();
 qiepai('6z');
-normalmoqie();
+normalMoqie();
 hupai();

@@ -1,4 +1,4 @@
-clearproject();
+clearProject();
 
 player_datas[0].nickname = '一姬-契约';
 player_datas[1].nickname = '一姬当千';
@@ -29,7 +29,7 @@ tiles0 = '11122233344477z';
 tiles1 = '1112340678999m';
 tiles2 = '1112340678999p';
 tiles3 = '1112340678999s';
-roundbegin();
+roundBegin();
 hupai();
 
 // 第2局: 东亲, 南起 地和, 字一色, 四暗刻单骑, 大四喜
@@ -37,17 +37,17 @@ tiles0 = '1112340678999s5z';
 tiles1 = '1112223334447z';
 tiles2 = '1112340678999m';
 tiles3 = '1112340678999p';
-randompaishan('7z');
-roundbegin();
+randomPaishan('7z');
+roundBegin();
 qiepai();
-zimohu();
+zimoHu();
 
 // 第3局: 南亲, 南起 字一色, 四杠子, 四暗刻单骑, 大四喜
 tiles1 = '11112223334447z';
 tiles2 = '1112340678999m';
 tiles3 = '1112340678999p';
 tiles0 = '1112340678999s';
-randompaishan('', '7432z');
-roundbegin();
-combomopai(4);
+randomPaishan('', '7432z');
+roundBegin();
+comboMopai(4);
 hupai();

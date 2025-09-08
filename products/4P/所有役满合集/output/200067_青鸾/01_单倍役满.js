@@ -1,4 +1,4 @@
-clearproject();
+clearProject();
 
 player_datas[0].nickname = '一姬-契约';
 player_datas[1].nickname = '一姬当千';
@@ -28,7 +28,7 @@ tiles0 = '123456789p11144z';
 tiles1 = '1112340678999m';
 tiles2 = '1112340678999p';
 tiles3 = '1112340678999s';
-roundbegin();
+roundBegin();
 hupai();
 
 // 第2局: 东亲, 南起 地和
@@ -36,20 +36,20 @@ tiles0 = '1112340678999m2z';
 tiles1 = '123456789p1144z';
 tiles2 = '1112340678999p';
 tiles3 = '1112340678999s';
-randompaishan('1z');
-roundbegin();
+randomPaishan('1z');
+roundBegin();
 qiepai();
-zimohu();
+zimoHu();
 
 // 第3局: 南亲, 南起 大三元
 tiles1 = '123p12555666777z';
 tiles2 = '1112340678999m';
 tiles3 = '1112340678999p';
 tiles0 = '1112340678999s';
-randompaishan('1z');
-roundbegin();
+randomPaishan('1z');
+roundBegin();
 qiepai('2z');
-normalmoqie();
+normalMoqie();
 hupai();
 
 // 第4局: 南亲, 南起 四暗刻
@@ -57,21 +57,21 @@ tiles1 = '555m555p555s11447z';
 tiles2 = '1112340678999m';
 tiles3 = '1112340678999p';
 tiles0 = '1112340678999s';
-randompaishan('2221z');
-roundbegin();
+randomPaishan('2221z');
+roundBegin();
 qiepai();
-normalmoqie(3);
-zimohu();
+normalMoqie(3);
+zimoHu();
 
 // 第5局: 南亲, 南起 字一色
 tiles1 = '11122233355667z';
 tiles2 = '1112340678999m';
 tiles3 = '1112340678999p';
 tiles0 = '1112340678999s';
-randompaishan('76z');
-roundbegin();
+randomPaishan('76z');
+roundBegin();
 qiepai();
-normalmoqie(2);
+normalMoqie(2);
 hupai();
 
 // 第6局: 南亲, 南起 绿一色
@@ -79,10 +79,10 @@ tiles1 = '223344666888s6z7z';
 tiles2 = '1112340678999m';
 tiles3 = '1112340678999p';
 tiles0 = '1112340678999s';
-randompaishan('776z');
-roundbegin();
+randomPaishan('776z');
+roundBegin();
 qiepai();
-normalmoqie(3);
+normalMoqie(3);
 hupai();
 
 // 第7局: 南亲, 南起 清老头
@@ -90,10 +90,10 @@ tiles1 = '11999m999p11999s1z';
 tiles2 = '2223405567888m';
 tiles3 = '2223405567888p';
 tiles0 = '2223405567888s';
-randompaishan('1m');
-roundbegin();
+randomPaishan('1m');
+roundBegin();
 qiepai();
-normalmoqie();
+normalMoqie();
 hupai();
 
 // 第8局: 南亲, 南起 国士无双
@@ -101,10 +101,10 @@ tiles1 = '119m19p19s1234577z';
 tiles2 = '2223405567888m';
 tiles3 = '2223405567888p';
 tiles0 = '2223405567888s';
-randompaishan('16z');
-roundbegin();
+randomPaishan('16z');
+roundBegin();
 qiepai();
-normalmoqie(2);
+normalMoqie(2);
 hupai();
 
 // 第9局: 南亲, 南起 小四喜
@@ -112,10 +112,10 @@ tiles1 = '123m11122233345z';
 tiles2 = '2223405567888m';
 tiles3 = '2223405567888p';
 tiles0 = '2223405567888s';
-randompaishan('554z');
-roundbegin();
+randomPaishan('554z');
+roundBegin();
 qiepai();
-normalmoqie(3);
+normalMoqie(3);
 hupai();
 
 // 第10局: 南亲, 南起 四杠子
@@ -123,13 +123,13 @@ tiles1 = '111999m999p11127z';
 tiles2 = '2223405567888m';
 tiles3 = '2223405567888p';
 tiles0 = '2223405567888s';
-randompaishan('1z', '2z1m9p9m');
-roundbegin();
+randomPaishan('1z', '2z1m9p9m');
+roundBegin();
 qiepai();
-normalmoqie();
+normalMoqie();
 mingpai();
 mopai();
-combomopai(3);
+comboMopai(3);
 hupai();
 
 // 第11局: 南亲, 南起 九莲宝灯
@@ -137,8 +137,8 @@ tiles1 = '1123465789999m7z';
 tiles2 = '2223405567888m';
 tiles3 = '2223405567888p';
 tiles0 = '2223405567888s';
-randompaishan('11z1m');
-roundbegin();
+randomPaishan('11z1m');
+roundBegin();
 qiepai();
-normalmoqie(3);
+normalMoqie(3);
 hupai();

@@ -1,4 +1,4 @@
-clearproject();
+clearProject();
 
 // 暗牌如果没有被开, 那么可以当成幺九牌, 所以这个模式可以做到四家流满
 
@@ -26,15 +26,15 @@ tiles0 = '22223444666888s';
 tiles1 = '2228m333557777s';
 tiles2 = '233344447777m0s';
 tiles3 = '05556666888m08p';
-randompaishan('', 'Y864s');
-roundbegin();
-combomopai(4);
+randomPaishan('', 'Y864s');
+roundBegin();
+comboMopai(4);
 qiepai(true);
 for (let i = 0; i < 65; i++) {
     mopai();
-    if (judgetile(getlstaction().data.tile, 'Y'))
+    if (judgeTile(getLstAction().data.tile, 'Y'))
         qiepai();
     else
         qiepai('anpai');
 }
-notileliuju();
+huangpai();

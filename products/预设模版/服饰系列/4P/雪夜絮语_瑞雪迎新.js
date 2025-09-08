@@ -1,4 +1,4 @@
-clearproject();
+clearProject();
 
 // 除了约瑟夫
 
@@ -25,4 +25,4 @@ config = {
 };
 
 // 示例对局
-demogame();
+demoGame();

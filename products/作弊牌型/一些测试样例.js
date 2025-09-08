@@ -1,4 +1,4 @@
-clearproject();
+clearProject();
 
 player_datas[0].nickname = '一姬-契约';
 player_datas[1].nickname = '新年初诣';
@@ -27,8 +27,8 @@ tiles1 = '6666666666666z';
 tiles2 = '6666666666666z';
 tiles3 = '6666666666666z';
 paishan = separate('66666666666666666666666666666666666666666666666666666666666666666666666666666666666z');
-roundbegin();
-combomopai(4);
+roundBegin();
+comboMopai(4);
 hupai();
 
 // 庄手牌全是7z, 旧版演示视频: https://www.bilibili.com/video/BV1GVSgYUEyf
@@ -36,7 +36,7 @@ tiles0 = '77777777777777z';
 tiles1 = '1112340678999m';
 tiles2 = '1112340678999p';
 tiles3 = '1112340678999s';
-roundbegin();
+roundBegin();
 hupai();
 
 // 无限立直, 第一次立直之后再次立直, 本质上都是无效的, 只有发声和牌横着的效果, 没有放立直棒动作, 也不影响立直番数和一发的计算
@@ -45,14 +45,14 @@ tiles0 = '123456789s11167z';
 tiles1 = '1112340678999m';
 tiles2 = '1112340678999p';
 tiles3 = '1112340678999s';
-randompaishan('', '666z............');
-roundbegin();
+randomPaishan('', '666z............');
+roundBegin();
 qiepai(true);
 for (let i = 0; i < 17; i++) {
-    normalmoqie(3);
-    moqieliqi();
+    normalMoqie(3);
+    moqieLiqi();
 }
-normalmoqie();
+normalMoqie();
 hupai();
 
 // 无振听模式, 手牌全是红宝牌的暗杠与算番, 至于百位无法显示的问题, 已经解决
@@ -61,11 +61,11 @@ tiles0 = '00000000000067p';
 tiles1 = '1112340678999m';
 tiles2 = '1111236789999p';
 tiles3 = '1112340678999s';
-randompaishan('00p', '4p.4p.4p.4p.000p');
-roundbegin();
-combomopai(3);
+randomPaishan('00p', '4p.4p.4p.4p.000p');
+roundBegin();
+comboMopai(3);
 qiepai('7p');
-normalmoqie();
-mingqiepai('00p');
-normalmoqie();
+normalMoqie();
+mingQiepai('00p');
+normalMoqie();
 hupai();

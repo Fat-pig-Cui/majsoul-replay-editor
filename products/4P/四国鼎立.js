@@ -1,4 +1,4 @@
-clearproject();
+clearProject();
 
 player_datas[0].nickname = '一姬-契约';
 player_datas[1].nickname = '新年初诣';
@@ -22,6 +22,6 @@ tiles0 = '129m19p19s1234567z';
 tiles1 = '19m19p19s1234567z';
 tiles2 = '19m19p19s1234567z';
 tiles3 = '19m19p19s1234567z';
-roundbegin();
+roundBegin();
 qiepai('2m');
-moqieliuju();
+moqieLiuju();

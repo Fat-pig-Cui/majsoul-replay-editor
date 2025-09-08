@@ -1,4 +1,4 @@
-clearproject();
+clearProject();
 
 // 鸢尾花之夜和温存韶光完全同期, UP装扮:
 // 和牌-机械哲学
@@ -39,4 +39,4 @@ config = {
 };
 
 // 示例对局
-demogame();
+demoGame();

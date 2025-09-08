@@ -1,4 +1,4 @@
-clearproject();
+clearProject();
 
 player_datas[0].nickname = '一姬-契约';
 player_datas[1].nickname = '一姬当千';
@@ -19,7 +19,7 @@ config = {
 tiles0 = '19m19p189s1234567z';
 tiles1 = '19m19p19s1234567z';
 tiles2 = '19m19p19s1234567z';
-randompaishan('', 'YYYYYDYYYYYYYY');
-roundbegin();
+randomPaishan('', 'YYYYYDYYYYYYYY');
+roundBegin();
 qiepai('8s');
-moqieliuju();
+moqieLiuju();

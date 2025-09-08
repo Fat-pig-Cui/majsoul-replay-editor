@@ -1,4 +1,4 @@
-clearproject();
+clearProject();
 
 // 赤羽之战的天和是不破地和的, 有汪汪录佐证: 137期片尾 https://www.bilibili.com/video/BV1jX4y1P7zi
 
@@ -27,12 +27,12 @@ tiles0 = '11234567899m159s';
 tiles1 = '357m1123467899p';
 tiles2 = '159m1123467899s';
 tiles3 = '2224466888m159p';
-randompaishan('5p5s5m');
-roundbegin();
+randomPaishan('5p5s5m');
+roundBegin();
 huansanzhang('159s', '357m', '159m', '159p', 1);
 dingque('psmp');
 hupai();
 
-zimohu();
+zimoHu();
 
-zimohu(true);
+zimoHu(true);

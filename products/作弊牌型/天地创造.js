@@ -1,4 +1,4 @@
-clearproject();
+clearProject();
 
 // 天地创造: 三暗杠白, 一明杠白, 岭上开花自摸白, 5张指示牌4张白1张1p
 // 青天井规则下:
@@ -31,11 +31,11 @@ tiles0 = '55555555555556z';
 tiles1 = '1112340678999m';
 tiles2 = '1112340678999p';
 tiles3 = '1112340678999s';
-randompaishan('65z', '1p.7z.7z.7z.7z5555z');
-roundbegin();
+randomPaishan('65z', '1p.7z.7z.7z.7z5555z');
+roundBegin();
 qiepai();
-normalmoqie(2);
+normalMoqie(2);
 mingpai();
 mopai();
-combomopai(3);
+comboMopai(3);
 hupai();

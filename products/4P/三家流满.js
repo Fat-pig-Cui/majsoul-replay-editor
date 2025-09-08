@@ -1,4 +1,4 @@
-clearproject();
+clearProject();
 
 // 这个其实在'所有报菜名合集'中已经有了, 在最后一局
 
@@ -24,8 +24,8 @@ tiles0 = '22223444666888s';
 tiles1 = '2228m333557777s';
 tiles2 = '233344447777m0s';
 tiles3 = '05556666888m08p';
-randompaishan('YYYDYYYDYYYDYYYDYYYDYYYDYYYDYYYDYYYDYYYDYYYDYYYDYYYDYYYDYYYDYYYDY', 'D864s');
-roundbegin();
-combomopai(4);
+randomPaishan('YYYDYYYDYYYDYYYDYYYDYYYDYYYDYYYDYYYDYYYDYYYDYYYDYYYDYYYDYYYDYYYDY', 'D864s');
+roundBegin();
+comboMopai(4);
 qiepai(true);
-moqieliuju();
+moqieLiuju();

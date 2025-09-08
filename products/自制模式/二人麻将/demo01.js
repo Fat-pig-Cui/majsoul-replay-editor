@@ -1,4 +1,4 @@
-clearproject();
+clearProject();
 
 player_datas[0].nickname = '一姬-契约';
 player_datas[1].nickname = '绮春歌';
@@ -16,13 +16,13 @@ config = {
 
 tiles0 = '11112223334445z';
 tiles1 = '1112340678999m';
-randompaishan('', '5m432z');
-roundbegin();
-combomopai('1z');
-combomopai('2z');
-leimingpai('3z', 'angang');
+randomPaishan('', '5m432z');
+roundBegin();
+comboMopai('1z');
+comboMopai('2z');
+zimingpai('3z', 'angang');
 mopai();
-leimingpai('4z', 'angang');
+zimingpai('4z', 'angang');
 mopai();
 qiepai();
 hupai();

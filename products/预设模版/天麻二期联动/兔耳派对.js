@@ -1,4 +1,4 @@
-clearproject();
+clearProject();
 
 player_datas[0].nickname = '竹井久-兔耳派对';
 player_datas[1].nickname = '福路美穗子-兔耳';
@@ -31,4 +31,4 @@ config = {
 };
 
 // 示例对局
-demogame();
+demoGame();

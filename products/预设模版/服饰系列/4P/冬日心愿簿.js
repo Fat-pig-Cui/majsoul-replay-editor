@@ -1,4 +1,4 @@
-clearproject();
+clearProject();
 
 // 冬日心愿簿UP装扮:
 // 和牌-得胜达摩
@@ -39,4 +39,4 @@ config = {
 };
 
 // 示例对局
-demogame();
+demoGame();

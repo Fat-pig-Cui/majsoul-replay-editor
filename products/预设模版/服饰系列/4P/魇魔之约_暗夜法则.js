@@ -1,4 +1,4 @@
-clearproject();
+clearProject();
 
 // 魇魔之约没有UP装扮
 
@@ -40,4 +40,4 @@ config = {
 };
 
 // 示例对局
-demogame();
+demoGame();

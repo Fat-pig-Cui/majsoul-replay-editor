@@ -1,4 +1,4 @@
-clearproject();
+clearProject();
 
 // 需要导入 add_function.js
 
@@ -31,12 +31,12 @@ tiles0 = '0m1112555666777z';
 tiles1 = '23455678p22334z';
 tiles2 = '1112223334445p';
 tiles3 = '5666777888999p';
-randompaishan('', '123765z0000000m');
-roundbegin();
-combomopai(11);
+randomPaishan('', '123765z0000000m');
+roundBegin();
+comboMopai(11);
 qiepai();
-mingqiepai();
-normalmoqie(78);
+mingQiepai();
+normalMoqie(78);
 mopai();
-combomopai();
+comboMopai();
 hupai();

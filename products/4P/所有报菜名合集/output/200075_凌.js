@@ -1,4 +1,4 @@
-clearproject();
+clearProject();
 
 player_datas[0].nickname = '凌-契约';
 player_datas[1].nickname = '凌';
@@ -25,7 +25,7 @@ tiles0 = '11122233344477z';
 tiles1 = '1112340678999m';
 tiles2 = '1112340678999p';
 tiles3 = '1112340678999s';
-roundbegin();
+roundBegin();
 hupai();
 
 // 第2局: 东亲, 南起 地和, 清老头, 四暗刻     三倍役满
@@ -33,20 +33,20 @@ tiles0 = '2223455567888s1z';
 tiles1 = '11999m999p11999s';
 tiles2 = '2223455567888m';
 tiles3 = '2223455567888p';
-randompaishan('1m');
-roundbegin();
+randomPaishan('1m');
+roundBegin();
 qiepai();
-zimohu();
+zimoHu();
 
 // 第3局: 南亲, 东起 铳两家: 绿一色, 纯正九莲宝灯 (3s)    役满, 两倍役满
 tiles1 = '2233344666888s6z';
 tiles2 = '2223455567888p';
 tiles3 = '1112340678999s';
 tiles0 = '1112340678999m';
-randompaishan('11z2s');
-roundbegin();
+randomPaishan('11z2s');
+roundBegin();
 qiepai();
-normalmoqie(2);
+normalMoqie(2);
 mopai();
 qiepai(true);
 hupai();
@@ -56,10 +56,10 @@ tiles1 = '23p355s555666777z';
 tiles2 = '19m19p19s1234567z';
 tiles3 = '23p11122233344z';
 tiles0 = '1112340678999m';
-randompaishan('33s1p');
-roundbegin();
+randomPaishan('33s1p');
+roundBegin();
 qiepai('3s');
-normalmoqie(2);
+normalMoqie(2);
 mopai();
 qiepai(true);
 hupai();
@@ -69,12 +69,12 @@ tiles1 = '19m9p1129s1234567z';
 tiles2 = '1123405678999p';
 tiles3 = '1p222444666888s';
 tiles0 = '1112340678999m';
-randompaishan('1p', '2p864s');
-roundbegin();
+randomPaishan('1p', '2p864s');
+roundBegin();
 qiepai('2s');
 mingpai();
 mopai();
-combomopai(3);
+comboMopai(3);
 qiepai();
 mopai();
 qiepai(true);
@@ -85,7 +85,7 @@ tiles1 = '1112340678999m7z';
 tiles2 = '1112340678999p';
 tiles3 = '1112340678999s';
 tiles0 = '1112223334447z';
-roundbegin();
+roundBegin();
 qiepai();
 hupai();
 
@@ -94,10 +94,10 @@ tiles2 = '1112340678999p7z';
 tiles3 = '1112340678999s';
 tiles0 = '1112223334555z';
 tiles1 = '1112340678999m';
-randompaishan('774z');
-roundbegin();
+randomPaishan('774z');
+roundBegin();
 qiepai();
-normalmoqie(3);
+normalMoqie(3);
 hupai();
 
 // 第8局: 北亲, 北起 荣 东起, 报菜名 (60番)        累计役满
@@ -107,16 +107,16 @@ tiles3 = '1999p1115556677z';
 tiles0 = '222205558888m6z';
 tiles1 = '222205558888s3z';
 tiles2 = '3333444467777s';
-randompaishan('...9p', '4444z8888p776251z');
-roundbegin();
+randomPaishan('...9p', '4444z8888p776251z');
+roundBegin();
 qiepai('1p', true);
-normalmoqie(3);
+normalMoqie(3);
 mopai();
-combomopai(3);
+comboMopai(3);
 qiepai();
-normalmoqie(60);
+normalMoqie(60);
 mopai();
-combomopai();
+comboMopai();
 qiepai();
 hupai();
 
@@ -127,18 +127,18 @@ tiles3 = '11122233344457z';
 tiles0 = '111666m22556p88s';
 tiles1 = '340m34p23334405s';
 tiles2 = '11112p88s555777z';
-randompaishan('3s..0p', '44p2422s..52p');
-roundbegin();
+randomPaishan('3s..0p', '44p2422s..52p');
+roundBegin();
 qiepai();
 mingpai();
 mopai();
-combomopai();
+comboMopai();
 qiepai();
-mingqiepai('6p');
-moqieliqi('2s');
-normalmoqie(2);
+mingQiepai('6p');
+moqieLiqi('2s');
+normalMoqie(2);
 mopai();
-leimingpai();
+zimingpai();
 hupai();
 
 // 第10局: (南场) 东亲, 南起 自摸, 报菜名 (33番)
@@ -148,15 +148,15 @@ tiles0 = '11122233344457z';
 tiles1 = '1111223378899p';
 tiles2 = '1112340678999m';
 tiles3 = '1112340678999s';
-randompaishan('6661z7p', '97976252p5632z');
-roundbegin();
+randomPaishan('6661z7p', '97976252p5632z');
+roundBegin();
 qiepai();
-moqieliqi();
-normalmoqie(2);
+moqieLiqi();
+normalMoqie(2);
 mopai();
-combomopai(3);
+comboMopai(3);
 qiepai();
-zimohu();
+zimoHu();
 
 // 第11局: (南场) 南亲, 西起 自摸, 报菜名 (16番)
 // 双立直, 海底摸月, 门前清自摸和, 七对子, 宝牌4, 宝牌6
@@ -165,16 +165,16 @@ tiles1 = '2222055588899m1z';
 tiles2 = '11m22p344556677s';
 tiles3 = '1333305558888p';
 tiles0 = '2222338889999s';
-randompaishan('1z', '3s......7s1p4s1p4s1p..9m.');
-roundbegin();
+randomPaishan('1z', '3s......7s1p4s1p4s1p..9m.');
+roundBegin();
 qiepai();
-moqieliqi();
+moqieLiqi();
 mopai();
-combomopai(2);
+comboMopai(2);
 qiepai();
-mingqiepai('5m');
-normalmoqie(64);
-zimohu();
+mingQiepai('5m');
+normalMoqie(64);
+zimoHu();
 
 // 第12局: (南场) 西亲 北起 自摸, 报菜名 (32番)
 // 双立直, 岭上开花, 门前清自摸和, 三色同刻, 三暗刻, 宝牌11, 红宝牌, 宝牌12
@@ -183,15 +183,15 @@ tiles2 = '11122233344457z';
 tiles3 = '12333m33305p333s';
 tiles0 = '55p11119999s555z';
 tiles1 = '1111666677779p';
-randompaishan('....3s', '2m2p2222s..3m.');
-roundbegin();
+randomPaishan('....3s', '2m2p2222s..3m.');
+roundBegin();
 qiepai();
-moqieliqi();
+moqieLiqi();
 mopai();
-leimingpai();
-normalmoqie(3);
+zimingpai();
+normalMoqie(3);
 mopai();
-combomopai();
+comboMopai();
 hupai();
 
 // 第13局: (南场) 北亲, 东起 荣和 北起        三倍满
@@ -201,9 +201,9 @@ tiles3 = '11133344445557z';
 tiles0 = '123m12399p12s222z';
 tiles1 = '1112340678999m';
 tiles2 = '1112340567899p';
-randompaishan('', '1z.8p...3s');
-roundbegin();
-combomopai();
+randomPaishan('', '1z.8p...3s');
+roundBegin();
+comboMopai();
 qiepai('3s');
 hupai();
 
@@ -214,13 +214,13 @@ tiles0 = '1p1112224445557z';
 tiles1 = '1222333455667p';
 tiles2 = '123456789m1p333z';
 tiles3 = '23789999p66777z';
-randompaishan('', '4p....');
-roundbegin();
+randomPaishan('', '4p....');
+roundBegin();
 qiepai('1p');
 hupai();
 
 // 跳转到北一局0本场
-gotoju(3, 0, 0);
+setRound(3, 0, 0);
 
 // 第15局: (北场) 东亲, 北起 荣 东起 (北1局)
 // 北, 连北
@@ -229,8 +229,8 @@ tiles0 = '1p1112223335557z';
 tiles1 = '1112340678999m';
 tiles2 = '1112340678999s';
 tiles3 = '123m23p23488s444z';
-randompaishan('', '6z....');
-roundbegin();
+randomPaishan('', '6z....');
+roundBegin();
 qiepai('1p');
 hupai();
 
@@ -240,10 +240,10 @@ tiles1 = '2223444666888s1z';
 tiles2 = '1112340678999m';
 tiles3 = '1112340678999p';
 tiles0 = '1112340678999s';
-randompaishan('111z');
-roundbegin();
+randomPaishan('111z');
+roundBegin();
 qiepai(true);
-moqieliqi(3);
+moqieLiqi(3);
 liuju();
 
 // 四杠流局
@@ -251,12 +251,12 @@ tiles1 = '11112223334447z';
 tiles2 = '1112340678999m';
 tiles3 = '1113340678999p';
 tiles0 = '1112340678999s';
-randompaishan('', '5z1p32z');
-roundbegin();
-combomopai(3);
+randomPaishan('', '5z1p32z');
+roundBegin();
+comboMopai(3);
 qiepai();
 mingpai();
-normalmoqie();
+normalMoqie();
 liuju();
 
 // 九种九牌
@@ -264,7 +264,7 @@ tiles1 = '19m19p19s12345677z';
 tiles2 = '1112340678999m';
 tiles3 = '1112340678999p';
 tiles0 = '1112340678999s';
-roundbegin();
+roundBegin();
 liuju();
 
 // 四家立直
@@ -272,10 +272,10 @@ tiles1 = '2223444666888s5z';
 tiles2 = '1112340678999m';
 tiles3 = '1112340678999p';
 tiles0 = '1112340678999s';
-randompaishan('555z');
-roundbegin();
+randomPaishan('555z');
+roundBegin();
 qiepai(true);
-moqieliqi(3);
+moqieLiqi(3);
 liuju();
 
 // 流局满贯, 听牌, 未听牌
@@ -283,8 +283,8 @@ tiles1 = '22223444666888s';
 tiles2 = '2228m333557777s';
 tiles3 = '233344447777m0s';
 tiles0 = '05556666888m08p';
-randompaishan('YYYDYYYDYYYDYYYDYYYDYYYDYYYDYYYDYYYDYYYDYYYDYYYDYYYDYYYDYYYDYYYDY', 'D864s');
-roundbegin();
-combomopai(4);
+randomPaishan('YYYDYYYDYYYDYYYDYYYDYYYDYYYDYYYDYYYDYYYDYYYDYYYDYYYDYYYDYYYDYYYDY', 'D864s');
+roundBegin();
+comboMopai(4);
 qiepai(true);
-moqieliuju();
+moqieLiuju();

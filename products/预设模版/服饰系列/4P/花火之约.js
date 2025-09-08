@@ -1,4 +1,4 @@
-clearproject();
+clearProject();
 
 // 花火之约UP装扮:
 // 立直棒-绯月荆棘
@@ -41,4 +41,4 @@ config = {
 };
 
 // 示例对局
-demogame();
+demoGame();

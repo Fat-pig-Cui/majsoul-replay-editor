@@ -1,4 +1,4 @@
-clearproject();
+clearProject();
 
 // 天黑请闭眼UP装扮:
 // 立直棒-喵星棒
@@ -36,4 +36,4 @@ config = {
 };
 
 // 示例对局
-demogame();
+demoGame();

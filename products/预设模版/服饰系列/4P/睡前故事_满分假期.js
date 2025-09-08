@@ -1,4 +1,4 @@
-clearproject();
+clearProject();
 
 // 睡前故事UP装扮:
 // 立直棒-魔法棒
@@ -52,4 +52,4 @@ config = {
 };
 
 // 示例对局
-demogame();
+demoGame();

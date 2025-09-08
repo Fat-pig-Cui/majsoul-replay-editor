@@ -1,4 +1,4 @@
-clearproject();
+clearProject();
 
 player_datas[0].nickname = '一姬-契约';
 player_datas[1].nickname = '一姬当千';
@@ -19,8 +19,8 @@ config = {
 tiles0 = '2222333444555p8s';
 tiles1 = '5566667777888s';
 tiles2 = '2223333444405s';
-randompaishan('YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY', 'Y043p');
-roundbegin();
-combomopai(4);
+randomPaishan('YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY', 'Y043p');
+roundBegin();
+comboMopai(4);
 qiepai();
-moqieliuju();
+moqieLiuju();

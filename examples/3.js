@@ -1,4 +1,4 @@
-clearproject();
+clearProject();
 
 player_datas[0].nickname = '电脑0';
 player_datas[1].nickname = '电脑1';
@@ -34,7 +34,7 @@ tiles1 = '1112378999s555s';
 tiles2 = '11123p78999p406m';
 tiles3 = '4556m345567p406s';
 paishan = separate('555555z5m5555555555555555555555555555555555555555555555555555555555555555555555555555z');
-roundbegin();
+roundBegin();
 huansanzhang('406p', '555s', '406m', '406s', 1);
 qiepai('5z');
 mopai();
@@ -47,14 +47,14 @@ for (let i = 62; i >= 0; i--) {
     mopai();
     qiepai();
 }
-notileliuju();
+huangpai();
 
 tiles1 = '19m19p19s1234z6s550m';
 tiles2 = '12345s12345m406p';
 tiles3 = '1122288999m556z';
 tiles0 = '1112378999p6m11s';
-randompaishan('11z8m17z');
-roundbegin();
+randomPaishan('11z8m17z');
+roundBegin();
 huansanzhang('6m11s', '550m', '406p', '556z', 1);
 qiepai('6s');
 hupai(2);
@@ -72,7 +72,7 @@ tiles2 = '8s6667788p111m9p9m9s';
 tiles3 = '111222z4446z333s';
 tiles0 = '1m1p1s1234567z78p8s';
 tiles1 = '222444s666s6z333z';
-randompaishan('6z9m');
-roundbegin();
+randomPaishan('6z9m');
+roundBegin();
 huansanzhang('78p8s', '333z', '9p9m9s', '333s', 1);
 hupai(true);

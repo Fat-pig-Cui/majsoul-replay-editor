@@ -1,4 +1,4 @@
-clearproject();
+clearProject();
 
 // 昭华年UP装扮:
 // 立直棒-冰糖葫芦(咸)
@@ -54,4 +54,4 @@ config = {
 };
 
 // 示例对局
-demogame();
+demoGame();

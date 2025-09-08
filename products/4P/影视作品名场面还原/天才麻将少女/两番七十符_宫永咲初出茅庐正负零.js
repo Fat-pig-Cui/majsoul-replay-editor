@@ -1,4 +1,4 @@
-clearproject();
+clearProject();
 
 // 动画版 天才麻将少女 第一季第1集19min开始
 // 清澄高校内部友人场, 四赤东风战
@@ -36,13 +36,13 @@ tiles3 = '23467m111p156889s';
 tiles0 = '2468m058p227777s';
 tiles1 = '2468m2488p44446s';
 tiles2 = '6m122334679p333z';
-qiepaiset = ['9p4z1z2z4z6z1z5p9m', '', '5z1z6z9s2m3s6m9m7z6p7p', '9s4z2z1z1s3p1m1m0p1s'];
-randompaishan('9p.5z4z4z.1z2z1z.6z1z2z.9s1s4z.2m3p6z.3s1m1z.9p1m5p.9m0p9m.7z0m..2s...9p...3z', '4z.3s...2s');
-roundbegin();
+qiepai_set = ['9p4z1z2z4z6z1z5p9m', '', '5z1z6z9s2m3s6m9m7z6p7p', '9s4z2z1z1s3p1m1m0p1s'];
+randomPaishan('9p.5z4z4z.1z2z1z.6z1z2z.9s1s4z.2m3p6z.3s1m1z.9p1m5p.9m0p9m.7z0m..2s...9p...3z', '4z.3s...2s');
+roundBegin();
 qiepai();
-normalmoqie(35);
-moqieliqi();
-normalmoqie(10);
+normalMoqie(35);
+moqieLiqi();
+normalMoqie(10);
 mopai();
-leimingpai();
-zimohu();
+zimingpai();
+zimoHu();

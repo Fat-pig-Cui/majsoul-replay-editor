@@ -1,4 +1,4 @@
-clearproject();
+clearProject();
 
 // 四风连打, 四杠散了, 四家立直同时出现,
 // 优先级最高的是四风连打, 但四风连打需要无人鸣牌, 故这里不会显示
@@ -32,13 +32,13 @@ tiles0 = '11112224445556z';
 tiles1 = '111999m111999p6z';
 tiles2 = '222444666888s6z';
 tiles3 = '111333777999s6z';
-randompaishan('1m2s1s', '23333z');
-roundbegin();
-combomopai();
+randomPaishan('1m2s1s', '23333z');
+roundBegin();
+comboMopai();
 qiepai(true);
 for (let i = 0; i < 3; i++) {
     mopai();
-    combomopai();
+    comboMopai();
     qiepai(true);
 }
 liuju();

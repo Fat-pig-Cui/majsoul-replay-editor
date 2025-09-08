@@ -1,4 +1,4 @@
-clearproject();
+clearProject();
 
 // 同期UP装扮:
 // 立直棒-饺子
@@ -30,4 +30,4 @@ config = {
 };
 
 // 示例对局
-demogame();
+demoGame();

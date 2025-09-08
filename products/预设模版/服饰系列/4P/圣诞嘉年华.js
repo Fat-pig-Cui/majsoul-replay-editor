@@ -1,4 +1,4 @@
-clearproject();
+clearProject();
 
 // 圣诞嘉年华实装时没有UP装扮
 
@@ -30,4 +30,4 @@ config = {
 };
 
 // 示例对局
-demogame();
+demoGame();

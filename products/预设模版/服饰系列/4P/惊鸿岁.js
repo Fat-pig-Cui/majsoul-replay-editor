@@ -1,4 +1,4 @@
-clearproject();
+clearProject();
 
 // 惊鸿岁UP装扮:
 // 立直棒-青竹伞
@@ -41,4 +41,4 @@ config = {
 };
 
 // 示例对局
-demogame();
+demoGame();

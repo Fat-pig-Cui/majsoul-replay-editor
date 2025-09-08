@@ -10,7 +10,7 @@
               textLength="242.7724" x="943.6098" y="399.3105">&#24320;&#23616;(&#24196;&#34892;&#21160;)
         </text>
         <text fill="#000000" font-family="'&#24494;&#36719;&#38597;&#40657;'" font-size="42" lengthAdjust="spacing"
-              textLength="273.082" x="928.455" y="448.2012">roundbegin()
+              textLength="273.082" x="928.455" y="448.2012">roundBegin()
         </text>
         <rect fill="#90EE90" height="112.7813" rx="18.75" ry="18.75" style="stroke:#181818;stroke-width:0.75;"
               width="176.0068" x="631.995" y="557.1102"/>
@@ -42,7 +42,7 @@
               textLength="280.3019" x="758.355" y="1399.7205">&#26263;&#26464;/&#21152;&#26464;/&#25300;&#21271;
         </text>
         <text fill="#000000" font-family="'&#24494;&#36719;&#38597;&#40657;'" font-size="42" lengthAdjust="spacing"
-              textLength="251.877" x="772.5675" y="1448.6112">leimingpai()
+              textLength="251.877" x="772.5675" y="1448.6112">zimingpai()
         </text>
         <rect fill="#F08080" height="112.7813" rx="18.75" ry="18.75" style="stroke:#181818;stroke-width:0.75;"
               width="165.0762" x="815.955" y="1628.0052"/>
@@ -58,7 +58,7 @@
               textLength="168.0007" x="104.9984" y="1001.6505">&#33618;&#29260;&#27969;&#23616;
         </text>
         <text fill="#000000" font-family="'&#24494;&#36719;&#38597;&#40657;'" font-size="42" lengthAdjust="spacing"
-              textLength="238.9775" x="69.51" y="1050.5412">notileliuju()
+              textLength="238.9775" x="69.51" y="1050.5412">huangpai()
         </text>
         <rect fill="#ADD8E6" height="112.7813" rx="18.75" ry="18.75" style="stroke:#181818;stroke-width:0.75;"
               width="183.0007" x="349.5" y="1353.2352"/>

@@ -1,4 +1,4 @@
-clearproject();
+clearProject();
 
 // 皮肤随机范围为所有实装皮肤
 // 装扮随机范围包括立直棒, 和牌特效, 立直特效, 头像框, 桌布, 牌背, 称号, 牌面
@@ -26,8 +26,8 @@ tiles0 = '2223444666888s5z';
 tiles1 = '1112340678999m';
 tiles2 = '1112340678999p';
 tiles3 = '1112340678999s';
-randompaishan('555z');
-roundbegin();
+randomPaishan('555z');
+roundBegin();
 qiepai(true);
-moqieliqi(3);
+moqieLiqi(3);
 liuju();

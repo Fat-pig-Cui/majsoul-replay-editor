@@ -1,4 +1,4 @@
-clearproject();
+clearProject();
 
 player_datas[0].nickname = '璃央-契约';
 player_datas[1].nickname = '璃央';
@@ -35,15 +35,15 @@ tiles0 = '789s1111z5556667z';
 tiles1 = '222205588889m3s';
 tiles2 = '1122224055599s';
 tiles3 = '3333444467777p';
-randompaishan('', '7z.....66s444477z.9s65z');
-roundbegin();
-combomopai(3);
+randomPaishan('', '7z.....66s444477z.9s65z');
+roundBegin();
+comboMopai(3);
 qiepai('9s');
-mingqiepai('4s');
-normalmoqie(61);
-moqieliqi();
-normalmoqie(3);
-zimohu();
+mingQiepai('4s');
+normalMoqie(61);
+moqieLiqi();
+normalMoqie(3);
+zimoHu();
 
 // 最高番数(14条60番)
 // 这个其实在'所有报菜名合集'中已经有了, 在第八局(东四局0本场)
@@ -53,15 +53,15 @@ tiles0 = '1999p1115556677z';
 tiles1 = '222205558888m6z';
 tiles2 = '222205558888s3z';
 tiles3 = '3333444467777s';
-randompaishan('...9p', '4444z8888p776z.51z');
-roundbegin();
+randomPaishan('...9p', '4444z8888p776z.51z');
+roundBegin();
 qiepai('1p', true);
-normalmoqie(3);
+normalMoqie(3);
 mopai();
-combomopai(3);
+comboMopai(3);
 qiepai();
-normalmoqie(60);
+normalMoqie(60);
 mopai();
-leimingpai();
-normalmoqie();
+zimingpai();
+normalMoqie();
 hupai();

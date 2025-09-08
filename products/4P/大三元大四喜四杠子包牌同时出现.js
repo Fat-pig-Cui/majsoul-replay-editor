@@ -1,4 +1,4 @@
-clearproject();
+clearProject();
 
 player_datas[0].nickname = '一姬-契约';
 player_datas[1].nickname = '新年初诣';
@@ -26,18 +26,18 @@ tiles0 = '1999m1555666777z';
 tiles1 = '1m9s11223344567z';
 tiles2 = '1666777888999p';
 tiles3 = '1666777888999s';
-randompaishan('9mDD1m', 'D432z');
-roundbegin();
+randomPaishan('9mDD1m', 'D432z');
+roundBegin();
 qiepai('1z');
 for (let i = 0; i < 3; i++) {
-    mingqiepai(i + 5 + 'z');
+    mingQiepai(i + 5 + 'z');
     mingpai();
-    normalmoqie();
+    normalMoqie();
 }
-mingqiepai('9s');
-normalmoqie();
+mingQiepai('9s');
+normalMoqie();
 mingpai();
-normalmoqie(4);
+normalMoqie(4);
 hupai();
 
 // 情景2: 三种役满出现在三家
@@ -45,14 +45,14 @@ tiles0 = '1112345678999m6z';
 tiles1 = '366s1234556677z';
 tiles2 = '12389s11223344z';
 tiles3 = '1112223s888999s';
-qiepaiset = ['6z3s', '1234z', '1289s', '57z67s'];
-randompaishan('3s', '76s75z');
-roundbegin();
+qiepai_set = ['6z3s', '1234z', '1289s', '57z67s'];
+randomPaishan('3s', '76s75z');
+roundBegin();
 qiepai(true);
 for (let i = 0; i < 4; i++) {
-    mingqiepai(2);
+    mingQiepai(2);
     mingpai();
-    normalmoqie();
+    normalMoqie();
 }
-normalmoqie();
+normalMoqie();
 hupai();

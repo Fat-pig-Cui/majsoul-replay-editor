@@ -1,4 +1,4 @@
-clearproject();
+clearProject();
 
 // 春日返校季UP装扮:
 // 立直棒-仿生喵
@@ -32,4 +32,4 @@ config = {
 };
 
 // 示例对局
-demogame();
+demoGame();

@@ -1,4 +1,4 @@
-clearproject();
+clearProject();
 
 // 这里不考虑换三张的情况, 没有什么必要
 
@@ -38,22 +38,22 @@ tiles0 = '1122334469999m4p';
 tiles1 = '66688m46788p677s';
 tiles2 = '1111222233334s';
 tiles3 = '1111222233334p';
-randompaishan('4s.1234m');
-roundbegin();
+randomPaishan('4s.1234m');
+roundBegin();
 dingque('pspm');
 qiepai();
 hupai();
 
-normalmoqie();
+normalMoqie();
 hupai();
 
-normalmoqie();
+normalMoqie();
 for (let i = 0; i < 4; i++) {
-    normalmoqie();
-    mingqiepai('9m');
+    normalMoqie();
+    mingQiepai('9m');
 }
-normalmoqie(49);
-notileliuju();
+normalMoqie(49);
+huangpai();
 
 // 无人跑路, 最高巡目
 // 要让一家巡目最高, 那该家最好是庄家
@@ -66,25 +66,25 @@ tiles3 = '1m1111222333444p';
 tiles0 = '19999m55667788s';
 tiles1 = '1m556677889999p';
 tiles2 = '1m112233449999s';
-randompaishan('234p1234s5p.6p.7p.8p.5s..6s..7s..8s');
-roundbegin();
+randomPaishan('234p1234s5p.6p.7p.8p.5s..6s..7s..8s');
+roundBegin();
 dingque('psps');
-combomopai(4);
+comboMopai(4);
 qiepai();
 for (let i = 0; i < 4; i++) {
-    mingqiepai('9s');
-    normalmoqie();
+    mingQiepai('9s');
+    normalMoqie();
 }
 for (let i = 0; i < 4; i++) {
-    mingqiepai('9p');
-    normalmoqie(2);
+    mingQiepai('9p');
+    normalMoqie(2);
 }
 for (let i = 0; i < 4; i++) {
-    mingqiepai('9m');
-    normalmoqie(3);
+    mingQiepai('9m');
+    normalMoqie(3);
 }
-normalmoqie(27);
-notileliuju();
+normalMoqie(27);
+huangpai();
 
 // 无人跑路, 最低巡目
 // 要让一家巡目最低, 那该家最好是北家
@@ -98,24 +98,24 @@ tiles3 = '1112223334449m9s';
 tiles0 = '111222333444p9s';
 tiles1 = '1112223334449s';
 tiles2 = '555666p5556669s';
-randompaishan('.1234s1m..2m..3m..4m..1p.2p.3p.4p');
-roundbegin();
+randomPaishan('.1234s1m..2m..3m..4m..1p.2p.3p.4p');
+roundBegin();
 dingque('mpmp');
 qiepai('9m');
-normalmoqie(1);
+normalMoqie(1);
 mopai();
-combomopai(4);
+comboMopai(4);
 qiepai();
 for (let i = 0; i < 4; i++) {
     mingpai();
-    normalmoqie(3);
+    normalMoqie(3);
 }
 for (let i = 0; i < 4; i++) {
     mingpai();
-    normalmoqie(2);
+    normalMoqie(2);
 }
-normalmoqie(29);
-notileliuju();
+normalMoqie(29);
+huangpai();
 
 
 // 有人跑路, 最多几张
@@ -127,22 +127,22 @@ tiles3 = '1122334469999m4p';
 tiles0 = '66688m46788p677s';
 tiles1 = '1111222233334s';
 tiles2 = '1111222233334p';
-randompaishan('4s.1234m');
-roundbegin();
+randomPaishan('4s.1234m');
+roundBegin();
 dingque('pspm');
 qiepai();
 hupai();
 
-normalmoqie();
+normalMoqie();
 hupai();
 
-normalmoqie();
+normalMoqie();
 for (let i = 0; i < 4; i++) {
-    normalmoqie();
-    mingqiepai('9m');
+    normalMoqie();
+    mingQiepai('9m');
 }
-normalmoqie(49);
-notileliuju();
+normalMoqie(49);
+huangpai();
 
 // 无人跑路, 最多几张
 // 要让一家牌河最多, 那该家最好是庄家
@@ -155,26 +155,26 @@ tiles2 = '1122334469999m8s';
 tiles3 = '6667m6667p46667s';
 tiles0 = '1122334469999p';
 tiles1 = '1122334469999s';
-randompaishan('1234m1s.2s.3s.4s.1p..2p..3p..4p');
-roundbegin();
+randomPaishan('1234m1s.2s.3s.4s.1p..2p..3p..4p');
+roundBegin();
 dingque('mspp');
 qiepai();
 for (let i = 0; i < 4; i++) {
-    normalmoqie();
-    mingqiepai('9m');
+    normalMoqie();
+    mingQiepai('9m');
 }
 for (let i = 0; i < 4; i++) {
-    normalmoqie();
-    mingqiepai('9s');
-    normalmoqie();
+    normalMoqie();
+    mingQiepai('9s');
+    normalMoqie();
 }
 for (let i = 0; i < 4; i++) {
-    normalmoqie();
-    mingqiepai('9p');
-    normalmoqie(2);
+    normalMoqie();
+    mingQiepai('9p');
+    normalMoqie(2);
 }
-normalmoqie(31);
-notileliuju();
+normalMoqie(31);
+huangpai();
 
 // 无人跑路, 最少几张
 // 要让一家牌河最少, 那该家最好是北家
@@ -189,25 +189,25 @@ tiles2 = '1112223334449m9s';
 tiles3 = '111222333444p9s';
 tiles0 = '1112223334449s';
 tiles1 = '555666p5556669s';
-randompaishan('..56p56s1m...2m...3m...4m...1p..2p..3p..4p..1s.2s.3s.4s');
-roundbegin();
+randomPaishan('..56p56s1m...2m...3m...4m...1p..2p..3p..4p..1s.2s.3s.4s');
+roundBegin();
 dingque('mpmp');
 qiepai('9m');
-normalmoqie(2);
+normalMoqie(2);
 mopai();
-combomopai(4);
+comboMopai(4);
 qiepai();
 for (let i = 0; i < 4; i++) {
     mingpai();
-    normalmoqie(4);
+    normalMoqie(4);
 }
 for (let i = 0; i < 4; i++) {
     mingpai();
-    normalmoqie(3);
+    normalMoqie(3);
 }
 for (let i = 0; i < 4; i++) {
     mingpai();
-    normalmoqie(2);
+    normalMoqie(2);
 }
-normalmoqie(12);
-notileliuju();
+normalMoqie(12);
+huangpai();

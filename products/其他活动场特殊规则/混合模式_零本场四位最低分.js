@@ -1,4 +1,4 @@
-clearproject();
+clearProject();
 
 // 龙之目玉(放铳家持有目玉) + 幻境传说(含有 庄家卡: 赠品) + 天命之战(各和牌家满天命牌)
 // 四位最低分: -4488000
@@ -30,10 +30,10 @@ tiles0 = '1111zt2223334446z';
 tiles1 = '1112mt340678999m';
 tiles2 = '1113st33777999s6z';
 tiles3 = '2224st44666888s6z';
-muyuseats = '1';
-randompaishan('6z', '5z.5z.5z.5z0p432z');
-roundbegin();
-combomopai(4);
+muyu_seats = '1';
+randomPaishan('6z', '5z.5z.5z.5z0p432z');
+roundBegin();
+comboMopai(4);
 qiepai();
-normalmoqie();
+normalMoqie();
 hupai();

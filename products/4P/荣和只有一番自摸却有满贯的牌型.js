@@ -1,4 +1,4 @@
-clearproject();
+clearProject();
 
 // 问: 立直情况下, 什么牌型荣和只有1番40符, 但自摸同样的牌是满贯?
 // 答: 有条件的三暗刻, 三个暗刻都不是幺九刻, 而且牌型没有断幺九, 雀头不能是役牌.
@@ -27,12 +27,12 @@ tiles0 = '123m22444666p8s34z';
 tiles1 = '1112340678999m';
 tiles2 = '1112340678999p';
 tiles3 = '122055899s3344z';
-randompaishan('8s', '11z....');
-roundbegin();
+randomPaishan('8s', '11z....');
+roundBegin();
 qiepai();
-mingqiepai('1s');
-moqieliqi('3z');
-mingqiepai('8s');
+mingQiepai('1s');
+moqieLiqi('3z');
+mingQiepai('8s');
 hupai();
 
 // 自摸
@@ -40,10 +40,10 @@ tiles0 = '123m22444666p8s34z';
 tiles1 = '1112340678999m';
 tiles2 = '1112340678999p';
 tiles3 = '122055799s3344z';
-randompaishan('88s', '11z....');
-roundbegin();
+randomPaishan('88s', '11z....');
+roundBegin();
 qiepai();
-mingqiepai('1s');
-moqieliqi('3z');
-mingqiepai('7s');
-zimohu();
+mingQiepai('1s');
+moqieLiqi('3z');
+mingQiepai('7s');
+zimoHu();

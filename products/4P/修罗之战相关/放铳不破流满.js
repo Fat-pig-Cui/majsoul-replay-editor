@@ -1,4 +1,4 @@
-clearproject();
+clearProject();
 
 // 雀魂流满的要求之一是不被吃碰杠, 而非鸣牌, 故放铳家仍然可以流满
 
@@ -24,12 +24,12 @@ config = {
 
 tiles0 = '23444555667779m';
 tiles1 = '1112223336999m';
-tiles2 = '6m222345556788p';
-tiles3 = '2223455567888s';
-randompaishan('Y...Y...Y...Y...Y...Y...Y...Y...Y...Y...Y...Y...Y...Y...Y...Y...1mY..Y');
-roundbegin();
+tiles2 = '406m2223555788p';
+tiles3 = '2222445566778s';
+randomPaishan('Y...Y...Y...Y...Y...Y...Y...Y...Y...Y...Y...Y...Y...Y...Y...Y...1mY..Y');
+roundBegin();
 qiepai();
-normalmoqie(65);
-hupai(0);
-normalmoqie(4);
-notileliuju();
+normalMoqie(65);
+hupai();
+normalMoqie(4);
+huangpai();

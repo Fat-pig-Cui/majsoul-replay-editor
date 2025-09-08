@@ -1,4 +1,4 @@
-clearproject();
+clearProject();
 
 player_datas[0].nickname = '电脑0';
 player_datas[1].nickname = '电脑1';
@@ -30,8 +30,8 @@ config = {
 tiles0 = '111s11125566777z';
 tiles1 = '1m222333444688s';
 tiles2 = '1m111222333p688s';
-randompaishan('66s4z', '2s5z999m33336z9999s65z9m71z1s444z');
-roundbegin();
+randomPaishan('66s4z', '2s5z999m33336z9999s65z9m71z1s444z');
+roundBegin();
 qiepai('2z', true);
 mopai();
 qiepai('1m', true);
@@ -39,14 +39,14 @@ mopai();
 qiepai('1m', true);
 mopai();
 for (let i = 0; i < 7; i++) {
-    leimingpai();
+    zimingpai();
     mopai();
 }
-while (getlstaction(1).data.left_tile_count >= 2) {
+while (getLstAction(1).data.left_tile_count >= 2) {
     qiepai();
     mopai();
 }
-leimingpai();
+zimingpai();
 mopai();
 qiepai();
 hupai();
@@ -54,46 +54,46 @@ hupai();
 tiles0 = '1122334567899s4z';
 tiles1 = '1m444055667789s';
 tiles2 = '1m111222333p688s';
-randompaishan('', '9s');
-roundbegin();
-leimingpai();
+randomPaishan('', '9s');
+roundBegin();
+zimingpai();
 mopai();
 hupai();
 
 tiles0 = '1199m123456789p4z';
 tiles1 = '2223334448888s';
 tiles2 = '1199m123456789p';
-roundbegin();
-leimingpai();
+roundBegin();
+zimingpai();
 mopai();
 qiepai(true);
 mopai();
 qiepai('8s', true);
 {
-    let tmp_tingpais = calctingpai(1);
+    let tmp_tingpais = calcTingpai(1);
     let first_2 = false; // 2号玩家是否已经立直
     for (let i = 0; i < 52; i++) {
         mopai();
-        if (calchupai(playertiles[getlstaction().data.seat]) !== 0) {
+        if (calcHupai(player_tiles[getLstAction().data.seat]) !== 0) {
             hupai();
             break;
         } else {
-            if (getlstaction().data.tile === '4z') {
-                leimingpai();
-                if (equaltile('4z', tmp_tingpais[0].tile)) {
+            if (getLstAction().data.tile === '4z') {
+                zimingpai();
+                if (isEqualTile('4z', tmp_tingpais[0].tile)) {
                     hupai();
                     break;
                 } else
                     continue;
             }
-            if (!first_2 && getlstaction().data.seat === 2) {
+            if (!first_2 && getLstAction().data.seat === 2) {
                 first_2 = true;
                 qiepai(true);
             } else
                 qiepai();
             let is_fangchong = false;
             for (let j = 0; j < tmp_tingpais.length; j++) {
-                if (equaltile(getlstaction().data.tile, tmp_tingpais[j].tile)) {
+                if (isEqualTile(getLstAction().data.tile, tmp_tingpais[j].tile)) {
                     is_fangchong = true;
                     hupai();
                     break;
@@ -104,5 +104,5 @@ qiepai('8s', true);
         }
     }
 }
-if (getlstaction().name !== 'RecordHule')
-    notileliuju();
+if (getLstAction().name !== 'RecordHule')
+    huangpai();

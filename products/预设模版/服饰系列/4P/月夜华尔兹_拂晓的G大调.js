@@ -1,4 +1,4 @@
-clearproject();
+clearProject();
 
 // 月夜华尔兹UP装扮:
 // 立直棒-应援棒
@@ -51,4 +51,4 @@ config = {
 };
 
 // 示例对局
-demogame();
+demoGame();

@@ -1,4 +1,4 @@
-clearproject();
+clearProject();
 
 // 忽略换三张, 初始点数设为 1000
 
@@ -27,6 +27,6 @@ tiles0 = '11113334448889m';
 tiles1 = '1112345678999p';
 tiles2 = '1112345678999s';
 tiles3 = '2223455567888s';
-roundbegin();
+roundBegin();
 dingque('psmp');
-leimingpai(true);
+zimingpai(true);

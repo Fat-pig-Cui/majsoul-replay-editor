@@ -226,7 +226,7 @@
                 if (actions[i].result.name === 'RecordFillAwaitingTiles') { // 不需要
                 }
             }
-        // txt += `editdata.players = ${JSON.stringify(json.head.result.players)};\n`;
+        // txt += `all_data.players = ${JSON.stringify(json.head.result.players)};\n`;
         txt = txt.substring(0, txt.length - 1); // 去掉最后多余的回车
 
         download(txt, uuid);

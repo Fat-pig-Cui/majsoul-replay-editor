@@ -1,4 +1,4 @@
-clearproject();
+clearProject();
 
 // 同期UP装扮:
 // 立直音乐-所向披靡 (没加入 views)
@@ -34,4 +34,4 @@ config = {
 };
 
 // 示例对局
-demogame();
+demoGame();

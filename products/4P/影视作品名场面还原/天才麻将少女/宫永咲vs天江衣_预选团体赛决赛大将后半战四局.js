@@ -1,4 +1,4 @@
-clearproject();
+clearProject();
 
 // 预选团体赛决赛大将后半战的经典牌局 第一季第17集10min开始, 19集结束
 // 1. 枪杠dora7. 池田华菜0点枪宫永咲的加杠成功拿回棒子
@@ -46,19 +46,19 @@ tiles2 = '4444067788s667p';
 tiles3 = '123345789p2389s';
 tiles0 = '111667s34099m07p';
 qiepaiset = ['2z1m6s', '9s5z5m6p', '1m5z4m7s', '2m6m5s'];
-randompaishan('1m2m2z5z5z6m1m5m4m5s8s6p...8p', '9s.8m...6p');
-roundbegin();
+randomPaishan('1m2m2z5z5z6m1m5m4m5s8s6p...8p', '9s.8m...6p');
+roundBegin();
 qiepai();
-normalmoqie(12);
-mingqiepai();
-normalmoqie(3);
+normalMoqie(12);
+mingQiepai();
+normalMoqie(3);
 mopai();
-combomopai();
-leimingpai();
+comboMopai();
+zimingpai();
 hupai();
 
 // 南2局0本场
-gotoju(1, 1, 0);
+setRound(1, 1, 0);
 
 // 1番110符
 // 加治木由美 的手牌没给镜头, 我就乱编了一个
@@ -68,20 +68,20 @@ tiles2 = '11116p1m678s2666z';
 tiles3 = '1222245689m158s';
 tiles0 = '234444s079m6777p';
 qiepaiset = ['2p5z2p5z9m', '2z4z2p7z2s1m', '4z5z1s4m6p', '2z7z2s1s'];
-randompaishan('4z2z2p4z5z7z5z2p1s2s2p7z4m1s5z2s6z.6m4m..6p', '3s.6p.0p..1m2z');
-roundbegin();
+randomPaishan('4z2z2p4z5z7z5z2p1s2s2p7z4m1s5z2s6z.6m4m..6p', '3s.6p.0p..1m2z');
+roundBegin();
 qiepai();
-normalmoqie(16);
+normalMoqie(16);
 mopai();
-combomopai('6z');
-leimingpai('1p');
-normalmoqie(2);
-moqieliqi();
-normalmoqie();
+comboMopai('6z');
+zimingpai('1p');
+normalMoqie(2);
+moqieLiqi();
+normalMoqie();
 hupai();
 
 // 南3局0本场
-gotoju(1, 2, 0);
+setRound(1, 2, 0);
 
 // 岭上断幺对对三暗刻三杠子 宫永咲自摸倍满
 scores = [46900, 163900, 87800, 101400];
@@ -90,34 +90,34 @@ tiles3 = '111205778999s6p';
 tiles0 = '119p9m19s1123567z';
 tiles1 = '44s11123m777p444z';
 qiepaiset = ['3m5p3p1p', '', '4z3z7z8m3m', '9p2p2m6p'];
-randompaishan('9p3m.8p2p5p.3s2m3p.8p6sH1m1p6p.4m4m', '4p.4m.8s.9m.4s2s2s');
-roundbegin();
+randomPaishan('9p3m.8p2p5p.3s2m3p.8p6sH1m1p6p.4m4m', '4p.4m.8s.9m.4s2s2s');
+roundBegin();
 qiepai();
-normalmoqie(13);
-mingqiepai();
-normalmoqie(3);
+normalMoqie(13);
+mingQiepai();
+normalMoqie(3);
 mopai();
-combomopai('6p');
-combomopai('8p');
-leimingpai('3s');
-zimohu();
+comboMopai('6p');
+comboMopai('8p');
+zimingpai('3s');
+zimoHu();
 // IF线, 如果宫永咲没碰6p 天江衣自摸倍满
-gotoju(1, 2, 0);
+setRound(1, 2, 0);
 scores = [46900, 163900, 87800, 101400];
 tiles2 = '23334s6688p38m347z';
 tiles3 = '111205778999s6p';
 tiles0 = '119p9m19s1123567z';
 tiles1 = '44s11123m777p444z';
 qiepaiset = ['3m5p3p', '', '4z3z7z8m', '9p2p2m6p'];
-randompaishan('9p3m.8p2p5p.3s2m3p.8p6sH1m', '9m....');
-roundbegin();
+randomPaishan('9p3m.8p2p5p.3s2m3p.8p6sH1m', '9m....');
+roundBegin();
 qiepai();
-normalmoqie(14);
-zimohu();
+normalMoqie(14);
+zimoHu();
 
 // 南4局0本场
 // 岭上清一色对对三暗刻三杠子红宝1 累计役满
-gotoju(1, 3, 0);
+setRound(1, 3, 0);
 
 scores = [35800, 168200, 105700, 90300];
 tiles3 = '19m7999p19s234567z';
@@ -125,11 +125,11 @@ tiles0 = '225779s2588m788p';
 tiles1 = '24679m169s469p56z';
 tiles2 = '122234p14m38s267z';
 qiepaiset = ['4z1z7z2m5m9s5s7p', '9m1s9s5z6z9p8s1p', '1m8s3s4m6z2z7z', '7p6s7s4s3s6m7m7p'];
-randompaishan('4z2m4p 6s1z3m1p 7s7z0m3p 4s2s0p2p 3s8m4s1p 6m7s8s3p 7m8p0s3p 7p7p1p', '7z.8s.1z.8p.0p4p5p');
-roundbegin();
+randomPaishan('4z2m4p 6s1z3m1p 7s7z0m3p 4s2s0p2p 3s8m4s1p 6m7s8s3p 7m8p0s3p 7p7p1p', '7z.8s.1z.8p.0p4p5p');
+roundBegin();
 qiepai();
-normalmoqie(30);
+normalMoqie(30);
 mingpai();
 mopai();
-combomopai(2);
+comboMopai(2);
 hupai();

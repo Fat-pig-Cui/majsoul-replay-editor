@@ -1,4 +1,4 @@
-clearproject();
+clearProject();
 
 // 要做到和牌却被飞, 那就只能是役满的包牌和一炮多响导致的, 下面分别用大三元和大四喜作为例子
 
@@ -27,29 +27,29 @@ tiles0 = '238999p11z556677z';
 tiles1 = '11345678m23456p';
 tiles2 = '2223405567888m';
 tiles3 = '2223405567888s';
-randompaishan('5677z1p', '1z....');
-roundbegin();
+randomPaishan('5677z1p', '1z....');
+roundBegin();
 qiepai('8p');
 for (let i = 0; i < 3; i++) {
-    normalmoqie();
-    mingqiepai('9p');
+    normalMoqie();
+    mingQiepai('9p');
 }
-normalmoqie(2);
+normalMoqie(2);
 hupai();
 
 // 大四喜包牌
-gotoju(0, 0, 0);
+setRound(0, 0, 0);
 scores = [7000, 45000, 48000, 0];
 tiles0 = '19999p112233445z';
 tiles1 = '11345678m23456p';
 tiles2 = '2223405567888m';
 tiles3 = '2223405567888s';
-randompaishan('12344z1p', '5z....');
-roundbegin();
+randomPaishan('12344z1p', '5z....');
+roundBegin();
 qiepai();
 for (let i = 0; i < 4; i++) {
-    normalmoqie();
-    mingqiepai('9p');
+    normalMoqie();
+    mingQiepai('9p');
 }
-normalmoqie(2);
+normalMoqie(2);
 hupai();

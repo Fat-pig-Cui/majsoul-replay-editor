@@ -1,4 +1,4 @@
-clearproject();
+clearProject();
 
 // 四方雀者UP装扮:
 // 立直棒-秘传之卷
@@ -36,4 +36,4 @@ config = {
 };
 
 // 示例对局
-demogame();
+demoGame();

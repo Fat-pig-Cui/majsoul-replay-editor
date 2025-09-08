@@ -1,4 +1,4 @@
-clearproject();
+clearProject();
 
 // 南起 铳三家共 2 (十三面) + 3 (绿四单) + 5 (字骑喜) = 10 倍役满
 
@@ -26,8 +26,8 @@ tiles0 = '0p1112223334446z';
 tiles1 = '1112340678999m';
 tiles2 = '19m19p19s1234567z';
 tiles3 = '222444666888s6z';
-randompaishan('6z');
-roundbegin();
+randomPaishan('6z');
+roundBegin();
 qiepai('0p');
-moqieliqi();
+moqieLiqi();
 hupai();

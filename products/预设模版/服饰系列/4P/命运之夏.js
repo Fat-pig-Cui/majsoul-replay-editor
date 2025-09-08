@@ -1,4 +1,4 @@
-clearproject();
+clearProject();
 
 // 命运之夏UP装扮:
 // 立直棒-喵切丸
@@ -42,4 +42,4 @@ config = {
 };
 
 // 示例对局
-demogame();
+demoGame();

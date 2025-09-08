@@ -1,4 +1,4 @@
-clearproject();
+clearProject();
 
 // 甜蜜魔法和新岁添喜完全同期, UP装扮:
 // 立直棒-仙境密匙
@@ -38,4 +38,4 @@ config = {
 };
 
 // 示例对局
-demogame();
+demoGame();

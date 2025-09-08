@@ -1,4 +1,4 @@
-clearproject();
+clearProject();
 
 // 11m77888999p123s 摸 8p 开暗杠(雀魂规则下, 不影响听牌面就可以暗杠), 荣和 7p 直接少了一杯口, 纯全带幺九总共4番
 
@@ -25,12 +25,12 @@ tiles0 = '119m77888999p237s';
 tiles1 = '222340567888m7p';
 tiles2 = '2222333346666p';
 tiles3 = '2233405677999s';
-randompaishan('1s', '11z....');
-roundbegin();
+randomPaishan('1s', '11z....');
+roundBegin();
 qiepai();
-mingqiepai('9s');
-moqieliqi('9m');
-mingqiepai('7p');
+mingQiepai('9s');
+moqieLiqi('9m');
+mingQiepai('7p');
 hupai();
 
 // 亲荣和, 立直nomi, 1番60符, 2900
@@ -38,14 +38,14 @@ tiles0 = '11m77888999p2237s';
 tiles1 = '222340567888m7p';
 tiles2 = '2222333346666p';
 tiles3 = '2233405677999s';
-randompaishan('1s8p', '1111z...9m');
-roundbegin();
+randomPaishan('1s8p', '1111z...9m');
+roundBegin();
 qiepai();
-mingqiepai('9s');
-moqieliqi('2s');
-mingqiepai('9s');
+mingQiepai('9s');
+moqieLiqi('2s');
+mingQiepai('9s');
 mopai();
-leimingpai();
-normalmoqie();
-mingqiepai('7p');
+zimingpai();
+normalMoqie();
+mingQiepai('7p');
 hupai();

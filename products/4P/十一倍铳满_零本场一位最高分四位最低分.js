@@ -1,4 +1,4 @@
-clearproject();
+clearProject();
 
 // 如果不限制零本场那一位最高分和四位最低分没有限制
 // 南起 铳三家共 2 (四单) + 3 (绿四单) + 6 (字杠骑喜) = 11 倍役满
@@ -29,9 +29,9 @@ tiles0 = '11112223334446z';
 tiles1 = '1112340678999m';
 tiles2 = '111333777999s6z';
 tiles3 = '222444666888s6z';
-randompaishan('6z', '0p432z');
-roundbegin();
-combomopai(4);
+randomPaishan('6z', '0p432z');
+roundBegin();
+comboMopai(4);
 qiepai();
-normalmoqie();
+normalMoqie();
 hupai();

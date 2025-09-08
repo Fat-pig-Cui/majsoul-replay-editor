@@ -1,4 +1,4 @@
-clearproject();
+clearProject();
 
 // 照姐铳松实玄倍满, 阿知贺篇第11集19min开始
 // 因为雀魂天麻联动没有 花田煌 和 松实玄, 所以分别用 岚星 和 伊芙 代替
@@ -36,19 +36,19 @@ tiles3 = '14m4667778p44777z';
 tiles0 = '126899s1127m455z';
 tiles1 = '2489m357789s89p5z';
 tiles2 = '2233340p23s206m6z';
-qiepaiset = ['3z4z9p1p6s1p1s1m', '4z2z6p4m7s5z5s5m5s', '2z9s9p2m6z2s3p2z', '1m1s3s3z4m4p8m7m'];
-randompaishan('3z4z2z 1s9m2z9s 3s9p6p9p 3z1p1m4s 6p2s8m0p 5p1p.5s4p5m0s 8m2z7m', '9p2p....');
-roundbegin();
+qiepai_set = ['3z4z9p1p6s1p1s1m', '4z2z6p4m7s5z5s5m5s', '2z9s9p2m6z2s3p2z', '1m1s3s3z4m4p8m7m'];
+randomPaishan('3z4z2z 1s9m2z9s 3s9p6p9p 3z1p1m4s 6p2s8m0p 5p1p.5s4p5m0s 8m2z7m', '9p2p....');
+roundBegin();
 qiepai();
-normalmoqie(19);
-moqieliqi();
-normalmoqie(2);
-mingqiepai();
-normalmoqie(2);
-mingqiepai();
-normalmoqie();
-moqieliqi();
-normalmoqie();
-mingqiepai();
-normalmoqie(2);
+normalMoqie(19);
+moqieLiqi();
+normalMoqie(2);
+mingQiepai();
+normalMoqie(2);
+mingQiepai();
+normalMoqie();
+moqieLiqi();
+normalMoqie();
+mingQiepai();
+normalMoqie(2);
 hupai();

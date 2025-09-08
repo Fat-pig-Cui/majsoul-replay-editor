@@ -1,4 +1,4 @@
-clearproject();
+clearProject();
 
 player_datas[0].nickname = '一姬-契约';
 player_datas[1].nickname = '新年初诣';
@@ -24,11 +24,11 @@ tiles0 = '22268m22288p222s7z';
 tiles1 = '1111340678999m';
 tiles2 = '1111330678999p';
 tiles3 = '1111340678999s';
-randompaishan('.....2m', '77m....22223333z.7m2s2p');
-roundbegin();
+randomPaishan('.....2m', '77m....22223333z.7m2s2p');
+roundBegin();
 qiepai(true);
-normalmoqie(5);
+normalMoqie(5);
 mopai();
-combomopai(3);
+comboMopai(3);
 hupai();
 

@@ -1,4 +1,4 @@
-clearproject();
+clearProject();
 
 // 除了轻库娘
 
@@ -40,4 +40,4 @@ config = {
 };
 
 // 示例对局
-demogame();
+demoGame();

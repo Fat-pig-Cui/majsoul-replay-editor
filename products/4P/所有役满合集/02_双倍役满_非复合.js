@@ -1,4 +1,4 @@
-clearproject();
+clearProject();
 
 player_datas[0].nickname = '一姬-契约';
 player_datas[1].nickname = '新年初诣';
@@ -25,7 +25,7 @@ tiles0 = '0m123456789p1114z';
 tiles1 = '1112345678999m';
 tiles2 = '1112340678999p';
 tiles3 = '1112340678999s';
-roundbegin();
+roundBegin();
 qiepai('0m');
 hupai();
 
@@ -34,10 +34,10 @@ tiles1 = '222p222s11122267z';
 tiles2 = '1112340678999m';
 tiles3 = '1112340678999p';
 tiles0 = '1112340678999s';
-randompaishan('6z');
-roundbegin();
+randomPaishan('6z');
+roundBegin();
 qiepai();
-normalmoqie();
+normalMoqie();
 hupai();
 
 // 第3局: 南亲, 南起 国士无双十三面
@@ -45,10 +45,10 @@ tiles1 = '139m19p19s1234567z';
 tiles2 = '2223405567888m';
 tiles3 = '1112340678999p';
 tiles0 = '1112340678999s';
-randompaishan('1z');
-roundbegin();
+randomPaishan('1z');
+roundBegin();
 qiepai('3m');
-normalmoqie();
+normalMoqie();
 hupai();
 
 // 第4局: 南亲, 南起 大四喜
@@ -56,8 +56,8 @@ tiles1 = '22m111222333445z';
 tiles2 = '1112340678999m';
 tiles3 = '1112340678999p';
 tiles0 = '1112340678999s';
-randompaishan('54z');
-roundbegin();
+randomPaishan('54z');
+roundBegin();
 qiepai();
-normalmoqie(2);
+normalMoqie(2);
 hupai();

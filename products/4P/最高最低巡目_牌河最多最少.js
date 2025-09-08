@@ -1,4 +1,4 @@
-clearproject();
+clearProject();
 
 // 巡目的计数方式是自家摸到或鸣到牌时, 巡目就加一
 
@@ -30,23 +30,23 @@ tiles0 = '11112223334445z';
 tiles1 = '112233449999m5z';
 tiles2 = '112233449999p5z';
 tiles3 = '112233449999s5z';
-randompaishan('234s1p.2p.3p.4p.1m..2m..3m..4m', '1s432z');
-roundbegin();
-combomopai(4);
+randomPaishan('234s1p.2p.3p.4p.1m..2m..3m..4m', '1s432z');
+roundBegin();
+comboMopai(4);
 qiepai();
 for (let i = 0; i < 4; i++) {
-    mingqiepai('9s');
-    normalmoqie();
+    mingQiepai('9s');
+    normalMoqie();
 }
 for (let i = 0; i < 4; i++) {
-    mingqiepai('9p');
-    normalmoqie(2);
+    mingQiepai('9p');
+    normalMoqie(2);
 }
 for (let i = 0; i < 4; i++) {
-    mingqiepai('9m');
-    normalmoqie(3);
+    mingQiepai('9m');
+    normalMoqie(3);
 }
-moqieliuju();
+moqieLiuju();
 
 // 要让一家巡目最少, 那该家最好是北家, 且西家打出的牌
 // 被亲家明杠四次
@@ -56,19 +56,19 @@ tiles0 = '11122233344457z';
 tiles1 = '112233449999m5z';
 tiles2 = '111222888999p5z';
 tiles3 = '111222888999s5z';
-randompaishan('.1z.2z.3z.4z.1234m');
-roundbegin();
+randomPaishan('.1z.2z.3z.4z.1234m');
+roundBegin();
 qiepai();
-normalmoqie(2);
+normalMoqie(2);
 for (let i = 0; i < 4; i++) {
     mingpai();
-    normalmoqie(3);
+    normalMoqie(3);
 }
 for (let i = 0; i < 4; i++) {
-    mingqiepai('9m');
-    normalmoqie();
+    mingQiepai('9m');
+    normalMoqie();
 }
-moqieliuju();
+moqieLiuju();
 
 
 // 要让一家牌河最多, 那该家最好是亲
@@ -81,25 +81,25 @@ tiles0 = '9999s1122334457z';
 tiles1 = '111122226666p5z';
 tiles2 = '333305559999p5z';
 tiles3 = '112233449999m5z';
-randompaishan('1234z1m.2m.3m.4m.4p..4p..4p..4p');
-roundbegin();
+randomPaishan('1234z1m.2m.3m.4m.4p..4p..4p..4p');
+roundBegin();
 for (let i = 0; i < 4; i++) {
     qiepai('9s');
-    normalmoqie();
+    normalMoqie();
     mingpai();
 }
 qiepai('7z');
 for (let i = 0; i < 4; i++) {
-    normalmoqie();
-    mingqiepai('9m');
-    normalmoqie();
+    normalMoqie();
+    mingQiepai('9m');
+    normalMoqie();
 }
 for (let i = 0; i < 4; i++) {
-    normalmoqie();
-    mingqiepai('9p');
-    normalmoqie(2);
+    normalMoqie();
+    mingQiepai('9p');
+    normalMoqie(2);
 }
-moqieliuju();
+moqieLiuju();
 
 // 要让一家牌河最少, 那该家最好是北家,
 // 且 北家出的牌
@@ -111,20 +111,20 @@ tiles0 = '11122233344457z';
 tiles1 = '112233449999m5z';
 tiles2 = '112233449999p5z';
 tiles3 = '1111222266667s';
-randompaishan('..1z..2z..3z..4z..1m.2m.3m.4m.1p2p3p4p', '5z....');
-roundbegin();
+randomPaishan('..1z..2z..3z..4z..1m.2m.3m.4m.1p2p3p4p', '5z....');
+roundBegin();
 qiepai();
-normalmoqie(3);
+normalMoqie(3);
 for (let i = 0; i < 4; i++) {
     mingpai();
-    normalmoqie(4);
+    normalMoqie(4);
 }
 for (let i = 0; i < 4; i++) {
-    mingqiepai('9m');
-    normalmoqie(2);
+    mingQiepai('9m');
+    normalMoqie(2);
 }
 for (let i = 0; i < 4; i++) {
-    mingqiepai('9p');
-    normalmoqie();
+    mingQiepai('9p');
+    normalMoqie();
 }
-moqieliuju();
+moqieLiuju();

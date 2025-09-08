@@ -1,4 +1,4 @@
-clearproject();
+clearProject();
 
 // 报菜名界面会见到所有 7*4 = 28 张字牌(四杠子18张+10张指示牌)
 
@@ -26,10 +26,10 @@ tiles0 = '9s1112223334447z';
 tiles1 = '1112340678999m';
 tiles2 = '1112340678999p';
 tiles3 = '1112223345599s';
-randompaishan('1z', '7565656567z7432z');
-roundbegin();
+randomPaishan('1z', '7565656567z7432z');
+roundBegin();
 qiepai('9s', true);
-mingqiepai('4s');
+mingQiepai('4s');
 mopai();
-combomopai(4);
+comboMopai(4);
 hupai();

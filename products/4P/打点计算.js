@@ -1,4 +1,4 @@
-clearproject();
+clearProject();
 
 // 这个主要是在算点的时候有歧义的选择(即选择最大的)
 // 在熟悉番种的情况下, 打点计算上出难题基本围绕 符数的计算 和 役种的选择 两方面, 下面都是后者
@@ -56,10 +56,10 @@ tiles0 = '123m777888999p15z';
 tiles1 = '2223334445557z';
 tiles2 = '1112340678999s';
 tiles3 = '2223455567888s';
-randompaishan('1z', '7z....');
-roundbegin();
+randomPaishan('1z', '7z....');
+roundBegin();
 qiepai();
-normalmoqie();
+normalMoqie();
 hupai();
 
 // 第2局, 777888999p1z 123m 荣和1z
@@ -67,13 +67,13 @@ tiles0 = '12m777888999p2s15z';
 tiles1 = '2223334445557z';
 tiles2 = '888m3666777999s';
 tiles3 = '2223455567888s';
-randompaishan('1z', '7z.7z...3m');
-roundbegin();
+randomPaishan('1z', '7z.7z...3m');
+roundBegin();
 qiepai('2s');
 mingpai();
-normalmoqie();
-mingqiepai('5z');
-normalmoqie();
+normalMoqie();
+mingQiepai('5z');
+normalMoqie();
 hupai();
 
 // 第3局, 123m77888999p11z 自摸7p
@@ -81,36 +81,36 @@ tiles0 = '123m77888999p115z';
 tiles1 = '2223334445557z';
 tiles2 = '1112340678999s';
 tiles3 = '2223455567888s';
-randompaishan('1117p', '6z....');
-roundbegin();
+randomPaishan('1117p', '6z....');
+roundBegin();
 qiepai();
-normalmoqie(3);
-zimohu();
+normalMoqie(3);
+zimoHu();
 
 // 第4局, 77888999p11z 123m 自摸7p
 tiles0 = '78m77888999p25s11z';
 tiles1 = '111p2223334447z';
 tiles2 = '888m3666777999s';
 tiles3 = '2223405567888s';
-randompaishan('7p', '5z.5z.6z..29m');
-roundbegin();
+randomPaishan('7p', '5z.5z.6z..29m');
+roundBegin();
 qiepai('2s');
 mingpai();
-normalmoqie();
-mingqiepai('5s');
+normalMoqie();
+mingQiepai('5s');
 mingpai();
-normalmoqie();
-zimohu();
+normalMoqie();
+zimoHu();
 
 // 第5局, 111m77888999p11z 荣和7p
 tiles0 = '111m77888999p115z';
 tiles1 = '3334445556667z';
 tiles2 = '1112340678999s';
 tiles3 = '2223455567888s';
-randompaishan('7p', '2z....');
-roundbegin();
+randomPaishan('7p', '2z....');
+roundBegin();
 qiepai();
-normalmoqie();
+normalMoqie();
 hupai();
 
 // 第6局, 1239m777888999p 荣和9m
@@ -118,10 +118,10 @@ tiles0 = '1239m777888999p5z';
 tiles1 = '1112223334447z';
 tiles2 = '1112340678999s';
 tiles3 = '2223455567888s';
-randompaishan('9m', '7z....');
-roundbegin();
+randomPaishan('9m', '7z....');
+roundBegin();
 qiepai();
-normalmoqie();
+normalMoqie();
 hupai();
 
 // 第7局, 9m777888999p 123m 荣和9m
@@ -129,13 +129,13 @@ tiles0 = '129m777888999p2s5z';
 tiles1 = '1112223334447z';
 tiles2 = '888m3666777999s';
 tiles3 = '2223455567888s';
-randompaishan('9m', '7z.7z...3m');
-roundbegin();
+randomPaishan('9m', '7z.7z...3m');
+roundBegin();
 qiepai('2s');
 mingpai();
-normalmoqie();
-mingqiepai('5z');
-normalmoqie();
+normalMoqie();
+mingQiepai('5z');
+normalMoqie();
 hupai();
 
 // 第8局, 11123m77888999p 自摸7p
@@ -143,36 +143,36 @@ tiles0 = '12399m77888999p5z';
 tiles1 = '1112223334447z';
 tiles2 = '1112340678999s';
 tiles3 = '2223455567888s';
-randompaishan('555z7p', '6z....');
-roundbegin();
+randomPaishan('555z7p', '6z....');
+roundBegin();
 qiepai();
-normalmoqie(3);
-zimohu();
+normalMoqie(3);
+zimoHu();
 
 // 第9局, 11m77888999p 789m 自摸7p
 tiles0 = '1178m77888999p25s';
 tiles1 = '1112223334447z';
 tiles2 = '888m3666777999s';
 tiles3 = '2223405567888s';
-randompaishan('7p', '5z.5z.6z..29m');
-roundbegin();
+randomPaishan('7p', '5z.5z.6z..29m');
+roundBegin();
 qiepai('2s');
 mingpai();
-normalmoqie();
-mingqiepai('5s');
+normalMoqie();
+mingQiepai('5s');
 mingpai();
-normalmoqie();
-zimohu();
+normalMoqie();
+zimoHu();
 
 // 第10局, 11199m77888999p 荣和7p
 tiles0 = '11199m77888999p5z';
 tiles1 = '1113334446667z';
 tiles2 = '1112340678999s';
 tiles3 = '2223455567888s';
-randompaishan('7p', '2z....');
-roundbegin();
+randomPaishan('7p', '2z....');
+roundBegin();
 qiepai();
-normalmoqie();
+normalMoqie();
 hupai();
 
 // 第11局, 11122233378m11p 荣和6m
@@ -180,10 +180,10 @@ tiles0 = '11122233378m11p6z';
 tiles1 = '1112223334445z';
 tiles2 = '1122340678999p';
 tiles3 = '1112340678999s';
-randompaishan('6m', '1z....');
-roundbegin();
+randomPaishan('6m', '1z....');
+roundBegin();
 qiepai();
-normalmoqie();
+normalMoqie();
 hupai();
 
 // 第12局, 123m123p1123344s 荣和2s
@@ -191,10 +191,10 @@ tiles0 = '123m123p1123344s5z';
 tiles1 = '1113334446667z';
 tiles2 = '4444055566667m';
 tiles3 = '4444055566667p';
-randompaishan('2s', '2z....');
-roundbegin();
+randomPaishan('2s', '2z....');
+roundBegin();
 qiepai();
-normalmoqie();
+normalMoqie();
 hupai();
 
 // 第13局, 123m123p1123344s 荣和4s
@@ -202,8 +202,8 @@ tiles0 = '123m123p1122334s5z';
 tiles1 = '1113334446667z';
 tiles2 = '4444055566667m';
 tiles3 = '4444055566667p';
-randompaishan('4s', '2z....');
-roundbegin();
+randomPaishan('4s', '2z....');
+roundBegin();
 qiepai();
-normalmoqie();
+normalMoqie();
 hupai();

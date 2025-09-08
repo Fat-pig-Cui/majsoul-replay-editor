@@ -1,4 +1,4 @@
-clearproject();
+clearProject();
 
 // 这个在万象修罗中是可以正常出现的, 但雀魂官方的逻辑是大小四喜只会取大四喜, 所以只有六倍役满
 
@@ -24,6 +24,6 @@ tiles0 = '11122233344444z';
 tiles1 = '1112340678999m';
 tiles2 = '1112340678999p';
 tiles3 = '1112340678999s';
-randompaishan('', '1z....');
-roundbegin();
+randomPaishan('', '1z....');
+roundBegin();
 hupai();
