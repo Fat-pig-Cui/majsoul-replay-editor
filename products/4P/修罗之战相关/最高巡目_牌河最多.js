@@ -24,13 +24,13 @@ config = {
 // 且 亲家前两次出的牌分别铳了北家和西家
 // 然后碰了南家四次(或者自家暗杠四次)
 // 38张/巡
-tiles0 = '9m16p9999s1233457z';
-tiles1 = '457m28p3577s5557z';
-tiles2 = '234569m2345p124z';
-tiles3 = '2233448m3467p18s';
+begin_tiles[0] = '9m16p9999s1233457z';
+begin_tiles[1] = '457m28p3577s5557z';
+begin_tiles[2] = '234569m2345p124z';
+begin_tiles[3] = '2233448m3467p18s';
 randomPaishan('1m1s1234z');
 roundBegin();
-huansanzhang('9m16p', '28p7z', '124z', '8m18s', 1);
+huanpai(['9m16p', '28p7z', '124z', '8m18s'], 1);
 qiepai('7z');
 hupai();
 

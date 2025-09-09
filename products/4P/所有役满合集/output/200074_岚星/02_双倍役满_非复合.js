@@ -27,19 +27,19 @@ config = {
 };
 
 // 第1局: 东亲, 南起 纯正九莲宝灯
-tiles0 = '0m123456789p1114z';
-tiles1 = '1112345678999m';
-tiles2 = '1112340678999p';
-tiles3 = '1112340678999s';
+begin_tiles[0] = '0m123456789p1114z';
+begin_tiles[1] = '1112345678999m';
+begin_tiles[2] = '1112340678999p';
+begin_tiles[3] = '1112340678999s';
 roundBegin();
 qiepai('0m');
 hupai();
 
 // 第2局: 南亲, 南起 四暗刻单骑
-tiles1 = '222p222s11122267z';
-tiles2 = '1112340678999m';
-tiles3 = '1112340678999p';
-tiles0 = '1112340678999s';
+begin_tiles[1] = '222p222s11122267z';
+begin_tiles[2] = '1112340678999m';
+begin_tiles[3] = '1112340678999p';
+begin_tiles[0] = '1112340678999s';
 randomPaishan('6z');
 roundBegin();
 qiepai();
@@ -47,10 +47,10 @@ normalMoqie();
 hupai();
 
 // 第3局: 南亲, 南起 国士无双十三面
-tiles1 = '139m19p19s1234567z';
-tiles2 = '2223405567888m';
-tiles3 = '1112340678999p';
-tiles0 = '1112340678999s';
+begin_tiles[1] = '139m19p19s1234567z';
+begin_tiles[2] = '2223405567888m';
+begin_tiles[3] = '1112340678999p';
+begin_tiles[0] = '1112340678999s';
 randomPaishan('1z');
 roundBegin();
 qiepai('3m');
@@ -58,10 +58,10 @@ normalMoqie();
 hupai();
 
 // 第4局: 南亲, 南起 大四喜
-tiles1 = '22m111222333445z';
-tiles2 = '1112340678999m';
-tiles3 = '1112340678999p';
-tiles0 = '1112340678999s';
+begin_tiles[1] = '22m111222333445z';
+begin_tiles[2] = '1112340678999m';
+begin_tiles[3] = '1112340678999p';
+begin_tiles[0] = '1112340678999s';
 randomPaishan('54z');
 roundBegin();
 qiepai();

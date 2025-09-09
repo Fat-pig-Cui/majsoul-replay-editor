@@ -30,11 +30,11 @@ config = {
 };
 
 // 第一局(流局满贯, 作弊)
-tiles0 = '1112340678999m5z';
-tiles1 = '1112340678999p';
-tiles2 = '1112340678999s';
-tiles3 = '1112223334447z';
-paishan = separate('55555555555555555555555555555555555555555555555555555555555555555555555555555555555z');
+begin_tiles[0] = '1112340678999m5z';
+begin_tiles[1] = '1112340678999p';
+begin_tiles[2] = '1112340678999s';
+begin_tiles[3] = '1112223334447z';
+setPaishan('55555555555555555555555555555555555555555555555555555555555555555555555555555555555z');
 roundBegin();
 qiepai('5z');
 for (let i = 0; i < 69; i++) {
@@ -44,10 +44,10 @@ for (let i = 0; i < 69; i++) {
 huangpai();
 
 // 第二局
-tiles0 = '1112340678999m1z';
-tiles1 = '1112340678999p';
-tiles2 = '1112340678999s';
-tiles3 = '1112223334447z';
+begin_tiles[0] = '1112340678999m1z';
+begin_tiles[1] = '1112340678999p';
+begin_tiles[2] = '1112340678999s';
+begin_tiles[3] = '1112223334447z';
 randomPaishan('23z9m', '5555z');
 roundBegin();
 for (let i = 0; i < 3; i++) {
@@ -63,29 +63,29 @@ qiepai();
 liuju();
 
 // 第三局
-tiles0 = '1p1112340678999s';
-tiles1 = '1123p777888999m';
-tiles2 = '2223334445566s';
-tiles3 = '2223334445566m';
+begin_tiles[0] = '1p1112340678999s';
+begin_tiles[1] = '1123p777888999m';
+begin_tiles[2] = '2223334445566s';
+begin_tiles[3] = '2223334445566m';
 randomPaishan('4p');
 roundBegin();
 qiepai('1p', true);
 hupai();
 
 // 第四局(诈和示范)
-tiles1 = '1112340678999m6z';
-tiles2 = '55p238s12556677z';
-tiles3 = '223446688s3457z';
-tiles0 = '59p346s11223344z';
+begin_tiles[1] = '1112340678999m6z';
+begin_tiles[2] = '55p238s12556677z';
+begin_tiles[3] = '223446688s3457z';
+begin_tiles[0] = '59p346s11223344z';
 randomPaishan('3s');
 roundBegin();
 hupai();
 
 // 第五局
-tiles1 = '456m456p225588s66z';
-tiles2 = '1112223334447z';
-tiles3 = '1112340678999p';
-tiles0 = '1112340678999m';
+begin_tiles[1] = '456m456p225588s66z';
+begin_tiles[2] = '1112223334447z';
+begin_tiles[3] = '1112340678999p';
+begin_tiles[0] = '1112340678999m';
 randomPaishan('82s', '55556777z');
 roundBegin();
 qiepai('6z');
@@ -98,11 +98,11 @@ qiepai();
 hupai();
 
 // 第六局
-tiles1 = '345m345p47s111555z';
-tiles2 = '111234067899m3s';
-tiles3 = '23344666888s66z';
-tiles0 = '1112340678999p';
-qiepai_set = ['', '7s5z', '3s', '2s'];
+begin_tiles[1] = '345m345p47s111555z';
+begin_tiles[2] = '111234067899m3s';
+begin_tiles[3] = '23344666888s66z';
+begin_tiles[0] = '1112340678999p';
+setDiscardTiles(['', '7s5z', '3s', '2s']);
 randomPaishan('9m9s1z93s', '11117745s');
 roundBegin();
 qiepai();
@@ -123,10 +123,10 @@ zimingpai();
 hupai();
 
 // 第七局
-tiles1 = '224488s11223347z';
-tiles2 = '1112340678999m';
-tiles3 = '1112340678999p';
-tiles0 = '1112340678999s';
+begin_tiles[1] = '224488s11223347z';
+begin_tiles[2] = '1112340678999m';
+begin_tiles[3] = '1112340678999p';
+begin_tiles[0] = '1112340678999s';
 randomPaishan('4z', '55556666z');
 roundBegin();
 qiepai('7z', true);
@@ -135,10 +135,10 @@ qiepai('4z', true);
 hupai();
 
 // 第八局
-tiles1 = '1112340678999m1z';
-tiles2 = '1112340678999p';
-tiles3 = '1112340678999s';
-tiles0 = '5m234678p234678s';
+begin_tiles[1] = '1112340678999m1z';
+begin_tiles[2] = '1112340678999p';
+begin_tiles[3] = '1112340678999s';
+begin_tiles[0] = '5m234678p234678s';
 randomPaishan('111z');
 roundBegin();
 qiepai('1z', true);
@@ -151,10 +151,10 @@ qiepai(true);
 liuju();
 
 // 第九局
-tiles1 = '1112340678999m6z';
-tiles2 = '238s55p12556677z';
-tiles3 = '223446688s3457z';
-tiles0 = '346s59p11223344z';
+begin_tiles[1] = '1112340678999m6z';
+begin_tiles[2] = '238s55p12556677z';
+begin_tiles[3] = '223446688s3457z';
+begin_tiles[0] = '346s59p11223344z';
 randomPaishan('3s');
 roundBegin();
 qiepai('6z', true);

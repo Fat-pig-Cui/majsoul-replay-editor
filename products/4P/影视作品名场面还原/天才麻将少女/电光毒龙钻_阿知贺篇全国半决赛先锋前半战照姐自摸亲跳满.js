@@ -31,11 +31,11 @@ config = {
 
 // 自摸平和一杯口纯全带, 跳满
 // 因为动画没有部分切牌和 花田煌, 松实玄 美 的手牌画面, 我这里乱编了一个
-tiles0 = '12399m789s12233p1z';
-tiles1 = '23567m1369p24s13z';
-tiles2 = '139m267p14599s25z';
-tiles3 = '234s449m249p4467z';
-qiepai_set = ['1z8p4s', '4z7z9s', '1z2z1m', '1z3z7z'];
+begin_tiles[0] = '12399m789s12233p1z';
+begin_tiles[1] = '23567m1369p24s13z';
+begin_tiles[2] = '139m267p14599s25z';
+begin_tiles[3] = '234s449m249p4467z';
+setDiscardTiles(['1z8p4s', '4z7z9s', '1z2z1m', '1z3z7z']);
 randomPaishan('4z1z1z8p7z2z3z4s9s1m4p1p', '7z....');
 roundBegin();
 qiepai();

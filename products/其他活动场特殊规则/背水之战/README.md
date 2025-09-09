@@ -13,11 +13,15 @@
 
 ## 函数特殊说明
 
-### 切牌: `qiepai(seat, tile, is_liqi, f_moqie, beishui_type)`
+### 切牌
 
-与段位场的切牌相比, 多了一个参数 `beishui_type`, `beishui_type` 的值可以是 `[0]`, `[1]`, `[2]`
+`qiepai(seat, tile, is_liqi, f_moqie, bs_type)`
+
+与段位场的切牌相比, 多了一个参数 `bs_type`, `bs_type` 的值可以是 `[0]`, `[1]`, `[2]`
 
 `[0]` 表示普通立直, `[1]` 表示"真"系列, `[2]` 表示"极"系列, 默认为 `[0]`
+
+例子: `qiepai(3, '1m', true, [2]);`
 
 ## 示例牌谱
 

@@ -20,10 +20,10 @@ config = {
     }
 };
 
-tiles0 = '22223444666888s';
-tiles1 = '2228m333557777s';
-tiles2 = '233344447777m0s';
-tiles3 = '05556666888m08p';
+begin_tiles[0] = '22223444666888s';
+begin_tiles[1] = '2228m333557777s';
+begin_tiles[2] = '233344447777m0s';
+begin_tiles[3] = '05556666888m08p';
 randomPaishan('YYYDYYYDYYYDYYYDYYYDYYYDYYYDYYYDYYYDYYYDYYYDYYYDYYYDYYYDYYYDYYYDY', 'D864s');
 roundBegin();
 comboMopai(4);

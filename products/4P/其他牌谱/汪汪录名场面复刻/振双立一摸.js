@@ -25,10 +25,10 @@ config = {
     }
 };
 
-tiles2 = '112m48p167778s347z';
-tiles3 = '44567m12p123456s';
-tiles0 = '48m4p13699s34556z';
-tiles1 = '57889m14689p36s2z';
+begin_tiles[2] = '112m48p167778s347z';
+begin_tiles[3] = '44567m12p123456s';
+begin_tiles[0] = '48m4p13699s34556z';
+begin_tiles[1] = '57889m14689p36s2z';
 randomPaishan('3p7s2p1m3p', '3z3m....');
 roundBegin();
 qiepai('3z');

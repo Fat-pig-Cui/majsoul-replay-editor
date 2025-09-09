@@ -32,11 +32,11 @@ config = {
 };
 
 // 具体到这一小局, 因为动画没有部分切牌和 片冈优希, 染谷真子 的手牌画面, 我这里随便编的
-tiles3 = '23467m111p156889s';
-tiles0 = '2468m058p227777s';
-tiles1 = '2468m2488p44446s';
-tiles2 = '6m122334679p333z';
-qiepai_set = ['9p4z1z2z4z6z1z5p9m', '', '5z1z6z9s2m3s6m9m7z6p7p', '9s4z2z1z1s3p1m1m0p1s'];
+begin_tiles[3] = '23467m111p156889s';
+begin_tiles[0] = '2468m058p227777s';
+begin_tiles[1] = '2468m2488p44446s';
+begin_tiles[2] = '6m122334679p333z';
+setDiscardTiles(['9p4z1z2z4z6z1z5p9m', '', '5z1z6z9s2m3s6m9m7z6p7p', '9s4z2z1z1s3p1m1m0p1s']);
 randomPaishan('9p.5z4z4z.1z2z1z.6z1z2z.9s1s4z.2m3p6z.3s1m1z.9p1m5p.9m0p9m.7z0m..2s...9p...3z', '4z.3s...2s');
 roundBegin();
 qiepai();

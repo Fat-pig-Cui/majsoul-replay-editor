@@ -22,10 +22,10 @@ config = {
 };
 
 // 情景1: 0: 大三元四杠子 包牌家1和2, 1: 大四喜, 包牌家: 0, 最后3放铳01
-tiles0 = '1999m1555666777z';
-tiles1 = '1m9s11223344567z';
-tiles2 = '1666777888999p';
-tiles3 = '1666777888999s';
+begin_tiles[0] = '1999m1555666777z';
+begin_tiles[1] = '1m9s11223344567z';
+begin_tiles[2] = '1666777888999p';
+begin_tiles[3] = '1666777888999s';
 randomPaishan('9mDD1m', 'D432z');
 roundBegin();
 qiepai('1z');
@@ -41,11 +41,11 @@ normalMoqie(4);
 hupai();
 
 // 情景2: 三种役满出现在三家
-tiles0 = '1112345678999m6z';
-tiles1 = '366s1234556677z';
-tiles2 = '12389s11223344z';
-tiles3 = '1112223s888999s';
-qiepai_set = ['6z3s', '1234z', '1289s', '57z67s'];
+begin_tiles[0] = '1112345678999m6z';
+begin_tiles[1] = '366s1234556677z';
+begin_tiles[2] = '12389s11223344z';
+begin_tiles[3] = '1112223s888999s';
+setDiscardTiles(['6z3s', '1234z', '1289s', '57z67s']);
 randomPaishan('3s', '76s75z');
 roundBegin();
 qiepai(true);

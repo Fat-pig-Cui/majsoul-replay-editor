@@ -63,10 +63,10 @@ huleOnePlayer = seat => {
         zimo: true,
     };
 }
-tiles0 = '1112340678999m7z';
-tiles1 = '1112340678999p';
-tiles2 = '5555555555555z';
-tiles3 = '1112340678999s';
+begin_tiles[0] = '1112340678999m7z';
+begin_tiles[1] = '1112340678999p';
+begin_tiles[2] = '5555555555555z';
+begin_tiles[3] = '1112340678999s';
 randomPaishan('75z', '7z....');
 roundBegin();
 qiepai();
@@ -115,10 +115,10 @@ huleOnePlayer = seat => {
         zimo: true,
     };
 }
-tiles0 = '1112340678999m7z';
-tiles1 = '1112340678999p';
-tiles2 = '5555555555555z';
-tiles3 = '1112340678999s';
+begin_tiles[0] = '1112340678999m7z';
+begin_tiles[1] = '1112340678999p';
+begin_tiles[2] = '5555555555555z';
+begin_tiles[3] = '1112340678999s';
 randomPaishan('75z', '7z....');
 roundBegin();
 qiepai();
@@ -167,10 +167,10 @@ huleOnePlayer = seat => {
         zimo: true,
     };
 }
-tiles0 = '1112340678999m7z';
-tiles1 = '1112340678999p';
-tiles2 = '5555555555555z';
-tiles3 = '1112340678999s';
+begin_tiles[0] = '1112340678999m7z';
+begin_tiles[1] = '1112340678999p';
+begin_tiles[2] = '5555555555555z';
+begin_tiles[3] = '1112340678999s';
 randomPaishan('75z', '7z....');
 roundBegin();
 qiepai();
@@ -219,10 +219,10 @@ huleOnePlayer = seat => {
         zimo: true,
     };
 }
-tiles0 = '1112340678999m7z';
-tiles1 = '1112340678999p';
-tiles2 = '5555555555555z';
-tiles3 = '1112340678999s';
+begin_tiles[0] = '1112340678999m7z';
+begin_tiles[1] = '1112340678999p';
+begin_tiles[2] = '5555555555555z';
+begin_tiles[3] = '1112340678999s';
 randomPaishan('75z', '7z....');
 roundBegin();
 qiepai();
@@ -266,10 +266,10 @@ huleOnePlayer = seat => {
         zimo: true,
     };
 }
-tiles0 = '1112340678999m7z';
-tiles1 = '1112340678999p';
-tiles2 = '5555555555555z';
-tiles3 = '1112340678999s';
+begin_tiles[0] = '1112340678999m7z';
+begin_tiles[1] = '1112340678999p';
+begin_tiles[2] = '5555555555555z';
+begin_tiles[3] = '1112340678999s';
 randomPaishan('75z', '7z....');
 roundBegin();
 qiepai();
@@ -313,10 +313,10 @@ huleOnePlayer = seat => {
         zimo: true,
     };
 }
-tiles0 = '1112340678999m7z';
-tiles1 = '1112340678999p';
-tiles2 = '5555555555555z';
-tiles3 = '1112340678999s';
+begin_tiles[0] = '1112340678999m7z';
+begin_tiles[1] = '1112340678999p';
+begin_tiles[2] = '5555555555555z';
+begin_tiles[3] = '1112340678999s';
 randomPaishan('75z', '7z....');
 roundBegin();
 qiepai();
@@ -365,10 +365,10 @@ huleOnePlayer = seat => {
         zimo: true,
     };
 }
-tiles0 = '1112340678999m7z';
-tiles1 = '1112340678999p';
-tiles2 = '5555555555555z';
-tiles3 = '1112340678999s';
+begin_tiles[0] = '1112340678999m7z';
+begin_tiles[1] = '1112340678999p';
+begin_tiles[2] = '5555555555555z';
+begin_tiles[3] = '1112340678999s';
 randomPaishan('75z', '7z....');
 roundBegin();
 qiepai();

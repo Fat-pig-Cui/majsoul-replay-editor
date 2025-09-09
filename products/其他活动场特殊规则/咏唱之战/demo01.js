@@ -20,10 +20,10 @@ config = {
     }
 };
 
-tiles0 = '222268m22288p222s';
-tiles1 = '1111340678999m';
-tiles2 = '1111330678999p';
-tiles3 = '1111340678999s';
+begin_tiles[0] = '222268m22288p222s';
+begin_tiles[1] = '1111340678999m';
+begin_tiles[2] = '1111330678999p';
+begin_tiles[3] = '1111340678999s';
 randomPaishan('', '77m....22223333z7m3p2s2p');
 roundBegin();
 comboMopai(3);

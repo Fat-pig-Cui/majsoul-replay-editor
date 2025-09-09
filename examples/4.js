@@ -29,10 +29,10 @@ config = {
 };
 
 // 第1局 底和
-tiles0 = '2345678m2345678p';
-tiles1 = '1112345678999p';
-tiles2 = '1112345678999s';
-tiles3 = '1112345678999m';
+begin_tiles[0] = '2345678m2345678p';
+begin_tiles[1] = '1112345678999p';
+begin_tiles[2] = '1112345678999s';
+begin_tiles[3] = '1112345678999m';
 randomPaishan('5p');
 roundBegin();
 dingque('smps');
@@ -42,10 +42,10 @@ qiepai();
 hupai(0, true);
 
 // 第2局 对对和
-tiles0 = '222333777888m37p';
-tiles1 = '1112345678999p';
-tiles2 = '1112345678999s';
-tiles3 = '1112345678999m';
+begin_tiles[0] = '222333777888m37p';
+begin_tiles[1] = '1112345678999p';
+begin_tiles[2] = '1112345678999s';
+begin_tiles[3] = '1112345678999m';
 randomPaishan('7p');
 roundBegin();
 dingque('smps');
@@ -55,10 +55,10 @@ qiepai();
 hupai(0, true);
 
 // 第3局 清一色
-tiles0 = '1112345678999m5p';
-tiles1 = '1112345678999p';
-tiles2 = '1112345678999s';
-tiles3 = '2233445667788m';
+begin_tiles[0] = '1112345678999m5p';
+begin_tiles[1] = '1112345678999p';
+begin_tiles[2] = '1112345678999s';
+begin_tiles[3] = '2233445667788m';
 randomPaishan('5m');
 roundBegin();
 dingque('smps');
@@ -68,10 +68,10 @@ qiepai();
 hupai(0, true);
 
 // 第4局 七对子
-tiles0 = '112258899m33577p';
-tiles1 = '1112345678999p';
-tiles2 = '1112345678999s';
-tiles3 = '2233445566778m';
+begin_tiles[0] = '112258899m33577p';
+begin_tiles[1] = '1112345678999p';
+begin_tiles[2] = '1112345678999s';
+begin_tiles[3] = '2233445566778m';
 randomPaishan('5p');
 roundBegin();
 dingque('smps');
@@ -81,10 +81,10 @@ qiepai();
 hupai(0, true);
 
 // 第5局 带幺九
-tiles0 = '11123778899m199p';
-tiles1 = '1112345678888p';
-tiles2 = '1112345678999s';
-tiles3 = '2233445667788m';
+begin_tiles[0] = '11123778899m199p';
+begin_tiles[1] = '1112345678888p';
+begin_tiles[2] = '1112345678999s';
+begin_tiles[3] = '2233445667788m';
 randomPaishan('9p');
 roundBegin();
 dingque('smps');
@@ -94,10 +94,10 @@ qiepai();
 hupai(0, true);
 
 // 第6局 金钩钓
-tiles0 = '22337788m123456p';
-tiles1 = '1112345678999p';
-tiles2 = '1112345678999s';
-tiles3 = '1112345678999m';
+begin_tiles[0] = '22337788m123456p';
+begin_tiles[1] = '1112345678999p';
+begin_tiles[2] = '1112345678999s';
+begin_tiles[3] = '1112345678999m';
 randomPaishan('2378m6p');
 roundBegin();
 dingque('smps');
@@ -123,10 +123,10 @@ qiepai();
 hupai(0, true);
 
 // 第7局 清对
-tiles0 = '2223335777888m3p';
-tiles1 = '1112345678999p';
-tiles2 = '1112345678999s';
-tiles3 = '1112345678999m';
+begin_tiles[0] = '2223335777888m3p';
+begin_tiles[1] = '1112345678999p';
+begin_tiles[2] = '1112345678999s';
+begin_tiles[3] = '1112345678999m';
 randomPaishan('5m');
 roundBegin();
 dingque('smps');
@@ -136,10 +136,10 @@ qiepai();
 hupai(0, true);
 
 // 第8局 将对
-tiles0 = '222555888m23555p';
-tiles1 = '1112345678999p';
-tiles2 = '1112345678999s';
-tiles3 = '1112345678999m';
+begin_tiles[0] = '222555888m23555p';
+begin_tiles[1] = '1112345678999p';
+begin_tiles[2] = '1112345678999s';
+begin_tiles[3] = '1112345678999m';
 randomPaishan('2p');
 roundBegin();
 dingque('smps');
@@ -149,10 +149,10 @@ qiepai();
 hupai(0, true);
 
 // 第9局 龙七对
-tiles0 = '112259999m33577p';
-tiles1 = '1112345678999p';
-tiles2 = '1112345678999s';
-tiles3 = '2233445667788m';
+begin_tiles[0] = '112259999m33577p';
+begin_tiles[1] = '1112345678999p';
+begin_tiles[2] = '1112345678999s';
+begin_tiles[3] = '2233445667788m';
 randomPaishan('5p');
 roundBegin();
 dingque('smps');
@@ -162,10 +162,10 @@ qiepai();
 hupai(0, true);
 
 // 第10局 清七对
-tiles0 = '2233445667788m5p';
-tiles1 = '1112345678999p';
-tiles2 = '1112345678999s';
-tiles3 = '1112345678999m';
+begin_tiles[0] = '2233445667788m5p';
+begin_tiles[1] = '1112345678999p';
+begin_tiles[2] = '1112345678999s';
+begin_tiles[3] = '1112345678999m';
 randomPaishan('5m');
 roundBegin();
 dingque('smps');
@@ -175,10 +175,10 @@ qiepai();
 hupai(0, true);
 
 // 第11局 清金钩钓
-tiles0 = '223367788m12345p';
-tiles1 = '1112345678999p';
-tiles2 = '1112345678999s';
-tiles3 = '1112345678999m';
+begin_tiles[0] = '223367788m12345p';
+begin_tiles[1] = '1112345678999p';
+begin_tiles[2] = '1112345678999s';
+begin_tiles[3] = '1112345678999m';
 randomPaishan('23786m');
 roundBegin();
 dingque('smps');
@@ -204,10 +204,10 @@ qiepai();
 hupai(0, true);
 
 // 第12局 清龙七对
-tiles0 = '1122335779999m5p';
-tiles1 = '1112345678999p';
-tiles2 = '1112345678999s';
-tiles3 = '2233445667788m';
+begin_tiles[0] = '1122335779999m5p';
+begin_tiles[1] = '1112345678999p';
+begin_tiles[2] = '1112345678999s';
+begin_tiles[3] = '2233445667788m';
 randomPaishan('5m');
 roundBegin();
 dingque('smps');
@@ -217,10 +217,10 @@ qiepai();
 hupai(0, true);
 
 // 第13局 十八罗汉
-tiles0 = '222888m13335777p';
-tiles1 = '1112223334445s';
-tiles2 = '5666777888999s';
-tiles3 = '111999m111999p1s';
+begin_tiles[0] = '222888m13335777p';
+begin_tiles[1] = '1112223334445s';
+begin_tiles[2] = '5666777888999s';
+begin_tiles[3] = '111999m111999p1s';
 randomPaishan('25m3p585m7p5m5p');
 roundBegin();
 dingque('smps');
@@ -250,10 +250,10 @@ qiepai();
 hupai(0, true);
 
 // 第14局 清十八罗汉
-tiles0 = '2223334777888m1p';
-tiles1 = '1112223334445s';
-tiles2 = '5666777888999s';
-tiles3 = '111999m111999p1s';
+begin_tiles[0] = '2223334777888m1p';
+begin_tiles[1] = '1112223334445s';
+begin_tiles[2] = '5666777888999s';
+begin_tiles[3] = '111999m111999p1s';
 randomPaishan('253585754m');
 roundBegin();
 dingque('smps');
@@ -283,10 +283,10 @@ qiepai();
 hupai(0, true);
 
 // 第15局 清幺九
-tiles0 = '11122233378995m';
-tiles1 = '1112345678999p';
-tiles2 = '1112345678999s';
-tiles3 = '2345556667788m';
+begin_tiles[0] = '11122233378995m';
+begin_tiles[1] = '1112345678999p';
+begin_tiles[2] = '1112345678999s';
+begin_tiles[3] = '2345556667788m';
 randomPaishan('9m');
 roundBegin();
 dingque('smps');
@@ -296,20 +296,20 @@ qiepai();
 hupai(0, true);
 
 // 第16局 天和
-tiles0 = '234678m23455678p';
-tiles1 = '1112345678999p';
-tiles2 = '1112345678999s';
-tiles3 = '1112345678999m';
+begin_tiles[0] = '234678m23455678p';
+begin_tiles[1] = '1112345678999p';
+begin_tiles[2] = '1112345678999s';
+begin_tiles[3] = '1112345678999m';
 randomPaishan('5p');
 roundBegin();
 dingque('smps');
 hupai(0, true);
 
 // 第17局 地和
-tiles0 = '5m1112345678999p';
-tiles1 = '234678m2345678p';
-tiles2 = '1112345678999s';
-tiles3 = '1112345678999m';
+begin_tiles[0] = '5m1112345678999p';
+begin_tiles[1] = '234678m2345678p';
+begin_tiles[2] = '1112345678999s';
+begin_tiles[3] = '1112345678999m';
 randomPaishan('5p');
 roundBegin();
 dingque('ssmp');
@@ -318,10 +318,10 @@ mopai();
 hupai(1, true);
 
 // 第18局 根
-tiles1 = '222234m11122235p';
-tiles2 = '2345678888999p';
-tiles3 = '1112345678999s';
-tiles0 = '1113345678999m';
+begin_tiles[1] = '222234m11122235p';
+begin_tiles[2] = '2345678888999p';
+begin_tiles[3] = '1112345678999s';
+begin_tiles[0] = '1113345678999m';
 randomPaishan('3p');
 roundBegin();
 dingque('ssmp');
@@ -331,10 +331,10 @@ qiepai();
 hupai(1, true);
 
 // 第19局 杠上花
-tiles1 = '222233m11122235p';
-tiles2 = '2345678888999p';
-tiles3 = '1112345678999s';
-tiles0 = '1113345678999m';
+begin_tiles[1] = '222233m11122235p';
+begin_tiles[2] = '2345678888999p';
+begin_tiles[3] = '1112345678999s';
+begin_tiles[0] = '1113345678999m';
 randomPaishan('4p');
 roundBegin();
 dingque('ssmp');
@@ -343,10 +343,10 @@ mopai();
 hupai(1, true);
 
 // 第20局 杠上炮
-tiles1 = '222233m11122235p';
-tiles2 = '33m34455p677889m';
-tiles3 = '1112345678999s';
-tiles0 = '1114445678999m';
+begin_tiles[1] = '222233m11122235p';
+begin_tiles[2] = '33m34455p677889m';
+begin_tiles[3] = '1112345678999s';
+begin_tiles[0] = '1114445678999m';
 randomPaishan('5p');
 roundBegin();
 dingque('sssp');
@@ -356,10 +356,10 @@ qiepai('3p');
 hupai(2, true);
 
 // 第21局 枪杠
-tiles2 = '22m66p33m11122235p';
-tiles3 = '2345678888999p';
-tiles1 = '1112345678999s';
-tiles0 = '44m33444777p555m';
+begin_tiles[2] = '22m66p33m11122235p';
+begin_tiles[3] = '2345678888999p';
+begin_tiles[1] = '1112345678999s';
+begin_tiles[0] = '44m33444777p555m';
 randomPaishan('21312m');
 roundBegin();
 dingque('smss');
@@ -379,10 +379,10 @@ zimingpai();
 hupai(0, true);
 
 // 第22局 海底捞月
-tiles0 = '111m2345678p999m1s';
-tiles1 = '2345678p222888m';
-tiles2 = '2345678p333777m';
-tiles3 = '2345p444555666m';
+begin_tiles[0] = '111m2345678p999m1s';
+begin_tiles[1] = '2345678p222888m';
+begin_tiles[2] = '2345678p333777m';
+begin_tiles[3] = '2345p444555666m';
 randomPaishan('123456789m', '8p');
 roundBegin();
 dingque('ssss');

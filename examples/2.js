@@ -27,9 +27,9 @@ config = {
     }
 };
 
-tiles0 = '111s11125566777z';
-tiles1 = '1m222333444688s';
-tiles2 = '1m111222333p688s';
+begin_tiles[0] = '111s11125566777z';
+begin_tiles[1] = '1m222333444688s';
+begin_tiles[2] = '1m111222333p688s';
 randomPaishan('66s4z', '2s5z999m33336z9999s65z9m71z1s444z');
 roundBegin();
 qiepai('2z', true);
@@ -51,18 +51,18 @@ mopai();
 qiepai();
 hupai();
 
-tiles0 = '1122334567899s4z';
-tiles1 = '1m444055667789s';
-tiles2 = '1m111222333p688s';
+begin_tiles[0] = '1122334567899s4z';
+begin_tiles[1] = '1m444055667789s';
+begin_tiles[2] = '1m111222333p688s';
 randomPaishan('', '9s');
 roundBegin();
 zimingpai();
 mopai();
 hupai();
 
-tiles0 = '1199m123456789p4z';
-tiles1 = '2223334448888s';
-tiles2 = '1199m123456789p';
+begin_tiles[0] = '1199m123456789p4z';
+begin_tiles[1] = '2223334448888s';
+begin_tiles[2] = '1199m123456789p';
 roundBegin();
 zimingpai();
 mopai();

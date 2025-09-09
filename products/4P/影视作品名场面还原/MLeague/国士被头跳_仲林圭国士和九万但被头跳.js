@@ -37,11 +37,11 @@ config = {
     }
 };
 
-tiles1 = '33477m48p13358s12z';
-tiles2 = '1122407m1669p34z';
-tiles3 = '18m4569p7888s566z';
-tiles0 = '156m139p0s134567z';
-qiepai_set = ['0s3p5m6m3s3p7z', '2z8s3z1z8p3m5z9m', '9p9s4z3z1p5z1m', '9p1p5z1m7s9p5s'];
+begin_tiles[1] = '33477m48p13358s12z';
+begin_tiles[2] = '1122407m1669p34z';
+begin_tiles[3] = '18m4569p7888s566z';
+begin_tiles[0] = '156m139p0s134567z';
+setDiscardTiles(['0s3p5m6m3s3p7z', '2z8s3z1z8p3m5z9m', '9p9s4z3z1p5z1m', '9p1p5z1m7s9p5s']);
 randomPaishan('9s3m2z1s5z1p7z3z2s7m1s6s6p5s3s9m6m3m9s2s4s9p3p5z5m6z9s8p', '72p....');
 roundBegin();
 qiepai();

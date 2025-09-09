@@ -20,13 +20,13 @@ config = {
     }
 };
 
-tiles0 = 'b19m12489p159s127z';
-tiles1 = 'b368m223344s666z';
-tiles2 = 'b111356799p345z';
-tiles3 = 'b112457999m248s';
+begin_tiles[0] = 'b19m12489p159s127z';
+begin_tiles[1] = 'b368m223344s666z';
+begin_tiles[2] = 'b111356799p345z';
+begin_tiles[3] = 'b112457999m248s';
 randomPaishan('6z', '5z....');
 roundBegin();
-huansanzhang('248p', '368m', '345z', '248s', 1);
+huanpai(['248p', '368m', '345z', '248s'], 1);
 qiepai('5s');
 mopai();
 zimingpai();

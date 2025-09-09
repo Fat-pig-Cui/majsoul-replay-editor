@@ -34,10 +34,10 @@ config = {
 // 且一上来就点北家, 然后又点西家
 // 之后碰南家的牌四次(或亲家暗杠四次)
 // 31巡
-tiles0 = '1122334469999m4p';
-tiles1 = '66688m46788p677s';
-tiles2 = '1111222233334s';
-tiles3 = '1111222233334p';
+begin_tiles[0] = '1122334469999m4p';
+begin_tiles[1] = '66688m46788p677s';
+begin_tiles[2] = '1111222233334s';
+begin_tiles[3] = '1111222233334p';
 randomPaishan('4s.1234m');
 roundBegin();
 dingque('pspm');
@@ -62,10 +62,10 @@ huangpai();
 // 被西家碰四次
 // 被南家碰四次
 // 23巡
-tiles3 = '1m1111222333444p';
-tiles0 = '19999m55667788s';
-tiles1 = '1m556677889999p';
-tiles2 = '1m112233449999s';
+begin_tiles[3] = '1m1111222333444p';
+begin_tiles[0] = '19999m55667788s';
+begin_tiles[1] = '1m556677889999p';
+begin_tiles[2] = '1m112233449999s';
 randomPaishan('234p1234s5p.6p.7p.8p.5s..6s..7s..8s');
 roundBegin();
 dingque('psps');
@@ -94,10 +94,10 @@ huangpai();
 // 西家暗杠四次
 // 赤羽不限制玩家开杠次数
 // 8巡
-tiles3 = '1112223334449m9s';
-tiles0 = '111222333444p9s';
-tiles1 = '1112223334449s';
-tiles2 = '555666p5556669s';
+begin_tiles[3] = '1112223334449m9s';
+begin_tiles[0] = '111222333444p9s';
+begin_tiles[1] = '1112223334449s';
+begin_tiles[2] = '555666p5556669s';
 randomPaishan('.1234s1m..2m..3m..4m..1p.2p.3p.4p');
 roundBegin();
 dingque('mpmp');
@@ -123,10 +123,10 @@ huangpai();
 // 且一上来就点北家, 然后又点西家
 // 之后碰南家的牌四次
 // 31张
-tiles3 = '1122334469999m4p';
-tiles0 = '66688m46788p677s';
-tiles1 = '1111222233334s';
-tiles2 = '1111222233334p';
+begin_tiles[3] = '1122334469999m4p';
+begin_tiles[0] = '66688m46788p677s';
+begin_tiles[1] = '1111222233334s';
+begin_tiles[2] = '1111222233334p';
 randomPaishan('4s.1234m');
 roundBegin();
 dingque('pspm');
@@ -151,10 +151,10 @@ huangpai();
 // 被北家碰四次
 // 被西家碰四次
 // 20张
-tiles2 = '1122334469999m8s';
-tiles3 = '6667m6667p46667s';
-tiles0 = '1122334469999p';
-tiles1 = '1122334469999s';
+begin_tiles[2] = '1122334469999m8s';
+begin_tiles[3] = '6667m6667p46667s';
+begin_tiles[0] = '1122334469999p';
+begin_tiles[1] = '1122334469999s';
 randomPaishan('1234m1s.2s.3s.4s.1p..2p..3p..4p');
 roundBegin();
 dingque('mspp');
@@ -185,10 +185,10 @@ huangpai();
 // 北家自己也暗杠四次
 // 赤羽不限制玩家开杠次数
 // 4张
-tiles2 = '1112223334449m9s';
-tiles3 = '111222333444p9s';
-tiles0 = '1112223334449s';
-tiles1 = '555666p5556669s';
+begin_tiles[2] = '1112223334449m9s';
+begin_tiles[3] = '111222333444p9s';
+begin_tiles[0] = '1112223334449s';
+begin_tiles[1] = '555666p5556669s';
 randomPaishan('..56p56s1m...2m...3m...4m...1p..2p..3p..4p..1s.2s.3s.4s');
 roundBegin();
 dingque('mpmp');

@@ -26,11 +26,11 @@ config = {
     }
 };
 
-tiles0 = '1111zt2223334446z';
-tiles1 = '1112mt340678999m';
-tiles2 = '1113st33777999s6z';
-tiles3 = '2224st44666888s6z';
-muyu_seats = '1';
+begin_tiles[0] = '1111zt2223334446z';
+begin_tiles[1] = '1112mt340678999m';
+begin_tiles[2] = '1113st33777999s6z';
+begin_tiles[3] = '2224st44666888s6z';
+setMuyuSeats('1');
 randomPaishan('6z', '5z.5z.5z.5z0p432z');
 roundBegin();
 comboMopai(4);

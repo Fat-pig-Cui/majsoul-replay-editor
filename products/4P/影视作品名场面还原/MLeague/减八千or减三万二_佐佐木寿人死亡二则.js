@@ -37,11 +37,11 @@ config = {
     }
 };
 
-tiles2 = '13569m1147p668s25z';
-tiles3 = '3m338p199s245667z';
-tiles0 = '12358m068p4788s3z';
-tiles1 = '346m49p33579s144z';
-qiepai_set = ['7z8p8m5m8s8s2z7s4z6p1s7z1z1m2p5s', '9p1z9m5z5s2z4p8p5s6m8m7p5p4p6p2s6m', '9m8s4p7p1z9p3m2z7p6m5z8s2m7s1m2p', '4z1s8p1s6p3m3z2z4m9m3s7p9p1m7s0s5p3p'];
+begin_tiles[2] = '13569m1147p668s25z';
+begin_tiles[3] = '3m338p199s245667z';
+begin_tiles[0] = '12358m068p4788s3z';
+begin_tiles[1] = '346m49p33579s144z';
+setDiscardTiles(['7z8p8m5m8s8s2z7s4z6p1s7z1z1m2p5s', '9p1z9m5z5s2z4p8p5s6m8m7p5p4p6p2s6m', '9m8s4p7p1z9p3m2z7p6m5z8s2m7s1m2p', '4z1s8p1s6p3m3z2z4m9m3s7p9p1m7s0s5p3p']);
 randomPaishan('5z5m7z7z3z5z1z1s3z9m7m6p5p0m9p3z2z2z4s1p7m8m2p4m6s8p7m9m4z5s7p3s3p7p1m6z2m9p1s7p8s1m7z5p2s7s1z4p7s0s6p1z5p2p2s8m5s6m', '2s....');
 roundBegin();
 qiepai();

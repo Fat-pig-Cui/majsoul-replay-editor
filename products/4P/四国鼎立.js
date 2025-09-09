@@ -18,10 +18,10 @@ config = {
     }
 };
 
-tiles0 = '129m19p19s1234567z';
-tiles1 = '19m19p19s1234567z';
-tiles2 = '19m19p19s1234567z';
-tiles3 = '19m19p19s1234567z';
+begin_tiles[0] = '129m19p19s1234567z';
+begin_tiles[1] = '19m19p19s1234567z';
+begin_tiles[2] = '19m19p19s1234567z';
+begin_tiles[3] = '19m19p19s1234567z';
 roundBegin();
 qiepai('2m');
 moqieLiuju();

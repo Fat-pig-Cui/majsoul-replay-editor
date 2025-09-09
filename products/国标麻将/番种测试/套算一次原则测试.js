@@ -23,10 +23,10 @@ config = {
 };
 
 // 2个一般高, 2个喜相逢, 去掉1个喜相逢
-tiles0 = '22334m2233455p22z';
-tiles1 = '1112336678999m';
-tiles2 = '1112336678999p';
-tiles3 = '1112345678999s';
+begin_tiles[0] = '22334m2233455p22z';
+begin_tiles[1] = '1112336678999m';
+begin_tiles[2] = '1112336678999p';
+begin_tiles[3] = '1112345678999s';
 randomPaishan('..4m4p');
 roundBegin();
 qiepai();
@@ -36,10 +36,10 @@ normalMoqie();
 hupai();
 
 // 2个一般高, 2个连六, 去掉1个连六
-tiles0 = '112233455699m11z';
-tiles1 = '2223334445556z';
-tiles2 = '1122336678999p';
-tiles3 = '1122345678999s';
+begin_tiles[0] = '112233455699m11z';
+begin_tiles[1] = '2223334445556z';
+begin_tiles[2] = '1122336678999p';
+begin_tiles[3] = '1122345678999s';
 randomPaishan('..6m4m');
 roundBegin();
 qiepai();
@@ -49,10 +49,10 @@ normalMoqie();
 hupai();
 
 // 2个一般高, 2个老少副, 去掉1个老少副
-tiles0 = '1122337789m11p11z';
-tiles1 = '1122334455666m';
-tiles2 = '1122336678999p';
-tiles3 = '1122345678999s';
+begin_tiles[0] = '1122337789m11p11z';
+begin_tiles[1] = '1122334455666m';
+begin_tiles[2] = '1122336678999p';
+begin_tiles[3] = '1122345678999s';
 randomPaishan('..8m9m');
 roundBegin();
 qiepai();
@@ -62,10 +62,10 @@ normalMoqie();
 hupai();
 
 // 2个喜相逢, 2个连六, 去掉1个连六
-tiles0 = '12345m1234569s12z';
-tiles1 = '2223334445556z';
-tiles2 = '1112233678999p';
-tiles3 = '1122345678899s';
+begin_tiles[0] = '12345m1234569s12z';
+begin_tiles[1] = '2223334445556z';
+begin_tiles[2] = '1112233678999p';
+begin_tiles[3] = '1122345678899s';
 randomPaishan('..6m...9s');
 roundBegin();
 qiepai();
@@ -75,10 +75,10 @@ normalMoqie(3);
 zimoHu();
 
 // 2个喜相逢, 2个老少副, 去掉1个老少副
-tiles0 = '123789m1234478p2z';
-tiles1 = '2223334445556z';
-tiles2 = '1112233678999p';
-tiles3 = '1122345678999s';
+begin_tiles[0] = '123789m1234478p2z';
+begin_tiles[1] = '2223334445556z';
+begin_tiles[2] = '1112233678999p';
+begin_tiles[3] = '1122345678999s';
 randomPaishan('9p');
 roundBegin();
 qiepai();
@@ -86,10 +86,10 @@ normalMoqie();
 hupai();
 
 // 花龙, 喜相逢, 连六, 去掉连六
-tiles0 = '12345m789p123s112z';
-tiles1 = '2223334445556z';
-tiles2 = '1122336678999p';
-tiles3 = '1122445678999s';
+begin_tiles[0] = '12345m789p123s112z';
+begin_tiles[1] = '2223334445556z';
+begin_tiles[2] = '1122336678999p';
+begin_tiles[3] = '1122445678999s';
 randomPaishan('6m');
 roundBegin();
 qiepai();
@@ -97,10 +97,10 @@ normalMoqie();
 hupai();
 
 // 花龙, 喜相逢, 老少副, 去掉老少副
-tiles0 = '56m123789p123s112z';
-tiles1 = '2223334445556z';
-tiles2 = '1122336678999p';
-tiles3 = '1122445678999s';
+begin_tiles[0] = '56m123789p123s112z';
+begin_tiles[1] = '2223334445556z';
+begin_tiles[2] = '1122336678999p';
+begin_tiles[3] = '1122445678999s';
 randomPaishan('4m');
 roundBegin();
 qiepai();

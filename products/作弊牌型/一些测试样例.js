@@ -22,29 +22,29 @@ config = {
 };
 
 // 牌全是6z, 旧版演示视频: https://www.bilibili.com/video/BV1xZmZYKEbz
-tiles0 = '66666666666666z';
-tiles1 = '6666666666666z';
-tiles2 = '6666666666666z';
-tiles3 = '6666666666666z';
-paishan = separate('66666666666666666666666666666666666666666666666666666666666666666666666666666666666z');
+begin_tiles[0] = '66666666666666z';
+begin_tiles[1] = '6666666666666z';
+begin_tiles[2] = '6666666666666z';
+begin_tiles[3] = '6666666666666z';
+setPaishan('66666666666666666666666666666666666666666666666666666666666666666666666666666666666z');
 roundBegin();
 comboMopai(4);
 hupai();
 
 // 庄手牌全是7z, 旧版演示视频: https://www.bilibili.com/video/BV1GVSgYUEyf
-tiles0 = '77777777777777z';
-tiles1 = '1112340678999m';
-tiles2 = '1112340678999p';
-tiles3 = '1112340678999s';
+begin_tiles[0] = '77777777777777z';
+begin_tiles[1] = '1112340678999m';
+begin_tiles[2] = '1112340678999p';
+begin_tiles[3] = '1112340678999s';
 roundBegin();
 hupai();
 
 // 无限立直, 第一次立直之后再次立直, 本质上都是无效的, 只有发声和牌横着的效果, 没有放立直棒动作, 也不影响立直番数和一发的计算
 // 旧版演示视频: https://www.bilibili.com/video/BV1tPBtYbEDu
-tiles0 = '123456789s11167z';
-tiles1 = '1112340678999m';
-tiles2 = '1112340678999p';
-tiles3 = '1112340678999s';
+begin_tiles[0] = '123456789s11167z';
+begin_tiles[1] = '1112340678999m';
+begin_tiles[2] = '1112340678999p';
+begin_tiles[3] = '1112340678999s';
 randomPaishan('', '666z............');
 roundBegin();
 qiepai(true);
@@ -57,10 +57,10 @@ hupai();
 
 // 无振听模式, 手牌全是红宝牌的暗杠与算番, 至于百位无法显示的问题, 已经解决
 // 旧版演示视频: https://www.bilibili.com/video/BV1D9iyY3EUJ
-tiles0 = '00000000000067p';
-tiles1 = '1112340678999m';
-tiles2 = '1111236789999p';
-tiles3 = '1112340678999s';
+begin_tiles[0] = '00000000000067p';
+begin_tiles[1] = '1112340678999m';
+begin_tiles[2] = '1111236789999p';
+begin_tiles[3] = '1112340678999s';
 randomPaishan('00p', '4p.4p.4p.4p.000p');
 roundBegin();
 comboMopai(3);

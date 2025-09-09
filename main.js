@@ -40,7 +40,7 @@ let player_datas;
  *          - 十位 0, 1 分别表示四麻, 三麻, 2 的话就是二人麻将
  *      - detail_rule: 详细规则, 很多详细配置都在这里, 下面仅列举部分, 更多详见 1_编辑游戏信息.md
  *          - init_point: 各玩家初始点数, 默认根据玩家数和模式自动选择
- *          - dora_count: 红宝牌数量, 默认为3
+ *          - dora_count: 红宝牌数量, 默认为段位场规则
  *          - chuanma: 是否是赤羽之战模式, 默认否
  *          - _qieshangmanguan: 是否切上满贯, 默认否
  *          - _guobiao: 是否为国标模式, 默认否
@@ -48,30 +48,10 @@ let player_datas;
  */
 let config;
 /**
- * 玩家的起手, 赋值的类型是 string 或 string[]
- * @type {string|string[]}
- */
-let tiles0, tiles1, tiles2, tiles3;
-/**
- * 牌山, 会随着牌局的进行逐渐减少
+ * 玩家的起手, 有效长度为玩家数, 不超过4
  * @type {string[]}
  */
-let paishan;
-/**
- * 玩家的实时点数, 长度为玩家数, 不超过4
- * @type {number[]}
- */
-let scores;
-/**
- * 玩家的切牌集合和摸牌集合, 用户输入侧, 有效长度为玩家数, 不超过4
- * @type {string[]}
- */
-let qiepai_set, mopai_set;
-/**
- * 龙之目玉: 拥有目玉的玩家队列
- * @type {string}
- */
-let muyu_seats;
+let begin_tiles;
 
 // 初始化必要变量
 const clearProject = () => {
@@ -93,12 +73,13 @@ const clearProject = () => {
             detail_rule: {}
         }
     };
-    tiles0 = tiles1 = tiles2 = tiles3 = muyu_seats = '';
+    begin_tiles = ['', '', '', ''];
+    muyu_seats = '';
     paishan = [];
     chang = ju = ben = liqibang = lianzhuang_cnt = 0;
     player_tiles = [[], [], [], []];
-    qiepai_set = ['', '', '', ''];
-    mopai_set = ['', '', '', ''];
+    discard_tiles = [[], [], [], []];
+    deal_tiles = [[], [], [], []];
     all_data = {
         actions: [],
         xun: [],
@@ -106,6 +87,32 @@ const clearProject = () => {
         config: config,
         player_datas: player_datas,
     };
+};
+
+/**
+ * 设置玩家的切牌集合
+ * @param {string[]} dc_tls - 切牌集合, 有效长度为玩家数, 不超过4
+ */
+const setDiscardTiles = dc_tls => {
+    for (let i in dc_tls)
+        discard_tiles[i] = separate(dc_tls[i]);
+};
+
+/**
+ * 设置玩家的摸牌集合
+ * @param {string[]} dl_tls - 摸牌集合, 有效长度为玩家数, 不超过4
+ */
+const setDealTiles = dl_tls => {
+    for (let i in dl_tls)
+        deal_tiles[i] = separate(dl_tls[i]);
+};
+
+/**
+ * 手动设置牌山(参数不含起手)
+ * @param {string} ps - 不含起手的完整牌山字符串
+ */
+const setPaishan = ps => {
+    paishan = separate(ps);
 };
 
 /**
@@ -122,7 +129,7 @@ let randomPaishan = (ps_head = '', ps_back = '') => {
     if (all_data.actions.length === 0 && game_begin_once)
         gameBegin();
 
-    let tiles = [separate(tiles0), separate(tiles1), separate(tiles2), separate(tiles3)];
+    let tiles = [separate(begin_tiles[0]), separate(begin_tiles[1]), separate(begin_tiles[2]), separate(begin_tiles[3])];
     let para_tiles = [separate(ps_head), separate(ps_back)];
 
     // 检查手牌数量是否合规
@@ -215,10 +222,8 @@ let randomPaishan = (ps_head = '', ps_back = '') => {
             else
                 cnt[tile2Int(tiles[j][i], true)]--;
 
-    if (is_mopai_paishan() && mopai_set[ju].length > 0) {
+    if (is_mopai_paishan() && deal_tiles[ju].length > 0) {
         para_tiles[0] = [];
-        for (let i = 0; i < player_cnt; i++)
-            deal_tiles[i] = separate(mopai_set[i]);
         while (deal_tiles[0].length > 0 || deal_tiles[1].length > 0 || deal_tiles[2].length > 0 || deal_tiles[3].length > 0)
             for (let i = ju + 1; i < ju + 1 + player_cnt; i++)
                 if (deal_tiles[i % player_cnt].length > 0)
@@ -259,10 +264,8 @@ let randomPaishan = (ps_head = '', ps_back = '') => {
     }
 
     // 回写
-    tiles0 = tiles[0].join('');
-    tiles1 = tiles[1].join('');
-    tiles2 = tiles[2].join('');
-    tiles3 = tiles[3].join('');
+    for (let i = 0; i < player_cnt; i++)
+        begin_tiles[i] = tiles[i].join('');
 
     for (let i in cnt) {
         let full_num = 4, have_fault = false;
@@ -297,7 +300,7 @@ let randomPaishan = (ps_head = '', ps_back = '') => {
 };
 
 // 开局, 数据初始化
-let roundBegin = () => {
+const roundBegin = () => {
     if (all_data.actions.length === 0 && game_begin_once)
         gameBegin();
 
@@ -385,7 +388,7 @@ let roundBegin = () => {
 /**
  * 摸牌, 参数顺序可以不一致
  * @param {number} [seat] - 摸牌的玩家, 没有此参数时按照正常对局流程
- * @param {string} [tile] - 摸的牌, 没有此参数时将根据 mopai_set 或牌山确定
+ * @param {string} [tile] - 摸的牌, 没有此参数时将根据 deal_tiles 或牌山确定
  * @param {number[]} [index] - 占星之战: 牌候选池中选择的牌位置, 后面会变为 number 类型
  */
 let mopai = (seat, tile, index) => {
@@ -549,7 +552,7 @@ let mopai = (seat, tile, index) => {
 /**
  * 切牌, 参数顺序可以不一致
  * @param {number} [seat] - 切牌的玩家, 没有此参数时按照正常对局流程
- * @param {string} [tile] - 切的牌, 没有此参数时将根据 qiepai_set 确定或摸切
+ * @param {string} [tile] - 切的牌, 没有此参数时将根据 discard_tiles 确定或摸切
  * @param {boolean|string} [is_liqi] - 是否立直, 默认不立直, 若为 'kailiqi', 则为开立直
  * @param {string} [f_moqie] - 何切模式: 值为 'moqie' 表示强制显示摸切, 值为 'shouqie' 或其他情况则强制显示手切
  * @param {string} [anpai] - 暗夜之战: 当值为字符串 'anpai' 时, 表示暗牌, 默认不暗牌
@@ -1616,15 +1619,20 @@ let liuju = liuju_type => {
 // ==========================================
 
 /**
+ * 龙之目玉: 设置目玉队列
+ * @param {string} m_seats - 拥有目玉的玩家队列
+ */
+const setMuyuSeats = m_seats => {
+    muyu_seats = m_seats;
+};
+
+/**
  * 换三张换牌(修罗/川麻)
- * @param {string} tls0 - 东起玩家交出去的牌
- * @param {string} tls1 - 南起玩家交出去的牌
- * @param {string} tls2 - 西起玩家交出去的牌
- * @param {string} tls3 - 北起玩家交出去的牌
+ * @param {string[]} tls - 四名玩家交出去的牌
  * @param {number} type - 换牌方式, 0: 逆时针, 1: 对家, 2: 顺时针
  */
-let huansanzhang = (tls0, tls1, tls2, tls3, type) => {
-    let tiles = [separate(tls0), separate(tls1), separate(tls2), separate(tls3)];
+const huanpai = (tls, type) => {
+    let tiles = [separate(tls[0]), separate(tls[1]), separate(tls[2]), separate(tls[3])];
 
     let ret = [];
     for (let seat = 0; seat < player_cnt; seat++) {
@@ -1635,9 +1643,9 @@ let huansanzhang = (tls0, tls1, tls2, tls3, type) => {
         }
         ret.push({
             out_tiles: tiles[seat],
-            out_tile_states: [0, 0, 0],
+            out_tile_states: [false, false, false],
             in_tiles: tiles[in_seat],
-            in_tile_states: [0, 0, 0],
+            in_tile_states: [false, false, false],
         });
     }
     for (let i = 0; i < player_cnt; i++)
@@ -1653,7 +1661,7 @@ let huansanzhang = (tls0, tls1, tls2, tls3, type) => {
  * dingque('smps')
  * @param {string} x - 四位玩家的定缺
  */
-let dingque = x => {
+const dingque = x => {
     let alldingque = x.split('');
     let dict = {'m': 1, 'p': 0, 's': 2}; // 注意 012 分别对应 pms, 而不是 mps
     let ret = [];
@@ -1727,18 +1735,18 @@ const setRound = (c, j, b) => {
 // 示例牌局
 const demoGame = () => {
     let mode = config.mode.mode;
-    tiles0 = '11223344556777z';
+    begin_tiles[0] = '11223344556777z';
     if (mode >= 20 && mode <= 29) {
-        tiles1 = '1112340678999m';
+        begin_tiles[1] = '1112340678999m';
         randomPaishan('6z', '55z............');
     } else if (mode >= 10 && mode <= 19) {
-        tiles1 = '1112340678999p';
-        tiles2 = '1112340678999s';
+        begin_tiles[1] = '1112340678999p';
+        begin_tiles[2] = '1112340678999s';
         randomPaishan('6z', '55z........');
     } else {
-        tiles1 = '1112340678999m';
-        tiles2 = '1112340678999p';
-        tiles3 = '1112340678999s';
+        begin_tiles[1] = '1112340678999m';
+        begin_tiles[2] = '1112340678999p';
+        begin_tiles[3] = '1112340678999s';
         randomPaishan('6z', '55z....');
     }
     roundBegin();
@@ -2264,8 +2272,16 @@ const getLstAction = (num = 1) => {
         throw new Error(roundInfo() + 'actions 为空');
 };
 
+/**
+ * 设置玩家的实时点数
+ * @param {number[]} s - 各玩家的点数, 有效长度为玩家数, 不超过4
+ */
+const setScores = s => {
+    scores = s;
+};
+
 // 复原以查看真实牌谱
-const resetReplay = function (){
+const resetReplay = function () {
     if (checkPaiPu !== undefined)
         GameMgr.Inst.checkPaiPu = function (game_uuid, account_id, paipu_config, is_maka) {
             return checkPaiPu.call(this, game_uuid, account_id, paipu_config, is_maka);
@@ -2296,6 +2312,16 @@ const resetReplay = function (){
 // 编辑自制牌谱时, 除非知道自己在做什么, 否则不建议修改下面的所有变量与函数, 或仅限只读
 
 /**
+ * 牌山, 会随着牌局的进行逐渐减少
+ * @type {string[]}
+ */
+let paishan;
+/**
+ * 玩家的实时点数, 长度为玩家数, 不超过4
+ * @type {number[]}
+ */
+let scores;
+/**
  * 玩家数, 有效值2, 3, 4, 默认为4
  * @type {number}
  */
@@ -2315,7 +2341,7 @@ let liqi_need;
  */
 let chang, ju, ben, liqibang, benchangbang;
 /**
- * 玩家的切牌集合和摸牌集合, 算法使用侧, 有效长度为玩家数, 不超过4
+ * 玩家的切牌集合和摸牌集合, 有效长度为玩家数, 不超过4
  * @type {[string][]}
  */
 let discard_tiles, deal_tiles;
@@ -2442,6 +2468,11 @@ let baogang_seat;
  * @type {[number][]}
  */
 let mingpais;
+/**
+ * 龙之目玉: 拥有目玉的玩家队列
+ * @type {string}
+ */
+let muyu_seats;
 /**
  * 龙之目玉: 目玉信息
  * - id: 目玉id, 从1开始依次递增1
@@ -2748,12 +2779,6 @@ const init = () => {
     awaiting_tiles = [];
     cuohu = [false, false, false, false];
 
-    discard_tiles = [[], [], [], []];
-    deal_tiles = [[], [], [], []];
-    for (let i = 0; i < player_cnt; i++)
-        discard_tiles[i] = separate(qiepai_set[i]);
-    for (let i = 0; i < player_cnt; i++)
-        deal_tiles[i] = separate(mopai_set[i]);
     delta_scores = [];
     for (let i = 0; i < player_cnt; i++)
         delta_scores[i] = 0;
@@ -2767,7 +2792,7 @@ const init = () => {
         li_doras.push(paishan[paishan.length - (22 - 4 * player_cnt + 2 * i)]);
     }
 
-    let tiles = [separate(tiles0), separate(tiles1), separate(tiles2), separate(tiles3)];
+    let tiles = [separate(begin_tiles[0]), separate(begin_tiles[1]), separate(begin_tiles[2]), separate(begin_tiles[3])];
     if (tiles[0].length === 0 && tiles[1].length === 0 && tiles[2].length === 0 && tiles[3].length === 0) { // 没有给定起手, 则模仿现实中摸牌
         for (let i = 0; i < 3; i++)
             for (let j = 0; j < player_cnt; j++)
@@ -6330,9 +6355,10 @@ const roundEnd = () => {
         return;
     if (is_chuanma() && chuanma_gangs.notover.length !== 0 && getLstAction().name !== 'RecordNoTile' && getLstAction().name !== 'RecordHuleXueZhanEnd')
         calcGangPoint(true);
-    qiepai_set = ['', '', '', ''];
-    mopai_set = ['', '', '', ''];
-    tiles0 = tiles1 = tiles2 = tiles3 = muyu_seats = '';
+    begin_tiles = ['', '', '', ''];
+    discard_tiles = [[], [], [], []];
+    deal_tiles = [[], [], [], []];
+    muyu_seats = '';
     paishan = [];
 
     all_data.actions.push(actions.slice());
@@ -7358,7 +7384,7 @@ const is_tiandichuangzao = () => config.mode.detail_rule._tiandichuangzao;
 const is_wanwushengzhang = () => config.mode.detail_rule._wanwushengzhang;
 
 /**
- * 是否根据 mopai_set 确定牌山
+ * 是否根据 deal_tiles 确定牌山
  * @returns {boolean}
  */
 const is_mopai_paishan = () => config.mode.detail_rule._mopai_paishan;
@@ -9695,18 +9721,18 @@ var checkPaiPu, resetData, showRecord, showInfo_record, setFanFu, OnChoosedPai, 
 let inst_once = true;
 
 // 在线编辑(进入牌谱之后的修改, 包括切换视角和切换巡目, 只在 editOffline 中的 resetData 中调用)
-function editOnline() {
+const editOnline = () => {
     let rounds = [];
     for (let i in all_data.actions)
         rounds.push({actions: all_data.actions[i], xun: all_data.xun[i][view.DesktopMgr.Inst.seat]});
     uiscript.UI_Replay.Inst.rounds = rounds;
     uiscript.UI_Replay.Inst.gameResult.result.players = all_data.players;
-}
+};
 
 // 离线编辑(进入牌谱之前改, 只在 gameEnd 中调用)
-function editOffline() {
+const editOffline = () => {
     // 修改玩家信息
-    function editPlayerDatas() {
+    const editPlayerDatas = () => {
         let ret = [];
         // 建议玩家随机的装扮: 立直棒(0), 和牌特效(1), 立直特效(2), 头像框(5), 桌布(6), 牌背(7), 称号(11), 牌面(13)
         let slots = [0, 1, 2, 5, 6, 7, 11, 13];
@@ -9764,7 +9790,7 @@ function editOffline() {
                 }
         }
         all_data.player_datas = player_datas = ret;
-    }
+    };
 
     if (checkPaiPu === undefined)
         checkPaiPu = GameMgr.Inst.checkPaiPu;
@@ -9948,15 +9974,15 @@ function editOffline() {
         }
 
     }
-}
+};
 
 // ===========================================
 // ============== 一些的优化函数 ===============
 // ===========================================
 
-function optimizeFunction() {
+const optimizeFunction = () => {
     // 修正多赤的暗杠
-    view.ActionAnGangAddGang.getAngangTile = function (tile, seat) {
+    view.ActionAnGangAddGang.getAngangTile = (tile, seat) => {
         let hand = view.DesktopMgr.Inst.players[view.DesktopMgr.Inst.seat2LocalPosition(seat)].hand;
         let mj_tile = mjcore.MJPai.Create(tile);
         let dora_cnt = 0; // 红宝牌数量
@@ -10738,4 +10764,4 @@ function optimizeFunction() {
         }
         return !1;
     }
-}
+};

@@ -38,10 +38,10 @@ config = {
 };
 
 // 东1局0本场, 和牌特效
-tiles0 = '1s1234056789m566z';
-tiles1 = '123456789m1122z';
-tiles2 = '1234056789p122z';
-tiles3 = '1234056789s566z';
+begin_tiles[0] = '1s1234056789m566z';
+begin_tiles[1] = '123456789m1122z';
+begin_tiles[2] = '1234056789p122z';
+begin_tiles[3] = '1234056789s566z';
 qiepaiset = ['123456789s', '333444777z', '123456789m', '123456789p'];
 randomPaishan('3z1m1p2s3z2m2p3s3z3m3p4s4z4m4p5s4z5m5p6s4z6m6p7s7z7m7p8s7z8m8p9s7z9m9p1z', '5z....');
 roundBegin();
@@ -51,13 +51,13 @@ mopai(1);
 hupai();
 
 setRound(0, 0, 0);
-scores = [25000, 25000, 25000, 25000];
+setScores([25000, 25000, 25000, 25000]);
 
 // 立直特效
-tiles0 = '1s1234056789m566z';
-tiles1 = '123456789m1122z';
-tiles2 = '1234056789p122z';
-tiles3 = '1234056789s566z';
+begin_tiles[0] = '1s1234056789m566z';
+begin_tiles[1] = '123456789m1122z';
+begin_tiles[2] = '1234056789p122z';
+begin_tiles[3] = '1234056789s566z';
 qiepaiset = ['123456789s', '333444777z', '123456789m', '123456789p'];
 randomPaishan('3z1m1p2s3z2m2p3s3z3m3p4s4z4m4p5s4z5m5p6s4z6m6p7s7z7m7p8s7z8m8p9s7z9m9p5z', '15z....');
 roundBegin();

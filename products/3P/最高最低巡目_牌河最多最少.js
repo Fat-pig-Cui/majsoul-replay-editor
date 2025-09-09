@@ -26,9 +26,9 @@ config = {
 // 被西家碰四次
 // 被南家碰四次
 // 28巡
-tiles0 = '11122233345556z';
-tiles1 = '22337788p9999s6z';
-tiles2 = '1199m1199p1111s6z';
+begin_tiles[0] = '11122233345556z';
+begin_tiles[1] = '22337788p9999s6z';
+begin_tiles[2] = '1199m1199p1111s6z';
 randomPaishan('9m192p.3p.7p.8p', '6z1m5321444z');
 roundBegin();
 comboMopai(8);
@@ -46,9 +46,9 @@ moqieLiuju();
 // 要让一家巡目最少, 那该家最好是西家
 // 亲家拔四北, 且南家出的牌被亲家杠四次
 // 14巡
-tiles0 = '11122233345556z';
-tiles1 = '222333777888p6z';
-tiles2 = '111999m111999p6z';
+begin_tiles[0] = '11122233345556z';
+begin_tiles[1] = '222333777888p6z';
+begin_tiles[2] = '111999m111999p6z';
 randomPaishan('1235z', '6z.....444z');
 roundBegin();
 comboMopai(4);
@@ -67,9 +67,9 @@ moqieLiuju();
 // 被西家碰四次
 // 且 无人拔北
 // 23张
-tiles0 = '9999s1122334457z';
-tiles1 = '1m566678p157s555z';
-tiles2 = '1122334469999p';
+begin_tiles[0] = '9999s1122334457z';
+begin_tiles[1] = '1m566678p157s555z';
+begin_tiles[2] = '1122334469999p';
 randomPaishan('1234z1p.2p.3p.4p');
 roundBegin();
 qiepai();
@@ -91,9 +91,9 @@ moqieLiuju();
 // 被南家碰四次
 // 且 四个北全拔
 // 11张
-tiles0 = '11122233344445z';
-tiles1 = '1122334469999p';
-tiles2 = '9m135666p147s555z';
+begin_tiles[0] = '11122233344445z';
+begin_tiles[1] = '1122334469999p';
+begin_tiles[2] = '9m135666p147s555z';
 randomPaishan('.1z.2z.3z.6z.1234p', '7666z');
 roundBegin();
 comboMopai(4);

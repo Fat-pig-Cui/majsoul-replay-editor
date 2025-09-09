@@ -25,10 +25,10 @@ config = {
 };
 
 // 第1(83)局: 明暗杠
-tiles0 = '2222333m123p67s55z';
-tiles1 = '1112223334445z';
-tiles2 = '111234478899p5z';
-tiles3 = '1112225555888s';
+begin_tiles[0] = '2222333m123p67s55z';
+begin_tiles[1] = '1112223334445z';
+begin_tiles[2] = '111234478899p5z';
+begin_tiles[3] = '1112225555888s';
 randomPaishan('3m8s');
 roundBegin();
 comboMopai();
@@ -39,18 +39,18 @@ normalMoqie(2);
 hupai();
 
 // 第2(84)局: 天和
-tiles0 = '222345m234p789s55z';
-tiles1 = '1112223334445z';
-tiles2 = '1112345678999p';
-tiles3 = '1112345678999s';
+begin_tiles[0] = '222345m234p789s55z';
+begin_tiles[1] = '1112223334445z';
+begin_tiles[2] = '1112345678999p';
+begin_tiles[3] = '1112345678999s';
 roundBegin();
 hupai();
 
 // 第3(85)局: 地和
-tiles0 = '3m1112223334445z';
-tiles1 = '22245m234p789s55z';
-tiles2 = '1112345678999p';
-tiles3 = '1112345678999s';
+begin_tiles[0] = '3m1112223334445z';
+begin_tiles[1] = '22245m234p789s55z';
+begin_tiles[2] = '1112345678999p';
+begin_tiles[3] = '1112345678999s';
 roundBegin();
 qiepai('3m');
 hupai();
@@ -58,10 +58,10 @@ hupai();
 setRound(0, 0, 3);
 
 // 第4(86)局: 人和(自摸)
-tiles0 = '11122233344456z';
-tiles1 = '22245m234p789s55z';
-tiles2 = '1112345678999p';
-tiles3 = '1112345678999s';
+begin_tiles[0] = '11122233344456z';
+begin_tiles[1] = '22245m234p789s55z';
+begin_tiles[2] = '1112345678999p';
+begin_tiles[3] = '1112345678999s';
 randomPaishan('3m');
 roundBegin();
 qiepai();
@@ -69,10 +69,10 @@ zimoHu();
 
 setRound(0, 0, 4);
 // 第5(87)局: 人和(点炮)
-tiles0 = '11122233344456z';
-tiles1 = '1112345678999p';
-tiles2 = '22245m234p789s55z';
-tiles3 = '1112345678999s';
+begin_tiles[0] = '11122233344456z';
+begin_tiles[1] = '1112345678999p';
+begin_tiles[2] = '22245m234p789s55z';
+begin_tiles[3] = '1112345678999s';
 randomPaishan('3m');
 roundBegin();
 qiepai();

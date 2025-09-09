@@ -16,9 +16,9 @@ config = {
     }
 };
 
-tiles0 = '2222333444555p8s';
-tiles1 = '5566667777888s';
-tiles2 = '2223333444405s';
+begin_tiles[0] = '2222333444555p8s';
+begin_tiles[1] = '5566667777888s';
+begin_tiles[2] = '2223333444405s';
 randomPaishan('YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY', 'Y043p');
 roundBegin();
 comboMopai(4);

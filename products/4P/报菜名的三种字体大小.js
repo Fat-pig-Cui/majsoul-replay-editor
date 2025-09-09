@@ -27,10 +27,10 @@ config = {
 };
 
 // 8条菜名, 至少7番: 立直, 一发, 自摸, 平和, 一杯口, 断幺九, 宝牌1, 里宝牌0
-tiles0 = '223344m4p144567s1z';
-tiles1 = '1112340678999m';
-tiles2 = '1112340678999p';
-tiles3 = '1133440678999s';
+begin_tiles[0] = '223344m4p144567s1z';
+begin_tiles[1] = '1112340678999m';
+begin_tiles[2] = '1112340678999p';
+begin_tiles[3] = '1133440678999s';
 randomPaishan('5pHHH6p', '65p....');
 roundBegin();
 qiepai('1s');
@@ -40,10 +40,10 @@ normalMoqie(3);
 zimoHu();
 
 // 9条菜名, 至少8番: 立直, 一发, 自摸, 平和, 一杯口, 断幺九, 宝牌1, 红宝牌1, 里宝牌0
-tiles0 = '223344m4p144567s1z';
-tiles1 = '1112340678999m';
-tiles2 = '1112345678999p';
-tiles3 = '1133440678999s';
+begin_tiles[0] = '223344m4p144567s1z';
+begin_tiles[1] = '1112340678999m';
+begin_tiles[2] = '1112345678999p';
+begin_tiles[3] = '1133440678999s';
 randomPaishan('0pHHH6p', '65p....');
 roundBegin();
 qiepai('1s');
@@ -53,10 +53,10 @@ normalMoqie(3);
 zimoHu();
 
 // 12条菜名, 至少12番: 立直, 一发, 海底摸月, 门前清自摸和, 白, 发, 东, 连东, 三暗刻, 宝牌1, 宝牌1, 里宝牌0
-tiles0 = '5p789s1112z555666z';
-tiles1 = '22220558888m55p';
-tiles2 = '3333444467777p';
-tiles3 = '11222240555s22z';
+begin_tiles[0] = '5p789s1112z555666z';
+begin_tiles[1] = '22220558888m55p';
+begin_tiles[2] = '3333444467777p';
+begin_tiles[3] = '11222240555s22z';
 randomPaishan('', '0p........2z6s....');
 roundBegin();
 qiepai('2z');
@@ -67,10 +67,10 @@ normalMoqie(3);
 zimoHu();
 
 // 13条菜名, 至少14番: 立直, 一发, 海底摸月, 门前清自摸和, 白, 发, 东, 连东, 三杠子, 三暗刻, 宝牌1, 宝牌1, 里宝牌0
-tiles0 = '5p789s1111z555666z';
-tiles1 = '22220558888m55p';
-tiles2 = '1122224055599s';
-tiles3 = '3333444467777p';
+begin_tiles[0] = '5p789s1111z555666z';
+begin_tiles[1] = '22220558888m55p';
+begin_tiles[2] = '1122224055599s';
+begin_tiles[3] = '3333444467777p';
 randomPaishan('', '0p.....3333222z6s.9s65z');
 roundBegin();
 comboMopai(3);
@@ -82,10 +82,10 @@ normalMoqie(3);
 zimoHu();
 
 // 14条菜名, 至少17番: 立直, 一发, 海底摸月, 门前清自摸和, 白, 发, 东, 连东, 三杠子, 三暗刻, 混一色, 宝牌1, 宝牌1, 里宝牌0
-tiles0 = '5789s1111z555666z';
-tiles1 = '22220558888m55p';
-tiles2 = '1122224556699s';
-tiles3 = '3333444467777p';
+begin_tiles[0] = '5789s1111z555666z';
+begin_tiles[1] = '22220558888m55p';
+begin_tiles[2] = '1122224556699s';
+begin_tiles[3] = '3333444467777p';
 randomPaishan('', '0s.....3333222z6s.9s65z');
 roundBegin();
 comboMopai(3);

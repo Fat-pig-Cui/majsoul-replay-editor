@@ -26,10 +26,10 @@ config = {
 // 被西家碰四次
 // 被南家碰/吃四次
 // 27巡
-tiles0 = '11112223334445z';
-tiles1 = '112233449999m5z';
-tiles2 = '112233449999p5z';
-tiles3 = '112233449999s5z';
+begin_tiles[0] = '11112223334445z';
+begin_tiles[1] = '112233449999m5z';
+begin_tiles[2] = '112233449999p5z';
+begin_tiles[3] = '112233449999s5z';
 randomPaishan('234s1p.2p.3p.4p.1m..2m..3m..4m', '1s432z');
 roundBegin();
 comboMopai(4);
@@ -52,10 +52,10 @@ moqieLiuju();
 // 被亲家明杠四次
 // 被南家碰四次
 // 13巡
-tiles0 = '11122233344457z';
-tiles1 = '112233449999m5z';
-tiles2 = '111222888999p5z';
-tiles3 = '111222888999s5z';
+begin_tiles[0] = '11122233344457z';
+begin_tiles[1] = '112233449999m5z';
+begin_tiles[2] = '111222888999p5z';
+begin_tiles[3] = '111222888999s5z';
 randomPaishan('.1z.2z.3z.4z.1234m');
 roundBegin();
 qiepai();
@@ -77,10 +77,10 @@ moqieLiuju();
 // 被北家碰四次
 // 被西家碰/吃四次
 // 24张
-tiles0 = '9999s1122334457z';
-tiles1 = '111122226666p5z';
-tiles2 = '333305559999p5z';
-tiles3 = '112233449999m5z';
+begin_tiles[0] = '9999s1122334457z';
+begin_tiles[1] = '111122226666p5z';
+begin_tiles[2] = '333305559999p5z';
+begin_tiles[3] = '112233449999m5z';
 randomPaishan('1234z1m.2m.3m.4m.4p..4p..4p..4p');
 roundBegin();
 for (let i = 0; i < 4; i++) {
@@ -107,10 +107,10 @@ moqieLiuju();
 // 被南家碰四次
 // 被西家碰四次
 // 10张
-tiles0 = '11122233344457z';
-tiles1 = '112233449999m5z';
-tiles2 = '112233449999p5z';
-tiles3 = '1111222266667s';
+begin_tiles[0] = '11122233344457z';
+begin_tiles[1] = '112233449999m5z';
+begin_tiles[2] = '112233449999p5z';
+begin_tiles[3] = '1111222266667s';
 randomPaishan('..1z..2z..3z..4z..1m.2m.3m.4m.1p2p3p4p', '5z....');
 roundBegin();
 qiepai();

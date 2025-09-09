@@ -18,11 +18,11 @@ config = {
     }
 };
 
-tiles0 = '1112345678999m6z';
-tiles1 = '377s1234556677z';
-tiles2 = '23468s11223344z';
-tiles3 = '122344s66788s57z';
-qiepai_set = ['6z3s', '1234z', '2468s', '57z71s'];
+begin_tiles[0] = '1112345678999m6z';
+begin_tiles[1] = '377s1234556677z';
+begin_tiles[2] = '23468s11223344z';
+begin_tiles[3] = '122344s66788s57z';
+setDiscardTiles(['6z3s', '1234z', '2468s', '57z71s']);
 randomPaishan('3s', '2s....');
 roundBegin();
 qiepai(true);

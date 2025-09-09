@@ -69,7 +69,7 @@
 
     function json2js(json, uuid) {
         let txt = '';
-        txt += `clearproject();\n\n// ${uuid}\n\n`;
+        txt += `clearProject();\n\n// ${uuid}\n\n`;
 
         for (let i in json.head.accounts)
             txt += `player_datas[${i}]=${JSON.stringify(json.head.accounts[i])};\n`;
@@ -85,12 +85,12 @@
                 if (actions[i].result.name === 'RecordNewRound') {
                     let chang = Data.chang, ju = Data.ju, ben = Data.ben;
                     txt += `// ${roundinfo(chang, ju, ben)}\n`;
-                    txt += `tiles0='${Data.tiles0.join('')}';\n`;
-                    txt += `tiles1='${Data.tiles1.join('')}';\n`;
-                    txt += `tiles2='${Data.tiles2.join('')}';\n`;
+                    txt += `begin_tiles[0]='${Data.tiles0.join('')}';\n`;
+                    txt += `begin_tiles[1]='${Data.tiles1.join('')}';\n`;
+                    txt += `begin_tiles[2]='${Data.tiles2.join('')}';\n`;
                     if (Data.tiles3 && Data.tiles3.length !== 0)
-                        txt += `tiles3='${Data.tiles3.join('')}';\n`;
-                    txt += `paishan=separate('${Data.paishan}');\n`;
+                        txt += `begin_tiles[3]='${Data.tiles3.join('')}';\n`;
+                    txt += `setPaishan('${Data.paishan}');\n`;
                     if (json.head.config.mode && json.head.config.mode.detail_rule && json.head.config.mode.detail_rule.muyu_mode) {
                         let muyuseats = '', tmp = [];
                         for (let j = i + 1; j < actions.length; j++)
@@ -99,9 +99,9 @@
                                     muyuseats += actions[i].result.data.muyu.seat.toString();
                                 tmp[actions[i].result.data.muyu.seat] = actions[i].result.data.muyu.count !== 0;
                             }
-                        txt += `muyuseats='${muyuseats}';\n`;
+                        txt += `setMuyuSeats('${muyuseats})';\n`;
                     }
-                    txt += `roundbegin();\n`;
+                    txt += `roundBegin();\n`;
                 }
                 if (actions[i].result.name === 'RecordDiscardTile') {
                     let tile = Data.tile, is_liqi = Data.is_liqi, moqie = Data.moqie;
@@ -125,7 +125,7 @@
                     for (let i = 0; i < tls.length; i++)
                         tls[i] = Data.chang_tile_infos[i].out_tiles.join('');
                     let type = Data.change_type;
-                    txt += `huansanzhang('${tls[0]}','${tls[1]}','${tls[2]}','${tls[3]}',${type});\n`;
+                    txt += `huanpai(['${tls[0]}','${tls[1]}','${tls[2]}','${tls[3]}'],${type});\n`;
                 }
                 if (actions[i].result.name === 'RecordSelectGap') {
                     let gap_types = Data.gap_types;
@@ -164,13 +164,13 @@
                     while (!actions[j].result)
                         j++;
                     if (actions[j].result.name === 'RecordGangResultEnd')
-                        txt += `leimingpai('${tile}','${c_type}',true);\n`;
+                        txt += `zimingpai('${tile}','${c_type}',true);\n`;
                     else
-                        txt += `leimingpai('${tile}','${c_type}');\n`;
+                        txt += `zimingpai('${tile}','${c_type}');\n`;
                 }
                 if (actions[i].result.name === 'RecordBaBei') {
                     let tile = Data.tile;
-                    txt += `leimingpai('${tile}','babei');\n`;
+                    txt += `zimingpai('${tile}','babei');\n`;
                 }
                 if (actions[i].result.name === 'RecordHule') {
                     let allseats = [];
@@ -182,7 +182,7 @@
                     txt += `liuju();\n\n`;
                 }
                 if (actions[i].result.name === 'RecordNoTile') {
-                    txt += `notileliuju();\n\n`;
+                    txt += `huangpai();\n\n`;
                 }
                 if (actions[i].result.name === 'RecordHuleXueZhanMid') {
                     let allseats = [];
@@ -214,9 +214,9 @@
                     if (actions[j].result.name === 'RecordUnveilTile') {
                         let seat = actions[j].result.data.seat;
                         if (actions[j].result.data.lock_state === 1)
-                            txt += `unveil_lock(${seat});\n`;
+                            txt += `kaipaiLock(${seat});\n`;
                         else if (actions[j].result.data.lock_state === 0)
-                            txt += `unveil(${seat});\n`;
+                            txt += `kaipai(${seat});\n`;
                     }
                 }
                 if (actions[i].result.name === 'RecordUnveilTile') { // 不需要

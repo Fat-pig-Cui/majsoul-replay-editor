@@ -33,70 +33,70 @@ config = {
 // ===================== 第一部分 =====================
 
 // 第1局, 切1m
-tiles0 = '12m111222333444z';
-tiles1 = '9m555566667777z';
-tiles2 = '1112340678999p';
-tiles3 = '1112340678999s';
+begin_tiles[0] = '12m111222333444z';
+begin_tiles[1] = '9m555566667777z';
+begin_tiles[2] = '1112340678999p';
+begin_tiles[3] = '1112340678999s';
 randomPaishan('2m');
 roundBegin();
 qiepai('1m');
 normalMoqie();
 hupai();
 
-scores = [200000, 200000, 200000, 200000];
+setScores([200000, 200000, 200000, 200000]);
 // 第2局, 切2m
-tiles0 = '12m111222333444z';
-tiles1 = '9m555566667777z';
-tiles2 = '1112340678999p';
-tiles3 = '1112340678999s';
+begin_tiles[0] = '12m111222333444z';
+begin_tiles[1] = '9m555566667777z';
+begin_tiles[2] = '1112340678999p';
+begin_tiles[3] = '1112340678999s';
 randomPaishan('1m');
 roundBegin();
 qiepai('2m');
 normalMoqie();
 hupai();
 
-scores = [200000, 200000, 200000, 200000];
+setScores([200000, 200000, 200000, 200000]);
 // 第3局, 切1z
-tiles0 = '12m111222333444z';
-tiles1 = '9m555566667777z';
-tiles2 = '1112340678999p';
-tiles3 = '1112340678999s';
+begin_tiles[0] = '12m111222333444z';
+begin_tiles[1] = '9m555566667777z';
+begin_tiles[2] = '1112340678999p';
+begin_tiles[3] = '1112340678999s';
 randomPaishan('3m');
 roundBegin();
 qiepai('1z');
 normalMoqie();
 hupai();
 
-scores = [200000, 200000, 200000, 200000];
+setScores([200000, 200000, 200000, 200000]);
 // 第4局, 切2z
-tiles0 = '12m111222333444z';
-tiles1 = '9m555566667777z';
-tiles2 = '1112340678999p';
-tiles3 = '1112340678999s';
+begin_tiles[0] = '12m111222333444z';
+begin_tiles[1] = '9m555566667777z';
+begin_tiles[2] = '1112340678999p';
+begin_tiles[3] = '1112340678999s';
 randomPaishan('3m');
 roundBegin();
 qiepai('2z');
 normalMoqie();
 hupai();
 
-scores = [200000, 200000, 200000, 200000];
+setScores([200000, 200000, 200000, 200000]);
 // 第5局, 切3z
-tiles0 = '12m111222333444z';
-tiles1 = '9m555566667777z';
-tiles2 = '1112340678999p';
-tiles3 = '1112340678999s';
+begin_tiles[0] = '12m111222333444z';
+begin_tiles[1] = '9m555566667777z';
+begin_tiles[2] = '1112340678999p';
+begin_tiles[3] = '1112340678999s';
 randomPaishan('3m');
 roundBegin();
 qiepai('3z');
 normalMoqie();
 hupai();
 
-scores = [200000, 200000, 200000, 200000];
+setScores([200000, 200000, 200000, 200000]);
 // 第6局, 切4z
-tiles0 = '12m111222333444z';
-tiles1 = '9m555566667777z';
-tiles2 = '1112340678999p';
-tiles3 = '1112340678999s';
+begin_tiles[0] = '12m111222333444z';
+begin_tiles[1] = '9m555566667777z';
+begin_tiles[2] = '1112340678999p';
+begin_tiles[3] = '1112340678999s';
 randomPaishan('3m');
 roundBegin();
 qiepai('4z');
@@ -105,48 +105,48 @@ hupai();
 
 // ===================== 第二部分 =====================
 
-scores = [200000, 200000, 200000, 200000];
+setScores([200000, 200000, 200000, 200000]);
 // 第7局, 切2s
-tiles0 = '22224444888s666z';
-tiles1 = '1112340678999m';
-tiles2 = '1112340678999p';
-tiles3 = '1111333055577s';
+begin_tiles[0] = '22224444888s666z';
+begin_tiles[1] = '1112340678999m';
+begin_tiles[2] = '1112340678999p';
+begin_tiles[3] = '1111333055577s';
 randomPaishan('3s');
 roundBegin();
 qiepai('2s');
 normalMoqie();
 hupai();
 
-scores = [200000, 200000, 200000, 200000];
+setScores([200000, 200000, 200000, 200000]);
 // 第8局, 切4s
-tiles0 = '22224444888s666z';
-tiles1 = '1112340678999m';
-tiles2 = '1112340678999p';
-tiles3 = '1111333055577s';
+begin_tiles[0] = '22224444888s666z';
+begin_tiles[1] = '1112340678999m';
+begin_tiles[2] = '1112340678999p';
+begin_tiles[3] = '1111333055577s';
 randomPaishan('3s');
 roundBegin();
 qiepai('4s');
 normalMoqie();
 hupai();
 
-scores = [200000, 200000, 200000, 200000];
+setScores([200000, 200000, 200000, 200000]);
 // 第9局, 切8s
-tiles0 = '22224444888s666z';
-tiles1 = '1112340678999m';
-tiles2 = '1112340678999p';
-tiles3 = '1111333055577s';
+begin_tiles[0] = '22224444888s666z';
+begin_tiles[1] = '1112340678999m';
+begin_tiles[2] = '1112340678999p';
+begin_tiles[3] = '1111333055577s';
 randomPaishan('3s');
 roundBegin();
 qiepai('8s');
 normalMoqie();
 hupai();
 
-scores = [200000, 200000, 200000, 200000];
+setScores([200000, 200000, 200000, 200000]);
 // 第10局, 切6z
-tiles0 = '22224444888s666z';
-tiles1 = '1112340678999m';
-tiles2 = '1112340678999p';
-tiles3 = '1111333055577s';
+begin_tiles[0] = '22224444888s666z';
+begin_tiles[1] = '1112340678999m';
+begin_tiles[2] = '1112340678999p';
+begin_tiles[3] = '1111333055577s';
 randomPaishan('3s');
 roundBegin();
 qiepai('6z');

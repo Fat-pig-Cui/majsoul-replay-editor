@@ -38,7 +38,7 @@ config = {
 
 // qiepai 去掉暗牌需要支付 1000 点和其他冗余判断
 origin_qiepai = qiepai;
-qiepai = function (seat, tile, is_liqi, f_moqie, anpai, bs_type) {
+qiepai = (seat, tile, is_liqi, f_moqie, anpai, bs_type) => {
     // 参数预处理
     function preprocess() {
         let x = {}, mat = [seat, tile, is_liqi, f_moqie, anpai, bs_type];
@@ -170,7 +170,7 @@ qiepai = function (seat, tile, is_liqi, f_moqie, anpai, bs_type) {
 
 // 修改点数变化
 origin_endHule = endHule;
-endHule = function (hule_info) {
+endHule = hule_info => {
     delta_scores = [12300, 0, 0, 0];
     scores = [21500, 0, 20300, 0];
     actions.push({
@@ -185,10 +185,10 @@ endHule = function (hule_info) {
     });
 }
 
-tiles0 = '6m6779p135s123455z';
-tiles2 = '33m888p24679s136z';
-mopai_set = ['', '', '', '9s7z1s5z6s1p'];
-qiepai_set = ['4z9p7p2z3z1m1z7p6p3z6m1z4m2z2z5m9p3p4z5s', '', '1z8m9m6z9s4z6z1p9s4s2s9p3s5m4z2z4p1s2s', ''];
+begin_tiles[0] = '6m6779p135s123455z';
+begin_tiles[2] = '33m888p24679s136z';
+setDealTiles(['', '', '', '9s7z1s5z6s1p']);
+setDiscardTiles(['4z9p7p2z3z1m1z7p6p3z6m1z4m2z2z5m9p3p4z5s', '', '1z8m9m6z9s4z6z1p9s4s2s9p3s5m4z2z4p1s2s', '']);
 randomPaishan('3z7z8m7z9m5z4z4m1m6z6s2m6s1p2m9s3z2m7z3s1z9p1m6s2z5m2z4z5m2z9p4p3p1s4z2s..1z3m5m5p4m..1s2p6z9p7s..3p7z3m', '8p.1m...4p');
 roundBegin();
 // Stage A

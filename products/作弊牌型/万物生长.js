@@ -28,10 +28,10 @@ config = {
     }
 };
 
-tiles0 = '66666666666667z';
-tiles1 = '1112340678999m';
-tiles2 = '1112340678999p';
-tiles3 = '9s111222334477z';
+begin_tiles[0] = '66666666666667z';
+begin_tiles[1] = '1112340678999m';
+begin_tiles[2] = '1112340678999p';
+begin_tiles[3] = '9s111222334477z';
 randomPaishan('6z', '55555555556666z');
 roundBegin();
 qiepai(true);

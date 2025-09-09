@@ -23,17 +23,29 @@
 
 ## 函数特殊说明
 
-### 切牌: `qiepai(seat, tile, is_liqi, f_moqie, anpai)`
+### 切牌(暗夜之战)
 
-与段位场的切牌相比, 多了一个参数 `anpai`, 如果 `anpai` 的值是字符串 `'anpai'` 时, 在暗夜之战切牌会暗牌
+`qiepai(seat, tile, is_liqi, f_moqie, anpai)`
 
-### 开牌并成功: `kaipai(seat)`
+与段位场相比多了个参数 `anpai`, 如果 `anpai` 的值是字符串 `'anpai'` 时, 在暗夜之战切牌会暗牌, 否则不会暗牌
+
+例子: `qiepai(0, '7z', true, 'anpai');`
+
+### 开牌并成功(暗夜之战)
+
+`kaipai(seat)`
 
 有人暗牌之后, 调用该函数可以使得 `seat` 号玩家开牌, 并且暗牌家没有锁定, 开牌成功
 
-### 开牌后锁定: `kaipaiLock(seat)`
+例子: `kaipai(1);`
+
+### 开牌后锁定(暗夜之战)
+
+`kaipaiLock(seat)`
 
 有人暗牌之后, 调用该函数可以使得 `seat` 号玩家开牌, 紧跟着暗牌家锁定, 开牌失败
+
+例子: `kaipaiLock(2);`
 
 ## 示例牌谱
 

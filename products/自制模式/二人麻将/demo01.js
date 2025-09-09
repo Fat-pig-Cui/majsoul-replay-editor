@@ -14,8 +14,8 @@ config = {
     }
 };
 
-tiles0 = '11112223334445z';
-tiles1 = '1112340678999m';
+begin_tiles[0] = '11112223334445z';
+begin_tiles[1] = '1112340678999m';
 randomPaishan('', '5m432z');
 roundBegin();
 comboMopai('1z');

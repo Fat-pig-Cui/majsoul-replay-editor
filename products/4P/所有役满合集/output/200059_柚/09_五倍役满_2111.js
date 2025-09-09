@@ -25,66 +25,66 @@ config = {
 };
 
 // 第1局: 东亲, 东起 天和, 大三元, 字一色, 四暗刻单骑
-tiles0 = '11122555666777z';
-tiles1 = '1112340678999m';
-tiles2 = '1112340678999p';
-tiles3 = '1112340678999s';
+begin_tiles[0] = '11122555666777z';
+begin_tiles[1] = '1112340678999m';
+begin_tiles[2] = '1112340678999p';
+begin_tiles[3] = '1112340678999s';
 roundBegin();
 hupai();
 
 // 第2局: 东亲, 东起 天和, 字一色, 小四喜, 四暗刻单骑
-tiles0 = '11122233344555z';
-tiles1 = '1112340678999m';
-tiles2 = '1112340678999p';
-tiles3 = '1112340678999s';
+begin_tiles[0] = '11122233344555z';
+begin_tiles[1] = '1112340678999m';
+begin_tiles[2] = '1112340678999p';
+begin_tiles[3] = '1112340678999s';
 roundBegin();
 hupai();
 
 // 第3局: 东亲, 南起 地和, 大三元, 字一色, 四暗刻单骑
-tiles0 = '1112340678999m4z';
-tiles1 = '1112555666777z';
-tiles2 = '1112340678999p';
-tiles3 = '1112340678999s';
+begin_tiles[0] = '1112340678999m4z';
+begin_tiles[1] = '1112555666777z';
+begin_tiles[2] = '1112340678999p';
+begin_tiles[3] = '1112340678999s';
 randomPaishan('2z');
 roundBegin();
 qiepai();
 zimoHu();
 
 // 第4局: 南亲, 西起 地和, 四暗刻, 字一色, 大四喜
-tiles1 = '1112340678999m7z';
-tiles2 = '1112223334455z';
-tiles3 = '1112340678999p';
-tiles0 = '1112340678999s';
+begin_tiles[1] = '1112340678999m7z';
+begin_tiles[2] = '1112223334455z';
+begin_tiles[3] = '1112340678999p';
+begin_tiles[0] = '1112340678999s';
 randomPaishan('4z');
 roundBegin();
 qiepai();
 zimoHu();
 
 // 第5局: 西亲, 北起 地和, 字一色, 小四喜, 四暗刻单骑
-tiles2 = '1112340678999m7z';
-tiles3 = '1112223334555z';
-tiles0 = '1112340678999p';
-tiles1 = '1112340678999s';
+begin_tiles[2] = '1112340678999m7z';
+begin_tiles[3] = '1112223334555z';
+begin_tiles[0] = '1112340678999p';
+begin_tiles[1] = '1112340678999s';
 randomPaishan('4z');
 roundBegin();
 qiepai();
 zimoHu();
 
 // 第6局: 北亲, 北起 大三元, 字一色, 四杠子, 四暗刻单骑
-tiles3 = '11112555666777z';
-tiles0 = '1112340678999m';
-tiles1 = '1112340678999p';
-tiles2 = '1112340678999s';
+begin_tiles[3] = '11112555666777z';
+begin_tiles[0] = '1112340678999m';
+begin_tiles[1] = '1112340678999p';
+begin_tiles[2] = '1112340678999s';
 randomPaishan('', '2567z');
 roundBegin();
 comboMopai(4);
 hupai();
 
 // 第7局: 北亲, 北起 字一色, 小四喜, 四杠子, 四暗刻单骑
-tiles3 = '11112223334555z';
-tiles0 = '1112340678999m';
-tiles1 = '1112340678999p';
-tiles2 = '1112340678999s';
+begin_tiles[3] = '11112223334555z';
+begin_tiles[0] = '1112340678999m';
+begin_tiles[1] = '1112340678999p';
+begin_tiles[2] = '1112340678999s';
 randomPaishan('', '4532z');
 roundBegin();
 comboMopai(4);

@@ -147,20 +147,8 @@
         if (json.player_count === 3)
             zhishipais += '....';
 
-        switch (json.mainrole) {
-            case 0:
-                tiles0 = json.tiles;
-                break;
-            case 1:
-                tiles1 = json.tiles;
-                break;
-            case 2:
-                tiles2 = json.tiles;
-                break;
-            case 3:
-                tiles3 = json.tiles;
-                break;
-        }
+        begin_tiles[json.mainrole] = json.tiles;
+
         randomPaishan('', zhishipais + '....');
         roundBegin();
         protected_tiles = {seat: json.mainrole, tiles: separate(json.tiles)};

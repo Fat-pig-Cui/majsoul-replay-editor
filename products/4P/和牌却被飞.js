@@ -23,10 +23,10 @@ config = {
 };
 
 // 大三元包牌
-tiles0 = '238999p11z556677z';
-tiles1 = '11345678m23456p';
-tiles2 = '2223405567888m';
-tiles3 = '2223405567888s';
+begin_tiles[0] = '238999p11z556677z';
+begin_tiles[1] = '11345678m23456p';
+begin_tiles[2] = '2223405567888m';
+begin_tiles[3] = '2223405567888s';
 randomPaishan('5677z1p', '1z....');
 roundBegin();
 qiepai('8p');
@@ -39,11 +39,11 @@ hupai();
 
 // 大四喜包牌
 setRound(0, 0, 0);
-scores = [7000, 45000, 48000, 0];
-tiles0 = '19999p112233445z';
-tiles1 = '11345678m23456p';
-tiles2 = '2223405567888m';
-tiles3 = '2223405567888s';
+setScores([7000, 45000, 48000, 0]);
+begin_tiles[0] = '19999p112233445z';
+begin_tiles[1] = '11345678m23456p';
+begin_tiles[2] = '2223405567888m';
+begin_tiles[3] = '2223405567888s';
 randomPaishan('12344z1p', '5z....');
 roundBegin();
 qiepai();

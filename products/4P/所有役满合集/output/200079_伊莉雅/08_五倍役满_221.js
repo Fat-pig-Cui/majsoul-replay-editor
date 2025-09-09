@@ -29,28 +29,28 @@ config = {
 };
 
 // 第1局: 东亲, 东起 天和, 四暗刻单骑, 大四喜
-tiles0 = '22m111222333444z';
-tiles1 = '1112340678999m';
-tiles2 = '1112340678999p';
-tiles3 = '1112340678999s';
+begin_tiles[0] = '22m111222333444z';
+begin_tiles[1] = '1112340678999m';
+begin_tiles[2] = '1112340678999p';
+begin_tiles[3] = '1112340678999s';
 roundBegin();
 hupai();
 
 // 第2局: 东亲, 南起 地和, 四暗刻单骑, 大四喜
-tiles0 = '1112340678999s5z';
-tiles1 = '2m111222333444z';
-tiles2 = '1112340678999m';
-tiles3 = '1112340678999p';
+begin_tiles[0] = '1112340678999s5z';
+begin_tiles[1] = '2m111222333444z';
+begin_tiles[2] = '1112340678999m';
+begin_tiles[3] = '1112340678999p';
 randomPaishan('2m');
 roundBegin();
 qiepai();
 zimoHu();
 
 // 第3局: 南亲, 南起 字一色, 四暗刻单骑, 大四喜
-tiles1 = '111222333444z57z';
-tiles2 = '1112340678999m';
-tiles3 = '1112340678999p';
-tiles0 = '1112340678999s';
+begin_tiles[1] = '111222333444z57z';
+begin_tiles[2] = '1112340678999m';
+begin_tiles[3] = '1112340678999p';
+begin_tiles[0] = '1112340678999s';
 randomPaishan('5z');
 roundBegin();
 qiepai();
@@ -58,10 +58,10 @@ normalMoqie();
 hupai();
 
 // 第4局: 南亲, 南起 四杠子, 四暗刻单骑, 大四喜
-tiles1 = '2m1111222333444z';
-tiles2 = '1112340678999m';
-tiles3 = '1112340678999p';
-tiles0 = '1112340678999s';
+begin_tiles[1] = '2m1111222333444z';
+begin_tiles[2] = '1112340678999m';
+begin_tiles[3] = '1112340678999p';
+begin_tiles[0] = '1112340678999s';
 randomPaishan('', '2m432z');
 roundBegin();
 comboMopai(4);

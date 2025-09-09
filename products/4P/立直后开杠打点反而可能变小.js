@@ -21,10 +21,10 @@ config = {
 };
 
 // 亲荣和, 立直, 一杯口, 纯全带幺九, 5番40符, 12000
-tiles0 = '119m77888999p237s';
-tiles1 = '222340567888m7p';
-tiles2 = '2222333346666p';
-tiles3 = '2233405677999s';
+begin_tiles[0] = '119m77888999p237s';
+begin_tiles[1] = '222340567888m7p';
+begin_tiles[2] = '2222333346666p';
+begin_tiles[3] = '2233405677999s';
 randomPaishan('1s', '11z....');
 roundBegin();
 qiepai();
@@ -34,10 +34,10 @@ mingQiepai('7p');
 hupai();
 
 // 亲荣和, 立直nomi, 1番60符, 2900
-tiles0 = '11m77888999p2237s';
-tiles1 = '222340567888m7p';
-tiles2 = '2222333346666p';
-tiles3 = '2233405677999s';
+begin_tiles[0] = '11m77888999p2237s';
+begin_tiles[1] = '222340567888m7p';
+begin_tiles[2] = '2222333346666p';
+begin_tiles[3] = '2233405677999s';
 randomPaishan('1s8p', '1111z...9m');
 roundBegin();
 qiepai();

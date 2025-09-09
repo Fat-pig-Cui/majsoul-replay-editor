@@ -58,11 +58,11 @@ config = {
 };
 
 // 东1局0本场
-tiles0 = '125678899m257p36s';
-tiles1 = '1237m12p67s22345z';
-tiles2 = '26m069p346777s36z';
-tiles3 = '69m1568p35s45566z';
-qiepai_set = ['2p5p7p6s3s1s', '4z9p5z3z1s2s', '9p9s3z7z6z', '9m6m1p4z3s'];
+begin_tiles[0] = '125678899m257p36s';
+begin_tiles[1] = '1237m12p67s22345z';
+begin_tiles[2] = '26m069p346777s36z';
+begin_tiles[3] = '69m1568p35s45566z';
+setDiscardTiles(['2p5p7p6s3s1s', '4z9p5z3z1s2s', '9p9s3z7z6z', '9m6m1p4z3s']);
 randomPaishan('4m3p8p9p9s4s8m7m1s6p7z4p9p1s6s3s5m2s', '1z....');
 roundBegin();
 qiepai();
@@ -75,11 +75,11 @@ mingQiepai();
 hupai();
 
 // 东2局0本场
-tiles1 = '14889m235p206s245z';
-tiles2 = '25679m1566p59s56z';
-tiles3 = '3346789p1228s37z';
-tiles0 = '116m14057p78s157z';
-qiepai_set = ['1z1p6z7z7z5z2m7p5p2z6m2z5z1m3m2m1m', '1m5z9m9p4z9m2z5p9p3z8m8m1z1z1s1s3z2s', '9s6z1p4z6z5z9m4z8p4z8s6m7m7m2m3m2z7z', '3z7z3m7m9s6z9p4m8m4m1s2s2p2m2p1s4s1p'];
+begin_tiles[1] = '14889m235p206s245z';
+begin_tiles[2] = '25679m1566p59s56z';
+begin_tiles[3] = '3346789p1228s37z';
+begin_tiles[0] = '116m14057p78s157z';
+setDiscardTiles(['1z1p6z7z7z5z2m7p5p2z6m2z5z1m3m2m1m', '1m5z9m9p4z9m2z5p9p3z8m8m1z1z1s1s3z2s', '9s6z1p4z6z5z9m4z8p4z8s6m7m7m2m3m2z7z', '3z7z3m7m9s6z9p4m8m4m1s2s2p2m2p1s4s1p']);
 randomPaishan('3m3m6z3s0m9s7m1z3m9s2m9p4z7m4s1z6z7s7z9m7m6z7s6s3s6p5s6s4z4m2z9p8p8m8m3z4z4m2z5m8s4s6m7z3s7p1p4p2p5z7p6m2m3m1s2z2p2m1s8p1s3p3z6s4s9p2s5s1p', '2p....');
 roundBegin();
 qiepai();
@@ -90,11 +90,11 @@ moqieLiqi();
 moqieLiuju();
 
 // 东3局0本场
-tiles2 = '1266789m78p469s14z';
-tiles3 = '2446m1p223678s23z';
-tiles0 = '3478m13567p1s257z';
-tiles1 = '1206p48s1133455z';
-qiepai_set = ['2z7z5z8s1m7s1p', '4s8s7s2m5m4z1p3m', '4z9s1z3z4p2m1m9p1z', '3z2z2p1p9m2s2m2m'];
+begin_tiles[2] = '1266789m78p469s14z';
+begin_tiles[3] = '2446m1p223678s23z';
+begin_tiles[0] = '3478m13567p1s257z';
+begin_tiles[1] = '1206p48s1133455z';
+setDiscardTiles(['2z7z5z8s1m7s1p', '4s8s7s2m5m4z1p3m', '4z9s1z3z4p2m1m9p1z', '3z2z2p1p9m2s2m2m']);
 randomPaishan('2p7m7p2p7s4p3z8p1s2m9p2m1m5m4s9m8s4p0m6p2p7p9p6m7s3m1z4m6s3p', '2s....');
 roundBegin();
 qiepai();
@@ -108,11 +108,11 @@ normalMoqie();
 zimoHu();
 
 // 东4局0本场
-tiles3 = '306m2334468p79s77z';
-tiles0 = '26m7888p1408s256z';
-tiles1 = '778m49p1279s1124z';
-tiles2 = '12358m9p367s1235z';
-qiepai_set = ['1s5z2z2m3z8s3p7z1z', '9p2z4z9s1s2s5z8m1p3m', '3z2z9s1z5z6z3s8m9m3m', '3m2s4z7s4z2m9s5s9p'];
+begin_tiles[3] = '306m2334468p79s77z';
+begin_tiles[0] = '26m7888p1408s256z';
+begin_tiles[1] = '778m49p1279s1124z';
+begin_tiles[2] = '12358m9p367s1235z';
+setDiscardTiles(['1s5z2z2m3z8s3p7z1z', '9p2z4z9s1s2s5z8m1p3m', '3z2z9s1z5z6z3s8m9m3m', '3m2s4z7s4z2m9s5s9p']);
 randomPaishan('5m2p9m2s6z5z9s4z3s3p4m7z7m6s5m7p4z3z1p6z1m2m3p5p5s7z1p7s9p1z3m5p7m', '6p....');
 roundBegin();
 qiepai();
@@ -126,11 +126,11 @@ normalMoqie(10);
 hupai();
 
 // 南1局0本场
-tiles0 = '3389m66p2458s4667z';
-tiles1 = '12238m23p5789s77z';
-tiles2 = '15679m456p19s155z';
-tiles3 = '1468m89p13407s25z';
-qiepai_set = ['4z2s7z4m8p8s8m1p', '8m5s6p1m6z6m3s', '1s9s9p1m9m', '1m9m4z1s2z'];
+begin_tiles[0] = '3389m66p2458s4667z';
+begin_tiles[1] = '12238m23p5789s77z';
+begin_tiles[2] = '15679m456p19s155z';
+begin_tiles[3] = '1468m89p13407s25z';
+setDiscardTiles(['4z2s7z4m8p8s8m1p', '8m5s6p1m6z6m3s', '1s9s9p1m9m', '1m9m4z1s2z']);
 randomPaishan('5m5m9m4m7z9p4z6s6p4p6m8p6z6m6s7m8m3s4s2p1p', '5p....');
 roundBegin();
 qiepai();
@@ -143,11 +143,11 @@ normalMoqie(8);
 hupai();
 
 // 南2局0本场
-tiles1 = '5m12340689p19s455z';
-tiles2 = '1145778m3p5s1366z';
-tiles3 = '389m1148p235s223z';
-tiles0 = '13677m15p89s4777z';
-qiepai_set = ['1p8s9s4z4z6m6s6s2m', '9s1s7z2m9s6s3s5p2s', '8s1z3z5s0s3p8m4s9s', '8s5s3m8s3z5z3s8m'];
+begin_tiles[1] = '5m12340689p19s455z';
+begin_tiles[2] = '1145778m3p5s1366z';
+begin_tiles[3] = '389m1148p235s223z';
+begin_tiles[0] = '13677m15p89s4777z';
+setDiscardTiles(['1p8s9s4z4z6m6s6s2m', '9s1s7z2m9s6s3s5p2s', '8s1z3z5s0s3p8m4s9s', '8s5s3m8s3z5z3s8m']);
 randomPaishan('8s8s3z7z7p6p3z6m2m2m7p3p7p9s0s8s4z6s4m3s2m3s5m5z6s5p4s2z6s2s9s6p2m', '6m....');
 roundBegin();
 qiepai();
@@ -157,11 +157,11 @@ normalMoqie(24);
 hupai();
 
 // 南3局0本场
-tiles2 = '3440m12p2307s1567z';
-tiles3 = '115m356679p7s457z';
-tiles0 = '238m34p11355s147z';
-tiles1 = '236899m267p148s3z';
-qiepai_set = ['1z4z7z1s5m8s1s1m', '1s8s7s3z9s6z8m', '1z6z7z5z8m2p9s1p', '4z1s7z5z5m7m9p8p'];
+begin_tiles[2] = '3440m12p2307s1567z';
+begin_tiles[3] = '115m356679p7s457z';
+begin_tiles[0] = '238m34p11355s147z';
+begin_tiles[1] = '236899m267p148s3z';
+setDiscardTiles(['1z4z7z1s5m8s1s1m', '1s8s7s3z9s6z8m', '1z6z7z5z8m2p9s1p', '4z1s7z5z5m7m9p8p']);
 randomPaishan('1s7m1p5s5p8p2s9s8s8p7s7p6s1m6z8m7p5m9s6p7m8s1m1p3p4m9m5m8p8p', '6m4s....');
 roundBegin();
 qiepai();
@@ -171,11 +171,11 @@ normalMoqie(5);
 hupai();
 
 // 南4局0本场
-tiles3 = '2558m23589s12347z';
-tiles0 = '79m12488p46688s6z';
-tiles1 = '33778m12336p3s16z';
-tiles2 = '124m356p28s12677z';
-qiepai_set = ['1p6z5z2z1s1z2p9m9p', '9s1z4z3p3s2m1m5s7s', '1z6z2z8s1s1m2m6m6p', '3z4z9p2z5z4z1z3z9p7z'];
+begin_tiles[3] = '2558m23589s12347z';
+begin_tiles[0] = '79m12488p46688s6z';
+begin_tiles[1] = '33778m12336p3s16z';
+begin_tiles[2] = '124m356p28s12677z';
+setDiscardTiles(['1p6z5z2z1s1z2p9m9p', '9s1z4z3p3s2m1m5s7s', '1z6z2z8s1s1m2m6m6p', '3z4z9p2z5z4z1z3z9p7z']);
 randomPaishan('9m9s4m7s2z5m4p9p5z4z1s2s9p6m1s5z1s7p4z1z2m6p4s0p1m4p3z8m5s6m9p7s7s2p7p', '4m....');
 roundBegin();
 qiepai();

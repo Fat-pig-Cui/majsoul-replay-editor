@@ -24,9 +24,9 @@ config = {
 };
 
 // 零本场一位最高分: 393000, 三位最低分: -384000
-tiles0 = '11112223334446z';
-tiles1 = '1112340678999p';
-tiles2 = '222444666888s6z';
+begin_tiles[0] = '11112223334446z';
+begin_tiles[1] = '1112340678999p';
+begin_tiles[2] = '222444666888s6z';
 randomPaishan('6z', '1m432z');
 roundBegin();
 for (let i = 0; i < 4; i++) {
@@ -40,10 +40,10 @@ hupai();
 setRound(0, 0, 0);
 
 // 零本场二位最高分: 228500
-scores = [36500, 68500, 0];
-tiles0 = '2222444666888s6z';
-tiles1 = '1112223334446z';
-tiles2 = '1112340678999p';
+setScores([36500, 68500, 0]);
+begin_tiles[0] = '2222444666888s6z';
+begin_tiles[1] = '1112223334446z';
+begin_tiles[2] = '1112340678999p';
 randomPaishan('76z', '1m864s');
 roundBegin();
 for (let i = 0; i < 4; i++) {
@@ -57,9 +57,9 @@ hupai();
 setRound(0, 0, 0);
 
 // 零本场二位最低分: -96000
-scores = [105000, 0, 0];
-tiles0 = '11122233344466z';
-tiles1 = '1112340678999p';
-tiles2 = '1112340678999s';
+setScores(105000, 0, 0);
+begin_tiles[0] = '11122233344466z';
+begin_tiles[1] = '1112340678999p';
+begin_tiles[2] = '1112340678999s';
 roundBegin();
 hupai();

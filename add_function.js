@@ -954,7 +954,7 @@ function editfunction2() {
             // L: 玩家的起手显示牌数, G: 可摸牌数
             var L = view.DesktopMgr.Inst.sha256 ? view.DesktopMgr.Inst.rule_mode === view.ERuleMode.Liqi2 ? 27 :
                 view.DesktopMgr.Inst.rule_mode === view.ERuleMode.Liqi3 ? 40 :
-                view.DesktopMgr.Inst.is_wanxiangxiuluo_mode() ? 49 : 53 : 0
+                    view.DesktopMgr.Inst.is_wanxiangxiuluo_mode() ? 49 : 53 : 0
                 , G = this.tile_count - W - R - L;
             0 > G && (G = 0);
             for (var T = this.tiles[0].me.width, Z = this.tiles[0].me.height + 5, U = view.DesktopMgr.Inst.index_ju,

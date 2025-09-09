@@ -29,13 +29,13 @@ config = {
     }
 };
 
-tiles0 = '1112378999m5z406p';
-tiles1 = '1112378999s555s';
-tiles2 = '11123p78999p406m';
-tiles3 = '4556m345567p406s';
-paishan = separate('555555z5m5555555555555555555555555555555555555555555555555555555555555555555555555555z');
+begin_tiles[0] = '1112378999m5z406p';
+begin_tiles[1] = '1112378999s555s';
+begin_tiles[2] = '11123p78999p406m';
+begin_tiles[3] = '4556m345567p406s';
+setPaishan('555555z5m5555555555555555555555555555555555555555555555555555555555555555555555555555z');
 roundBegin();
-huansanzhang('406p', '555s', '406m', '406s', 1);
+huanpai(['406p', '555s', '406m', '406s'], 1);
 qiepai('5z');
 mopai();
 for (let i = 0; i < 6; i++) {
@@ -49,13 +49,13 @@ for (let i = 62; i >= 0; i--) {
 }
 huangpai();
 
-tiles1 = '19m19p19s1234z6s550m';
-tiles2 = '12345s12345m406p';
-tiles3 = '1122288999m556z';
-tiles0 = '1112378999p6m11s';
+begin_tiles[1] = '19m19p19s1234z6s550m';
+begin_tiles[2] = '12345s12345m406p';
+begin_tiles[3] = '1122288999m556z';
+begin_tiles[0] = '1112378999p6m11s';
 randomPaishan('11z8m17z');
 roundBegin();
-huansanzhang('6m11s', '550m', '406p', '556z', 1);
+huanpai(['6m11s', '550m', '406p', '556z'], 1);
 qiepai('6s');
 hupai(2);
 for (let i = 0; i < 3; i++) {
@@ -68,11 +68,11 @@ qiepai();
 mopai();
 hupai(true);
 
-tiles2 = '8s6667788p111m9p9m9s';
-tiles3 = '111222z4446z333s';
-tiles0 = '1m1p1s1234567z78p8s';
-tiles1 = '222444s666s6z333z';
+begin_tiles[2] = '8s6667788p111m9p9m9s';
+begin_tiles[3] = '111222z4446z333s';
+begin_tiles[0] = '1m1p1s1234567z78p8s';
+begin_tiles[1] = '222444s666s6z333z';
 randomPaishan('6z9m');
 roundBegin();
-huansanzhang('78p8s', '333z', '9p9m9s', '333s', 1);
+huanpai(['78p8s', '333z', '9p9m9s', '333s'], 1);
 hupai(true);

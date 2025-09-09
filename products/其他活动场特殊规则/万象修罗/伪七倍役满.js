@@ -22,11 +22,11 @@ config = {
     }
 };
 
-tiles0 = 'b1112223344z899p';
-tiles1 = 'b112340679m899s';
-tiles2 = 'b112340679p344z';
-tiles3 = 'b112340679s899m';
+begin_tiles[0] = 'b1112223344z899p';
+begin_tiles[1] = 'b112340679m899s';
+begin_tiles[2] = 'b112340679p344z';
+begin_tiles[3] = 'b112340679s899m';
 randomPaishan('', '1z....');
 roundBegin();
-huansanzhang('899p', '899s', '344z', '899m', 1);
+huanpai(['899p', '899s', '344z', '899m'], 1);
 hupai(true);

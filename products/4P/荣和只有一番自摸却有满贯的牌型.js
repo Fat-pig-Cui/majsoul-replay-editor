@@ -23,10 +23,10 @@ config = {
 };
 
 // 荣和
-tiles0 = '123m22444666p8s34z';
-tiles1 = '1112340678999m';
-tiles2 = '1112340678999p';
-tiles3 = '122055899s3344z';
+begin_tiles[0] = '123m22444666p8s34z';
+begin_tiles[1] = '1112340678999m';
+begin_tiles[2] = '1112340678999p';
+begin_tiles[3] = '122055899s3344z';
 randomPaishan('8s', '11z....');
 roundBegin();
 qiepai();
@@ -36,10 +36,10 @@ mingQiepai('8s');
 hupai();
 
 // 自摸
-tiles0 = '123m22444666p8s34z';
-tiles1 = '1112340678999m';
-tiles2 = '1112340678999p';
-tiles3 = '122055799s3344z';
+begin_tiles[0] = '123m22444666p8s34z';
+begin_tiles[1] = '1112340678999m';
+begin_tiles[2] = '1112340678999p';
+begin_tiles[3] = '122055799s3344z';
 randomPaishan('88s', '11z....');
 roundBegin();
 qiepai();

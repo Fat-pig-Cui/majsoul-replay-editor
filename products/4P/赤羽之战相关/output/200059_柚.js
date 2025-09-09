@@ -28,10 +28,10 @@ config = {
 };
 
 // 第1局: 天和, 根;  清十八罗汉, 杠上花; 清金钩钓, 杠上炮
-tiles0 = '11112222333344m';
-tiles1 = '1112223334446p';
-tiles2 = '66778999m99p689s';
-tiles3 = '1122334457777s';
+begin_tiles[0] = '11112222333344m';
+begin_tiles[1] = '1112223334446p';
+begin_tiles[2] = '66778999m99p689s';
+begin_tiles[3] = '1122334457777s';
 randomPaishan('12346p2134s9m5s');
 roundBegin();
 dingque('pspm');
@@ -52,10 +52,10 @@ hupai(true);
 
 
 // 第2局: 地和;         清龙七对;           十八罗汉
-tiles0 = '4455667788999m9p';
-tiles1 = '1112223334m789p';
-tiles2 = '3344455p568999s';
-tiles3 = '111222p1112224s';
+begin_tiles[0] = '4455667788999m9p';
+begin_tiles[1] = '1112223334m789p';
+begin_tiles[2] = '3344455p568999s';
+begin_tiles[3] = '111222p1112224s';
 randomPaishan('49m12p1234s');
 roundBegin();
 dingque('pspm');
@@ -75,10 +75,10 @@ hupai(true);
 
 
 // 第3局: 清七对;    清幺九, 抢杠;        龙七对
-tiles1 = '7788999m445566p7s';
-tiles2 = '2m123445677889s';
-tiles3 = '1112223338999s';
-tiles0 = '2334455667788m';
+begin_tiles[1] = '7788999m445566p7s';
+begin_tiles[2] = '2m123445677889s';
+begin_tiles[3] = '1112223338999s';
+begin_tiles[0] = '2334455667788m';
 randomPaishan('2m7s9m');
 roundBegin();
 dingque('pspm');
@@ -95,10 +95,10 @@ zimoHu(true);
 
 
 // 第4局: 将对;         清对;             金钩钓
-tiles0 = '222555888m22258s';
-tiles1 = '12366m66788899p';
-tiles2 = '113344m1139999s';
-tiles3 = '1112223334445p';
+begin_tiles[0] = '222555888m22258s';
+begin_tiles[1] = '12366m66788899p';
+begin_tiles[2] = '113344m1139999s';
+begin_tiles[3] = '1112223334445p';
 randomPaishan('5s5p134m13s');
 roundBegin();
 dingque('pspm');
@@ -118,10 +118,10 @@ hupai(true);
 
 
 // 第5局: 带幺九;        七对子;            清一色
-tiles0 = '123778899m23999s';
-tiles1 = '2233445566778m';
-tiles2 = '1112345678999p';
-tiles3 = '223344p2233445s';
+begin_tiles[0] = '123778899m23999s';
+begin_tiles[1] = '2233445566778m';
+begin_tiles[2] = '1112345678999p';
+begin_tiles[3] = '223344p2233445s';
 randomPaishan('15s5p');
 roundBegin();
 dingque('pssm');
@@ -137,10 +137,10 @@ hupai(true);
 
 
 // 第6局: 对对;         底和, 海底捞月
-tiles0 = '222333444m22235s';
-tiles1 = '8m333466788999p';
-tiles2 = '1112467999m112p';
-tiles3 = '1555678p123456s';
+begin_tiles[0] = '222333444m22235s';
+begin_tiles[1] = '8m333466788999p';
+begin_tiles[2] = '1112467999m112p';
+begin_tiles[3] = '1555678p123456s';
 randomPaishan('3s', '1p');
 roundBegin();
 dingque('pssm');
@@ -154,10 +154,10 @@ huangpai();
 
 
 // 第7局: 诈和示范
-tiles0 = '22234555678889m';
-tiles1 = '1112345678999m';
-tiles2 = '1112345678999p';
-tiles3 = '1112345678999s';
+begin_tiles[0] = '22234555678889m';
+begin_tiles[1] = '1112345678999m';
+begin_tiles[2] = '1112345678999p';
+begin_tiles[3] = '1112345678999s';
 roundBegin();
 dingque('pssm');
 hupai(true);

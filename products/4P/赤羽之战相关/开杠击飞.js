@@ -23,10 +23,10 @@ config = {
     }
 };
 
-tiles0 = '11113334448889m';
-tiles1 = '1112345678999p';
-tiles2 = '1112345678999s';
-tiles3 = '2223455567888s';
+begin_tiles[0] = '11113334448889m';
+begin_tiles[1] = '1112345678999p';
+begin_tiles[2] = '1112345678999s';
+begin_tiles[3] = '2223455567888s';
 roundBegin();
 dingque('psmp');
 zimingpai(true);

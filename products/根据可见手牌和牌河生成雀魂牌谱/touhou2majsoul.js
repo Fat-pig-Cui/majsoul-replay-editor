@@ -113,10 +113,9 @@ config = {
         if (seat === ju && mopai_xunmu[ju] === 0) {
             tiles[ju].push(new_mopai_set[ju][mopai_xunmu[ju]]);
 
-            tiles0 = process(tiles[0]);
-            tiles1 = process(tiles[1]);
-            tiles2 = process(tiles[2]);
-            tiles3 = process(tiles[3]);
+            for (let i in tiles)
+                begin_tiles[i] = process(tiles[i]);
+
             let zhishipais = '';
             for (let i = biao_dora.length - 1; i >= 0; i--) {
                 if (li_dora[i] !== undefined)

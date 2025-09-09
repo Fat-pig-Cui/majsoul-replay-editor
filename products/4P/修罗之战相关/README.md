@@ -22,15 +22,19 @@
 
 ## 函数特殊说明
 
-### 换三张换牌: `huansanzhang(tls0, tls1, tls2, tls3, type)`
+### 换三张换牌
 
-`tls0, tls1, tls2, tls3` : 表示四个人要交出去的三张牌
+`huanpai(tls, type)`
+
+`tls[0], tls[1], tls[2], tls[3]` 表示四名玩家要交出去的三张牌
 
 `type` : 0 表示逆时针换牌, 1 表示对家换牌, 2 表示顺时针换牌
 
-例子: `huansanzhang('9p79s', '333s', '78p8s', '333z', 1);`
+例子: `huanpai(['9p79s', '333s', '78p8s', '333z'], 1);`
 
-### 和牌: `hupai(allseats, type)`
+### 和牌
+
+`hupai(all_seats, type)`
 
 与段位场相比多了个参数 `type`, 值为 `false` 表示中途和牌, `true` 表示最终和牌(使得该小局结束的和牌,
 而不是玩家的最后和牌), 默认为中途和牌
