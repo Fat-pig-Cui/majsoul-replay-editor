@@ -16,7 +16,7 @@ player_datas[3].avatar_id = 403501;
 player_datas[2].views = [{slot: 1, item_id: 308021}]; // 和牌-高岭之花
 player_datas[3].views = [{slot: 2, item_id: 308002}]; // 立直-花天月地
 
-config = {
+setConfig({
     category: 1,
     meta: {mode_id: 0},
     mode: {
@@ -29,7 +29,7 @@ config = {
             _mainrole_: 2,
         }
     }
-};
+});
 
 // 具体到这一小局, 因为动画没有部分切牌和 片冈优希, 染谷真子 的手牌画面, 我这里随便编的
 begin_tiles[3] = '23467m111p156889s';

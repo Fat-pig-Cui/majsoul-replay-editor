@@ -7,7 +7,7 @@ player_datas[0].avatar_id = 400101;
 player_datas[1].avatar_id = 400101;
 player_datas[2].avatar_id = 400101;
 
-config = {
+setConfig({
     category: 1,
     meta: {mode_id: 0},
     mode: {
@@ -25,7 +25,7 @@ config = {
             xuezhandaodi: false,
         }
     }
-};
+});
 
 begin_tiles[0] = '111s11125566777z';
 begin_tiles[1] = '1m222333444688s';

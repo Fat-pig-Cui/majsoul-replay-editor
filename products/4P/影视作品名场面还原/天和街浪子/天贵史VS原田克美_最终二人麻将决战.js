@@ -18,7 +18,7 @@ player_datas[0].views = [
 ];
 player_datas[2].title = 600039; // 称号-森罗万象
 
-config = {
+setConfig({
     category: 4,
     meta: {mode_id: 0},
     mode: {
@@ -34,7 +34,7 @@ config = {
             _scores_: [9200, 0, 20300, 0],
         }
     }
-};
+});
 
 // qiepai 去掉暗牌需要支付 1000 点和其他冗余判断
 origin_qiepai = qiepai;

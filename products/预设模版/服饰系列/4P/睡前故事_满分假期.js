@@ -40,7 +40,7 @@ player_datas[1].views = player_datas[3].views = [
     {slot: 2, item_id: 305312}, // 立直-灵魂契约
 ];
 
-config = {
+setConfig({
     category: 1,
     meta: {mode_id: 0},
     mode: {
@@ -49,7 +49,7 @@ config = {
             init_point: 100000,
         }
     }
-};
+});
 
 // 示例对局
 demoGame();

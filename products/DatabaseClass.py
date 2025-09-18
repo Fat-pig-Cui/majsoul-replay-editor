@@ -1,7 +1,7 @@
-from products.Database_raw import *
+from products.DatabaseRAW import *
 
 
-class Database_class:
+class DatabaseClass:
     def __init__(self):
         self.chars = []
         char_num = 0
@@ -77,7 +77,7 @@ class Database_class:
         return None
 
 
-db = Database_class()
+db = DatabaseClass()
 # for i in db.chars:
 #     print(i)
 # for i in db.views:

@@ -12,7 +12,7 @@ player_datas[3].avatar_id = 402401;
 player_datas[2].title = 600027;
 player_datas[3].title = 600012;
 
-config = {
+setConfig({
     category: 1,
     meta: {room_id: 63031},
     mode: {
@@ -25,7 +25,7 @@ config = {
             paixing: 3,
         }
     },
-};
+});
 
 begin_tiles[0] = '11122233344467z';
 begin_tiles[1] = '1112223334446z';

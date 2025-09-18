@@ -17,7 +17,7 @@ player_datas[0].views = player_datas[1].views = player_datas[2].views = player_d
     {slot: 7, item_id: 308020}, // 牌背-恋之背影
 ];
 
-config = {
+setConfig({
     category: 1,
     meta: {mode_id: 0},
     mode: {
@@ -28,7 +28,7 @@ config = {
             _mjp_id: 308020, // 牌背-恋之背影
         }
     }
-};
+});
 
 // 示例对局
 demoGame();

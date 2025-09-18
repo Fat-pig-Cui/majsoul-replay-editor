@@ -38,7 +38,7 @@ player_datas[1].avatar_id = 400104;
 player_datas[2].avatar_id = 400105;
 player_datas[3].avatar_id = 400106;
 
-config = {
+setConfig({
     category: 1,
     meta: {mode_id: 0},
     mode: {
@@ -47,7 +47,7 @@ config = {
             init_point: 50000,
         }
     }
-};
+});
 
 // 1番门清自摸最高符数: 100
 begin_tiles[0] = '234m789p13333444z';

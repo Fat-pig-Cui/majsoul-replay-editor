@@ -14,7 +14,7 @@ player_datas[2].avatar_id = 403001;
 player_datas[3].avatar_id = 403101;
 player_datas[0].verified = player_datas[1].verified = player_datas[2].verified = player_datas[3].verified = 2;
 
-config = {
+setConfig({
     category: 4,
     meta: {mode_id: 0},
     mode: {
@@ -35,7 +35,7 @@ config = {
             _mainrole_: 1,
         }
     }
-};
+});
 
 begin_tiles[2] = '13569m1147p668s25z';
 begin_tiles[3] = '3m338p199s245667z';

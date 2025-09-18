@@ -19,7 +19,7 @@ player_datas[0].views = player_datas[1].views = player_datas[2].views = [
     {slot: 6, item_id: 30580006}, // 桌布-破茧
 ];
 
-config = {
+setConfig({
     category: 1,
     meta: {mode_id: 0},
     mode: {
@@ -29,7 +29,7 @@ config = {
             _tablecloth_id: 30580006, // 桌布-破茧
         }
     }
-};
+});
 
 // 示例对局
 demoGame();

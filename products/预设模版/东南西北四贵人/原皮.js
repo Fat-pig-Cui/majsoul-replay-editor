@@ -34,7 +34,7 @@ player_datas[3].views = [
     {slot: 5, item_id: 30550012}, // 头像框-赤丹霞羽
 ];
 
-config = {
+setConfig({
     category: 1,
     meta: {mode_id: 0},
     mode: {
@@ -43,7 +43,7 @@ config = {
             init_point: 100000,
         }
     }
-};
+});
 
 // 示例对局
 demoGame();

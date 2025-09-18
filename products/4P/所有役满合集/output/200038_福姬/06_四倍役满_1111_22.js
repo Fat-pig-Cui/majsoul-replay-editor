@@ -14,7 +14,7 @@ player_datas[0].title = player_datas[1].title = player_datas[2].title = player_d
 // 主播(猫爪)认证
 player_datas[0].verified = player_datas[1].verified = player_datas[2].verified = player_datas[3].verified = 1;
 
-config = {
+setConfig({
     category: 1,
     meta: {mode_id: 0},
     mode: {
@@ -23,7 +23,7 @@ config = {
             init_point: 200000,
         }
     }
-};
+});
 
 // 第1局: 东亲, 东起 四暗刻单骑, 大四喜
 begin_tiles[0] = '1p1s111222333444z';

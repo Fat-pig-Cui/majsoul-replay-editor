@@ -15,7 +15,7 @@ player_datas[1].avatar_id = 400104;
 player_datas[2].avatar_id = 400105;
 player_datas[3].avatar_id = 400106;
 
-config = {
+setConfig({
     category: 1,
     meta: {mode_id: 0},
     mode: {
@@ -24,7 +24,7 @@ config = {
             init_point: 50000,
         }
     }
-};
+});
 
 // 8条菜名, 至少7番: 立直, 一发, 自摸, 平和, 一杯口, 断幺九, 宝牌1, 里宝牌0
 begin_tiles[0] = '223344m4p144567s1z';

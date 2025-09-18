@@ -11,7 +11,7 @@ player_datas[1].avatar_id = 400104;
 player_datas[2].avatar_id = 400105;
 player_datas[3].avatar_id = 400106;
 
-config = {
+setConfig({
     category: 1,
     meta: {mode_id: 0},
     mode: {
@@ -20,7 +20,7 @@ config = {
             _sanxiangliuju: true,
         }
     }
-};
+});
 
 begin_tiles[0] = '1112340678999m6z';
 begin_tiles[1] = '1112223334446z';

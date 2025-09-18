@@ -28,7 +28,7 @@ player_datas[0].views = player_datas[3].views = [
     {slot: 2, item_id: 305307}, // 立直-蝶惑
 ];
 
-config = {
+setConfig({
     category: 1,
     meta: {mode_id: 0},
     mode: {
@@ -37,7 +37,7 @@ config = {
             init_point: 100000,
         }
     }
-};
+});
 
 // 示例对局
 demoGame();

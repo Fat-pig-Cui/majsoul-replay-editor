@@ -20,7 +20,7 @@ player_datas[1].avatar_id = 400104;
 player_datas[2].avatar_id = 400105;
 player_datas[3].avatar_id = 400106;
 
-config = {
+setConfig({
     category: 1,
     meta: {mode_id: 0},
     mode: {
@@ -29,7 +29,7 @@ config = {
             init_point: 200000,
         }
     }
-};
+});
 
 // 对对和, 三暗刻, 小三元, 混老头, 混一色  13番
 begin_tiles[0] = '111999m15556677z';

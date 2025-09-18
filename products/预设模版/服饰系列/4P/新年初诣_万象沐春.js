@@ -58,7 +58,7 @@ player_datas[3].views = [
     {slot: 7, item_id: 305701}, // 牌背-红包
 ];
 
-config = {
+setConfig({
     category: 1,
     meta: {mode_id: 0},
     mode: {
@@ -69,7 +69,7 @@ config = {
             _mjp_id: 305701, // 牌背-红包
         }
     }
-};
+});
 
 // 示例对局
 demoGame();

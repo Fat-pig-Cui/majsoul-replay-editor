@@ -15,7 +15,7 @@ player_datas[0].title = player_datas[1].title = player_datas[2].title = 600038;
 // 主播(猫爪)认证
 player_datas[0].verified = player_datas[1].verified = player_datas[2].verified = 1;
 
-config = {
+setConfig({
     category: 1,
     meta: {mode_id: 0},
     mode: {
@@ -24,7 +24,7 @@ config = {
             init_point: 100000,
         }
     }
-};
+});
 
 // 最长菜名(15条49番)
 // 立直, 一发, 海底摸月, 门前清自摸和, 白, 发, 东, 连东, 混全带幺九,

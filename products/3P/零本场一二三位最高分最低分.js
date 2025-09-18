@@ -12,7 +12,7 @@ player_datas[0].avatar_id = 400102;
 player_datas[1].avatar_id = 400105;
 player_datas[2].avatar_id = 400106;
 
-config = {
+setConfig({
     category: 1,
     meta: {mode_id: 0},
     mode: {
@@ -21,7 +21,7 @@ config = {
             _scores_: [105000, 0, 0],
         }
     }
-};
+});
 
 // 零本场一位最高分: 393000, 三位最低分: -384000
 begin_tiles[0] = '11112223334446z';

@@ -10,7 +10,7 @@ player_datas[1].nickname = '南帝段智兴';
 player_datas[2].nickname = '西毒欧阳锋';
 player_datas[3].nickname = '北丐洪七公';
 
-config = {
+setConfig({
     category: 1,
     meta: {mode_id: 0},
     mode: {
@@ -20,7 +20,7 @@ config = {
             _random_skin: true,
         }
     }
-};
+});
 
 begin_tiles[0] = '2223444666888s5z';
 begin_tiles[1] = '1112340678999m';

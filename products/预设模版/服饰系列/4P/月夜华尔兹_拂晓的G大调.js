@@ -37,7 +37,7 @@ player_datas[1].views = player_datas[3].views = [
     {slot: 7, item_id: 305706}, // 牌背-圣诞树
 ];
 
-config = {
+setConfig({
     category: 1,
     meta: {mode_id: 0},
     mode: {
@@ -48,7 +48,7 @@ config = {
             _mjp_id: 305706, // 牌背-圣诞树
         }
     }
-};
+});
 
 // 示例对局
 demoGame();

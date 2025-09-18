@@ -17,7 +17,7 @@ player_datas[0].views = player_datas[1].views = player_datas[2].views = player_d
     {slot: 5, item_id: 305537}, // 头像框-圣堂百合
 ];
 
-config = {
+setConfig({
     category: 1,
     meta: {mode_id: 0},
     mode: {
@@ -26,7 +26,7 @@ config = {
             init_point: 500000,
         }
     }
-};
+});
 
 // 第1局: 东亲, 南起 地和, 大三元, 四暗刻
 begin_tiles[0] = '1112340678999m1z';

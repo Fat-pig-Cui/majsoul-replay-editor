@@ -22,7 +22,7 @@ player_datas[1] = {
     ]
 };
 
-config = {
+setConfig({
     category: 99,
     meta: {mode_id: 0},
     mode: {
@@ -35,7 +35,7 @@ config = {
             _mainrole_: 1,
         }
     }
-};
+});
 
 // 东1局0本场, 和牌特效
 begin_tiles[0] = '1s1234056789m566z';

@@ -48,14 +48,14 @@ player_datas[3] = {
     ]
 };
 
-config = {
+setConfig({
     category: 4,
     meta: {mode_id: 0},
     mode: {
         mode: 2,
         detail_rule: {}
     }
-};
+});
 
 // 东1局0本场
 begin_tiles[0] = '125678899m257p36s';

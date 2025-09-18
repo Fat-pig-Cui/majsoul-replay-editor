@@ -13,7 +13,7 @@ home = os.getcwd()
 
 file_name = 'Generator.py'
 file_name_sp1 = 'Generator_SP.py'
-file_name_sp2 = 'Generate_Dictionary.py'
+file_name_sp2 = 'GenerateDictionary.py'
 
 run_python = python_exe + file_name
 

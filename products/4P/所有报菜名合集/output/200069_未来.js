@@ -9,7 +9,7 @@ player_datas[1].avatar_id = 406901;
 player_datas[2].avatar_id = 406903;
 player_datas[3].avatar_id = 406904;
 
-config = {
+setConfig({
     category: 1,
     meta: {mode_id: 0},
     mode: {
@@ -18,7 +18,7 @@ config = {
             init_point: 200000,
         }
     }
-};
+});
 
 // 第1局: 东亲, 东起 天和, 字一色, 四暗刻单骑, 大四喜      六倍役满
 begin_tiles[0] = '11122233344477z';

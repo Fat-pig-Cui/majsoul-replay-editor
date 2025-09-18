@@ -5,7 +5,7 @@ player_datas[1].avatar_id = 400104;
 player_datas[2].avatar_id = 400105;
 player_datas[3].avatar_id = 400106;
 
-config = {
+setConfig({
     category: 3,
     meta: {mode_id: 0},
     mode: {
@@ -21,7 +21,7 @@ config = {
             _mainrole_: 0,
         }
     }
-};
+});
 
 (function () {
     /* 将从天凤牌谱编辑的数据赋值给 json 变量, 两个例子:

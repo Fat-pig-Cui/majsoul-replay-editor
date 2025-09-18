@@ -12,7 +12,7 @@ player_datas[2].avatar_id = 400101;
 player_datas[3].avatar_id = 400101;
 player_datas[1].title = 600008; // 称号-魂之启迪者 初阶
 
-config = {
+setConfig({
     category: 2,
     meta: {mode_id: 2},
     mode: {
@@ -23,7 +23,7 @@ config = {
             _mainrole_: 3,
         }
     }
-};
+});
 
 begin_tiles[2] = '112m48p167778s347z';
 begin_tiles[3] = '44567m12p123456s';

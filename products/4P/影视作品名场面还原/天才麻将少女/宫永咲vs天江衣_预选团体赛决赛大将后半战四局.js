@@ -22,7 +22,7 @@ player_datas[0].views = [{slot: 1, item_id: 305206}, {slot: 2, item_id: 305324}]
 player_datas[1].views = [{slot: 1, item_id: 308001}]; // 和牌-龙卷雷霆
 player_datas[2].views = [{slot: 1, item_id: 308021}]; // 和牌-高岭之花
 
-config = {
+setConfig({
     category: 4,
     meta: {mode_id: 0},
     mode: {
@@ -37,7 +37,7 @@ config = {
             _mainrole_: 2,
         }
     }
-};
+});
 
 // 枪杠dora7
 // 因为动画没有部分切牌和 天江衣, 加治木由美 的手牌画面, 我这里乱编了一个

@@ -12,14 +12,14 @@ player_datas[2].avatar_id = 400101;
 player_datas[3].avatar_id = 400101;
 player_datas[1].title = 600008;
 
-config = {
+setConfig({
     category: 2,
     meta: {mode_id: 2},
     mode: {
         mode: 1,
         detail_rule: {}
     }
-};
+});
 
 begin_tiles[0] = '45668m3468p1238s3z';
 begin_tiles[1] = '17m1155p13408s23z';

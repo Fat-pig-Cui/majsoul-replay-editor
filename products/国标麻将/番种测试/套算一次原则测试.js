@@ -9,7 +9,7 @@ player_datas[1].avatar_id = 400104;
 player_datas[2].avatar_id = 400105;
 player_datas[3].avatar_id = 400106;
 
-config = {
+setConfig({
     category: 1,
     meta: {mode_id: 0},
     mode: {
@@ -20,7 +20,7 @@ config = {
             _guobiao_lianzhuang: true,
         }
     }
-};
+});
 
 // 2个一般高, 2个喜相逢, 去掉1个喜相逢
 begin_tiles[0] = '22334m2233455p22z';

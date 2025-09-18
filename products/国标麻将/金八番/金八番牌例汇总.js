@@ -9,7 +9,7 @@ player_datas[1].avatar_id = 400104;
 player_datas[2].avatar_id = 400105;
 player_datas[3].avatar_id = 400106;
 
-config = {
+setConfig({
     category: 1,
     meta: {mode_id: 0},
     mode: {
@@ -20,7 +20,7 @@ config = {
             _guobiao_lianzhuang: true,
         }
     }
-};
+});
 
 // 第1局: 幺九刻*1, 一般高, 连六, 边张 (明杠, 缺一门, 无字, 自摸)
 begin_tiles[0] = '1112m44556689p57z';

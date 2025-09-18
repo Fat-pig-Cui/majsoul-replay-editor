@@ -10,14 +10,14 @@ player_datas[2].avatar_id = 404604;
 // 主播(猫爪)认证
 player_datas[0].verified = player_datas[1].verified = player_datas[2].verified = 1;
 
-config = {
+setConfig({
     category: 1,
     meta: {mode_id: 0},
     mode: {
         mode: 11,
         detail_rule: {}
     }
-};
+});
 
 // 第1局: 立直, 两立直, 吃, 碰, 杠, 拔北, 四杠流局
 begin_tiles[0] = '1112340678999p1s';

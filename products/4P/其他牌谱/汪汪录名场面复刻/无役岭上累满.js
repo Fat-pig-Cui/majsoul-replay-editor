@@ -14,7 +14,7 @@ player_datas[3].views = [
     {slot: 1, item_id: 305009}, // 和牌-樱花
 ]
 
-config = {
+setConfig({
     category: 2,
     meta: {mode_id: 6},
     mode: {
@@ -23,7 +23,7 @@ config = {
             _mainrole_: 3,
         }
     }
-};
+});
 
 begin_tiles[0] = '2449m556689p6s126z';
 begin_tiles[1] = '478p40689s23346z';

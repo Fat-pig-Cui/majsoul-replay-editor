@@ -13,7 +13,7 @@ player_datas[1].avatar_id = 402403;
 player_datas[2].avatar_id = 402803;
 player_datas[3].avatar_id = 402903;
 
-config = {
+setConfig({
     category: 1,
     meta: {mode_id: 0},
     mode: {
@@ -22,7 +22,7 @@ config = {
             init_point: 100000,
         }
     }
-};
+});
 
 // 示例对局
 demoGame();

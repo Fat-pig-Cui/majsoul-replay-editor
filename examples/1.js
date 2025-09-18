@@ -9,7 +9,7 @@ player_datas[1].avatar_id = 400101;
 player_datas[2].avatar_id = 400101;
 player_datas[3].avatar_id = 400101;
 
-config = {
+setConfig({
     category: 1,
     meta: {mode_id: 0},
     mode: {
@@ -27,7 +27,7 @@ config = {
             xuezhandaodi: false,
         }
     }
-};
+});
 
 // 第一局(流局满贯, 作弊)
 begin_tiles[0] = '1112340678999m5z';

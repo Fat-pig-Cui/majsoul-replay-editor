@@ -41,7 +41,7 @@ player_datas[2].views = player_datas[3].views = [
     {slot: 6, item_id: 305048}, // 桌布-雀魂祭一周年
 ];
 
-config = {
+setConfig({
     category: 1,
     meta: {mode_id: 0},
     mode: {
@@ -51,7 +51,7 @@ config = {
             _tablecloth_id: 305048, // 桌布-雀魂祭一周年
         }
     }
-};
+});
 
 // 示例对局
 demoGame();

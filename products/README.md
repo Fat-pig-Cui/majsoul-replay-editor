@@ -116,8 +116,8 @@
 
 ## python 脚本文件
 
-- [Database_raw.py](Database_raw.py)
-- [Database_class.py](Database_class.py)
+- [DatabaseRAW.py](DatabaseRAW.py)
+- [DatabaseClass.py](DatabaseClass.py)
 - [Database.py](Database.py)
 - [Function.py](Function.py)
 - [Refresh.py](Refresh.py)
@@ -138,6 +138,8 @@
         - [Generator_3P.py](3P/最长菜名与最高番数/Generator_3P.py)
     - 对局操作语音合集
         - [Generator_3P.py](3P/对局操作语音合集/Generator_3P.py)
+- ../doc
+    - [GenerateDictionary.py](../doc/GenerateDictionary.py)
 
 ## 其他文件
 

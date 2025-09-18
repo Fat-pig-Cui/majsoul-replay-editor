@@ -23,7 +23,7 @@ player_datas[0].views = player_datas[1].views = player_datas[2].views = player_d
     {slot: 7, item_id: 30570006}, // 牌背-封印术
 ];
 
-config = {
+setConfig({
     category: 1,
     meta: {mode_id: 0},
     mode: {
@@ -34,7 +34,7 @@ config = {
             _mjp_id: 30570006, // 牌背-封印术
         }
     }
-};
+});
 
 // 示例对局
 demoGame();

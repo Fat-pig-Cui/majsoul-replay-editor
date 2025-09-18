@@ -13,7 +13,7 @@ player_datas[0].views = player_datas[1].views = player_datas[2].views = player_d
     {slot: 6, item_id: 305812}, // 桌布-仙境茶话会
 ];
 
-config = {
+setConfig({
     category: 1,
     meta: {mode_id: 0},
     mode: {
@@ -22,7 +22,7 @@ config = {
             init_point: 500000,
         }
     }
-};
+});
 
 // 第1局: 东亲, 东起 天和, 大三元, 字一色, 四暗刻单骑
 begin_tiles[0] = '11122555666777z';

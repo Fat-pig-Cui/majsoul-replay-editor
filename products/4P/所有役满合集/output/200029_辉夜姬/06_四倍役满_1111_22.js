@@ -17,7 +17,7 @@ player_datas[0].views = player_datas[1].views = player_datas[2].views = player_d
     {slot: 6, item_id: 30580005}, // 桌布-预热开场
 ];
 
-config = {
+setConfig({
     category: 1,
     meta: {mode_id: 0},
     mode: {
@@ -26,7 +26,7 @@ config = {
             init_point: 200000,
         }
     }
-};
+});
 
 // 第1局: 东亲, 东起 四暗刻单骑, 大四喜
 begin_tiles[0] = '1p1s111222333444z';

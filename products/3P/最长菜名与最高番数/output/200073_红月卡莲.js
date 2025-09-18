@@ -18,7 +18,7 @@ player_datas[0].views = player_datas[1].views = player_datas[2].views = [
     {slot: 7, item_id: 308030}, // 牌背-假面的裁决
 ];
 
-config = {
+setConfig({
     category: 1,
     meta: {mode_id: 0},
     mode: {
@@ -27,7 +27,7 @@ config = {
             init_point: 100000,
         }
     }
-};
+});
 
 // 最长菜名(15条49番)
 // 立直, 一发, 海底摸月, 门前清自摸和, 白, 发, 东, 连东, 混全带幺九,

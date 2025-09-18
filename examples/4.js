@@ -9,7 +9,7 @@ player_datas[1].avatar_id = 400101;
 player_datas[2].avatar_id = 400101;
 player_datas[3].avatar_id = 400101;
 
-config = {
+setConfig({
     category: 1,
     meta: {mode_id: 0},
     mode: {
@@ -26,7 +26,7 @@ config = {
             xuezhandaodi: false
         }
     }
-};
+});
 
 // 第1局 底和
 begin_tiles[0] = '2345678m2345678p';

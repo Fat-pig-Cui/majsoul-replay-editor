@@ -1,6 +1,6 @@
 from datetime import datetime
 
-from products.Database_class import db
+from products.DatabaseClass import db
 
 chars = db.chars
 views = db.views

@@ -19,7 +19,7 @@ player_datas[0].views = player_datas[1].views = player_datas[2].views = player_d
     {slot: 5, item_id: 305529}, // 头像框-秋霜切玉
 ];
 
-config = {
+setConfig({
     category: 1,
     meta: {mode_id: 0},
     mode: {
@@ -29,7 +29,7 @@ config = {
             init_point: 500000,
         }
     }
-};
+});
 
 // 第1局: 天和, 根;  清十八罗汉, 杠上花; 清金钩钓, 杠上炮
 begin_tiles[0] = '11112222333344m';

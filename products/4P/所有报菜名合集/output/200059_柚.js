@@ -13,7 +13,7 @@ player_datas[0].views = player_datas[1].views = player_datas[2].views = player_d
     {slot: 0, item_id: 305612}, // 立直棒-陨石法杖
 ];
 
-config = {
+setConfig({
     category: 1,
     meta: {mode_id: 0},
     mode: {
@@ -22,7 +22,7 @@ config = {
             init_point: 200000,
         }
     }
-};
+});
 
 // 第1局: 东亲, 东起 天和, 字一色, 四暗刻单骑, 大四喜      六倍役满
 begin_tiles[0] = '11122233344477z';

@@ -30,24 +30,6 @@
  */
 let player_datas;
 /**
- * 对局的模式
- * - category: 模式大类, 1: 友人场, 2: 匹配场, 4: 比赛场, 100: 新手教程
- * - meta
- *      - mode_id: 匹配场的房间, 只有在 category 为 2 时才有效, 详见 字典.md
- * - mode
- *      - mode: 玩家数和场次局数
- *          - 个位 0, 1, 2, 3 分别表示 一局战, 东风战, 半庄战, 人机战, 4 和 0 一样
- *          - 十位 0, 1 分别表示四麻, 三麻, 2 的话就是二人麻将
- *      - detail_rule: 详细规则, 很多详细配置都在这里, 下面仅列举部分, 更多详见 1_编辑游戏信息.md
- *          - init_point: 各玩家初始点数, 默认根据玩家数和模式自动选择
- *          - dora_count: 红宝牌数量, 默认为段位场规则
- *          - chuanma: 是否是赤羽之战模式, 默认否
- *          - _qieshangmanguan: 是否切上满贯, 默认否
- *          - _guobiao: 是否为国标模式, 默认否
- * @type {{category: number, meta: {mode_id: number}, mode: {mode: number, detail_rule: {}}}}
- */
-let config;
-/**
  * 玩家的起手, 有效长度为玩家数, 不超过4
  * @type {string[]}
  */
@@ -87,6 +69,27 @@ const clearProject = () => {
         config: config,
         player_datas: player_datas,
     };
+};
+
+/**
+ * 设置对局的模式
+ * - category: 模式大类, 1: 友人场, 2: 匹配场, 4: 比赛场, 100: 新手教程
+ * - meta
+ *      - mode_id: 匹配场的房间, 只有在 category 为 2 时才有效, 详见 字典.md
+ * - mode
+ *      - mode: 玩家数和场次局数
+ *          - 个位 0, 1, 2, 3 分别表示 一局战, 东风战, 半庄战, 人机战, 4 和 0 一样
+ *          - 十位 0, 1 分别表示四麻, 三麻, 2 的话就是二人麻将
+ *      - detail_rule: 详细规则, 很多详细配置都在这里, 下面仅列举部分, 更多详见 1_编辑游戏信息.md
+ *          - init_point: 各玩家初始点数, 默认根据玩家数和模式自动选择
+ *          - dora_count: 红宝牌数量, 默认为段位场规则
+ *          - chuanma: 是否是赤羽之战模式, 默认否
+ *          - _qieshangmanguan: 是否切上满贯, 默认否
+ *          - _guobiao: 是否为国标模式, 默认否
+ * @param {{category: number, meta: {mode_id: number}, mode: {mode: number, detail_rule: {}}}} conf
+ */
+const setConfig = conf => {
+    config = conf;
 };
 
 /**
@@ -215,7 +218,7 @@ let randomPaishan = (ps_head = '', ps_back = '') => {
         cnt[Cbd] = 4;
 
     // 减去玩家起手
-    for (let j in tiles)
+    for (let j = 0; j < player_cnt; j++)
         for (let i in tiles[j])
             if (tiles[j][i].length > 2 && tiles[j][i][2] === SPT_Suf && is_mingjing())
                 cnt2[tile2Int(tiles[j][i])]--;
@@ -253,7 +256,7 @@ let randomPaishan = (ps_head = '', ps_back = '') => {
 
     for (let i in para_tiles)
         randomize(para_tiles[i]);
-    for (let i in tiles)
+    for (let i = 0; i < player_cnt; i++)
         randomize(tiles[i]);
     // 补全玩家起手
     for (let i = 0; i < player_cnt; i++) {
@@ -553,9 +556,9 @@ let mopai = (seat, tile, index) => {
  * 切牌, 参数顺序可以不一致
  * @param {number} [seat] - 切牌的玩家, 没有此参数时按照正常对局流程
  * @param {string} [tile] - 切的牌, 没有此参数时将根据 discard_tiles 确定或摸切
- * @param {boolean|string} [is_liqi] - 是否立直, 默认不立直, 若为 'kailiqi', 则为开立直
+ * @param {boolean|'kailiqi'} [is_liqi] - 是否立直, 默认不立直, 若为 'kailiqi', 则为开立直
  * @param {string} [f_moqie] - 何切模式: 值为 'moqie' 表示强制显示摸切, 值为 'shouqie' 或其他情况则强制显示手切
- * @param {string} [anpai] - 暗夜之战: 当值为字符串 'anpai' 时, 表示暗牌, 默认不暗牌
+ * @param {'anpai'} [anpai] - 暗夜之战: 当值为字符串 'anpai' 时, 表示暗牌, 默认不暗牌
  * @param {number[]} [bs_type] - 背水之战: 立直类型, 有效值为 '[0]', '[1]', '[2]', 默认为普通立直, 需要配合 is_liqi 使用
  */
 let qiepai = (seat, tile, is_liqi, f_moqie, anpai, bs_type) => {
@@ -2311,6 +2314,17 @@ const resetReplay = function () {
 // ==========================================
 // 编辑自制牌谱时, 除非知道自己在做什么, 否则不建议修改下面的所有变量与函数, 或仅限只读
 
+/**
+ * 设置对局的模式
+ * - category: 模式大类, 1: 友人场, 2: 匹配场, 4: 比赛场, 100: 新手教程
+ * - meta
+ *      - mode_id: 匹配场的房间, 只有在 category 为 2 时才有效, 详见 字典.md
+ * - mode
+ *      - mode: 玩家数和场次局数
+ *      - detail_rule: 详细规则, 很多详细配置都在这里, 详见 1_编辑游戏信息.md
+ * @type {{category: number, meta: {mode_id: number}, mode: {mode: number, detail_rule: {}}}}
+ */
+let config;
 /**
  * 牌山, 会随着牌局的进行逐渐减少
  * @type {string[]}

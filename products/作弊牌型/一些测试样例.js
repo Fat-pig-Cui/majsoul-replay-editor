@@ -9,7 +9,7 @@ player_datas[1].avatar_id = 400104;
 player_datas[2].avatar_id = 400105;
 player_datas[3].avatar_id = 400106;
 
-config = {
+setConfig({
     category: 2,
     meta: {mode_id: 13},
     mode: {
@@ -19,7 +19,7 @@ config = {
             init_point: 200000,
         }
     }
-};
+});
 
 // 牌全是6z, 旧版演示视频: https://www.bilibili.com/video/BV1xZmZYKEbz
 begin_tiles[0] = '66666666666666z';

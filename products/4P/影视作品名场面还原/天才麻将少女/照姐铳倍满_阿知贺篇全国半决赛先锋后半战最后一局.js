@@ -15,7 +15,7 @@ player_datas[3].avatar_id = 403701;
 player_datas[2].views = [{slot: 1, item_id: 305206}, {slot: 2, item_id: 308022}]; // 和牌-天降正义 和 立直-未来视
 player_datas[3].views = [{slot: 2, item_id: 308002}]; // 立直-花天月地
 
-config = {
+setConfig({
     category: 4,
     meta: {mode_id: 0},
     mode: {
@@ -28,7 +28,7 @@ config = {
             _scores_: [48200, 80900, 57100, 213800],
         }
     }
-};
+});
 
 // 立直平和一杯口断幺dora6, 倍满
 // 有些手牌切牌没有画面, 我就随便编了几个

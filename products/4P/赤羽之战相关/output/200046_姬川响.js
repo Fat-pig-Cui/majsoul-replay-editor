@@ -14,7 +14,7 @@ player_datas[3].avatar_id = 404604;
 // 主播(猫爪)认证
 player_datas[0].verified = player_datas[1].verified = player_datas[2].verified = player_datas[3].verified = 1;
 
-config = {
+setConfig({
     category: 1,
     meta: {mode_id: 0},
     mode: {
@@ -24,7 +24,7 @@ config = {
             init_point: 500000,
         }
     }
-};
+});
 
 // 第1局: 天和, 根;  清十八罗汉, 杠上花; 清金钩钓, 杠上炮
 begin_tiles[0] = '11112222333344m';

@@ -15,14 +15,14 @@ player_datas[0].views = player_datas[1].views = player_datas[2].views = [
     {slot: 5, item_id: 305551}, // 头像框-丹心一寸
 ];
 
-config = {
+setConfig({
     category: 1,
     meta: {mode_id: 0},
     mode: {
         mode: 11,
         detail_rule: {}
     }
-};
+});
 
 // 第1局: 立直, 两立直, 吃, 碰, 杠, 拔北, 四杠流局
 begin_tiles[0] = '1112340678999p1s';

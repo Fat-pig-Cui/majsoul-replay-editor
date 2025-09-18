@@ -14,7 +14,7 @@ player_datas[0].views = player_datas[1].views = player_datas[2].views = player_d
     {slot: 6, item_id: 305809}, // 动态桌布-紫霞海岸
 ];
 
-config = {
+setConfig({
     category: 1,
     meta: {mode_id: 0},
     mode: {
@@ -23,7 +23,7 @@ config = {
             init_point: 500000,
         }
     }
-};
+});
 
 // 第1局: 东亲, 东起 天和, 纯正九莲宝灯
 begin_tiles[0] = '11123405678999m';

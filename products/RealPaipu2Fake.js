@@ -73,7 +73,7 @@
 
         for (let i in json.head.accounts)
             txt += `player_datas[${i}]=${JSON.stringify(json.head.accounts[i])};\n`;
-        txt += `\nconfig=${JSON.stringify(json.head.config)};\n\n`;
+        txt += `\nsetConfig(${JSON.stringify(json.head.config)});\n\n`;
 
         let actions = json.data.data.actions;
         for (let i in actions)

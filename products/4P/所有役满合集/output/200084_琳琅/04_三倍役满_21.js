@@ -12,7 +12,7 @@ player_datas[3].avatar_id = 400107;
 // 主播(猫爪)认证
 player_datas[0].verified = player_datas[1].verified = player_datas[2].verified = player_datas[3].verified = 1;
 
-config = {
+setConfig({
     category: 1,
     meta: {mode_id: 0},
     mode: {
@@ -21,7 +21,7 @@ config = {
             init_point: 500000,
         }
     }
-};
+});
 
 // 第1局: 东亲, 东起 天和, 纯正九莲宝灯
 begin_tiles[0] = '11123405678999m';

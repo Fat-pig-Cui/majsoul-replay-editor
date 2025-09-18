@@ -11,7 +11,7 @@ player_datas[1].avatar_id = 400104;
 player_datas[2].avatar_id = 400105;
 player_datas[3].avatar_id = 400106;
 
-config = {
+setConfig({
     category: 1,
     meta: {mode_id: 0},
     mode: {
@@ -22,7 +22,7 @@ config = {
             _guobiao_lianzhuang: true,
         }
     }
-};
+});
 
 // 第1(83)局: 明暗杠
 begin_tiles[0] = '2222333m123p67s55z';

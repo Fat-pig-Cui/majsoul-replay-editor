@@ -20,7 +20,7 @@ player_datas[0].views = player_datas[1].views = player_datas[2].views = player_d
     {slot: 2, item_id: 305311}, // 立直-虚拟导航
 ];
 
-config = {
+setConfig({
     category: 1,
     meta: {mode_id: 0},
     mode: {
@@ -29,7 +29,7 @@ config = {
             init_point: 100000,
         }
     }
-};
+});
 
 // 示例对局
 demoGame();

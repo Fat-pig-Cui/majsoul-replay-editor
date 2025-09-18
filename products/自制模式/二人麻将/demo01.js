@@ -5,14 +5,14 @@ player_datas[1].nickname = '绮春歌';
 player_datas[0].avatar_id = 400102;
 player_datas[1].avatar_id = 400106;
 
-config = {
+setConfig({
     category: 1,
     meta: {mode_id: 0},
     mode: {
         mode: 21,
         detail_rule: {}
     }
-};
+});
 
 begin_tiles[0] = '11112223334445z';
 begin_tiles[1] = '1112340678999m';

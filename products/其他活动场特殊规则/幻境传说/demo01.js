@@ -9,7 +9,7 @@ player_datas[1].avatar_id = 400104;
 player_datas[2].avatar_id = 400105;
 player_datas[3].avatar_id = 400106;
 
-config = {
+setConfig({
     category: 1,
     meta: {mode_id: 0},
     mode: {
@@ -18,7 +18,7 @@ config = {
             field_spell_mode: 30504, // 炒作, 胜负手, 厄运沙漏
         }
     }
-};
+});
 
 begin_tiles[0] = '22288m22288p222s1z';
 begin_tiles[1] = '1111340678999m';

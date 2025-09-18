@@ -15,7 +15,7 @@ player_datas[0].views = player_datas[1].views = player_datas[2].views = player_d
     {slot: 5, item_id: 305523}, // 头像框-猫咪军团的身份
 ];
 
-config = {
+setConfig({
     category: 1,
     meta: {mode_id: 0},
     mode: {
@@ -24,7 +24,7 @@ config = {
             init_point: 200000,
         }
     }
-};
+});
 
 // 第1局: 东亲, 东起 四暗刻单骑, 大四喜
 begin_tiles[0] = '1p1s111222333444z';

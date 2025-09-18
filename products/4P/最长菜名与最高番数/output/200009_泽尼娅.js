@@ -13,7 +13,7 @@ player_datas[0].views = player_datas[1].views = player_datas[2].views = player_d
     {slot: 6, item_id: 30580008}, // 桌布-小恶魔日记
 ];
 
-config = {
+setConfig({
     category: 1,
     meta: {mode_id: 0},
     mode: {
@@ -22,7 +22,7 @@ config = {
             init_point: 100000,
         }
     }
-};
+});
 
 // 最长菜名(15条45番)
 // 立直, 一发, 海底摸月, 门前清自摸和, 白, 发, 东, 连东, 混全带幺九,

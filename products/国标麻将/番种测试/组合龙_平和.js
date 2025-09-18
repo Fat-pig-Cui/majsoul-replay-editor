@@ -9,7 +9,7 @@ player_datas[1].avatar_id = 400104;
 player_datas[2].avatar_id = 400105;
 player_datas[3].avatar_id = 400106;
 
-config = {
+setConfig({
     category: 1,
     meta: {mode_id: 0},
     mode: {
@@ -20,7 +20,7 @@ config = {
             _guobiao_lianzhuang: true,
         }
     }
-};
+});
 
 // 组合龙, 门前请, 平和, 四归一, 坎张
 begin_tiles[0] = '147m258p2333469s1z';

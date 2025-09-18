@@ -17,7 +17,7 @@ player_datas[0].views = player_datas[1].views = player_datas[2].views = player_d
     {slot: 6, item_id: 305804}, // 桌布-贺华岁
 ];
 
-config = {
+setConfig({
     category: 1,
     meta: {mode_id: 0},
     mode: {
@@ -27,7 +27,7 @@ config = {
             init_point: 500000,
         }
     }
-};
+});
 
 // 第1局: 天和, 根;  清十八罗汉, 杠上花; 清金钩钓, 杠上炮
 begin_tiles[0] = '11112222333344m';

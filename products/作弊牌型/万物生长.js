@@ -17,7 +17,7 @@ player_datas[1].avatar_id = 400104;
 player_datas[2].avatar_id = 400105;
 player_datas[3].avatar_id = 400106;
 
-config = {
+setConfig({
     category: 2,
     meta: {mode_id: 13},
     mode: {
@@ -26,7 +26,7 @@ config = {
             _wanwushengzhang: true,
         }
     }
-};
+});
 
 begin_tiles[0] = '66666666666667z';
 begin_tiles[1] = '1112340678999m';

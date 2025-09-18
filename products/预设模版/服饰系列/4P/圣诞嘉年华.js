@@ -17,7 +17,7 @@ player_datas[0].views = player_datas[1].views = player_datas[2].views = player_d
     {slot: 6, item_id: 305020}, // 圣夜桌布
 ];
 
-config = {
+setConfig({
     category: 1,
     meta: {mode_id: 0},
     mode: {
@@ -27,7 +27,7 @@ config = {
             _tablecloth_id: 305020, // 圣夜桌布
         }
     }
-};
+});
 
 // 示例对局
 demoGame();

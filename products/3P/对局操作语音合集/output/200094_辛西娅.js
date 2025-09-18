@@ -7,14 +7,14 @@ player_datas[0].avatar_id = 409402;
 player_datas[1].avatar_id = 409401;
 player_datas[2].avatar_id = 409403;
 
-config = {
+setConfig({
     category: 1,
     meta: {mode_id: 0},
     mode: {
         mode: 11,
         detail_rule: {}
     }
-};
+});
 
 // 第1局: 立直, 两立直, 吃, 碰, 杠, 拔北, 四杠流局
 begin_tiles[0] = '1112340678999p1s';

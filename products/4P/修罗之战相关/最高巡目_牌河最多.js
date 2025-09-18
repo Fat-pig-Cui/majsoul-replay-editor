@@ -9,7 +9,7 @@ player_datas[1].avatar_id = 400104;
 player_datas[2].avatar_id = 400105;
 player_datas[3].avatar_id = 400106;
 
-config = {
+setConfig({
     category: 1,
     meta: {mode_id: 40},
     mode: {
@@ -18,7 +18,7 @@ config = {
             xuezhandaodi: true,
         }
     }
-};
+});
 
 // 要让一家巡目最高且牌河最多, 那该家最好是亲家
 // 且 亲家前两次出的牌分别铳了北家和西家

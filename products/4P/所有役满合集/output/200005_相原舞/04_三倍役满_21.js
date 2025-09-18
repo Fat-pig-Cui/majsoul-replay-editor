@@ -15,7 +15,7 @@ player_datas[0].views = player_datas[1].views = player_datas[2].views = player_d
     {slot: 6, item_id: 305804}, // 桌布-贺华岁
 ];
 
-config = {
+setConfig({
     category: 1,
     meta: {mode_id: 0},
     mode: {
@@ -24,7 +24,7 @@ config = {
             init_point: 500000,
         }
     }
-};
+});
 
 // 第1局: 东亲, 东起 天和, 纯正九莲宝灯
 begin_tiles[0] = '11123405678999m';

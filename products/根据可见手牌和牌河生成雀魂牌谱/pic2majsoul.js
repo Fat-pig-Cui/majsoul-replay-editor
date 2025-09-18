@@ -57,7 +57,7 @@
         player_datas[1].avatar_id = 400104;
         player_datas[2].avatar_id = 400105;
         player_datas[3].avatar_id = 400106;
-        config = {
+        setConfig({
             category: 3,
             meta: {mode_id: 0},
             mode: {
@@ -70,7 +70,7 @@
                     _scores_: json.scores,
                 }
             }
-        };
+        });
 
         // 解析 fulu 至 fulus_info
         let new_fulus = [json.fulu0, json.fulu1, json.fulu2, json.fulu3];

@@ -14,7 +14,7 @@ player_datas[3].avatar_id = 406501;
 
 player_datas[3].views = [{slot: 1, item_id: 305206}, {slot: 2, item_id: 308022}]; // 和牌-天降正义 和 立直-未来视
 
-config = {
+setConfig({
     category: 4,
     meta: {mode_id: 0},
     mode: {
@@ -27,7 +27,7 @@ config = {
             _scores_: [123300, 85200, 91900, 99600],
         }
     }
-};
+});
 
 // 自摸平和一杯口纯全带, 跳满
 // 因为动画没有部分切牌和 花田煌, 松实玄 美 的手牌画面, 我这里乱编了一个
