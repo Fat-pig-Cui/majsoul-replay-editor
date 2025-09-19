@@ -9,7 +9,7 @@ player_datas[1].avatar_id = 405403;
 player_datas[2].avatar_id = 405404;
 player_datas[3].avatar_id = 405405;
 
-config = {
+setConfig({
     category: 2,
     meta: {mode_id: 13},
     mode: {
@@ -19,7 +19,7 @@ config = {
             _chang_ju_ben_num_: [2, 0, 0],
         }
     }
-};
+});
 
 origin_huleOnePlayer = huleOnePlayer;
 

@@ -12,7 +12,7 @@ player_datas[3].avatar_id = 408403;
 // 主播(猫爪)认证
 player_datas[0].verified = player_datas[1].verified = player_datas[2].verified = player_datas[3].verified = 1;
 
-config = {
+setConfig({
     category: 2,
     meta: {mode_id: 13},
     mode: {
@@ -22,7 +22,7 @@ config = {
             _chang_ju_ben_num_: [2, 0, 0],
         }
     }
-};
+});
 
 origin_huleOnePlayer = huleOnePlayer;
 

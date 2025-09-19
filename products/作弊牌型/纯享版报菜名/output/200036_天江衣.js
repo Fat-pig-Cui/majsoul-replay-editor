@@ -20,7 +20,7 @@ player_datas[0].views = player_datas[1].views = player_datas[2].views = player_d
     {slot: 7, item_id: 308005}, // 牌背-艾托企鹅
 ];
 
-config = {
+setConfig({
     category: 2,
     meta: {mode_id: 13},
     mode: {
@@ -30,7 +30,7 @@ config = {
             _chang_ju_ben_num_: [2, 0, 0],
         }
     }
-};
+});
 
 origin_huleOnePlayer = huleOnePlayer;
 

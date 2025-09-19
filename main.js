@@ -26,7 +26,7 @@
  *          - 7: 牌背
  *          - 13: 牌面
  *      - id: 装扮的id
- * @type {{nickname: string, avatar_id: number, title: number|undefined, avatar_frame: number|undefined, verified: number|undefined, views: {slot: number, item_id: number}[]|undefined}[]}
+ * @type {{nickname: string, avatar_id: number, [title]: number, [avatar_frame]: number, [verified]: number, [views]: {slot: number, item_id: number}[]}[]}
  */
 let player_datas;
 /**
@@ -1395,11 +1395,15 @@ let huangpai = () => {
             if (!paihe[seat].liujumanguan || huled[seat])
                 continue;
 
+            let cur_delta_scores = [];
+            for (let i = 0; i < player_cnt; i++)
+                cur_delta_scores[i] = 0;
+            let score = calcScore(seat, cur_delta_scores);
             scores_info.push({
                 seat: seat,
-                score: calcScore(seat),
+                score: score,
                 old_scores: scores.slice(),
-                delta_scores: delta_scores.slice(),
+                delta_scores: cur_delta_scores,
                 hand: player_tiles[seat].slice(),
                 ming: fulu2Ming(seat),
                 doras: calcDoras(),
@@ -1480,22 +1484,23 @@ let huangpai = () => {
 
     /**
      * 计算 seat 号玩家的流局满贯导致的各家点数变动, 并返回流满点数
-     * @param seat - seat 号玩家
+     * @param {number} seat - seat 号玩家
+     * @param {number[]} cur_delta_scores - 该流满导致的玩家点数变动
      * @returns {number} 流满点数
      */
-    function calcScore(seat) {
+    function calcScore(seat, cur_delta_scores) {
         let score = 0;
         for (let i = 0; i < player_cnt; i++) {
             if (seat === i || huled[i])
                 continue;
             // 幻境传说: 命运卡1
             if (seat === ju || i === ju) {
-                delta_scores[i] -= 4000 * times;
-                delta_scores[seat] += 4000 * times;
+                cur_delta_scores[i] -= 4000 * times;
+                cur_delta_scores[seat] += 4000 * times;
                 score += 4000 * times;
             } else {
-                delta_scores[i] -= 2000 * times;
-                delta_scores[seat] += 2000 * times;
+                cur_delta_scores[i] -= 2000 * times;
+                cur_delta_scores[seat] += 2000 * times;
                 score += 2000 * times;
             }
         }
@@ -1505,16 +1510,18 @@ let huangpai = () => {
                 if (seat === j || huled[j])
                     continue;
                 if (seat === ju) {
-                    delta_scores[j] -= base_points * 2;
-                    delta_scores[seat] += base_points * 2;
+                    cur_delta_scores[j] -= base_points * 2;
+                    cur_delta_scores[seat] += base_points * 2;
                     score += base_points * 2;
                 } else {
-                    delta_scores[j] -= base_points;
-                    delta_scores[seat] += base_points;
+                    cur_delta_scores[j] -= base_points;
+                    cur_delta_scores[seat] += base_points;
                     score += base_points;
                 }
             }
         }
+        for (let i = 0; i < player_cnt; i++)
+            delta_scores[i] += cur_delta_scores[i];
         return score;
     }
 };
@@ -2370,7 +2377,7 @@ let discard_tiles, deal_tiles;
  * - tile: 构成副露的牌集合
  * - from: 鸣其他家的牌时, 构成副露的牌所来自的玩家, 这里默认最后一张牌是来自被鸣牌家的,
  * 如果是自家鸣牌, 则没有 from
- * @type {[{type: number, tile: string[], from: number|undefined}][]}
+ * @type {[{type: number, tile: string[], [from]: number}][]}
  */
 let fulu;
 /**
@@ -2390,7 +2397,7 @@ let paihe;
  * 值得注意的是刚开局所有玩家的 yifa 都是1, 用于天地人和的判断
  * - kai: 是否为开立直
  * - beishui_type: 背水之战: 立直类型, 0: 普通立直, 1: 真系列, 2: 极系列
- * @type {{liqi: number, yifa: number, kai: boolean, beishui_type: number|undefined}[]}
+ * @type {{liqi: number, yifa: number, kai: boolean, [beishui_type]: number}[]}
  */
 let liqi_info;
 /**
@@ -2399,7 +2406,7 @@ let liqi_info;
  * - liqi: 立直的类型, 1: 普通立直, 2: 两立直
  * - kai: 是否为开立直
  * - beishui_type: 背水之战: 立直类型, 0: 普通立直, 1: 真系列, 2: 极系列
- * @type {{seat: number, liqi: number, kai: boolean, beishui_type: number|undefined}|null}
+ * @type {{seat: number, liqi: number, kai: boolean, [beishui_type]: number}|null}
  */
 let lst_liqi;
 /**
@@ -2413,7 +2420,7 @@ let doras, li_doras;
  * - licnt: 里dora数量
  * - lastype: 翻dora类型, 1表示即翻指示牌(暗杠), 2表示过一个操作才翻指示牌(明杠)
  * - bonus: 幻境传说: 是否多一个dora
- * @type {{cnt: number, licnt: number, lastype: number, bonus: number|undefined}}
+ * @type {{cnt: number, licnt: number, lastype: number, [bonus]: number}}
  */
 let dora_cnt;
 /**
@@ -3067,7 +3074,7 @@ const updateZhenting = () => {
 /**
  * 把 lst_liqi 中的信息赋值给 liqi_info, 并返回胶水代码用的 liqi
  * @param {boolean} [type] - 是否允许立直失败, 只会出现在血战到底模式中, 默认不允许
- * @returns {{seat: number, liqibang: number, score: number, liqi_type_beishuizhizhan: number|undefined, failed: boolean|undefined} |null}
+ * @returns {{seat: number, liqibang: number, score: number, [liqi_type_beishuizhizhan]: number, [failed]: boolean} |null}
  */
 const lstLiqi2Liqi = (type = false) => {
     let ret = null;
@@ -6450,7 +6457,7 @@ const roundInfo = () => {
  * @param {boolean} is_sha256 - 牌山是否包含起手
  */
 let addNewRound = (left_tile_count, fake_hash_code, opens, is_sha256) => {
-    actions.push({
+    actions.push(JSON.parse(JSON.stringify({
         name: 'RecordNewRound',
         data: {
             chang: chang,
@@ -6473,7 +6480,7 @@ let addNewRound = (left_tile_count, fake_hash_code, opens, is_sha256) => {
             md5: !is_sha256 ? fake_hash_code : '',
             sha256: is_sha256 ? fake_hash_code : '',
         }
-    });
+    })));
     calcXun();
 };
 
@@ -6488,7 +6495,7 @@ let addNewRound = (left_tile_count, fake_hash_code, opens, is_sha256) => {
  * @param {{}|{seat: number, liqi: number, continue_deal_count: number, overload: boolean}} hunzhiyiji_data - 魂之一击: 魂之一击立直数据
  */
 let addDealTile = (seat, drawcard, left_tile_count, liqi, tile_state, zhanxing_index, hunzhiyiji_data) => {
-    actions.push({
+    actions.push(JSON.parse(JSON.stringify({
         name: 'RecordDealTile',
         data: {
             seat: seat,
@@ -6501,7 +6508,7 @@ let addDealTile = (seat, drawcard, left_tile_count, liqi, tile_state, zhanxing_i
             tile_index: is_zhanxing() ? zhanxing_index : undefined,
             hun_zhi_yi_ji_info: is_hunzhiyiji() ? hunzhiyiji_data : undefined,
         }
-    });
+    })));
     calcXun();
 };
 
@@ -6512,7 +6519,7 @@ let addDealTile = (seat, drawcard, left_tile_count, liqi, tile_state, zhanxing_i
  * @param {{liqibang: number, seat: number, scores: number[]}|null} liqi - 刚立直玩家的立直信息
  */
 let addFillAwaitingTiles = (seat, left_tile_count, liqi) => {
-    actions.push({
+    actions.push(JSON.parse(JSON.stringify({
         name: 'RecordFillAwaitingTiles',
         data: {
             operation: {seat: seat},
@@ -6521,7 +6528,7 @@ let addFillAwaitingTiles = (seat, left_tile_count, liqi) => {
             liqi: liqi,
             doras: calcDoras(),
         }
-    });
+    })));
 };
 
 /**
@@ -6536,7 +6543,7 @@ let addFillAwaitingTiles = (seat, left_tile_count, liqi) => {
  * @param {number} beishui_type - 背水之战: 立直类型
  */
 let addDiscardTile = (seat, tile, moqie, is_liqi, is_wliqi, is_kailiqi, tile_state, beishui_type) => {
-    actions.push({
+    actions.push(JSON.parse(JSON.stringify({
         name: 'RecordDiscardTile',
         data: {
             seat: seat,
@@ -6553,7 +6560,7 @@ let addDiscardTile = (seat, tile, moqie, is_liqi, is_wliqi, is_kailiqi, tile_sta
             hun_zhi_yi_ji_info: is_hunzhiyiji() && hunzhiyiji_info[seat].liqi && !hunzhiyiji_info[seat].overload ? JSON.parse(JSON.stringify(hunzhiyiji_info[seat])) : undefined,
             liqi_type_beishuizhizhan: is_liqi ? beishui_type : undefined,
         }
-    });
+    })));
 };
 
 /**
@@ -6565,7 +6572,7 @@ let addDiscardTile = (seat, tile, moqie, is_liqi, is_wliqi, is_kailiqi, tile_sta
  * @param {boolean} is_wliqi - 是否为双立直
  */
 let addRevealTile = (seat, tile, moqie, is_liqi, is_wliqi) => {
-    actions.push({
+    actions.push(JSON.parse(JSON.stringify({
         name: 'RecordRevealTile',
         data: {
             seat: seat,
@@ -6577,7 +6584,7 @@ let addRevealTile = (seat, tile, moqie, is_liqi, is_wliqi) => {
             scores: scores.slice(),
             tingpais: is_heqie_mode() ? [] : calcTingpai(seat),
         }
-    });
+    })));
 };
 
 /**
@@ -6587,7 +6594,7 @@ let addRevealTile = (seat, tile, moqie, is_liqi, is_wliqi) => {
  * @param {string} [tile] - 切的牌
  */
 let addLockTile = (seat, lock_state, tile = '') => {
-    actions.push({
+    actions.push(JSON.parse(JSON.stringify({
         name: 'RecordLockTile',
         data: {
             seat: seat,
@@ -6596,7 +6603,7 @@ let addLockTile = (seat, lock_state, tile = '') => {
             liqibang: liqibang,
             lock_state: lock_state,
         }
-    });
+    })));
 };
 
 /**
@@ -6604,14 +6611,14 @@ let addLockTile = (seat, lock_state, tile = '') => {
  * @param {number} seat - 开牌的玩家
  */
 let addUnveilTile = seat => {
-    actions.push({
+    actions.push(JSON.parse(JSON.stringify({
         name: 'RecordUnveilTile',
         data: {
             seat: seat,
             scores: scores.slice(),
             liqibang: liqibang,
         }
-    });
+    })));
 };
 
 /**
@@ -6624,7 +6631,7 @@ let addUnveilTile = seat => {
  * @param {boolean[]} tile_states - 配牌明牌: 鸣出去的牌是否为明牌
  */
 let addChiPengGang = (seat, split_tiles, froms, type, liqi, tile_states) => {
-    actions.push({
+    actions.push(JSON.parse(JSON.stringify({
         name: 'RecordChiPengGang',
         data: {
             seat: seat,
@@ -6638,7 +6645,7 @@ let addChiPengGang = (seat, split_tiles, froms, type, liqi, tile_states) => {
             yongchang: is_yongchang() ? JSON.parse(JSON.stringify(yongchang_data[froms.at(-1)])) : undefined,
             hun_zhi_yi_ji_info: is_hunzhiyiji() && hunzhiyiji_info[seat].liqi ? JSON.parse(JSON.stringify(hunzhiyiji_info[froms.at(-1)])) : undefined,
         }
-    });
+    })));
     calcXun();
 };
 
@@ -6650,7 +6657,7 @@ let addChiPengGang = (seat, split_tiles, froms, type, liqi, tile_states) => {
  * @param {boolean[]} tile_states - 配牌明牌: 鸣出去的牌是否为明牌
  */
 let addAnGangAddGang = (seat, tile, ming_type, tile_states) => {
-    actions.push({
+    actions.push(JSON.parse(JSON.stringify({
         name: 'RecordAnGangAddGang',
         data: {
             seat: seat,
@@ -6660,7 +6667,7 @@ let addAnGangAddGang = (seat, tile, ming_type, tile_states) => {
             tingpais: is_heqie_mode() ? [] : calcTingpai(seat),
             tile_states: tile_states,
         }
-    });
+    })));
 };
 
 /**
@@ -6670,7 +6677,7 @@ let addAnGangAddGang = (seat, tile, ming_type, tile_states) => {
  * @param {boolean[]} tile_states - 配牌明牌: 拔出去的牌是否为明牌
  */
 let addBaBei = (seat, tile, tile_states) => {
-    actions.push({
+    actions.push(JSON.parse(JSON.stringify({
         name: 'RecordBaBei',
         data: {
             seat: seat,
@@ -6679,7 +6686,7 @@ let addBaBei = (seat, tile, tile_states) => {
             doras: calcDoras(),
             tingpais: is_heqie_mode() ? [] : calcTingpai(seat),
         }
-    });
+    })));
 };
 
 /**
@@ -6689,7 +6696,7 @@ let addBaBei = (seat, tile, tile_states) => {
  * @param {number} baopait - 包牌玩家, 注意和数值比 seat 大1
  */
 let endHule = (hule_info, old_scores, baopait) => {
-    actions.push({
+    actions.push(JSON.parse(JSON.stringify({
         name: 'RecordHule',
         data: {
             hules: hule_info,
@@ -6698,7 +6705,7 @@ let endHule = (hule_info, old_scores, baopait) => {
             scores: scores.slice(),
             baopai: baopait,
         }
-    });
+    })));
 };
 
 /**
@@ -6708,7 +6715,7 @@ let endHule = (hule_info, old_scores, baopait) => {
  * @param {{}} liqi - 刚立直玩家的立直信息
  */
 let addHuleXueZhanMid = (hule_info, old_scores, liqi) => {
-    actions.push({
+    actions.push(JSON.parse(JSON.stringify({
         name: 'RecordHuleXueZhanMid',
         data: {
             hules: hule_info,
@@ -6717,7 +6724,7 @@ let addHuleXueZhanMid = (hule_info, old_scores, liqi) => {
             scores: scores.slice(),
             liqi: liqi,
         }
-    });
+    })));
 };
 
 /**
@@ -6726,7 +6733,7 @@ let addHuleXueZhanMid = (hule_info, old_scores, liqi) => {
  * @param {(number)[]} old_scores - 结算前分数
  */
 let endHuleXueZhanEnd = (hule_info, old_scores) => {
-    actions.push({
+    actions.push(JSON.parse(JSON.stringify({
         name: 'RecordHuleXueZhanEnd',
         data: {
             hules: hule_info,
@@ -6735,7 +6742,7 @@ let endHuleXueZhanEnd = (hule_info, old_scores) => {
             scores: scores.slice(),
             hules_history: hules_history.slice(),
         }
-    });
+    })));
 };
 
 /**
@@ -6744,7 +6751,7 @@ let endHuleXueZhanEnd = (hule_info, old_scores) => {
  * @param {(number)[]} old_scores - 结算前分数
  */
 let addHuleXueLiuMid = (hule_info, old_scores) => {
-    actions.push({
+    actions.push(JSON.parse(JSON.stringify({
         name: 'RecordHuleXueLiuMid',
         data: {
             old_scores: old_scores,
@@ -6754,7 +6761,7 @@ let addHuleXueLiuMid = (hule_info, old_scores) => {
             tingpais: getLstAction().name === 'RecordNewRound' && !is_heqie_mode() ? calcTingpai(ju) : [],
             baopai: 0,
         }
-    });
+    })));
 };
 
 /**
@@ -6763,7 +6770,7 @@ let addHuleXueLiuMid = (hule_info, old_scores) => {
  * @param {(number)[]} old_scores - 结算前分数
  */
 let endHuleXueLiuEnd = (hule_info, old_scores) => {
-    actions.push({
+    actions.push(JSON.parse(JSON.stringify({
         name: 'RecordHuleXueLiuEnd',
         data: {
             old_scores: old_scores,
@@ -6773,7 +6780,7 @@ let endHuleXueLiuEnd = (hule_info, old_scores) => {
             hules_history: hules_history.slice(),
             baopai: 0,
         }
-    });
+    })));
 };
 
 /**
@@ -6783,7 +6790,7 @@ let endHuleXueLiuEnd = (hule_info, old_scores) => {
  * @param {{}[]} scores_info - 结算相关信息
  */
 let endNoTile = (liujumanguan, ting_info, scores_info) => {
-    actions.push({
+    actions.push(JSON.parse(JSON.stringify({
         name: 'RecordNoTile',
         data: {
             scores: scores_info,
@@ -6791,7 +6798,7 @@ let endNoTile = (liujumanguan, ting_info, scores_info) => {
             liujumanguan: liujumanguan,
             hules_history: hules_history.slice(),
         }
-    });
+    })));
 };
 
 /**
@@ -6799,11 +6806,11 @@ let endNoTile = (liujumanguan, ting_info, scores_info) => {
  * @param {number} type - 流局的类型
  * @param {number} seat - 最后操作的玩家, 只有在九种九牌和三家和了有效
  * @param {{}|null} liqi - 立直信息
- * @param {string[]|undefined} tiles - 玩家的手牌, 只有在九种九牌有效
+ * @param {string[]} [tiles] - 玩家的手牌, 只有在九种九牌有效
  * @param {string[]} allplayertiles - 所有玩家的手牌, 只有在四家立直和三家和了有效
  */
 let endLiuJu = (type, seat, liqi, tiles, allplayertiles) => {
-    actions.push({
+    actions.push(JSON.parse(JSON.stringify({
         name: 'RecordLiuJu',
         data: {
             type: type,
@@ -6813,7 +6820,7 @@ let endLiuJu = (type, seat, liqi, tiles, allplayertiles) => {
             allplayertiles: type === 4 || type === 5 ? allplayertiles : undefined,
             hules_history: hules_history.slice(),
         }
-    });
+    })));
 };
 
 /**
@@ -6822,7 +6829,7 @@ let endLiuJu = (type, seat, liqi, tiles, allplayertiles) => {
  * @param {number} type - 换牌方式, 0: 逆时针, 1: 对家, 2: 顺时针
  */
 let addChangeTile = (change_tile_infos, type) => {
-    actions.push({
+    actions.push(JSON.parse(JSON.stringify({
         name: 'RecordChangeTile',
         data: {
             change_tile_infos: change_tile_infos,
@@ -6831,7 +6838,7 @@ let addChangeTile = (change_tile_infos, type) => {
             tingpai: getAllTingpai(),
             operations: [],
         }
-    });
+    })));
 };
 
 /**
@@ -6839,13 +6846,13 @@ let addChangeTile = (change_tile_infos, type) => {
  * @param {number[]} gap_types - 所有玩家的定缺
  */
 let addSelectGap = gap_types => {
-    actions.push({
+    actions.push(JSON.parse(JSON.stringify({
         name: 'RecordSelectGap',
         data: {
             gap_types: gap_types,
             tingpai: getAllTingpai(),
         }
-    });
+    })));
 };
 
 /**
@@ -6853,7 +6860,7 @@ let addSelectGap = gap_types => {
  * @param {number[]} old_scores - 结算前分数
  */
 let addGangResult = old_scores => {
-    actions.push({
+    actions.push(JSON.parse(JSON.stringify({
         name: 'RecordGangResult',
         data: {
             gang_infos: {
@@ -6862,7 +6869,7 @@ let addGangResult = old_scores => {
                 scores: scores.slice(),
             }
         }
-    });
+    })));
 };
 
 /**
@@ -6870,7 +6877,7 @@ let addGangResult = old_scores => {
  * @param {number[]} old_scores - 结算前分数
  */
 let addGangResultEnd = old_scores => {
-    actions.push({
+    actions.push(JSON.parse(JSON.stringify({
         name: 'RecordGangResultEnd',
         data: {
             gang_infos: {
@@ -6880,7 +6887,7 @@ let addGangResultEnd = old_scores => {
                 hules_history: hules_history.slice(),
             },
         }
-    });
+    })));
 };
 
 /**
@@ -6890,7 +6897,7 @@ let addGangResultEnd = old_scores => {
  * @param {number[]} old_scores - 结算前分数
  */
 let addCuohu = (seat, zimo, old_scores) => {
-    actions.push({
+    actions.push(JSON.parse(JSON.stringify({
         name: 'RecordCuohu',
         data: {
             cuohu_info: {
@@ -6901,7 +6908,7 @@ let addCuohu = (seat, zimo, old_scores) => {
                 scores: scores.slice(),
             },
         }
-    });
+    })));
 };
 
 // ===========================================

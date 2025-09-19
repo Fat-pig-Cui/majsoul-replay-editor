@@ -21,7 +21,7 @@ player_datas[0].views = player_datas[1].views = player_datas[2].views = player_d
     {slot: 13, item_id: 305718}, // 牌面-猫咪雀圣
 ];
 
-config = {
+setConfig({
     category: 2,
     meta: {mode_id: 13},
     mode: {
@@ -31,7 +31,7 @@ config = {
             _chang_ju_ben_num_: [2, 0, 0],
         }
     }
-};
+});
 
 origin_huleOnePlayer = huleOnePlayer;
 

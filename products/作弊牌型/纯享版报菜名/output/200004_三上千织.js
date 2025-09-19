@@ -16,7 +16,7 @@ player_datas[0].views = player_datas[1].views = player_datas[2].views = player_d
     {slot: 6, item_id: 305802}, // 桌布-冲鸭！
 ];
 
-config = {
+setConfig({
     category: 2,
     meta: {mode_id: 13},
     mode: {
@@ -26,7 +26,7 @@ config = {
             _chang_ju_ben_num_: [2, 0, 0],
         }
     }
-};
+});
 
 origin_huleOnePlayer = huleOnePlayer;
 

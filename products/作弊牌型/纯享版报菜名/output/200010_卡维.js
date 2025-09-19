@@ -14,7 +14,7 @@ player_datas[0].views = player_datas[1].views = player_datas[2].views = player_d
     {slot: 6, item_id: 305809}, // 动态桌布-紫霞海岸
 ];
 
-config = {
+setConfig({
     category: 2,
     meta: {mode_id: 13},
     mode: {
@@ -24,7 +24,7 @@ config = {
             _chang_ju_ben_num_: [2, 0, 0],
         }
     }
-};
+});
 
 origin_huleOnePlayer = huleOnePlayer;
 
