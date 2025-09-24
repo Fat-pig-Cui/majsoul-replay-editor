@@ -37,7 +37,7 @@ let begin_tiles;
 
 // 初始化必要变量
 const clearProject = () => {
-    if (view?.DesktopMgr?.Inst?.active)
+    if (view.DesktopMgr.Inst && view.DesktopMgr.Inst.active)
         throw new Error('请退出当前牌谱后再载入自制牌谱');
 
     game_begin_once = true;
@@ -432,8 +432,10 @@ let mopai = (seat, tile, index) => {
                     seat = (getLstAction(2).data.seat + 1) % player_cnt;
                 else // 修罗则为被枪杠家继续岭上摸牌
                     seat = getLstAction(2).data.seat;
-            } else
-                seat = (getLstAction().data.hules.at(-1).seat + 1) % player_cnt;
+            } else{
+                let lst_index = getLstAction().data.hules.length - 1;
+                seat = (getLstAction().data.hules[lst_index].seat + 1) % player_cnt;
+            }
         }
         // 血流成河或国标错和, 摸牌家为和牌之前最后操作玩家的下一家
         if (lstname === 'RecordHuleXueLiuMid' || lstname === 'RecordCuohu')
@@ -482,7 +484,7 @@ let mopai = (seat, tile, index) => {
         left_cnt += awaiting_tiles.length;
 
     // 实际摸的牌
-    let drawcard = paishan.at(-1);
+    let drawcard = paishan[paishan.length - 1];
     if (tile !== undefined)
         drawcard = tile;
     else if (is_zhanxing())
@@ -601,8 +603,8 @@ let qiepai = (seat, tile, is_liqi, f_moqie, anpai, bs_type) => {
     if (tile === undefined && discard_tiles[seat].length > 0)
         tile = discard_tiles[seat].shift();
     if (tile === undefined || tile === '..')
-        tile = player_tiles[seat].at(-1);
-    moqie = moqie && player_tiles[seat].at(-1) === tile && lstname !== 'RecordNewRound' && lstname !== 'RecordChiPengGang';
+        tile = player_tiles[seat][player_tiles[seat].length - 1];
+    moqie = moqie && player_tiles[seat][player_tiles[seat].length - 1] === tile && lstname !== 'RecordNewRound' && lstname !== 'RecordChiPengGang';
     if (is_heqie_mode())
         moqie = f_moqie === 'moqie';
 
@@ -903,7 +905,7 @@ let mingpai = (seat, tiles, jifei) => {
          */
         function trymingpai(try_tiles) {
             for (let seat2 = 0; seat2 < player_cnt; seat2++)
-                if (seat2 !== from && (seat === seat2 || seat === undefined) && in_tiles(try_tiles, player_tiles[seat2])) {
+                if (seat2 !== from && (seat === seat2 || seat === undefined) && inTiles(try_tiles, player_tiles[seat2])) {
                     mingpai(seat2, try_tiles, jifei);
                     return true;
                 }
@@ -1079,7 +1081,7 @@ let zimingpai = (seat, tile, type, jifei) => {
      */
     function trying() {
         // 国标补花
-        if (is_guobiao() && typeof editfunction == 'function' && in_tiles(Huapai, player_tiles[seat])) {
+        if (is_guobiao() && typeof editfunction == 'function' && inTiles(Huapai, player_tiles[seat])) {
             zimingpai(seat, Huapai, 'babei');
             return true;
         }
@@ -1088,7 +1090,7 @@ let zimingpai = (seat, tile, type, jifei) => {
         if (player_cnt === 2 || player_cnt === 3) {
             alltiles = allEqualTiles('4z').reverse();
             for (let i in alltiles)
-                if (in_tiles(alltiles[i], player_tiles[seat])) {
+                if (inTiles(alltiles[i], player_tiles[seat])) {
                     zimingpai(seat, alltiles[i], 'babei');
                     return true;
                 }
@@ -1097,7 +1099,7 @@ let zimingpai = (seat, tile, type, jifei) => {
         if (player_cnt === 2 && typeof editfunction == 'function') {
             alltiles = allEqualTiles('3z').reverse();
             for (let i in alltiles)
-                if (in_tiles(alltiles[i], player_tiles[seat])) {
+                if (inTiles(alltiles[i], player_tiles[seat])) {
                     zimingpai(seat, alltiles[i], 'babei')
                     return true;
                 }
@@ -1110,7 +1112,7 @@ let zimingpai = (seat, tile, type, jifei) => {
                     for (let x2 in alltiles)
                         for (let x3 in alltiles) {
                             let tmp_angang = [alltiles[x0], alltiles[x1], alltiles[x2], alltiles[x3]];
-                            if (in_tiles(tmp_angang, player_tiles[seat])) {
+                            if (inTiles(tmp_angang, player_tiles[seat])) {
                                 zimingpai(seat, alltiles[x0], 'angang', jifei);
                                 return true;
                             }
@@ -1120,7 +1122,7 @@ let zimingpai = (seat, tile, type, jifei) => {
         for (let i = C1m; i <= C7z; i++) {
             alltiles = allEqualTiles(int2Tile(i)).reverse();
             for (let i in alltiles)
-                if (in_tiles(alltiles[i], player_tiles[seat])) {
+                if (inTiles(alltiles[i], player_tiles[seat])) {
                     let can_jiagang = false;
                     for (let i in fulu[seat])
                         if (isEqualTile(fulu[seat][i].tile[0], alltiles[i]) && fulu[seat][i].type === 1) {
@@ -1992,11 +1994,11 @@ const decompose = tiles => {
             ret += matches[i] + matches[i];
             continue;
         }
-        let kind_index = matches[i].at(-1) === SPT_Suf ? -2 : -1;
-        let tile_kind = matches[i].at(kind_index);
-        if (kind_index === -2)
+        let kind_index = matches[i][matches[i].length - 1] === SPT_Suf ? matches[i].length - 2 : matches[i].length - 1;
+        let tile_kind = matches[i][kind_index];
+        if (kind_index === matches[i].length - 2)
             tile_kind += SPT_Suf;
-        for (let j = 0; j < matches[i].length + kind_index; j++)
+        for (let j = 0; j < kind_index; j++)
             ret += matches[i][j] + tile_kind;
     }
     return ret;
@@ -2973,7 +2975,7 @@ const cmp = (x, y) => tile2Int(x) - tile2Int(y);
  * @param {string[]} y - 全集
  * @returns {boolean}
  */
-const in_tiles = (x, y) => {
+const inTiles = (x, y) => {
     if (typeof x == 'string')
         x = [x];
     let cnt = [], cnt2 = [];
@@ -3896,7 +3898,7 @@ const calcFan = (seat, zimo, fangchong) => {
     }
 
     let tiles = player_tiles[seat];
-    let lastile = tiles.at(-1), fulucnt = 0;
+    let lastile = tiles[tiles.length - 1], fulucnt = 0;
     let ret = {yiman: false, fans: [], fu: 0};
     let cnt = []; // cnt 是仅手牌的数量集合, 不含红宝牌
     for (let i = Cbd; i <= C0s; i++) // 注意这里是 C0s 而不是 C7z, 是因为下面 dfs 要用到 nxt2, 需要从 C7z 扩展到 C0s
@@ -4907,7 +4909,7 @@ const calcFanChuanma = (seat, zimo, type = false) => {
         return ret;
     }
 
-    let lastile = tiles.at(-1), fulucnt = 0;
+    let lastile = tiles[tiles.length - 1], fulucnt = 0;
     let ret = {fans: [], fu: 0};
     if (huazhu(seat))
         return ret;
@@ -5202,7 +5204,7 @@ const calcFanGuobiao = (seat, zimo) => {
     }
 
     let tiles = player_tiles[seat];
-    let lastile = tiles.at(-1), fulucnt = 0;
+    let lastile = tiles[tiles.length-1], fulucnt = 0;
     let ret = {fans: [], fu: 0};
     let cnt = [];
     for (let i = C1m; i <= C0s; i++) // 注意这里是 C0s 而不是 C7z, 是因为下面 dfs 要用到 nxt2, 需要从 C7z 扩展到 C0s
@@ -6642,8 +6644,8 @@ let addChiPengGang = (seat, split_tiles, froms, type, liqi, tile_states) => {
             tingpais: is_heqie_mode() ? [] : calcTingpai(seat),
             tile_states: tile_states,
             muyu: is_muyu() ? JSON.parse(JSON.stringify(muyu)) : undefined,
-            yongchang: is_yongchang() ? JSON.parse(JSON.stringify(yongchang_data[froms.at(-1)])) : undefined,
-            hun_zhi_yi_ji_info: is_hunzhiyiji() && hunzhiyiji_info[seat].liqi ? JSON.parse(JSON.stringify(hunzhiyiji_info[froms.at(-1)])) : undefined,
+            yongchang: is_yongchang() ? JSON.parse(JSON.stringify(yongchang_data[froms[froms.length - 1]])) : undefined,
+            hun_zhi_yi_ji_info: is_hunzhiyiji() && hunzhiyiji_info[seat].liqi ? JSON.parse(JSON.stringify(hunzhiyiji_info[froms[froms.length - 1]])) : undefined,
         }
     })));
     calcXun();
@@ -7592,6 +7594,8 @@ const views_pool = {}, invalid_views = {
         600114,  // あやまらないよ！
         600115,  // 双聖戦優勝
         600122,  // 麒麟位2025
+        600133,  // Limited Title
+        600136,  // チームシリウス
     ],
 };
 

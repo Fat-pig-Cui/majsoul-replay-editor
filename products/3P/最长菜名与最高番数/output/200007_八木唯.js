@@ -4,11 +4,11 @@ clearProject();
 // 最后一局闲家的最长菜名(15条55番)
 
 player_datas[0].nickname = '八木唯-契约';
-player_datas[1].nickname = '四方雀者';
-player_datas[2].nickname = '异想烂漫';
+player_datas[1].nickname = '异想烂漫';
+player_datas[2].nickname = '云踪侠影';
 player_datas[0].avatar_id = 400702;
-player_datas[1].avatar_id = 400707;
-player_datas[2].avatar_id = 400708;
+player_datas[1].avatar_id = 400708;
+player_datas[2].avatar_id = 400709;
 
 player_datas[0].views = player_datas[1].views = player_datas[2].views = [
     {slot: 6, item_id: 30580007}, // 动态桌布-星间飞行

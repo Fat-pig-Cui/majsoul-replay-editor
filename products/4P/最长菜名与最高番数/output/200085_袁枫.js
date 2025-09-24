@@ -3,11 +3,11 @@ clearProject();
 player_datas[0].nickname = '袁枫-契约';
 player_datas[1].nickname = '袁枫';
 player_datas[2].nickname = '袁枫-契约';
-player_datas[3].nickname = '袁枫';
+player_datas[3].nickname = '云踪侠影';
 player_datas[0].avatar_id = 408502;
 player_datas[1].avatar_id = 408501;
 player_datas[2].avatar_id = 408502;
-player_datas[3].avatar_id = 408501;
+player_datas[3].avatar_id = 408503;
 
 setConfig({
     category: 1,

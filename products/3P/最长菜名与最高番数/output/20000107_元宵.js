@@ -5,10 +5,10 @@ clearProject();
 
 player_datas[0].nickname = '元宵-契约';
 player_datas[1].nickname = '元宵';
-player_datas[2].nickname = '元宵-契约';
+player_datas[2].nickname = '云踪侠影';
 player_datas[0].avatar_id = 40010702;
 player_datas[1].avatar_id = 40010701;
-player_datas[2].avatar_id = 40010702;
+player_datas[2].avatar_id = 40010703;
 
 // 头像框-竹福滚滚
 player_datas[0].avatar_frame = player_datas[1].avatar_frame = player_datas[2].avatar_frame = 30550022;
