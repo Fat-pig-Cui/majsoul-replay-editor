@@ -24,7 +24,7 @@
 [template_branch.js](template_branch.js) 是 [template.js](template.js) 的扩展版, 目前看来只适合一姬
 
 此外, template_branch.js 中有不少名字无法正常显示,
-这里需要借助 [Majsoul Plus](https://github.com/MajsoulPlus/majsoul-plus),
+这里需要借助 [雀魂Plus](https://github.com/MajsoulPlus/majsoul-plus),
 详见 [报菜名界面加入无法显示的汉字](../../../using_MJSP/报菜名界面加入无法显示的汉字.md))
 
 ## template.js 目录

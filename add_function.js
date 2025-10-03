@@ -7,7 +7,7 @@
 'use strict';
 
 /**
- * editfunction 实现了以下功能:
+ * editFunction 实现了以下功能:
  * 1. 血流成河模式
  * 2. 开立直开牌
  * 3. 拔北可以拔其他牌, 且国标补花不播放语音
@@ -15,7 +15,7 @@
  * 5. 明杠, 暗杠后立即显示听牌变化
  * 6. 国标麻将错和
  */
-function editfunction() {
+function editFunction() {
     // ActionDiscardTile 改动: 添加 kailiqi
     view.ActionDiscardTile.record = function (K, U) {
         void 0 === U && (U = 0),
@@ -923,12 +923,12 @@ function editfunction() {
 }
 
 /**
- * editfunction2 实现了以下功能:
+ * editFunction2 实现了以下功能:
  * 1. 二人麻将牌山的显示
  * 2. 国标不显示王牌
  * 3. 血流成河不计算拔牌数
  */
-function editfunction2() {
+function editFunction2() {
     // 牌谱界面牌山信息
     uiscript.UI_Replay.Inst.page_paishan.setInfo = function () {
         if (!this.noinfo) {

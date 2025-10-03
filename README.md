@@ -13,7 +13,7 @@ B站视频教程(偏过时): [【雀魂】如何自制牌谱回放](https://www.
 
 ## 使用方法
 
-### 查看样例
+### 快速上手
 
 打开 [main.js](main.js) 和 [examples](examples) 文件夹或 [products](products)
 文件夹下的任一牌谱回放js文件(如 [demo.js](examples/demo.js))
@@ -120,11 +120,6 @@ B站视频教程(偏过时): [【雀魂】如何自制牌谱回放](https://www.
 
 5. 更多牌谱详见 [products](products) 文件夹, 也欢迎读者根据灵感制作自己的牌谱
 
-## 演示截图(更多截图可见最后)
-
-![doc/pic/img01.jpg](doc/pic/img01.jpg)
-![doc/pic/img02.jpg](doc/pic/img02.jpg)
-
 ## TODO(欢迎contribute)
 
 - 关于GUI(图形化用户界面): 有玩家反馈写代码门槛过高, 能否搞个GUI. 但目前有以下因素导致短期内无法实现:
@@ -158,17 +153,21 @@ B站视频教程(偏过时): [【雀魂】如何自制牌谱回放](https://www.
 
    目前原作者已很少接触雀魂, 故相关问题尽量找我
 
-5. github 是本仓库唯一的发布平台, 开源协议 Apache 2.0
+5. Github 是本仓库唯一的发布平台, 开源协议 Apache 2.0
 
-## 实机截图
+## 演示截图
 
+- [demo.js](examples/demo.js)
+  ![doc/pic/img01.jpg](doc/pic/img01.jpg)
+- 段位场四麻理论最高番数
+  ![doc/pic/img02.jpg](doc/pic/img02.jpg)
 - [【雀魂自制牌谱】一姬纯享版报菜名 升级版](https://www.bilibili.com/video/BV1w96LYWEzR)
   ![doc/pic/img03.jpg](doc/pic/img03.jpg)
 - 天才麻将少女 名对局 宫永咲VS天江衣
   ![doc/pic/img04.jpg](doc/pic/img04.jpg)
 - MLeague 名场面 佐佐木寿人死亡二则
   ![doc/pic/img05.jpg](doc/pic/img05.jpg)
-- 真·字一色 (注意: 这里更改立绘使用到了 [Majsoul Plus](https://github.com/MajsoulPlus/majsoul-plus), 自制牌谱只实现了牌谱部分,
+- 真·字一色 (注意: 这里更改立绘使用到了 [雀魂Plus](https://github.com/MajsoulPlus/majsoul-plus), 自制牌谱只实现了牌谱部分,
   教程见 [README.md](using_MJSP/README.md))
   ![doc/pic/img06.jpg](doc/pic/img06.jpg)
 - 国标麻将不算花牌情况下理论最大牌型(有些番种名称无法正常显示的问题通过 Majsoul Plus 解决了,

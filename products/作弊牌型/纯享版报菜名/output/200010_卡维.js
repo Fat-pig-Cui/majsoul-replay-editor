@@ -50,7 +50,7 @@ huleOnePlayer = seat => {
     return {
         count: 64,
         doras: [doras[0]],
-        li_doras: li_doras,
+        li_doras: [],
         fans: fans,
         fu: 170,
         hand: player_tiles[seat].slice(),
@@ -102,7 +102,7 @@ huleOnePlayer = seat => {
     return {
         count: 64,
         doras: [doras[0]],
-        li_doras: li_doras,
+        li_doras: [],
         fans: fans,
         fu: 170,
         hand: player_tiles[seat].slice(),
@@ -154,7 +154,7 @@ huleOnePlayer = seat => {
     return {
         count: 64,
         doras: [doras[0]],
-        li_doras: li_doras,
+        li_doras: [],
         fans: fans,
         fu: 170,
         hand: player_tiles[seat].slice(),
@@ -206,7 +206,7 @@ huleOnePlayer = seat => {
     return {
         count: 64,
         doras: [doras[0]],
-        li_doras: li_doras,
+        li_doras: [],
         fans: fans,
         fu: 170,
         hand: player_tiles[seat].slice(),
@@ -253,7 +253,7 @@ huleOnePlayer = seat => {
     return {
         count: 6,
         doras: [doras[0]],
-        li_doras: li_doras,
+        li_doras: [],
         fans: fans,
         fu: 170,
         hand: player_tiles[seat].slice(),
@@ -300,7 +300,7 @@ huleOnePlayer = seat => {
     return {
         count: 6,
         doras: [doras[0]],
-        li_doras: li_doras,
+        li_doras: [],
         fans: fans,
         fu: 170,
         hand: player_tiles[seat].slice(),
@@ -352,7 +352,7 @@ huleOnePlayer = seat => {
     return {
         count: 64,
         doras: [doras[0]],
-        li_doras: li_doras,
+        li_doras: [],
         fans: fans,
         fu: 170,
         hand: player_tiles[seat].slice(),

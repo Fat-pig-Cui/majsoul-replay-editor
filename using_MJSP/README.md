@@ -2,7 +2,7 @@
 
 1. 下载并安装该issue下版本的雀魂Plus: https://github.com/MajsoulPlus/majsoul-plus/pull/128#issuecomment-873089143
 
-2. 运行雀魂Plus, 点击下图红框的按钮, 弹出 extension 目录, 返回到上一级 Majsoul Plus 目录, 找到 static 文件夹进入
+2. 运行雀魂Plus, 点击下图红框的按钮, 弹出 extension 目录, 返回到上一级雀魂Plus目录, 找到 static 文件夹进入
 
    ![pic/img01.jpg](pic/img01.jpg)
 

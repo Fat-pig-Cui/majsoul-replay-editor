@@ -1,6 +1,6 @@
 clearProject();
 
-// 2020雀魂TOP20, 其中的TOP3: '仓颉造字' https://www.bilibili.com/video/BV1BV411B7nw/?t=403
+// 2020雀魂TOP20, 其中的NO.3: '仓颉造字' https://www.bilibili.com/video/BV1BV411B7nw/?t=403
 
 player_datas[0].nickname = '珒';
 player_datas[1].nickname = '七海单推人';
