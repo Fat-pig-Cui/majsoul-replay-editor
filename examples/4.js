@@ -387,7 +387,7 @@ randomPaishan('123456789m', '8p');
 roundBegin();
 dingque('ssss');
 qiepai();
-while (paishan.length !== 0) {
+while (getLeftTileCnt() > 0) {
     mopai();
     qiepai();
 }

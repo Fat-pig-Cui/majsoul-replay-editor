@@ -43,7 +43,7 @@ for (let i = 0; i < 6; i++) {
     mopai();
 }
 hupai();
-for (let i = 62; i >= 0; i--) {
+for (let i = 0; i < 63; i++) {
     mopai();
     qiepai();
 }
