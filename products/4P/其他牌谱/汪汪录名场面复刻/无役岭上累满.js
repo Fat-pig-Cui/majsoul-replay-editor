@@ -34,9 +34,6 @@ randomPaishan('1m3p1s1m9m6m2p9s9m3m2s2p2p3p2s1s4s8p6m4z4p1p2m3p2z4p7m5z5s7s1p4p9
 roundBegin();
 qiepai();
 normalMoqie(18);
-huangpai();
-
-
 mingQiepai();
 normalMoqie(19);
 mingQiepai();

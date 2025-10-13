@@ -41,31 +41,31 @@ origin_qiepai = qiepai;
 qiepai = (seat, tile, is_liqi, f_moqie, anpai, bs_type) => {
     // 参数预处理
     function preprocess() {
-        let x = {}, mat = [seat, tile, is_liqi, f_moqie, anpai, bs_type];
-        for (let i in mat)
-            if (mat[i] === 'anpai')
-                x.anpai = mat[i];
-            else if (mat[i] === 'moqie' || mat[i] === 'shouqie')
-                x.f_moqie = mat[i];
-            else if (typeof mat[i] == 'number')
-                x.seat = mat[i];
-            else if (typeof mat[i] == 'boolean' || mat[i] === 'kailiqi')
-                x.is_liqi = mat[i];
-            else if (mat[i] instanceof Array && typeof mat[i][0] === 'number')
-                x.beishui_type = mat[i][0];
-            else if (typeof mat[i] == 'string')
-                x.tile = mat[i];
+        let x = {}, tmp = [seat, tile, is_liqi, f_moqie, anpai, bs_type];
+        for (let i in tmp)
+            if (tmp[i] === 'anpai')
+                x.anpai = tmp[i];
+            else if (tmp[i] === 'moqie' || tmp[i] === 'shouqie')
+                x.f_moqie = tmp[i];
+            else if (typeof tmp[i] == 'number')
+                x.seat = tmp[i];
+            else if (typeof tmp[i] == 'boolean' || tmp[i] === 'kailiqi')
+                x.is_liqi = tmp[i];
+            else if (tmp[i] instanceof Array && typeof tmp[i][0] === 'number')
+                x.beishui_type = tmp[i][0];
+            else if (typeof tmp[i] == 'string')
+                x.tile = tmp[i];
         return [x.seat, x.tile, x.is_liqi, x.f_moqie, x.anpai, x.beishui_type];
     }
 
     let beishui_type;
     [seat, tile, is_liqi, f_moqie, anpai, beishui_type] = preprocess();
 
-    lstaction_completion();
+    lstActionCompletion();
 
-    let lstname = getLstAction().name, lstseat = getLstAction().data.seat;
+    let lst_name = getLstAction().name;
     if (seat === undefined)
-        seat = lstseat;
+        seat = getLstAction().data.seat;
     if (is_liqi === undefined)
         is_liqi = false;
     if (is_beishuizhizhan() && beishui_type === undefined)
@@ -75,13 +75,20 @@ qiepai = (seat, tile, is_liqi, f_moqie, anpai, bs_type) => {
     // 如果 tile 参数原生不空, 且在手牌出现不止一次, 则一定是手切
     if (tile !== undefined && player_tiles[seat].indexOf(tile) !== player_tiles[seat].length - 1)
         moqie = false;
-    if (tile === undefined && discard_tiles[seat].length > 0)
+    if (tile === undefined && discard_tiles[seat].length > 0) {
         tile = discard_tiles[seat].shift();
-    if (tile === undefined || tile === '..')
-        tile = player_tiles[seat].at(-1);
-    moqie = moqie && player_tiles[seat].at(-1) === tile && lstname !== 'RecordNewRound' && lstname !== 'RecordChiPengGang';
+        if (tile === '..')
+            tile = undefined;
+    }
+    if (tile === undefined)
+        tile = player_tiles[seat][player_tiles[seat].length - 1];
+    moqie = moqie && player_tiles[seat][player_tiles[seat].length - 1] === tile && lst_name !== 'RecordNewRound' && lst_name !== 'RecordChiPengGang';
     if (is_heqie_mode())
         moqie = f_moqie === 'moqie';
+
+    // 切牌解除同巡振听
+    pretongxunzt[seat] = tongxunzt[seat] = false;
+    updateZhenting();
 
     // 确定立直类型
     let is_wliqi = false, is_kailiqi = false;
@@ -155,7 +162,7 @@ qiepai = (seat, tile, is_liqi, f_moqie, anpai, bs_type) => {
     }
 
     // 完成上个操作的后续
-    function lstaction_completion() {
+    function lstActionCompletion() {
         // 包杠失效
         baogang_seat = -1;
 
@@ -166,7 +173,7 @@ qiepai = (seat, tile, is_liqi, f_moqie, anpai, bs_type) => {
             dora_cnt.bonus = dora_cnt.lastype = 0;
         }
     }
-}
+};
 
 // 修改点数变化
 origin_endHule = endHule;

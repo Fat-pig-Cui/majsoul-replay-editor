@@ -57,7 +57,7 @@ hupai();
 setRound(0, 0, 0);
 
 // 零本场二位最低分: -96000
-setScores(105000, 0, 0);
+setScores([105000, 0, 0]);
 begin_tiles[0] = '11122233344466z';
 begin_tiles[1] = '1112340678999p';
 begin_tiles[2] = '1112340678999s';

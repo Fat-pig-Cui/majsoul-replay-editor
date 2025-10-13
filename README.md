@@ -167,7 +167,7 @@ B站视频教程(偏过时): [【雀魂】如何自制牌谱回放](https://www.
   ![doc/pic/img04.jpg](doc/pic/img04.jpg)
 - MLeague 名场面 佐佐木寿人死亡二则
   ![doc/pic/img05.jpg](doc/pic/img05.jpg)
-- 真·字一色 (注意: 这里更改立绘使用到了 [雀魂Plus](https://github.com/MajsoulPlus/majsoul-plus), 自制牌谱只实现了牌谱部分,
+- 真·字一色 (注意: 这里更改立绘使用到了 [雀魂Plus](https://github.com/MajsoulPlus/majsoul-plus) , 自制牌谱只实现了牌谱部分,
   教程见 [README.md](using_MJSP/README.md))
   ![doc/pic/img06.jpg](doc/pic/img06.jpg)
 - 国标麻将不算花牌情况下理论最大牌型(有些番种名称无法正常显示的问题通过 雀魂Plus 解决了,
