@@ -38,7 +38,7 @@ let begin_tiles;
 // 初始化必要变量
 const clearProject = () => {
     if (view.DesktopMgr.Inst && view.DesktopMgr.Inst.active)
-        throw new Error('请退出当前牌谱后再载入自制牌谱');
+        throw new Error('clearProject: 请退出当前牌谱后再载入自制牌谱');
 
     game_begin_once = true;
     player_datas = [
@@ -87,10 +87,10 @@ const clearProject = () => {
  *          - chuanma: 是否是赤羽之战模式, 默认否
  *          - _qieshangmanguan: 是否切上满贯, 默认否
  *          - _guobiao: 是否为国标模式, 默认否
- * @param {{category: number, meta: {[mode_id]: number, [room_id]: number}, mode: {mode: number, detail_rule: {}}}} conf
+ * @param {{category: number, meta: {[mode_id]: number, [room_id]: number}, mode: {mode: number, detail_rule: {}}}} c
  */
-const setConfig = conf => {
-    config = conf;
+const setConfig = c => {
+    config = c;
 };
 
 /**
@@ -438,7 +438,7 @@ let mopai = (seat, tile, index) => {
         while (huled[seat])
             seat = (seat + 1) % player_cnt;
         if (isNaN(seat))
-            throw new Error(roundInfo() + `mopai: 无法判断谁摸牌, getLstAction().name: ${lst_name}`);
+            throw new Error(roundInfo() + ` mopai: 无法判断谁摸牌, getLstAction().name: ${lst_name}`);
     }
     if (tile === undefined && deal_tiles[seat].length > 0) {
         tile = deal_tiles[seat].shift();
@@ -652,7 +652,7 @@ let qiepai = (seat, tile, is_liqi, f_moqie, anpai, bs_type) => {
     else {
         let index = player_tiles[seat].lastIndexOf(tile);
         if (index === -1) // 要切的牌手牌中没有, 则报错
-            throw new Error(roundInfo() + `seat: ${seat} 手牌不存在要切的牌: ${tile}`);
+            throw new Error(roundInfo() + ` qiepai: seat: ${seat} 手牌不存在要切的牌: ${tile}`);
         player_tiles[seat].splice(index, 1);
     }
     player_tiles[seat].sort(cmp);
@@ -756,10 +756,10 @@ let mingpai = (seat, tiles, jifei) => {
                     return;
         }
 
-        throw new Error(roundInfo() + `seat: ${from} 的切牌: ${tile} 没有玩家能 mingpai`);
+        throw new Error(roundInfo() + ` mingpai: seat: ${from} 的切牌: ${tile} 没有玩家能 mingpai`);
     }
     if (tiles.length <= 1)
-        throw new Error(roundInfo() + `seat: ${from} 的切牌: ${tile} 后的 mingpai tiles 参数不对: ${tiles}`);
+        throw new Error(roundInfo() + ` mingpai: seat: ${from} 的切牌: ${tile} 后的 mingpai tiles 参数不对: ${tiles}`);
 
     // 鸣出去的牌是否为明牌
     let tile_states = [];
@@ -933,14 +933,14 @@ let zimingpai = (seat, tile, type, jifei) => {
     if (seat === undefined) {
         seat = getLstAction().data.seat;
         if (seat === undefined)
-            throw new Error(roundInfo() + `无法判断谁 zimingpai, getLstAction().name: ${getLstAction().name}`)
+            throw new Error(roundInfo() + ` zimingpai: 无法判断谁 zimingpai, getLstAction().name: ${getLstAction().name}`)
     }
     if (jifei === undefined)
         jifei = false;
     if (tile === undefined) {
         if (trying())
             return;
-        throw new Error(roundInfo() + `seat: ${seat}, xun: ${xun[seat].length}: 玩家无法 zimingpai (没给 tile 情况下)`);
+        throw new Error(roundInfo() + ` zimingpai: seat: ${seat}, xun: ${xun[seat].length}: 玩家无法 zimingpai (没给 tile 情况下)`);
     }
 
     // 上个操作补完: 开杠翻指示牌
@@ -1065,7 +1065,7 @@ let zimingpai = (seat, tile, type, jifei) => {
         if (jifei)
             roundEnd();
     } else
-        throw new Error(roundInfo() + `seat: ${seat}, xun: ${xun[seat].length}: 玩家无法 zimingpai (给定 tile: ${tile} 情况下)`);
+        throw new Error(roundInfo() + ` zimingpai: seat: ${seat}, xun: ${xun[seat].length}: 玩家无法 zimingpai (给定 tile: ${tile} 情况下)`);
 
     /**
      * seat 号玩家尝试自家鸣牌, 按照顺序: 国标补花, 拔北, 拔西, 暗杠, 加杠
@@ -1183,7 +1183,7 @@ let hupai = (all_seats, type) => {
             }
         }
         if (all_seats.length === 0)  // 没给参数 seat 的情况下, 无人能正常和牌
-            throw new Error(roundInfo() + 'hupai 没给 seat 参数无人能正常和牌');
+            throw new Error(roundInfo() + ' hupai: 没给 seat 参数无人能正常和牌');
     }
 
     // all_seats 重新排序, 按照放铳家逆时针顺序
@@ -1558,7 +1558,7 @@ let liuju = liuju_type => {
 
         roundEnd();
     } else
-        throw new Error(roundInfo() + '不符合任何途中流局条件');
+        throw new Error(roundInfo() + ' liuju: 不符合任何途中流局条件');
 
     // 九种九牌
     function jiuZhongJiuPai() {
@@ -1681,7 +1681,7 @@ const dingque = x => {
  */
 let kaipai = seat => {
     if (typeof seat != 'number')
-        throw new Error(roundInfo() + `kaipai: 暗夜之战开牌必须指定玩家, seat: ${seat}`);
+        throw new Error(roundInfo() + ` kaipai: 暗夜之战开牌必须指定玩家, seat: ${seat}`);
     if (getLstAction().name === 'RecordRevealTile') {
         let tile_seat = getLstAction().data.seat;
         let tile = getLstAction().data.tile;
@@ -1704,7 +1704,7 @@ let kaipai = seat => {
  */
 let kaipaiLock = seat => {
     if (typeof seat != 'number')
-        throw new Error(roundInfo() + `kaipaiLock: 暗夜之战开牌必须指定玩家, seat: ${seat}`);
+        throw new Error(roundInfo() + ` kaipaiLock: 暗夜之战开牌必须指定玩家, seat: ${seat}`);
     if (getLstAction().name === 'RecordRevealTile') {
         let tile_seat = getLstAction().data.seat;
         scores[seat] -= 2000;
@@ -1718,7 +1718,7 @@ let kaipaiLock = seat => {
         addLockTile(tile_seat, 1);
 
     } else
-        throw new Error(roundInfo() + `kaipaiLock: 暗夜之战开牌的前提是有人刚暗牌, getLstAction().name: ${getLstAction().name}`);
+        throw new Error(roundInfo() + ` kaipaiLock: 暗夜之战开牌的前提是有人刚暗牌, getLstAction().name: ${getLstAction().name}`);
 };
 
 // ========================================================================
@@ -1788,7 +1788,7 @@ const normalMoqie = tile_cnt => {
         mopai();
         qiepai(tile_cnt);
     } else
-        throw new Error(roundInfo() + `normalMoqie: tile_cnt 参数不合规: ${tile_cnt}`);
+        throw new Error(roundInfo() + ` normalMoqie: tile_cnt 参数不合规: ${tile_cnt}`);
 };
 
 /**
@@ -1807,7 +1807,7 @@ const moqieLiqi = tile_cnt => {
         mopai();
         qiepai(tile_cnt, true);
     } else
-        throw new Error(roundInfo() + `moqieLiqi: tile_cnt 参数不合规: ${tile_cnt}`);
+        throw new Error(roundInfo() + ` moqieLiqi: tile_cnt 参数不合规: ${tile_cnt}`);
 };
 
 /**
@@ -1826,7 +1826,7 @@ const comboMopai = tile_cnt => {
         zimingpai(tile_cnt);
         mopai();
     } else
-        throw new Error(roundInfo() + `comboMopai: tile_cnt 参数不合规: ${tile_cnt}`);
+        throw new Error(roundInfo() + ` comboMopai: tile_cnt 参数不合规: ${tile_cnt}`);
 };
 
 /**
@@ -1851,7 +1851,7 @@ const mingQiepai = tls_cnt => {
             qiepai(tls_cnt);
         }
     } else
-        throw new Error(roundInfo() + `mingQiepai: tls_cnt 参数不合规: ${tls_cnt}`);
+        throw new Error(roundInfo() + ` mingQiepai: tls_cnt 参数不合规: ${tls_cnt}`);
 };
 
 /**
@@ -1863,7 +1863,7 @@ const zimoHu = (flag = false) => {
         mopai();
         hupai(flag);
     } else
-        throw new Error(roundInfo() + `zimoHu: flag 参数不合规: ${flag}`);
+        throw new Error(roundInfo() + ` zimoHu: flag 参数不合规: ${flag}`);
 };
 
 // 便捷函数: 摸切到荒牌流局
@@ -1900,7 +1900,7 @@ const moqieLiuju = () => {
  */
 const judgeTile = (tile, type) => {
     if (typeof tile != 'string' || tile.length === 1)
-        throw new Error(roundInfo() + `judgeTile: tile 格式不合规: ${tile}`);
+        throw new Error(roundInfo() + ` judgeTile: tile 格式不合规: ${tile}`);
     if (tile === Tbd)
         return true;
     let x = tile2Int(tile);
@@ -1936,7 +1936,7 @@ const judgeTile = (tile, type) => {
         case 'tuibudao':
             return x === 10 || x === 11 || x === 12 || x === 13 || x === 14 || x === 17 || x === 18 || x === 20 || x === 22 || x === 23 || x === 24 || x === 26 || x === 27 || x === 32;
         default:
-            throw new Error(roundInfo() + `judgeTile: type 格式不合规: ${type}`);
+            throw new Error(roundInfo() + ` judgeTile: type 格式不合规: ${type}`);
     }
 };
 
@@ -2275,7 +2275,7 @@ const getLstAction = (num = 1) => {
         }
         return actions[ret];
     } else
-        throw new Error(roundInfo() + 'actions 为空');
+        throw new Error(roundInfo() + ' actions 为空');
 };
 
 /**
@@ -2902,7 +2902,7 @@ const tile2Int = (tile, type = false, sptile = false) => {
         if (tile[1] === 'z')
             return 27 + parseInt(tile) + SPT_Offset;
     }
-    throw new Error(roundInfo() + `tile2Int 输入不合规: ${tile}`);
+    throw new Error(roundInfo() + ` tile2Int 输入不合规: ${tile}`);
 };
 
 /**
@@ -2945,7 +2945,7 @@ const int2Tile = (x, type = false) => {
         if (x === 37)
             return '0s' + SPT_Suf;
     }
-    throw new Error(roundInfo() + `int2Tile 输入不合规: ${x}`);
+    throw new Error(roundInfo() + ` int2Tile 输入不合规: ${x}`);
 };
 
 /**
@@ -9784,12 +9784,14 @@ const guobiaoFans = () => {
 // ========================================================================
 
 /**
- * 回放接口, 在 editOffline 中重写, 并在 resetReplay 中复原
+ * 回放接口, 其中
  *
- * 其中 OnChoosedPai, seat2LocalPosition, localPosition2Seat 在 add_function.js 中
+ * checkPaiPu 和 resetData 在 editOffline 中重写, 在 resetReplay 中复原
+ *
+ * OnChoosedPai, seat2LocalPosition, localPosition2Seat 在 add_function.js 中重写
  * @type {function}
  */
-var checkPaiPu, resetData, showRecord, showInfo_record, setFanFu, OnChoosedPai, seat2LocalPosition, localPosition2Seat;
+var checkPaiPu, resetData, OnChoosedPai, seat2LocalPosition, localPosition2Seat;
 
 // 使补充和优化函数只执行一次的控制变量
 let inst_once = true;
@@ -9870,12 +9872,6 @@ const editOffline = () => {
         checkPaiPu = GameMgr.Inst.checkPaiPu;
     if (resetData === undefined)
         resetData = uiscript.UI_Replay.prototype.resetData;
-    if (showRecord === undefined)
-        showRecord = uiscript.UI_Win.prototype.showRecord;
-    if (showInfo_record === undefined)
-        showInfo_record = uiscript.UI_Win.prototype._showInfo_record;
-    if (setFanFu === undefined)
-        setFanFu = uiscript.UI_Win.prototype.setFanFu;
     if (OnChoosedPai === undefined)
         OnChoosedPai = view.ViewPai.prototype.OnChoosedPai
     if (seat2LocalPosition === undefined)
@@ -9896,7 +9892,7 @@ const editOffline = () => {
     GameMgr.Inst.checkPaiPu = function (game_uuid, account_id, paipu_config) {
         try { // 添加下面
             if (all_data.actions.length === 0) {
-                console.error('没有载入自制牌谱, 不可查看, 若要查看真实牌谱, 请输入 resetReplay()');
+                console.error('GameMgr.Inst.checkPaiPu: 没有载入自制牌谱, 不可查看, 若要查看真实牌谱, 请输入 resetReplay()');
                 return;
             }
             if (inst_once) {
