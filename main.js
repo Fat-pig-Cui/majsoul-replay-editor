@@ -3083,13 +3083,15 @@ const lstLiqi2Liqi = (type = false) => {
                 liqi: lst_liqi.liqi,
                 yifa: get_field_spell_mode2() === 2 ? 3 : 1, // 幻境传说: 机会卡2
                 kai: lst_liqi.kai,
-                beishui_type: lst_liqi.beishui_type
+                beishui_type: lst_liqi.beishui_type,
+                xia_ke_shang: {score_coefficients: calcXiaKeShang()},
             };
             ret = {
                 seat: lst_liqi.seat,
                 liqibang: liqibang,
                 score: scores[lst_liqi.seat],
                 liqi_type_beishuizhizhan: lst_liqi.beishui_type,
+                xia_ke_shang: {score_coefficients: calcXiaKeShang()},
             };
         } else if (type)
             ret = {
@@ -3312,6 +3314,25 @@ const updateShoumoqie = seat => {
     }
 };
 
+/**
+ * 下克上, 返回各家的打点倍数
+ */
+const calcXiaKeShang = () => {
+    let times = [];
+    for (let i = 0; i < player_cnt; i++)
+        times[i] = 1;
+    for (let i = 0; i < player_cnt; i++)
+        if (is_xiakeshang() && scores[i] < 30000) {
+            if (scores[i] < 10000)
+                times[i] = 4;
+            else if (scores[i] < 20000)
+                times[i] = 3;
+            else
+                times[i] = 2;
+        }
+    return times;
+};
+
 // ========================================================================
 
 /**
@@ -3372,6 +3393,9 @@ let huleOnePlayer = seat => {
     let tianming_bonus = 1;
     if (is_tianming())
         tianming_bonus = calcTianming(seat, zimo);
+    let xia_ke_shang_coefficient = calcXiaKeShang()[seat];
+
+    let extra_times = tianming_bonus * xia_ke_shang_coefficient;
     // -------------------------------------------
     let zhahu = false;
     if (calcHupai(player_tiles[seat]) === 0 || sudian === -2000)
@@ -3433,10 +3457,10 @@ let huleOnePlayer = seat => {
     }
 
     [point_rong, point_sum, point_zimo_qin, point_zimo_xian] = calcPoint(sudian);
-    point_rong = qieshang(point_rong) * tianming_bonus;
-    point_sum = qieshang(point_sum) * tianming_bonus;
-    point_zimo_qin = qieshang(point_zimo_qin) * tianming_bonus;
-    point_zimo_xian = qieshang(point_zimo_xian) * tianming_bonus;
+    point_rong = qieshang(point_rong) * extra_times;
+    point_sum = qieshang(point_sum) * extra_times;
+    point_zimo_qin = qieshang(point_zimo_qin) * extra_times;
+    point_zimo_xian = qieshang(point_zimo_xian) * extra_times;
 
     // 有包牌
     if (baopai[seat].length > 0) {
@@ -3448,9 +3472,9 @@ let huleOnePlayer = seat => {
 
         let feibao_rong, feibao_zimo_qin, feibao_zimo_xian;
         [feibao_rong, , feibao_zimo_qin, feibao_zimo_xian] = calcPoint((val - baoval) * yiman_sudian);
-        feibao_rong = qieshang(feibao_rong) * tianming_bonus;
-        feibao_zimo_qin = qieshang(feibao_zimo_qin) * tianming_bonus;
-        feibao_zimo_xian = qieshang(feibao_zimo_xian) * tianming_bonus;
+        feibao_rong = qieshang(feibao_rong) * extra_times;
+        feibao_zimo_qin = qieshang(feibao_zimo_qin) * extra_times;
+        feibao_zimo_xian = qieshang(feibao_zimo_xian) * extra_times;
 
         if (zimo) {
             // 包牌部分, 包牌家全包
@@ -3459,11 +3483,11 @@ let huleOnePlayer = seat => {
                     if (i === seat || huled[i])
                         continue;
                     if (i === ju || seat === ju) {
-                        delta_point = baopai[seat][j].val * 2 * yiman_sudian * muyu_times[i] * muyu_times[seat] * tianming_bonus;
+                        delta_point = baopai[seat][j].val * 2 * yiman_sudian * muyu_times[i] * muyu_times[seat] * extra_times;
                         delta_scores[baopai[seat][j].seat] -= delta_point;
                         delta_scores[seat] += delta_point;
                     } else {
-                        delta_point = baopai[seat][j].val * yiman_sudian * muyu_times[i] * muyu_times[seat] * tianming_bonus;
+                        delta_point = baopai[seat][j].val * yiman_sudian * muyu_times[i] * muyu_times[seat] * extra_times;
                         delta_scores[baopai[seat][j].seat] -= delta_point;
                         delta_scores[seat] += delta_point;
                     }
@@ -3489,7 +3513,7 @@ let huleOnePlayer = seat => {
         } else {
             // 包牌部分
             for (let j in baopai[seat]) {
-                delta_point = baopai[seat][j].val * yiman_sudian * 2 * muyu_times[fangchong_seat] * muyu_times[seat] * tianming_bonus;
+                delta_point = baopai[seat][j].val * yiman_sudian * 2 * muyu_times[fangchong_seat] * muyu_times[seat] * extra_times;
                 if (qinjia)
                     delta_point *= 1.5;
                 delta_scores[baopai[seat][j].seat] -= delta_point;
@@ -3591,6 +3615,8 @@ let huleOnePlayer = seat => {
     }
     if (is_tianming())
         ret.tianming_bonus = tianming_bonus;
+    if (is_xiakeshang())
+        ret.xia_ke_shang_coefficient = xia_ke_shang_coefficient;
     if (is_xuezhandaodi() || is_wanxiangxiuluo() || player_cnt === 2)
         ret.dadian = dadian;
     player_tiles[seat].pop();
@@ -6534,6 +6560,7 @@ let addNewRound = (left_tile_count, fake_hash_code, opens, is_sha256) => {
             muyu: is_muyu() ? JSON.parse(JSON.stringify(muyu)) : undefined,
             md5: !is_sha256 ? fake_hash_code : undefined,
             sha256: is_sha256 ? fake_hash_code : undefined,
+            xia_ke_shang: is_xiakeshang() ? {score_coefficients: calcXiaKeShang()} : undefined,
         }
     })));
     calcXun();
@@ -7192,6 +7219,12 @@ const is_wanxiangxiuluo = () => config.mode.detail_rule.wanxiangxiuluo_mode;
  * @returns {boolean}
  */
 const is_beishuizhizhan = () => config.mode.detail_rule.beishuizhizhan_mode;
+
+/**
+ * 是否为下克上模式
+ * @returns {boolean}
+ */
+const is_xiakeshang = () => config.mode.detail_rule.amusement_switches instanceof Array && config.mode.detail_rule.amusement_switches.indexOf(18) > -1;
 
 /**
  * 是否为血流成河模式
@@ -10156,6 +10189,8 @@ const optimizeFunction = () => {
                 text += '万象修罗';
             else if (x.beishuizhizhan_mode)
                 text += '背水之战';
+            else if (x.amusement_switches instanceof Array && x.amusement_switches.indexOf(18) > -1)
+                text += '下克上';
             else if (x._random_views || x._random_skin)
                 text = '随机装扮';
             else
@@ -10518,6 +10553,21 @@ const optimizeFunction = () => {
                         }, 250);
                 }));
         }
+        if (this.xiakeshang.visible = !1,
+            view.DesktopMgr.Inst.isTargetSpecialMode(18)) {
+            var k = !1;
+            K.xia_ke_shang_coefficient && (k = !0),
+            k && (m += 700,
+                this.timerManager.addTimerOnce(m, function() {
+                    z.xiakeshang.visible = !0,
+                        z.xiakeshang.alpha = 0,
+                        z.xiakeshang.skin = game.Tools.localUISrc('myres/mjdesktop/xiakeshang_result' + K.xia_ke_shang_coefficient + '.png'),
+                        z.tweenManager.addTweenTo(z.xiakeshang, {
+                            alpha: 1
+                        }, 250);
+                }));
+        }
+
         if (view.DesktopMgr.Inst.mode === view.EMJMode.play && K.seat === view.DesktopMgr.Inst.seat && K.mode <= 1 && uiscript.UI_Activity.activity_is_running(uiscript.UI_Activity_DuanWu_Point.activity_id)) {
             for (var S = false, j = 0; j < view.DesktopMgr.Inst.player_datas.length; j++) {
                 var _ = view.DesktopMgr.Inst.player_datas[j];
@@ -10676,6 +10726,14 @@ const optimizeFunction = () => {
                 var V = (view.DesktopMgr.Inst.muyu_info.seat - view.DesktopMgr.Inst.index_ju + view.DesktopMgr.Inst.player_count) % view.DesktopMgr.Inst.player_count;
                 this.muyu.skin = game.Tools.localUISrc('myres/mjdesktop/muyu_seat' + V + '.png');
             }
+        }
+        if (this.xiakeshang.visible = !1,
+            view.DesktopMgr.Inst.isTargetSpecialMode(18)) {
+            var r = !1;
+            K.xia_ke_shang_coefficient && (r = !0),
+            r && (this.xiakeshang.visible = !0,
+                this.xiakeshang.alpha = 1,
+                this.xiakeshang.skin = game.Tools.localUISrc('myres/mjdesktop/xiakeshang_result' + K.xia_ke_shang_coefficient + '.png'));
         }
         this.count_down.text = '',
             this.btn_confirm.visible = true,
