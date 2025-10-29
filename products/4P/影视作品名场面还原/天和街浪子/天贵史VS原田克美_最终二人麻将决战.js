@@ -37,7 +37,7 @@ setConfig({
 });
 
 // qiepai 去掉暗牌需要支付 1000 点和其他冗余判断
-origin_qiepai = qiepai;
+let origin_qiepai = qiepai;
 qiepai = (seat, tile, is_liqi, f_moqie, anpai, bs_type) => {
     // 参数预处理
     function preprocess() {
@@ -176,7 +176,7 @@ qiepai = (seat, tile, is_liqi, f_moqie, anpai, bs_type) => {
 };
 
 // 修改点数变化
-origin_endHule = endHule;
+let origin_endHule = endHule;
 endHule = hule_info => {
     delta_scores = [12300, 0, 0, 0];
     scores = [21500, 0, 20300, 0];

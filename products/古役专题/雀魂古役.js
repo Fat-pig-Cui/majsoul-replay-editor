@@ -15,7 +15,7 @@ setConfig({
     mode: {
         mode: 1,
         detail_rule: {
-            _guyi_mode: true,
+            guyi_mode: true,
             init_point: 200000,
         }
     }

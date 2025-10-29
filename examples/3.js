@@ -33,7 +33,7 @@ begin_tiles[0] = '1112378999m5z406p';
 begin_tiles[1] = '1112378999s555s';
 begin_tiles[2] = '11123p78999p406m';
 begin_tiles[3] = '4556m345567p406s';
-setPaishan('555555z5m5555555555555555555555555555555555555555555555555555555555555555555555555555z');
+setPaishan('555555z5m' + '5z'.repeat(76));
 roundBegin();
 huanpai(['406p', '555s', '406m', '406s'], 1);
 qiepai('5z');

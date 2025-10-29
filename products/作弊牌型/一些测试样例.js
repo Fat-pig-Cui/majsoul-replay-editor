@@ -22,11 +22,11 @@ setConfig({
 });
 
 // 牌全是6z, 旧版演示视频: https://www.bilibili.com/video/BV1xZmZYKEbz
-begin_tiles[0] = '66666666666666z';
-begin_tiles[1] = '6666666666666z';
-begin_tiles[2] = '6666666666666z';
-begin_tiles[3] = '6666666666666z';
-setPaishan('66666666666666666666666666666666666666666666666666666666666666666666666666666666666z');
+begin_tiles[0] = '6z'.repeat(14);
+begin_tiles[1] = '6z'.repeat(13);
+begin_tiles[2] = '6z'.repeat(13);
+begin_tiles[3] = '6z'.repeat(13);
+setPaishan('6z'.repeat(83));
 roundBegin();
 comboMopai(4);
 hupai();

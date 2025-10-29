@@ -47,12 +47,16 @@ B站视频教程(偏过时): [【雀魂】如何自制牌谱回放](https://www.
 
 [字典](doc/0_字典.md) 是用来查阅的, 建议编辑牌谱时使用, [字典_template](doc/字典_template.md) 是生成字典的模版, 无需阅读
 
+---
+
 至于 code.js , 这是初步解混淆后的雀魂核心js文件, 与本仓库关系不大, 放在这里仅方便查阅(文件很大, 不要轻易打开),
 解混淆的方法见另一个仓库: [misc-code](https://github.com/Fat-pig-Cui/misc-code)
 
+为了便于维护, 最近正在用 TypeScript 重写项目, 目前的 main.js 和 [main.d.ts](main.d.ts) 都由 [main.ts](main.ts) 编译而来, 
+有很多不完善的地方, 这里暂存了老版本: [main_old.js](main_old.js)
+
 使用过程中, 如果存在 bug 之类的不符合预期的情况, 可以提 issue,
-或在B站联系我: [肥pig崔的B站空间](https://space.bilibili.com/372365985),
-内容比较多的话还可以发邮件到我的邮箱说明: **chubbypig@qq.com**
+也可以直接在B站联系我: [肥pig崔的B站空间](https://space.bilibili.com/372365985)
 
 另外, 如果有意向编写自制牌谱并且关注新功能, 或者做贡献, 则可以 fork 本仓库, 方便版本控制
 

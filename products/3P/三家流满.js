@@ -19,7 +19,7 @@ setConfig({
 begin_tiles[0] = '2222333444555p8s';
 begin_tiles[1] = '5566667777888s';
 begin_tiles[2] = '2223333444405s';
-randomPaishan('YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY', 'Y043p');
+randomPaishan('Y'.repeat(50), 'Y043p');
 roundBegin();
 comboMopai(4);
 qiepai();

@@ -1,8 +1,11 @@
 {
   "dependencies": {
+    "eslint": "^9.38.0",
     "flow-bin": "^0.278.0",
     "flow-remove-types": "^2.278.0",
-    "typescript": "^5.9.2"
+    "tsc": "^2.0.4",
+    "tslint": "^5.20.1",
+    "typescript": "^5.9.3"
   },
   "scripts": {
     "flow": "flow"

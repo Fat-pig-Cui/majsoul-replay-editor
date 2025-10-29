@@ -34,7 +34,7 @@ begin_tiles[0] = '1112340678999m5z';
 begin_tiles[1] = '1112340678999p';
 begin_tiles[2] = '1112340678999s';
 begin_tiles[3] = '1112223334447z';
-setPaishan('55555555555555555555555555555555555555555555555555555555555555555555555555555555555z');
+setPaishan('5z'.repeat(83));
 roundBegin();
 qiepai('5z');
 for (let i = 0; i < 69; i++) {

@@ -29,7 +29,7 @@ setConfig({
     }
 });
 
-origin_huleOnePlayer = huleOnePlayer;
+let origin_huleOnePlayer = huleOnePlayer;
 
 // 第1局
 huleOnePlayer = seat => {

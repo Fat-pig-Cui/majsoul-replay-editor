@@ -273,3 +273,93 @@
 
     huangpai();
 })();
+
+// // official
+// json = {
+//     player_count: 4,
+//     chang_ju_ben_num: [0, 0, 0],
+//     mainrole: 2,
+//     tiles: '0566m6p89s',
+//     lst_mopai: '',
+//     dora: ['0p'],
+//     paihe0: '3z9s1p2pg8m9p1z4s5mr',
+//     paihe1: '7z2z3m5z1sg1zg4zg4zg',
+//     paihe2: '9p7z6z2p8m4s4zg1mg',
+//     paihe3: '9p7zg9s7sg5sg4z4p7pg',
+//     fulu0: [],
+//     fulu1: [],
+//     fulu2: ['_555z', '_111z'],
+//     fulu3: [],
+// };
+//
+// // https://www.bilibili.com/opus/1100855183761473545
+// json = {
+//     player_count: 4,
+//     chang_ju_ben_num: [1, 0, 0],
+//     mainrole: 0,
+//     tiles: '34055m11346p406s',
+//     lst_mopai: '5p',
+//     dora: ['2z'],
+//     paihe0: '9m9p6z5z6zg8p9pg3zg',
+//     paihe1: '1s9s7z2z8m1z4mg3mg',
+//     paihe2: '4zg6z7m7mg9mg1p8pg6m',
+//     paihe3: '9m9mg2z1p1zg6z5p4z',
+//     fulu0: [],
+//     fulu1: [],
+//     fulu2: [],
+//     fulu3: [],
+// };
+//
+// // https://www.bilibili.com/opus/1096031042145353764
+// json = {
+//     player_count: 4,
+//     chang_ju_ben_num: [0, 2, 0],
+//     mainrole: 0,
+//     tiles: '2220m56p3066778s',
+//     lst_mopai: '4s',
+//     dora: ['7p'],
+//     paihe0: '7z2s5mg2zg3z3z9s2pg5zg',
+//     paihe1: '9s2z8s4s6m7mg1zg7zg4m',
+//     paihe2: '9m9mg4p4zg2zr1zg9sg6zg4zg4sg5zg',
+//     paihe3: '5z2sg1s1zg7p3m1pg6zg2pg1pg',
+//     fulu0: [],
+//     fulu1: [],
+//     fulu2: [],
+//     fulu3: [],
+// };
+//
+// // https://www.bilibili.com/opus/1090866786329427968
+// json = {
+//     player_count: 4,
+//     chang_ju_ben_num: [1, 2, 0],
+//     mainrole: 2,
+//     tiles: '446m456p44556s77z',
+//     lst_mopai: '0p',
+//     dora: ['6z', '1p'],
+//     paihe0: '8p5z5p9s6zg7s4zg5m9sg',
+//     paihe1: '1zg5zg3z2s1sg8sg1zg1sg7pr',
+//     paihe2: '4z1z9s8s2z7p8pg6pg',
+//     paihe3: '1z4zg2m8s9m2z9p2zg',
+//     fulu0: ['33_3z', '7777m'],
+//     fulu1: [],
+//     fulu2: [],
+//     fulu3: [],
+// };
+//
+// // https://www.bilibili.com/opus/1064906303211569152
+// json = {
+//     player_count: 4,
+//     chang_ju_ben_num: [0, 3, 0],
+//     mainrole: 0,
+//     tiles: '355m123405p3345s',
+//     lst_mopai: '5m',
+//     dora: ['5p'],
+//     paihe0: '9m4z8s8p7zg',
+//     paihe1: '4z1m9p7zg6z',
+//     paihe2: '1s9s7z1z3m',
+//     paihe3: '7z5z2m8s9sg9p',
+//     fulu0: [],
+//     fulu1: [],
+//     fulu2: ['_444z'],
+//     fulu3: [],
+// };
