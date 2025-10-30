@@ -1,9 +1,5 @@
 {
   "compilerOptions": {
-    "lib": [
-      "es6",
-      "dom"
-    ],
     "alwaysStrict": true,
     "declaration": true,
     "module": "commonjs",

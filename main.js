@@ -70,16 +70,16 @@ let randomPaishan = (ps_head = '', ps_back = '') => {
     for (let i = 0; i < player_cnt; i++) {
         let tiles_len = tiles[i].length;
         if (i === ju) {
-            if (tiles_len > Qin_tiles_num)
+            if (tiles_len > Constants.QIN_TILE_NUM)
                 console.warn(roundInfo() + `tiles${i} 作为亲家牌数量超过正常值: ${tiles_len}`);
-            else if (tiles_len < Qin_tiles_num)
-                console.log(roundInfo() + `tiles${i} 作为亲家牌数量不够: ${tiles_len}, 自动补全至${Qin_tiles_num}张`);
+            else if (tiles_len < Constants.QIN_TILE_NUM)
+                console.log(roundInfo() + `tiles${i} 作为亲家牌数量不够: ${tiles_len}, 自动补全至${Constants.QIN_TILE_NUM}张`);
         }
         else {
-            if (tiles_len > Xian_tiles_num)
+            if (tiles_len > Constants.XIAN_TILE_NUM)
                 console.warn(roundInfo() + `tiles${i} 作为闲家牌数量超过正常值: ${tiles_len}`);
-            else if (tiles_len < Xian_tiles_num)
-                console.log(roundInfo() + `tiles${i} 作为闲家牌数量不够: ${tiles_len}, 自动补全至${Xian_tiles_num}张`);
+            else if (tiles_len < Constants.XIAN_TILE_NUM)
+                console.log(roundInfo() + `tiles${i} 作为闲家牌数量不够: ${tiles_len}, 自动补全至${Constants.XIAN_TILE_NUM}张`);
         }
     }
     let aka_cnt = 3;
@@ -90,62 +90,62 @@ let randomPaishan = (ps_head = '', ps_back = '') => {
     else if (player_cnt === 2)
         aka_cnt = 1;
     let cnt = [];
-    cnt[Cbd] = 0;
-    for (let i = C1m; i <= C7z; i++)
+    cnt[Constants.CBD] = 0;
+    for (let i = Constants.TILE_NUM.C1m; i <= Constants.TILE_NUM.C7z; i++)
         cnt[i] = 4;
-    for (let i = C0m; i <= C0s; i++)
+    for (let i = Constants.TILE_NUM.C0m; i <= Constants.TILE_NUM.C0s; i++)
         cnt[i] = 0;
     if (player_cnt === 2) {
-        for (let i = C1p + 1; i <= C9p - 1; i++)
+        for (let i = Constants.TILE_NUM.C1p + 1; i <= Constants.TILE_NUM.C9p - 1; i++)
             cnt[i] = 0;
-        for (let i = C1s + 1; i <= C9s - 1; i++)
+        for (let i = Constants.TILE_NUM.C1s + 1; i <= Constants.TILE_NUM.C9s - 1; i++)
             cnt[i] = 0;
-        cnt[C5m] = 4 - aka_cnt;
-        cnt[C0m] = aka_cnt;
+        cnt[Constants.TILE_NUM.C5m] = 4 - aka_cnt;
+        cnt[Constants.TILE_NUM.C0m] = aka_cnt;
     }
     else if (player_cnt === 3) {
-        for (let i = C1m + 1; i <= C9m - 1; i++)
+        for (let i = Constants.TILE_NUM.C1m + 1; i <= Constants.TILE_NUM.C9m - 1; i++)
             cnt[i] = 0;
-        cnt[C5p] = cnt[C5s] = 4 - Math.floor(aka_cnt / 2);
-        cnt[C0p] = cnt[C0s] = Math.floor(aka_cnt / 2);
+        cnt[Constants.TILE_NUM.C5p] = cnt[Constants.TILE_NUM.C5s] = 4 - Math.floor(aka_cnt / 2);
+        cnt[Constants.TILE_NUM.C0p] = cnt[Constants.TILE_NUM.C0s] = Math.floor(aka_cnt / 2);
     }
     else {
         if (aka_cnt === 4) {
-            cnt[C5m] = cnt[C5s] = 3;
-            cnt[C5p] = cnt[C0p] = 2;
-            cnt[C0m] = cnt[C0s] = 1;
+            cnt[Constants.TILE_NUM.C5m] = cnt[Constants.TILE_NUM.C5s] = 3;
+            cnt[Constants.TILE_NUM.C5p] = cnt[Constants.TILE_NUM.C0p] = 2;
+            cnt[Constants.TILE_NUM.C0m] = cnt[Constants.TILE_NUM.C0s] = 1;
         }
         else {
-            cnt[C5m] = cnt[C5p] = cnt[C5s] = 4 - Math.floor(aka_cnt / 3);
-            cnt[C0m] = cnt[C0p] = cnt[C0s] = Math.floor(aka_cnt / 3);
+            cnt[Constants.TILE_NUM.C5m] = cnt[Constants.TILE_NUM.C5p] = cnt[Constants.TILE_NUM.C5s] = 4 - Math.floor(aka_cnt / 3);
+            cnt[Constants.TILE_NUM.C0m] = cnt[Constants.TILE_NUM.C0p] = cnt[Constants.TILE_NUM.C0s] = Math.floor(aka_cnt / 3);
         }
     }
     if (is_chuanma()) {
-        for (let i = C1z; i <= C7z; i++)
+        for (let i = Constants.TILE_NUM.C1z; i <= Constants.TILE_NUM.C7z; i++)
             cnt[i] = 0;
-        cnt[C0m] = cnt[C0p] = cnt[C0s] = 0;
-        cnt[C5m] = cnt[C5p] = cnt[C5s] = 4;
+        cnt[Constants.TILE_NUM.C0m] = cnt[Constants.TILE_NUM.C0p] = cnt[Constants.TILE_NUM.C0s] = 0;
+        cnt[Constants.TILE_NUM.C5m] = cnt[Constants.TILE_NUM.C5p] = cnt[Constants.TILE_NUM.C5s] = 4;
     }
     if (is_guobiao()) {
-        cnt[C0m] = cnt[C0p] = cnt[C0s] = 0;
-        cnt[C5m] = cnt[C5p] = cnt[C5s] = 4;
+        cnt[Constants.TILE_NUM.C0m] = cnt[Constants.TILE_NUM.C0p] = cnt[Constants.TILE_NUM.C0s] = 0;
+        cnt[Constants.TILE_NUM.C5m] = cnt[Constants.TILE_NUM.C5p] = cnt[Constants.TILE_NUM.C5s] = 4;
         if (is_guobiao_huapai() && typeof editFunction == 'function')
-            cnt[tile2Int(Huapai, true)] = 8;
+            cnt[tile2Int(Constants.HUAPAI, true)] = 8;
     }
     let cnt2 = [];
-    cnt2[Cbd] = 0;
-    for (let i = C1m; i <= C7z; i++)
+    cnt2[Constants.CBD] = 0;
+    for (let i = Constants.TILE_NUM.C1m; i <= Constants.TILE_NUM.C7z; i++)
         cnt2[i] = 3;
     if (is_mingjing()) {
-        for (let i = C1m; i <= C7z; i++)
+        for (let i = Constants.TILE_NUM.C1m; i <= Constants.TILE_NUM.C7z; i++)
             cnt[i] = 1;
-        cnt[C0m] = cnt[C0p] = cnt[C0s] = 0;
+        cnt[Constants.TILE_NUM.C0m] = cnt[Constants.TILE_NUM.C0p] = cnt[Constants.TILE_NUM.C0s] = 0;
     }
     if (is_wanxiangxiuluo())
-        cnt[Cbd] = 4;
+        cnt[Constants.CBD] = 4;
     for (let j = 0; j < player_cnt; j++)
         for (let i in tiles[j])
-            if (tiles[j][i].length > 2 && tiles[j][i][2] === SPT_Suf && is_mingjing())
+            if (tiles[j][i].length > 2 && tiles[j][i][2] === Constants.SPT_SUFFIX && is_mingjing())
                 cnt2[tile2Int(tiles[j][i])]--;
             else
                 cnt[tile2Int(tiles[j][i], true)]--;
@@ -160,12 +160,12 @@ let randomPaishan = (ps_head = '', ps_back = '') => {
     for (let j in para_tiles)
         for (let i in para_tiles[j])
             if (sp_type.indexOf(para_tiles[j][i][0]) === -1)
-                if (para_tiles[j][i].length === 3 && para_tiles[j][i][2] === SPT_Suf)
+                if (para_tiles[j][i].length === 3 && para_tiles[j][i][2] === Constants.SPT_SUFFIX)
                     cnt2[tile2Int(para_tiles[j][i], true)]--;
                 else
                     cnt[tile2Int(para_tiles[j][i], true)]--;
     let remain_tiles = [];
-    for (let i = C1m; i <= C0s; i++) {
+    for (let i = Constants.TILE_NUM.C1m; i <= Constants.TILE_NUM.C0s; i++) {
         for (let j = 0; j < cnt[i]; j++)
             remain_tiles.push(int2Tile(i));
         if (is_mingjing())
@@ -178,9 +178,9 @@ let randomPaishan = (ps_head = '', ps_back = '') => {
     for (let i = 0; i < player_cnt; i++)
         randomize(tiles[i]);
     for (let i = 0; i < player_cnt; i++) {
-        while (tiles[i].length < Xian_tiles_num)
+        while (tiles[i].length < Constants.XIAN_TILE_NUM)
             tiles[i].push(remain_tiles.pop());
-        if (i === ju && tiles[i].length < Qin_tiles_num)
+        if (i === ju && tiles[i].length < Constants.QIN_TILE_NUM)
             tiles[i].push(remain_tiles.pop());
     }
     for (let i = 0; i < player_cnt; i++)
@@ -227,12 +227,12 @@ const roundBegin = () => {
         for (let seat = 0; seat < player_cnt; seat++) {
             let ret = { seat: seat, tiles: [], count: [] };
             let tiles = player_tiles[seat], cnt = [];
-            for (let i = C1m; i <= C0s; i++)
+            for (let i = Constants.TILE_NUM.C1m; i <= Constants.TILE_NUM.C0s; i++)
                 cnt[i] = 0;
             for (let i in tiles)
                 cnt[tile2Int(tiles[i], true)]++;
             mingpais[seat] = cnt;
-            for (let i = C1m; i <= C0s; i++) {
+            for (let i = Constants.TILE_NUM.C1m; i <= Constants.TILE_NUM.C0s; i++) {
                 if (cnt[i] === 0)
                     continue;
                 ret.tiles.push(int2Tile(i));
@@ -248,13 +248,13 @@ const roundBegin = () => {
     let qishou_tiles = [], random_tiles = [[], [], [], []];
     for (let i = 0; i < player_cnt; i++) {
         if (i === ju) {
-            if (player_tiles[i].length !== Qin_tiles_num)
+            if (player_tiles[i].length !== Constants.QIN_TILE_NUM)
                 has_intergrity = false;
         }
-        else if (player_tiles[i].length !== Xian_tiles_num)
+        else if (player_tiles[i].length !== Constants.XIAN_TILE_NUM)
             has_intergrity = false;
         for (let j in player_tiles[i])
-            if (player_tiles[i][j] !== Tbd) {
+            if (player_tiles[i][j] !== Constants.TBD) {
                 qishou_len++;
                 random_tiles[i].push(player_tiles[i][j]);
             }
@@ -507,7 +507,7 @@ let mingpai = (...args) => {
                 for (let i = from + 1; i < from + player_cnt; i++) {
                     let seat2 = i % player_cnt;
                     let cnt = [];
-                    for (let i = C1m; i <= C7z; i++)
+                    for (let i = Constants.TILE_NUM.C1m; i <= Constants.TILE_NUM.C7z; i++)
                         cnt[i] = 0;
                     for (let i in player_tiles[seat2])
                         cnt[tile2Int(player_tiles[seat2][i])]++;
@@ -674,7 +674,7 @@ let zimingpai = (...args) => {
             tile_cnt++;
     let is_babei = tile_cnt >= 1 && (player_cnt === 3 || player_cnt === 2) && isEqualTile(tile, '4z') && (!type || type === 'babei');
     is_babei || (is_babei = tile_cnt >= 1 && player_cnt === 2 && isEqualTile(tile, '3z') && (!type || type === 'baxi'));
-    is_babei || (is_babei = is_guobiao() && tile === Huapai && type === 'babei' && typeof editFunction == 'function');
+    is_babei || (is_babei = is_guobiao() && tile === Constants.HUAPAI && type === 'babei' && typeof editFunction == 'function');
     is_babei || (is_babei = tile_cnt >= 1 && type === 'babei' && typeof editFunction == 'function');
     let is_angang = tile_cnt >= 4 && (!type || type === 'angang');
     let is_jiagang = false;
@@ -762,8 +762,8 @@ let zimingpai = (...args) => {
     else
         throw new Error(roundInfo() + ` zimingpai: seat: ${seat}, xun: ${xun[seat].length}: 玩家无法 zimingpai (给定 tile: ${tile} 情况下)`);
     function trying() {
-        if (is_guobiao() && typeof editFunction == 'function' && inTiles(Huapai, player_tiles[seat])) {
-            zimingpai(seat, Huapai, 'babei');
+        if (is_guobiao() && typeof editFunction == 'function' && inTiles(Constants.HUAPAI, player_tiles[seat])) {
+            zimingpai(seat, Constants.HUAPAI, 'babei');
             return true;
         }
         let all_tiles;
@@ -783,7 +783,7 @@ let zimingpai = (...args) => {
                     return true;
                 }
         }
-        for (let i = C1m; i <= C7z; i++) {
+        for (let i = Constants.TILE_NUM.C1m; i <= Constants.TILE_NUM.C7z; i++) {
             all_tiles = allEqualTiles(int2Tile(i)).reverse();
             for (let x0 in all_tiles)
                 for (let x1 in all_tiles)
@@ -796,7 +796,7 @@ let zimingpai = (...args) => {
                             }
                         }
         }
-        for (let i = C1m; i <= C7z; i++) {
+        for (let i = Constants.TILE_NUM.C1m; i <= Constants.TILE_NUM.C7z; i++) {
             all_tiles = allEqualTiles(int2Tile(i)).reverse();
             for (let j in all_tiles)
                 if (inTiles(all_tiles[j], player_tiles[seat])) {
@@ -1163,11 +1163,11 @@ let liuju = (liuju_type) => {
         throw new Error(roundInfo() + ' liuju: 不符合任何途中流局条件');
     function jiuZhongJiuPai() {
         let cnt = [], yaojiu_type = 0;
-        for (let i = C1m; i <= C7z; i++)
+        for (let i = Constants.TILE_NUM.C1m; i <= Constants.TILE_NUM.C7z; i++)
             cnt[i] = 0;
         for (let i in player_tiles[seat])
             cnt[tile2Int(player_tiles[seat][i])]++;
-        for (let i = C1m; i <= C7z; i++)
+        for (let i = Constants.TILE_NUM.C1m; i <= Constants.TILE_NUM.C7z; i++)
             if (cnt[i] >= 1 && judgeTile(int2Tile(i), 'Y'))
                 yaojiu_type++;
         if (yaojiu_type >= 9 && liqi_info[seat].liqi === 0 && liqi_info[seat].yifa === 1 && player_tiles[seat].length === 14) {
@@ -1180,7 +1180,7 @@ let liuju = (liuju_type) => {
             if (fulu[0].length === 0 && fulu[1].length === 0 && fulu[2].length === 0 && fulu[3].length === 0)
                 if (paihe[0].tiles.length === 1 && paihe[1].tiles.length === 1 && paihe[2].tiles.length === 1 && paihe[3].tiles.length === 1)
                     if (paihe[0].tiles[0] === paihe[1].tiles[0] && paihe[1].tiles[0] === paihe[2].tiles[0] && paihe[2].tiles[0] === paihe[3].tiles[0])
-                        if (tile2Int(paihe[0].tiles[0]) >= C1z && tile2Int(paihe[0].tiles[0]) <= C4z)
+                        if (tile2Int(paihe[0].tiles[0]) >= Constants.TILE_NUM.C1z && tile2Int(paihe[0].tiles[0]) <= Constants.TILE_NUM.C4z)
                             type = 2;
     }
     function siGangSanLe() {
@@ -1392,7 +1392,7 @@ const moqieLiuju = () => {
 const judgeTile = (tile, type) => {
     if (typeof tile != 'string' || tile.length === 1)
         throw new Error(roundInfo() + ` judgeTile: tile 格式不合规: ${tile}`);
-    if (tile === Tbd)
+    if (tile === Constants.TBD)
         return true;
     let x = tile2Int(tile);
     switch (type) {
@@ -1411,19 +1411,19 @@ const judgeTile = (tile, type) => {
         case 'S':
             return tile[1] === 's';
         case 'L':
-            return x === C1s + 1 || x === C1s + 2 || x === C1s + 3 || x === C1s + 5 || x === C1s + 7 || x === C5z + 1;
+            return x === Constants.TILE_NUM.C1s + 1 || x === Constants.TILE_NUM.C1s + 2 || x === Constants.TILE_NUM.C1s + 3 || x === Constants.TILE_NUM.C1s + 5 || x === Constants.TILE_NUM.C1s + 7 || x === Constants.TILE_NUM.C5z + 1;
         case 'quanshuang':
-            return x <= C9s && ((x - 1) % 9 + 1) % 2 === 0;
+            return x <= Constants.TILE_NUM.C9s && ((x - 1) % 9 + 1) % 2 === 0;
         case 'quanda':
-            return x <= C9s && (x - 1) % 9 >= 6;
+            return x <= Constants.TILE_NUM.C9s && (x - 1) % 9 >= 6;
         case 'quanzhong':
-            return x <= C9s && (x - 1) % 9 >= 3 && (x - 1) % 9 <= 5;
+            return x <= Constants.TILE_NUM.C9s && (x - 1) % 9 >= 3 && (x - 1) % 9 <= 5;
         case 'quanxiao':
-            return x <= C9s && (x - 1) % 9 <= 2;
+            return x <= Constants.TILE_NUM.C9s && (x - 1) % 9 <= 2;
         case 'dayuwu':
-            return x <= C9s && (x - 1) % 9 >= 5;
+            return x <= Constants.TILE_NUM.C9s && (x - 1) % 9 >= 5;
         case 'xiaoyuwu':
-            return x <= C9s && (x - 1) % 9 <= 3;
+            return x <= Constants.TILE_NUM.C9s && (x - 1) % 9 <= 3;
         case 'tuibudao':
             return x === 10 || x === 11 || x === 12 || x === 13 || x === 14 || x === 17 || x === 18 || x === 20 || x === 22 || x === 23 || x === 24 || x === 26 || x === 27 || x === 32;
         default:
@@ -1431,13 +1431,13 @@ const judgeTile = (tile, type) => {
     }
 };
 const allEqualTiles = (tile) => {
-    if (tile === Tbd)
-        return [Tbd];
+    if (tile === Constants.TBD)
+        return [Constants.TBD];
     tile = tile.substring(0, 2);
     if (tile[0] === '0' || tile[0] === '5' && tile[1] !== 'z')
-        return ['5' + tile[1], '5' + tile[1] + SPT_Suf, '0' + tile[1], '0' + tile[1] + SPT_Suf];
+        return ['5' + tile[1], '5' + tile[1] + Constants.SPT_SUFFIX, '0' + tile[1], '0' + tile[1] + Constants.SPT_SUFFIX];
     else
-        return [tile, tile + SPT_Suf];
+        return [tile, tile + Constants.SPT_SUFFIX];
 };
 const isEqualTile = (x, y) => allEqualTiles(x).indexOf(y) > -1;
 const decompose = (tiles) => {
@@ -1447,16 +1447,16 @@ const decompose = (tiles) => {
     let matches = x.match(/\d+[mpsz]t?|\.|H|T|Y|D|M|P|S/g);
     let ret = '';
     for (let i = 0; i < bd_tile_num; i++)
-        ret += Tbd;
+        ret += Constants.TBD;
     for (let i in matches) {
         if (matches[i].length === 1 && random_tiles.indexOf(matches[i]) > -1) {
             ret += matches[i] + matches[i];
             continue;
         }
-        let kind_index = matches[i][matches[i].length - 1] === SPT_Suf ? matches[i].length - 2 : matches[i].length - 1;
+        let kind_index = matches[i][matches[i].length - 1] === Constants.SPT_SUFFIX ? matches[i].length - 2 : matches[i].length - 1;
         let tile_kind = matches[i][kind_index];
         if (kind_index === matches[i].length - 2)
-            tile_kind += SPT_Suf;
+            tile_kind += Constants.SPT_SUFFIX;
         for (let j = 0; j < kind_index; j++)
             ret += matches[i][j] + tile_kind;
     }
@@ -1470,7 +1470,7 @@ const separate = (tiles) => {
     tiles = decompose(tiles);
     let ret = [];
     while (tiles.length > 0) {
-        if (tiles.length > 2 && tiles[2] === SPT_Suf) {
+        if (tiles.length > 2 && tiles[2] === Constants.SPT_SUFFIX) {
             ret.push(tiles.substring(0, 3));
             tiles = tiles.substring(3);
         }
@@ -1483,16 +1483,16 @@ const separate = (tiles) => {
 };
 const calcHupai = (tiles, type = false) => {
     let cnt = [], tmp = [];
-    for (let i = Cbd; i <= C7z; i++)
+    for (let i = Constants.CBD; i <= Constants.TILE_NUM.C7z; i++)
         cnt[i] = tmp[i] = 0;
     for (let i in tiles)
         cnt[tile2Int(tiles[i])]++;
-    if (is_guobiao() && tiles.indexOf(Huapai) > -1)
+    if (is_guobiao() && tiles.indexOf(Constants.HUAPAI) > -1)
         return 0;
-    if (is_wanxiangxiuluo() && cnt[Cbd] === 1 && !type) {
+    if (is_wanxiangxiuluo() && cnt[Constants.CBD] === 1 && !type) {
         let tmp_tiles = [];
         for (let i in tiles)
-            if (tiles[i] !== Tbd)
+            if (tiles[i] !== Constants.TBD)
                 tmp_tiles.push(tiles[i]);
         for (let i = 1; i <= 34; i++) {
             tmp_tiles.push(int2Tile(i));
@@ -1503,26 +1503,26 @@ const calcHupai = (tiles, type = false) => {
         }
         return 0;
     }
-    for (let i = C1m; i <= C7z; i++) {
+    for (let i = Constants.TILE_NUM.C1m; i <= Constants.TILE_NUM.C7z; i++) {
         if (cnt[i] >= 2) {
             cnt[i] -= 2;
             let ok = true;
-            for (let j = C1m; j <= C7z; j++)
+            for (let j = Constants.TILE_NUM.C1m; j <= Constants.TILE_NUM.C7z; j++)
                 tmp[j] = cnt[j];
-            tmp[C0m] = tmp[C0p] = tmp[C0s] = 0;
+            tmp[Constants.TILE_NUM.C0m] = tmp[Constants.TILE_NUM.C0p] = tmp[Constants.TILE_NUM.C0s] = 0;
             for (let k = 1; k <= 3; k++) {
-                for (let j = k * 9 - 8; j !== 0; j = nxt2[j]) {
+                for (let j = k * 9 - 8; j !== 0; j = Constants.NXT2[j]) {
                     if (tmp[j] < 0) {
                         ok = false;
                         break;
                     }
                     tmp[j] %= 3;
-                    tmp[nxt2[j]] -= tmp[j];
-                    tmp[nxt2[nxt2[j]]] -= tmp[j];
+                    tmp[Constants.NXT2[j]] -= tmp[j];
+                    tmp[Constants.NXT2[Constants.NXT2[j]]] -= tmp[j];
                 }
-                tmp[C0m] = tmp[C0p] = tmp[C0s] = 0;
+                tmp[Constants.TILE_NUM.C0m] = tmp[Constants.TILE_NUM.C0p] = tmp[Constants.TILE_NUM.C0s] = 0;
             }
-            for (let j = C1z; j <= C7z; j++)
+            for (let j = Constants.TILE_NUM.C1z; j <= Constants.TILE_NUM.C7z; j++)
                 if (tmp[j] % 3 !== 0)
                     ok = false;
             cnt[i] += 2;
@@ -1531,7 +1531,7 @@ const calcHupai = (tiles, type = false) => {
         }
     }
     let duizi = 0;
-    for (let i = C1m; i <= C7z; i++) {
+    for (let i = Constants.TILE_NUM.C1m; i <= Constants.TILE_NUM.C7z; i++) {
         if (cnt[i] === 2)
             duizi++;
         if (cnt[i] >= 4 && cnt[i] % 2 === 0 && (is_chuanma() || is_guobiao()))
@@ -1540,7 +1540,7 @@ const calcHupai = (tiles, type = false) => {
     if (duizi === 7)
         return 2;
     let guoshi = true;
-    for (let i = C1m; i <= C7z; i++) {
+    for (let i = Constants.TILE_NUM.C1m; i <= Constants.TILE_NUM.C7z; i++) {
         if (judgeTile(int2Tile(i), 'Y')) {
             if (cnt[i] === 0)
                 guoshi = false;
@@ -1552,7 +1552,7 @@ const calcHupai = (tiles, type = false) => {
         return 3;
     if (is_guobiao() && tiles.length === 14) {
         let quanbukao = true;
-        for (let i = C1m; i <= C7z; i++)
+        for (let i = Constants.TILE_NUM.C1m; i <= Constants.TILE_NUM.C7z; i++)
             if (cnt[i] >= 2)
                 quanbukao = false;
         let jin_huase = [
@@ -1619,7 +1619,7 @@ const calcHupai = (tiles, type = false) => {
     if (is_yifanjieguyi() && tiles.length === 14) {
         let shisanbuda = true;
         let duizi_num = 0;
-        for (let i = C1m; i <= C7z; i++) {
+        for (let i = Constants.TILE_NUM.C1m; i <= Constants.TILE_NUM.C7z; i++) {
             if (cnt[i] === 2)
                 duizi_num++;
             if (cnt[i] >= 3)
@@ -1642,14 +1642,14 @@ const calcTingpai = (seat, type = false) => {
         return [];
     let tiles = player_tiles[seat];
     let cnt = [];
-    for (let i = Cbd; i <= C7z; i++)
+    for (let i = Constants.CBD; i <= Constants.TILE_NUM.C7z; i++)
         cnt[i] = 0;
     for (let i in tiles)
         cnt[tile2Int(tiles[i])]++;
-    if (is_guobiao() && tiles.indexOf(Huapai) > -1)
+    if (is_guobiao() && tiles.indexOf(Constants.HUAPAI) > -1)
         return [];
     let ret = [];
-    for (let i = C1m; i <= C7z; i++) {
+    for (let i = Constants.TILE_NUM.C1m; i <= Constants.TILE_NUM.C7z; i++) {
         tiles.push(int2Tile(i));
         cnt[i]++;
         if ((cnt[i] <= 4 || type) && calcHupai(tiles) !== 0 && calcHupai(tiles) !== 12)
@@ -1721,16 +1721,6 @@ let lianzhuang_cnt;
 let cuohu;
 let protected_tiles;
 let pretongxunzt, prelizhizt, shezhangzt, tongxunzt, lizhizt, zhenting;
-const Qin_tiles_num = 14, Xian_tiles_num = 13;
-const C1m = 1, C9m = 9, C1p = 10, C9p = 18, C1s = 19, C9s = 27, C1z = 28, C4z = 31, C5z = 32, C7z = 34, C0m = 35, C0p = 36, C0s = 37, C5m = 5, C5p = 14, C5s = 23;
-const SPT_Suf = 't';
-const SPT_Offset = 40;
-const Tbd = 'bd';
-const Cbd = 0;
-const GB_Qihu = 8;
-const Huapai = '0m';
-const nxt2 = [0, 2, 3, 4, 5, 6, 7, 8, 9, 35, 11, 12, 13, 14, 15, 16, 17, 18, 35, 20, 21, 22, 23, 24, 25, 26, 27, 35, 35, 35, 35, 35, 35, 35, 35, 36, 0];
-const dora_nxt = [0, 2, 3, 4, 5, 6, 7, 8, 9, 1, 11, 12, 13, 14, 15, 16, 17, 18, 10, 20, 21, 22, 23, 24, 25, 26, 27, 19, 29, 30, 31, 28, 33, 34, 32];
 let game_begin_once;
 const gameBegin = () => {
     if (!game_begin_once)
@@ -1891,7 +1881,7 @@ const calcDoras = () => {
     return doras0;
 };
 const tile2Int = (tile, type = false, sptile = false) => {
-    if (tile === Tbd)
+    if (tile === Constants.TBD)
         return 0;
     if (!sptile || tile.length <= 2) {
         if (type && tile[0] === '0') {
@@ -1913,31 +1903,31 @@ const tile2Int = (tile, type = false, sptile = false) => {
         if (tile[1] === 'z')
             return 27 + parseInt(tile);
     }
-    else if (tile[2] === SPT_Suf) {
+    else if (tile[2] === Constants.SPT_SUFFIX) {
         if (type && tile[0] === '0') {
             if (tile[1] === 'm')
-                return 35 + SPT_Offset;
+                return 35 + Constants.SPT_OFFSET;
             if (tile[1] === 'p')
-                return 36 + SPT_Offset;
+                return 36 + Constants.SPT_OFFSET;
             if (tile[1] === 's')
-                return 37 + SPT_Offset;
+                return 37 + Constants.SPT_OFFSET;
         }
         if (tile[0] === '0')
             tile = '5' + tile[1];
         if (tile[1] === 'm')
-            return parseInt(tile) + SPT_Offset;
+            return parseInt(tile) + Constants.SPT_OFFSET;
         if (tile[1] === 'p')
-            return 9 + parseInt(tile) + SPT_Offset;
+            return 9 + parseInt(tile) + Constants.SPT_OFFSET;
         if (tile[1] === 's')
-            return 18 + parseInt(tile) + SPT_Offset;
+            return 18 + parseInt(tile) + Constants.SPT_OFFSET;
         if (tile[1] === 'z')
-            return 27 + parseInt(tile) + SPT_Offset;
+            return 27 + parseInt(tile) + Constants.SPT_OFFSET;
     }
     throw new Error(roundInfo() + ` tile2Int 输入不合规: ${tile}`);
 };
 const int2Tile = (x, type = false) => {
     if (x === 0)
-        return Tbd;
+        return Constants.TBD;
     if (!type) {
         if (x >= 1 && x <= 9)
             return x.toString() + 'm';
@@ -1956,19 +1946,19 @@ const int2Tile = (x, type = false) => {
     }
     else {
         if (x >= 1 && x <= 9)
-            return x.toString() + 'm' + SPT_Suf;
+            return x.toString() + 'm' + Constants.SPT_SUFFIX;
         if (x >= 10 && x <= 18)
-            return (x - 9).toString() + 'p' + SPT_Suf;
+            return (x - 9).toString() + 'p' + Constants.SPT_SUFFIX;
         if (x >= 19 && x <= 27)
-            return (x - 18).toString() + 's' + SPT_Suf;
+            return (x - 18).toString() + 's' + Constants.SPT_SUFFIX;
         if (x >= 28 && x <= 34)
-            return (x - 27).toString() + 'z' + SPT_Suf;
+            return (x - 27).toString() + 'z' + Constants.SPT_SUFFIX;
         if (x === 35)
-            return '0m' + SPT_Suf;
+            return '0m' + Constants.SPT_SUFFIX;
         if (x === 36)
-            return '0p' + SPT_Suf;
+            return '0p' + Constants.SPT_SUFFIX;
         if (x === 37)
-            return '0s' + SPT_Suf;
+            return '0s' + Constants.SPT_SUFFIX;
     }
     throw new Error(roundInfo() + ` int2Tile 输入不合规: ${x}`);
 };
@@ -1978,13 +1968,13 @@ const inTiles = (x, y) => {
     if (typeof x == 'string')
         x = [x];
     let cnt = [], cnt2 = [];
-    for (let i = C1m; i <= C0s + SPT_Offset; i++)
+    for (let i = Constants.TILE_NUM.C1m; i <= Constants.TILE_NUM.C0s + Constants.SPT_OFFSET; i++)
         cnt[i] = cnt2[i] = 0;
     for (let i in x)
         cnt[tile2Int(x[i], true, true)]++;
     for (let i in y)
         cnt2[tile2Int(y[i], true, true)]++;
-    for (let i = C1m; i <= C0s + SPT_Offset; i++)
+    for (let i = Constants.TILE_NUM.C1m; i <= Constants.TILE_NUM.C0s + Constants.SPT_OFFSET; i++)
         if (cnt[i] > cnt2[i])
             return false;
     return true;
@@ -2168,11 +2158,11 @@ const huazhu = (seat) => {
     return false;
 };
 const isDora = (tile) => {
-    if (tile2Int(tile) >= C0m && tile2Int(tile) <= C0s)
+    if (tile2Int(tile) >= Constants.TILE_NUM.C0m && tile2Int(tile) <= Constants.TILE_NUM.C0s)
         return true;
     let doras0 = calcDoras();
     for (let i in doras0)
-        if (tile2Int(tile) === dora_nxt[tile2Int(doras0[i])])
+        if (tile2Int(tile) === Constants.DORA_NXT[tile2Int(doras0[i])])
             return true;
     return false;
 };
@@ -2181,14 +2171,14 @@ const calcTianming = (seat, zimo) => {
     for (let i in player_tiles[seat]) {
         if (!zimo && parseInt(i) === player_tiles[seat].length - 1)
             break;
-        if (player_tiles[seat][i].length >= 2 && player_tiles[seat][i][2] === SPT_Suf)
+        if (player_tiles[seat][i].length >= 2 && player_tiles[seat][i][2] === Constants.SPT_SUFFIX)
             sum++;
     }
     for (let i in fulu[seat])
         for (let j in fulu[seat][i].tile) {
             if (fulu[seat][i].type !== 3 && parseInt(j) === fulu[seat][i].tile.length - 1)
                 break;
-            if (fulu[seat][i].tile[j].length > 2 && fulu[seat][i].tile[j][2] === SPT_Suf)
+            if (fulu[seat][i].tile[j].length > 2 && fulu[seat][i].tile[j][2] === Constants.SPT_SUFFIX)
                 sum++;
         }
     return sum;
@@ -2671,7 +2661,7 @@ let huleOnePlayerGuobiao = (seat) => {
         zhahu = true;
     if (lst_name === 'RecordBaBei' || lst_name === 'RecordAnGangAddGang' && lst_action.data.type === 3)
         zhahu = true;
-    if (!is_guobiao_no_8fanfu() && sudian_no_huapai < GB_Qihu * scale_points())
+    if (!is_guobiao_no_8fanfu() && sudian_no_huapai < Constants.GB_BASE_FAN * scale_points())
         is_cuohu = true;
     if (cuohu[seat])
         is_cuohu = true;
@@ -2710,8 +2700,8 @@ let huleOnePlayerGuobiao = (seat) => {
         for (let i = 0; i < player_cnt; i++) {
             if (i === seat)
                 continue;
-            delta_scores[i] -= sudian + GB_Qihu * scale_points();
-            delta_scores[seat] += sudian + GB_Qihu * scale_points();
+            delta_scores[i] -= sudian + Constants.GB_BASE_FAN * scale_points();
+            delta_scores[seat] += sudian + Constants.GB_BASE_FAN * scale_points();
         }
     }
     else {
@@ -2720,8 +2710,8 @@ let huleOnePlayerGuobiao = (seat) => {
         for (let i = 0; i < player_cnt; i++) {
             if (i === seat)
                 continue;
-            delta_scores[i] -= GB_Qihu * scale_points();
-            delta_scores[seat] += GB_Qihu * scale_points();
+            delta_scores[i] -= Constants.GB_BASE_FAN * scale_points();
+            delta_scores[seat] += Constants.GB_BASE_FAN * scale_points();
         }
     }
     player_tiles[seat].pop();
@@ -2735,10 +2725,10 @@ let huleOnePlayerGuobiao = (seat) => {
         hu_tile: hu_tile,
         liqi: false,
         ming: ming,
-        point_rong: sudian + 3 * GB_Qihu * scale_points(),
-        point_sum: 3 * (sudian + GB_Qihu * scale_points()),
-        point_zimo_qin: sudian + GB_Qihu * scale_points(),
-        point_zimo_xian: sudian + GB_Qihu * scale_points(),
+        point_rong: sudian + 3 * Constants.GB_BASE_FAN * scale_points(),
+        point_sum: 3 * (sudian + Constants.GB_BASE_FAN * scale_points()),
+        point_zimo_qin: sudian + Constants.GB_BASE_FAN * scale_points(),
+        point_zimo_xian: sudian + Constants.GB_BASE_FAN * scale_points(),
         qinjia: qinjia,
         seat: seat,
         title_id: 0,
@@ -2757,7 +2747,7 @@ const calcFan = (seat, zimo, fangchong) => {
     let fulu_cnt = 0;
     let ret = { yiman: false, fans: [], fu: 0 };
     let cnt = [];
-    for (let i = Cbd; i <= C0s; i++)
+    for (let i = Constants.CBD; i <= Constants.TILE_NUM.C0s; i++)
         cnt[i] = 0;
     for (let i in tiles)
         cnt[tile2Int(tiles[i])]++;
@@ -2772,17 +2762,17 @@ const calcFan = (seat, zimo, fangchong) => {
         return ret;
     if (!is_wanxiangxiuluo())
         normalCalc();
-    else if (cnt[Cbd] === 1) {
-        cnt[Cbd]--;
-        tiles.splice(tiles.indexOf(Tbd), 1);
-        for (let j = C1m; j <= C7z; j++) {
+    else if (cnt[Constants.CBD] === 1) {
+        cnt[Constants.CBD]--;
+        tiles.splice(tiles.indexOf(Constants.TBD), 1);
+        for (let j = Constants.TILE_NUM.C1m; j <= Constants.TILE_NUM.C7z; j++) {
             cnt[j]++;
             tiles.push(int2Tile(j));
             normalCalc();
             tiles.pop();
             cnt[j]--;
         }
-        tiles.unshift(Tbd);
+        tiles.unshift(Constants.TBD);
     }
     if (is_yifanjieguyi() && calcHupai(tiles) === 12) {
         let ans = { yiman: !is_qingtianjing(), fans: [], fu: 25 };
@@ -2828,7 +2818,7 @@ const calcFan = (seat, zimo, fangchong) => {
         }
     }
     function dfs(now) {
-        if (now === C0m) {
+        if (now === Constants.TILE_NUM.C0m) {
             if (partition.length === 5 || partition.length === 7)
                 calc();
             return;
@@ -2853,19 +2843,19 @@ const calcFan = (seat, zimo, fangchong) => {
             else if (whatever[k] % 3 === 0)
                 for (let j = 0; j < whatever[k] / 3; j++)
                     partition.push({ type: 6, tile: [int2Tile(now), int2Tile(now), int2Tile(now)] });
-            if (cnt[nxt2[now]] >= cnt0 && cnt[nxt2[nxt2[now]]] >= cnt0) {
+            if (cnt[Constants.NXT2[now]] >= cnt0 && cnt[Constants.NXT2[Constants.NXT2[now]]] >= cnt0) {
                 cnt[now] -= cnt0;
-                cnt[nxt2[now]] -= cnt0;
-                cnt[nxt2[nxt2[now]]] -= cnt0;
+                cnt[Constants.NXT2[now]] -= cnt0;
+                cnt[Constants.NXT2[Constants.NXT2[now]]] -= cnt0;
                 for (let i = 1; i <= cnt0; i++)
                     partition.push({
                         type: 5,
-                        tile: [int2Tile(now), int2Tile(nxt2[now]), int2Tile(nxt2[nxt2[now]])],
+                        tile: [int2Tile(now), int2Tile(Constants.NXT2[now]), int2Tile(Constants.NXT2[Constants.NXT2[now]])],
                     });
                 dfs(now + 1);
                 cnt[now] += cnt0;
-                cnt[nxt2[now]] += cnt0;
-                cnt[nxt2[nxt2[now]]] += cnt0;
+                cnt[Constants.NXT2[now]] += cnt0;
+                cnt[Constants.NXT2[Constants.NXT2[now]]] += cnt0;
                 for (let i = 0; i < cnt0; i++)
                     partition.pop();
             }
@@ -2876,7 +2866,7 @@ const calcFan = (seat, zimo, fangchong) => {
     }
     function calc() {
         let cnt2 = [];
-        for (let i = C1m; i <= C7z; i++)
+        for (let i = Constants.TILE_NUM.C1m; i <= Constants.TILE_NUM.C7z; i++)
             cnt2[i] = 0;
         let partitiontmp = partition.slice();
         for (let i = partitiontmp.length - 1; i >= 0; i--) {
@@ -2931,7 +2921,7 @@ const calcFan = (seat, zimo, fangchong) => {
             let typecnt = [];
             let kezi = [], gangzi = [], anke = [], shunzi = [];
             let kezi_num = 0, gangzi_num = 0, anke_num = 0, duizi_num = 0;
-            for (let i = C1m; i <= C7z; i++) {
+            for (let i = Constants.TILE_NUM.C1m; i <= Constants.TILE_NUM.C7z; i++) {
                 typecnt[i] = [0, 0, 0, 0, 0, 0, 0, 0];
                 anke[i] = gangzi[i] = kezi[i] = shunzi[i] = 0;
             }
@@ -2965,12 +2955,12 @@ const calcFan = (seat, zimo, fangchong) => {
                     typecnt[(tile2Int(partitiontmp[i].tile[0]) + tile2Int(partitiontmp[i].tile[1]) + tile2Int(partitiontmp[i].tile[2])) / 3][type]++;
             }
             let beikou = 0, santongshun = false, sanlianke = false;
-            for (let i = C1m; i <= C7z; i++) {
+            for (let i = Constants.TILE_NUM.C1m; i <= Constants.TILE_NUM.C7z; i++) {
                 anke_num += anke[i];
                 gangzi_num += gangzi[i];
                 kezi_num += kezi[i];
                 duizi_num += typecnt[i][7];
-                if (i >= C1m + 1 && i <= C9m - 1 || i >= C1p + 1 && i <= C9p - 1 || i >= C1s + 1 && i <= C9s - 1)
+                if (i >= Constants.TILE_NUM.C1m + 1 && i <= Constants.TILE_NUM.C9m - 1 || i >= Constants.TILE_NUM.C1p + 1 && i <= Constants.TILE_NUM.C9p - 1 || i >= Constants.TILE_NUM.C1s + 1 && i <= Constants.TILE_NUM.C9s - 1)
                     if (kezi[i - 1] >= 1 && kezi[i] >= 1 && kezi[i + 1] >= 1)
                         sanlianke = true;
                 beikou += Math.floor(shunzi[i] / 2);
@@ -2978,7 +2968,7 @@ const calcFan = (seat, zimo, fangchong) => {
                     santongshun = true;
             }
             let flag_ziyise = true, flag_lvyise = true, flag_qinglaotou = true, flag_duanyao = true, flag_hunlaotou = true;
-            for (let i = C1m; i <= C7z; i++) {
+            for (let i = Constants.TILE_NUM.C1m; i <= Constants.TILE_NUM.C7z; i++) {
                 if (!judgeTile(int2Tile(i), 'H') && cnt2[i] > 0)
                     flag_ziyise = false;
                 if (!judgeTile(int2Tile(i), 'L') && cnt2[i] > 0)
@@ -2992,7 +2982,7 @@ const calcFan = (seat, zimo, fangchong) => {
             }
             let wumenqi = true;
             for (let i = 0; i < 5; i++) {
-                const wumen_lows = [C1m, C1p, C1s, C1z, C5z], wumen_highs = [C9m, C9p, C9s, C4z, C7z];
+                const wumen_lows = [Constants.TILE_NUM.C1m, Constants.TILE_NUM.C1p, Constants.TILE_NUM.C1s, Constants.TILE_NUM.C1z, Constants.TILE_NUM.C5z], wumen_highs = [Constants.TILE_NUM.C9m, Constants.TILE_NUM.C9p, Constants.TILE_NUM.C9s, Constants.TILE_NUM.C4z, Constants.TILE_NUM.C7z];
                 let flag = false;
                 for (let j = wumen_lows[i]; j <= wumen_highs[i]; j++)
                     flag = flag || cnt2[j] > 0;
@@ -3005,7 +2995,7 @@ const calcFan = (seat, zimo, fangchong) => {
                 if (shunzi[k * 9 + 2] >= 1 && shunzi[k * 9 + 5] >= 1 && shunzi[k * 9 + 8] >= 1)
                     yiqi = true;
                 jiulian = [true, ''];
-                for (let i = C1m; i <= C9m; i++)
+                for (let i = Constants.TILE_NUM.C1m; i <= Constants.TILE_NUM.C9m; i++)
                     if (cnt2[k * 9 + i] < jlbd[i])
                         jiulian = [false, ''];
                     else if (cnt2[k * 9 + i] > jlbd[i])
@@ -3013,14 +3003,14 @@ const calcFan = (seat, zimo, fangchong) => {
                 if (jiulian[0])
                     break;
             }
-            for (let i = C1m; i <= C7z; i++)
+            for (let i = Constants.TILE_NUM.C1m; i <= Constants.TILE_NUM.C7z; i++)
                 if (gangzi[i] >= 1)
                     jiulian = [false, ''];
             for (let k = 0; k <= 3; k++) {
                 hunyise = qingyise = true;
-                for (let i = C1m; i <= C7z; i++)
+                for (let i = Constants.TILE_NUM.C1m; i <= Constants.TILE_NUM.C7z; i++)
                     if (Math.floor((i - 1) / 9) !== k && cnt2[i] > 0) {
-                        if (i <= C9s)
+                        if (i <= Constants.TILE_NUM.C9s)
                             hunyise = false;
                         qingyise = false;
                     }
@@ -3028,26 +3018,26 @@ const calcFan = (seat, zimo, fangchong) => {
                     break;
             }
             let sanse = false, sansetongke = false;
-            for (let i = C1m; i <= C9m; i++) {
-                if (i >= C1m + 1 && i <= C9m - 1)
+            for (let i = Constants.TILE_NUM.C1m; i <= Constants.TILE_NUM.C9m; i++) {
+                if (i >= Constants.TILE_NUM.C1m + 1 && i <= Constants.TILE_NUM.C9m - 1)
                     if (shunzi[i] >= 1 && shunzi[i + 9] >= 1 && shunzi[i + 18] >= 1)
                         sanse = true;
                 if (kezi[i] >= 1 && kezi[i + 9] >= 1 && kezi[i + 18] >= 1)
                     sansetongke = true;
             }
             let chunquandai = true, hunquandai = true;
-            for (let i = C1m; i <= C7z; i++) {
-                if (i !== C1m + 1 && i !== C9m - 1 && i !== C1p + 1 && i !== C9p - 1 && i !== C1s + 1 && i !== C9s - 1 && shunzi[i] >= 1)
+            for (let i = Constants.TILE_NUM.C1m; i <= Constants.TILE_NUM.C7z; i++) {
+                if (i !== Constants.TILE_NUM.C1m + 1 && i !== Constants.TILE_NUM.C9m - 1 && i !== Constants.TILE_NUM.C1p + 1 && i !== Constants.TILE_NUM.C9p - 1 && i !== Constants.TILE_NUM.C1s + 1 && i !== Constants.TILE_NUM.C9s - 1 && shunzi[i] >= 1)
                     chunquandai = hunquandai = false;
-                if (i !== C1m && i !== C9m && i !== C1p && i !== C9p && i !== C1s && i < C9s && kezi[i] + typecnt[i][7] >= 1)
+                if (i !== Constants.TILE_NUM.C1m && i !== Constants.TILE_NUM.C9m && i !== Constants.TILE_NUM.C1p && i !== Constants.TILE_NUM.C9p && i !== Constants.TILE_NUM.C1s && i < Constants.TILE_NUM.C9s && kezi[i] + typecnt[i][7] >= 1)
                     chunquandai = hunquandai = false;
-                if (i >= C1z && i <= C7z && kezi[i] + typecnt[i][7] >= 1)
+                if (i >= Constants.TILE_NUM.C1z && i <= Constants.TILE_NUM.C7z && kezi[i] + typecnt[i][7] >= 1)
                     chunquandai = false;
             }
             let pinghu = true;
             if (duizi_num === 7)
                 pinghu = false;
-            for (let i = C1m; i <= C7z; i++) {
+            for (let i = Constants.TILE_NUM.C1m; i <= Constants.TILE_NUM.C7z; i++) {
                 if (kezi[i] >= 1)
                     pinghu = false;
                 if (typecnt[i][7] === 1) {
@@ -3055,7 +3045,7 @@ const calcFan = (seat, zimo, fangchong) => {
                         pinghu = false;
                     if (tile2Int((chang + 1).toString() + 'z') === i)
                         pinghu = false;
-                    if (i >= C5z && i <= C7z)
+                    if (i >= Constants.TILE_NUM.C5z && i <= Constants.TILE_NUM.C7z)
                         pinghu = false;
                 }
             }
@@ -3070,14 +3060,14 @@ const calcFan = (seat, zimo, fangchong) => {
                 pinghu = false;
             let xiaosanyuan = false, dasanyuan = false, xiaosixi = false, dasixi = false;
             for (let i = 0; i < 3; i++)
-                if (typecnt[C5z + i][7] === 1 && kezi[C5z + (i + 1) % 3] >= 1 && kezi[C5z + (i + 2) % 3] >= 1)
+                if (typecnt[Constants.TILE_NUM.C5z + i][7] === 1 && kezi[Constants.TILE_NUM.C5z + (i + 1) % 3] >= 1 && kezi[Constants.TILE_NUM.C5z + (i + 2) % 3] >= 1)
                     xiaosanyuan = true;
-            if (kezi[C5z] >= 1 && kezi[C5z + 1] >= 1 && kezi[C5z + 2] >= 1)
+            if (kezi[Constants.TILE_NUM.C5z] >= 1 && kezi[Constants.TILE_NUM.C5z + 1] >= 1 && kezi[Constants.TILE_NUM.C5z + 2] >= 1)
                 dasanyuan = true;
             for (let i = 0; i < 4; i++)
-                if (typecnt[C1z + i][7] === 1 && kezi[C1z + (i + 1) % 4] >= 1 && kezi[C1z + (i + 2) % 4] >= 1 && kezi[C1z + (i + 3) % 4] >= 1)
+                if (typecnt[Constants.TILE_NUM.C1z + i][7] === 1 && kezi[Constants.TILE_NUM.C1z + (i + 1) % 4] >= 1 && kezi[Constants.TILE_NUM.C1z + (i + 2) % 4] >= 1 && kezi[Constants.TILE_NUM.C1z + (i + 3) % 4] >= 1)
                     xiaosixi = true;
-            if (kezi[C1z] >= 1 && kezi[C1z + 1] >= 1 && kezi[C1z + 2] >= 1 && kezi[C1z + 3] >= 1)
+            if (kezi[Constants.TILE_NUM.C1z] >= 1 && kezi[Constants.TILE_NUM.C1z + 1] >= 1 && kezi[Constants.TILE_NUM.C1z + 2] >= 1 && kezi[Constants.TILE_NUM.C1z + 3] >= 1)
                 dasixi = true;
             let alldoras = [0, 0, 0, 0];
             for (let i in fulu[seat])
@@ -3086,48 +3076,48 @@ const calcFan = (seat, zimo, fangchong) => {
                     alldoras[2]++;
                 }
             for (let i = 0; i < dora_cnt.cnt; i++) {
-                if (player_cnt === 3 && tile2Int(doras[i]) === C1m)
-                    alldoras[0] += cnt2[C9m];
+                if (player_cnt === 3 && tile2Int(doras[i]) === Constants.TILE_NUM.C1m)
+                    alldoras[0] += cnt2[Constants.TILE_NUM.C9m];
                 else if (player_cnt === 2) {
-                    if (tile2Int(doras[i]) === C1p)
-                        alldoras[0] += cnt2[C9p];
-                    if (tile2Int(doras[i]) === C1s)
-                        alldoras[0] += cnt2[C9s];
+                    if (tile2Int(doras[i]) === Constants.TILE_NUM.C1p)
+                        alldoras[0] += cnt2[Constants.TILE_NUM.C9p];
+                    if (tile2Int(doras[i]) === Constants.TILE_NUM.C1s)
+                        alldoras[0] += cnt2[Constants.TILE_NUM.C9s];
                 }
                 else {
                     if (get_field_spell_mode2() === 3)
                         alldoras[0] += cnt2[tile2Int(doras[i])];
-                    alldoras[0] += cnt2[dora_nxt[tile2Int(doras[i])]];
+                    alldoras[0] += cnt2[Constants.DORA_NXT[tile2Int(doras[i])]];
                 }
             }
             for (let i = 0; i < dora_cnt.licnt; i++) {
-                if (player_cnt === 3 && tile2Int(li_doras[i]) === C1m)
-                    alldoras[3] += cnt2[C9m];
+                if (player_cnt === 3 && tile2Int(li_doras[i]) === Constants.TILE_NUM.C1m)
+                    alldoras[3] += cnt2[Constants.TILE_NUM.C9m];
                 else if (player_cnt === 2) {
-                    if (tile2Int(li_doras[i]) === C1p)
-                        alldoras[3] += cnt2[C9p];
-                    if (tile2Int(li_doras[i]) === C1s)
-                        alldoras[3] += cnt2[C9s];
+                    if (tile2Int(li_doras[i]) === Constants.TILE_NUM.C1p)
+                        alldoras[3] += cnt2[Constants.TILE_NUM.C9p];
+                    if (tile2Int(li_doras[i]) === Constants.TILE_NUM.C1s)
+                        alldoras[3] += cnt2[Constants.TILE_NUM.C9s];
                 }
                 else {
                     if (get_field_spell_mode2() === 3)
                         alldoras[3] += cnt2[tile2Int(li_doras[i])];
-                    alldoras[3] += cnt2[dora_nxt[tile2Int(li_doras[i])]];
+                    alldoras[3] += cnt2[Constants.DORA_NXT[tile2Int(li_doras[i])]];
                 }
             }
             for (let i in tiles)
-                if (tile2Int(tiles[i]) >= C0m && tile2Int(tiles[i]) <= C0s)
+                if (tile2Int(tiles[i]) >= Constants.TILE_NUM.C0m && tile2Int(tiles[i]) <= Constants.TILE_NUM.C0s)
                     alldoras[1]++;
             for (let i in fulu[seat])
                 for (let j in fulu[seat][i].tile)
-                    if (tile2Int(fulu[seat][i].tile[j]) >= C0m && tile2Int(fulu[seat][i].tile[j]) <= C0s)
+                    if (tile2Int(fulu[seat][i].tile[j]) >= Constants.TILE_NUM.C0m && tile2Int(fulu[seat][i].tile[j]) <= Constants.TILE_NUM.C0s)
                         alldoras[1]++;
             for (let i in fulu[seat])
                 if (fulu[seat][i].type === 4)
                     cnt2[tile2Int(fulu[seat][i].tile[0])]--;
             if (get_field_spell_mode1() === 5 && seat === ju && !zimo)
                 ans.dora_bonus = alldoras[0] + alldoras[1] + alldoras[3];
-            if (is_tiandichuangzao() && typecnt[C5z][2] === 1 && typecnt[C5z][7] === 1 && typecnt[C5z][3] === 3) {
+            if (is_tiandichuangzao() && typecnt[Constants.TILE_NUM.C5z][2] === 1 && typecnt[Constants.TILE_NUM.C5z][7] === 1 && typecnt[Constants.TILE_NUM.C5z][3] === 3) {
                 if (!is_qingtianjing()) {
                     ans.fans.push({ val: 6, id: 9001 });
                     return ans;
@@ -3135,7 +3125,7 @@ const calcFan = (seat, zimo, fangchong) => {
                 else
                     ans.fans.push({ val: 0, id: 9001 });
             }
-            if (is_wanwushengzhang() && typecnt[C5z + 1][3] === 4 && typecnt[C5z + 1][7] === 1) {
+            if (is_wanwushengzhang() && typecnt[Constants.TILE_NUM.C5z + 1][3] === 4 && typecnt[Constants.TILE_NUM.C5z + 1][7] === 1) {
                 if (!is_qingtianjing()) {
                     ans.fans.push({ val: 6, id: 9002 });
                     return ans;
@@ -3158,7 +3148,7 @@ const calcFan = (seat, zimo, fangchong) => {
                     let fulusanyuancnt = 0;
                     for (let i in fulu[seat]) {
                         let type = fulu[seat][i].type, t_int = tile2Int(fulu[seat][i].tile[0]);
-                        if ((type === 1 || type === 2 || type === 3) && (t_int >= C5z && t_int <= C7z)) {
+                        if ((type === 1 || type === 2 || type === 3) && (t_int >= Constants.TILE_NUM.C5z && t_int <= Constants.TILE_NUM.C7z)) {
                             fulusanyuancnt++;
                             if (fulusanyuancnt === 3 && fulu[seat][i].from !== undefined)
                                 baopai[seat].push({ seat: fulu[seat][i].from, val: 1 });
@@ -3208,7 +3198,7 @@ const calcFan = (seat, zimo, fangchong) => {
                     let fulusixicnt = 0;
                     for (let i in fulu[seat]) {
                         let type = fulu[seat][i].type, t_int = tile2Int(fulu[seat][i].tile[0]);
-                        if ((type === 1 || type === 2 || type === 3) && (t_int >= C1z && t_int <= C4z)) {
+                        if ((type === 1 || type === 2 || type === 3) && (t_int >= Constants.TILE_NUM.C1z && t_int <= Constants.TILE_NUM.C4z)) {
                             fulusixicnt++;
                             if (fulusixicnt === 4 && fulu[seat][i].from !== undefined)
                                 baopai[seat].push({ seat: fulu[seat][i].from, val: no_wyakuman() ? 1 : 2 });
@@ -3246,8 +3236,8 @@ const calcFan = (seat, zimo, fangchong) => {
             if (is_yifanjieguyi()) {
                 let sitongshun = false, silianke = false;
                 for (let i = 0; i <= 2; i++)
-                    for (let j = C1m; j <= C9m; j++) {
-                        if (j !== C1m && j !== C9m && shunzi[i * 9 + j] >= 4)
+                    for (let j = Constants.TILE_NUM.C1m; j <= Constants.TILE_NUM.C9m; j++) {
+                        if (j !== Constants.TILE_NUM.C1m && j !== Constants.TILE_NUM.C9m && shunzi[i * 9 + j] >= 4)
                             sitongshun = true;
                         if (j <= 6 && kezi[i * 9 + j] >= 1 && kezi[i * 9 + j + 1] >= 1 && kezi[i * 9 + j + 2] >= 1 && kezi[i * 9 + j + 3] >= 1)
                             silianke = true;
@@ -3259,7 +3249,7 @@ const calcFan = (seat, zimo, fangchong) => {
                 let hongkongque = true, hongyidian = true, heiyise = true;
                 if (cnt2[34] === 0)
                     hongkongque = hongyidian = false;
-                for (let i = C1m; i <= C7z; i++) {
+                for (let i = Constants.TILE_NUM.C1m; i <= Constants.TILE_NUM.C7z; i++) {
                     if (i !== 19 && i !== 23 && i !== 25 && i !== 27 && i !== 34 && i !== 37 && cnt2[i] >= 1)
                         hongkongque = false;
                     if (i !== 20 && i !== 21 && i !== 22 && i !== 24 && i !== 26 && i !== 34 && cnt2[i] >= 1)
@@ -3276,7 +3266,7 @@ const calcFan = (seat, zimo, fangchong) => {
                 if (seat === ju && lianzhuang_cnt >= 7)
                     ans.fans.push({ val: 1, id: 46 });
                 let wan_qingyise = true;
-                for (let i = C1p; i <= C7z; i++)
+                for (let i = Constants.TILE_NUM.C1p; i <= Constants.TILE_NUM.C7z; i++)
                     if (cnt2[i] >= 1)
                         wan_qingyise = false;
                 if (wan_qingyise) {
@@ -3295,13 +3285,13 @@ const calcFan = (seat, zimo, fangchong) => {
                 let xinganxian_part1 = false, xinganxian_part2 = false;
                 for (let j = 0; j <= 2; j++) {
                     xinganxian_part1 = true;
-                    for (let i = C1m; i <= C9m; i++)
+                    for (let i = Constants.TILE_NUM.C1m; i <= Constants.TILE_NUM.C9m; i++)
                         if (cnt2[j * 9 + i] !== 1)
                             xinganxian_part1 = false;
                     if (xinganxian_part1)
                         break;
                 }
-                if (kezi[C1z] === 1 && typecnt[C4z][7] === 1 || kezi[C4z] === 1 && typecnt[C1z][7] === 1)
+                if (kezi[Constants.TILE_NUM.C1z] === 1 && typecnt[Constants.TILE_NUM.C4z][7] === 1 || kezi[Constants.TILE_NUM.C4z] === 1 && typecnt[Constants.TILE_NUM.C1z][7] === 1)
                     xinganxian_part2 = true;
                 if (menqing && xinganxian_part1 && xinganxian_part2)
                     ans.fans.push({ val: 1, id: 9711 });
@@ -3394,12 +3384,12 @@ const calcFan = (seat, zimo, fangchong) => {
                 ans.fans.push({ val: 1, id: 5 });
             if (!zimo && paishan.length === wangpai_num)
                 ans.fans.push({ val: 1, id: 6 });
-            if (kezi[C5z] >= 1)
-                ans.fans.push({ val: kezi[C5z], id: 7 });
-            if (kezi[C5z + 1] >= 1)
-                ans.fans.push({ val: kezi[C5z + 1], id: 8 });
-            if (kezi[C7z] >= 1)
-                ans.fans.push({ val: kezi[C7z], id: 9 });
+            if (kezi[Constants.TILE_NUM.C5z] >= 1)
+                ans.fans.push({ val: kezi[Constants.TILE_NUM.C5z], id: 7 });
+            if (kezi[Constants.TILE_NUM.C5z + 1] >= 1)
+                ans.fans.push({ val: kezi[Constants.TILE_NUM.C5z + 1], id: 8 });
+            if (kezi[Constants.TILE_NUM.C7z] >= 1)
+                ans.fans.push({ val: kezi[Constants.TILE_NUM.C7z], id: 9 });
             if (kezi[tile2Int(((seat - ju + player_cnt) % player_cnt + 1).toString() + 'z')] >= 1)
                 ans.fans.push({
                     val: kezi[tile2Int(((seat - ju + player_cnt) % player_cnt + 1).toString() + 'z')],
@@ -3461,7 +3451,7 @@ const calcFan = (seat, zimo, fangchong) => {
             }
             if (is_yifanjieguyi()) {
                 let tuibudao = true;
-                for (let i = C1m; i <= C7z; i++)
+                for (let i = Constants.TILE_NUM.C1m; i <= Constants.TILE_NUM.C7z; i++)
                     if (i !== 10 && i !== 11 && i !== 12 && i !== 13 && i !== 14 && i !== 17 && i !== 18)
                         if (i !== 20 && i !== 22 && i !== 23 && i !== 24 && i !== 26 && i !== 27)
                             if (i !== 32 && cnt2[i] >= 1) {
@@ -3536,7 +3526,7 @@ const calcFan = (seat, zimo, fangchong) => {
             ans.fu = 20;
             if (!pinghu)
                 ans.fu += tingpaifu;
-            for (let i = C1m; i <= C7z; i++) {
+            for (let i = Constants.TILE_NUM.C1m; i <= Constants.TILE_NUM.C7z; i++) {
                 if (judgeTile(int2Tile(i), 'Y')) {
                     ans.fu += typecnt[i][1] * 4;
                     ans.fu += typecnt[i][2] * 16;
@@ -3597,7 +3587,7 @@ const calcFanChuanma = (seat, zimo, type = false) => {
     if (huazhu(seat))
         return ret;
     let cnt = [];
-    for (let i = C1m; i <= C0s; i++)
+    for (let i = Constants.TILE_NUM.C1m; i <= Constants.TILE_NUM.C0s; i++)
         cnt[i] = 0;
     for (let i in tiles)
         cnt[tile2Int(tiles[i])]++;
@@ -3609,7 +3599,7 @@ const calcFanChuanma = (seat, zimo, type = false) => {
     dfs(1);
     if (calcHupai(tiles) === 2) {
         partition = [];
-        for (let i = C1m; i <= C9s; i++)
+        for (let i = Constants.TILE_NUM.C1m; i <= Constants.TILE_NUM.C9s; i++)
             while (cnt[i] > 0) {
                 partition.push({ type: 7, tile: [int2Tile(i), int2Tile(i)] });
                 cnt[i] -= 2;
@@ -3618,7 +3608,7 @@ const calcFanChuanma = (seat, zimo, type = false) => {
     }
     return ret;
     function dfs(now) {
-        if (now === C1z) {
+        if (now === Constants.TILE_NUM.C1z) {
             if (partition.length === 5 || partition.length === 7)
                 calc();
             return;
@@ -3643,19 +3633,19 @@ const calcFanChuanma = (seat, zimo, type = false) => {
             else if (whatever[k] % 3 === 0)
                 for (let j = 0; j < whatever[k] / 3; j++)
                     partition.push({ type: 6, tile: [int2Tile(now), int2Tile(now), int2Tile(now)] });
-            if (cnt[nxt2[now]] >= cnt0 && cnt[nxt2[nxt2[now]]] >= cnt0) {
+            if (cnt[Constants.NXT2[now]] >= cnt0 && cnt[Constants.NXT2[Constants.NXT2[now]]] >= cnt0) {
                 cnt[now] -= cnt0;
-                cnt[nxt2[now]] -= cnt0;
-                cnt[nxt2[nxt2[now]]] -= cnt0;
+                cnt[Constants.NXT2[now]] -= cnt0;
+                cnt[Constants.NXT2[Constants.NXT2[now]]] -= cnt0;
                 for (let i = 1; i <= cnt0; i++)
                     partition.push({
                         type: 5,
-                        tile: [int2Tile(now), int2Tile(nxt2[now]), int2Tile(nxt2[nxt2[now]])],
+                        tile: [int2Tile(now), int2Tile(Constants.NXT2[now]), int2Tile(Constants.NXT2[Constants.NXT2[now]])],
                     });
                 dfs(now + 1);
                 cnt[now] += cnt0;
-                cnt[nxt2[now]] += cnt0;
-                cnt[nxt2[nxt2[now]]] += cnt0;
+                cnt[Constants.NXT2[now]] += cnt0;
+                cnt[Constants.NXT2[Constants.NXT2[now]]] += cnt0;
                 for (let i = 0; i < cnt0; i++)
                     partition.pop();
             }
@@ -3666,7 +3656,7 @@ const calcFanChuanma = (seat, zimo, type = false) => {
     }
     function calc() {
         let cnt2 = [];
-        for (let i = C1m; i <= C9s; i++)
+        for (let i = Constants.TILE_NUM.C1m; i <= Constants.TILE_NUM.C9s; i++)
             cnt2[i] = 0;
         let partitiontmp = partition.slice();
         for (let i = partitiontmp.length - 1; i >= 0; i--) {
@@ -3711,7 +3701,7 @@ const calcFanChuanma = (seat, zimo, type = false) => {
             let typecnt = [];
             let kezi = [], gangzi = [], shunzi = [];
             let kezi_num = 0, gangzi_num = 0, duizi_num = 0;
-            for (let i = C1m; i <= C9s; i++) {
+            for (let i = Constants.TILE_NUM.C1m; i <= Constants.TILE_NUM.C9s; i++) {
                 typecnt[i] = [0, 0, 0, 0, 0, 0, 0, 0];
                 kezi[i] = gangzi[i] = shunzi[i] = 0;
             }
@@ -3742,14 +3732,14 @@ const calcFanChuanma = (seat, zimo, type = false) => {
                 if (p_type === 0 || p_type === 5)
                     typecnt[(tile2Int(partitiontmp[i].tile[0]) + tile2Int(partitiontmp[i].tile[1]) + tile2Int(partitiontmp[i].tile[2])) / 3][p_type]++;
             }
-            for (let i = C1m; i <= C9s; i++) {
+            for (let i = Constants.TILE_NUM.C1m; i <= Constants.TILE_NUM.C9s; i++) {
                 gangzi_num += gangzi[i];
                 kezi_num += kezi[i];
             }
             if (partitiontmp.length === 7)
                 duizi_num = 7;
             let quandai = true;
-            for (let i = C1m; i <= C9s; i++) {
+            for (let i = Constants.TILE_NUM.C1m; i <= Constants.TILE_NUM.C9s; i++) {
                 if (i !== 2 && i !== 8 && i !== 11 && i !== 17 && i !== 20 && i !== 26 && shunzi[i] >= 1)
                     quandai = false;
                 if (i !== 1 && i !== 9 && i !== 10 && i !== 18 && i !== 19 && i !== 27 && i < 28 && kezi[i] + typecnt[i][7] >= 1)
@@ -3758,19 +3748,19 @@ const calcFanChuanma = (seat, zimo, type = false) => {
             let qingyise = false;
             for (let k = 0; k < 3; k++) {
                 qingyise = true;
-                for (let i = C1m; i <= C9s; i++)
+                for (let i = Constants.TILE_NUM.C1m; i <= Constants.TILE_NUM.C9s; i++)
                     if (Math.floor((i - 1) / 9) !== k && cnt2[i] > 0)
                         qingyise = false;
                 if (qingyise)
                     break;
             }
             let jiangdui = true;
-            for (let i = C1m; i <= C9s; i++)
+            for (let i = Constants.TILE_NUM.C1m; i <= Constants.TILE_NUM.C9s; i++)
                 if (i !== 2 && i !== 5 && i !== 8 && i !== 11 && i !== 14 && i !== 17 && i !== 20 && i !== 23 && i !== 26 && cnt2[i] > 0)
                     jiangdui = false;
             ans.fans[1000] = 0;
             ans.fans[1003] = 1;
-            for (let i = C1m; i <= C9s; i++)
+            for (let i = Constants.TILE_NUM.C1m; i <= Constants.TILE_NUM.C9s; i++)
                 ans.fans[1000] += Math.floor(cnt2[i] / 4);
             if (!type && zimo && getLstAction(2) !== undefined && (getLstAction(2).name === 'RecordAnGangAddGang' || getLstAction(2).name === 'RecordChiPengGang'))
                 ans.fans[1001] = 1;
@@ -3823,7 +3813,7 @@ const calcFanChuanma = (seat, zimo, type = false) => {
             }
             ans.fu = 20;
             ans.fu += tingpaifu;
-            for (let i = C1m; i <= C9s; i++) {
+            for (let i = Constants.TILE_NUM.C1m; i <= Constants.TILE_NUM.C9s; i++) {
                 if (judgeTile(int2Tile(i), 'Y')) {
                     ans.fu += typecnt[i][1] * 4;
                     ans.fu += typecnt[i][2] * 16;
@@ -3884,7 +3874,7 @@ const calcFanGuobiao = (seat, zimo) => {
     let fulu_cnt = 0;
     let ret = { fans: [], fu: 0 };
     let cnt = [];
-    for (let i = C1m; i <= C0s; i++)
+    for (let i = Constants.TILE_NUM.C1m; i <= Constants.TILE_NUM.C0s; i++)
         cnt[i] = 0;
     for (let i in tiles)
         cnt[tile2Int(tiles[i])]++;
@@ -3950,7 +3940,7 @@ const calcFanGuobiao = (seat, zimo) => {
     }
     if (result === 4 || result === 5) {
         let qixingbukao = true;
-        for (let i = C1z; i <= C7z; i++)
+        for (let i = Constants.TILE_NUM.C1z; i <= Constants.TILE_NUM.C7z; i++)
             if (cnt[i] === 0)
                 qixingbukao = false;
         let ans = { fans: [], fu: 25 };
@@ -3993,7 +3983,7 @@ const calcFanGuobiao = (seat, zimo) => {
     }
     return ret;
     function dfs(now) {
-        if (now === C0m) {
+        if (now === Constants.TILE_NUM.C0m) {
             if (partition.length === 5 || partition.length === 7)
                 calc();
             return;
@@ -4014,19 +4004,19 @@ const calcFanGuobiao = (seat, zimo) => {
             }
             else if (k === 2)
                 partition.push({ type: 6, tile: [int2Tile(now), int2Tile(now), int2Tile(now)] });
-            if (cnt[nxt2[now]] >= cnt0 && cnt[nxt2[nxt2[now]]] >= cnt0) {
+            if (cnt[Constants.NXT2[now]] >= cnt0 && cnt[Constants.NXT2[Constants.NXT2[now]]] >= cnt0) {
                 cnt[now] -= cnt0;
-                cnt[nxt2[now]] -= cnt0;
-                cnt[nxt2[nxt2[now]]] -= cnt0;
+                cnt[Constants.NXT2[now]] -= cnt0;
+                cnt[Constants.NXT2[Constants.NXT2[now]]] -= cnt0;
                 for (let i = 1; i <= cnt0; i++)
                     partition.push({
                         type: 5,
-                        tile: [int2Tile(now), int2Tile(nxt2[now]), int2Tile(nxt2[nxt2[now]])]
+                        tile: [int2Tile(now), int2Tile(Constants.NXT2[now]), int2Tile(Constants.NXT2[Constants.NXT2[now]])]
                     });
                 dfs(now + 1);
                 cnt[now] += cnt0;
-                cnt[nxt2[now]] += cnt0;
-                cnt[nxt2[nxt2[now]]] += cnt0;
+                cnt[Constants.NXT2[now]] += cnt0;
+                cnt[Constants.NXT2[Constants.NXT2[now]]] += cnt0;
                 for (let i = 1; i <= cnt0; i++)
                     partition.length = partition.length - 1;
             }
@@ -4037,7 +4027,7 @@ const calcFanGuobiao = (seat, zimo) => {
     }
     function calc() {
         let cnt2 = [];
-        for (let i = C1m; i <= C7z; i++)
+        for (let i = Constants.TILE_NUM.C1m; i <= Constants.TILE_NUM.C7z; i++)
             cnt2[i] = 0;
         let partitiontmp = partition.slice();
         for (let i = partitiontmp.length - 1; i >= 0; i--) {
@@ -4100,7 +4090,7 @@ const calcFanGuobiao = (seat, zimo) => {
             let kezi_num = 0, gangzi_num = 0, anke_num = 0, duizi_num = 0;
             let minggang_num = 0;
             let angang_num = 0;
-            for (let i = C1m; i <= C7z; i++) {
+            for (let i = Constants.TILE_NUM.C1m; i <= Constants.TILE_NUM.C7z; i++) {
                 typecnt[i] = [0, 0, 0, 0, 0, 0, 0, 0];
                 anke[i] = gangzi[i] = kezi[i] = shunzi[i] = 0;
             }
@@ -4137,7 +4127,7 @@ const calcFanGuobiao = (seat, zimo) => {
                     typecnt[(tile2Int(partitiontmp[i].tile[0]) + tile2Int(partitiontmp[i].tile[1]) + tile2Int(partitiontmp[i].tile[2])) / 3][type]++;
             }
             let beikou = 0, santongshun = false;
-            for (let i = C1m; i <= C7z; i++) {
+            for (let i = Constants.TILE_NUM.C1m; i <= Constants.TILE_NUM.C7z; i++) {
                 anke_num += anke[i];
                 gangzi_num += gangzi[i];
                 kezi_num += kezi[i];
@@ -4151,7 +4141,7 @@ const calcFanGuobiao = (seat, zimo) => {
             if (partitiontmp.length === 7)
                 duizi_num = 7;
             let flag_ziyise = true, flag_lvyise = true, flag_qinglaotou = true, flag_duanyao = true, flag_hunlaotou = true;
-            for (let i = C1m; i <= C7z; i++) {
+            for (let i = Constants.TILE_NUM.C1m; i <= Constants.TILE_NUM.C7z; i++) {
                 if (!judgeTile(int2Tile(i), 'H') && cnt2[i] > 0)
                     flag_ziyise = false;
                 if (!judgeTile(int2Tile(i), 'L') && cnt2[i] > 0)
@@ -4165,7 +4155,7 @@ const calcFanGuobiao = (seat, zimo) => {
             }
             let wumenqi = true;
             for (let i = 0; i < 5; i++) {
-                const wumen_lows = [C1m, C1p, C1s, C1z, C5z], wumen_highs = [C9m, C9p, C9s, C4z, C7z];
+                const wumen_lows = [Constants.TILE_NUM.C1m, Constants.TILE_NUM.C1p, Constants.TILE_NUM.C1s, Constants.TILE_NUM.C1z, Constants.TILE_NUM.C5z], wumen_highs = [Constants.TILE_NUM.C9m, Constants.TILE_NUM.C9p, Constants.TILE_NUM.C9s, Constants.TILE_NUM.C4z, Constants.TILE_NUM.C7z];
                 let flag = false;
                 for (let j = wumen_lows[i]; j <= wumen_highs[i]; j++)
                     flag = flag || cnt2[j] > 0;
@@ -4186,14 +4176,14 @@ const calcFanGuobiao = (seat, zimo) => {
                 if (jiulian)
                     break;
             }
-            for (let i = C1m; i <= C7z; i++)
+            for (let i = Constants.TILE_NUM.C1m; i <= Constants.TILE_NUM.C7z; i++)
                 if (gangzi[i] >= 1)
                     jiulian = false;
             for (let k = 0; k <= 3; k++) {
                 hunyise = qingyise = true;
-                for (let i = C1m; i <= C7z; i++)
+                for (let i = Constants.TILE_NUM.C1m; i <= Constants.TILE_NUM.C7z; i++)
                     if (Math.floor((i - 1) / 9) !== k && cnt2[i] > 0) {
-                        if (i <= C9s)
+                        if (i <= Constants.TILE_NUM.C9s)
                             hunyise = false;
                         qingyise = false;
                     }
@@ -4209,26 +4199,26 @@ const calcFanGuobiao = (seat, zimo) => {
             }
             let xiaosanyuan = false, dasanyuan = false, xiaosixi = false, dasixi = false;
             for (let i = 0; i < 3; i++)
-                if (typecnt[C5z + i][7] === 1 && kezi[C5z + (i + 1) % 3] >= 1 && kezi[C5z + (i + 2) % 3] >= 1)
+                if (typecnt[Constants.TILE_NUM.C5z + i][7] === 1 && kezi[Constants.TILE_NUM.C5z + (i + 1) % 3] >= 1 && kezi[Constants.TILE_NUM.C5z + (i + 2) % 3] >= 1)
                     xiaosanyuan = true;
-            if (kezi[C5z] >= 1 && kezi[C5z + 1] >= 1 && kezi[C5z + 2] >= 1)
+            if (kezi[Constants.TILE_NUM.C5z] >= 1 && kezi[Constants.TILE_NUM.C5z + 1] >= 1 && kezi[Constants.TILE_NUM.C5z + 2] >= 1)
                 dasanyuan = true;
             for (let i = 0; i < 4; i++)
-                if (typecnt[C1z + i][7] === 1 && kezi[C1z + (i + 1) % 4] >= 1 && kezi[C1z + (i + 2) % 4] >= 1 && kezi[C1z + (i + 3) % 4] >= 1)
+                if (typecnt[Constants.TILE_NUM.C1z + i][7] === 1 && kezi[Constants.TILE_NUM.C1z + (i + 1) % 4] >= 1 && kezi[Constants.TILE_NUM.C1z + (i + 2) % 4] >= 1 && kezi[Constants.TILE_NUM.C1z + (i + 3) % 4] >= 1)
                     xiaosixi = true;
-            if (kezi[C1z] >= 1 && kezi[C1z + 1] >= 1 && kezi[C1z + 2] >= 1 && kezi[C1z + 3] >= 1)
+            if (kezi[Constants.TILE_NUM.C1z] >= 1 && kezi[Constants.TILE_NUM.C1z + 1] >= 1 && kezi[Constants.TILE_NUM.C1z + 2] >= 1 && kezi[Constants.TILE_NUM.C1z + 3] >= 1)
                 dasixi = true;
             let hunquandai = true;
-            for (let i = C1m; i <= C7z; i++) {
-                if (i !== C1m + 1 && i !== C9m - 1 && i !== C1p + 1 && i !== C9p - 1 && i !== C1s + 1 && i !== C9s - 1 && shunzi[i] >= 1)
+            for (let i = Constants.TILE_NUM.C1m; i <= Constants.TILE_NUM.C7z; i++) {
+                if (i !== Constants.TILE_NUM.C1m + 1 && i !== Constants.TILE_NUM.C9m - 1 && i !== Constants.TILE_NUM.C1p + 1 && i !== Constants.TILE_NUM.C9p - 1 && i !== Constants.TILE_NUM.C1s + 1 && i !== Constants.TILE_NUM.C9s - 1 && shunzi[i] >= 1)
                     hunquandai = false;
-                if (i !== C1m && i !== C9m && i !== C1p && i !== C9p && i !== C1s && i < C9s && kezi[i] + typecnt[i][7] >= 1)
+                if (i !== Constants.TILE_NUM.C1m && i !== Constants.TILE_NUM.C9m && i !== Constants.TILE_NUM.C1p && i !== Constants.TILE_NUM.C9p && i !== Constants.TILE_NUM.C1s && i < Constants.TILE_NUM.C9s && kezi[i] + typecnt[i][7] >= 1)
                     hunquandai = false;
             }
             let pinghu = true;
             if (duizi_num === 7)
                 pinghu = false;
-            for (let i = C1m; i <= C7z; i++)
+            for (let i = Constants.TILE_NUM.C1m; i <= Constants.TILE_NUM.C7z; i++)
                 if (kezi[i] >= 1 || typecnt[i][7] === 1 && i >= 28 && i <= 34) {
                     pinghu = false;
                     break;
@@ -4376,7 +4366,7 @@ const calcFanGuobiao = (seat, zimo) => {
                 banFan([8055, 8063, 8080]);
             }
             let quanshuangke = true;
-            for (let i = C1m; i <= C7z; i++)
+            for (let i = Constants.TILE_NUM.C1m; i <= Constants.TILE_NUM.C7z; i++)
                 if (!judgeTile(int2Tile(i), 'quanshuang') && cnt2[i] >= 1)
                     quanshuangke = false;
             if (duizi_num >= 2)
@@ -4403,7 +4393,7 @@ const calcFanGuobiao = (seat, zimo) => {
                 banFan(8022);
             }
             let quanda = true, quanzhong = true, quanxiao = true;
-            for (let i = C1m; i <= C7z; i++) {
+            for (let i = Constants.TILE_NUM.C1m; i <= Constants.TILE_NUM.C7z; i++) {
                 if (!judgeTile(int2Tile(i), 'quanda') && cnt2[i] >= 1)
                     quanda = false;
                 if (!judgeTile(int2Tile(i), 'quanzhong') && cnt2[i] >= 1)
@@ -4449,10 +4439,10 @@ const calcFanGuobiao = (seat, zimo) => {
             if (sanbugao && !isBanned(8029))
                 ans.fans.push({ val: 16, id: 8029 });
             let quandaiwu = true;
-            for (let i = C1m; i <= C7z; i++) {
+            for (let i = Constants.TILE_NUM.C1m; i <= Constants.TILE_NUM.C7z; i++) {
                 if (!(i >= 4 && i <= 6) && !(i >= 13 && i <= 15) && !(i >= 22 && i <= 24) && shunzi[i] >= 1)
                     quandaiwu = false;
-                if (i !== C5m && i !== C5p && i !== C5s)
+                if (i !== Constants.TILE_NUM.C5m && i !== Constants.TILE_NUM.C5p && i !== Constants.TILE_NUM.C5s)
                     if (kezi[i] >= 1 || typecnt[i][7] >= 1)
                         quandaiwu = false;
             }
@@ -4467,7 +4457,7 @@ const calcFanGuobiao = (seat, zimo) => {
             if (anke_num === 3 && !isBanned(8032))
                 ans.fans.push({ val: 16, id: 8032 });
             let dayuwu = true, xiaoyuwu = true;
-            for (let i = C1m; i <= C7z; i++) {
+            for (let i = Constants.TILE_NUM.C1m; i <= Constants.TILE_NUM.C7z; i++) {
                 if (!judgeTile(int2Tile(i), 'dayuwu') && cnt2[i] >= 1)
                     dayuwu = false;
                 if (!judgeTile(int2Tile(i), 'xiaoyuwu') && cnt2[i] >= 1)
@@ -4483,7 +4473,7 @@ const calcFanGuobiao = (seat, zimo) => {
             }
             let sanfengke = false;
             for (let i = 0; i < 4; i++)
-                if (kezi[C1z + i] >= 1 && kezi[C1z + (i + 1) % 4] >= 1 && kezi[C1z + (i + 2) % 4] >= 1)
+                if (kezi[Constants.TILE_NUM.C1z + i] >= 1 && kezi[Constants.TILE_NUM.C1z + (i + 1) % 4] >= 1 && kezi[Constants.TILE_NUM.C1z + (i + 2) % 4] >= 1)
                     sanfengke = true;
             if (sanfengke && !xiaosixi && !isBanned(8037)) {
                 ans.fans.push({ val: 12, id: 8037 });
@@ -4504,7 +4494,7 @@ const calcFanGuobiao = (seat, zimo) => {
                     banFan([8072, 8073]);
             }
             let tuibudao = true;
-            for (let i = C1m; i <= C7z; i++)
+            for (let i = Constants.TILE_NUM.C1m; i <= Constants.TILE_NUM.C7z; i++)
                 if (!judgeTile(int2Tile(i), 'tuibudao') && cnt2[i] >= 1)
                     tuibudao = false;
             if (tuibudao && !isBanned(8039)) {
@@ -4516,7 +4506,7 @@ const calcFanGuobiao = (seat, zimo) => {
                 banFan(8071);
             }
             let sansesanjiegao = false;
-            for (let i = C1m; i <= C9m - 2; i++)
+            for (let i = Constants.TILE_NUM.C1m; i <= Constants.TILE_NUM.C9m - 2; i++)
                 for (let j = 0; j < 3; j++)
                     for (let k = 0; k < 3; k++)
                         for (let l = 0; l < 3; l++)
@@ -4570,7 +4560,7 @@ const calcFanGuobiao = (seat, zimo) => {
             }
             let shuangjianke = false;
             for (let i = 0; i < 3; i++)
-                if (kezi[C5z + (i + 1) % 3] >= 1 && kezi[C5z + (i + 2) % 3] >= 1)
+                if (kezi[Constants.TILE_NUM.C5z + (i + 1) % 3] >= 1 && kezi[Constants.TILE_NUM.C5z + (i + 2) % 3] >= 1)
                     shuangjianke = true;
             if (shuangjianke && !isBanned(8053)) {
                 banFan([8058, 8059, 8060]);
@@ -4599,17 +4589,17 @@ const calcFanGuobiao = (seat, zimo) => {
             if ((lastile_num === 4 || lastile_num === 3 && zimo) && !isBanned(8057))
                 ans.fans.push({ val: 4, id: 8057 });
             if (!isBanned(8058))
-                for (let i = 0; i < kezi[C5z]; i++) {
+                for (let i = 0; i < kezi[Constants.TILE_NUM.C5z]; i++) {
                     ans.fans.push({ val: 2, id: 8058 });
                     ban_yaojiuke_num++;
                 }
             if (!isBanned(8059))
-                for (let i = 0; i < kezi[C5z + 1]; i++) {
+                for (let i = 0; i < kezi[Constants.TILE_NUM.C5z + 1]; i++) {
                     ans.fans.push({ val: 2, id: 8059 });
                     ban_yaojiuke_num++;
                 }
             if (!isBanned(8060))
-                for (let i = 0; i < kezi[C7z]; i++) {
+                for (let i = 0; i < kezi[Constants.TILE_NUM.C7z]; i++) {
                     ans.fans.push({ val: 2, id: 8060 });
                     ban_yaojiuke_num++;
                 }
@@ -4630,7 +4620,7 @@ const calcFanGuobiao = (seat, zimo) => {
                 banFan(8077);
             }
             let siguiyi_num = 0;
-            for (let i = C1m; i <= C7z; i++)
+            for (let i = Constants.TILE_NUM.C1m; i <= Constants.TILE_NUM.C7z; i++)
                 if (cnt2[i] === 4 && gangzi[i] === 0)
                     siguiyi_num++;
             if (siguiyi_num >= 1 && !isBanned(8065))
@@ -4666,7 +4656,7 @@ const calcFanGuobiao = (seat, zimo) => {
             if (laoshaofu_num >= 1 && !isBanned(8073))
                 ans.fans.push({ val: beikou >= 2 || ersetongshun_num >= 2 ? 1 : laoshaofu_num, id: 8073 });
             let yaojiuke_num = -ban_yaojiuke_num;
-            for (let i = C1m; i <= C7z; i++)
+            for (let i = Constants.TILE_NUM.C1m; i <= Constants.TILE_NUM.C7z; i++)
                 if (judgeTile(int2Tile(i), 'Y'))
                     yaojiuke_num += kezi[i];
             if (!isBanned(8074) && yaojiuke_num >= 1)
@@ -4674,7 +4664,7 @@ const calcFanGuobiao = (seat, zimo) => {
             if (minggang_num === 1 && gangzi_num === 1 && !isBanned(8075))
                 ans.fans.push({ val: 1, id: 8075 });
             let queyimen = false, have_m = 0, have_p = 0, have_s = 0;
-            for (let i = C1m; i <= C9m; i++) {
+            for (let i = Constants.TILE_NUM.C1m; i <= Constants.TILE_NUM.C9m; i++) {
                 if (cnt2[i] >= 1)
                     have_m = 1;
                 if (cnt2[i + 9] >= 1)
@@ -4687,13 +4677,13 @@ const calcFanGuobiao = (seat, zimo) => {
             if (queyimen && !isBanned(8076))
                 ans.fans.push({ val: 1, id: 8076 });
             let wuzi = true;
-            for (let i = C1z; i <= C7z; i++)
+            for (let i = Constants.TILE_NUM.C1z; i <= Constants.TILE_NUM.C7z; i++)
                 if (cnt2[i] >= 1)
                     wuzi = false;
             if (wuzi && !isBanned(8077))
                 ans.fans.push({ val: 1, id: 8077 });
             let cnt_tiles = [];
-            for (let i = C1m; i <= C7z; i++)
+            for (let i = Constants.TILE_NUM.C1m; i <= Constants.TILE_NUM.C7z; i++)
                 cnt_tiles[i] = 0;
             for (let i in tiles)
                 cnt_tiles[tile2Int(tiles[i])]++;
@@ -4749,7 +4739,7 @@ const calcFanGuobiao = (seat, zimo) => {
             ans.fu = 20;
             if (!pinghu)
                 ans.fu += tingpaifu;
-            for (let i = C1m; i <= C7z; i++) {
+            for (let i = Constants.TILE_NUM.C1m; i <= Constants.TILE_NUM.C7z; i++) {
                 if (judgeTile(int2Tile(i), 'Y')) {
                     ans.fu += typecnt[i][1] * 4;
                     ans.fu += typecnt[i][2] * 16;
@@ -4767,7 +4757,7 @@ const calcFanGuobiao = (seat, zimo) => {
                         ans.fu += 2;
                     if (i === tile2Int((chang + 1).toString() + 'z'))
                         ans.fu += 2;
-                    if (i >= C5z && i <= C7z)
+                    if (i >= Constants.TILE_NUM.C5z && i <= Constants.TILE_NUM.C7z)
                         ans.fu += 2;
                 }
             }
@@ -8497,3 +8487,33 @@ const optimizeFunction = () => {
         return !1;
     };
 };
+class Constants {
+}
+Constants.QIN_TILE_NUM = 14;
+Constants.XIAN_TILE_NUM = 13;
+Constants.SPT_SUFFIX = 't';
+Constants.SPT_OFFSET = 40;
+Constants.GB_BASE_FAN = 8;
+Constants.TBD = 'bd';
+Constants.HUAPAI = '0m';
+Constants.CBD = 0;
+Constants.TILE_NUM = Object.freeze({
+    C1m: 1,
+    C9m: 9,
+    C1p: 10,
+    C9p: 18,
+    C1s: 19,
+    C9s: 27,
+    C1z: 28,
+    C4z: 31,
+    C5z: 32,
+    C7z: 34,
+    C0m: 35,
+    C0p: 36,
+    C0s: 37,
+    C5m: 5,
+    C5p: 14,
+    C5s: 23,
+});
+Constants.NXT2 = [0, 2, 3, 4, 5, 6, 7, 8, 9, 35, 11, 12, 13, 14, 15, 16, 17, 18, 35, 20, 21, 22, 23, 24, 25, 26, 27, 35, 35, 35, 35, 35, 35, 35, 35, 36, 0];
+Constants.DORA_NXT = [0, 2, 3, 4, 5, 6, 7, 8, 9, 1, 11, 12, 13, 14, 15, 16, 17, 18, 10, 20, 21, 22, 23, 24, 25, 26, 27, 19, 29, 30, 31, 28, 33, 34, 32];

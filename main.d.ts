@@ -87,16 +87,6 @@ declare let protected_tiles: {
     tiles: string[];
 };
 declare let pretongxunzt: Players_Boolean, prelizhizt: Players_Boolean, shezhangzt: Players_Boolean, tongxunzt: Players_Boolean, lizhizt: Players_Boolean, zhenting: Players_Boolean;
-declare const Qin_tiles_num = 14, Xian_tiles_num = 13;
-declare const C1m = 1, C9m = 9, C1p = 10, C9p = 18, C1s = 19, C9s = 27, C1z = 28, C4z = 31, C5z = 32, C7z = 34, C0m = 35, C0p = 36, C0s = 37, C5m = 5, C5p = 14, C5s = 23;
-declare const SPT_Suf = "t";
-declare const SPT_Offset = 40;
-declare const Tbd = "bd";
-declare const Cbd = 0;
-declare const GB_Qihu = 8;
-declare const Huapai = "0m";
-declare const nxt2: number[];
-declare const dora_nxt: number[];
 declare let game_begin_once: boolean;
 declare const gameBegin: () => void;
 declare const init: () => void;
@@ -664,3 +654,33 @@ type AllData = {
     player_datas: PlayerDatas;
     players: Players;
 };
+declare class Constants {
+    static readonly QIN_TILE_NUM = 14;
+    static readonly XIAN_TILE_NUM = 13;
+    static readonly SPT_SUFFIX = "t";
+    static readonly SPT_OFFSET = 40;
+    static readonly GB_BASE_FAN = 8;
+    static readonly TBD = "bd";
+    static readonly HUAPAI = "0m";
+    static readonly CBD = 0;
+    static readonly TILE_NUM: Readonly<{
+        C1m: 1;
+        C9m: 9;
+        C1p: 10;
+        C9p: 18;
+        C1s: 19;
+        C9s: 27;
+        C1z: 28;
+        C4z: 31;
+        C5z: 32;
+        C7z: 34;
+        C0m: 35;
+        C0p: 36;
+        C0s: 37;
+        C5m: 5;
+        C5p: 14;
+        C5s: 23;
+    }>;
+    static readonly NXT2: number[];
+    static readonly DORA_NXT: number[];
+}
