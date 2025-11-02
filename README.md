@@ -152,7 +152,7 @@ B站视频教程(偏过时): [【雀魂】如何自制牌谱回放](https://www.
         - 说明文档(wiki)的编写
         - 示例牌谱的编写
     - [Fat-pig-Cui](https://github.com/Fat-pig-Cui) (我, 维护者):
-        - main.js 的重构, 添加 JSDoc, 功能的大量扩充(包括国标功能的实现)
+        - main.js 用 TypeScript 重构, 添加 JSDoc, 功能的大量扩充(包括国标功能的实现)
         - add_function.js 的维护与扩充
         - 说明文档的重排优化, 细节补充
         - 自制牌谱的大量补充, 及批处理脚本刷新牌谱的编写

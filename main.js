@@ -1,6 +1,5 @@
 "use strict";
 var checkPaiPu, resetData, OnChoosedPai, seat2LocalPosition, localPosition2Seat;
-var editFunction, editFunction2, cfg, view, GameMgr, uiscript;
 const player_datas = [null, null, null, null];
 const begin_tiles = ['', '', '', ''];
 const player_tiles = [[], [], [], []];

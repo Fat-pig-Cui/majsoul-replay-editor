@@ -239,7 +239,7 @@ declare let inst_once: boolean;
 declare const editOnline: () => void;
 declare const editOffline: () => void;
 declare const optimizeFunction: () => void;
-type Cfg_Type = {
+declare type Cfg_Type = {
     item_definition: {
         item: {
             rows_: {
@@ -284,7 +284,7 @@ type Cfg_Type = {
         };
     };
 };
-type View_Type = {
+declare type View_Type = {
     DesktopMgr?: {
         Inst?: {
             seat: Seat;
@@ -301,12 +301,12 @@ type View_Type = {
         };
     };
 };
-type GameMgr_Type = {
+declare type GameMgr_Type = {
     Inst: {
         checkPaiPu: Function;
     };
 };
-type UIScript_Type = {
+declare type UIScript_Type = {
     UI_Replay: {
         prototype: {
             resetData: Function;
@@ -681,6 +681,6 @@ declare class Constants {
         C5p: 14;
         C5s: 23;
     }>;
-    static readonly NXT2: number[];
-    static readonly DORA_NXT: number[];
+    static readonly NXT2: readonly number[];
+    static readonly DORA_NXT: readonly number[];
 }

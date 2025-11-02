@@ -16,7 +16,7 @@ var checkPaiPu: Function, resetData: Function, OnChoosedPai: Function, seat2Loca
     localPosition2Seat: Function;
 
 // 兼容 TypeScript 语法的声明
-var editFunction: Function, editFunction2: Function, cfg: Cfg_Type, view: View_Type, GameMgr: GameMgr_Type,
+declare var editFunction: Function, editFunction2: Function, cfg: Cfg_Type, view: View_Type, GameMgr: GameMgr_Type,
     uiscript: UIScript_Type;
 
 // 玩家的个人信息
@@ -10220,7 +10220,7 @@ const optimizeFunction = (): void => {
 };
 
 // ========================================================================
-type Cfg_Type = {
+declare type Cfg_Type = {
     item_definition: {
         item: {
             rows_: {
@@ -10265,7 +10265,7 @@ type Cfg_Type = {
         }
     }
 };
-type View_Type = {
+declare type View_Type = {
     DesktopMgr?: {
         Inst?: {
             seat: Seat,
@@ -10282,8 +10282,8 @@ type View_Type = {
         },
     }
 };
-type GameMgr_Type = { Inst: { checkPaiPu: Function } };
-type UIScript_Type = {
+declare type GameMgr_Type = { Inst: { checkPaiPu: Function } };
+declare type UIScript_Type = {
     UI_Replay: {
         prototype: {
             resetData: Function,
@@ -10637,12 +10637,12 @@ class Constants {
      *
      * 数组长度为37
      */
-    public static readonly NXT2 = [0, 2, 3, 4, 5, 6, 7, 8, 9, 35, 11, 12, 13, 14, 15, 16, 17, 18, 35, 20, 21, 22, 23, 24, 25, 26, 27, 35, 35, 35, 35, 35, 35, 35, 35, 36, 0];
+    public static readonly NXT2: readonly number[] = [0, 2, 3, 4, 5, 6, 7, 8, 9, 35, 11, 12, 13, 14, 15, 16, 17, 18, 35, 20, 21, 22, 23, 24, 25, 26, 27, 35, 35, 35, 35, 35, 35, 35, 35, 36, 0];
 
     /**
      * 宝牌指示牌表, 如果某张指示牌的数字编码(不区分红宝牌)为 i, 则它对应的宝牌的数字编码为 DORA_NXT[i]
      *
      * 数组长度35
      */
-    public static readonly DORA_NXT = [0, 2, 3, 4, 5, 6, 7, 8, 9, 1, 11, 12, 13, 14, 15, 16, 17, 18, 10, 20, 21, 22, 23, 24, 25, 26, 27, 19, 29, 30, 31, 28, 33, 34, 32];
+    public static readonly DORA_NXT: readonly number[] = [0, 2, 3, 4, 5, 6, 7, 8, 9, 1, 11, 12, 13, 14, 15, 16, 17, 18, 10, 20, 21, 22, 23, 24, 25, 26, 27, 19, 29, 30, 31, 28, 33, 34, 32];
 }
