@@ -15,7 +15,7 @@
  * 5. 明杠, 暗杠后立即显示听牌变化
  * 6. 国标麻将错和
  */
-function editFunction() {
+const editFunction = () => {
     // ActionDiscardTile 改动: 添加 kailiqi
     view.ActionDiscardTile.record = function (K, U) {
         void 0 === U && (U = 0),
@@ -576,9 +576,10 @@ function editFunction() {
     view.ViewPai.prototype.OnChoosedPai = function () {
         try {
             var K = view.ERevealState;
-            if (!view.DesktopMgr.bianjietishi || this.revealState === K.reveal)
-                return this.ResetShow(),
-                    void 0;
+            if (!view.DesktopMgr.bianjietishi || this.revealState === K.reveal){
+                this.ResetShow();
+                return void 0;
+            }
             var U = view.DesktopMgr.Inst.choosed_pai
                 , V;
             if (null == U || 0 !== mjcore.MJPai.Distance(this.val, U)) {
@@ -593,7 +594,7 @@ function editFunction() {
             } else
                 V = new Laya.Vector4(0.615, 0.827, 0.976, 1);
 
-            this.setMeshColor(V),
+            this.setMeshColor(V);
             this.contianer_touming_touying &&
             (this.contianer_touming_touying.getChildByName('bg').meshRender.sharedMaterial.albedoColor = V);
         } catch (e) {
@@ -680,10 +681,10 @@ function editFunction() {
             default:
                 break;
         }
-        return this.auto_play && (K += this._get_autoplay_delay(O)),
+        this.auto_play && (K += this._get_autoplay_delay(O));
         ('RecordNewRound' === O.name || 'RecordDealTile' === O.name || view.DesktopMgr.Inst.is_zhanxing_mode() &&
-            'RecordDiscardTile' === O.name || 'RecordFillAwaitingTiles' === O.name) && this.page_paishan.refresh(),
-            K;
+            'RecordDiscardTile' === O.name || 'RecordFillAwaitingTiles' === O.name) && this.page_paishan.refresh();
+        return K;
     };
     uiscript.UI_Replay.prototype.doFastRecord = function (O) {
         switch (O.name) {
@@ -827,14 +828,18 @@ function editFunction() {
     }
     view.ViewPlayer.prototype.RefreshDir = function () {
         if (-1 !== this.seat) {
-            var e = new Laya.Vector4, i = 0;
+            let e = new Laya.Vector4, i = 0;
             if (view.DesktopMgr.Inst.rule_mode === view.ERuleMode.Liqi3)
                 i = (this.seat - view.DesktopMgr.Inst.index_ju + 3) % 3;
             if (view.DesktopMgr.Inst.rule_mode === view.ERuleMode.Liqi2)
                 i = (this.seat - view.DesktopMgr.Inst.index_ju + 2) % 2;
             if (view.DesktopMgr.Inst.rule_mode === view.ERuleMode.Liqi4)
                 i = (this.seat - view.DesktopMgr.Inst.index_ju + 4) % 4;
-            e.z = .25 * i, e.w = 0, e.x = .25, e.y = 1, this.trans_dir.meshRender.material.tilingOffset = e
+            e.z = .25 * i;
+            e.w = 0;
+            e.x = .25;
+            e.y = 1;
+            this.trans_dir.meshRender.material.tilingOffset = e;
         }
     }
 
@@ -928,7 +933,7 @@ function editFunction() {
  * 2. 国标不显示王牌
  * 3. 血流成河不计算拔牌数
  */
-function editFunction2() {
+const editFunction2 = () => {
     // 牌谱界面牌山信息
     uiscript.UI_Replay.Inst.page_paishan.setInfo = function () {
         if (!this.noinfo) {

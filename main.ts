@@ -15,10 +15,6 @@
 var checkPaiPu: Function, resetData: Function, OnChoosedPai: Function, seat2LocalPosition: Function,
     localPosition2Seat: Function;
 
-// 兼容 TypeScript 语法的声明
-declare var editFunction: Function, editFunction2: Function, cfg: Cfg_Type, view: View_Type, GameMgr: GameMgr_Type,
-    uiscript: UIScript_Type;
-
 // 玩家的个人信息
 const player_datas: PlayerDatas = [null, null, null, null];
 
@@ -104,8 +100,8 @@ const setPaishan = (ps: string): void => {
  * @example
  * // 以四个三索开头, 东风为第一张岭上牌的牌山, 可以简写, 中间的空格不影响
  * randomPaishan('33s3s 3s', '1z')
- * @param {string} [ps_head] - 牌山开头
- * @param {string} [ps_back] - 牌山结尾
+ * @param ps_head - 牌山开头
+ * @param ps_back - 牌山结尾
  */
 let randomPaishan = (ps_head: string = '', ps_back: string = ''): void => {
     if (all_data.actions.length === 0)
@@ -208,8 +204,11 @@ let randomPaishan = (ps_head: string = '', ps_back: string = ''): void => {
         para_tiles[0] = [];
         while (deal_tiles[0].length > 0 || deal_tiles[1].length > 0 || deal_tiles[2].length > 0 || deal_tiles[3].length > 0)
             for (let i = ju + 1; i < ju + 1 + player_cnt; i++)
-                if (deal_tiles[i % player_cnt].length > 0)
-                    para_tiles[0].push(deal_tiles[i % player_cnt].shift());
+                if (deal_tiles[i % player_cnt].length > 0) {
+                    let tile = deal_tiles[i % player_cnt].shift();
+                    if (tile !== '..')
+                        para_tiles[0].push(tile);
+                }
     }
 
     // 减去两个参数的牌
@@ -373,7 +372,7 @@ let mopai = (...args: any[]): void => {
     // 参数预处理
     for (let i in args)
         if (typeof args[i] == 'string')
-            tile = args[i];
+            tile = args[i] as Tile;
         else if (typeof args[i] == 'number')
             seat = args[i] as Seat;
         else if (args[i] instanceof Array && typeof args[i][0] == 'number')
@@ -415,9 +414,9 @@ let mopai = (...args: any[]): void => {
             throw new Error(roundInfo() + ` mopai: 无法判断谁摸牌, getLstAction().name: ${lst_name}`);
     }
     if (tile === undefined && deal_tiles[seat].length > 0) {
-        tile = deal_tiles[seat].shift();
-        if (tile === '..')
-            tile = undefined;
+        let tmp_tile = deal_tiles[seat].shift();
+        if (tmp_tile !== '..')
+            tile = tmp_tile;
     }
 
     // 是否明牌
@@ -538,7 +537,7 @@ let qiepai = (...args: any[]): void => {
         else if (args[i] instanceof Array && typeof args[i][0] === 'number')
             beishui_type = args[i][0] as BeishuiType;
         else if (typeof args[i] == 'string')
-            tile = args[i];
+            tile = args[i] as Tile;
 
     lstActionCompletion();
 
@@ -555,9 +554,9 @@ let qiepai = (...args: any[]): void => {
     if (tile !== undefined && player_tiles[seat].indexOf(tile) !== player_tiles[seat].length - 1)
         moqie = false;
     if (tile === undefined && discard_tiles[seat].length > 0) {
-        tile = discard_tiles[seat].shift();
-        if (tile === '..')
-            tile = undefined;
+        let tmp_tile = discard_tiles[seat].shift();
+        if (tmp_tile !== '..')
+            tile = tmp_tile;
     }
     if (tile === undefined)
         tile = player_tiles[seat][player_tiles[seat].length - 1];
@@ -832,8 +831,8 @@ let mingpai = (...args: any[]): void => {
 
     /**
      * 判断玩家能否鸣 x 牌对应的一个组合
-     * @param {string[]} x - 牌型, 组合之一
-     * @param {Seat} seat - 鸣牌的玩家, 可能为 undefined
+     * @param x - 牌型, 组合之一
+     * @param seat - 鸣牌的玩家, 可能为 undefined
      */
     function trying(x: Tile[], seat: Seat): boolean {
         let x0 = allEqualTiles(x[0]).reverse(), x1 = allEqualTiles(x[1]).reverse(), x2: Tile[] = [];
@@ -855,7 +854,7 @@ let mingpai = (...args: any[]): void => {
 
         /**
          * 判断 x 牌对应的某个组合 try_tiles 能否有玩家能鸣
-         * @param {string[]} try_tiles - 牌型, 组合之一
+         * @param try_tiles - 牌型, 组合之一
          */
         function tryMingpai(try_tiles: Tile[]): boolean {
             for (let seat2: Seat = 0; seat2 < player_cnt; seat2++)
@@ -886,7 +885,7 @@ let zimingpai = (...args: any[]): void => {
         else if (typeof args[i] == 'boolean')
             jifei = args[i];
         else if (typeof args[i] == 'string')
-            tile = args[i];
+            tile = args[i] as Tile;
 
     if (seat === undefined) {
         seat = getLstAction().data.seat;
@@ -1430,8 +1429,8 @@ let huangpai = (): void => {
 
     /**
      * 计算 seat 号玩家的流局满贯导致的各家点数变动, 并返回流满点数
-     * @param {number} seat - seat 号玩家
-     * @param {number[]} cur_delta_scores - 该流满导致的玩家点数变动
+     * @param seat - seat 号玩家
+     * @param cur_delta_scores - 该流满导致的玩家点数变动
      */
     function calcScore(seat: Seat, cur_delta_scores: Players_Number): number {
         let score = 0;
@@ -1473,7 +1472,7 @@ let huangpai = (): void => {
 
 /**
  * 途中流局
- * @param {LiujuType} [liuju_type] - 流局类型, 若没有该参数, 则除了"三家和了"外, 由系统自动判断属于哪种流局
+ * @param liuju_type - 流局类型, 若没有该参数, 则除了"三家和了"外, 由系统自动判断属于哪种流局
  */
 let liuju = (liuju_type?: LiujuType): void => {
     let all_liuju = [jiuZhongJiuPai, siFengLianDa, siGangSanLe, siJiaLiZhi, sanJiaHuLe];
@@ -1571,8 +1570,8 @@ const setMuyuSeats = (m_seats: MuyuSeats): void => {
 
 /**
  * 换三张换牌(修罗/川麻)
- * @param {string[]} tls - 四名玩家交出去的牌
- * @param {HuanpaiType} type - 换牌方式, 0: 逆时针, 1: 对家, 2: 顺时针
+ * @param tls - 四名玩家交出去的牌
+ * @param type - 换牌方式, 0: 逆时针, 1: 对家, 2: 顺时针
  */
 const huanpai = (tls: string[], type: HuanpaiType): void => {
     let tiles = [separate(tls[0]), separate(tls[1]), separate(tls[2]), separate(tls[3])];
@@ -1602,7 +1601,7 @@ const huanpai = (tls: string[], type: HuanpaiType): void => {
  * @example
  * // seat 从0-3的定缺花色分别为"索,万,饼,索"
  * dingque('smps')
- * @param {GapsInput} x - 四位玩家的定缺
+ * @param x - 四位玩家的定缺
  */
 const dingque = (x: GapsInput): void => {
     let all_dingque = x.split('') as [GapInputType, GapInputType, GapInputType, GapInputType];
@@ -1657,9 +1656,9 @@ let kaipaiLock = (seat: Seat): void => {
 
 /**
  * 跳转局数
- * @param {number} c - 场 chang, 0,1,2,3 分别表示 东,南,西,北 场
- * @param {number} j - 局 ju, seat 为 ju 坐庄
- * @param {number} b - 本 ben, 本场数
+ * @param c - 场 chang, 0,1,2,3 分别表示 东,南,西,北 场
+ * @param j - 局 ju, seat 为 ju 坐庄
+ * @param b - 本 ben, 本场数
  */
 const setRound = (c: Seat, j: Seat, b: number): void => {
     chang = c;
@@ -1704,7 +1703,7 @@ const demoGame = (): void => {
 
 /**
  * 便捷函数: 正常摸切
- * @param {Tile|number} [tile_cnt] - 要切的牌(Tile)或循环次数(number), 默认为1
+ * @param tile_cnt - 要切的牌(Tile)或循环次数(number), 默认为1
  */
 const normalMoqie = (tile_cnt?: Tile | number): void => {
     if (tile_cnt === undefined)
@@ -1723,7 +1722,7 @@ const normalMoqie = (tile_cnt?: Tile | number): void => {
 
 /**
  * 便捷函数: 摸牌立直
- * @param {Tile|number} [tile_cnt] - 要切的牌(Tile)或循环次数(number), 默认为1
+ * @param tile_cnt - 要切的牌(Tile)或循环次数(number), 默认为1
  */
 const moqieLiqi = (tile_cnt?: Tile | number): void => {
     if (tile_cnt === undefined)
@@ -1742,7 +1741,7 @@ const moqieLiqi = (tile_cnt?: Tile | number): void => {
 
 /**
  * 便捷函数: 连续岭上摸牌
- * @param {number|string} [tile_cnt] - 要鸣的牌(string)或循环次数(number), 默认为1
+ * @param tile_cnt - 要鸣的牌(string)或循环次数(number), 默认为1
  */
 const comboMopai = (tile_cnt?: Tile | number): void => {
     if (tile_cnt === undefined)
@@ -1761,7 +1760,7 @@ const comboMopai = (tile_cnt?: Tile | number): void => {
 
 /**
  * 便捷函数: 鸣牌并切牌
- * @param {string|number} [tls_cnt] - 要切的牌(string, 1张牌)或鸣牌从手里拿出来的牌(string, 至少2张牌)或循环次数(number), 默认为1
+ * @param tls_cnt - 要切的牌(string, 1张牌)或鸣牌从手里拿出来的牌(string, 至少2张牌)或循环次数(number), 默认为1
  */
 const mingQiepai = (tls_cnt?: string | number): void => {
     if (tls_cnt === undefined)
@@ -1786,7 +1785,7 @@ const mingQiepai = (tls_cnt?: string | number): void => {
 
 /**
  * 便捷函数: 自摸和牌
- * @param {boolean} [flag] - 修罗/川麻: 即 hupai 中的 type 参数, 是否为最终和牌, 默认为中途和牌
+ * @param flag - 修罗/川麻: 即 hupai 中的 type 参数, 是否为最终和牌, 默认为中途和牌
  */
 const zimoHu = (flag: boolean = false): void => {
     if (typeof flag == 'boolean') {
@@ -1807,8 +1806,8 @@ const moqieLiuju = (): void => {
  * @example
  * // return true
  * judgeTile('1m', 'M')
- * @param {string} tile - 要验的牌
- * @param {string} type - 规则:
+ * @param tile - 要验的牌
+ * @param type - 规则:
  * - 'H': 字牌
  * - 'T': 老头牌
  * - 'Y': 幺九牌
@@ -1876,11 +1875,11 @@ const judgeTile = (tile: Tile, type: string): boolean => {
 const allEqualTiles = (tile: Tile): Tile[] => {
     if (tile === Constants.TBD)
         return [Constants.TBD];
-    tile = tile.substring(0, 2);
+    tile = tile.substring(0, 2) as Tile; // 去掉可能存在的 Constants.SPT_SUFFIX
     if (tile[0] === '0' || tile[0] === '5' && tile[1] !== 'z')
-        return ['5' + tile[1], '5' + tile[1] + Constants.SPT_SUFFIX, '0' + tile[1], '0' + tile[1] + Constants.SPT_SUFFIX];
+        return ['5' + tile[1], '5' + tile[1] + Constants.SPT_SUFFIX, '0' + tile[1], '0' + tile[1] + Constants.SPT_SUFFIX] as Tile[];
     else
-        return [tile, tile + Constants.SPT_SUFFIX];
+        return [tile, tile + Constants.SPT_SUFFIX] as Tile[];
 };
 
 // 判断两个牌是否等效
@@ -1922,19 +1921,19 @@ const decompose = (tiles: string): string => {
  * // return ['1m', '2m', '3m', '9p', '9p']
  * separate('123m99p')
  */
-const separate = (tiles: string | string[]): Tile[] => {
+const separate = (tiles: string | Tile[]): Tile[] => {
     if (!tiles)
         return [];
     if (tiles instanceof Array)
         return tiles;
     tiles = decompose(tiles);
-    let ret = [];
+    let ret: Tile[] = [];
     while (tiles.length > 0) {
         if (tiles.length > 2 && tiles[2] === Constants.SPT_SUFFIX) { // 第3位是 Constants.SPT_SUFFIX, 则是特殊牌
-            ret.push(tiles.substring(0, 3));
+            ret.push(tiles.substring(0, 3) as Tile);
             tiles = tiles.substring(3);
         } else {
-            ret.push(tiles.substring(0, 2));
+            ret.push(tiles.substring(0, 2) as Tile);
             tiles = tiles.substring(2);
         }
     }
@@ -1944,16 +1943,15 @@ const separate = (tiles: string | string[]): Tile[] => {
 /**
  * 计算手牌为 tiles 时的和牌型
  * @example
- * // return 1
  * calcHupai('11122233344455z')
- * @example
- * // return 3
+ * // return 1
  * calcHupai('19m19p19s11234567z')
- * // return 0, 因为牌少一张, 处于待牌状态, 不是和牌型
+ * // return 3
  * calcHupai('19m19p19s1234567z')
- * @param {string[]} tiles - 手牌
- * @param {boolean} [type] - 是否可能没有百搭牌, 默认为可能有百搭牌
- * @returns {number}
+ * // return 0, 因为牌少一张, 处于待牌状态, 不是和牌型
+ * @param tiles - 手牌
+ * @param type - 是否可能没有百搭牌, 默认为可能有百搭牌
+ * @returns
  * - 0: 不是和牌型
  * - 1: 一般型和牌
  * - 2: 七对子和牌
@@ -2140,11 +2138,11 @@ const calcHupai = (tiles: Tile[], type: boolean = false): number => {
 /**
  * 计算 seat 号玩家的所有听牌
  * @example
- * // return [{tile: '6m'}, {tile: '9m'}]
  * // 当 player_tiles[0] 为 separate('1122335577889m')
  * calcTingpai(0)
- * @param {number} seat - seat 号玩家
- * @param {boolean} [type] - 是否考虑听第5张(无虚听), 默认不考虑
+ * // return [{tile: '6m'}, {tile: '9m'}]
+ * @param seat - seat 号玩家
+ * @param type - 是否考虑听第5张(无虚听), 默认不考虑
  */
 const calcTingpai = (seat: Seat, type: boolean = false): { tile: Tile }[] => {
     if (is_chuanma() && huazhu(seat))
@@ -2175,7 +2173,7 @@ const calcTingpai = (seat: Seat, type: boolean = false): { tile: Tile }[] => {
 
 /**
  * 获取最近操作信息, 忽略 RecordChangeTile, RecordSelectGap, RecordGangResult, RecordFillAwaitingTiles 这几个操作
- * @param {number} [num] - 倒数第 num 个操作, 默认为1
+ * @param num - 倒数第 num 个操作, 默认为1
  */
 const getLstAction = (num: number = 1): Action => {
     if (actions.length > 0) {
@@ -2222,7 +2220,7 @@ let liqi_need: number;
  */
 let chang: Seat, ju: Seat, ben: number, liqibang: number, benchangbang: number;
 // 玩家的切牌集合和摸牌集合
-let discard_tiles: Players_TileArray, deal_tiles: Players_TileArray;
+let discard_tiles: Players_TileMoqieArray, deal_tiles: Players_TileMoqieArray;
 // 玩家的副露信息
 let fulu: Fulu;
 // 玩家的牌河
@@ -2280,7 +2278,7 @@ let shoumoqie: Players_BooleanArray;
 // 咏唱之战: 各家舍牌手摸切最大长度和bonus
 let yongchang_data: YongChangData;
 // 占星之战: 牌候选池, 通常长度为3
-let awaiting_tiles: [string?, string?, string?];
+let awaiting_tiles: [Tile?, Tile?, Tile?];
 // 庄家连续和牌连庄数量, 用于八连庄
 let lianzhuang_cnt: number;
 // 国标玩家是否已错和
@@ -2486,14 +2484,14 @@ const calcDoras = (): Doras => {
 
 /**
  * tile 编码转换为数字编码
- * @param {string} tile - 输入的牌
- * @param {boolean} [type] - 是否区分红宝牌, 默认不区分
- * @param {boolean} [sptile] - 是否区分以 Constants.SPT_SUFFIX 结尾的特殊牌, 默认不区分
+ * @param tile - 输入的牌
+ * @param type - 是否区分红宝牌, 默认不区分
+ * @param is_SP_tile - 是否区分以 Constants.SPT_SUFFIX 结尾的特殊牌, 默认不区分
  */
-const tile2Int = (tile: Tile, type: boolean = false, sptile: boolean = false): number => {
+const tile2Int = (tile: Tile, type: boolean = false, is_SP_tile: boolean = false): number => {
     if (tile === Constants.TBD) // 万象修罗百搭牌
         return 0;
-    if (!sptile || tile.length <= 2) {
+    if (!is_SP_tile || tile.length <= 2) {
         if (type && tile[0] === '0') {
             if (tile[1] === 'm')
                 return 35;
@@ -2539,21 +2537,21 @@ const tile2Int = (tile: Tile, type: boolean = false, sptile: boolean = false): n
 
 /**
  * 数字编码转换为 tile 编码
- * @param {number} x - 数字编码
- * @param {boolean} [type] - 是否生成带 Constants.SPT_SUFFIX 结尾的特殊牌
+ * @param x - 数字编码
+ * @param type - 是否生成带 Constants.SPT_SUFFIX 结尾的特殊牌
  */
-const int2Tile = (x: number, type: boolean = false): string => {
+const int2Tile = (x: number, type: boolean = false): Tile => {
     if (x === 0)
         return Constants.TBD;
     if (!type) {
         if (x >= 1 && x <= 9)
-            return x.toString() + 'm';
+            return x.toString() + 'm' as Tile;
         if (x >= 10 && x <= 18)
-            return (x - 9).toString() + 'p';
+            return (x - 9).toString() + 'p' as Tile;
         if (x >= 19 && x <= 27)
-            return (x - 18).toString() + 's';
+            return (x - 18).toString() + 's' as Tile;
         if (x >= 28 && x <= 34)
-            return (x - 27).toString() + 'z';
+            return (x - 27).toString() + 'z' as Tile;
         if (x === 35)
             return '0m';
         if (x === 36)
@@ -2562,19 +2560,19 @@ const int2Tile = (x: number, type: boolean = false): string => {
             return '0s';
     } else {
         if (x >= 1 && x <= 9)
-            return x.toString() + 'm' + Constants.SPT_SUFFIX;
+            return x.toString() + 'm' + Constants.SPT_SUFFIX as Tile;
         if (x >= 10 && x <= 18)
-            return (x - 9).toString() + 'p' + Constants.SPT_SUFFIX;
+            return (x - 9).toString() + 'p' + Constants.SPT_SUFFIX as Tile;
         if (x >= 19 && x <= 27)
-            return (x - 18).toString() + 's' + Constants.SPT_SUFFIX;
+            return (x - 18).toString() + 's' + Constants.SPT_SUFFIX as Tile;
         if (x >= 28 && x <= 34)
-            return (x - 27).toString() + 'z' + Constants.SPT_SUFFIX;
+            return (x - 27).toString() + 'z' + Constants.SPT_SUFFIX as Tile;
         if (x === 35)
-            return '0m' + Constants.SPT_SUFFIX;
+            return '0m' + Constants.SPT_SUFFIX as Tile;
         if (x === 36)
-            return '0p' + Constants.SPT_SUFFIX;
+            return '0p' + Constants.SPT_SUFFIX as Tile;
         if (x === 37)
-            return '0s' + Constants.SPT_SUFFIX;
+            return '0s' + Constants.SPT_SUFFIX as Tile;
     }
     throw new Error(roundInfo() + ` int2Tile 输入不合规: ${x}`);
 };
@@ -2622,9 +2620,9 @@ const updateShezhangzt = (seat: Seat): void => {
 /**
  * 更新同巡和立直预振听, zimingpai 不会造成舍张振听, 所以只有同巡和立直,
  * 此外, 暗杠只有国士听牌才有可能导致其他玩家振听
- * @param {number} seat - seat 号玩家
- * @param {string} tile - 相关操作的牌
- * @param {boolean} [is_angang] - 是否为暗杠
+ * @param seat - seat 号玩家
+ * @param tile - 相关操作的牌
+ * @param is_angang - 是否为暗杠, 默认否
  */
 const updatePrezhenting = (seat: Seat, tile: Tile, is_angang: boolean = false): void => {
     if (!is_chuanma() && !is_guobiao() && !no_zhenting()) {
@@ -2685,7 +2683,7 @@ const updateZhenting = (): void => {
 
 /**
  * 把 lst_liqi 中的信息赋值给 liqi_info, 并返回胶水代码用的 liqi
- * @param {boolean} [type] - 是否允许立直失败, 只会出现在血战到底模式中, 默认不允许
+ * @param type - 是否允许立直失败, 只会出现在血战到底模式中, 默认不允许
  */
 const lstLiqi2Liqi = (type: boolean = false): Liqi => {
     let ret = null;
@@ -2770,8 +2768,8 @@ const fulu2Ming = (seat: Seat): string[] => {
 
 /**
  * 配牌明牌, 如果有明的牌则去掉, 返回 true, 没有则返回 false
- * @param {number} seat - seat 号玩家
- * @param {string} tile - 牌的种类
+ * @param seat - seat 号玩家
+ * @param tile - 牌的种类
  */
 const eraseMingpai = (seat: Seat, tile: Tile): boolean => {
     if (mingpais[seat][tile2Int(tile, true)] > 0) {
@@ -2783,7 +2781,7 @@ const eraseMingpai = (seat: Seat, tile: Tile): boolean => {
 
 /**
  * 龙之目玉, 更新目玉
- * @param {boolean} [type] - 更新类型, true 表示生成新目玉, false 表示计数, 默认为 false
+ * @param type - 更新类型, true 表示生成新目玉, false 表示计数, 默认为 false
  */
 const updateMuyu = (type: boolean = false): void => {
     if (type) {
@@ -2802,7 +2800,7 @@ const updateMuyu = (type: boolean = false): void => {
 
 /**
  * 川麻, 判断 seat 玩家是否花猪
- * @param {number} seat - seat 号玩家
+ * @param seat - seat 号玩家
  */
 const huazhu = (seat: Seat): boolean => {
     // 注意 gaps 的 012 分别对应 pms, 而不是 mps
@@ -2827,7 +2825,7 @@ const huazhu = (seat: Seat): boolean => {
 
 /**
  * 幻境传说, 判断 tile 是否为 dora
- * @param {string} tile - 牌
+ * @param tile - 牌
  */
 const isDora = (tile: Tile): boolean => {
     if (tile2Int(tile) >= Constants.TILE_NUM.C0m && tile2Int(tile) <= Constants.TILE_NUM.C0s)
@@ -2841,8 +2839,8 @@ const isDora = (tile: Tile): boolean => {
 
 /**
  * 天命之战, 有多少天命牌
- * @param {number} seat - seat 号玩家
- * @param {boolean} zimo - 是否为自摸
+ * @param seat - seat 号玩家
+ * @param zimo - 是否为自摸
  */
 const calcTianming = (seat: Seat, zimo: boolean): number => {
     let sum = 1;
@@ -2880,8 +2878,8 @@ const updateShoumoqie = (seat: Seat): void => {
 
     /**
      * 咏唱之战, 计算 seat 号玩家的奖励番(绯, 苍)
-     * @param {number} seat - seat 号玩家
-     * @param {boolean} flag - 计算类型, false 表示摸切, true 表示手切
+     * @param seat - seat 号玩家
+     * @param flag - 计算类型, false 表示摸切, true 表示手切
      */
     function calcBonus(seat: Seat, flag: boolean) {
         const val = yongchang_data[seat][flag ? 'shouqie_count' : 'moqie_count'];
@@ -2940,7 +2938,7 @@ const calcXiaKeShang = (): [number, number, number, number] => {
 let huleOnePlayer = (seat: Seat): HuleInfo => {
     /**
      * 点数切上到整百
-     * @param {number} point - 原点数
+     * @param point - 原点数
      */
     const qieshang = (point: number): number => Math.ceil(point / 100) * 100;
 
@@ -3212,8 +3210,8 @@ let huleOnePlayer = (seat: Seat): HuleInfo => {
 
     /**
      * 通过素点计算 荣和, 自摸总计, 自摸收亲, 自摸收闲 的点数
-     * @param {number} c_sudian - 素点
-     * @returns {[number, number, number, number]} - 荣和, 自摸总计, 自摸收亲, 自摸收闲
+     * @param c_sudian - 素点
+     * @returns [荣和, 自摸总计, 自摸收亲, 自摸收闲]
      */
     function calcPoint(c_sudian: number): [number, number, number, number] {
         let rong: number, sum: number, zimo_qin: number, zimo_xian: number;
@@ -3489,9 +3487,9 @@ let huleOnePlayerGuobiao = (seat: Seat): HuleInfo => {
  * calcFan 组 - 立直
  *
  * 根据牌算番
- * @param {number} seat - 和牌的 seat 号玩家
- * @param {boolean} zimo - 是否是自摸
- * @param {number} fangchong - 放铳玩家的 seat, 只有在 zimo 为 false 有效
+ * @param seat - 和牌的 seat 号玩家
+ * @param zimo - 是否是自摸
+ * @param fangchong - 放铳玩家的 seat, 只有在 zimo 为 false 有效
  */
 const calcFan = (seat: Seat, zimo: boolean, fangchong?: Seat): CalcFanRet => {
     // 更新返回值
@@ -3684,7 +3682,7 @@ const calcFan = (seat: Seat, zimo: boolean, fangchong?: Seat): CalcFanRet => {
         /**
          * 核心算法, 根据所有前置动作计算手牌有哪些番
          *
-         * @param {number} tingpaifu - 听牌符数
+         * @param tingpaifu - 听牌符数
          */
         function calc0(tingpaifu: 0 | 2): CalcFanRet {
             // 删除 ans 中番为 id 的番
@@ -3788,16 +3786,16 @@ const calcFan = (seat: Seat, zimo: boolean, fangchong?: Seat): CalcFanRet => {
             }
             // ---------------------------------
             // jiulian[0] 用于判断是否为九莲, jiulian[1] 表示多出来的一张牌
-            let jiulian: [boolean, string] = [false, ''], yiqi = false, hunyise = false, qingyise = false;
+            let jiulian: [boolean, Tile?] = [false], yiqi = false, hunyise = false, qingyise = false;
             let jlbd = [0, 3, 1, 1, 1, 1, 1, 1, 1, 3];
             for (let k = 0; k <= 2; k++) {
                 if (shunzi[k * 9 + 2] >= 1 && shunzi[k * 9 + 5] >= 1 && shunzi[k * 9 + 8] >= 1)
                     yiqi = true;
 
-                jiulian = [true, ''];
+                jiulian = [true];
                 for (let i = Constants.TILE_NUM.C1m; i <= Constants.TILE_NUM.C9m; i++)
                     if (cnt2[k * 9 + i] < jlbd[i]) // 手牌中各种牌数量不满足
-                        jiulian = [false, ''];
+                        jiulian = [false];
                     else if (cnt2[k * 9 + i] > jlbd[i]) // 多出来的牌
                         jiulian[1] = int2Tile(k * 9 + i);
                 if (jiulian[0])
@@ -3805,7 +3803,7 @@ const calcFan = (seat: Seat, zimo: boolean, fangchong?: Seat): CalcFanRet => {
             }
             for (let i = Constants.TILE_NUM.C1m; i <= Constants.TILE_NUM.C7z; i++)
                 if (gangzi[i] >= 1) // 九莲不允许有杠子
-                    jiulian = [false, ''];
+                    jiulian = [false];
 
             for (let k = 0; k <= 3; k++) { // 0, 1, 2, 3 分别代表 m, p, s, z
                 hunyise = qingyise = true;
@@ -3847,9 +3845,9 @@ const calcFan = (seat: Seat, zimo: boolean, fangchong?: Seat): CalcFanRet => {
                     pinghu = false;
                 if (typecnt[i][7] === 1) {
                     // 雀头是自风, 场风, 三元
-                    if (tile2Int(((seat - ju + player_cnt) % player_cnt + 1).toString() + 'z') === i)
+                    if (tile2Int(((seat - ju + player_cnt) % player_cnt + 1).toString() + 'z' as Tile) === i)
                         pinghu = false;
-                    if (tile2Int((chang + 1).toString() + 'z') === i)
+                    if (tile2Int((chang + 1).toString() + 'z' as Tile) === i)
                         pinghu = false;
                     if (i >= Constants.TILE_NUM.C5z && i <= Constants.TILE_NUM.C7z)
                         pinghu = false;
@@ -4235,13 +4233,13 @@ const calcFan = (seat: Seat, zimo: boolean, fangchong?: Seat): CalcFanRet => {
                 ans.fans.push({val: kezi[Constants.TILE_NUM.C5z + 1], id: 8}); // 发
             if (kezi[Constants.TILE_NUM.C7z] >= 1)
                 ans.fans.push({val: kezi[Constants.TILE_NUM.C7z], id: 9}); // 中
-            if (kezi[tile2Int(((seat - ju + player_cnt) % player_cnt + 1).toString() + 'z')] >= 1)
+            if (kezi[tile2Int(((seat - ju + player_cnt) % player_cnt + 1).toString() + 'z' as Tile)] >= 1)
                 ans.fans.push({
-                    val: kezi[tile2Int(((seat - ju + player_cnt) % player_cnt + 1).toString() + 'z')],
+                    val: kezi[tile2Int(((seat - ju + player_cnt) % player_cnt + 1).toString() + 'z' as Tile)],
                     id: 10
                 }); // 自风
-            if (kezi[tile2Int((chang + 1).toString() + 'z')] >= 1)
-                ans.fans.push({val: kezi[tile2Int((chang + 1).toString() + 'z')], id: 11}); // 场风
+            if (kezi[tile2Int((chang + 1).toString() + 'z' as Tile)] >= 1)
+                ans.fans.push({val: kezi[tile2Int((chang + 1).toString() + 'z' as Tile)], id: 11}); // 场风
 
             if (flag_duanyao && (!no_shiduan() || no_shiduan() && menqing))
                 // 幻境传说: 机会卡4
@@ -4426,12 +4424,12 @@ const calcFan = (seat: Seat, zimo: boolean, fangchong?: Seat): CalcFanRet => {
                 if (typecnt[i][7] === 1) {
                     // 雀头符, 雀头是自风, 场风, 三元
                     if (no_lianfengsifu()) {
-                        if (i === tile2Int(((seat - ju + player_cnt) % player_cnt + 1).toString() + 'z') || i === tile2Int((chang + 1).toString() + 'z'))
+                        if (i === tile2Int(((seat - ju + player_cnt) % player_cnt + 1).toString() + 'z' as Tile) || i === tile2Int((chang + 1).toString() + 'z' as Tile))
                             ans.fu += 2;
                     } else {
-                        if (i === tile2Int(((seat - ju + player_cnt) % player_cnt + 1).toString() + 'z'))
+                        if (i === tile2Int(((seat - ju + player_cnt) % player_cnt + 1).toString() + 'z' as Tile))
                             ans.fu += 2;
-                        if (i === tile2Int((chang + 1).toString() + 'z'))
+                        if (i === tile2Int((chang + 1).toString() + 'z' as Tile))
                             ans.fu += 2;
                     }
                     if (i >= 32 && i <= 34)
@@ -4455,9 +4453,9 @@ const calcFan = (seat: Seat, zimo: boolean, fangchong?: Seat): CalcFanRet => {
  * calcFan 组 - 川麻
  *
  * 根据牌算番
- * @param {number} seat - 和牌的 seat 号玩家
- * @param {boolean} zimo - 是否是自摸
- * @param {boolean} [type] - false 表示正常和牌, true 表示查大叫的情况
+ * @param seat - 和牌的 seat 号玩家
+ * @param zimo - 是否是自摸
+ * @param type - false 表示正常和牌, true 表示查大叫的情况
  */
 const calcFanChuanma = (seat: Seat, zimo: boolean, type: boolean = false): CalcFanRet => {
     // 更新返回值
@@ -4605,7 +4603,7 @@ const calcFanChuanma = (seat: Seat, zimo: boolean, type: boolean = false): CalcF
         /**
          * 核心算法, 根据所有前置动作计算手牌有哪些番
          *
-         * @param {number} tingpaifu - 听牌符数, 这里没什么用
+         * @param tingpaifu - 听牌符数, 这里没什么用
          */
         function calc0(tingpaifu: 0 | 2): { fans: FansType; fu: number; } {
             let ans = {fans: [] as number[], fu: 0};
@@ -4791,8 +4789,8 @@ const calcFanChuanma = (seat: Seat, zimo: boolean, type: boolean = false): CalcF
  * calcFan 组 - 国标
  *
  * 根据牌算番
- * @param {number} seat - 和牌的 seat 号玩家
- * @param {boolean} zimo - 是否是自摸
+ * @param seat - 和牌的 seat 号玩家
+ * @param zimo - 是否是自摸
  */
 const calcFanGuobiao = (seat: Seat, zimo: boolean): CalcFanRet => {
     // 更新返回值
@@ -5021,13 +5019,13 @@ const calcFanGuobiao = (seat: Seat, zimo: boolean): CalcFanRet => {
         /**
          * 核心算法, 根据所有前置动作计算手牌有哪些番
          *
-         * @param {number} tingpaifu - 听牌符数, 这里没什么用
+         * @param tingpaifu - 听牌符数, 这里没什么用
          */
         function calc0(tingpaifu: 0 | 2): CalcFanRet {
             /**
              * ban 掉 ids 中 id 的番
              *
-             * @param {number|number[]} ids - ban 番列表
+             * @param ids - ban 番列表
              */
             const banFan = (ids: number | number[]): void => {
                 if (typeof ids == 'number')
@@ -5039,7 +5037,7 @@ const calcFanGuobiao = (seat: Seat, zimo: boolean): CalcFanRet => {
             /**
              * id 番是否已被 ban
              *
-             * @param {number} id - 查询番的 id
+             * @param id - 查询番的 id
              */
             const isBanned = (id: number): boolean => {
                 return ban_num[id - 8000];
@@ -5702,13 +5700,13 @@ const calcFanGuobiao = (seat: Seat, zimo: boolean): CalcFanRet => {
                 }
 
             if (!isBanned(8061))
-                for (let i = 0; i < kezi[tile2Int((chang + 1).toString() + 'z')]; i++) {
+                for (let i = 0; i < kezi[tile2Int((chang + 1).toString() + 'z' as Tile)]; i++) {
                     ans.fans.push({val: 2, id: 8061}); // 圈风刻
                     // 这副刻子不计幺九刻
                     ban_yaojiuke_num++;
                 }
             if (!isBanned(8062))
-                for (let i = 0; i < kezi[tile2Int(((seat - ju + player_cnt) % player_cnt + 1).toString() + 'z')]; i++) {
+                for (let i = 0; i < kezi[tile2Int(((seat - ju + player_cnt) % player_cnt + 1).toString() + 'z' as Tile)]; i++) {
                     ans.fans.push({val: 2, id: 8062}); // 门风刻
                     // 这副刻子不计幺九刻
                     ban_yaojiuke_num++;
@@ -5894,9 +5892,9 @@ const calcFanGuobiao = (seat: Seat, zimo: boolean): CalcFanRet => {
                 }
                 if (typecnt[i][7] === 1) {
                     // 雀头符, 雀头是自风, 场风, 三元
-                    if (i === tile2Int(((seat - ju + player_cnt) % player_cnt + 1).toString() + 'z'))
+                    if (i === tile2Int(((seat - ju + player_cnt) % player_cnt + 1).toString() + 'z' as Tile))
                         ans.fu += 2;
-                    if (i === tile2Int((chang + 1).toString() + 'z'))
+                    if (i === tile2Int((chang + 1).toString() + 'z' as Tile))
                         ans.fu += 2;
                     if (i >= Constants.TILE_NUM.C5z && i <= Constants.TILE_NUM.C7z)
                         ans.fu += 2;
@@ -5919,8 +5917,8 @@ const calcFanGuobiao = (seat: Seat, zimo: boolean): CalcFanRet => {
  * calcSudian 组 - 立直
  *
  * 根据算得的番计算素点
- * @param {CalcFanRet} x - 和牌信息
- * @param {number} [type] - 有效值0和1, 0是一般模式, 1表示比较模式, 默认为一般模式
+ * @param x - 和牌信息
+ * @param type - 有效值0和1, 0是一般模式, 1表示比较模式, 默认为一般模式
  */
 const calcSudian = (x: CalcFanRet, type: number = 0): number => {
     let fanfu = get_fanfu(), val = 0;
@@ -5954,8 +5952,8 @@ const calcSudian = (x: CalcFanRet, type: number = 0): number => {
  * calcSudian 组 - 川麻
  *
  * 根据算得的番计算素点
- * @param {CalcFanRet} x - 和牌信息
- * @param {number} [type] - 有效值0和1, 0是一般模式, 1表示比较模式, 默认为一般模式
+ * @param x - 和牌信息
+ * @param type - 有效值0和1, 0是一般模式, 1表示比较模式, 默认为一般模式
  */
 const calcSudianChuanma = (x: CalcFanRet, type: number = 0): number => {
     let val = 0;
@@ -5970,8 +5968,8 @@ const calcSudianChuanma = (x: CalcFanRet, type: number = 0): number => {
  * calcSudian 组 - 国标
  *
  * 根据算得的番计算素点
- * @param {CalcFanRet} x - 和牌信息
- * @param {boolean} [no_huapai] - 是否不考虑花牌, 默认考虑
+ * @param x - 和牌信息
+ * @param no_huapai - 是否不考虑花牌, 默认考虑
  */
 const calcSudianGuobiao = (x: CalcFanRet, no_huapai: boolean = false): number => {
     let val = 0;
@@ -5985,7 +5983,7 @@ const calcSudianGuobiao = (x: CalcFanRet, no_huapai: boolean = false): number =>
 
 /**
  * 川麻刮风下雨
- * @param {boolean} [type] - 是否完场, 默认不完场
+ * @param type - 是否完场, 默认不完场
  */
 const calcGangPoint = (type: boolean = false): void => {
     if (chuanma_gangs.notover.length === 0)
@@ -6041,8 +6039,8 @@ const roundEnd = (): void => {
 const gameEnd = (): void => {
     /**
      * 根据最终点数和座次确定位次的比较算法
-     * @param {{part_point_1: number, seat: number}} x - 参数1玩家的信息
-     * @param {{part_point_1: number, seat: number}} y - 参数2玩家的信息
+     * @param x - 参数1玩家的信息
+     * @param y - 参数2玩家的信息
      */
     const cmp2 = (x: Player_Player, y: Player_Player): number => {
         if (x.part_point_1 < y.part_point_1)
@@ -6090,10 +6088,10 @@ const roundInfo = (): string => {
 
 /**
  * 胶水代码: 开局
- * @param {number} left_tile_count - 剩余牌数
- * @param {string} fake_hash_code - 牌山虚假的 md5 或 sha256 码, 由下面 is_sha256 决定类型
- * @param {Opens} opens - 配牌明牌: 明的牌
- * @param {boolean} is_sha256 - 牌山是否包含起手
+ * @param left_tile_count - 剩余牌数
+ * @param fake_hash_code - 牌山虚假的 md5 或 sha256 码, 由下面 is_sha256 决定类型
+ * @param opens - 配牌明牌: 明的牌
+ * @param is_sha256 - 牌山是否包含起手
  */
 let addNewRound = (left_tile_count: number, fake_hash_code: string, opens: Opens, is_sha256: boolean): void => {
     actions.push(JSON.parse(JSON.stringify({
@@ -6126,12 +6124,12 @@ let addNewRound = (left_tile_count: number, fake_hash_code: string, opens: Opens
 
 /**
  * 胶水代码: 摸牌
- * @param {Seat} seat - 摸牌的玩家
- * @param {Tile} draw_card - 摸的牌
- * @param {Liqi} liqi - 刚立直玩家的立直信息
- * @param {boolean} tile_state - 配牌明牌: 摸的牌是否是明牌
- * @param {AwaitingIndex} zhanxing_index - 占星之战: 摸的牌在候选池的位置
- * @param {HunzhiyijiInfo_Player} hunzhiyiji_data - 魂之一击: 魂之一击立直数据
+ * @param seat - 摸牌的玩家
+ * @param draw_card - 摸的牌
+ * @param liqi - 刚立直玩家的立直信息
+ * @param tile_state - 配牌明牌: 摸的牌是否是明牌
+ * @param zhanxing_index - 占星之战: 摸的牌在候选池的位置
+ * @param hunzhiyiji_data - 魂之一击: 魂之一击立直数据
  */
 let addDealTile = (seat: Seat, draw_card: Tile, liqi: Liqi, tile_state: boolean, zhanxing_index: AwaitingIndex, hunzhiyiji_data: HunzhiyijiInfo_Player): void => {
     actions.push(JSON.parse(JSON.stringify({
@@ -6153,8 +6151,8 @@ let addDealTile = (seat: Seat, draw_card: Tile, liqi: Liqi, tile_state: boolean,
 
 /**
  * 胶水代码: 占星之战: 牌候选池填充
- * @param {Seat} seat - 要摸牌的玩家
- * @param {Liqi} liqi - 刚立直玩家的立直信息
+ * @param seat - 要摸牌的玩家
+ * @param liqi - 刚立直玩家的立直信息
  */
 let addFillAwaitingTiles = (seat: Seat, liqi: Liqi): void => {
     actions.push(JSON.parse(JSON.stringify({
@@ -6171,14 +6169,14 @@ let addFillAwaitingTiles = (seat: Seat, liqi: Liqi): void => {
 
 /**
  * 胶水代码: 切牌
- * @param {Seat} seat - 切牌的玩家
- * @param {Tile} tile - 切的牌
- * @param {boolean} moqie - 是否为摸切
- * @param {boolean} is_liqi - 是否立直
- * @param {boolean} is_wliqi - 是否为双立直
- * @param {boolean} is_kailiqi - 是否为开立直
- * @param {boolean} tile_state - 配牌明牌: 切的牌是否为明的牌
- * @param {BeishuiType} beishui_type - 背水之战: 立直类型
+ * @param seat - 切牌的玩家
+ * @param tile - 切的牌
+ * @param moqie - 是否为摸切
+ * @param is_liqi - 是否立直
+ * @param is_wliqi - 是否为双立直
+ * @param is_kailiqi - 是否为开立直
+ * @param tile_state - 配牌明牌: 切的牌是否为明的牌
+ * @param beishui_type - 背水之战: 立直类型
  */
 let addDiscardTile = (seat: Seat, tile: Tile, moqie: boolean, is_liqi: boolean, is_wliqi: boolean, is_kailiqi: boolean, tile_state: boolean, beishui_type: BeishuiType): void => {
     actions.push(JSON.parse(JSON.stringify({
@@ -6203,11 +6201,11 @@ let addDiscardTile = (seat: Seat, tile: Tile, moqie: boolean, is_liqi: boolean, 
 
 /**
  * 胶水代码: 暗夜之战暗牌
- * @param {Seat} seat - 暗牌的玩家
- * @param {Tile} tile - 切的牌
- * @param {boolean} moqie - 是否为摸切
- * @param {boolean} is_liqi - 是否立直
- * @param {boolean} is_wliqi - 是否为双立直
+ * @param seat - 暗牌的玩家
+ * @param tile - 切的牌
+ * @param moqie - 是否为摸切
+ * @param is_liqi - 是否立直
+ * @param is_wliqi - 是否为双立直
  */
 let addRevealTile = (seat: Seat, tile: Tile, moqie: boolean, is_liqi: boolean, is_wliqi: boolean): void => {
     actions.push(JSON.parse(JSON.stringify({
@@ -6227,11 +6225,11 @@ let addRevealTile = (seat: Seat, tile: Tile, moqie: boolean, is_liqi: boolean, i
 
 /**
  * 胶水代码: 暗夜之战锁牌
- * @param {Seat} seat - 切牌的玩家
- * @param {LockState} lock_state - 锁定状态, 0 为未锁定, 1 为锁定, 2 为无人开牌
- * @param {Tile} [tile] - 切的牌
+ * @param seat - 切牌的玩家
+ * @param lock_state - 锁定状态, 0 为未锁定, 1 为锁定, 2 为无人开牌
+ * @param tile - 切的牌
  */
-let addLockTile = (seat: Seat, lock_state: LockState, tile: Tile = ''): void => {
+let addLockTile = (seat: Seat, lock_state: LockState, tile: Tile | '' = ''): void => {
     actions.push(JSON.parse(JSON.stringify({
         name: 'RecordLockTile',
         data: {
@@ -6246,7 +6244,7 @@ let addLockTile = (seat: Seat, lock_state: LockState, tile: Tile = ''): void => 
 
 /**
  * 胶水代码: 暗夜之战开牌
- * @param {Seat} seat - 开牌的玩家
+ * @param seat - 开牌的玩家
  */
 let addUnveilTile = (seat: Seat): void => {
     actions.push(JSON.parse(JSON.stringify({
@@ -6261,12 +6259,12 @@ let addUnveilTile = (seat: Seat): void => {
 
 /**
  * 胶水代码: 他家鸣牌(吃/碰/明杠)
- * @param {Seat} seat - 鸣牌的玩家
- * @param {Tile[]} split_tiles - 参与鸣牌的所有牌
- * @param {Seat[]} froms - 副露的牌来自哪些玩家
- * @param {ChiPengGangType} type - 操作类型, 0吃, 1碰, 2明杠
- * @param {Liqi} liqi - 刚立直玩家的立直信息
- * @param {boolean[]} tile_states - 配牌明牌: 鸣出去的牌是否为明牌
+ * @param seat - 鸣牌的玩家
+ * @param split_tiles - 参与鸣牌的所有牌
+ * @param froms - 副露的牌来自哪些玩家
+ * @param type - 操作类型, 0吃, 1碰, 2明杠
+ * @param liqi - 刚立直玩家的立直信息
+ * @param tile_states - 配牌明牌: 鸣出去的牌是否为明牌
  */
 let addChiPengGang = (seat: Seat, split_tiles: Tile[], froms: Seat[], type: ChiPengGangType, liqi: Liqi, tile_states: boolean[]): void => {
     actions.push(JSON.parse(JSON.stringify({
@@ -6289,10 +6287,10 @@ let addChiPengGang = (seat: Seat, split_tiles: Tile[], froms: Seat[], type: ChiP
 
 /**
  * 胶水代码: 自家鸣牌(暗杠/加杠)
- * @param {Seat} seat - 鸣牌的玩家
- * @param {Tile} tile - 鸣的牌
- * @param {ZiMingType} ziming_type - 操作类型, 2加杠, 3暗杠
- * @param {boolean[]} tile_states - 配牌明牌: 鸣出去的牌是否为明牌
+ * @param seat - 鸣牌的玩家
+ * @param tile - 鸣的牌
+ * @param ziming_type - 操作类型, 2加杠, 3暗杠
+ * @param tile_states - 配牌明牌: 鸣出去的牌是否为明牌
  */
 let addAnGangAddGang = (seat: Seat, tile: Tile, ziming_type: ZiMingType, tile_states: boolean[]): void => {
     actions.push(JSON.parse(JSON.stringify({
@@ -6310,9 +6308,9 @@ let addAnGangAddGang = (seat: Seat, tile: Tile, ziming_type: ZiMingType, tile_st
 
 /**
  * 胶水代码: 自家鸣牌: 拔北
- * @param {Seat} seat - 拔北的玩家
- * @param {Tile} tile - 拔的牌
- * @param {boolean[]} tile_states - 配牌明牌: 拔出去的牌是否为明牌
+ * @param seat - 拔北的玩家
+ * @param tile - 拔的牌
+ * @param tile_states - 配牌明牌: 拔出去的牌是否为明牌
  */
 let addBaBei = (seat: Seat, tile: Tile, tile_states: boolean[]): void => {
     actions.push(JSON.parse(JSON.stringify({
@@ -6329,9 +6327,9 @@ let addBaBei = (seat: Seat, tile: Tile, tile_states: boolean[]): void => {
 
 /**
  * 胶水代码: 和牌
- * @param {HuleInfo[]} hule_info - 本次和牌所有的和牌信息
- * @param {Players_Number} old_scores - 结算前分数
- * @param {BaopaiT} baopait - 包牌玩家, 注意和数值比 seat 大1
+ * @param hule_info - 本次和牌所有的和牌信息
+ * @param old_scores - 结算前分数
+ * @param baopait - 包牌玩家, 注意和数值比 seat 大1
  */
 let endHule = (hule_info: HuleInfo[], old_scores: Players_Number, baopait: BaopaiT): void => {
     actions.push(JSON.parse(JSON.stringify({
@@ -6348,9 +6346,9 @@ let endHule = (hule_info: HuleInfo[], old_scores: Players_Number, baopait: Baopa
 
 /**
  * 胶水代码: 血战到底(修罗/川麻)中途和牌
- * @param {HuleInfo[]} hule_info - 本次和牌所有的和牌信息
- * @param {Players_Number} old_scores - 结算前分数
- * @param {Liqi} liqi - 刚立直玩家的立直信息
+ * @param hule_info - 本次和牌所有的和牌信息
+ * @param old_scores - 结算前分数
+ * @param liqi - 刚立直玩家的立直信息
  */
 let addHuleXueZhanMid = (hule_info: HuleInfo[], old_scores: Players_Number, liqi: Liqi): void => {
     actions.push(JSON.parse(JSON.stringify({
@@ -6367,8 +6365,8 @@ let addHuleXueZhanMid = (hule_info: HuleInfo[], old_scores: Players_Number, liqi
 
 /**
  * 胶水代码: 血战到底(修罗/川麻)完场和牌
- * @param {HuleInfo[]} hule_info - 本次和牌所有的和牌信息
- * @param {Players_Number} old_scores - 结算前分数
+ * @param hule_info - 本次和牌所有的和牌信息
+ * @param old_scores - 结算前分数
  */
 let endHuleXueZhanEnd = (hule_info: HuleInfo[], old_scores: Players_Number): void => {
     actions.push(JSON.parse(JSON.stringify({
@@ -6385,8 +6383,8 @@ let endHuleXueZhanEnd = (hule_info: HuleInfo[], old_scores: Players_Number): voi
 
 /**
  * 胶水代码: 自创函数: 血流成河中途和牌
- * @param {HuleInfo[]} hule_info - 本次和牌所有的和牌信息
- * @param {Players_Number} old_scores - 结算前分数
+ * @param hule_info - 本次和牌所有的和牌信息
+ * @param old_scores - 结算前分数
  */
 let addHuleXueLiuMid = (hule_info: HuleInfo[], old_scores: Players_Number): void => {
     actions.push(JSON.parse(JSON.stringify({
@@ -6404,8 +6402,8 @@ let addHuleXueLiuMid = (hule_info: HuleInfo[], old_scores: Players_Number): void
 
 /**
  * 胶水代码: 自创函数: 血流成河完场和牌
- * @param {HuleInfo[]} hule_info - 本次和牌所有的和牌信息
- * @param {Players_Number} old_scores - 结算前分数
+ * @param hule_info - 本次和牌所有的和牌信息
+ * @param old_scores - 结算前分数
  */
 let endHuleXueLiuEnd = (hule_info: HuleInfo[], old_scores: Players_Number): void => {
     actions.push(JSON.parse(JSON.stringify({
@@ -6424,9 +6422,9 @@ let endHuleXueLiuEnd = (hule_info: HuleInfo[], old_scores: Players_Number): void
 
 /**
  * 胶水代码: 荒牌流局
- * @param {boolean} liujumanguan - 是否有流局满贯
- * @param {TingInfo} ting_info - 玩家的听牌信息
- * @param {ScoresInfo} scores_info - 结算相关信息
+ * @param liujumanguan - 是否有流局满贯
+ * @param ting_info - 玩家的听牌信息
+ * @param scores_info - 结算相关信息
  */
 let endNoTile = (liujumanguan: boolean, ting_info: TingInfo, scores_info: ScoresInfo): void => {
     actions.push(JSON.parse(JSON.stringify({
@@ -6442,11 +6440,11 @@ let endNoTile = (liujumanguan: boolean, ting_info: TingInfo, scores_info: Scores
 
 /**
  * 胶水代码: 途中流局
- * @param {LiujuType} type - 流局的类型
- * @param {Seat} seat - 最后操作的玩家, 只有在九种九牌和三家和了有效
- * @param {Liqi} liqi - 立直信息
- * @param {Tile[]} [tiles] - 玩家的手牌, 只有在九种九牌有效
- * @param {string[]} allplayertiles - 所有玩家的手牌, 只有在四家立直和三家和了有效
+ * @param type - 流局的类型
+ * @param seat - 最后操作的玩家, 只有在九种九牌和三家和了有效
+ * @param liqi - 立直信息
+ * @param tiles - 玩家的手牌, 只有在九种九牌有效
+ * @param allplayertiles - 所有玩家的手牌, 只有在四家立直和三家和了有效
  */
 let endLiuJu = (type: LiujuType, seat: Seat, liqi: Liqi, tiles: Tile[], allplayertiles: string[]): void => {
     actions.push(JSON.parse(JSON.stringify({
@@ -6464,8 +6462,8 @@ let endLiuJu = (type: LiujuType, seat: Seat, liqi: Liqi, tiles: Tile[], allplaye
 
 /**
  * 胶水代码: 换三张换牌
- * @param {ChangeTileInfo} change_tile_infos - 换三张主体信息
- * @param {HuanpaiType} type - 换牌方式, 0: 逆时针, 1: 对家, 2: 顺时针
+ * @param change_tile_infos - 换三张主体信息
+ * @param type - 换牌方式, 0: 逆时针, 1: 对家, 2: 顺时针
  */
 let addChangeTile = (change_tile_infos: ChangeTileInfo, type: HuanpaiType): void => {
     actions.push(JSON.parse(JSON.stringify({
@@ -6482,7 +6480,7 @@ let addChangeTile = (change_tile_infos: ChangeTileInfo, type: HuanpaiType): void
 
 /**
  * 胶水代码: 川麻: 定缺
- * @param {Gaps} gap_types - 所有玩家的定缺
+ * @param gap_types - 所有玩家的定缺
  */
 let addSelectGap = (gap_types: Gaps): void => {
     actions.push(JSON.parse(JSON.stringify({
@@ -6496,7 +6494,7 @@ let addSelectGap = (gap_types: Gaps): void => {
 
 /**
  * 胶水代码: 川麻: 刮风下雨
- * @param {Players_Number} old_scores - 结算前分数
+ * @param old_scores - 结算前分数
  */
 let addGangResult = (old_scores: Players_Number): void => {
     actions.push(JSON.parse(JSON.stringify({
@@ -6513,7 +6511,7 @@ let addGangResult = (old_scores: Players_Number): void => {
 
 /**
  * 胶水代码: 川麻: 刮风下雨完场
- * @param {Players_Number} old_scores - 结算前分数
+ * @param old_scores - 结算前分数
  */
 let addGangResultEnd = (old_scores: Players_Number): void => {
     actions.push(JSON.parse(JSON.stringify({
@@ -6531,9 +6529,9 @@ let addGangResultEnd = (old_scores: Players_Number): void => {
 
 /**
  * 胶水代码: 自创函数, 国标错和配打
- * @param {Seat} seat - 错和的玩家
- * @param {boolean} zimo - 是否为自摸
- * @param {Players_Number} old_scores - 结算前分数
+ * @param seat - 错和的玩家
+ * @param zimo - 是否为自摸
+ * @param old_scores - 结算前分数
  */
 let addCuohu = (seat: Seat, zimo: boolean, old_scores: Players_Number): void => {
     actions.push(JSON.parse(JSON.stringify({
@@ -6624,7 +6622,7 @@ const get_chang_ju_ben_num = (): [Seat, Seat, number, number?] => {
 };
 
 // 第一局各玩家的点数
-const get_init_scores = (): [] | Players_Number => {
+const get_init_scores = (): Players_Number | [] => {
     if (config.mode.detail_rule._scores_ instanceof Array)
         return config.mode.detail_rule._scores_;
     return [];
@@ -10220,6 +10218,67 @@ const optimizeFunction = (): void => {
 };
 
 // ========================================================================
+
+class Constants {
+    // 亲家起手牌数量
+    public static readonly QIN_TILE_NUM = 14;
+    // 闲家起手牌数量
+    public static readonly XIAN_TILE_NUM = 13;
+    // 特殊牌的后缀
+    public static readonly SPT_SUFFIX = 't';
+    // 特殊牌和普通牌数字编码的差值
+    public static readonly SPT_OFFSET = 40;
+    // 国标麻将起和番
+    public static readonly GB_BASE_FAN = 8;
+    // 万象修罗百搭牌编码
+    public static readonly TBD = 'bd';
+    // 国标麻将起和番
+    public static readonly HUAPAI = '0m';
+    // 万象修罗百搭牌数字编码
+    public static readonly CBD = 0;
+    // 常用牌的数字编码
+    public static readonly TILE_NUM = Object.freeze({
+        C1m: 1,
+        C9m: 9,
+        C1p: 10,
+        C9p: 18,
+        C1s: 19,
+        C9s: 27,
+        C1z: 28,
+        C4z: 31,
+        C5z: 32,
+        C7z: 34,
+        C0m: 35,
+        C0p: 36,
+        C0s: 37,
+        C5m: 5,
+        C5p: 14,
+        C5s: 23,
+    });
+
+    /**
+     * 顺子中比它大的牌, 如果某张牌的数字编码(不区分红宝牌)为 i, 则由它构成的顺子中比它大1的牌的数字编码为 NXT2[i]
+     *
+     * 故可得出 即 j, NXT2[j], NXT2[NXT2[j]] 构成递增的顺子
+     *
+     * 如果不存在, 则指向 35, 36
+     *
+     * 数组长度为37
+     */
+    public static readonly NXT2: readonly number[] = [0, 2, 3, 4, 5, 6, 7, 8, 9, 35, 11, 12, 13, 14, 15, 16, 17, 18, 35, 20, 21, 22, 23, 24, 25, 26, 27, 35, 35, 35, 35, 35, 35, 35, 35, 36, 0];
+
+    /**
+     * 宝牌指示牌表, 如果某张指示牌的数字编码(不区分红宝牌)为 i, 则它对应的宝牌的数字编码为 DORA_NXT[i]
+     *
+     * 数组长度35
+     */
+    public static readonly DORA_NXT: readonly number[] = [0, 2, 3, 4, 5, 6, 7, 8, 9, 1, 11, 12, 13, 14, 15, 16, 17, 18, 10, 20, 21, 22, 23, 24, 25, 26, 27, 19, 29, 30, 31, 28, 33, 34, 32];
+}
+
+// ========================================================================
+// 兼容 TypeScript 语法的声明
+declare var editFunction: Function, editFunction2: Function, cfg: Cfg_Type, view: View_Type, GameMgr: GameMgr_Type,
+    uiscript: UIScript_Type;
 declare type Cfg_Type = {
     item_definition: {
         item: {
@@ -10307,7 +10366,15 @@ declare type UIScript_Type = {
     }
 };
 // ========================================================================
-type Tile = string;
+type HonorNumber = 1 | 2 | 3 | 4 | 5 | 6 | 7;
+type OrdinalNumber = 0 | HonorNumber | 8 | 9;
+type HonorType = 'z';
+type OrdinalType = 'm' | 'p' | 's';
+type HonorTile = `${HonorNumber}${HonorType}${'' | typeof Constants.SPT_SUFFIX}`;
+type OrdinalTile = `${OrdinalNumber}${OrdinalType}${'' | typeof Constants.SPT_SUFFIX}`;
+
+type Tile = HonorTile | OrdinalTile | typeof Constants.TBD;
+type TileWithMoqie = Tile | '..';
 type Seat = 0 | 1 | 2 | 3;
 type PlayerNum = 2 | 3 | 4;
 type ChiPengGangType = 0 | 1 | 2;
@@ -10502,6 +10569,7 @@ type Players_Number = [number, number, number?, number?];
 type Players_NumberArray = [number[], number[], number[]?, number[]?];
 type Players_Tile = [Tile, Tile, Tile?, Tile?];
 type Players_TileArray = [Tile[], Tile[], Tile[]?, Tile[]?];
+type Players_TileMoqieArray = [TileWithMoqie[], TileWithMoqie[], TileWithMoqie[]?, TileWithMoqie[]?];
 type Players_Boolean = [boolean, boolean, boolean?, boolean?];
 type Players_BooleanArray = [boolean[], boolean[], boolean[]?, boolean[]?];
 type PlayerDatas = [PlayerDatas_Player, PlayerDatas_Player, PlayerDatas_Player?, PlayerDatas_Player?];
@@ -10513,14 +10581,36 @@ type Players = [Player_Player, Player_Player, Player_Player?, Player_Player?];
 type HunzhiyijiInfo = [HunzhiyijiInfo_Player, HunzhiyijiInfo_Player, HunzhiyijiInfo_Player?, HunzhiyijiInfo_Player?];
 type YongChangData = [YongChangData_Player, YongChangData_Player, YongChangData_Player?, YongChangData_Player?];
 
-type GapInputType = 'm' | 'p' | 's';
+type GapInputType = OrdinalType;
 type GapsInput = `${GapInputType}${GapInputType}${GapInputType}${GapInputType}`;
 type GapType = 0 | 1 | 2;
 type Gaps = [GapType, GapType, GapType, GapType];
 
 type Doras = [Tile?, Tile?, Tile?, Tile?, Tile?];
 
-type ActionName = string;
+type ActionName =
+    | 'RecordNewRound'
+    | 'RecordDealTile'
+    | 'RecordFillAwaitingTiles'
+    | 'RecordDiscardTile'
+    | 'RecordRevealTile'
+    | 'RecordLockTile'
+    | 'RecordUnveilTile'
+    | 'RecordChiPengGang'
+    | 'RecordAnGangAddGang'
+    | 'RecordBaBei'
+    | 'RecordHule'
+    | 'RecordHuleXueZhanMid'
+    | 'RecordHuleXueZhanEnd'
+    | 'RecordHuleXueLiuMid'
+    | 'RecordHuleXueLiuEnd'
+    | 'RecordNoTile'
+    | 'RecordLiuJu'
+    | 'RecordChangeTile'
+    | 'RecordSelectGap'
+    | 'RecordGangResult'
+    | 'RecordGangResultEnd'
+    | 'RecordCuohu';
 type Action = { name: ActionName, data: ActionData };
 type Actions = Action[];
 
@@ -10590,59 +10680,3 @@ type AllData = {
     players: Players,
 };
 
-
-class Constants {
-    // 亲家起手牌数量
-    public static readonly QIN_TILE_NUM = 14;
-    // 闲家起手牌数量
-    public static readonly XIAN_TILE_NUM = 13;
-    // 特殊牌的后缀
-    public static readonly SPT_SUFFIX = 't';
-    // 特殊牌和普通牌数字编码的差值
-    public static readonly SPT_OFFSET = 40;
-    // 国标麻将起和番
-    public static readonly GB_BASE_FAN = 8;
-    // 万象修罗百搭牌编码
-    public static readonly TBD = 'bd';
-    // 国标麻将起和番
-    public static readonly HUAPAI = '0m';
-    // 万象修罗百搭牌数字编码
-    public static readonly CBD = 0;
-    // 常用牌的数字编码
-    public static readonly TILE_NUM = Object.freeze({
-        C1m: 1,
-        C9m: 9,
-        C1p: 10,
-        C9p: 18,
-        C1s: 19,
-        C9s: 27,
-        C1z: 28,
-        C4z: 31,
-        C5z: 32,
-        C7z: 34,
-        C0m: 35,
-        C0p: 36,
-        C0s: 37,
-        C5m: 5,
-        C5p: 14,
-        C5s: 23,
-    });
-
-    /**
-     * 顺子中比它大的牌, 如果某张牌的数字编码(不区分红宝牌)为 i, 则由它构成的顺子中比它大1的牌的数字编码为 NXT2[i]
-     *
-     * 故可得出 即 j, NXT2[j], NXT2[NXT2[j]] 构成递增的顺子
-     *
-     * 如果不存在, 则指向 35, 36
-     *
-     * 数组长度为37
-     */
-    public static readonly NXT2: readonly number[] = [0, 2, 3, 4, 5, 6, 7, 8, 9, 35, 11, 12, 13, 14, 15, 16, 17, 18, 35, 20, 21, 22, 23, 24, 25, 26, 27, 35, 35, 35, 35, 35, 35, 35, 35, 36, 0];
-
-    /**
-     * 宝牌指示牌表, 如果某张指示牌的数字编码(不区分红宝牌)为 i, 则它对应的宝牌的数字编码为 DORA_NXT[i]
-     *
-     * 数组长度35
-     */
-    public static readonly DORA_NXT: readonly number[] = [0, 2, 3, 4, 5, 6, 7, 8, 9, 1, 11, 12, 13, 14, 15, 16, 17, 18, 10, 20, 21, 22, 23, 24, 25, 26, 27, 19, 29, 30, 31, 28, 33, 34, 32];
-}
