@@ -3,13 +3,13 @@ clearProject();
 // 为了方便编辑不考虑换三张的过程
 
 player_datas[0].nickname = '辉夜姬-契约';
-player_datas[1].nickname = '择芳意';
-player_datas[2].nickname = '氤氲浮光';
-player_datas[3].nickname = '罗裳曼影';
+player_datas[1].nickname = '氤氲浮光';
+player_datas[2].nickname = '罗裳曼影';
+player_datas[3].nickname = '摇曳心情';
 player_datas[0].avatar_id = 402902;
-player_datas[1].avatar_id = 402904;
-player_datas[2].avatar_id = 402905;
-player_datas[3].avatar_id = 402906;
+player_datas[1].avatar_id = 402905;
+player_datas[2].avatar_id = 402906;
+player_datas[3].avatar_id = 402907;
 
 // 称号-神社贵宾
 player_datas[0].title = player_datas[1].title = player_datas[2].title = player_datas[3].title = 600038;

@@ -52,11 +52,11 @@ const setConfig = (c) => {
 };
 const setDiscardTiles = (tiles) => {
     for (let i in tiles)
-        discard_tiles[i] = separate(tiles[i]);
+        discard_tiles[i] = separateWithMoqie(tiles[i]);
 };
 const setDealTiles = (tiles) => {
     for (let i in tiles)
-        deal_tiles[i] = separate(tiles[i]);
+        deal_tiles[i] = separateWithMoqie(tiles[i]);
 };
 const setPaishan = (ps) => {
     paishan = separate(ps);
@@ -64,8 +64,8 @@ const setPaishan = (ps) => {
 let randomPaishan = (ps_head = '', ps_back = '') => {
     if (all_data.actions.length === 0)
         gameBegin();
-    let tiles = [separate(begin_tiles[0]), separate(begin_tiles[1]), separate(begin_tiles[2]), separate(begin_tiles[3])];
-    let para_tiles = [separate(ps_head), separate(ps_back)];
+    let tiles = [separateWithParam(begin_tiles[0]), separateWithParam(begin_tiles[1]), separateWithParam(begin_tiles[2]), separateWithParam(begin_tiles[3])];
+    let para_tiles = [separateWithParam(ps_head), separateWithParam(ps_back)];
     for (let i = 0; i < player_cnt; i++) {
         let tiles_len = tiles[i].length;
         if (i === ju) {
@@ -142,20 +142,24 @@ let randomPaishan = (ps_head = '', ps_back = '') => {
     }
     if (is_wanxiangxiuluo())
         cnt[Constants.CBD] = 4;
+    const sp_type = ['Y', 'D', 'T', 'H', 'M', 'P', 'S', '.'];
     for (let j = 0; j < player_cnt; j++)
         for (let i in tiles[j])
-            if (tiles[j][i].length > 2 && tiles[j][i][2] === Constants.SPT_SUFFIX && is_mingjing())
-                cnt2[tile2Int(tiles[j][i])]--;
-            else
-                cnt[tile2Int(tiles[j][i], true)]--;
+            if (sp_type.indexOf(tiles[j][i][0]) === -1)
+                if (tiles[j][i].length > 2 && tiles[j][i][2] === Constants.SPT_SUFFIX && is_mingjing())
+                    cnt2[tile2Int(tiles[j][i])]--;
+                else
+                    cnt[tile2Int(tiles[j][i], true)]--;
     if (is_mopai_paishan() && deal_tiles[ju].length > 0) {
         para_tiles[0] = [];
         while (deal_tiles[0].length > 0 || deal_tiles[1].length > 0 || deal_tiles[2].length > 0 || deal_tiles[3].length > 0)
             for (let i = ju + 1; i < ju + 1 + player_cnt; i++)
-                if (deal_tiles[i % player_cnt].length > 0)
-                    para_tiles[0].push(deal_tiles[i % player_cnt].shift());
+                if (deal_tiles[i % player_cnt].length > 0) {
+                    let tile = deal_tiles[i % player_cnt].shift();
+                    if (tile !== '..')
+                        para_tiles[0].push(tile);
+                }
     }
-    const sp_type = ['Y', 'D', 'T', 'H', 'M', 'P', 'S', '.'];
     for (let j in para_tiles)
         for (let i in para_tiles[j])
             if (sp_type.indexOf(para_tiles[j][i][0]) === -1)
@@ -319,9 +323,9 @@ let mopai = (...args) => {
             throw new Error(roundInfo() + ` mopai: 无法判断谁摸牌, getLstAction().name: ${lst_name}`);
     }
     if (tile === undefined && deal_tiles[seat].length > 0) {
-        tile = deal_tiles[seat].shift();
-        if (tile === '..')
-            tile = undefined;
+        let tmp_tile = deal_tiles[seat].shift();
+        if (tmp_tile !== '..')
+            tile = tmp_tile;
     }
     let tile_state = is_openhand() || liqi_info[seat].kai;
     if (is_zhanxing()) {
@@ -414,9 +418,9 @@ let qiepai = (...args) => {
     if (tile !== undefined && player_tiles[seat].indexOf(tile) !== player_tiles[seat].length - 1)
         moqie = false;
     if (tile === undefined && discard_tiles[seat].length > 0) {
-        tile = discard_tiles[seat].shift();
-        if (tile === '..')
-            tile = undefined;
+        let tmp_tile = discard_tiles[seat].shift();
+        if (tmp_tile !== '..')
+            tile = tmp_tile;
     }
     if (tile === undefined)
         tile = player_tiles[seat][player_tiles[seat].length - 1];
@@ -1480,6 +1484,44 @@ const separate = (tiles) => {
     }
     return ret;
 };
+const separateWithMoqie = (tiles) => {
+    if (!tiles)
+        return [];
+    if (tiles instanceof Array)
+        return tiles;
+    tiles = decompose(tiles);
+    let ret = [];
+    while (tiles.length > 0) {
+        if (tiles.length > 2 && tiles[2] === Constants.SPT_SUFFIX) {
+            ret.push(tiles.substring(0, 3));
+            tiles = tiles.substring(3);
+        }
+        else {
+            ret.push(tiles.substring(0, 2));
+            tiles = tiles.substring(2);
+        }
+    }
+    return ret;
+};
+const separateWithParam = (tiles) => {
+    if (!tiles)
+        return [];
+    if (tiles instanceof Array)
+        return tiles;
+    tiles = decompose(tiles);
+    let ret = [];
+    while (tiles.length > 0) {
+        if (tiles.length > 2 && tiles[2] === Constants.SPT_SUFFIX) {
+            ret.push(tiles.substring(0, 3));
+            tiles = tiles.substring(3);
+        }
+        else {
+            ret.push(tiles.substring(0, 2));
+            tiles = tiles.substring(2);
+        }
+    }
+    return ret;
+};
 const calcHupai = (tiles, type = false) => {
     let cnt = [], tmp = [];
     for (let i = Constants.CBD; i <= Constants.TILE_NUM.C7z; i++)
@@ -1879,10 +1921,10 @@ const calcDoras = () => {
         doras0[i] = doras[i];
     return doras0;
 };
-const tile2Int = (tile, type = false, sptile = false) => {
+const tile2Int = (tile, type = false, is_SP_tile = false) => {
     if (tile === Constants.TBD)
         return 0;
-    if (!sptile || tile.length <= 2) {
+    if (!is_SP_tile || tile.length <= 2) {
         if (type && tile[0] === '0') {
             if (tile[1] === 'm')
                 return 35;
@@ -2040,6 +2082,20 @@ const updatePrezhenting = (seat, tile, is_angang = false) => {
 const updateZhenting = () => {
     for (let i = 0; i < player_cnt; i++)
         zhenting[i] = shezhangzt[i] || tongxunzt[i] || lizhizt[i];
+};
+const isTile = (tile) => {
+    if (tile === Constants.TBD)
+        return true;
+    let tmp_tile = tile.substring(0, 2);
+    if (tmp_tile[1] === 'z') {
+        let num = parseInt(tmp_tile[0]);
+        return !(isNaN(num) || num < 1 || num > 7);
+    }
+    if (tmp_tile[1] === 'm' || tmp_tile[1] === 'p' || tmp_tile[1] === 's') {
+        let num = parseInt(tmp_tile[0]);
+        return !(isNaN(num) || num < 0 || num > 9);
+    }
+    return false;
 };
 const lstLiqi2Liqi = (type = false) => {
     let ret = null;
@@ -2988,15 +3044,15 @@ const calcFan = (seat, zimo, fangchong) => {
                 if (!flag)
                     wumenqi = false;
             }
-            let jiulian = [false, ''], yiqi = false, hunyise = false, qingyise = false;
+            let jiulian = [false], yiqi = false, hunyise = false, qingyise = false;
             let jlbd = [0, 3, 1, 1, 1, 1, 1, 1, 1, 3];
             for (let k = 0; k <= 2; k++) {
                 if (shunzi[k * 9 + 2] >= 1 && shunzi[k * 9 + 5] >= 1 && shunzi[k * 9 + 8] >= 1)
                     yiqi = true;
-                jiulian = [true, ''];
+                jiulian = [true];
                 for (let i = Constants.TILE_NUM.C1m; i <= Constants.TILE_NUM.C9m; i++)
                     if (cnt2[k * 9 + i] < jlbd[i])
-                        jiulian = [false, ''];
+                        jiulian = [false];
                     else if (cnt2[k * 9 + i] > jlbd[i])
                         jiulian[1] = int2Tile(k * 9 + i);
                 if (jiulian[0])
@@ -3004,7 +3060,7 @@ const calcFan = (seat, zimo, fangchong) => {
             }
             for (let i = Constants.TILE_NUM.C1m; i <= Constants.TILE_NUM.C7z; i++)
                 if (gangzi[i] >= 1)
-                    jiulian = [false, ''];
+                    jiulian = [false];
             for (let k = 0; k <= 3; k++) {
                 hunyise = qingyise = true;
                 for (let i = Constants.TILE_NUM.C1m; i <= Constants.TILE_NUM.C7z; i++)

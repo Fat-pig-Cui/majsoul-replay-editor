@@ -1,4 +1,4 @@
-(function () {
+!function () {
     let paipulink = prompt('Please Enter a Paipu Link or Paipu UUID.');
     if (!paipulink)
         throw new Error('User canceled input')
@@ -236,4 +236,4 @@
             return `${chang_word[chang]}${ju + 1}局${ben}本场`;
         }
     }
-})();
+}();

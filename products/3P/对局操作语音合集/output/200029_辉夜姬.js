@@ -1,11 +1,11 @@
 clearProject();
 
 player_datas[0].nickname = '辉夜姬-契约';
-player_datas[1].nickname = '氤氲浮光';
-player_datas[2].nickname = '罗裳曼影';
+player_datas[1].nickname = '罗裳曼影';
+player_datas[2].nickname = '摇曳心情';
 player_datas[0].avatar_id = 402902;
-player_datas[1].avatar_id = 402905;
-player_datas[2].avatar_id = 402906;
+player_datas[1].avatar_id = 402906;
+player_datas[2].avatar_id = 402907;
 
 // 称号-神社贵宾
 player_datas[0].title = player_datas[1].title = player_datas[2].title = 600038;

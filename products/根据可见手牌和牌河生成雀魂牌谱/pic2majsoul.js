@@ -3,7 +3,7 @@
  * 1. 自家摸牌后选择切什么牌(第一类何切)
  * 2. 其他家切牌后自家是否要鸣牌, 和鸣牌后切什么牌(第二类何切)
  */
-!(function () {
+!function () {
     /**
      * 用户修改 json 数据
      * - player_count: 玩家数
@@ -51,7 +51,7 @@
     let new_discard_tiles = [[], [], [], []];
     let qiepai_xun = [0, 0, 0, 0], fulu_index = [0, 0, 0, 0];
     // 预处理
-    !(function () {
+    !function () {
         clearProject();
         player_datas[0].avatar_id = 400102;
         player_datas[1].avatar_id = 400104;
@@ -177,7 +177,7 @@
             }
             return ret;
         }
-    })();
+    }();
 
     let seat = ju, nxt_step = 'qiepai';
     while (true) {
@@ -272,7 +272,7 @@
         mopai(json.mainrole, json.lst_mopai);
 
     huangpai();
-})();
+}();
 
 // // official
 // json = {

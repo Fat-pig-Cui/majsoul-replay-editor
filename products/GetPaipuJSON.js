@@ -1,4 +1,4 @@
-(function () {
+!function () {
     let paipulink = prompt('Please Enter a Paipu Link or Paipu UUID.');
     if (!paipulink)
         throw new Error('User canceled input');
@@ -67,4 +67,4 @@
             gameRecordJson.data = {name: gameDetailRecordsWrapper.name, data: gameDetailRecordsJson};
             download(gameRecordJson, uuid);
         });
-})();
+}();

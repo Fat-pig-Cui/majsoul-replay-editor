@@ -79,15 +79,15 @@ const setConfig = (c: Config): void => {
 };
 
 // 设置玩家的切牌集合
-const setDiscardTiles = (tiles: Players_Tile): void => {
+const setDiscardTiles = (tiles: Players_String): void => {
     for (let i in tiles)
-        discard_tiles[i] = separate(tiles[i]);
+        discard_tiles[i] = separateWithMoqie(tiles[i]);
 };
 
 // 设置玩家的摸牌集合
-const setDealTiles = (tiles: Players_Tile): void => {
+const setDealTiles = (tiles: Players_String): void => {
     for (let i in tiles)
-        deal_tiles[i] = separate(tiles[i]);
+        deal_tiles[i] = separateWithMoqie(tiles[i]);
 };
 
 // 手动设置牌山(参数不含起手)
@@ -107,8 +107,8 @@ let randomPaishan = (ps_head: string = '', ps_back: string = ''): void => {
     if (all_data.actions.length === 0)
         gameBegin();
 
-    let tiles = [separate(begin_tiles[0]), separate(begin_tiles[1]), separate(begin_tiles[2]), separate(begin_tiles[3])];
-    let para_tiles = [separate(ps_head), separate(ps_back)];
+    let tiles = [separateWithParam(begin_tiles[0]), separateWithParam(begin_tiles[1]), separateWithParam(begin_tiles[2]), separateWithParam(begin_tiles[3])];
+    let para_tiles = [separateWithParam(ps_head), separateWithParam(ps_back)];
 
     // 检查手牌数量是否合规
     for (let i = 0; i < player_cnt; i++) {
@@ -192,13 +192,15 @@ let randomPaishan = (ps_head: string = '', ps_back: string = ''): void => {
     if (is_wanxiangxiuluo())
         cnt[Constants.CBD] = 4;
 
+    const sp_type = ['Y', 'D', 'T', 'H', 'M', 'P', 'S', '.'];
     // 减去玩家起手
     for (let j = 0; j < player_cnt; j++)
         for (let i in tiles[j])
-            if (tiles[j][i].length > 2 && tiles[j][i][2] === Constants.SPT_SUFFIX && is_mingjing())
-                cnt2[tile2Int(tiles[j][i])]--;
-            else
-                cnt[tile2Int(tiles[j][i], true)]--;
+            if (sp_type.indexOf(tiles[j][i][0]) === -1)
+                if (tiles[j][i].length > 2 && tiles[j][i][2] === Constants.SPT_SUFFIX && is_mingjing())
+                    cnt2[tile2Int(tiles[j][i] as Tile)]--;
+                else
+                    cnt[tile2Int(tiles[j][i] as Tile, true)]--;
 
     if (is_mopai_paishan() && deal_tiles[ju].length > 0) {
         para_tiles[0] = [];
@@ -212,14 +214,13 @@ let randomPaishan = (ps_head: string = '', ps_back: string = ''): void => {
     }
 
     // 减去两个参数的牌
-    const sp_type = ['Y', 'D', 'T', 'H', 'M', 'P', 'S', '.'];
     for (let j in para_tiles)
         for (let i in para_tiles[j])
             if (sp_type.indexOf(para_tiles[j][i][0]) === -1)
                 if (para_tiles[j][i].length === 3 && para_tiles[j][i][2] === Constants.SPT_SUFFIX)
-                    cnt2[tile2Int(para_tiles[j][i], true)]--;
+                    cnt2[tile2Int(para_tiles[j][i] as Tile, true)]--;
                 else
-                    cnt[tile2Int(para_tiles[j][i], true)]--;
+                    cnt[tile2Int(para_tiles[j][i] as Tile, true)]--;
 
     let remain_tiles: Tile[] = [];
     for (let i = Constants.TILE_NUM.C1m; i <= Constants.TILE_NUM.C0s; i++) {
@@ -261,9 +262,9 @@ let randomPaishan = (ps_head: string = '', ps_back: string = ''): void => {
             console.warn(roundInfo() + `paishan 不合规: ${3 - cnt2[i]} 个 ${int2Tile(parseInt(i), true)}`);
     }
 
-    paishan = para_tiles[0].concat(remain_tiles, para_tiles[1]);
+    paishan = para_tiles[0].concat(remain_tiles, para_tiles[1]) as Tile[];
 
-    function randomize(tls: Tile[]): void {
+    function randomize(tls: TileWithParam[]): void {
         for (let i in tls)
             if (tls[i][0] === 'H' || tls[i][0] === 'T') {
                 let index = remain_tiles.findIndex((tile: Tile) => judgeTile(tile, tls[i][0]));
@@ -365,7 +366,7 @@ const roundBegin = (): void => {
  * 摸牌, 参数顺序可以不一致, 包含
  * - {Seat} - 摸牌的玩家, 没有此参数时按照正常对局流程
  * - {Tile} - 摸的牌, 没有此参数时将根据 deal_tiles 或牌山确定
- * - {[AwaitingIndex]} - 占星之战: 牌候选池中选择的牌位置, 后面会变为 AwaitingIndex 类型
+ * - {AwaitingIndex} - 占星之战: 牌候选池中选择的牌位置, 后面会变为 AwaitingIndex 类型
  */
 let mopai = (...args: any[]): void => {
     let seat: Seat, tile: Tile, index: AwaitingIndex;
@@ -1941,6 +1942,56 @@ const separate = (tiles: string | Tile[]): Tile[] => {
 };
 
 /**
+ * 拆分牌为数组, 比 separate 更进一步, 加入了摸切
+ * @example
+ * // return ['1m', '2m', '3m', '..', '9p']
+ * separateWithMoqie('123m.9p')
+ */
+const separateWithMoqie = (tiles: string | TileWithMoqie[]): TileWithMoqie[] => {
+    if (!tiles)
+        return [];
+    if (tiles instanceof Array)
+        return tiles;
+    tiles = decompose(tiles);
+    let ret: TileWithMoqie[] = [];
+    while (tiles.length > 0) {
+        if (tiles.length > 2 && tiles[2] === Constants.SPT_SUFFIX) { // 第3位是 Constants.SPT_SUFFIX, 则是特殊牌
+            ret.push(tiles.substring(0, 3) as TileWithMoqie);
+            tiles = tiles.substring(3);
+        } else {
+            ret.push(tiles.substring(0, 2) as TileWithMoqie);
+            tiles = tiles.substring(2);
+        }
+    }
+    return ret;
+};
+
+/**
+ * 拆分牌为数组, 比 separateWithMoqie 更进一步, 可以拆分随机牌
+ * @example
+ * // return ['1m', '2m', '3m', 'YY', '9p']
+ * separateWithParam('123mY9p')
+ */
+const separateWithParam = (tiles: string | TileWithParam[]): TileWithParam[] => {
+    if (!tiles)
+        return [];
+    if (tiles instanceof Array)
+        return tiles;
+    tiles = decompose(tiles);
+    let ret: TileWithParam[] = [];
+    while (tiles.length > 0) {
+        if (tiles.length > 2 && tiles[2] === Constants.SPT_SUFFIX) { // 第3位是 Constants.SPT_SUFFIX, 则是特殊牌
+            ret.push(tiles.substring(0, 3) as TileWithParam);
+            tiles = tiles.substring(3);
+        } else {
+            ret.push(tiles.substring(0, 2) as TileWithParam);
+            tiles = tiles.substring(2);
+        }
+    }
+    return ret;
+};
+
+/**
  * 计算手牌为 tiles 时的和牌型
  * @example
  * calcHupai('11122233344455z')
@@ -2680,6 +2731,24 @@ const updateZhenting = (): void => {
 };
 
 // ========================================================================
+
+/**
+ * 判断 tile 字符串是否合法
+ */
+const isTile = (tile: string): boolean => {
+    if (tile === Constants.TBD)
+        return true;
+    let tmp_tile = tile.substring(0, 2);
+    if (tmp_tile[1] === 'z'){
+        let num = parseInt(tmp_tile[0]);
+        return !(isNaN(num) || num < 1 || num > 7);
+    }
+    if (tmp_tile[1] === 'm' || tmp_tile[1] === 'p' || tmp_tile[1] === 's') {
+        let num = parseInt(tmp_tile[0]);
+        return !(isNaN(num) || num < 0 || num > 9);
+    }
+    return false;
+};
 
 /**
  * 把 lst_liqi 中的信息赋值给 liqi_info, 并返回胶水代码用的 liqi
@@ -10375,6 +10444,7 @@ type OrdinalTile = `${OrdinalNumber}${OrdinalType}${'' | typeof Constants.SPT_SU
 
 type Tile = HonorTile | OrdinalTile | typeof Constants.TBD;
 type TileWithMoqie = Tile | '..';
+type TileWithParam = TileWithMoqie | 'YY' | 'DD' | 'TT' | 'HH' | 'MM' | 'PP' | 'SS';
 type Seat = 0 | 1 | 2 | 3;
 type PlayerNum = 2 | 3 | 4;
 type ChiPengGangType = 0 | 1 | 2;
@@ -10567,7 +10637,7 @@ type YongChangData_Player = {
 
 type Players_Number = [number, number, number?, number?];
 type Players_NumberArray = [number[], number[], number[]?, number[]?];
-type Players_Tile = [Tile, Tile, Tile?, Tile?];
+type Players_String = [string, string, string?, string?];
 type Players_TileArray = [Tile[], Tile[], Tile[]?, Tile[]?];
 type Players_TileMoqieArray = [TileWithMoqie[], TileWithMoqie[], TileWithMoqie[]?, TileWithMoqie[]?];
 type Players_Boolean = [boolean, boolean, boolean?, boolean?];

@@ -1,13 +1,13 @@
 clearProject();
 
 player_datas[0].nickname = '泷川夏彦-契约';
-player_datas[1].nickname = '泷川夏彦';
-player_datas[2].nickname = '氤氲浮光';
-player_datas[3].nickname = '贺今朝';
+player_datas[1].nickname = '氤氲浮光';
+player_datas[2].nickname = '贺今朝';
+player_datas[3].nickname = '摇曳心情';
 player_datas[0].avatar_id = 404902;
-player_datas[1].avatar_id = 404901;
-player_datas[2].avatar_id = 404903;
-player_datas[3].avatar_id = 404904;
+player_datas[1].avatar_id = 404903;
+player_datas[2].avatar_id = 404904;
+player_datas[3].avatar_id = 404905;
 
 setConfig({
     category: 2,
