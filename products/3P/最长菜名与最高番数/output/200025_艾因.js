@@ -4,11 +4,11 @@ clearProject();
 // 最后一局闲家的最长菜名(15条55番)
 
 player_datas[0].nickname = '艾因-契约';
-player_datas[1].nickname = '命运之夏';
-player_datas[2].nickname = '天黑请闭眼';
+player_datas[1].nickname = '天黑请闭眼';
+player_datas[2].nickname = '雪间春信';
 player_datas[0].avatar_id = 402502;
-player_datas[1].avatar_id = 402503;
-player_datas[2].avatar_id = 402504;
+player_datas[1].avatar_id = 402504;
+player_datas[2].avatar_id = 402505;
 
 setConfig({
     category: 1,

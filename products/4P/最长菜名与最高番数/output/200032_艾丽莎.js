@@ -1,13 +1,13 @@
 clearProject();
 
 player_datas[0].nickname = '艾丽莎-契约';
-player_datas[1].nickname = '择芳意';
-player_datas[2].nickname = '天黑请闭眼';
-player_datas[3].nickname = '心跳时速';
+player_datas[1].nickname = '天黑请闭眼';
+player_datas[2].nickname = '心跳时速';
+player_datas[3].nickname = '纯白乐章';
 player_datas[0].avatar_id = 403202;
-player_datas[1].avatar_id = 403204;
-player_datas[2].avatar_id = 403205;
-player_datas[3].avatar_id = 403206;
+player_datas[1].avatar_id = 403205;
+player_datas[2].avatar_id = 403206;
+player_datas[3].avatar_id = 403207;
 
 player_datas[0].views = player_datas[1].views = player_datas[2].views = player_datas[3].views = [
     {slot: 6, item_id: 305803}, // 桌布-堆雪人

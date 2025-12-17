@@ -3,13 +3,13 @@ clearProject();
 // 为了方便编辑不考虑换三张的过程
 
 player_datas[0].nickname = '艾因-契约';
-player_datas[1].nickname = '艾因';
-player_datas[2].nickname = '命运之夏';
-player_datas[3].nickname = '天黑请闭眼';
+player_datas[1].nickname = '命运之夏';
+player_datas[2].nickname = '天黑请闭眼';
+player_datas[3].nickname = '雪间春信';
 player_datas[0].avatar_id = 402502;
-player_datas[1].avatar_id = 402501;
-player_datas[2].avatar_id = 402503;
-player_datas[3].avatar_id = 402504;
+player_datas[1].avatar_id = 402503;
+player_datas[2].avatar_id = 402504;
+player_datas[3].avatar_id = 402505;
 
 setConfig({
     category: 1,

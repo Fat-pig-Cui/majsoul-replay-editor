@@ -17,7 +17,7 @@ const clearProject = () => {
     game_begin_once = true;
     for (let i = 0; i < 4; i++)
         player_datas[i] = {
-            nickname: '电脑0',
+            nickname: `电脑${i}`,
             avatar_id: 400101,
             title: 600001,
             avatar_frame: 0,
@@ -1906,8 +1906,10 @@ const calcXun = () => {
             xun[i].push(actions.length - 1);
 };
 const calcDoras = () => {
-    dora_cnt.cnt = Math.min(dora_cnt.cnt, 5);
-    dora_cnt.licnt = Math.min(dora_cnt.licnt, 5);
+    if (dora_cnt.cnt > 5)
+        dora_cnt.cnt = 5;
+    if (dora_cnt.licnt > 5)
+        dora_cnt.licnt = 5;
     if (no_ganglidora())
         dora_cnt.licnt = 1;
     if (no_gangdora())

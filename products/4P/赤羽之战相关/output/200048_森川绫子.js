@@ -3,13 +3,13 @@ clearProject();
 // 为了方便编辑不考虑换三张的过程
 
 player_datas[0].nickname = '森川绫子-契约';
-player_datas[1].nickname = '满分假期';
-player_datas[2].nickname = '拂晓的G大调';
-player_datas[3].nickname = '不寐之绊';
+player_datas[1].nickname = '拂晓的G大调';
+player_datas[2].nickname = '不寐之绊';
+player_datas[3].nickname = '纯白乐章';
 player_datas[0].avatar_id = 404802;
-player_datas[1].avatar_id = 404803;
-player_datas[2].avatar_id = 404804;
-player_datas[3].avatar_id = 404805;
+player_datas[1].avatar_id = 404804;
+player_datas[2].avatar_id = 404805;
+player_datas[3].avatar_id = 404806;
 
 setConfig({
     category: 1,

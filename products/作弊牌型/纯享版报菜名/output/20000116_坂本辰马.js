@@ -49,7 +49,6 @@ huleOnePlayer = seat => {
         {val: 1, id: 13}, // 一杯口
         {val: 3, id: 28}, // 二杯口
         {val: 2, id: 25}, // 七对子
-        {val: 1, id: 7}, // 役牌 白
     ];
     player_tiles[seat].pop();
     delta_scores = [-16000, -8000, 32000, -8000];
@@ -89,6 +88,7 @@ setRound(2, 0, 0);
 // 第2局
 huleOnePlayer = seat => {
     let fans = [
+        {val: 1, id: 7}, // 役牌 白
         {val: 1, id: 8}, // 役牌 发
         {val: 1, id: 9}, // 役牌 中
         {val: 1, id: 9101}, // 役牌 东
@@ -100,8 +100,6 @@ huleOnePlayer = seat => {
         {val: 1, id: 9107}, // 役牌 北
         {val: 1, id: 9108}, // 役牌 连北
         {val: 1, id: 12}, // 断幺九
-        {val: 2, id: 15}, // 混全带幺九
-        {val: 2, id: 16}, // 一气通贯
     ];
     player_tiles[seat].pop();
     delta_scores = [-16000, -8000, 32000, -8000];
@@ -141,6 +139,8 @@ setRound(2, 0, 0);
 // 第3局
 huleOnePlayer = seat => {
     let fans = [
+        {val: 2, id: 15}, // 混全带幺九
+        {val: 2, id: 16}, // 一气通贯
         {val: 2, id: 17}, // 三色同顺
         {val: 2, id: 19}, // 三色同刻
         {val: 2, id: 20}, // 三杠子
@@ -151,9 +151,6 @@ huleOnePlayer = seat => {
         {val: 3, id: 26}, // 纯全带幺九
         {val: 3, id: 27}, // 混一色
         {val: 6, id: 29}, // 清一色
-        {val: 1, id: 31}, // 宝牌
-        {val: 2, id: 31}, // 宝牌
-        {val: 3, id: 31}, // 宝牌
     ];
     player_tiles[seat].pop();
     delta_scores = [-16000, -8000, 32000, -8000];
@@ -193,6 +190,9 @@ setRound(2, 0, 0);
 // 第4局
 huleOnePlayer = seat => {
     let fans = [
+        {val: 1, id: 31}, // 宝牌
+        {val: 2, id: 31}, // 宝牌
+        {val: 3, id: 31}, // 宝牌
         {val: 4, id: 31}, // 宝牌
         {val: 5, id: 32}, // 红宝牌
         {val: 6, id: 32}, // 红宝牌
@@ -204,7 +204,6 @@ huleOnePlayer = seat => {
         {val: 12, id: 34}, // 拔北宝牌
         {val: 13, id: 33}, // 里宝牌
         {val: 14, id: 33}, // 里宝牌
-        {val: 15, id: 33}, // 里宝牌
         {val: 5, id: 9100}, // 流局满贯
     ];
     player_tiles[seat].pop();
