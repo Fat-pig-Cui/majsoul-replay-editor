@@ -18,7 +18,7 @@ tmp_filename = '0_字典.md'
 infile = open(filename, 'r', encoding='utf-8')
 outfile = open(tmp_filename, 'w', encoding='utf-8')
 
-pattern1 = 'Updated YYYY/MM/DD'
+pattern1 = 'Updated on YYYY/MM/DD'
 
 replaced_string = '##########'
 
@@ -141,7 +141,7 @@ def print_db():
 
 for line in infile:
     if line.strip() == pattern1:
-        outfile.write('Updated ' + datetime.now().strftime('%Y/%m/%d') + '\n')
+        outfile.write('Updated on ' + datetime.now().strftime('%Y/%m/%d') + '\n')
         continue
     if line.strip() == replaced_string:
         outfile.write(table_head[table_cnt])

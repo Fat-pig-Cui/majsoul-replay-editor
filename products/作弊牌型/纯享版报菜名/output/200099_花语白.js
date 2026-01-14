@@ -3,11 +3,11 @@ clearProject();
 player_datas[0].nickname = '花语白-契约';
 player_datas[1].nickname = '花语白';
 player_datas[2].nickname = '花语白-契约';
-player_datas[3].nickname = '花语白';
+player_datas[3].nickname = '流连深蓝';
 player_datas[0].avatar_id = 409902;
 player_datas[1].avatar_id = 409901;
 player_datas[2].avatar_id = 409902;
-player_datas[3].avatar_id = 409901;
+player_datas[3].avatar_id = 409903;
 
 setConfig({
     category: 2,

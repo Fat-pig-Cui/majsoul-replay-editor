@@ -831,7 +831,7 @@ let mingpai = (...args: any[]): void => {
     }
 
     /**
-     * 判断玩家能否鸣 x 牌对应的一个组合
+     * 判断玩家能否鸣牌出 x 牌型的牌
      * @param x - 牌型, 组合之一
      * @param seat - 鸣牌的玩家, 可能为 undefined
      */
@@ -1662,9 +1662,7 @@ let kaipaiLock = (seat: Seat): void => {
  * @param b - 本 ben, 本场数
  */
 const setRound = (c: Seat, j: Seat, b: number): void => {
-    chang = c;
-    ju = j;
-    ben = b;
+    [chang, ju, ben] = [c, j, b];
 };
 
 // 获取当前位置还剩余多少牌
@@ -2128,10 +2126,7 @@ const calcHupai = (tiles: Tile[], type: boolean = false): number => {
                     if (jin_huase[j][i])
                         if (!(cnt[j * 9 + 1 + i] === 1 && cnt[j * 9 + 4 + i] === 1 && cnt[j * 9 + 7 + i] === 1))
                             zuhelong = false;
-            if (!zuhelong)
-                return 4;
-            else
-                return 5;
+            return !zuhelong ? 4 : 5;
         }
     }
     if (is_guobiao() && tiles.length >= 11) { // 国标不含全不靠的组合龙
@@ -2349,8 +2344,6 @@ let protected_tiles: { seat: number, tiles: string[] };
 let pretongxunzt: Players_Boolean, prelizhizt: Players_Boolean, shezhangzt: Players_Boolean,
     tongxunzt: Players_Boolean, lizhizt: Players_Boolean, zhenting: Players_Boolean;
 
-// ========================================================================
-
 // 使 gameBegin 每个牌谱只运行一次的变量
 let game_begin_once: boolean;
 
@@ -2369,7 +2362,7 @@ const gameBegin = (): void => {
     else
         player_cnt = 4;
 
-    if (player_cnt === 3) { // 三麻, 二麻屏蔽以下模式
+    if (player_cnt === 3 || player_cnt === 2) { // 三麻, 二麻屏蔽以下模式
         let x = config.mode.detail_rule;
         x.wanxiangxiuluo_mode = x.xuezhandaodi = x.muyu_mode = x.chuanma = false;
     }
@@ -2511,9 +2504,7 @@ const calcXun = (): void => {
             xun[i].push(actions.length - 1);
 };
 
-/**
- * 计算表指示牌
- */
+// 计算表指示牌
 const calcDoras = (): Doras => {
     if (dora_cnt.cnt > 5)
         dora_cnt.cnt = 5;
@@ -2630,15 +2621,13 @@ const int2Tile = (x: number, type: boolean = false): Tile => {
     throw new Error(roundInfo() + ` int2Tile 输入不合规: ${x}`);
 };
 
-/**
- * 手牌理牌算法
- */
+// 手牌理牌算法
 const cmp = (x: Tile, y: Tile): number => tile2Int(x) - tile2Int(y);
 
 // 随机排序比较函数
 const randomCmp = () => Math.random() - 0.5;
 
-// 判断第一个参数里面的所有牌是否为第二个参数里面的牌的子集
+// 判断第一个参数里面的所有牌是否为第二个参数里面的牌的子集, 考虑和赤宝牌和特殊牌
 const inTiles = (x: Tile | Tile[], y: Tile[]): boolean => {
     if (typeof x == 'string')
         x = [x];
@@ -2654,8 +2643,6 @@ const inTiles = (x: Tile | Tile[], y: Tile[]): boolean => {
             return false;
     return true;
 };
-
-// ========================================================================
 
 // 更新 seat 号玩家的舍张振听状态
 const updateShezhangzt = (seat: Seat): void => {
@@ -2732,16 +2719,16 @@ const updateZhenting = (): void => {
         zhenting[i] = shezhangzt[i] || tongxunzt[i] || lizhizt[i];
 };
 
-// ========================================================================
-
-/**
- * 判断 tile 字符串是否合法
- */
+// 判断 tile 字符串是否合法
 const isTile = (tile: string): boolean => {
     if (tile === Constants.TBD)
         return true;
+    if (tile.length >= 4)
+        return false;
+    if (tile.length === 3 && tile[2] !== Constants.SPT_SUFFIX)
+        return false;
     let tmp_tile = tile.substring(0, 2);
-    if (tmp_tile[1] === 'z'){
+    if (tmp_tile[1] === 'z') {
         let num = parseInt(tmp_tile[0]);
         return !(isNaN(num) || num < 1 || num > 7);
     }
@@ -2835,8 +2822,6 @@ const fulu2Ming = (seat: Seat): string[] => {
     return ming;
 };
 
-// ========================================================================
-
 /**
  * 配牌明牌, 如果有明的牌则去掉, 返回 true, 没有则返回 false
  * @param seat - seat 号玩家
@@ -2869,10 +2854,8 @@ const updateMuyu = (type: boolean = false): void => {
         muyu.count--;
 };
 
-/**
- * 川麻, 判断 seat 玩家是否花猪
- * @param seat - seat 号玩家
- */
+
+// 川麻, 判断 seat 玩家是否花猪
 const huazhu = (seat: Seat): boolean => {
     // 注意 gaps 的 012 分别对应 pms, 而不是 mps
     for (let i in player_tiles[seat]) { // 查手牌
@@ -2894,10 +2877,7 @@ const huazhu = (seat: Seat): boolean => {
     return false;
 };
 
-/**
- * 幻境传说, 判断 tile 是否为 dora
- * @param tile - 牌
- */
+// 幻境传说, 判断 tile 是否为 dora
 const isDora = (tile: Tile): boolean => {
     if (tile2Int(tile) >= Constants.TILE_NUM.C0m && tile2Int(tile) <= Constants.TILE_NUM.C0s)
         return true;
@@ -2996,7 +2976,7 @@ const calcXiaKeShang = (): [number, number, number, number] => {
             else
                 times[i] = 2;
         }
-    return times as [number, number, number, number];
+    return times;
 };
 
 // ========================================================================
@@ -3574,7 +3554,7 @@ const calcFan = (seat: Seat, zimo: boolean, fangchong?: Seat): CalcFanRet => {
     let fulu_cnt = 0;
     let ret: CalcFanRet = {yiman: false, fans: [], fu: 0};
     let cnt: number[] = []; // cnt 是仅手牌的数量集合, 不含红宝牌
-    for (let i = Constants.CBD; i <= Constants.TILE_NUM.C0s; i++) // 注意这里是 Constants.TILE_NUM.C0s 而不是 Constants.TILE_NUM.C7z, 是因为下面 dfs 要用到 Constants.NXT2, 需要从 Constants.TILE_NUM.C7z 扩展到 Constants.TILE_NUM.C0s
+    for (let i = Constants.CBD; i <= Constants.TILE_NUM.C0s; i++) // 注意这里是 C0s 而不是 C7z, 是因为下面 dfs 要用到 NXT2, 需要从 C7z 扩展到 C0s
         cnt[i] = 0;
     for (let i in tiles)
         cnt[tile2Int(tiles[i])]++;
@@ -3652,6 +3632,9 @@ const calcFan = (seat: Seat, zimo: boolean, fangchong?: Seat): CalcFanRet => {
                 if (zimo && paishan.length === wangpai_num && lst_draw_type === 1 || !zimo && paishan.length === wangpai_num)
                     ans.fans.push({val: !is_qingtianjing() ? 1 : 13, id: 63}); // 石上三年
             }
+            if (is_yifanjieguyi() && seat === ju && lianzhuang_cnt >= 7) // 第8次和牌
+                ans.fans.push({val: 1, id: 46}); // 八连庄
+
             updateRet(ans);
         }
     }
@@ -4554,7 +4537,7 @@ const calcFanChuanma = (seat: Seat, zimo: boolean, type: boolean = false): CalcF
     if (huazhu(seat))
         return ret;
     let cnt: number[] = [];
-    for (let i = Constants.TILE_NUM.C1m; i <= Constants.TILE_NUM.C0s; i++) // 注意这里是 Constants.TILE_NUM.C0s 而不是 Constants.TILE_NUM.C7z, 是因为下面 dfs 要用到 Constants.NXT2, 需要从 Constants.TILE_NUM.C7z 扩展到 Constants.TILE_NUM.C0s
+    for (let i = Constants.TILE_NUM.C1m; i <= Constants.TILE_NUM.C0s; i++) // 注意这里是 C0s 而不是 C7z, 是因为下面 dfs 要用到 NXT2, 需要从 C7z 扩展到 C0s
         cnt[i] = 0;
     for (let i in tiles)
         cnt[tile2Int(tiles[i])]++;
@@ -4875,7 +4858,7 @@ const calcFanGuobiao = (seat: Seat, zimo: boolean): CalcFanRet => {
     let fulu_cnt = 0;
     let ret: CalcFanRet = {fans: [], fu: 0};
     let cnt: number[] = [];
-    for (let i = Constants.TILE_NUM.C1m; i <= Constants.TILE_NUM.C0s; i++) // 注意这里是 Constants.TILE_NUM.C0s 而不是 Constants.TILE_NUM.C7z, 是因为下面 dfs 要用到 Constants.NXT2, 需要从 Constants.TILE_NUM.C7z 扩展到 Constants.TILE_NUM.C0s
+    for (let i = Constants.TILE_NUM.C1m; i <= Constants.TILE_NUM.C0s; i++) // 注意这里是 C0s 而不是 C7z, 是因为下面 dfs 要用到 NXT2, 需要从 C7z 扩展到 C0s
         cnt[i] = 0;
     for (let i in tiles)
         cnt[tile2Int(tiles[i])]++;
@@ -4894,57 +4877,7 @@ const calcFanGuobiao = (seat: Seat, zimo: boolean): CalcFanRet => {
     if (result === 3) {
         let ans: CalcFanRet = {fans: [], fu: 25};
         ans.fans.push({val: 88, id: 8006}); // 十三幺
-
-        let ban_zimo = false;
-        // 天地人和
-        if (liqi_info[seat].yifa !== 0 && liqi_info[seat].liqi === 0 && seat === ju && zimo) {
-            ans.fans.push({val: 8, id: 8083}); // 天和
-            ban_zimo = true;
-        }
-
-        let first_tile = true;
-        for (let i = 0; i < player_cnt; i++) {
-            if (i === ju)
-                continue;
-            if (!(liqi_info[i].yifa !== 0 && liqi_info[i].liqi === 0))
-                first_tile = false;
-        }
-        if (first_tile && seat !== ju && !zimo)
-            ans.fans.push({val: 8, id: 8084}); // 地和
-
-        // 在立直麻将中人和的基础上添加亲家的下一家没有一发(因为国标没有立直, 所以任何情况下切牌后都没有一发)
-        if (liqi_info[seat].yifa !== 0 && liqi_info[seat].liqi === 0 && seat !== ju && zimo) {
-            ans.fans.push({val: 8, id: 8085}); // 人和
-            ban_zimo = true;
-        } else if (liqi_info[seat].yifa !== 0 && liqi_info[seat].liqi === 0 && seat !== ju && !zimo && liqi_info[(ju + 1) % player_cnt].yifa === 0)
-            ans.fans.push({val: 8, id: 8085}); // 人和
-
-        if (paishan.length === 0)
-            if (zimo) {
-                ans.fans.push({val: 8, id: 8043}); // 妙手回春
-                ban_zimo = true;
-            } else
-                ans.fans.push({val: 8, id: 8044}); // 海底捞月
-        if (getLstAction().name === 'RecordAnGangAddGang')
-            ans.fans.push({val: 8, id: 8046}); // 抢杠和
-        else {
-            let lastile_num = 0;
-            for (let i = 0; i < player_cnt; i++) {
-                for (let j in paihe[i].tiles) // 查牌河, 注意被鸣走的牌还在 paihe 中
-                    if (isEqualTile(lastile, paihe[i].tiles[j]))
-                        lastile_num++;
-                for (let j in fulu[i])  // 查副露
-                    if (fulu[i][j].from !== undefined)
-                        for (let k = 0; k < fulu[i][j].tile.length - 1; k++) // -1 是要剔除掉被鸣走的牌
-                            if (isEqualTile(lastile, fulu[i][j].tile[k]))
-                                lastile_num++;
-            }
-            if (lastile_num === 4 || lastile_num === 3 && zimo)
-                ans.fans.push({val: 4, id: 8057}); // 和绝张
-        }
-        if (zimo && !ban_zimo)
-            ans.fans.push({val: 1, id: 8081}); // 自摸
-
+        specialCalc(ans);
         updateRet(ans);
     }
     if (result === 4 || result === 5) { // 一定是全不靠或七星不靠
@@ -4961,6 +4894,7 @@ const calcFanGuobiao = (seat: Seat, zimo: boolean): CalcFanRet => {
             ans.fans.push({val: 12, id: 8034}); // 组合龙
         } else
             ans.fans.push({val: 12, id: 8033}); // 全不靠
+        specialCalc(ans);
         updateRet(ans);
     }
     if (result >= 6 && result <= 11) { // 没有全不靠的组合龙
@@ -5981,6 +5915,63 @@ const calcFanGuobiao = (seat: Seat, zimo: boolean): CalcFanRet => {
             // --------------------------------------------------
             return ans;
         }
+    }
+
+    /**
+     * 能与特殊牌型(国士, 全不靠)复合番种的计算, 不含全不靠的组合龙因为还会调用 dfs 所以不需要调用该函数
+     *
+     * 复合番种包括: 天和, 地和, 人和, 妙手回春, 海底捞月, 抢杠和, 和绝张, 自摸
+     */
+    function specialCalc(ans: CalcFanRet): void {
+        let ban_zimo = false;
+
+        if (liqi_info[seat].yifa !== 0 && liqi_info[seat].liqi === 0 && seat === ju && zimo) {
+            ans.fans.push({val: 8, id: 8083}); // 天和
+            ban_zimo = true;
+        }
+
+        let first_tile = true;
+        for (let i = 0; i < player_cnt; i++) {
+            if (i === ju)
+                continue;
+            if (!(liqi_info[i].yifa !== 0 && liqi_info[i].liqi === 0))
+                first_tile = false;
+        }
+        if (first_tile && seat !== ju && !zimo)
+            ans.fans.push({val: 8, id: 8084}); // 地和
+
+        // 在立直麻将中人和的基础上添加亲家的下一家没有一发(因为国标没有立直, 所以任何情况下切牌后都没有一发)
+        if (liqi_info[seat].yifa !== 0 && liqi_info[seat].liqi === 0 && seat !== ju && zimo) {
+            ans.fans.push({val: 8, id: 8085}); // 人和
+            ban_zimo = true;
+        } else if (liqi_info[seat].yifa !== 0 && liqi_info[seat].liqi === 0 && seat !== ju && !zimo && liqi_info[(ju + 1) % player_cnt].yifa === 0)
+            ans.fans.push({val: 8, id: 8085}); // 人和
+
+        if (paishan.length === 0)
+            if (zimo) {
+                ans.fans.push({val: 8, id: 8043}); // 妙手回春
+                ban_zimo = true;
+            } else
+                ans.fans.push({val: 8, id: 8044}); // 海底捞月
+        if (getLstAction().name === 'RecordAnGangAddGang')
+            ans.fans.push({val: 8, id: 8046}); // 抢杠和
+        else {
+            let lastile_num = 0;
+            for (let i = 0; i < player_cnt; i++) {
+                for (let j in paihe[i].tiles) // 查牌河, 注意被鸣走的牌还在 paihe 中
+                    if (isEqualTile(lastile, paihe[i].tiles[j]))
+                        lastile_num++;
+                for (let j in fulu[i])  // 查副露
+                    if (fulu[i][j].from !== undefined)
+                        for (let k = 0; k < fulu[i][j].tile.length - 1; k++) // -1 是要剔除掉被鸣走的牌
+                            if (isEqualTile(lastile, fulu[i][j].tile[k]))
+                                lastile_num++;
+            }
+            if (lastile_num === 4 || lastile_num === 3 && zimo)
+                ans.fans.push({val: 4, id: 8057}); // 和绝张
+        }
+        if (zimo && !ban_zimo)
+            ans.fans.push({val: 1, id: 8081}); // 自摸
     }
 };
 
@@ -9221,7 +9212,7 @@ let inst_once = true;
 
 // 在线编辑(进入牌谱之后的修改, 包括切换视角和切换巡目, 只在 editOffline 中的 resetData 中调用)
 const editOnline = (): void => {
-    let rounds = [];
+    let rounds: { actions: Actions, xun: number[] }[] = [];
     for (let i in all_data.actions)
         rounds.push({actions: all_data.actions[i], xun: all_data.xun[i][view.DesktopMgr.Inst.seat]});
     uiscript.UI_Replay.Inst.rounds = rounds;
@@ -9290,6 +9281,7 @@ const editOffline = (): void => {
         }
         for (let i = 0; i < player_cnt; i++)
             all_data.player_datas[i] = player_datas[i] = ret[i];
+        player_datas.splice(player_cnt);
     };
 
     if (checkPaiPu === undefined)

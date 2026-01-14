@@ -1,6 +1,6 @@
 # 字典
 
-Updated YYYY/MM/DD
+Updated on YYYY/MM/DD
 
 善用 Ctrl + F 并查看文件目录, 每项下面的是在控制台查看对应内容的命令行
 

@@ -1276,9 +1276,7 @@ let kaipaiLock = (seat) => {
         throw new Error(roundInfo() + ` kaipaiLock: 暗夜之战开牌的前提是有人刚暗牌, getLstAction().name: ${getLstAction().name}`);
 };
 const setRound = (c, j, b) => {
-    chang = c;
-    ju = j;
-    ben = b;
+    [chang, ju, ben] = [c, j, b];
 };
 const getLeftTileCnt = () => {
     let left_cnt = paishan.length - 14;
@@ -1623,10 +1621,7 @@ const calcHupai = (tiles, type = false) => {
                     if (jin_huase[j][i])
                         if (!(cnt[j * 9 + 1 + i] === 1 && cnt[j * 9 + 4 + i] === 1 && cnt[j * 9 + 7 + i] === 1))
                             zuhelong = false;
-            if (!zuhelong)
-                return 4;
-            else
-                return 5;
+            return !zuhelong ? 4 : 5;
         }
     }
     if (is_guobiao() && tiles.length >= 11) {
@@ -1774,7 +1769,7 @@ const gameBegin = () => {
         player_cnt = 3;
     else
         player_cnt = 4;
-    if (player_cnt === 3) {
+    if (player_cnt === 3 || player_cnt === 2) {
         let x = config.mode.detail_rule;
         x.wanxiangxiuluo_mode = x.xuezhandaodi = x.muyu_mode = x.chuanma = false;
     }
@@ -2088,6 +2083,10 @@ const updateZhenting = () => {
 const isTile = (tile) => {
     if (tile === Constants.TBD)
         return true;
+    if (tile.length >= 4)
+        return false;
+    if (tile.length === 3 && tile[2] !== Constants.SPT_SUFFIX)
+        return false;
     let tmp_tile = tile.substring(0, 2);
     if (tmp_tile[1] === 'z') {
         let num = parseInt(tmp_tile[0]);
@@ -2871,6 +2870,8 @@ const calcFan = (seat, zimo, fangchong) => {
                 if (zimo && paishan.length === wangpai_num && lst_draw_type === 1 || !zimo && paishan.length === wangpai_num)
                     ans.fans.push({ val: !is_qingtianjing() ? 1 : 13, id: 63 });
             }
+            if (is_yifanjieguyi() && seat === ju && lianzhuang_cnt >= 7)
+                ans.fans.push({ val: 1, id: 46 });
             updateRet(ans);
         }
     }
@@ -3947,52 +3948,7 @@ const calcFanGuobiao = (seat, zimo) => {
     if (result === 3) {
         let ans = { fans: [], fu: 25 };
         ans.fans.push({ val: 88, id: 8006 });
-        let ban_zimo = false;
-        if (liqi_info[seat].yifa !== 0 && liqi_info[seat].liqi === 0 && seat === ju && zimo) {
-            ans.fans.push({ val: 8, id: 8083 });
-            ban_zimo = true;
-        }
-        let first_tile = true;
-        for (let i = 0; i < player_cnt; i++) {
-            if (i === ju)
-                continue;
-            if (!(liqi_info[i].yifa !== 0 && liqi_info[i].liqi === 0))
-                first_tile = false;
-        }
-        if (first_tile && seat !== ju && !zimo)
-            ans.fans.push({ val: 8, id: 8084 });
-        if (liqi_info[seat].yifa !== 0 && liqi_info[seat].liqi === 0 && seat !== ju && zimo) {
-            ans.fans.push({ val: 8, id: 8085 });
-            ban_zimo = true;
-        }
-        else if (liqi_info[seat].yifa !== 0 && liqi_info[seat].liqi === 0 && seat !== ju && !zimo && liqi_info[(ju + 1) % player_cnt].yifa === 0)
-            ans.fans.push({ val: 8, id: 8085 });
-        if (paishan.length === 0)
-            if (zimo) {
-                ans.fans.push({ val: 8, id: 8043 });
-                ban_zimo = true;
-            }
-            else
-                ans.fans.push({ val: 8, id: 8044 });
-        if (getLstAction().name === 'RecordAnGangAddGang')
-            ans.fans.push({ val: 8, id: 8046 });
-        else {
-            let lastile_num = 0;
-            for (let i = 0; i < player_cnt; i++) {
-                for (let j in paihe[i].tiles)
-                    if (isEqualTile(lastile, paihe[i].tiles[j]))
-                        lastile_num++;
-                for (let j in fulu[i])
-                    if (fulu[i][j].from !== undefined)
-                        for (let k = 0; k < fulu[i][j].tile.length - 1; k++)
-                            if (isEqualTile(lastile, fulu[i][j].tile[k]))
-                                lastile_num++;
-            }
-            if (lastile_num === 4 || lastile_num === 3 && zimo)
-                ans.fans.push({ val: 4, id: 8057 });
-        }
-        if (zimo && !ban_zimo)
-            ans.fans.push({ val: 1, id: 8081 });
+        specialCalc(ans);
         updateRet(ans);
     }
     if (result === 4 || result === 5) {
@@ -4009,6 +3965,7 @@ const calcFanGuobiao = (seat, zimo) => {
         }
         else
             ans.fans.push({ val: 12, id: 8033 });
+        specialCalc(ans);
         updateRet(ans);
     }
     if (result >= 6 && result <= 11) {
@@ -4827,6 +4784,54 @@ const calcFanGuobiao = (seat, zimo) => {
                 ans.fu = 30;
             return ans;
         }
+    }
+    function specialCalc(ans) {
+        let ban_zimo = false;
+        if (liqi_info[seat].yifa !== 0 && liqi_info[seat].liqi === 0 && seat === ju && zimo) {
+            ans.fans.push({ val: 8, id: 8083 });
+            ban_zimo = true;
+        }
+        let first_tile = true;
+        for (let i = 0; i < player_cnt; i++) {
+            if (i === ju)
+                continue;
+            if (!(liqi_info[i].yifa !== 0 && liqi_info[i].liqi === 0))
+                first_tile = false;
+        }
+        if (first_tile && seat !== ju && !zimo)
+            ans.fans.push({ val: 8, id: 8084 });
+        if (liqi_info[seat].yifa !== 0 && liqi_info[seat].liqi === 0 && seat !== ju && zimo) {
+            ans.fans.push({ val: 8, id: 8085 });
+            ban_zimo = true;
+        }
+        else if (liqi_info[seat].yifa !== 0 && liqi_info[seat].liqi === 0 && seat !== ju && !zimo && liqi_info[(ju + 1) % player_cnt].yifa === 0)
+            ans.fans.push({ val: 8, id: 8085 });
+        if (paishan.length === 0)
+            if (zimo) {
+                ans.fans.push({ val: 8, id: 8043 });
+                ban_zimo = true;
+            }
+            else
+                ans.fans.push({ val: 8, id: 8044 });
+        if (getLstAction().name === 'RecordAnGangAddGang')
+            ans.fans.push({ val: 8, id: 8046 });
+        else {
+            let lastile_num = 0;
+            for (let i = 0; i < player_cnt; i++) {
+                for (let j in paihe[i].tiles)
+                    if (isEqualTile(lastile, paihe[i].tiles[j]))
+                        lastile_num++;
+                for (let j in fulu[i])
+                    if (fulu[i][j].from !== undefined)
+                        for (let k = 0; k < fulu[i][j].tile.length - 1; k++)
+                            if (isEqualTile(lastile, fulu[i][j].tile[k]))
+                                lastile_num++;
+            }
+            if (lastile_num === 4 || lastile_num === 3 && zimo)
+                ans.fans.push({ val: 4, id: 8057 });
+        }
+        if (zimo && !ban_zimo)
+            ans.fans.push({ val: 1, id: 8081 });
     }
 };
 const calcSudian = (x, type = 0) => {
@@ -7620,6 +7625,7 @@ const editOffline = () => {
         }
         for (let i = 0; i < player_cnt; i++)
             all_data.player_datas[i] = player_datas[i] = ret[i];
+        player_datas.splice(player_cnt);
     };
     if (checkPaiPu === undefined)
         checkPaiPu = GameMgr.Inst.checkPaiPu;

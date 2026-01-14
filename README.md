@@ -1,5 +1,7 @@
 # 雀魂回放编辑器Majsoul_Replay_Editor
 
+中文 | [English](README_en.md)
+
 自定义雀魂牌谱回放的注入脚本和一些自制牌谱回放文件, 支持国际中文服, 日服和美服的网页端
 
 [中文服官网](https://www.maj-soul.com), [日服官网](https://mahjongsoul.com), [美服官网](https://mahjongsoul.yo-star.com)
@@ -18,7 +20,7 @@ B站视频教程(偏过时): [【雀魂】如何自制牌谱回放](https://www.
 打开 [main.js](main.js) 和 [examples](examples) 文件夹或 [products](products)
 文件夹下的任一牌谱回放js文件(如 [demo.js](examples/demo.js))
 
-电脑登录网页版雀魂(注意用小号), F12 打开 console (控制台), 把 main.js 里面的内容全选复制输入到控制台中,
+电脑登录网页版雀魂(注意用小号), F12 打开 console (控制台), 把 `main.js` 里面的内容全选复制输入到控制台中,
 然后将牌谱回放js文件内容也输入到控制台中
 
 (注: 如果在粘贴到控制台的时候出现了下图中的警告, 则需要先输入 `allow pasting`, 如果是中文就输入 `允许粘贴`,
@@ -52,7 +54,7 @@ B站视频教程(偏过时): [【雀魂】如何自制牌谱回放](https://www.
 至于 code.js , 这是初步解混淆后的雀魂核心js文件, 与本仓库关系不大, 放在这里仅方便查阅(文件很大, 不要轻易打开),
 解混淆的方法见另一个仓库: [misc-code](https://github.com/Fat-pig-Cui/misc-code)
 
-为了便于维护, 最近正在用 TypeScript 重写项目, 目前的 main.js 和 [main.d.ts](main.d.ts) 都由 [main.ts](main.ts) 编译而来,
+为了便于维护, 最近正在用 TypeScript 重写项目, 目前的 `main.js` 和 [main.d.ts](main.d.ts) 都由 [main.ts](main.ts) 编译而来,
 有很多不完善的地方, 因为有部分直接借鉴了官网源码所以有报错很正常(集中在 `GameMgr.Inst.checkPaiPu` 和
 `optimizeFunction` 函数), 这里暂存了老版本: [main_old.js](main_old.js)
 
@@ -134,11 +136,12 @@ B站视频教程(偏过时): [【雀魂】如何自制牌谱回放](https://www.
     - 核心脚本功能过于复杂, 即使做GUI了还是要读上面的文档才能学会使用
     - 做GUI所花费的精力要比脚本大的多
     - 个人对GUI方面不是很熟
-    - 总结: "好钢用在刀刃上", GUI上下功夫性价比太低, 但仍然欢迎大佬实现GUI
+
+总结: "好钢用在刀刃上", GUI上下功夫性价比太低, 但仍然欢迎大佬实现GUI
 
 ## 版权声明
 
-1. 更改回放的方法参考了B站 [一般通过转转](https://space.bilibili.com/23019265)
+1. 更改回放的部分方法参考了B站 [一般通过转转](https://space.bilibili.com/23019265)
    的 [【雀魂+】(自制回放)听说有人想看石上三年的七倍役满](https://www.bilibili.com/video/BV1HE411Q7JM)
 
 2. 血流成河的某些功能同样参照了上述作者的
@@ -148,17 +151,15 @@ B站视频教程(偏过时): [【雀魂】如何自制牌谱回放](https://www.
 
 4. 其他部分由两位作者共同编写, 具体贡献:
     - [GrandDawn](https://github.com/GrandDawn) (原作者):
-        - main.js 核心功能的算法实现
-        - add_function.js 重写函数的算法实现
+        - `main.js` 核心功能的算法实现
+        - `add_function.js` 重写函数的算法实现
         - 说明文档(wiki)的编写
         - 示例牌谱的编写
     - [Fat-pig-Cui](https://github.com/Fat-pig-Cui) (我, 维护者):
-        - main.js 用 TypeScript 重构, 添加 TSDoc, 功能的大量扩充(包括国标功能的实现)
-        - add_function.js 的维护与扩充
+        - `main.js` 用 TypeScript 重构, 添加 TSDoc, 功能的大量扩充(包括国标功能的实现)
+        - `add_function.js` 的维护与扩充
         - 说明文档的重排优化, 细节补充
         - 自制牌谱的大量补充, 及批处理脚本刷新牌谱的编写
-
-   目前原作者已很少接触雀魂, 故相关问题尽量找我
 
 5. GitHub 是本仓库唯一的发布平台, 开源协议 Apache 2.0
 

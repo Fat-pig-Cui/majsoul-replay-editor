@@ -2,10 +2,10 @@ clearProject();
 
 player_datas[0].nickname = '萨塔恩-契约';
 player_datas[1].nickname = '萨塔恩';
-player_datas[2].nickname = '萨塔恩-契约';
+player_datas[2].nickname = '流连深蓝';
 player_datas[0].avatar_id = 409702;
 player_datas[1].avatar_id = 409701;
-player_datas[2].avatar_id = 409702;
+player_datas[2].avatar_id = 409703;
 
 setConfig({
     category: 1,

@@ -103,6 +103,5 @@ qiepai('8s', true);
                 break;
         }
     }
-}
-if (getLstAction().name !== 'RecordHule')
     huangpai();
+}
