@@ -1,6 +1,6 @@
 declare var checkPaiPu: Function, resetData: Function, OnChoosedPai: Function, seat2LocalPosition: Function, localPosition2Seat: Function;
 declare const player_datas: PlayerDatas;
-declare const begin_tiles: [string, string, string, string];
+declare const begin_tiles: [string, string, string?, string?];
 declare const player_tiles: Players_TileArray;
 declare const all_data: AllData;
 declare const clearProject: () => void;

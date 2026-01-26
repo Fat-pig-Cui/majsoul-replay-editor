@@ -1,8 +1,8 @@
 "use strict";
 var checkPaiPu, resetData, OnChoosedPai, seat2LocalPosition, localPosition2Seat;
-const player_datas = [null, null, null, null];
-const begin_tiles = ['', '', '', ''];
-const player_tiles = [[], [], [], []];
+const player_datas = [null, null];
+const begin_tiles = ['', ''];
+const player_tiles = [[], []];
 const all_data = {
     actions: [],
     xun: [],
@@ -15,7 +15,7 @@ const clearProject = () => {
     if ((_b = (_a = view === null || view === void 0 ? void 0 : view.DesktopMgr) === null || _a === void 0 ? void 0 : _a.Inst) === null || _b === void 0 ? void 0 : _b.active)
         throw new Error('clearProject: 请退出当前牌谱后再载入自制牌谱');
     game_begin_once = true;
-    for (let i = 0; i < 4; i++)
+    for (let i = 0; i < 4; i++) {
         player_datas[i] = {
             nickname: `电脑${i}`,
             avatar_id: 400101,
@@ -24,6 +24,9 @@ const clearProject = () => {
             verified: 0,
             views: []
         };
+        begin_tiles[i] = '';
+        player_tiles[i] = [];
+    }
     config = {
         category: 1,
         meta: { mode_id: 0 },
@@ -32,10 +35,6 @@ const clearProject = () => {
             detail_rule: {}
         }
     };
-    for (let i = 0; i < 4; i++) {
-        begin_tiles[i] = '';
-        player_tiles[i] = [];
-    }
     muyu_seats = '';
     paishan = [];
     chang = ju = ben = liqibang = lianzhuang_cnt = 0;
@@ -1761,14 +1760,15 @@ let game_begin_once;
 const gameBegin = () => {
     if (!game_begin_once)
         return;
-    all_data.config = config;
-    all_data.player_datas = player_datas;
     if (config.mode.mode >= 20 && config.mode.mode <= 29)
         player_cnt = 2;
     else if (config.mode.mode >= 10 && config.mode.mode <= 19)
         player_cnt = 3;
     else
         player_cnt = 4;
+    all_data.config = config;
+    player_datas.splice(player_cnt);
+    all_data.player_datas = player_datas;
     if (player_cnt === 3 || player_cnt === 2) {
         let x = config.mode.detail_rule;
         x.wanxiangxiuluo_mode = x.xuezhandaodi = x.muyu_mode = x.chuanma = false;
@@ -1823,25 +1823,31 @@ const init = () => {
     ju_cnt = -1;
     benchangbang = ben;
     baopai = [[], [], [], []];
+    baopai.splice(player_cnt);
     lst_liqi = null;
     mingpais = [[], [], [], []];
+    mingpais.splice(player_cnt);
     chuanma_gangs = { over: [], notover: [] };
     dora_cnt = { cnt: 1, licnt: 1, lastype: 0, bonus: 0 };
     huled = [false, false, false, false];
+    huled.splice(player_cnt);
     hules_history = [];
     fulu = [[], [], [], []];
+    fulu.splice(player_cnt);
     paihe = [
         { liujumanguan: !(no_liujumanguan() || is_heqie_mode()), tiles: [] },
         { liujumanguan: !(no_liujumanguan() || is_heqie_mode()), tiles: [] },
         { liujumanguan: !(no_liujumanguan() || is_heqie_mode()), tiles: [] },
         { liujumanguan: !(no_liujumanguan() || is_heqie_mode()), tiles: [] },
     ];
+    paihe.splice(player_cnt);
     liqi_info = [
         { liqi: 0, yifa: 1, kai: false },
         { liqi: 0, yifa: 1, kai: false },
         { liqi: 0, yifa: 1, kai: false },
         { liqi: 0, yifa: 1, kai: false },
     ];
+    liqi_info.splice(player_cnt);
     lst_draw_type = draw_type = 1;
     baogang_seat = -1;
     shezhangzt = [false, false, false, false];
@@ -1851,6 +1857,13 @@ const init = () => {
     lizhizt = [false, false, false, false];
     zhenting = [false, false, false, false];
     sigang_bao = [false, false, false, false];
+    shezhangzt.splice(player_cnt);
+    pretongxunzt.splice(player_cnt);
+    prelizhizt.splice(player_cnt);
+    tongxunzt.splice(player_cnt);
+    lizhizt.splice(player_cnt);
+    zhenting.splice(player_cnt);
+    sigang_bao.splice(player_cnt);
     spell_hourglass = [0, 0, 0, 0];
     hunzhiyiji_info = [
         { seat: 0, liqi: 0, continue_deal_count: 0, overload: false },
@@ -1867,9 +1880,8 @@ const init = () => {
     ];
     awaiting_tiles = [];
     cuohu = [false, false, false, false];
-    delta_scores = [0, 0];
-    for (let i = 0; i < player_cnt; i++)
-        delta_scores[i] = 0;
+    delta_scores = [0, 0, 0, 0];
+    delta_scores.splice(player_cnt);
     if (paishan.length === 0)
         randomPaishan();
     doras = [];
@@ -3164,11 +3176,11 @@ const calcFan = (seat, zimo, fangchong) => {
                 }
             }
             for (let i in tiles)
-                if (tile2Int(tiles[i]) >= Constants.TILE_NUM.C0m && tile2Int(tiles[i]) <= Constants.TILE_NUM.C0s)
+                if (tile2Int(tiles[i], true) >= Constants.TILE_NUM.C0m && tile2Int(tiles[i], true) <= Constants.TILE_NUM.C0s)
                     alldoras[1]++;
             for (let i in fulu[seat])
                 for (let j in fulu[seat][i].tile)
-                    if (tile2Int(fulu[seat][i].tile[j]) >= Constants.TILE_NUM.C0m && tile2Int(fulu[seat][i].tile[j]) <= Constants.TILE_NUM.C0s)
+                    if (tile2Int(fulu[seat][i].tile[j], true) >= Constants.TILE_NUM.C0m && tile2Int(fulu[seat][i].tile[j], true) <= Constants.TILE_NUM.C0s)
                         alldoras[1]++;
             for (let i in fulu[seat])
                 if (fulu[seat][i].type === 4)
