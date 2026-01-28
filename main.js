@@ -499,8 +499,6 @@ let mingpai = (...args) => {
         else if (args[i] instanceof Array || typeof args[i] == 'string')
             tiles = separate(args[i]);
     let from = getLstAction().data.seat, tile = getLstAction().data.tile;
-    let liqi = null;
-    lstActionCompletion();
     if (seat === undefined)
         if (tiles !== undefined)
             if (!isEqualTile(tiles[0], tile))
@@ -541,6 +539,8 @@ let mingpai = (...args) => {
     }
     if (tiles.length <= 1)
         throw new Error(roundInfo() + ` mingpai: seat: ${from} 的切牌: ${tile} 后的 mingpai tiles 参数不对: ${tiles}`);
+    let liqi = null;
+    lstActionCompletion();
     let tile_states = [];
     if (is_begin_open())
         for (let i in tiles)
@@ -3139,54 +3139,54 @@ const calcFan = (seat, zimo, fangchong) => {
                     xiaosixi = true;
             if (kezi[Constants.TILE_NUM.C1z] >= 1 && kezi[Constants.TILE_NUM.C1z + 1] >= 1 && kezi[Constants.TILE_NUM.C1z + 2] >= 1 && kezi[Constants.TILE_NUM.C1z + 3] >= 1)
                 dasixi = true;
-            let alldoras = [0, 0, 0, 0];
+            let all_doras = [0, 0, 0, 0];
             for (let i in fulu[seat])
                 if (fulu[seat][i].type === 4) {
                     cnt2[tile2Int(fulu[seat][i].tile[0])]++;
-                    alldoras[2]++;
+                    all_doras[2]++;
                 }
             for (let i = 0; i < dora_cnt.cnt; i++) {
                 if (player_cnt === 3 && tile2Int(doras[i]) === Constants.TILE_NUM.C1m)
-                    alldoras[0] += cnt2[Constants.TILE_NUM.C9m];
+                    all_doras[0] += cnt2[Constants.TILE_NUM.C9m];
                 else if (player_cnt === 2) {
                     if (tile2Int(doras[i]) === Constants.TILE_NUM.C1p)
-                        alldoras[0] += cnt2[Constants.TILE_NUM.C9p];
+                        all_doras[0] += cnt2[Constants.TILE_NUM.C9p];
                     if (tile2Int(doras[i]) === Constants.TILE_NUM.C1s)
-                        alldoras[0] += cnt2[Constants.TILE_NUM.C9s];
+                        all_doras[0] += cnt2[Constants.TILE_NUM.C9s];
                 }
                 else {
                     if (get_field_spell_mode2() === 3)
-                        alldoras[0] += cnt2[tile2Int(doras[i])];
-                    alldoras[0] += cnt2[Constants.DORA_NXT[tile2Int(doras[i])]];
+                        all_doras[0] += cnt2[tile2Int(doras[i])];
+                    all_doras[0] += cnt2[Constants.DORA_NXT[tile2Int(doras[i])]];
                 }
             }
             for (let i = 0; i < dora_cnt.licnt; i++) {
                 if (player_cnt === 3 && tile2Int(li_doras[i]) === Constants.TILE_NUM.C1m)
-                    alldoras[3] += cnt2[Constants.TILE_NUM.C9m];
+                    all_doras[3] += cnt2[Constants.TILE_NUM.C9m];
                 else if (player_cnt === 2) {
                     if (tile2Int(li_doras[i]) === Constants.TILE_NUM.C1p)
-                        alldoras[3] += cnt2[Constants.TILE_NUM.C9p];
+                        all_doras[3] += cnt2[Constants.TILE_NUM.C9p];
                     if (tile2Int(li_doras[i]) === Constants.TILE_NUM.C1s)
-                        alldoras[3] += cnt2[Constants.TILE_NUM.C9s];
+                        all_doras[3] += cnt2[Constants.TILE_NUM.C9s];
                 }
                 else {
                     if (get_field_spell_mode2() === 3)
-                        alldoras[3] += cnt2[tile2Int(li_doras[i])];
-                    alldoras[3] += cnt2[Constants.DORA_NXT[tile2Int(li_doras[i])]];
+                        all_doras[3] += cnt2[tile2Int(li_doras[i])];
+                    all_doras[3] += cnt2[Constants.DORA_NXT[tile2Int(li_doras[i])]];
                 }
             }
             for (let i in tiles)
                 if (tile2Int(tiles[i], true) >= Constants.TILE_NUM.C0m && tile2Int(tiles[i], true) <= Constants.TILE_NUM.C0s)
-                    alldoras[1]++;
+                    all_doras[1]++;
             for (let i in fulu[seat])
                 for (let j in fulu[seat][i].tile)
                     if (tile2Int(fulu[seat][i].tile[j], true) >= Constants.TILE_NUM.C0m && tile2Int(fulu[seat][i].tile[j], true) <= Constants.TILE_NUM.C0s)
-                        alldoras[1]++;
+                        all_doras[1]++;
             for (let i in fulu[seat])
                 if (fulu[seat][i].type === 4)
                     cnt2[tile2Int(fulu[seat][i].tile[0])]--;
             if (get_field_spell_mode1() === 5 && seat === ju && !zimo)
-                ans.dora_bonus = alldoras[0] + alldoras[1] + alldoras[3];
+                ans.dora_bonus = all_doras[0] + all_doras[1] + all_doras[3];
             if (is_tiandichuangzao() && typecnt[Constants.TILE_NUM.C5z][2] === 1 && typecnt[Constants.TILE_NUM.C5z][7] === 1 && typecnt[Constants.TILE_NUM.C5z][3] === 3) {
                 if (!is_qingtianjing()) {
                     ans.fans.push({ val: 6, id: 9001 });
@@ -3565,18 +3565,18 @@ const calcFan = (seat, zimo, fangchong) => {
             }
             if (calcSudian(ans) === -2000)
                 return ans;
-            if (alldoras[0] !== 0)
+            if (all_doras[0] > 0)
                 if (!(get_field_spell_mode2() === 1 && liqi_info[seat].liqi !== 0))
-                    ans.fans.push({ val: alldoras[0], id: 31 });
-            if (alldoras[1] !== 0)
-                ans.fans.push({ val: alldoras[1], id: 32 });
-            if (alldoras[2] !== 0)
-                ans.fans.push({ val: alldoras[2], id: 34 });
+                    ans.fans.push({ val: all_doras[0], id: 31 });
+            if (all_doras[1] > 0)
+                ans.fans.push({ val: all_doras[1], id: 32 });
+            if (all_doras[2] > 0)
+                ans.fans.push({ val: all_doras[2], id: 34 });
             if (liqi_info[seat].liqi !== 0) {
                 let times = 1;
                 if (get_field_spell_mode2() === 1 && liqi_info[seat].liqi !== 0)
                     times = 2;
-                ans.fans.push({ val: alldoras[3] * times, id: 33 });
+                ans.fans.push({ val: all_doras[3] * times, id: 33 });
             }
             if (is_hunzhiyiji())
                 if (!zimo && hunzhiyiji_info[fangchong].liqi !== 0)
