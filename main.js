@@ -1470,6 +1470,9 @@ const separate = (tiles) => {
     tiles = decompose(tiles);
     let ret = [];
     while (tiles.length > 0) {
+        let tmp_tile = tiles.substring(0, 2);
+        if (!isTile(tmp_tile))
+            console.error(roundInfo() + ` separate: 牌格式不合规: ${tmp_tile}`);
         if (tiles.length > 2 && tiles[2] === Constants.SPT_SUFFIX) {
             ret.push(tiles.substring(0, 3));
             tiles = tiles.substring(3);
@@ -1489,6 +1492,9 @@ const separateWithMoqie = (tiles) => {
     tiles = decompose(tiles);
     let ret = [];
     while (tiles.length > 0) {
+        let tmp_tile = tiles.substring(0, 2);
+        if (!isTile(tmp_tile, true))
+            console.error(roundInfo() + ` separateWithMoqie: 牌格式不合规: ${tmp_tile}`);
         if (tiles.length > 2 && tiles[2] === Constants.SPT_SUFFIX) {
             ret.push(tiles.substring(0, 3));
             tiles = tiles.substring(3);
@@ -1508,6 +1514,9 @@ const separateWithParam = (tiles) => {
     tiles = decompose(tiles);
     let ret = [];
     while (tiles.length > 0) {
+        let tmp_tile = tiles.substring(0, 2);
+        if (!isTile(tmp_tile, true))
+            console.error(roundInfo() + ` separateWithParam: 牌格式不合规: ${tmp_tile}`);
         if (tiles.length > 2 && tiles[2] === Constants.SPT_SUFFIX) {
             ret.push(tiles.substring(0, 3));
             tiles = tiles.substring(3);
@@ -2092,22 +2101,25 @@ const updateZhenting = () => {
     for (let i = 0; i < player_cnt; i++)
         zhenting[i] = shezhangzt[i] || tongxunzt[i] || lizhizt[i];
 };
-const isTile = (tile) => {
+const isTile = (tile, type = false) => {
+    if (tile.length < 2 || tile.length > 3 || (tile.length === 3 && tile[2] !== Constants.SPT_SUFFIX))
+        return false;
     if (tile === Constants.TBD)
         return true;
-    if (tile.length >= 4)
-        return false;
-    if (tile.length === 3 && tile[2] !== Constants.SPT_SUFFIX)
-        return false;
-    let tmp_tile = tile.substring(0, 2);
-    if (tmp_tile[1] === 'z') {
-        let num = parseInt(tmp_tile[0]);
-        return !(isNaN(num) || num < 1 || num > 7);
+    if (type) {
+        let random_tiles = ['.', 'H', 'T', 'Y', 'D', 'M', 'P', 'S'];
+        for (let i in random_tiles) {
+            let tmp_random_tile = random_tiles[i].repeat(2);
+            if (tile === tmp_random_tile)
+                return true;
+        }
     }
-    if (tmp_tile[1] === 'm' || tmp_tile[1] === 'p' || tmp_tile[1] === 's') {
-        let num = parseInt(tmp_tile[0]);
-        return !(isNaN(num) || num < 0 || num > 9);
-    }
+    let honor_numbers = ['1', '2', '3', '4', '5', '6', '7'];
+    let ordinal_numbers = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
+    if (tile[1] === 'z')
+        return honor_numbers.indexOf(tile[0]) > -1;
+    else if (['m', 'p', 's'].indexOf(tile[1]) > -1)
+        return ordinal_numbers.indexOf(tile[0]) > -1;
     return false;
 };
 const lstLiqi2Liqi = (type = false) => {
