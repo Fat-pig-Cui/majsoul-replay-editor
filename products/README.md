@@ -118,7 +118,8 @@
 
 ## python 脚本文件
 
-- [DatabaseRAW.py](DatabaseRAW.py)
+- [DatabaseToggle.py](DatabaseToggle.py)
+- [DatabaseRAW.py](DatabaseRAW.py) (只读, 由 DatabaseToggle.py 生成)
 - [DatabaseClass.py](DatabaseClass.py)
 - [Database.py](Database.py)
 - [Function.py](Function.py)

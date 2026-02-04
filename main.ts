@@ -371,12 +371,22 @@ let mopai = (...args: any[]): void => {
     let seat: Seat, tile: Tile, index: AwaitingIndex;
     // 参数预处理
     for (let i in args)
-        if (typeof args[i] == 'string')
-            tile = args[i] as Tile;
-        else if (typeof args[i] == 'number')
-            seat = args[i] as Seat;
-        else if (args[i] instanceof Array && typeof args[i][0] == 'number')
-            index = args[i][0] as AwaitingIndex;
+        if (typeof args[i] == 'string') {
+            if (isTile(args[i]))
+                tile = args[i];
+            else
+                console.error(roundInfo() + ` mopai: 不合规的牌: ${args[i]}`);
+        } else if (typeof args[i] == 'number') {
+            if (isValidSeat(args[i]))
+                seat = args[i];
+            else
+                console.error(roundInfo() + ` mopai: 不合规的 seat: ${args[i]}, 当前对局玩家数: ${player_cnt}`);
+        } else if (args[i] instanceof Array && args[i].length === 1 && typeof args[i][0] == 'number') {
+            if (isAwaitingIndex(args[i][0]))
+                index = args[i][0];
+            else
+                console.error(roundInfo() + ` mopai: 不合规的 awaiting_index: ${args[i][0]}`);
+        }
 
     let liqi: Liqi = null;
     let hunzhiyiji_data: HunzhiyijiInfo_Player = null;
@@ -530,14 +540,24 @@ let qiepai = (...args: any[]): void => {
             is_kailiqi = is_liqi = true;
         else if (args[i] === 'moqie' || args[i] === 'shouqie')
             f_moqie = args[i];
-        else if (typeof args[i] == 'number')
-            seat = args[i] as Seat;
-        else if (typeof args[i] == 'boolean')
+        else if (typeof args[i] == 'number') {
+            if (isValidSeat(args[i]))
+                seat = args[i];
+            else
+                throw new Error(roundInfo() + ` qiepai: 不合规的 seat: ${args[i]}, 当前对局玩家数: ${player_cnt}`);
+        } else if (typeof args[i] == 'boolean')
             is_liqi = args[i];
-        else if (args[i] instanceof Array && typeof args[i][0] === 'number')
-            beishui_type = args[i][0] as BeishuiType;
-        else if (typeof args[i] == 'string')
-            tile = args[i] as Tile;
+        else if (args[i] instanceof Array && args[i].length === 1 && typeof args[i][0] === 'number') {
+            if (isBeishuiType(args[i][0]))
+                beishui_type = args[i][0];
+            else
+                throw new Error(roundInfo() + ` qiepai: 不合规的 beishui_type: ${args[i][0]}`);
+        } else if (typeof args[i] == 'string') {
+            if (isTile(args[i]))
+                tile = args[i];
+            else
+                throw new Error(roundInfo() + ` qiepai: 不合规的牌: ${args[i]}`);
+        }
 
     lstActionCompletion();
 
@@ -667,9 +687,12 @@ let mingpai = (...args: any[]): void => {
     let seat: Seat, tiles: Tile[], jifei: boolean;
     // 参数预处理
     for (let i in args)
-        if (typeof args[i] == 'number')
-            seat = args[i] as Seat;
-        else if (typeof args[i] == 'boolean')
+        if (typeof args[i] == 'number') {
+            if (isValidSeat(args[i]))
+                seat = args[i];
+            else
+                throw new Error(roundInfo() + ` mingpai: 不合规的 seat: ${args[i]}, 当前对局玩家数: ${player_cnt}`);
+        } else if (typeof args[i] == 'boolean')
             jifei = args[i];
         else if (args[i] instanceof Array || typeof args[i] == 'string')
             tiles = separate(args[i]);
@@ -880,12 +903,19 @@ let zimingpai = (...args: any[]): void => {
     for (let i in args)
         if (args[i] === 'babei' || args[i] === 'angang' || args[i] === 'jiagang' || args[i] === 'baxi')
             type = args[i];
-        else if (typeof args[i] == 'number')
-            seat = args[i] as Seat;
-        else if (typeof args[i] == 'boolean')
+        else if (typeof args[i] == 'number') {
+            if (isValidSeat(args[i]))
+                seat = args[i];
+            else
+                console.error(roundInfo() + ` zimingpai: 不合规的 seat: ${args[i]}, 当前对局玩家数: ${player_cnt}`);
+        } else if (typeof args[i] == 'boolean')
             jifei = args[i];
-        else if (typeof args[i] == 'string')
-            tile = args[i] as Tile;
+        else if (typeof args[i] == 'string') {
+            if (isTile(args[i]))
+                tile = args[i];
+            else
+                console.error(roundInfo() + ` zimingpai: 不合规的牌: ${args[i]}`);
+        }
 
     if (seat === undefined) {
         seat = getLstAction().data.seat;
@@ -1096,10 +1126,18 @@ let hupai = (...args: any[]): void => {
     let seats: Seat[], type: boolean;
     // 参数预处理
     for (let i in args)
-        if (typeof args[i] == 'number')
-            seats = [args[i] as Seat];
-        else if (args[i] instanceof Array)
+        if (typeof args[i] == 'number') {
+            if (isValidSeat(args[i]))
+                seats = [args[i]];
+            else
+                console.error(roundInfo() + ` hupai: 不合规的 seat: ${args[i]}, 当前对局玩家数: ${player_cnt}`);
+        }
+        else if (args[i] instanceof Array){
+            for (let j in args[i])
+                if (typeof args[i] != "number" || !isValidSeat(args[i][j]))
+                    console.error(roundInfo() + ` hupai: 不合规的 seat: ${args[i][j]}, 当前对局玩家数: ${player_cnt}`);
             seats = args[i];
+        }
         else if (typeof args[i] == 'boolean')
             type = args[i];
 
@@ -1929,7 +1967,7 @@ const separate = (tiles: string | Tile[]): Tile[] => {
     while (tiles.length > 0) {
         let tmp_tile = tiles.substring(0, 2);
         if (!isTile(tmp_tile))
-            console.error(roundInfo() + ` separate: 牌格式不合规: ${tmp_tile}`);
+            console.error(roundInfo() + ` separate: 不合规的牌: ${tmp_tile}`);
         if (tiles.length > 2 && tiles[2] === Constants.SPT_SUFFIX) { // 第3位是 Constants.SPT_SUFFIX, 则是特殊牌
             ret.push(tiles.substring(0, 3) as Tile);
             tiles = tiles.substring(3);
@@ -2745,20 +2783,19 @@ const updateZhenting = (): void => {
  * @param tile - 输入的牌
  * @param type - 是否允许'.HTYDMPS'等随机牌, 默认不允许
  */
-const isTile = (tile: string, type = false): boolean => {
+const isTile = (tile: string, type = false): tile is Tile => {
     if (tile.length < 2 || tile.length > 3 || (tile.length === 3 && tile[2] !== Constants.SPT_SUFFIX))
         return false;
     if (tile === Constants.TBD)
         return true;
     if (type) {
         let random_tiles = ['.', 'H', 'T', 'Y', 'D', 'M', 'P', 'S'];
-        for (let i in random_tiles){
+        for (let i in random_tiles) {
             let tmp_random_tile = random_tiles[i].repeat(2);
             if (tile === tmp_random_tile)
                 return true;
         }
     }
-
     let honor_numbers = ['1', '2', '3', '4', '5', '6', '7'];
     let ordinal_numbers = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
     if (tile[1] === 'z')
@@ -2766,6 +2803,21 @@ const isTile = (tile: string, type = false): boolean => {
     else if (['m', 'p', 's'].indexOf(tile[1]) > -1)
         return ordinal_numbers.indexOf(tile[0]) > -1;
     return false;
+};
+
+// 判断 seat 参数是否为合法的 seat
+const isValidSeat = (seat: number): seat is Seat => {
+    return seat >= 0 && seat < player_cnt && Math.floor(seat) === seat;
+};
+
+// 判断 awaiting_index 参数是否为 AwaitingIndex 类型
+const isAwaitingIndex = (awaiting_index: number): awaiting_index is AwaitingIndex => {
+    return awaiting_index === 0 || awaiting_index === 1 || awaiting_index === 2;
+};
+
+// 判断 beishui_type 参数是否为 BeishuiType 类型
+const isBeishuiType = (beishui_type: number): beishui_type is BeishuiType => {
+    return beishui_type === 0 || beishui_type === 1 || beishui_type === 2;
 };
 
 /**
@@ -3029,6 +3081,7 @@ let huleOnePlayer = (seat: Seat): HuleInfo => {
     else
         push2PlayerTiles(seat);
     let fangchong_seat: Seat;
+    let delta_scores_backup = delta_scores.slice();
     if (!zimo)
         fangchong_seat = lst_action.data.seat;
 
@@ -3239,9 +3292,10 @@ let huleOnePlayer = (seat: Seat): HuleInfo => {
     // 幻境传说: 命运卡3
     if (get_field_spell_mode3() === 3 && liqi_info[seat].liqi !== 0) {
         let diff = 300 * spell_hourglass[seat];
-        if (delta_scores[seat] <= diff)
+        let win_point = delta_scores[seat] - delta_scores_backup[seat];
+        if (win_point < diff)
             for (let i = 0; i < player_cnt; i++)
-                delta_scores[i] = 0;
+                delta_scores[i] = delta_scores_backup[i];
         else {
             delta_scores[seat] -= diff;
             if (zimo)

@@ -287,12 +287,24 @@ const roundBegin = () => {
 let mopai = (...args) => {
     let seat, tile, index;
     for (let i in args)
-        if (typeof args[i] == 'string')
-            tile = args[i];
-        else if (typeof args[i] == 'number')
-            seat = args[i];
-        else if (args[i] instanceof Array && typeof args[i][0] == 'number')
-            index = args[i][0];
+        if (typeof args[i] == 'string') {
+            if (isTile(args[i]))
+                tile = args[i];
+            else
+                console.error(roundInfo() + ` mopai: 不合规的牌: ${args[i]}`);
+        }
+        else if (typeof args[i] == 'number') {
+            if (isValidSeat(args[i]))
+                seat = args[i];
+            else
+                console.error(roundInfo() + ` mopai: 不合规的 seat: ${args[i]}, 当前对局玩家数: ${player_cnt}`);
+        }
+        else if (args[i] instanceof Array && args[i].length === 1 && typeof args[i][0] == 'number') {
+            if (isAwaitingIndex(args[i][0]))
+                index = args[i][0];
+            else
+                console.error(roundInfo() + ` mopai: 不合规的 awaiting_index: ${args[i][0]}`);
+        }
     let liqi = null;
     let hunzhiyiji_data = null;
     lstActionCompletion();
@@ -397,14 +409,26 @@ let qiepai = (...args) => {
             is_kailiqi = is_liqi = true;
         else if (args[i] === 'moqie' || args[i] === 'shouqie')
             f_moqie = args[i];
-        else if (typeof args[i] == 'number')
-            seat = args[i];
+        else if (typeof args[i] == 'number') {
+            if (isValidSeat(args[i]))
+                seat = args[i];
+            else
+                throw new Error(roundInfo() + ` qiepai: 不合规的 seat: ${args[i]}, 当前对局玩家数: ${player_cnt}`);
+        }
         else if (typeof args[i] == 'boolean')
             is_liqi = args[i];
-        else if (args[i] instanceof Array && typeof args[i][0] === 'number')
-            beishui_type = args[i][0];
-        else if (typeof args[i] == 'string')
-            tile = args[i];
+        else if (args[i] instanceof Array && args[i].length === 1 && typeof args[i][0] === 'number') {
+            if (isBeishuiType(args[i][0]))
+                beishui_type = args[i][0];
+            else
+                throw new Error(roundInfo() + ` qiepai: 不合规的 beishui_type: ${args[i][0]}`);
+        }
+        else if (typeof args[i] == 'string') {
+            if (isTile(args[i]))
+                tile = args[i];
+            else
+                throw new Error(roundInfo() + ` qiepai: 不合规的牌: ${args[i]}`);
+        }
     lstActionCompletion();
     let lst_name = getLstAction().name;
     if (seat === undefined)
@@ -492,8 +516,12 @@ let qiepai = (...args) => {
 let mingpai = (...args) => {
     let seat, tiles, jifei;
     for (let i in args)
-        if (typeof args[i] == 'number')
-            seat = args[i];
+        if (typeof args[i] == 'number') {
+            if (isValidSeat(args[i]))
+                seat = args[i];
+            else
+                throw new Error(roundInfo() + ` mingpai: 不合规的 seat: ${args[i]}, 当前对局玩家数: ${player_cnt}`);
+        }
         else if (typeof args[i] == 'boolean')
             jifei = args[i];
         else if (args[i] instanceof Array || typeof args[i] == 'string')
@@ -647,12 +675,20 @@ let zimingpai = (...args) => {
     for (let i in args)
         if (args[i] === 'babei' || args[i] === 'angang' || args[i] === 'jiagang' || args[i] === 'baxi')
             type = args[i];
-        else if (typeof args[i] == 'number')
-            seat = args[i];
+        else if (typeof args[i] == 'number') {
+            if (isValidSeat(args[i]))
+                seat = args[i];
+            else
+                console.error(roundInfo() + ` zimingpai: 不合规的 seat: ${args[i]}, 当前对局玩家数: ${player_cnt}`);
+        }
         else if (typeof args[i] == 'boolean')
             jifei = args[i];
-        else if (typeof args[i] == 'string')
-            tile = args[i];
+        else if (typeof args[i] == 'string') {
+            if (isTile(args[i]))
+                tile = args[i];
+            else
+                console.error(roundInfo() + ` zimingpai: 不合规的牌: ${args[i]}`);
+        }
     if (seat === undefined) {
         seat = getLstAction().data.seat;
         if (seat === undefined)
@@ -820,10 +856,18 @@ let zimingpai = (...args) => {
 let hupai = (...args) => {
     let seats, type;
     for (let i in args)
-        if (typeof args[i] == 'number')
-            seats = [args[i]];
-        else if (args[i] instanceof Array)
+        if (typeof args[i] == 'number') {
+            if (isValidSeat(args[i]))
+                seats = [args[i]];
+            else
+                console.error(roundInfo() + ` hupai: 不合规的 seat: ${args[i]}, 当前对局玩家数: ${player_cnt}`);
+        }
+        else if (args[i] instanceof Array) {
+            for (let j in args[i])
+                if (typeof args[i] != "number" || !isValidSeat(args[i][j]))
+                    console.error(roundInfo() + ` hupai: 不合规的 seat: ${args[i][j]}, 当前对局玩家数: ${player_cnt}`);
             seats = args[i];
+        }
         else if (typeof args[i] == 'boolean')
             type = args[i];
     if (is_chuanma())
@@ -1472,7 +1516,7 @@ const separate = (tiles) => {
     while (tiles.length > 0) {
         let tmp_tile = tiles.substring(0, 2);
         if (!isTile(tmp_tile))
-            console.error(roundInfo() + ` separate: 牌格式不合规: ${tmp_tile}`);
+            console.error(roundInfo() + ` separate: 不合规的牌: ${tmp_tile}`);
         if (tiles.length > 2 && tiles[2] === Constants.SPT_SUFFIX) {
             ret.push(tiles.substring(0, 3));
             tiles = tiles.substring(3);
@@ -2122,6 +2166,15 @@ const isTile = (tile, type = false) => {
         return ordinal_numbers.indexOf(tile[0]) > -1;
     return false;
 };
+const isValidSeat = (seat) => {
+    return seat >= 0 && seat < player_cnt && Math.floor(seat) === seat;
+};
+const isAwaitingIndex = (awaiting_index) => {
+    return awaiting_index === 0 || awaiting_index === 1 || awaiting_index === 2;
+};
+const isBeishuiType = (beishui_type) => {
+    return beishui_type === 0 || beishui_type === 1 || beishui_type === 2;
+};
 const lstLiqi2Liqi = (type = false) => {
     let ret = null;
     if (lst_liqi != null) {
@@ -2331,6 +2384,7 @@ let huleOnePlayer = (seat) => {
     else
         push2PlayerTiles(seat);
     let fangchong_seat;
+    let delta_scores_backup = delta_scores.slice();
     if (!zimo)
         fangchong_seat = lst_action.data.seat;
     if (is_hunzhiyiji() && !zimo && hunzhiyiji_info[fangchong_seat].liqi !== 0)
@@ -2528,9 +2582,10 @@ let huleOnePlayer = (seat) => {
     let dadian = Math.max(delta_scores[seat], -delta_scores[seat]);
     if (get_field_spell_mode3() === 3 && liqi_info[seat].liqi !== 0) {
         let diff = 300 * spell_hourglass[seat];
-        if (delta_scores[seat] <= diff)
+        let win_point = delta_scores[seat] - delta_scores_backup[seat];
+        if (win_point < diff)
             for (let i = 0; i < player_cnt; i++)
-                delta_scores[i] = 0;
+                delta_scores[i] = delta_scores_backup[i];
         else {
             delta_scores[seat] -= diff;
             if (zimo)

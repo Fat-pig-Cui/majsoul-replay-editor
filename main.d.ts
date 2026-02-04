@@ -101,7 +101,10 @@ declare const inTiles: (x: Tile | Tile[], y: Tile[]) => boolean;
 declare const updateShezhangzt: (seat: Seat) => void;
 declare const updatePrezhenting: (seat: Seat, tile: Tile, is_angang?: boolean) => void;
 declare const updateZhenting: () => void;
-declare const isTile: (tile: string, type?: boolean) => boolean;
+declare const isTile: (tile: string, type?: boolean) => tile is Tile;
+declare const isValidSeat: (seat: number) => seat is Seat;
+declare const isAwaitingIndex: (awaiting_index: number) => awaiting_index is AwaitingIndex;
+declare const isBeishuiType: (beishui_type: number) => beishui_type is BeishuiType;
 declare const lstLiqi2Liqi: (type?: boolean) => Liqi;
 declare const getAllTingpai: () => {
     seat: number;

@@ -32,6 +32,10 @@
 
    ![pic/img03.jpg](pic/img03.jpg)
 
+   ![pic/img04.jpg](pic/img04.jpg)
+
+   ![pic/img05.jpg](pic/img05.jpg)
+
 上图立绘来源: https://jp.msi.com/Landing/mihoshimei/nb
 
 更多第三方立绘展示详见我的B站动态: [把其他立绘搬到雀魂中](https://www.bilibili.com/opus/1056869246845321238)

@@ -35,6 +35,8 @@ paths_3P = [
     '最长菜名与最高番数',
 ]
 
+os.system(python_exe + 'DatabaseToggle.py')
+
 for path in paths:
     change_dir = path_prefix + path
     os.chdir(change_dir)
