@@ -1131,14 +1131,12 @@ let hupai = (...args: any[]): void => {
                 seats = [args[i]];
             else
                 console.error(roundInfo() + ` hupai: 不合规的 seat: ${args[i]}, 当前对局玩家数: ${player_cnt}`);
-        }
-        else if (args[i] instanceof Array){
+        } else if (args[i] instanceof Array) {
             for (let j in args[i])
                 if (typeof args[i] != "number" || !isValidSeat(args[i][j]))
                     console.error(roundInfo() + ` hupai: 不合规的 seat: ${args[i][j]}, 当前对局玩家数: ${player_cnt}`);
             seats = args[i];
-        }
-        else if (typeof args[i] == 'boolean')
+        } else if (typeof args[i] == 'boolean')
             type = args[i];
 
     // 川麻枪杠, 则杠不收取点数
@@ -3140,6 +3138,8 @@ let huleOnePlayer = (seat: Seat): HuleInfo => {
             li_doras0[i] = li_doras[i];
 
     if (zhahu) {
+        if (seat === ju)
+            lianzhuang_cnt = -1; // 任意荒牌流局都会导致连庄数重置, 而在 hupai 中会加1, 所以这里是 -1
         [point_rong, point_sum, point_zimo_qin, point_zimo_xian] = calcPoint(-2000);
         for (let i = 0; i < player_cnt; i++) {
             if (i === seat || huled[i])
@@ -3674,7 +3674,7 @@ const calcFan = (seat: Seat, zimo: boolean, fangchong?: Seat): CalcFanRet => {
     if (is_yifanjieguyi() && calcHupai(tiles) === 12) {
         let ans: CalcFanRet = {yiman: !is_qingtianjing(), fans: [], fu: 25};
         if (liqi_info[seat].yifa !== 0 && liqi_info[seat].liqi === 0 && zimo)
-            ans.fans.push({val: 1, id: 9708}); // 十三不搭
+            ans.fans.push({val: !is_qingtianjing() ? 1 : 13, id: 9708}); // 十三不搭
         updateRet(ans);
     }
     return ret;
@@ -3683,18 +3683,106 @@ const calcFan = (seat: Seat, zimo: boolean, fangchong?: Seat): CalcFanRet => {
     function normalCalc() {
         dfs(1);
         if (calcHupai(tiles) === 3) {
+            // 删除 ans 中番为 id 的番
+            const deleteFan = (id: number): void => {
+                for (let i in ans.fans)
+                    if (ans.fans[i].id === id) {
+                        ans.fans.splice(parseInt(i), 1);
+                        break;
+                    }
+            };
+
             const menqing = fulu_cnt === 0;
             let tianhu = false;
             let ans: CalcFanRet = {yiman: !is_qingtianjing(), fans: [], fu: 25};
 
+            let wangpai_num = 14;
+            if (player_cnt === 3)
+                wangpai_num = 18;
+            else if (player_cnt === 2)
+                wangpai_num = 22;
+            if (is_qingtianjing()) {
+                if (is_hunzhiyiji()) {
+                    if (hunzhiyiji_info[seat].liqi === 1)
+                        ans.fans.push({val: 2, id: 804}); // 立直
+                    if (hunzhiyiji_info[seat].liqi === 2)
+                        ans.fans.push({val: 3, id: 805}); // 双立直
+                    if (hunzhiyiji_info[seat].liqi !== 0 && !hunzhiyiji_info[seat].overload)
+                        ans.fans.push({val: 1, id: 30}); // 一发
+                } else {
+                    if (liqi_info[seat].kai) { // 开立直非役满情况
+                        if (liqi_info[seat].liqi === 1)
+                            ans.fans.push({val: 2, id: 9005}); // 开立直
+                        if (liqi_info[seat].liqi === 2)
+                            ans.fans.push({val: 3, id: 9006}); // 开两立直
+                    } else {
+                        // 幻境传说: 机会卡5
+                        if (get_field_spell_mode2() === 5) {
+                            if (liqi_info[seat].liqi === 1)
+                                ans.fans.push({val: 2, id: 2}); // 立直
+                            if (liqi_info[seat].liqi === 2)
+                                ans.fans.push({val: 4, id: 18}); // 两立直
+                        } else if (is_beishuizhizhan()) {
+                            if (liqi_info[seat].liqi === 1 && liqi_info[seat].beishui_type === 1)
+                                ans.fans.push({val: 3, id: 806}); // 真-立直
+                            else if (liqi_info[seat].liqi === 2 && liqi_info[seat].beishui_type === 1)
+                                ans.fans.push({val: 4, id: 807}); // 真-两立直
+                            else if (liqi_info[seat].liqi === 1 && liqi_info[seat].beishui_type === 2)
+                                ans.fans.push({val: 5, id: 808}); // 极-立直
+                            else if (liqi_info[seat].liqi === 2 && liqi_info[seat].beishui_type === 2)
+                                ans.fans.push({val: 6, id: 809}); // 极-两立直
+                            else if (liqi_info[seat].liqi === 1)
+                                ans.fans.push({val: 1, id: 2}); // 立直
+                            else if (liqi_info[seat].liqi === 2)
+                                ans.fans.push({val: 2, id: 18}); // 两立直
+                        } else {
+                            if (liqi_info[seat].liqi === 1)
+                                ans.fans.push({val: 1, id: 2}); // 立直
+                            if (liqi_info[seat].liqi === 2)
+                                ans.fans.push({val: 2, id: 18}); // 两立直
+                        }
+                    }
+                    // 幻境传说: 机会卡5
+                    if (get_field_spell_mode2() === 5) {
+                        if (liqi_info[seat].liqi !== 0 && liqi_info[seat].yifa !== 0)
+                            ans.fans.push({val: 2, id: 30}); // 一发
+                    } else {
+                        if (liqi_info[seat].liqi !== 0 && liqi_info[seat].yifa !== 0 && !no_yifa())
+                            ans.fans.push({val: 1, id: 30}); // 一发
+                    }
+                }
+                let lstname = getLstAction().name;
+                if (is_guyi() || is_yifanjieguyi()) {
+                    if (lstname === 'RecordDiscardTile' && getLstAction().data.is_liqi)
+                        ans.fans.push({val: 1, id: 51}); // 燕返
+                    if (!zimo && lst_draw_type === 0 && lstname === 'RecordDiscardTile')
+                        if (getLstAction(3) !== undefined && (getLstAction(3).name === 'RecordAnGangAddGang' || getLstAction(3).name === 'RecordChiPengGang'))
+                            ans.fans.push({val: 1, id: 52}); // 杠振
+                    if (fulu_cnt === 4)
+                        ans.fans.push({val: 1, id: 53}); // 十二落抬
+                }
+                if (menqing && zimo)
+                    ans.fans.push({val: 1, id: 1}); // 门前清自摸和
+
+                if (lstname === 'RecordAnGangAddGang')
+                    ans.fans.push({val: 1, id: 3}); // 枪杠
+                if (zimo && lst_draw_type === 0)
+                    ans.fans.push({val: 1, id: 4}); // 岭上开花
+                if (zimo && paishan.length === wangpai_num && lst_draw_type === 1)
+                    ans.fans.push({val: 1, id: 5}); // 海底摸月
+                if (!zimo && paishan.length === wangpai_num)
+                    ans.fans.push({val: 1, id: 6}); // 河底捞鱼
+            }
+
             if (liqi_info[seat].yifa !== 0 && liqi_info[seat].liqi === 0)
-                if (zimo)
+                if (zimo) {
+                    deleteFan(1); // 删除门前清自摸和
                     if (seat === ju) {
                         ans.fans.push({val: !is_qingtianjing() ? 1 : 13, id: 35}); // 天和
                         tianhu = true;
                     } else
                         ans.fans.push({val: !is_qingtianjing() ? 1 : 13, id: 36}); // 地和
-                else if (is_guyi() || is_yifanjieguyi())
+                } else if (is_guyi() || is_yifanjieguyi())
                     ans.fans.push({val: !is_qingtianjing() ? 1 : 13, id: 59}); // 人和
 
             if (menqing && cnt[tile2Int(lastile)] === 1 && !tianhu)
@@ -3705,16 +3793,13 @@ const calcFan = (seat: Seat, zimo: boolean, fangchong?: Seat): CalcFanRet => {
                     tmp.val /= 2;
                 ans.fans.push(tmp);
             }
-            if (liqi_info[seat].liqi === 2) {
-                let wangpai_num = 14;
-                if (player_cnt === 3)
-                    wangpai_num = 18;
-                else if (player_cnt === 2)
-                    wangpai_num = 22;
-
-                if (zimo && paishan.length === wangpai_num && lst_draw_type === 1 || !zimo && paishan.length === wangpai_num)
+            if (liqi_info[seat].liqi === 2)
+                if (zimo && paishan.length === wangpai_num && lst_draw_type === 1 || !zimo && paishan.length === wangpai_num) {
+                    deleteFan(18); // 删除两立直
+                    deleteFan(5); // 删除海底摸月
+                    deleteFan(6); // 删除河底捞鱼
                     ans.fans.push({val: !is_qingtianjing() ? 1 : 13, id: 63}); // 石上三年
-            }
+                }
             if (is_yifanjieguyi() && seat === ju && lianzhuang_cnt >= 7) // 第8次和牌
                 ans.fans.push({val: 1, id: 46}); // 八连庄
 
@@ -4181,12 +4266,12 @@ const calcFan = (seat: Seat, zimo: boolean, fangchong?: Seat): CalcFanRet => {
                 wangpai_num = 18;
 
             if (is_guyi() || is_yifanjieguyi()) {
-                if (qingyise && duizi_num === 7 && flag_duanyao) {
-                    if (cnt2[2] > 0)
+                if (menqing && qingyise && flag_duanyao) {
+                    if (cnt2.slice(2, Constants.TILE_NUM.C9m).every(n => n == 2))
                         ans.fans.push({val: !is_qingtianjing() ? 1 : 13, id: 62}); // 大数邻
-                    if (cnt2[11] > 0)
+                    if (cnt2.slice(11, Constants.TILE_NUM.C9p).every(n => n == 2))
                         ans.fans.push({val: !is_qingtianjing() ? 1 : 13, id: 60}); // 大车轮
-                    if (cnt2[20] > 0)
+                    if (cnt2.slice(20, Constants.TILE_NUM.C9s).every(n => n == 2))
                         ans.fans.push({val: !is_qingtianjing() ? 1 : 13, id: 61}); // 大竹林
                 }
 
@@ -4213,9 +4298,9 @@ const calcFan = (seat: Seat, zimo: boolean, fangchong?: Seat): CalcFanRet => {
                             silianke = true;
                     }
                 if (silianke)
-                    ans.fans.push({val: 1, id: 9703}); // 四连刻
+                    ans.fans.push({val: !is_qingtianjing() ? 1 : 13, id: 9703}); // 四连刻
                 if (sitongshun)
-                    ans.fans.push({val: 1, id: 9704}); // 一色四同顺
+                    ans.fans.push({val: !is_qingtianjing() ? 1 : 13, id: 9704}); // 一色四同顺
 
                 let hongkongque = true, hongyidian = true, heiyise = true;
                 if (cnt2[34] === 0)
@@ -4229,14 +4314,14 @@ const calcFan = (seat: Seat, zimo: boolean, fangchong?: Seat): CalcFanRet => {
                         heiyise = false;
                 }
                 if (hongkongque)
-                    ans.fans.push({val: 1, id: 9705}); // 红孔雀
+                    ans.fans.push({val: !is_qingtianjing() ? 1 : 13, id: 9705}); // 红孔雀
                 if (hongyidian)
-                    ans.fans.push({val: 1, id: 9706}); // 红一点
+                    ans.fans.push({val: !is_qingtianjing() ? 1 : 13, id: 9706}); // 红一点
                 if (heiyise)
-                    ans.fans.push({val: 1, id: 9707}); // 黑一色
+                    ans.fans.push({val: !is_qingtianjing() ? 1 : 13, id: 9707}); // 黑一色
 
                 if (seat === ju && lianzhuang_cnt >= 7) // 第8次和牌
-                    ans.fans.push({val: 1, id: 46}); // 八连庄
+                    ans.fans.push({val: !is_qingtianjing() ? 1 : 13, id: 46}); // 八连庄
 
                 let wan_qingyise = true;
                 for (let i = Constants.TILE_NUM.C1p; i <= Constants.TILE_NUM.C7z; i++)
@@ -4247,7 +4332,7 @@ const calcFan = (seat: Seat, zimo: boolean, fangchong?: Seat): CalcFanRet => {
                     for (let i = 1; i <= 9; i++)
                         sum += cnt2[i] * i;
                     if (sum >= 100)
-                        ans.fans.push({val: 1, id: 9709}); // 百万石
+                        ans.fans.push({val: !is_qingtianjing() ? 1 : 13, id: 9709}); // 百万石
                 }
 
                 let jinmenqiao = false;
@@ -4255,7 +4340,7 @@ const calcFan = (seat: Seat, zimo: boolean, fangchong?: Seat): CalcFanRet => {
                     if (shunzi[i * 9 + 2] >= 1 && shunzi[i * 9 + 4] >= 1 && shunzi[i * 9 + 6] >= 1 && shunzi[i * 9 + 8] >= 1)
                         jinmenqiao = true;
                 if (menqing && jinmenqiao)
-                    ans.fans.push({val: 1, id: 9710}); // 金门桥
+                    ans.fans.push({val: !is_qingtianjing() ? 1 : 13, id: 9710}); // 金门桥
 
                 let xinganxian_part1 = false, xinganxian_part2 = false;
                 for (let j = 0; j <= 2; j++) {
@@ -4269,19 +4354,19 @@ const calcFan = (seat: Seat, zimo: boolean, fangchong?: Seat): CalcFanRet => {
                 if (kezi[Constants.TILE_NUM.C1z] === 1 && typecnt[Constants.TILE_NUM.C4z][7] === 1 || kezi[Constants.TILE_NUM.C4z] === 1 && typecnt[Constants.TILE_NUM.C1z][7] === 1)
                     xinganxian_part2 = true;
                 if (menqing && xinganxian_part1 && xinganxian_part2)
-                    ans.fans.push({val: 1, id: 9711}); // 东北新干线
+                    ans.fans.push({val: !is_qingtianjing() ? 1 : 13, id: 9711}); // 东北新干线
 
                 if (flag_lvyise && cnt2[33] === 0) {
                     deleteFan(40);
-                    ans.fans.push({val: 2, id: 9712}); // 无发绿一色
+                    ans.fans.push({val: !is_qingtianjing() ? 2 : 26, id: 9712}); // 无发绿一色
                 }
             }
 
             if (liqi_info[seat].kai && !zimo && liqi_info[fangchong].liqi === 0) { // 开立直
                 if (liqi_info[seat].liqi === 1)
-                    ans.fans.push({val: 1, id: 9003});
+                    ans.fans.push({val: !is_qingtianjing() ? 1 : 13, id: 9003});
                 if (liqi_info[seat].liqi === 2)
-                    ans.fans.push({val: 1, id: 9004});
+                    ans.fans.push({val: !is_qingtianjing() ? 1 : 13, id: 9004});
             }
 
             if (ans.fans.length > 0 && !is_qingtianjing())

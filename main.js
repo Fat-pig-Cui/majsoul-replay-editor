@@ -2435,6 +2435,8 @@ let huleOnePlayer = (seat) => {
         for (let i = 0; i < dora_cnt.licnt; i++)
             li_doras0[i] = li_doras[i];
     if (zhahu) {
+        if (seat === ju)
+            lianzhuang_cnt = -1;
         [point_rong, point_sum, point_zimo_qin, point_zimo_xian] = calcPoint(-2000);
         for (let i = 0; i < player_cnt; i++) {
             if (i === seat || huled[i])
@@ -2912,24 +2914,112 @@ const calcFan = (seat, zimo, fangchong) => {
     if (is_yifanjieguyi() && calcHupai(tiles) === 12) {
         let ans = { yiman: !is_qingtianjing(), fans: [], fu: 25 };
         if (liqi_info[seat].yifa !== 0 && liqi_info[seat].liqi === 0 && zimo)
-            ans.fans.push({ val: 1, id: 9708 });
+            ans.fans.push({ val: !is_qingtianjing() ? 1 : 13, id: 9708 });
         updateRet(ans);
     }
     return ret;
     function normalCalc() {
         dfs(1);
         if (calcHupai(tiles) === 3) {
+            const deleteFan = (id) => {
+                for (let i in ans.fans)
+                    if (ans.fans[i].id === id) {
+                        ans.fans.splice(parseInt(i), 1);
+                        break;
+                    }
+            };
             const menqing = fulu_cnt === 0;
             let tianhu = false;
             let ans = { yiman: !is_qingtianjing(), fans: [], fu: 25 };
+            let wangpai_num = 14;
+            if (player_cnt === 3)
+                wangpai_num = 18;
+            else if (player_cnt === 2)
+                wangpai_num = 22;
+            if (is_qingtianjing()) {
+                if (is_hunzhiyiji()) {
+                    if (hunzhiyiji_info[seat].liqi === 1)
+                        ans.fans.push({ val: 2, id: 804 });
+                    if (hunzhiyiji_info[seat].liqi === 2)
+                        ans.fans.push({ val: 3, id: 805 });
+                    if (hunzhiyiji_info[seat].liqi !== 0 && !hunzhiyiji_info[seat].overload)
+                        ans.fans.push({ val: 1, id: 30 });
+                }
+                else {
+                    if (liqi_info[seat].kai) {
+                        if (liqi_info[seat].liqi === 1)
+                            ans.fans.push({ val: 2, id: 9005 });
+                        if (liqi_info[seat].liqi === 2)
+                            ans.fans.push({ val: 3, id: 9006 });
+                    }
+                    else {
+                        if (get_field_spell_mode2() === 5) {
+                            if (liqi_info[seat].liqi === 1)
+                                ans.fans.push({ val: 2, id: 2 });
+                            if (liqi_info[seat].liqi === 2)
+                                ans.fans.push({ val: 4, id: 18 });
+                        }
+                        else if (is_beishuizhizhan()) {
+                            if (liqi_info[seat].liqi === 1 && liqi_info[seat].beishui_type === 1)
+                                ans.fans.push({ val: 3, id: 806 });
+                            else if (liqi_info[seat].liqi === 2 && liqi_info[seat].beishui_type === 1)
+                                ans.fans.push({ val: 4, id: 807 });
+                            else if (liqi_info[seat].liqi === 1 && liqi_info[seat].beishui_type === 2)
+                                ans.fans.push({ val: 5, id: 808 });
+                            else if (liqi_info[seat].liqi === 2 && liqi_info[seat].beishui_type === 2)
+                                ans.fans.push({ val: 6, id: 809 });
+                            else if (liqi_info[seat].liqi === 1)
+                                ans.fans.push({ val: 1, id: 2 });
+                            else if (liqi_info[seat].liqi === 2)
+                                ans.fans.push({ val: 2, id: 18 });
+                        }
+                        else {
+                            if (liqi_info[seat].liqi === 1)
+                                ans.fans.push({ val: 1, id: 2 });
+                            if (liqi_info[seat].liqi === 2)
+                                ans.fans.push({ val: 2, id: 18 });
+                        }
+                    }
+                    if (get_field_spell_mode2() === 5) {
+                        if (liqi_info[seat].liqi !== 0 && liqi_info[seat].yifa !== 0)
+                            ans.fans.push({ val: 2, id: 30 });
+                    }
+                    else {
+                        if (liqi_info[seat].liqi !== 0 && liqi_info[seat].yifa !== 0 && !no_yifa())
+                            ans.fans.push({ val: 1, id: 30 });
+                    }
+                }
+                let lstname = getLstAction().name;
+                if (is_guyi() || is_yifanjieguyi()) {
+                    if (lstname === 'RecordDiscardTile' && getLstAction().data.is_liqi)
+                        ans.fans.push({ val: 1, id: 51 });
+                    if (!zimo && lst_draw_type === 0 && lstname === 'RecordDiscardTile')
+                        if (getLstAction(3) !== undefined && (getLstAction(3).name === 'RecordAnGangAddGang' || getLstAction(3).name === 'RecordChiPengGang'))
+                            ans.fans.push({ val: 1, id: 52 });
+                    if (fulu_cnt === 4)
+                        ans.fans.push({ val: 1, id: 53 });
+                }
+                if (menqing && zimo)
+                    ans.fans.push({ val: 1, id: 1 });
+                if (lstname === 'RecordAnGangAddGang')
+                    ans.fans.push({ val: 1, id: 3 });
+                if (zimo && lst_draw_type === 0)
+                    ans.fans.push({ val: 1, id: 4 });
+                if (zimo && paishan.length === wangpai_num && lst_draw_type === 1)
+                    ans.fans.push({ val: 1, id: 5 });
+                if (!zimo && paishan.length === wangpai_num)
+                    ans.fans.push({ val: 1, id: 6 });
+            }
             if (liqi_info[seat].yifa !== 0 && liqi_info[seat].liqi === 0)
-                if (zimo)
+                if (zimo) {
+                    deleteFan(1);
                     if (seat === ju) {
                         ans.fans.push({ val: !is_qingtianjing() ? 1 : 13, id: 35 });
                         tianhu = true;
                     }
                     else
                         ans.fans.push({ val: !is_qingtianjing() ? 1 : 13, id: 36 });
+                }
                 else if (is_guyi() || is_yifanjieguyi())
                     ans.fans.push({ val: !is_qingtianjing() ? 1 : 13, id: 59 });
             if (menqing && cnt[tile2Int(lastile)] === 1 && !tianhu)
@@ -2940,15 +3030,13 @@ const calcFan = (seat, zimo, fangchong) => {
                     tmp.val /= 2;
                 ans.fans.push(tmp);
             }
-            if (liqi_info[seat].liqi === 2) {
-                let wangpai_num = 14;
-                if (player_cnt === 3)
-                    wangpai_num = 18;
-                else if (player_cnt === 2)
-                    wangpai_num = 22;
-                if (zimo && paishan.length === wangpai_num && lst_draw_type === 1 || !zimo && paishan.length === wangpai_num)
+            if (liqi_info[seat].liqi === 2)
+                if (zimo && paishan.length === wangpai_num && lst_draw_type === 1 || !zimo && paishan.length === wangpai_num) {
+                    deleteFan(18);
+                    deleteFan(5);
+                    deleteFan(6);
                     ans.fans.push({ val: !is_qingtianjing() ? 1 : 13, id: 63 });
-            }
+                }
             if (is_yifanjieguyi() && seat === ju && lianzhuang_cnt >= 7)
                 ans.fans.push({ val: 1, id: 46 });
             updateRet(ans);
@@ -3351,12 +3439,12 @@ const calcFan = (seat, zimo, fangchong) => {
             if (player_cnt === 2)
                 wangpai_num = 18;
             if (is_guyi() || is_yifanjieguyi()) {
-                if (qingyise && duizi_num === 7 && flag_duanyao) {
-                    if (cnt2[2] > 0)
+                if (menqing && qingyise && flag_duanyao) {
+                    if (cnt2.slice(2, Constants.TILE_NUM.C9m).every(n => n == 2))
                         ans.fans.push({ val: !is_qingtianjing() ? 1 : 13, id: 62 });
-                    if (cnt2[11] > 0)
+                    if (cnt2.slice(11, Constants.TILE_NUM.C9p).every(n => n == 2))
                         ans.fans.push({ val: !is_qingtianjing() ? 1 : 13, id: 60 });
-                    if (cnt2[20] > 0)
+                    if (cnt2.slice(20, Constants.TILE_NUM.C9s).every(n => n == 2))
                         ans.fans.push({ val: !is_qingtianjing() ? 1 : 13, id: 61 });
                 }
                 if (liqi_info[seat].liqi === 2)
@@ -3380,9 +3468,9 @@ const calcFan = (seat, zimo, fangchong) => {
                             silianke = true;
                     }
                 if (silianke)
-                    ans.fans.push({ val: 1, id: 9703 });
+                    ans.fans.push({ val: !is_qingtianjing() ? 1 : 13, id: 9703 });
                 if (sitongshun)
-                    ans.fans.push({ val: 1, id: 9704 });
+                    ans.fans.push({ val: !is_qingtianjing() ? 1 : 13, id: 9704 });
                 let hongkongque = true, hongyidian = true, heiyise = true;
                 if (cnt2[34] === 0)
                     hongkongque = hongyidian = false;
@@ -3395,13 +3483,13 @@ const calcFan = (seat, zimo, fangchong) => {
                         heiyise = false;
                 }
                 if (hongkongque)
-                    ans.fans.push({ val: 1, id: 9705 });
+                    ans.fans.push({ val: !is_qingtianjing() ? 1 : 13, id: 9705 });
                 if (hongyidian)
-                    ans.fans.push({ val: 1, id: 9706 });
+                    ans.fans.push({ val: !is_qingtianjing() ? 1 : 13, id: 9706 });
                 if (heiyise)
-                    ans.fans.push({ val: 1, id: 9707 });
+                    ans.fans.push({ val: !is_qingtianjing() ? 1 : 13, id: 9707 });
                 if (seat === ju && lianzhuang_cnt >= 7)
-                    ans.fans.push({ val: 1, id: 46 });
+                    ans.fans.push({ val: !is_qingtianjing() ? 1 : 13, id: 46 });
                 let wan_qingyise = true;
                 for (let i = Constants.TILE_NUM.C1p; i <= Constants.TILE_NUM.C7z; i++)
                     if (cnt2[i] >= 1)
@@ -3411,14 +3499,14 @@ const calcFan = (seat, zimo, fangchong) => {
                     for (let i = 1; i <= 9; i++)
                         sum += cnt2[i] * i;
                     if (sum >= 100)
-                        ans.fans.push({ val: 1, id: 9709 });
+                        ans.fans.push({ val: !is_qingtianjing() ? 1 : 13, id: 9709 });
                 }
                 let jinmenqiao = false;
                 for (let i = 0; i <= 2; i++)
                     if (shunzi[i * 9 + 2] >= 1 && shunzi[i * 9 + 4] >= 1 && shunzi[i * 9 + 6] >= 1 && shunzi[i * 9 + 8] >= 1)
                         jinmenqiao = true;
                 if (menqing && jinmenqiao)
-                    ans.fans.push({ val: 1, id: 9710 });
+                    ans.fans.push({ val: !is_qingtianjing() ? 1 : 13, id: 9710 });
                 let xinganxian_part1 = false, xinganxian_part2 = false;
                 for (let j = 0; j <= 2; j++) {
                     xinganxian_part1 = true;
@@ -3431,17 +3519,17 @@ const calcFan = (seat, zimo, fangchong) => {
                 if (kezi[Constants.TILE_NUM.C1z] === 1 && typecnt[Constants.TILE_NUM.C4z][7] === 1 || kezi[Constants.TILE_NUM.C4z] === 1 && typecnt[Constants.TILE_NUM.C1z][7] === 1)
                     xinganxian_part2 = true;
                 if (menqing && xinganxian_part1 && xinganxian_part2)
-                    ans.fans.push({ val: 1, id: 9711 });
+                    ans.fans.push({ val: !is_qingtianjing() ? 1 : 13, id: 9711 });
                 if (flag_lvyise && cnt2[33] === 0) {
                     deleteFan(40);
-                    ans.fans.push({ val: 2, id: 9712 });
+                    ans.fans.push({ val: !is_qingtianjing() ? 2 : 26, id: 9712 });
                 }
             }
             if (liqi_info[seat].kai && !zimo && liqi_info[fangchong].liqi === 0) {
                 if (liqi_info[seat].liqi === 1)
-                    ans.fans.push({ val: 1, id: 9003 });
+                    ans.fans.push({ val: !is_qingtianjing() ? 1 : 13, id: 9003 });
                 if (liqi_info[seat].liqi === 2)
-                    ans.fans.push({ val: 1, id: 9004 });
+                    ans.fans.push({ val: !is_qingtianjing() ? 1 : 13, id: 9004 });
             }
             if (ans.fans.length > 0 && !is_qingtianjing())
                 return ans;
