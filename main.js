@@ -661,11 +661,13 @@ let mingpai = (...args) => {
             }
         return false;
         function tryMingpai(try_tiles) {
-            for (let seat2 = 0; seat2 < player_cnt; seat2++)
-                if (seat2 !== from && (seat === seat2 || seat === undefined) && inTiles(try_tiles, player_tiles[seat2])) {
+            for (let i = 0; i < player_cnt; i++) {
+                let seat2 = (from + 1 + i) % player_cnt;
+                if ((seat === seat2 || seat === undefined) && inTiles(try_tiles, player_tiles[seat2])) {
                     mingpai(seat2, try_tiles, jifei);
                     return true;
                 }
+            }
             return false;
         }
     }

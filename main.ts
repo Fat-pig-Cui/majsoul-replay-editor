@@ -880,11 +880,13 @@ let mingpai = (...args: any[]): void => {
          * @param try_tiles - 牌型, 组合之一
          */
         function tryMingpai(try_tiles: Tile[]): boolean {
-            for (let seat2: Seat = 0; seat2 < player_cnt; seat2++)
-                if (seat2 !== from && (seat === seat2 || seat === undefined) && inTiles(try_tiles, player_tiles[seat2])) {
+            for (let i = 0; i < player_cnt; i++) {
+                let seat2 = (from + 1 + i) % player_cnt as Seat;
+                if ((seat === seat2 || seat === undefined) && inTiles(try_tiles, player_tiles[seat2])) {
                     mingpai(seat2, try_tiles, jifei);
                     return true;
                 }
+            }
             return false;
         }
     }

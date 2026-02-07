@@ -2,8 +2,46 @@ from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.common.exceptions import TimeoutException
+from datetime import datetime
 import json
 import time
+
+
+def check_dependencies(commands):
+    """从命令中提取依赖对象并检查"""
+    dependencies = set()
+
+    # 简单的依赖提取（可根据需要扩展）
+    import re
+    for cmd in commands:
+        # 匹配可能的外部依赖
+        patterns = [
+            r'(\w+)\.\w+\(',  # object.method(
+            r'new\s+(\w+)',  # new Object
+            r'(\w+)\.\w+\s*=',  # object.property =
+            r'window\.(\w+)',  # window.object
+        ]
+
+        for pattern in patterns:
+            matches = re.findall(pattern, cmd)
+            dependencies.update(matches)
+
+    # 过滤掉 JavaScript 内置对象
+    js_builtins = {
+        'console', 'document', 'window', 'navigator', 'location',
+        'history', 'localStorage', 'sessionStorage', 'JSON',
+        'Math', 'Date', 'Array', 'Object', 'String', 'Number',
+        'Boolean', 'Function', 'RegExp', 'Error', 'Promise',
+        'fetch', 'XMLHttpRequest', 'setTimeout', 'setInterval',
+        'clearTimeout', 'clearInterval', 'alert', 'confirm',
+        'prompt', 'parseInt', 'parseFloat', 'isNaN', 'isFinite',
+        'encodeURI', 'decodeURI', 'encodeURIComponent', 'decodeURIComponent'
+    }
+
+    external_deps = dependencies - js_builtins
+    print(f"检测到外部依赖: {external_deps}")
+
+    return external_deps
 
 
 class ConsoleExecutor:
@@ -31,42 +69,6 @@ class ConsoleExecutor:
             print(f"❌ {object_name} 加载超时")
             return False
 
-    def check_dependencies(self, commands):
-        """从命令中提取依赖对象并检查"""
-        dependencies = set()
-
-        # 简单的依赖提取（可根据需要扩展）
-        import re
-        for cmd in commands:
-            # 匹配可能的外部依赖
-            patterns = [
-                r'(\w+)\.\w+\(',  # object.method(
-                r'new\s+(\w+)',  # new Object
-                r'(\w+)\.\w+\s*=',  # object.property =
-                r'window\.(\w+)',  # window.object
-            ]
-
-            for pattern in patterns:
-                matches = re.findall(pattern, cmd)
-                dependencies.update(matches)
-
-        # 过滤掉 JavaScript 内置对象
-        js_builtins = {
-            'console', 'document', 'window', 'navigator', 'location',
-            'history', 'localStorage', 'sessionStorage', 'JSON',
-            'Math', 'Date', 'Array', 'Object', 'String', 'Number',
-            'Boolean', 'Function', 'RegExp', 'Error', 'Promise',
-            'fetch', 'XMLHttpRequest', 'setTimeout', 'setInterval',
-            'clearTimeout', 'clearInterval', 'alert', 'confirm',
-            'prompt', 'parseInt', 'parseFloat', 'isNaN', 'isFinite',
-            'encodeURI', 'decodeURI', 'encodeURIComponent', 'decodeURIComponent'
-        }
-
-        external_deps = dependencies - js_builtins
-        print(f"检测到外部依赖: {external_deps}")
-
-        return external_deps
-
     def execute_with_deps(self, url, commands, wait_time=3):
         """执行命令，确保依赖加载"""
         print(f"🌐 访问: {url}, 等待时间: {wait_time}s")
@@ -76,7 +78,7 @@ class ConsoleExecutor:
         time.sleep(wait_time)
 
         # 检查依赖
-        dependencies = self.check_dependencies(commands)
+        dependencies = check_dependencies(commands)
 
         # 等待关键依赖加载
         loaded_deps = []
@@ -146,19 +148,24 @@ jquery_commands = [
     "cfg.item_definition.skin.map_",
     "cfg.item_definition.item.map_",
     "cfg.item_definition.title.map_",
+    "cfg.activity.activity.map_",
 ]
-url = "https://game.maj-soul.com/1/"
+url_majsoul = "https://game.maj-soul.com/1/"
 
 jquery_result = executor.execute_with_deps(
-    url=url,
+    url=url_majsoul,
     commands=jquery_commands,
     wait_time=10
 )
 
 with open("DatabaseRAW.py", "w", encoding='utf-8') as f:
+    f.write('# Updated on ' + datetime.now().strftime('%Y/%m/%d') + '\n\n')
     f.write('CHARACTER = ' + json.dumps(jquery_result['results'][0]['result'], ensure_ascii=False, indent=4))
     f.write('\n\nSKIN = ' + json.dumps(jquery_result['results'][1]['result'], ensure_ascii=False, indent=4))
     f.write('\n\nITEM = ' + json.dumps(jquery_result['results'][2]['result'], ensure_ascii=False, indent=4))
     f.write('\n\nTITLE = ' + json.dumps(jquery_result['results'][3]['result'], ensure_ascii=False, indent=4))
+
+with open("DatabaseActivity.py", "w", encoding='utf-8') as f:
+    f.write('CFG_ACTIVITY_ACTIVITY_MAP_ = ' + json.dumps(jquery_result['results'][4]['result'], ensure_ascii=False, indent=4))
 
 executor.close()
