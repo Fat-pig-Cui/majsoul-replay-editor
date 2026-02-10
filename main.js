@@ -3536,7 +3536,7 @@ const calcFan = (seat, zimo, fangchong) => {
             if (ans.fans.length > 0 && !is_qingtianjing())
                 return ans;
             ans.yiman = false;
-            if (liqi_info[seat].yifa !== 0 && liqi_info[seat].liqi === 0 && seat !== ju && !zimo && (is_guyi() || is_yifanjieguyi()))
+            if (liqi_info[seat].yifa !== 0 && liqi_info[seat].liqi === 0 && seat !== ju && !zimo)
                 if (is_renhumanguan())
                     ans.fans.push({ val: 5, id: 65 });
             if (is_hunzhiyiji()) {
@@ -5139,7 +5139,7 @@ let addNewRound = (left_tile_count, fake_hash_code, opens, is_sha256) => {
             tiles3: player_tiles[3].slice(),
             paishan: paishan.join(''),
             scores: scores.slice(),
-            tingpai: getAllTingpai(),
+            tingpai: !is_chuanma() ? getAllTingpai() : undefined,
             doras: calcDoras(),
             opens: opens,
             muyu: is_muyu() ? JSON.parse(JSON.stringify(muyu)) : undefined,
@@ -5372,7 +5372,7 @@ let addChangeTile = (change_tile_infos, type) => {
             change_tile_infos: change_tile_infos,
             change_type: type,
             doras: calcDoras(),
-            tingpai: getAllTingpai(),
+            tingpai: !is_chuanma() ? getAllTingpai() : undefined,
             operations: [],
         }
     })));
