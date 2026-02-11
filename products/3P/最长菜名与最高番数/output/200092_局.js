@@ -5,10 +5,10 @@ clearProject();
 
 player_datas[0].nickname = '局-契约';
 player_datas[1].nickname = '局';
-player_datas[2].nickname = '局-契约';
+player_datas[2].nickname = '缘结祈岁';
 player_datas[0].avatar_id = 409202;
 player_datas[1].avatar_id = 409201;
-player_datas[2].avatar_id = 409202;
+player_datas[2].avatar_id = 409203;
 
 setConfig({
     category: 1,

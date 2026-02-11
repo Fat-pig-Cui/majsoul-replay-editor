@@ -1,8 +1,13 @@
 from selenium import webdriver
+from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.common.exceptions import TimeoutException
 from datetime import datetime
+from collections import OrderedDict
+import platform
+
 import json
 import time
 
@@ -46,16 +51,25 @@ def check_dependencies(commands):
 
 class ConsoleExecutor:
     def __init__(self, headless=True):
+        system = platform.system()
+
+        # 无论 macOS (Darwin) 还是 Windows，为了静默运行 (headless)，都推荐使用 Chrome
+        print(f"Detected {system}, using Chrome driver for headless support...")
+
         self.options = Options()
         if headless:
-            self.options.add_argument("--headless")
+            self.options.add_argument("--headless=new") # 使用新版 headless 模式
         self.options.add_argument("--disable-blink-features=AutomationControlled")
 
         # 防止检测
         self.options.add_experimental_option("excludeSwitches", ["enable-automation"])
         self.options.add_experimental_option('useAutomationExtension', False)
 
-        self.driver = webdriver.Chrome(options=self.options)
+        try:
+            self.driver = webdriver.Chrome(options=self.options, service=Service())
+        except Exception as e:
+            print(f"Chrome 启动失败: {e}")
+            raise e
 
     def wait_for_object(self, object_name, timeout=10):
         """等待特定对象/函数加载完成"""
@@ -155,8 +169,10 @@ url_majsoul = "https://game.maj-soul.com/1/"
 jquery_result = executor.execute_with_deps(
     url=url_majsoul,
     commands=jquery_commands,
-    wait_time=10
+    wait_time=25
 )
+for i in range(5):
+    jquery_result['results'][i]['result'] = OrderedDict(sorted(jquery_result['results'][i]['result'].items(), key=lambda x: x[1]['id']))
 
 with open("DatabaseRAW.py", "w", encoding='utf-8') as f:
     f.write('# Updated on ' + datetime.now().strftime('%Y/%m/%d') + '\n\n')

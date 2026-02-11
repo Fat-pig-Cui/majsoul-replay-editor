@@ -3,17 +3,12 @@ clearProject();
 // 第一局亲家的最长菜名(15条49番), 第二局最高番数(14条64番)
 // 最后一局闲家的最长菜名(15条55番)
 
-player_datas[0].nickname = '福姬-契约';
-player_datas[1].nickname = '异想烂漫';
-player_datas[2].nickname = '缘结祈岁';
-player_datas[0].avatar_id = 403802;
-player_datas[1].avatar_id = 403806;
-player_datas[2].avatar_id = 403807;
-
-// 称号-神社贵宾
-player_datas[0].title = player_datas[1].title = player_datas[2].title = 600038;
-// 主播(猫爪)认证
-player_datas[0].verified = player_datas[1].verified = player_datas[2].verified = 1;
+player_datas[0].nickname = '金乌-契约';
+player_datas[1].nickname = '金乌';
+player_datas[2].nickname = '金乌-契约';
+player_datas[0].avatar_id = 40012002;
+player_datas[1].avatar_id = 40012001;
+player_datas[2].avatar_id = 40012002;
 
 setConfig({
     category: 1,

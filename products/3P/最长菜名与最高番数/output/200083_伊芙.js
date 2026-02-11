@@ -4,11 +4,11 @@ clearProject();
 // 最后一局闲家的最长菜名(15条55番)
 
 player_datas[0].nickname = '伊芙-契约';
-player_datas[1].nickname = '伊芙';
-player_datas[2].nickname = '圣谛遗章';
+player_datas[1].nickname = '圣谛遗章';
+player_datas[2].nickname = '缘结祈岁';
 player_datas[0].avatar_id = 408302;
-player_datas[1].avatar_id = 408301;
-player_datas[2].avatar_id = 408303;
+player_datas[1].avatar_id = 408303;
+player_datas[2].avatar_id = 408304;
 
 setConfig({
     category: 1,

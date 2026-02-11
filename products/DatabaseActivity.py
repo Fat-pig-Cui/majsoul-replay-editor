@@ -1,24 +1,4 @@
 CFG_ACTIVITY_ACTIVITY_MAP_ = {
-    "100000": {
-        "id": 100000,
-        "name_chs": "",
-        "name_chs_t": "",
-        "name_en": "",
-        "name_jp": "",
-        "name_kr": "",
-        "need_popout": 0,
-        "type": "chest_up"
-    },
-    "100001": {
-        "id": 100001,
-        "name_chs": "",
-        "name_chs_t": "",
-        "name_en": "",
-        "name_jp": "",
-        "name_kr": "",
-        "need_popout": 0,
-        "type": "chest_up"
-    },
     "1001": {
         "id": 1001,
         "name_chs": "",
@@ -28,26 +8,6 @@ CFG_ACTIVITY_ACTIVITY_MAP_ = {
         "name_kr": "",
         "need_popout": 1,
         "type": "task"
-    },
-    "100100": {
-        "id": 100100,
-        "name_chs": "",
-        "name_chs_t": "",
-        "name_en": "",
-        "name_jp": "",
-        "name_kr": "",
-        "need_popout": 0,
-        "type": "chest_up"
-    },
-    "100101": {
-        "id": 100101,
-        "name_chs": "",
-        "name_chs_t": "",
-        "name_en": "",
-        "name_jp": "",
-        "name_kr": "",
-        "need_popout": 0,
-        "type": "chest_up"
     },
     "1002": {
         "id": 1002,
@@ -2978,6 +2938,46 @@ CFG_ACTIVITY_ACTIVITY_MAP_ = {
         "name_kr": "",
         "need_popout": 0,
         "type": "shop"
+    },
+    "100000": {
+        "id": 100000,
+        "name_chs": "",
+        "name_chs_t": "",
+        "name_en": "",
+        "name_jp": "",
+        "name_kr": "",
+        "need_popout": 0,
+        "type": "chest_up"
+    },
+    "100001": {
+        "id": 100001,
+        "name_chs": "",
+        "name_chs_t": "",
+        "name_en": "",
+        "name_jp": "",
+        "name_kr": "",
+        "need_popout": 0,
+        "type": "chest_up"
+    },
+    "100100": {
+        "id": 100100,
+        "name_chs": "",
+        "name_chs_t": "",
+        "name_en": "",
+        "name_jp": "",
+        "name_kr": "",
+        "need_popout": 0,
+        "type": "chest_up"
+    },
+    "100101": {
+        "id": 100101,
+        "name_chs": "",
+        "name_chs_t": "",
+        "name_en": "",
+        "name_jp": "",
+        "name_kr": "",
+        "need_popout": 0,
+        "type": "chest_up"
     },
     "220210": {
         "id": 220210,
@@ -11118,5 +11118,215 @@ CFG_ACTIVITY_ACTIVITY_MAP_ = {
         "name_kr": "빛을 물고 온 새",
         "need_popout": 1,
         "type": "flip_task"
+    },
+    "260201": {
+        "id": 260201,
+        "name_chs": "神驰集愿",
+        "name_chs_t": "神馳集願",
+        "name_en": "Wishes Unbridled",
+        "name_jp": "午神の願い事集め",
+        "name_kr": "소원이 닿는 곳",
+        "need_popout": 0,
+        "type": "marathon"
+    },
+    "260202": {
+        "id": 260202,
+        "name_chs": "",
+        "name_chs_t": "",
+        "name_en": "",
+        "name_jp": "",
+        "name_kr": "",
+        "need_popout": 0,
+        "type": "period_task"
+    },
+    "260203": {
+        "id": 260203,
+        "name_chs": "",
+        "name_chs_t": "",
+        "name_en": "",
+        "name_jp": "",
+        "name_kr": "",
+        "need_popout": 0,
+        "type": "period_task"
+    },
+    "260204": {
+        "id": 260204,
+        "name_chs": "",
+        "name_chs_t": "",
+        "name_en": "",
+        "name_jp": "",
+        "name_kr": "",
+        "need_popout": 0,
+        "type": "period_task"
+    },
+    "260205": {
+        "id": 260205,
+        "name_chs": "",
+        "name_chs_t": "",
+        "name_en": "",
+        "name_jp": "",
+        "name_kr": "",
+        "need_popout": 0,
+        "type": "story"
+    },
+    "260210": {
+        "id": 260210,
+        "name_chs": "",
+        "name_chs_t": "",
+        "name_en": "",
+        "name_jp": "",
+        "name_kr": "",
+        "need_popout": 0,
+        "type": "shop"
+    },
+    "260211": {
+        "id": 260211,
+        "name_chs": "",
+        "name_chs_t": "",
+        "name_en": "",
+        "name_jp": "",
+        "name_kr": "",
+        "need_popout": 0,
+        "type": "event_cross_time"
+    },
+    "260212": {
+        "id": 260212,
+        "name_chs": "",
+        "name_chs_t": "",
+        "name_en": "",
+        "name_jp": "",
+        "name_kr": "",
+        "need_popout": 0,
+        "type": "item"
+    },
+    "260215": {
+        "id": 260215,
+        "name_chs": "",
+        "name_chs_t": "",
+        "name_en": "",
+        "name_jp": "",
+        "name_kr": "",
+        "need_popout": 0,
+        "type": "choose_up"
+    },
+    "260216": {
+        "id": 260216,
+        "name_chs": "",
+        "name_chs_t": "",
+        "name_en": "",
+        "name_jp": "",
+        "name_kr": "",
+        "need_popout": 0,
+        "type": "chest_up"
+    },
+    "260217": {
+        "id": 260217,
+        "name_chs": "",
+        "name_chs_t": "",
+        "name_en": "",
+        "name_jp": "",
+        "name_kr": "",
+        "need_popout": 0,
+        "type": "chest_up"
+    },
+    "260218": {
+        "id": 260218,
+        "name_chs": "",
+        "name_chs_t": "",
+        "name_en": "",
+        "name_jp": "",
+        "name_kr": "",
+        "need_popout": 0,
+        "type": "chest_replace_up"
+    },
+    "260219": {
+        "id": 260219,
+        "name_chs": "",
+        "name_chs_t": "",
+        "name_en": "",
+        "name_jp": "",
+        "name_kr": "",
+        "need_popout": 0,
+        "type": "chest_replace_up"
+    },
+    "260220": {
+        "id": 260220,
+        "name_chs": "",
+        "name_chs_t": "",
+        "name_en": "",
+        "name_jp": "",
+        "name_kr": "",
+        "need_popout": 0,
+        "type": "chest_up"
+    },
+    "260221": {
+        "id": 260221,
+        "name_chs": "",
+        "name_chs_t": "",
+        "name_en": "",
+        "name_jp": "",
+        "name_kr": "",
+        "need_popout": 0,
+        "type": "chest_up"
+    },
+    "260222": {
+        "id": 260222,
+        "name_chs": "",
+        "name_chs_t": "",
+        "name_en": "",
+        "name_jp": "",
+        "name_kr": "",
+        "need_popout": 0,
+        "type": "chest_replace_up"
+    },
+    "260223": {
+        "id": 260223,
+        "name_chs": "",
+        "name_chs_t": "",
+        "name_en": "",
+        "name_jp": "",
+        "name_kr": "",
+        "need_popout": 0,
+        "type": "chest_replace_up"
+    },
+    "260224": {
+        "id": 260224,
+        "name_chs": "",
+        "name_chs_t": "",
+        "name_en": "",
+        "name_jp": "",
+        "name_kr": "",
+        "need_popout": 0,
+        "type": "choose_group_up"
+    },
+    "260225": {
+        "id": 260225,
+        "name_chs": "",
+        "name_chs_t": "",
+        "name_en": "",
+        "name_jp": "",
+        "name_kr": "",
+        "need_popout": 0,
+        "type": "choose_group_up"
+    },
+    "260226": {
+        "id": 260226,
+        "name_chs": "",
+        "name_chs_t": "",
+        "name_en": "",
+        "name_jp": "",
+        "name_kr": "",
+        "need_popout": 0,
+        "type": "chest_replace_up"
+    },
+    "260227": {
+        "id": 260227,
+        "name_chs": "",
+        "name_chs_t": "",
+        "name_en": "",
+        "name_jp": "",
+        "name_kr": "",
+        "need_popout": 0,
+        "type": "chest_replace_up"
     }
 }

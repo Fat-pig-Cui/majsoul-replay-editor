@@ -2,14 +2,14 @@ clearProject();
 
 // 为了方便编辑不考虑换三张的过程
 
-player_datas[0].nickname = '局-契约';
-player_datas[1].nickname = '局';
-player_datas[2].nickname = '局-契约';
-player_datas[3].nickname = '缘结祈岁';
-player_datas[0].avatar_id = 409202;
-player_datas[1].avatar_id = 409201;
-player_datas[2].avatar_id = 409202;
-player_datas[3].avatar_id = 409203;
+player_datas[0].nickname = '金乌-契约';
+player_datas[1].nickname = '金乌';
+player_datas[2].nickname = '金乌-契约';
+player_datas[3].nickname = '金乌';
+player_datas[0].avatar_id = 40012002;
+player_datas[1].avatar_id = 40012001;
+player_datas[2].avatar_id = 40012002;
+player_datas[3].avatar_id = 40012001;
 
 setConfig({
     category: 1,
