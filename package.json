@@ -4,8 +4,7 @@
     "flow-bin": "^0.278.0",
     "flow-remove-types": "^2.278.0",
     "tsc": "^2.0.4",
-    "tslint": "^5.20.1",
-    "typescript": "^5.9.3"
+    "tslint": "^5.20.1"
   },
   "scripts": {
     "flow": "flow"

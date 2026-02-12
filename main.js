@@ -980,8 +980,8 @@ let hupai = (...args) => {
             ret.push(whatever);
             hules_history.push(whatever);
         }
-        if (is_chuanma() && ju_cnt === -1)
-            ju_cnt = seats[0];
+        if (is_chuanma() && first_hu_seat === -1)
+            first_hu_seat = seats[0];
         if (!is_xueliu())
             for (let i in seats)
                 huled[seats[i]] = true;
@@ -1799,7 +1799,7 @@ let mingpais;
 let muyu_seats;
 let muyu;
 let muyu_times;
-let ju_cnt;
+let first_hu_seat;
 let gaps;
 let chuanma_gangs;
 let spell_hourglass;
@@ -1875,7 +1875,7 @@ const init = () => {
     muyu = { id: 0, seat: 0, count: 5, count_max: 5 };
     xun = [[], [], [], []];
     gaps = null;
-    ju_cnt = -1;
+    first_hu_seat = -1;
     benchangbang = ben;
     baopai = [[], [], [], []];
     baopai.splice(player_cnt);
@@ -2293,7 +2293,7 @@ const huazhu = (seat) => {
     return false;
 };
 const isDora = (tile) => {
-    if (tile2Int(tile) >= Constants.TILE_NUM.C0m && tile2Int(tile) <= Constants.TILE_NUM.C0s)
+    if (tile2Int(tile, true) >= Constants.TILE_NUM.C0m && tile2Int(tile, true) <= Constants.TILE_NUM.C0s)
         return true;
     let doras0 = calcDoras();
     for (let i in doras0)
@@ -2456,6 +2456,7 @@ let huleOnePlayer = (seat) => {
             }
         }
         player_tiles[seat].pop();
+        console.log(roundInfo() + `seat: ${seat} 玩家诈和`);
         return {
             count: 0,
             doras: doras0,
@@ -2726,6 +2727,7 @@ let huleOnePlayerChuanma = (seat) => {
             delta_scores[seat] += -33000;
         }
         player_tiles[seat].pop();
+        console.log(`第${all_data.actions.length + 1}局: seat: ${seat} 玩家诈和`);
         return {
             seat: seat,
             hand: hand,
@@ -2813,6 +2815,7 @@ let huleOnePlayerGuobiao = (seat) => {
         }
         if (!zimo)
             player_tiles[seat].pop();
+        console.log(roundInfo() + `seat: ${seat} 玩家诈和或错和`);
         return {
             count: 0,
             doras: [],
@@ -2913,12 +2916,6 @@ const calcFan = (seat, zimo, fangchong) => {
         }
         tiles.unshift(Constants.TBD);
     }
-    if (is_yifanjieguyi() && calcHupai(tiles) === 12) {
-        let ans = { yiman: !is_qingtianjing(), fans: [], fu: 25 };
-        if (liqi_info[seat].yifa !== 0 && liqi_info[seat].liqi === 0 && zimo)
-            ans.fans.push({ val: !is_qingtianjing() ? 1 : 13, id: 9708 });
-        updateRet(ans);
-    }
     return ret;
     function normalCalc() {
         dfs(1);
@@ -2998,8 +2995,6 @@ const calcFan = (seat, zimo, fangchong) => {
                     if (!zimo && lst_draw_type === 0 && lstname === 'RecordDiscardTile')
                         if (getLstAction(3) !== undefined && (getLstAction(3).name === 'RecordAnGangAddGang' || getLstAction(3).name === 'RecordChiPengGang'))
                             ans.fans.push({ val: 1, id: 52 });
-                    if (fulu_cnt === 4)
-                        ans.fans.push({ val: 1, id: 53 });
                 }
                 if (menqing && zimo)
                     ans.fans.push({ val: 1, id: 1 });
@@ -3011,6 +3006,62 @@ const calcFan = (seat, zimo, fangchong) => {
                     ans.fans.push({ val: 1, id: 5 });
                 if (!zimo && paishan.length === wangpai_num)
                     ans.fans.push({ val: 1, id: 6 });
+                let cnt2 = [];
+                for (let i = Constants.TILE_NUM.C1m; i <= Constants.TILE_NUM.C7z; i++)
+                    cnt2[i] = 0;
+                for (let i in tiles)
+                    cnt2[tile2Int(tiles[i])]++;
+                let all_doras = [0, 0, 0, 0];
+                for (let i in fulu[seat])
+                    if (fulu[seat][i].type === 4) {
+                        cnt2[tile2Int(fulu[seat][i].tile[0])]++;
+                        all_doras[2]++;
+                    }
+                for (let i = 0; i < dora_cnt.cnt; i++) {
+                    if (player_cnt === 3 && tile2Int(doras[i]) === Constants.TILE_NUM.C1m)
+                        all_doras[0] += cnt2[Constants.TILE_NUM.C9m];
+                    else if (player_cnt === 2) {
+                        if (tile2Int(doras[i]) === Constants.TILE_NUM.C1p)
+                            all_doras[0] += cnt2[Constants.TILE_NUM.C9p];
+                        if (tile2Int(doras[i]) === Constants.TILE_NUM.C1s)
+                            all_doras[0] += cnt2[Constants.TILE_NUM.C9s];
+                    }
+                    else {
+                        if (get_field_spell_mode2() === 3)
+                            all_doras[0] += cnt2[tile2Int(doras[i])];
+                        all_doras[0] += cnt2[Constants.DORA_NXT[tile2Int(doras[i])]];
+                    }
+                }
+                for (let i = 0; i < dora_cnt.licnt; i++) {
+                    if (player_cnt === 3 && tile2Int(li_doras[i]) === Constants.TILE_NUM.C1m)
+                        all_doras[3] += cnt2[Constants.TILE_NUM.C9m];
+                    else if (player_cnt === 2) {
+                        if (tile2Int(li_doras[i]) === Constants.TILE_NUM.C1p)
+                            all_doras[3] += cnt2[Constants.TILE_NUM.C9p];
+                        if (tile2Int(li_doras[i]) === Constants.TILE_NUM.C1s)
+                            all_doras[3] += cnt2[Constants.TILE_NUM.C9s];
+                    }
+                    else {
+                        if (get_field_spell_mode2() === 3)
+                            all_doras[3] += cnt2[tile2Int(li_doras[i])];
+                        all_doras[3] += cnt2[Constants.DORA_NXT[tile2Int(li_doras[i])]];
+                    }
+                }
+                if (get_field_spell_mode1() === 5 && seat === ju && !zimo)
+                    ans.dora_bonus = all_doras[0] + all_doras[1] + all_doras[3];
+                if (all_doras[0] > 0)
+                    if (!(get_field_spell_mode2() === 1 && liqi_info[seat].liqi !== 0))
+                        ans.fans.push({ val: all_doras[0], id: 31 });
+                if (all_doras[1] > 0)
+                    ans.fans.push({ val: all_doras[1], id: 32 });
+                if (all_doras[2] > 0)
+                    ans.fans.push({ val: all_doras[2], id: 34 });
+                if (liqi_info[seat].liqi !== 0) {
+                    let times = 1;
+                    if (get_field_spell_mode2() === 1 && liqi_info[seat].liqi !== 0)
+                        times = 2;
+                    ans.fans.push({ val: all_doras[3] * times, id: 33 });
+                }
             }
             if (liqi_info[seat].yifa !== 0 && liqi_info[seat].liqi === 0)
                 if (zimo) {
@@ -3041,6 +3092,70 @@ const calcFan = (seat, zimo, fangchong) => {
                 }
             if (is_yifanjieguyi() && seat === ju && lianzhuang_cnt >= 7)
                 ans.fans.push({ val: 1, id: 46 });
+            updateRet(ans);
+        }
+        if (is_yifanjieguyi() && calcHupai(tiles) === 12) {
+            let ans = { yiman: !is_qingtianjing(), fans: [], fu: 25 };
+            if (is_qingtianjing()) {
+                let cnt2 = [];
+                for (let i = Constants.TILE_NUM.C1m; i <= Constants.TILE_NUM.C7z; i++)
+                    cnt2[i] = 0;
+                for (let i in tiles)
+                    cnt2[tile2Int(tiles[i])]++;
+                let all_doras = [0, 0, 0, 0];
+                for (let i in fulu[seat])
+                    if (fulu[seat][i].type === 4) {
+                        cnt2[tile2Int(fulu[seat][i].tile[0])]++;
+                        all_doras[2]++;
+                    }
+                for (let i = 0; i < dora_cnt.cnt; i++) {
+                    if (player_cnt === 3 && tile2Int(doras[i]) === Constants.TILE_NUM.C1m)
+                        all_doras[0] += cnt2[Constants.TILE_NUM.C9m];
+                    else if (player_cnt === 2) {
+                        if (tile2Int(doras[i]) === Constants.TILE_NUM.C1p)
+                            all_doras[0] += cnt2[Constants.TILE_NUM.C9p];
+                        if (tile2Int(doras[i]) === Constants.TILE_NUM.C1s)
+                            all_doras[0] += cnt2[Constants.TILE_NUM.C9s];
+                    }
+                    else {
+                        if (get_field_spell_mode2() === 3)
+                            all_doras[0] += cnt2[tile2Int(doras[i])];
+                        all_doras[0] += cnt2[Constants.DORA_NXT[tile2Int(doras[i])]];
+                    }
+                }
+                for (let i = 0; i < dora_cnt.licnt; i++) {
+                    if (player_cnt === 3 && tile2Int(li_doras[i]) === Constants.TILE_NUM.C1m)
+                        all_doras[3] += cnt2[Constants.TILE_NUM.C9m];
+                    else if (player_cnt === 2) {
+                        if (tile2Int(li_doras[i]) === Constants.TILE_NUM.C1p)
+                            all_doras[3] += cnt2[Constants.TILE_NUM.C9p];
+                        if (tile2Int(li_doras[i]) === Constants.TILE_NUM.C1s)
+                            all_doras[3] += cnt2[Constants.TILE_NUM.C9s];
+                    }
+                    else {
+                        if (get_field_spell_mode2() === 3)
+                            all_doras[3] += cnt2[tile2Int(li_doras[i])];
+                        all_doras[3] += cnt2[Constants.DORA_NXT[tile2Int(li_doras[i])]];
+                    }
+                }
+                if (get_field_spell_mode1() === 5 && seat === ju && !zimo)
+                    ans.dora_bonus = all_doras[0] + all_doras[1] + all_doras[3];
+                if (all_doras[0] > 0)
+                    if (!(get_field_spell_mode2() === 1 && liqi_info[seat].liqi !== 0))
+                        ans.fans.push({ val: all_doras[0], id: 31 });
+                if (all_doras[1] > 0)
+                    ans.fans.push({ val: all_doras[1], id: 32 });
+                if (all_doras[2] > 0)
+                    ans.fans.push({ val: all_doras[2], id: 34 });
+                if (liqi_info[seat].liqi !== 0) {
+                    let times = 1;
+                    if (get_field_spell_mode2() === 1 && liqi_info[seat].liqi !== 0)
+                        times = 2;
+                    ans.fans.push({ val: all_doras[3] * times, id: 33 });
+                }
+            }
+            if (liqi_info[seat].yifa !== 0 && liqi_info[seat].liqi === 0 && zimo)
+                ans.fans.push({ val: !is_qingtianjing() ? 1 : 13, id: 9708 });
             updateRet(ans);
         }
     }
@@ -3398,7 +3513,7 @@ const calcFan = (seat, zimo, fangchong) => {
                 ans.fans.push({ val: !is_qingtianjing() ? 1 : 13, id: 40 });
             if (flag_qinglaotou)
                 ans.fans.push({ val: !is_qingtianjing() ? 1 : 13, id: 41 });
-            if (xiaosixi && !dasixi)
+            if (xiaosixi && (!dasixi || is_sixifuhe()))
                 ans.fans.push({ val: !is_qingtianjing() ? 1 : 13, id: 43 });
             if (gangzi_num === 4) {
                 if (!is_xuezhandaodi() && !is_wanxiangxiuluo() && is_sigangbaopai() && sigang_bao[seat]) {
@@ -5077,8 +5192,8 @@ const roundEnd = () => {
     all_data.xun.push(xun.slice());
     xun = [[], [], [], []];
     actions = [];
-    if (is_chuanma() && ju_cnt !== -1)
-        ju = ju_cnt;
+    if (is_chuanma() && first_hu_seat !== -1)
+        ju = first_hu_seat;
     if (ju === player_cnt) {
         chang++;
         ju = 0;
@@ -5245,6 +5360,7 @@ let addChiPengGang = (seat, split_tiles, froms, type, liqi, tile_states) => {
             type: type,
             froms: froms,
             liqi: liqi,
+            scores: scores.slice(),
             tingpais: is_heqie_mode() ? undefined : calcTingpai(seat),
             tile_states: tile_states,
             muyu: is_muyu() ? JSON.parse(JSON.stringify(muyu)) : undefined,
@@ -5588,6 +5704,7 @@ const no_zhenting = () => config.mode.detail_rule._no_zhenting;
 const is_ronghuzhahu = () => config.mode.detail_rule._ronghuzhahu;
 const is_tiandichuangzao = () => config.mode.detail_rule._tiandichuangzao;
 const is_wanwushengzhang = () => config.mode.detail_rule._wanwushengzhang;
+const is_sixifuhe = () => config.mode.detail_rule._sixifuhe;
 const is_mopai_paishan = () => config.mode.detail_rule._mopai_paishan;
 const is_heqie_mode = () => config.mode.detail_rule._heqie_mode;
 const is_guobiao = () => config.mode.detail_rule._guobiao;

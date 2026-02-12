@@ -1266,8 +1266,8 @@ let hupai = (...args: any[]): void => {
             ret.push(whatever);
             hules_history.push(whatever);
         }
-        if (is_chuanma() && ju_cnt === -1)
-            ju_cnt = seats[0];
+        if (is_chuanma() && first_hu_seat === -1)
+            first_hu_seat = seats[0];
         if (!is_xueliu())
             for (let i in seats)
                 huled[seats[i]] = true;
@@ -2356,7 +2356,7 @@ let muyu: Muyu;
 // 龙之目玉: 打点的倍数, 只有有目玉的玩家为2, 其他都为1
 let muyu_times: [1 | 2, 1 | 2, (1 | 2)?, (1 | 2)?];
 // 川麻: 某局第一位和牌玩家的 seat, 若没有则为-1
-let ju_cnt: -1 | Seat;
+let first_hu_seat: -1 | Seat;
 // 川麻: 玩家的定缺, 注意 012 分别代表 pms
 let gaps: Gaps;
 // 川麻: 开杠刮风下雨
@@ -2463,7 +2463,7 @@ const init = (): void => {
     muyu = {id: 0, seat: 0, count: 5, count_max: 5};
     xun = [[], [], [], []];
     gaps = null;
-    ju_cnt = -1;
+    first_hu_seat = -1;
     benchangbang = ben;
     baopai = [[], [], [], []];
     baopai.splice(player_cnt);
@@ -2960,7 +2960,7 @@ const huazhu = (seat: Seat): boolean => {
 
 // 幻境传说, 判断 tile 是否为 dora
 const isDora = (tile: Tile): boolean => {
-    if (tile2Int(tile) >= Constants.TILE_NUM.C0m && tile2Int(tile) <= Constants.TILE_NUM.C0s)
+    if (tile2Int(tile, true) >= Constants.TILE_NUM.C0m && tile2Int(tile, true) <= Constants.TILE_NUM.C0s)
         return true;
     let doras0 = calcDoras();
     for (let i in doras0)
@@ -3158,6 +3158,7 @@ let huleOnePlayer = (seat: Seat): HuleInfo => {
             }
         }
         player_tiles[seat].pop();
+        console.log(roundInfo() + `seat: ${seat} 玩家诈和`);
         return {
             count: 0,
             doras: doras0,
@@ -3456,6 +3457,7 @@ let huleOnePlayerChuanma = (seat: Seat): HuleInfo => {
             delta_scores[seat] += -33000;
         }
         player_tiles[seat].pop();
+        console.log(`第${all_data.actions.length + 1}局: seat: ${seat} 玩家诈和`);
         return {
             seat: seat,
             hand: hand,
@@ -3555,6 +3557,7 @@ let huleOnePlayerGuobiao = (seat: Seat): HuleInfo => {
         }
         if (!zimo)
             player_tiles[seat].pop();
+        console.log(roundInfo() + `seat: ${seat} 玩家诈和或错和`);
         return {
             count: 0,
             doras: [] as Doras,
@@ -3673,12 +3676,6 @@ const calcFan = (seat: Seat, zimo: boolean, fangchong?: Seat): CalcFanRet => {
         tiles.unshift(Constants.TBD);
     }
 
-    if (is_yifanjieguyi() && calcHupai(tiles) === 12) {
-        let ans: CalcFanRet = {yiman: !is_qingtianjing(), fans: [], fu: 25};
-        if (liqi_info[seat].yifa !== 0 && liqi_info[seat].liqi === 0 && zimo)
-            ans.fans.push({val: !is_qingtianjing() ? 1 : 13, id: 9708}); // 十三不搭
-        updateRet(ans);
-    }
     return ret;
 
     // 没有百搭牌情况下的算番流程, 分为一般算番(dfs)和国士型
@@ -3760,8 +3757,6 @@ const calcFan = (seat: Seat, zimo: boolean, fangchong?: Seat): CalcFanRet => {
                     if (!zimo && lst_draw_type === 0 && lstname === 'RecordDiscardTile')
                         if (getLstAction(3) !== undefined && (getLstAction(3).name === 'RecordAnGangAddGang' || getLstAction(3).name === 'RecordChiPengGang'))
                             ans.fans.push({val: 1, id: 52}); // 杠振
-                    if (fulu_cnt === 4)
-                        ans.fans.push({val: 1, id: 53}); // 十二落抬
                 }
                 if (menqing && zimo)
                     ans.fans.push({val: 1, id: 1}); // 门前清自摸和
@@ -3774,6 +3769,71 @@ const calcFan = (seat: Seat, zimo: boolean, fangchong?: Seat): CalcFanRet => {
                     ans.fans.push({val: 1, id: 5}); // 海底摸月
                 if (!zimo && paishan.length === wangpai_num)
                     ans.fans.push({val: 1, id: 6}); // 河底捞鱼
+
+                let cnt2: number[] = []; // cnt2 是包含副露的牌数量集合, 不含红包牌和拔北宝牌
+                for (let i = Constants.TILE_NUM.C1m; i <= Constants.TILE_NUM.C7z; i++)
+                    cnt2[i] = 0;
+                for (let i in tiles)
+                    cnt2[tile2Int(tiles[i])]++;
+
+                // 四种dora: 表dora, 红dora, 拔北dora, 里dora
+                let all_doras = [0, 0, 0, 0];
+                // 先把拔北给算上, 然后减去
+                for (let i in fulu[seat])
+                    if (fulu[seat][i].type === 4) {
+                        cnt2[tile2Int(fulu[seat][i].tile[0])]++;
+                        all_doras[2]++;
+                    }
+                for (let i = 0; i < dora_cnt.cnt; i++) {
+                    if (player_cnt === 3 && tile2Int(doras[i]) === Constants.TILE_NUM.C1m)
+                        all_doras[0] += cnt2[Constants.TILE_NUM.C9m];
+                    else if (player_cnt === 2) {
+                        if (tile2Int(doras[i]) === Constants.TILE_NUM.C1p)
+                            all_doras[0] += cnt2[Constants.TILE_NUM.C9p];
+                        if (tile2Int(doras[i]) === Constants.TILE_NUM.C1s)
+                            all_doras[0] += cnt2[Constants.TILE_NUM.C9s];
+                    } else {
+                        // 幻境传说: 机会卡3
+                        if (get_field_spell_mode2() === 3)
+                            all_doras[0] += cnt2[tile2Int(doras[i])];
+                        all_doras[0] += cnt2[Constants.DORA_NXT[tile2Int(doras[i])]];
+                    }
+                }
+                for (let i = 0; i < dora_cnt.licnt; i++) {
+                    if (player_cnt === 3 && tile2Int(li_doras[i]) === Constants.TILE_NUM.C1m)
+                        all_doras[3] += cnt2[Constants.TILE_NUM.C9m];
+                    else if (player_cnt === 2) {
+                        if (tile2Int(li_doras[i]) === Constants.TILE_NUM.C1p)
+                            all_doras[3] += cnt2[Constants.TILE_NUM.C9p];
+                        if (tile2Int(li_doras[i]) === Constants.TILE_NUM.C1s)
+                            all_doras[3] += cnt2[Constants.TILE_NUM.C9s];
+                    } else {
+                        // 幻境传说: 机会卡3
+                        if (get_field_spell_mode2() === 3)
+                            all_doras[3] += cnt2[tile2Int(li_doras[i])];
+                        all_doras[3] += cnt2[Constants.DORA_NXT[tile2Int(li_doras[i])]];
+                    }
+                }
+                // 幻境传说: 庄家卡5
+                if (get_field_spell_mode1() === 5 && seat === ju && !zimo)
+                    ans.dora_bonus = all_doras[0] + all_doras[1] + all_doras[3];
+
+                // 悬赏番
+                if (all_doras[0] > 0)
+                    // 幻境传说: 机会卡1
+                    if (!(get_field_spell_mode2() === 1 && liqi_info[seat].liqi !== 0))
+                        ans.fans.push({val: all_doras[0], id: 31}); // 宝牌
+                if (all_doras[1] > 0)
+                    ans.fans.push({val: all_doras[1], id: 32}); // 红宝牌
+                if (all_doras[2] > 0)
+                    ans.fans.push({val: all_doras[2], id: 34}); // 北宝牌
+                if (liqi_info[seat].liqi !== 0) {
+                    let times = 1;
+                    // 幻境传说: 机会卡1
+                    if (get_field_spell_mode2() === 1 && liqi_info[seat].liqi !== 0)
+                        times = 2;
+                    ans.fans.push({val: all_doras[3] * times, id: 33}); // 里宝牌
+                }
             }
 
             if (liqi_info[seat].yifa !== 0 && liqi_info[seat].liqi === 0)
@@ -3805,6 +3865,79 @@ const calcFan = (seat: Seat, zimo: boolean, fangchong?: Seat): CalcFanRet => {
             if (is_yifanjieguyi() && seat === ju && lianzhuang_cnt >= 7) // 第8次和牌
                 ans.fans.push({val: 1, id: 46}); // 八连庄
 
+            updateRet(ans);
+        }
+
+        if (is_yifanjieguyi() && calcHupai(tiles) === 12) {
+            let ans: CalcFanRet = {yiman: !is_qingtianjing(), fans: [], fu: 25};
+            if (is_qingtianjing()){
+                let cnt2: number[] = []; // cnt2 是包含副露的牌数量集合, 不含红包牌和拔北宝牌
+                for (let i = Constants.TILE_NUM.C1m; i <= Constants.TILE_NUM.C7z; i++)
+                    cnt2[i] = 0;
+                for (let i in tiles)
+                    cnt2[tile2Int(tiles[i])]++;
+
+                // 四种dora: 表dora, 红dora, 拔北dora, 里dora
+                let all_doras = [0, 0, 0, 0];
+                // 先把拔北给算上, 然后减去
+                for (let i in fulu[seat])
+                    if (fulu[seat][i].type === 4) {
+                        cnt2[tile2Int(fulu[seat][i].tile[0])]++;
+                        all_doras[2]++;
+                    }
+                for (let i = 0; i < dora_cnt.cnt; i++) {
+                    if (player_cnt === 3 && tile2Int(doras[i]) === Constants.TILE_NUM.C1m)
+                        all_doras[0] += cnt2[Constants.TILE_NUM.C9m];
+                    else if (player_cnt === 2) {
+                        if (tile2Int(doras[i]) === Constants.TILE_NUM.C1p)
+                            all_doras[0] += cnt2[Constants.TILE_NUM.C9p];
+                        if (tile2Int(doras[i]) === Constants.TILE_NUM.C1s)
+                            all_doras[0] += cnt2[Constants.TILE_NUM.C9s];
+                    } else {
+                        // 幻境传说: 机会卡3
+                        if (get_field_spell_mode2() === 3)
+                            all_doras[0] += cnt2[tile2Int(doras[i])];
+                        all_doras[0] += cnt2[Constants.DORA_NXT[tile2Int(doras[i])]];
+                    }
+                }
+                for (let i = 0; i < dora_cnt.licnt; i++) {
+                    if (player_cnt === 3 && tile2Int(li_doras[i]) === Constants.TILE_NUM.C1m)
+                        all_doras[3] += cnt2[Constants.TILE_NUM.C9m];
+                    else if (player_cnt === 2) {
+                        if (tile2Int(li_doras[i]) === Constants.TILE_NUM.C1p)
+                            all_doras[3] += cnt2[Constants.TILE_NUM.C9p];
+                        if (tile2Int(li_doras[i]) === Constants.TILE_NUM.C1s)
+                            all_doras[3] += cnt2[Constants.TILE_NUM.C9s];
+                    } else {
+                        // 幻境传说: 机会卡3
+                        if (get_field_spell_mode2() === 3)
+                            all_doras[3] += cnt2[tile2Int(li_doras[i])];
+                        all_doras[3] += cnt2[Constants.DORA_NXT[tile2Int(li_doras[i])]];
+                    }
+                }
+                // 幻境传说: 庄家卡5
+                if (get_field_spell_mode1() === 5 && seat === ju && !zimo)
+                    ans.dora_bonus = all_doras[0] + all_doras[1] + all_doras[3];
+
+                // 悬赏番
+                if (all_doras[0] > 0)
+                    // 幻境传说: 机会卡1
+                    if (!(get_field_spell_mode2() === 1 && liqi_info[seat].liqi !== 0))
+                        ans.fans.push({val: all_doras[0], id: 31}); // 宝牌
+                if (all_doras[1] > 0)
+                    ans.fans.push({val: all_doras[1], id: 32}); // 红宝牌
+                if (all_doras[2] > 0)
+                    ans.fans.push({val: all_doras[2], id: 34}); // 北宝牌
+                if (liqi_info[seat].liqi !== 0) {
+                    let times = 1;
+                    // 幻境传说: 机会卡1
+                    if (get_field_spell_mode2() === 1 && liqi_info[seat].liqi !== 0)
+                        times = 2;
+                    ans.fans.push({val: all_doras[3] * times, id: 33}); // 里宝牌
+                }
+            }
+            if (liqi_info[seat].yifa !== 0 && liqi_info[seat].liqi === 0 && zimo)
+                ans.fans.push({val: !is_qingtianjing() ? 1 : 13, id: 9708}); // 十三不搭
             updateRet(ans);
         }
     }
@@ -3860,7 +3993,7 @@ const calcFan = (seat: Seat, zimo: boolean, fangchong?: Seat): CalcFanRet => {
 
     // 算番
     function calc() {
-        let cnt2: number[] = []; // cnt2 是包含副露的牌数量集合, 不含红包牌
+        let cnt2: number[] = []; // cnt2 是包含副露的牌数量集合, 不含红包牌和拔北宝牌
         for (let i = Constants.TILE_NUM.C1m; i <= Constants.TILE_NUM.C7z; i++)
             cnt2[i] = 0;
         let partitiontmp = partition.slice();
@@ -4220,7 +4353,7 @@ const calcFan = (seat: Seat, zimo: boolean, fangchong?: Seat): CalcFanRet => {
             if (flag_qinglaotou)
                 ans.fans.push({val: !is_qingtianjing() ? 1 : 13, id: 41}); // 清老头
 
-            if (xiaosixi && !dasixi)
+            if (xiaosixi && (!dasixi || is_sixifuhe()))
                 ans.fans.push({val: !is_qingtianjing() ? 1 : 13, id: 43}); // 小四喜
 
             if (gangzi_num === 4) {
@@ -6256,8 +6389,8 @@ const roundEnd = (): void => {
     all_data.xun.push(xun.slice() as Players_NumberArray);
     xun = [[], [], [], []];
     actions = [];
-    if (is_chuanma() && ju_cnt !== -1)
-        ju = ju_cnt;
+    if (is_chuanma() && first_hu_seat !== -1)
+        ju = first_hu_seat;
     if (ju === player_cnt) {
         chang++;
         ju = 0;
@@ -6507,6 +6640,7 @@ let addChiPengGang = (seat: Seat, split_tiles: Tile[], froms: Seat[], type: ChiP
             type: type,
             froms: froms,
             liqi: liqi,
+            scores: scores.slice(),
             tingpais: is_heqie_mode() ? undefined : calcTingpai(seat),
             tile_states: tile_states,
             muyu: is_muyu() ? JSON.parse(JSON.stringify(muyu)) : undefined,
@@ -7082,6 +7216,9 @@ const is_tiandichuangzao = (): boolean => config.mode.detail_rule._tiandichuangz
 
 // 是否开启自定义番种'万物生长'
 const is_wanwushengzhang = (): boolean => config.mode.detail_rule._wanwushengzhang;
+
+// 是否允许大小四喜复合
+const is_sixifuhe = (): boolean => config.mode.detail_rule._sixifuhe;
 
 // 是否根据 deal_tiles 确定牌山
 const is_mopai_paishan = (): boolean => config.mode.detail_rule._mopai_paishan;
@@ -10692,6 +10829,7 @@ type Config = {
             _ronghuzhahu?: boolean,
             _tiandichuangzao?: boolean,
             _wanwushengzhang?: boolean,
+            _sixifuhe?: boolean,
             _mopai_paishan?: boolean,
             _heqie_mode?: boolean,
             _guobiao?: boolean,

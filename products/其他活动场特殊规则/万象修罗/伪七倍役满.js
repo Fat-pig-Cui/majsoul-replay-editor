@@ -1,6 +1,7 @@
 clearProject();
 
 // 雀魂官方的逻辑是大小四喜同时满足的话只会取大四喜, 所以只有六倍役满而不是七倍
+// 但可以在 detail_rule 中设置 _sixifuhe 让大小四喜可以复合
 
 player_datas[0].nickname = '一姬-契约';
 player_datas[1].nickname = '新年初诣';
