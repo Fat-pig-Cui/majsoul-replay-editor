@@ -37,8 +37,8 @@ for (let cnt = 0; cnt < 69; cnt++) {
         let seat = getLstAction().data.seat;
         let tile = getLstAction().data.tile;
         let is_fangchong = false;
-        for (let i = seat + 1; i < seat + player_cnt; i++) {
-            let tmp_seat = i % player_cnt;
+        for (let i = seat + 1; i < seat + 4; i++) {
+            let tmp_seat = i % 4;
             let tmp_tingpais = calcTingpai(tmp_seat);
             for (let j = 0; j < tmp_tingpais.length; j++)
                 if (isEqualTile(tile, tmp_tingpais[j].tile)) {

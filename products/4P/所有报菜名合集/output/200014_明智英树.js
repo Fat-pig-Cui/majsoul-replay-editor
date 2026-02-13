@@ -263,14 +263,6 @@ mingpai();
 normalMoqie();
 liuju();
 
-// 九种九牌
-begin_tiles[1] = '19m19p19s12345677z';
-begin_tiles[2] = '1112340678999m';
-begin_tiles[3] = '1112340678999p';
-begin_tiles[0] = '1112340678999s';
-roundBegin();
-liuju();
-
 // 四家立直
 begin_tiles[1] = '2223444666888s5z';
 begin_tiles[2] = '1112340678999m';
@@ -280,6 +272,14 @@ randomPaishan('555z');
 roundBegin();
 qiepai(true);
 moqieLiqi(3);
+liuju();
+
+// 九种九牌
+begin_tiles[1] = '19m19p19s12345677z';
+begin_tiles[2] = '1112340678999m';
+begin_tiles[3] = '1112340678999p';
+begin_tiles[0] = '1112340678999s';
+roundBegin();
 liuju();
 
 // 流局满贯, 听牌, 未听牌

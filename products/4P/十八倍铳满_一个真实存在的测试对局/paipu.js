@@ -19,7 +19,7 @@ setConfig({
         mode: 4,
         detail_rule: {
             init_point: 200000,
-            guyi_mode: 1,
+            guyi_mode: true,
         },
         testing_environment: {
             paixing: 3,

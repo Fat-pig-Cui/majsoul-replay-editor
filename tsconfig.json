@@ -1,13 +1,14 @@
 {
   "compilerOptions": {
-    "alwaysStrict": true,
-    "declaration": true,
-    "module": "commonjs",
-    "noImplicitAny": true,
-    "removeComments": true,
-    "target": "es6",
+    "target": "es2016",
+    "module": "esnext",
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "noImplicitAny": false,
+    "lib": ["es2016", "dom"],
+    "outDir": ".",
+    "declaration": false,
   },
-  "files": [
-    "main.ts",
-  ]
+  "include": ["src/main.ts", "src/core/*.ts", "src/types/*.d.ts"],
+  "exclude": ["node_modules", "src/products"]
 }

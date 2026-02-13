@@ -54,9 +54,13 @@ B站视频教程(偏过时): [【雀魂】如何自制牌谱回放](https://www.
 至于 code.js , 这是初步解混淆后的雀魂核心js文件, 与本仓库关系不大, 放在这里仅方便查阅(文件很大, 不要轻易打开),
 解混淆的方法见另一个仓库: [misc-code](https://github.com/Fat-pig-Cui/misc-code)
 
-为了便于维护, 最近正在用 TypeScript 重写项目, 目前的 `main.js` 和 [main.d.ts](main.d.ts) 都由 [main.ts](main.ts) 编译而来,
-有很多不完善的地方, 因为有部分直接借鉴了官网源码所以有报错很正常(集中在 `GameMgr.Inst.checkPaiPu` 和
-`optimizeFunction` 函数), 这里暂存了老版本: [main_old.js](main_old.js)
+为了便于维护和封装, 最近正在用 TypeScript 重写项目, 目前的 `main.js` 由 [src](src) 文件夹下的 TypeScript 文件编译而来, 
+有很多不完善的地方, 这里暂存了老版本: [main_old.js](main_old.js)
+
+如何从ts编译为js:
+1. 安装 Node.js 和 npm
+2. 在项目根目录下运行 `npm install` 安装依赖
+3. 运行 `npm run build` 即可覆盖生成 `main.js`
 
 使用过程中, 如果存在 bug 之类的不符合预期的情况, 可以提 issue,
 也可以直接在B站联系我: [肥pig崔的B站空间](https://space.bilibili.com/372365985)
@@ -130,6 +134,8 @@ B站视频教程(偏过时): [【雀魂】如何自制牌谱回放](https://www.
 5. 更多牌谱详见 [products](products) 文件夹, 也欢迎读者根据灵感制作自己的牌谱
 
 ## TODO(欢迎contribute)
+
+- 模块化: 目前的代码结构比较混乱, 需要重构成模块化的形式, 方便维护和扩展, 但目前没有找到合适的方案, 需要花费一些时间来设计和实现
 
 - 关于GUI(图形化用户界面): 有玩家反馈写代码门槛过高, 能否搞个GUI. 但目前有以下因素导致短期内无法实现:
     - 核心脚本的代码很少考虑健壮性, 而且很难保证稳定性

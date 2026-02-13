@@ -1,12 +1,19 @@
 {
-  "dependencies": {
-    "eslint": "^9.38.0",
-    "flow-bin": "^0.278.0",
-    "flow-remove-types": "^2.278.0",
-    "tsc": "^2.0.4",
-    "tslint": "^5.20.1"
-  },
+  "name": "majsoul-replay-editor",
   "scripts": {
-    "flow": "flow"
+    "build": "rollup -c",
+    "watch": "rollup -c -w",
+    "dev": "rollup -c -w --environment NODE_ENV:development",
+    "prod": "rollup -c --environment NODE_ENV:production"
+  },
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "^25.0.0",
+    "@rollup/plugin-node-resolve": "^15.0.0",
+    "@rollup/plugin-terser": "^0.4.0",
+    "@rollup/plugin-typescript": "^11.0.0",
+    "rollup": "^3.0.0",
+    "rollup-plugin-dts": "^6.3.0",
+    "tslib": "^2.5.0",
+    "typescript": "^5.0.0"
   }
 }

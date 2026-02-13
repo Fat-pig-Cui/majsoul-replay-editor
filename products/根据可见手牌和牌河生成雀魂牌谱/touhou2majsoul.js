@@ -23,17 +23,23 @@ setConfig({
     }
 });
 
-!function () {
+(function () {
     /* 将从天凤牌谱编辑的数据赋值给 json 变量, 两个例子:
     {"title":["",""],"name":["COM0","COM1","COM2","COM3"],"rule":{"aka":1},"log":[[[0,0,0],[25000,25000,25000,25000],[13],[],[13,14,41,41,43,31,11,28,26,17,36,29,36],[26,"p414141",17,"c121314",43,45,37,31,26,23,19,43,21,24,32,11,35,52],[43,31,11,28,26,17,45,36,37,26,43,60,23,19,17,36,32,60],[39,47,46,41,22,34,17,33,14,37,25,19,18],[45,53,23,28,13,32,34,33,47,46,19,43,27,23,24,32,25,16],[39,47,46,60,41,22,34,17,33,14,37,33,23,18,46,45,43,47],[19,31,32,38,13,37,14,22,26,16,12,14,22],[12,38,39,28,39,35,47,42,25,42,21,23,46,44,27,37,34,18],[19,31,32,38,60,60,60,60,60,60,60,60,60,60,60,60,60,60],[41,11,42,11,18,15,21,36,33,33,45,21,38],[24,44,12,44,27,31,17,16,22,18,51,46,35,15,39,15,38,29],[41,11,60,42,11,60,60,60,60,60,60,38,21,18,60,27,60,46],["全員聴牌"]]]}
     {"title":["",""],"name":["COM0","COM1","COM2","COM3"],"rule":{"aka":1},"log":[[[0,0,1],[25000,25000,25000,25000],[52],[],[43,39,21,18,29,41,34,42,31,19,18,31,36],[15,28,37,22,27,42,33,15,19,37,46,13,27,17,26,43,35,12,42],[43,39,21,60,18,29,41,34,"r15",60,60,60,60,60,60,60,60,60,60],[47,42,13,45,45,21,19,11,23,35,14,12,24],[26,24,14,25,31,41,44,44,34,16,17,17,38,14,46,21,34,36],[47,42,13,45,60,60,60,60,14,19,16,45,12,35,21,14,26,34],[15,51,41,41,45,45,29,47,46,22,18,34,26],[16,16,39,"p454545",38,"p414141",44,11,"15p1551",36,23,33,25,23,14,11,17,12],[29,47,46,22,18,34,60,60,26,60,60,60,60,60,60,60,60,60],[29,39,44,24,13,32,38,22,28,39,16,23,36],[46,47,19,37,35,38,31,27,29,12,47,21,28,27,43,32,24,25],[29,60,39,60,60,44,24,60,31,32,60,36,13,39,29,27,23,19],["全員聴牌"]]]}
     */
+    // log[0][0]: 等于 chang * 4 + ju
+    // log[0][1]: 本场数
+    // log[0][2]: 供托棒子个数
     let json = JSON.parse(prompt('Please Enter JSON from touhou.net/6/:'));
+    // json = JSON.parse('{"title":["",""],"name":["COM0","COM1","COM2","COM3"],"rule":{"aka":1},"log":[[[0,0,0],[25000,25000,25000,25000],[13],[],[13,14,41,41,43,31,11,28,26,17,36,29,36],[26,"p414141",17,"c121314",43,45,37,31,26,23,19,43,21,24,32,11,35,52],[43,31,11,28,26,17,45,36,37,26,43,60,23,19,17,36,32,60],[39,47,46,41,22,34,17,33,14,37,25,19,18],[45,53,23,28,13,32,34,33,47,46,19,43,27,23,24,32,25,16],[39,47,46,60,41,22,34,17,33,14,37,33,23,18,46,45,43,47],[19,31,32,38,13,37,14,22,26,16,12,14,22],[12,38,39,28,39,35,47,42,25,42,21,23,46,44,27,37,34,18],[19,31,32,38,60,60,60,60,60,60,60,60,60,60,60,60,60,60],[41,11,42,11,18,15,21,36,33,33,45,21,38],[24,44,12,44,27,31,17,16,22,18,51,46,35,15,39,15,38,29],[41,11,60,42,11,60,60,60,60,60,60,38,21,18,60,27,60,46],["全員聴牌"]]]}');
     if (!json)
         throw new Error('User canceled input');
     const log = json.log;
-    config.mode.detail_rule._chang_ju_ben_num_ = [, ju,] = log[0].shift();
-    config.mode.detail_rule._scores_ = log[0].shift();
+    let {c, j, b, n} = {c: Math.floor(log[0][0][0] / 4), j: log[0][0][1] % 4, b: log[0][0][1], n: log[0][0][2]};
+    let chang_ju_ben_num = [c, j, b, n];
+    log[0].shift();
+    let tmp_scores = log[0].shift();
     const biao_dora = log[0].shift();
     const li_dora = log[0].shift();
     const dict = {
@@ -62,19 +68,31 @@ setConfig({
         new_qiepai_set[i] = log[0][3 * i + 2];
     }
 
-    if (tiles[2].length !== 0 && tiles[3].length === 0)
-        config.mode.mode = 12; // 三麻
-    if (config.mode.mode === 12) { // 三麻点数修正
+    let ply_cnt = tiles[3].length === 0 ? 3 : 4;
+
+    if (ply_cnt === 3) { // 三麻点数修正
         let all_4p_points = true;
-        for (let i in config.mode.detail_rule._scores_)
-            if (config.mode.detail_rule._scores_[i] !== 25000)
+        for (let i in tmp_scores)
+            if (tmp_scores[i] !== 25000)
                 all_4p_points = false;
         if (all_4p_points) // 三麻点数修正
-            config.mode.detail_rule._scores_ = [35000, 35000, 35000];
+            tmp_scores = [35000, 35000, 35000];
     }
 
+    setConfig({
+        category: 1,
+        meta: {mode_id: 0},
+        mode: {
+            mode: ply_cnt === 3 ? 12 : 2,
+            detail_rule: {
+                _chang_ju_ben_num_: chang_ju_ben_num,
+                _scores_: tmp_scores,
+            }
+        }
+    });
+
     // while 循环关键变量: seat: 要操作的玩家, nxt_step: 下个操作的类型
-    let seat = ju, nxt_step = 'mopai';
+    let seat = j, nxt_step = 'mopai';
     while (true) {
         switch (nxt_step) {
             case 'mopai':
@@ -110,8 +128,8 @@ setConfig({
             return;
         }
         // 开局, 亲家补全至14张牌
-        if (seat === ju && mopai_xunmu[ju] === 0) {
-            tiles[ju].push(new_mopai_set[ju][mopai_xunmu[ju]]);
+        if (seat === j && mopai_xunmu[j] === 0) {
+            tiles[j].push(new_mopai_set[j][mopai_xunmu[j]]);
 
             for (let i in tiles)
                 begin_tiles[i] = process(tiles[i]);
@@ -164,8 +182,8 @@ setConfig({
         qiepai_xunmu[seat]++;
 
         // 明杠
-        for (let i = seat + 1; i < seat + player_cnt; i++) {
-            let tmp_seat = i % player_cnt;
+        for (let i = seat + 1; i < seat + ply_cnt; i++) {
+            let tmp_seat = i % ply_cnt;
             if (typeof new_mopai_set[tmp_seat][mopai_xunmu[tmp_seat]] == 'string') {
                 let tmp_fulu = new_mopai_set[tmp_seat][mopai_xunmu[tmp_seat]];
                 let tmp_fulu_from_seat, tmp_fulu_type;
@@ -178,8 +196,8 @@ setConfig({
             }
         }
         // 碰
-        for (let i = seat + 1; i < seat + player_cnt; i++) {
-            let tmp_seat = i % player_cnt;
+        for (let i = seat + 1; i < seat + ply_cnt; i++) {
+            let tmp_seat = i % ply_cnt;
             if (typeof new_mopai_set[tmp_seat][mopai_xunmu[tmp_seat]] == 'string') {
                 let tmp_fulu = new_mopai_set[tmp_seat][mopai_xunmu[tmp_seat]];
                 let tmp_fulu_from_seat, tmp_fulu_type;
@@ -192,7 +210,7 @@ setConfig({
             }
         }
         // 吃
-        let tmp_seat = (seat + 1) % player_cnt;
+        let tmp_seat = (seat + 1) % ply_cnt;
         if (typeof new_mopai_set[tmp_seat][mopai_xunmu[tmp_seat]] == 'string') {
             let tmp_fulu = new_mopai_set[tmp_seat][mopai_xunmu[tmp_seat]];
             let tmp_fulu_from_seat, tmp_fulu_type;
@@ -204,7 +222,7 @@ setConfig({
             }
         }
         // 摸牌
-        seat = (seat + 1) % player_cnt;
+        seat = (seat + 1) % ply_cnt;
         nxt_step = 'mopai';
 
         function judge_fulu(tmp_fulu, tmp_seat) {
@@ -271,4 +289,4 @@ setConfig({
             }
         return [];
     }
-}();
+})();

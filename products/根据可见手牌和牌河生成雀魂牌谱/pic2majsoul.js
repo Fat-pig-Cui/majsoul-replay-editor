@@ -3,7 +3,7 @@
  * 1. 自家摸牌后选择切什么牌(第一类何切)
  * 2. 其他家切牌后自家是否要鸣牌, 和鸣牌后切什么牌(第二类何切)
  */
-!function () {
+(function () {
     /**
      * 用户修改 json 数据
      * - player_count: 玩家数
@@ -23,8 +23,7 @@
      *            暗杠的巡目在轮到该暗杠副露时的下一个摸牌巡, 加杠的巡目在碰对应副露之后下一个摸牌巡
      * @type {{player_count: number, chang_ju_ben_num: number[], mainrole: number, tiles: string, lst_mopai: string, dora: string[], scores: number[], paihe0: string, paihe1: string, paihe2: string, paihe3: string, fulu0: string[], fulu1: string[], fulu2: string[], fulu3: string[]}}
      */
-    let json;
-    json = {
+    let json = {
         player_count: 4,
         chang_ju_ben_num: [0, 0, 0],
         mainrole: 2,
@@ -51,7 +50,7 @@
     let new_discard_tiles = [[], [], [], []];
     let qiepai_xun = [0, 0, 0, 0], fulu_index = [0, 0, 0, 0];
     // 预处理
-    !function () {
+    (function () {
         clearProject();
         player_datas[0].avatar_id = 400102;
         player_datas[1].avatar_id = 400104;
@@ -129,9 +128,10 @@
             }
         }
         // 解析 paihe 至 new_discard_tiles
-        let new_qiepai_set = [json.paihe0, json.paihe1, json.paihe2, json.paihe3];
+        let tmp_qiepai_set = [json.paihe0, json.paihe1, json.paihe2, json.paihe3];
+        let new_qiepai_set = [[], [], [], []];
         for (let i = 0; i < json.player_count; i++) {
-            new_qiepai_set[i] = separate_tiles(new_qiepai_set[i]);
+            new_qiepai_set[i] = separate_tiles(tmp_qiepai_set[i]);
             for (let j in new_qiepai_set[i])
                 new_discard_tiles[i].push({
                     tile: new_qiepai_set[i][j].substring(0, 2),
@@ -151,8 +151,8 @@
 
         randomPaishan('', zhishipais + '....');
         roundBegin();
-        protected_tiles = {seat: json.mainrole, tiles: separate(json.tiles)};
-        protected_tiles.tiles.sort(cmp);
+        protected_tiles.seat = json.mainrole;
+        protected_tiles.tiles = separate(json.tiles).sort(cmp);
 
         // paihe 经过该函数变为数组格式
         function separate_tiles(tiles) {
@@ -177,9 +177,9 @@
             }
             return ret;
         }
-    }();
+    })();
 
-    let seat = ju, nxt_step = 'qiepai';
+    let seat = json.chang_ju_ben_num[1], nxt_step = 'qiepai';
     while (true) {
         switch (nxt_step) {
             case 'mopai':
@@ -226,8 +226,8 @@
             // 明杠, 碰
             let op = ['minggang', 'peng'];
             for (let j in op)
-                for (let i = seat + 1; i < seat + player_cnt; i++) {
-                    let tmp_seat = i % player_cnt;
+                for (let i = seat + 1; i < seat + json.player_count; i++) {
+                    let tmp_seat = i % json.player_count;
                     let tmp_fulu = fulus_info[tmp_seat][fulu_index[tmp_seat]];
                     if (tmp_fulu && tmp_fulu.type === op[j] && tmp_fulu.from === seat && tmp_fulu.ming_tile === tile) {
                         nxt_step = op[j];
@@ -236,7 +236,7 @@
                     }
                 }
 
-            let tmp_seat = (seat + 1) % player_cnt, tmp_fulu = fulus_info[tmp_seat][fulu_index[tmp_seat]];
+            let tmp_seat = (seat + 1) % json.player_count, tmp_fulu = fulus_info[tmp_seat][fulu_index[tmp_seat]];
             if (tmp_fulu && tmp_fulu.type === 'chi' && tmp_fulu.from === seat && tmp_fulu.ming_tile === tile) {
                 nxt_step = 'chi';
                 seat = tmp_seat;
@@ -244,7 +244,7 @@
             }
 
             nxt_step = 'mopai';
-            seat = (seat + 1) % player_cnt;
+            seat = (seat + 1) % json.player_count;
         }
 
         function new_mingpai() {
@@ -272,7 +272,7 @@
         mopai(json.mainrole, json.lst_mopai);
 
     huangpai();
-}();
+})();
 
 // // official
 // json = {

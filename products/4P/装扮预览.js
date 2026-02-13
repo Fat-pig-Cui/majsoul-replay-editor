@@ -4,7 +4,7 @@ clearProject();
 
 player_datas[0].nickname = player_datas[2].nickname = player_datas[3].nickname = '电脑(简单)';
 player_datas[1] = {
-    nickname: '$nickname$',
+    nickname: '${nickname}',
     avatar_id: 407002, // 鲁鲁修-契约
     title: 600034, // 称号也可以看, 不过称号不属于严格意义上的装扮, 这里用 天选之证 举例
     avatar_frame: 305552, // 头像框, 用 大小姐发带 举例
