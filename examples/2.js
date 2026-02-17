@@ -72,16 +72,19 @@ qiepai('8s', true);
 {
     let tmp_tingpais = calcTingpai(1);
     let first_2 = false; // 2号玩家是否已经立直
+    let huled = false; // 是否已经胡牌
     for (let i = 0; i < 52; i++) {
         mopai();
         if (calcHupai(player_tiles[getLstAction().data.seat]) !== 0) {
             hupai();
+            huled = true;
             break;
         } else {
             if (getLstAction().data.tile === '4z') {
                 zimingpai();
                 if (isEqualTile('4z', tmp_tingpais[0].tile)) {
                     hupai();
+                    huled = true;
                     break;
                 } else
                     continue;
@@ -92,16 +95,17 @@ qiepai('8s', true);
             } else
                 qiepai();
             let is_fangchong = false;
-            for (let j = 0; j < tmp_tingpais.length; j++) {
+            for (let j = 0; j < tmp_tingpais.length; j++)
                 if (isEqualTile(getLstAction().data.tile, tmp_tingpais[j].tile)) {
                     is_fangchong = true;
                     hupai();
+                    huled = true;
                     break;
                 }
-            }
             if (is_fangchong)
                 break;
         }
     }
-    huangpai();
+    if (!huled)
+        huangpai();
 }

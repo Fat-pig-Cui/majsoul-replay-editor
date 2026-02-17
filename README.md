@@ -49,10 +49,9 @@ B站视频教程(偏过时): [【雀魂】如何自制牌谱回放](https://www.
 
 [字典](doc/0_字典.md) 是用来查阅的, 建议编辑牌谱时使用, [字典_template](doc/字典_template.md) 是生成字典的模版, 无需阅读
 
----
+另外还可以阅读由 Copilot 生成的 [copilot_instructions](.github/copilot-instructions.md), 里面有一些关于代码结构和工作流的说明, 以及一些常见问题的解答
 
-至于 code.js , 这是初步解混淆后的雀魂核心js文件, 与本仓库关系不大, 放在这里仅方便查阅(文件很大, 不要轻易打开),
-解混淆的方法见另一个仓库: [misc-code](https://github.com/Fat-pig-Cui/misc-code)
+---
 
 为了便于维护和封装, 最近正在用 TypeScript 重写项目, 目前的 `main.js` 由 [src](src) 文件夹下的 TypeScript 文件编译而来, 
 有很多不完善的地方, 这里暂存了老版本: [main_old.js](main_old.js)

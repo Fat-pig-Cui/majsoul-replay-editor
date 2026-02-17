@@ -5,6 +5,63 @@
  * @github: https://github.com/Fat-pig-Cui/majsoul-replay-editor
  */
 
+// 常量集合
+export class Constants {
+    // 亲家起手牌数量
+    public static readonly QIN_TILE_NUM = 14;
+    // 闲家起手牌数量
+    public static readonly XIAN_TILE_NUM = 13;
+    // 特殊牌的后缀
+    public static readonly SPT_SUFFIX = 't';
+    // 特殊牌和普通牌数字编码的差值
+    public static readonly SPT_OFFSET = 40;
+    // 国标麻将起和番
+    public static readonly GB_BASE_FAN = 8;
+    // 万象修罗百搭牌编码
+    public static readonly TBD = 'bd';
+    // 国标麻将起和番
+    public static readonly HUAPAI = '0m';
+    // 万象修罗百搭牌数字编码
+    public static readonly CBD = 0;
+    // 常用牌的数字编码
+    public static readonly TILE_NUM = Object.freeze({
+        C1m: 1,
+        C9m: 9,
+        C1p: 10,
+        C9p: 18,
+        C1s: 19,
+        C9s: 27,
+        C1z: 28,
+        C4z: 31,
+        C5z: 32,
+        C7z: 34,
+        C0m: 35,
+        C0p: 36,
+        C0s: 37,
+        C5m: 5,
+        C5p: 14,
+        C5s: 23,
+    });
+
+    /**
+     * 顺子中比它大的牌, 如果某张牌的数字编码(不区分红宝牌)为 i, 则由它构成的顺子中比它大1的牌的数字编码为 NXT2[i]
+     *
+     * 故可得出 即 j, NXT2[j], NXT2[NXT2[j]] 构成递增的顺子
+     *
+     * 如果不存在, 则指向 35, 36
+     *
+     * 数组长度为37
+     */
+    public static readonly NXT2: readonly number[] = [0, 2, 3, 4, 5, 6, 7, 8, 9, 35, 11, 12, 13, 14, 15, 16, 17, 18, 35, 20, 21, 22, 23, 24, 25, 26, 27, 35, 35, 35, 35, 35, 35, 35, 35, 36, 0];
+
+    /**
+     * 宝牌指示牌表, 如果某张指示牌的数字编码(不区分红宝牌)为 i, 则它对应的宝牌的数字编码为 DORA_NXT[i]
+     *
+     * 数组长度35
+     */
+    public static readonly DORA_NXT: readonly number[] = [0, 2, 3, 4, 5, 6, 7, 8, 9, 1, 11, 12, 13, 14, 15, 16, 17, 18, 10, 20, 21, 22, 23, 24, 25, 26, 27, 19, 29, 30, 31, 28, 33, 34, 32];
+}
+
 // 自定义番种: 役种名称的汉字需要在已有的里面选, 否则不会显示
 export const DIYFans = (): void => {
     // 9000: 诈和, '诈'字无法显示, 原名称为'振和'
@@ -2123,60 +2180,3 @@ export const guobiaoFans = (): void => {
         sound: 'fan_dora13',
     };
 };
-
-// 常量集合
-export class Constants {
-    // 亲家起手牌数量
-    public static readonly QIN_TILE_NUM = 14;
-    // 闲家起手牌数量
-    public static readonly XIAN_TILE_NUM = 13;
-    // 特殊牌的后缀
-    public static readonly SPT_SUFFIX = 't';
-    // 特殊牌和普通牌数字编码的差值
-    public static readonly SPT_OFFSET = 40;
-    // 国标麻将起和番
-    public static readonly GB_BASE_FAN = 8;
-    // 万象修罗百搭牌编码
-    public static readonly TBD = 'bd';
-    // 国标麻将起和番
-    public static readonly HUAPAI = '0m';
-    // 万象修罗百搭牌数字编码
-    public static readonly CBD = 0;
-    // 常用牌的数字编码
-    public static readonly TILE_NUM = Object.freeze({
-        C1m: 1,
-        C9m: 9,
-        C1p: 10,
-        C9p: 18,
-        C1s: 19,
-        C9s: 27,
-        C1z: 28,
-        C4z: 31,
-        C5z: 32,
-        C7z: 34,
-        C0m: 35,
-        C0p: 36,
-        C0s: 37,
-        C5m: 5,
-        C5p: 14,
-        C5s: 23,
-    });
-
-    /**
-     * 顺子中比它大的牌, 如果某张牌的数字编码(不区分红宝牌)为 i, 则由它构成的顺子中比它大1的牌的数字编码为 NXT2[i]
-     *
-     * 故可得出 即 j, NXT2[j], NXT2[NXT2[j]] 构成递增的顺子
-     *
-     * 如果不存在, 则指向 35, 36
-     *
-     * 数组长度为37
-     */
-    public static readonly NXT2: readonly number[] = [0, 2, 3, 4, 5, 6, 7, 8, 9, 35, 11, 12, 13, 14, 15, 16, 17, 18, 35, 20, 21, 22, 23, 24, 25, 26, 27, 35, 35, 35, 35, 35, 35, 35, 35, 36, 0];
-
-    /**
-     * 宝牌指示牌表, 如果某张指示牌的数字编码(不区分红宝牌)为 i, 则它对应的宝牌的数字编码为 DORA_NXT[i]
-     *
-     * 数组长度35
-     */
-    public static readonly DORA_NXT: readonly number[] = [0, 2, 3, 4, 5, 6, 7, 8, 9, 1, 11, 12, 13, 14, 15, 16, 17, 18, 10, 20, 21, 22, 23, 24, 25, 26, 27, 19, 29, 30, 31, 28, 33, 34, 32];
-}

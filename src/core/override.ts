@@ -28,8 +28,18 @@ import {DIYFans, guobiaoFans} from "./constants";
 export var checkPaiPu: Function, resetData: Function, OnChoosedPai: Function, seat2LocalPosition: Function,
     localPosition2Seat: Function;
 
+/**
+ * 复原以查看真实牌谱
+ */
+export const resetReplay = (): void => {
+    if (checkPaiPu !== undefined)
+        GameMgr.Inst.checkPaiPu = checkPaiPu;
+    if (resetData !== undefined)
+        uiscript.UI_Replay.prototype.resetData = resetData;
+};
+
 // 使补充和优化函数只执行一次的控制变量
-export let inst_once = true;
+export let inst_once_chkP = true;
 
 // 在线编辑(进入牌谱之后的修改, 包括切换视角和切换巡目, 只在 editOffline 中的 resetData 中调用)
 const editOnline = (): void => {
@@ -132,7 +142,7 @@ export const editOffline = (): void => {
                 console.error('GameMgr.Inst.checkPaiPu: 没有载入自制牌谱, 不可查看, 若要查看真实牌谱, 请输入 resetReplay()');
                 return;
             }
-            if (inst_once) {
+            if (inst_once_chkP) {
                 if (typeof editFunction == 'function')
                     editFunction();
                 updateViews();
@@ -217,9 +227,9 @@ export const editOffline = (): void => {
                                         view.DesktopMgr.Inst.paipu_config = paipu_config;
                                         view.DesktopMgr.Inst.initRoom(JSON.parse(JSON.stringify(all_data.config)), all_data.player_datas, account_id, view.EMJMode.paipu, Laya.Handler.create(W, function () {
                                             // 添加下面
-                                            if (typeof editFunction2 == 'function' && inst_once)
+                                            if (typeof editFunction2 == 'function' && inst_once_chkP)
                                                 editFunction2();
-                                            inst_once = false;
+                                            inst_once_chkP = false;
                                             if (player_cnt === 2) {
                                                 view.DesktopMgr.Inst.rule_mode = view.ERuleMode.Liqi2;
                                                 uiscript.UI_DesktopInfo.Inst.refreshSeat();

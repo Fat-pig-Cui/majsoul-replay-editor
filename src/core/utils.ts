@@ -5,29 +5,494 @@
  * @github: https://github.com/Fat-pig-Cui/majsoul-replay-editor
  */
 
-import {calcHupai, calcTingpai, getLstAction, isEqualTile, player_tiles} from "./core";
 import {
-    actions, ben, chang,
-    dora_cnt,
-    doras, fulu, gaps,
-    huled, ju,
+    actions, ben, chang, dora_cnt,
+    doras, fulu, gaps, huled, ju,
     liqi_info, lizhizt, mingpais, paihe,
-    player_cnt,
-    prelizhizt,
-    pretongxunzt, scores,
+    player_cnt, prelizhizt, pretongxunzt, scores,
     shezhangzt, shoumoqie, tongxunzt,
-    xun, yongchang_data, zhenting
+    xun, yongchang_data, zhenting,
+    awaiting_tiles, muyu_info, muyu, paishan,
+    player_tiles
 } from "./core";
 import {
+    get_fanfu,
     is_chuanma,
-    is_guobiao, is_heqie_mode, is_xiakeshang,
+    is_guobiao,
+    is_heqie_mode,
+    is_qieshang,
+    is_qingtianjing,
+    is_wanxiangxiuluo,
+    is_xiakeshang,
+    is_yifanjieguyi, is_zhanxing,
     no_dora,
     no_gangdora,
     no_ganglidora,
+    no_leijiyiman,
     no_lidora,
-    no_zhenting
+    no_zhenting,
+    scale_points
 } from "./misc";
 import {Constants} from "./constants";
+
+/**
+ * 获取当前位置还剩余多少牌
+ */
+export const getLeftTileCnt = (): number => {
+    let left_cnt = paishan.length - 14;
+    if (player_cnt === 2)
+        left_cnt = paishan.length - 18;
+    else if (is_chuanma() || is_guobiao())
+        left_cnt = paishan.length;
+    if (is_zhanxing())
+        left_cnt += awaiting_tiles.length;
+    return left_cnt;
+};
+
+/**
+ * 判断 tile 牌是否满足 type 规则
+ * @example
+ * // return true
+ * judgeTile('1m', 'M')
+ * @param tile - 要验的牌
+ * @param type - 规则:
+ * - 'H': 字牌
+ * - 'T': 老头牌
+ * - 'Y': 幺九牌
+ * - 'D': 中张牌
+ * - 'M': 万子
+ * - 'P': 饼子
+ * - 'S': 索子
+ * - 'L': 组成绿一色的牌
+ * - 'quanshuang': 国标: 组成全双刻的牌
+ * - 'quanda': 国标: 组成全大的牌
+ * - 'quanzhong': 国标: 组成全中的牌
+ * - 'quanxiao': 国标: 组成全小的牌
+ * - 'dayuwu': 国标: 组成大于五的牌
+ * - 'xiaoyuwu': 国标: 组成小于五的牌
+ * - 'tuibudao': 国标: 组成推不倒的牌
+ */
+export const judgeTile = (tile: Tile, type: string): boolean => {
+    if (typeof tile != 'string' || tile.length === 1)
+        throw new Error(errorRoundInfo() + `judgeTile: tile 格式不合规: ${tile}`);
+    if (tile === Constants.TBD)
+        return true;
+    let x = tile2Int(tile);
+    switch (type) {
+        case 'Y':
+            return tile[0] === '1' || tile[0] === '9' || tile[1] === 'z';
+        case 'D':
+            return !(tile[0] === '1' || tile[0] === '9' || tile[1] === 'z');
+        case 'T':
+            return tile[0] === '1' && tile[1] !== 'z' || tile[0] === '9';
+        case 'H':
+            return tile[1] === 'z';
+        case 'M':
+            return tile[1] === 'm';
+        case 'P':
+            return tile[1] === 'p';
+        case 'S':
+            return tile[1] === 's';
+        case 'L':
+            return x === Constants.TILE_NUM.C1s + 1 || x === Constants.TILE_NUM.C1s + 2 || x === Constants.TILE_NUM.C1s + 3 || x === Constants.TILE_NUM.C1s + 5 || x === Constants.TILE_NUM.C1s + 7 || x === Constants.TILE_NUM.C5z + 1;
+        case 'quanshuang':
+            return x <= Constants.TILE_NUM.C9s && ((x - 1) % 9 + 1) % 2 === 0;
+        case 'quanda':
+            return x <= Constants.TILE_NUM.C9s && (x - 1) % 9 >= 6;
+        case 'quanzhong':
+            return x <= Constants.TILE_NUM.C9s && (x - 1) % 9 >= 3 && (x - 1) % 9 <= 5;
+        case 'quanxiao':
+            return x <= Constants.TILE_NUM.C9s && (x - 1) % 9 <= 2;
+        case 'dayuwu':
+            return x <= Constants.TILE_NUM.C9s && (x - 1) % 9 >= 5;
+        case 'xiaoyuwu':
+            return x <= Constants.TILE_NUM.C9s && (x - 1) % 9 <= 3;
+        case 'tuibudao':
+            return x === 10 || x === 11 || x === 12 || x === 13 || x === 14 || x === 17 || x === 18 || x === 20 || x === 22 || x === 23 || x === 24 || x === 26 || x === 27 || x === 32;
+        default:
+            throw new Error(errorRoundInfo() + `judgeTile: type 格式不合规: ${type}`);
+    }
+};
+
+/**
+ * 返回和 tile 等效的所有牌, 优先把红宝牌和含有 Constants.SPT_SUFFIX 放到后面
+ * @example
+ * // return ['5m', '0m', '5mt', '0mt']
+ * allEqualTiles('5m')
+ */
+export const allEqualTiles = (tile: Tile): Tile[] => {
+    if (tile === Constants.TBD)
+        return [Constants.TBD];
+    tile = tile.substring(0, 2) as Tile; // 去掉可能存在的 Constants.SPT_SUFFIX
+    if (tile[0] === '0' || tile[0] === '5' && tile[1] !== 'z')
+        return ['5' + tile[1], '5' + tile[1] + Constants.SPT_SUFFIX, '0' + tile[1], '0' + tile[1] + Constants.SPT_SUFFIX] as Tile[];
+    else
+        return [tile, tile + Constants.SPT_SUFFIX] as Tile[];
+};
+
+/**
+ * 判断两个牌是否等效
+ */
+export const isEqualTile = (x: Tile, y: Tile): boolean => allEqualTiles(x).includes(y);
+
+/**
+ * 解析牌, 会将简化后牌编码恢复成单个并列样子
+ * @example
+ * // return '1m2m3m9p9p'
+ * decompose('123m99p')
+ */
+export const decompose = (tiles: string): string => {
+    let x = tiles.replace(/\s*/g, '');
+    let random_tiles = '.HTYDMPS'; // 随机牌
+    let bd_tile_num = x.match(/b/g) ? x.match(/b/g).length : 0;
+    let matches = x.match(/\d+[mpsz]t?|\.|H|T|Y|D|M|P|S/g);
+
+    let ret = '';
+    for (let i = 0; i < bd_tile_num; i++)
+        ret += Constants.TBD; // 万象修罗百搭牌
+    for (let i in matches) {
+        if (matches[i].length === 1 && random_tiles.includes(matches[i])) {
+            ret += matches[i] + matches[i];
+            continue;
+        }
+        let kind_index = matches[i][matches[i].length - 1] === Constants.SPT_SUFFIX ? matches[i].length - 2 : matches[i].length - 1;
+        let tile_kind = matches[i][kind_index];
+        if (kind_index === matches[i].length - 2)
+            tile_kind += Constants.SPT_SUFFIX;
+        for (let j = 0; j < kind_index; j++)
+            ret += matches[i][j] + tile_kind;
+    }
+    return ret;
+};
+
+/**
+ * 拆分牌为数组, 与 decompose 类似, 不过返回的是数组
+ * @example
+ * // return ['1m', '2m', '3m', '9p', '9p']
+ * separate('123m99p')
+ */
+export const separate = (tiles: string | Tile[]): Tile[] => {
+    if (!tiles)
+        return [];
+    if (tiles instanceof Array)
+        return tiles;
+    tiles = decompose(tiles);
+    let ret: Tile[] = [];
+    while (tiles.length > 0) {
+        let tmp_tile = tiles.substring(0, 2);
+        if (!isTile(tmp_tile))
+            console.error(errorRoundInfo() + `separate: 不合规的牌: ${tmp_tile}`);
+        if (tiles.length > 2 && tiles[2] === Constants.SPT_SUFFIX) { // 第3位是 Constants.SPT_SUFFIX, 则是特殊牌
+            ret.push(tiles.substring(0, 3) as Tile);
+            tiles = tiles.substring(3);
+        } else {
+            ret.push(tiles.substring(0, 2) as Tile);
+            tiles = tiles.substring(2);
+        }
+    }
+    return ret;
+};
+
+/**
+ * 拆分牌为数组, 比 separate 更进一步, 加入了摸切
+ * @example
+ * // return ['1m', '2m', '3m', '..', '9p']
+ * separateWithMoqie('123m.9p')
+ */
+export const separateWithMoqie = (tiles: string | TileWithMoqie[]): TileWithMoqie[] => {
+    if (!tiles)
+        return [];
+    if (tiles instanceof Array)
+        return tiles;
+    tiles = decompose(tiles);
+    let ret: TileWithMoqie[] = [];
+    while (tiles.length > 0) {
+        let tmp_tile = tiles.substring(0, 2);
+        if (!isTile(tmp_tile, true))
+            console.error(errorRoundInfo() + `separateWithMoqie: 牌格式不合规: ${tmp_tile}`);
+        if (tiles.length > 2 && tiles[2] === Constants.SPT_SUFFIX) { // 第3位是 Constants.SPT_SUFFIX, 则是特殊牌
+            ret.push(tiles.substring(0, 3) as TileWithMoqie);
+            tiles = tiles.substring(3);
+        } else {
+            ret.push(tiles.substring(0, 2) as TileWithMoqie);
+            tiles = tiles.substring(2);
+        }
+    }
+    return ret;
+};
+
+/**
+ * 拆分牌为数组, 比 separateWithMoqie 更进一步, 可以拆分随机牌
+ * @example
+ * // return ['1m', '2m', '3m', 'YY', '9p']
+ * separateWithParam('123mY9p')
+ */
+export const separateWithParam = (tiles: string | TileWithParam[]): TileWithParam[] => {
+    if (!tiles)
+        return [];
+    if (tiles instanceof Array)
+        return tiles;
+    tiles = decompose(tiles);
+    let ret: TileWithParam[] = [];
+    while (tiles.length > 0) {
+        let tmp_tile = tiles.substring(0, 2);
+        if (!isTile(tmp_tile, true))
+            console.error(errorRoundInfo() + `separateWithParam: 牌格式不合规: ${tmp_tile}`);
+        if (tiles.length > 2 && tiles[2] === Constants.SPT_SUFFIX) { // 第3位是 Constants.SPT_SUFFIX, 则是特殊牌
+            ret.push(tiles.substring(0, 3) as TileWithParam);
+            tiles = tiles.substring(3);
+        } else {
+            ret.push(tiles.substring(0, 2) as TileWithParam);
+            tiles = tiles.substring(2);
+        }
+    }
+    return ret;
+};
+
+/**
+ * 计算手牌为 tiles 时的和牌型
+ * @example
+ * calcHupai('11122233344455z')
+ * // return 1
+ * calcHupai('19m19p19s11234567z')
+ * // return 3
+ * calcHupai('19m19p19s1234567z')
+ * // return 0, 因为牌少一张, 处于待牌状态, 不是和牌型
+ * @param tiles - 手牌
+ * @param type - 是否可能没有百搭牌, 默认为可能有百搭牌
+ * @returns
+ * - 0: 不是和牌型
+ * - 1: 一般型和牌
+ * - 2: 七对子和牌
+ * - 3: 国士型和牌
+ * - 4: 国标中全不靠和牌(不含组合龙)
+ * - 5: 国标中全不靠和牌(含有组合龙)
+ * - 6-11: 国标中不含全不靠的组合龙和牌
+ * - 12: 一番街古役: 十三不搭
+ */
+export const calcHupai = (tiles: Tile[], type: boolean = false): number => {
+    let cnt: number[] = [], tmp: number[] = [];
+    for (let i = Constants.CBD; i <= Constants.TILE_NUM.C7z; i++) // 是 Constants.CBD 而不是 Constants.TILE_NUM.C1m 是因为百搭牌
+        cnt[i] = tmp[i] = 0;
+    for (let i in tiles)
+        cnt[tile2Int(tiles[i])]++;
+
+    if (is_guobiao() && tiles.includes(Constants.HUAPAI))  // 国标无法听花牌, 有花牌一定不是和牌型
+        return 0;
+
+    if (is_wanxiangxiuluo() && cnt[Constants.CBD] === 1 && !type) {
+        let tmp_tiles: Tile[] = [];
+        for (let i in tiles)
+            if (tiles[i] !== Constants.TBD)
+                tmp_tiles.push(tiles[i]);
+        for (let i = 1; i <= 34; i++) { // 百搭牌试所有牌
+            tmp_tiles.push(int2Tile(i));
+            let result = calcHupai(tmp_tiles, true);
+            if (result !== 0) // 存在百搭牌使得成为和牌型, 则返回
+                return result;
+            tmp_tiles.pop();
+        }
+        return 0;
+    }
+
+    for (let i = Constants.TILE_NUM.C1m; i <= Constants.TILE_NUM.C7z; i++) {
+        if (cnt[i] >= 2) { // 假设雀头, 则剩下的只有4个面子
+            cnt[i] -= 2;
+            let ok = true; // 先假设能和, 再依条件否定
+            for (let j = Constants.TILE_NUM.C1m; j <= Constants.TILE_NUM.C7z; j++)
+                tmp[j] = cnt[j];
+            tmp[Constants.TILE_NUM.C0m] = tmp[Constants.TILE_NUM.C0p] = tmp[Constants.TILE_NUM.C0s] = 0;
+
+            for (let k = 1; k <= 3; k++) {
+                for (let j = k * 9 - 8; j !== 0; j = Constants.NXT2[j]) {
+                    if (tmp[j] < 0) { // 若牌数量减为了负数, 说明有有未成形的顺子
+                        ok = false;
+                        break;
+                    }
+                    tmp[j] %= 3; // 去掉暗刻, 如果 tmp[j] 仍然不为0的话, 则要构成和牌型一定构成顺子
+                    // j, Constants.NXT2[j], Constants.NXT2[NXT2[j]] 构成顺子, 三个一组减去
+                    tmp[Constants.NXT2[j]] -= tmp[j];
+                    tmp[Constants.NXT2[Constants.NXT2[j]]] -= tmp[j];
+                }
+                tmp[Constants.TILE_NUM.C0m] = tmp[Constants.TILE_NUM.C0p] = tmp[Constants.TILE_NUM.C0s] = 0;
+            }
+            // 若字牌不能构成暗刻
+            for (let j = Constants.TILE_NUM.C1z; j <= Constants.TILE_NUM.C7z; j++)
+                if (tmp[j] % 3 !== 0)
+                    ok = false;
+
+            cnt[i] += 2;
+            if (ok)
+                return 1;
+        }
+    }
+
+    // 七对子
+    let duizi = 0;
+    for (let i = Constants.TILE_NUM.C1m; i <= Constants.TILE_NUM.C7z; i++) {
+        if (cnt[i] === 2)
+            duizi++;
+        // 本来只要判断 cnt[i] === 4 就行, 这里扩展成作弊大于四张牌的情况
+        if (cnt[i] >= 4 && cnt[i] % 2 === 0 && (is_chuanma() || is_guobiao()))
+            duizi += cnt[i] / 2;
+    }
+    if (duizi === 7)
+        return 2;
+
+    // 国士无双
+    let guoshi = true;
+    for (let i = Constants.TILE_NUM.C1m; i <= Constants.TILE_NUM.C7z; i++) {
+        if (judgeTile(int2Tile(i), 'Y')) {
+            if (cnt[i] === 0) // 所有幺九牌都至少有一张
+                guoshi = false;
+        } else if (cnt[i] > 0) // 存在非幺九牌
+            guoshi = false;
+    }
+    if (guoshi)
+        return 3;
+
+    if (is_guobiao() && tiles.length === 14) { // 国标的全不靠和七星不靠
+        let quanbukao = true;
+        for (let i = Constants.TILE_NUM.C1m; i <= Constants.TILE_NUM.C7z; i++)
+            if (cnt[i] >= 2)
+                quanbukao = false;
+        // 3*3 的数组, 每一行代表一个花色, 三行分别对应 m, p, s 色, 每一行的三个元素分别代表是否有147, 258, 369中的牌
+        let jin_huase = [
+            [false, false, false],
+            [false, false, false],
+            [false, false, false],
+        ];
+        for (let j = 0; j <= 2; j++)
+            for (let i = 0; i <= 8; i++)
+                if (cnt[j * 9 + i + 1] === 1)
+                    jin_huase[j][i % 3] = true;
+
+        // jin_huase 的每一行, 每一列都最多只有一个 true
+        for (let i = 0; i <= 2; i++) {
+            let true_cnt_row = 0, true_cnt_col = 0;
+            for (let j = 0; j <= 2; j++) {
+                if (jin_huase[i][j]) // 扫描每一行
+                    true_cnt_row++;
+                if (jin_huase[j][i]) // 扫描每一列
+                    true_cnt_col++;
+            }
+            if (true_cnt_row >= 2 || true_cnt_col >= 2)
+                quanbukao = false;
+        }
+        if (quanbukao) {
+            let zuhelong = true; // 是否复合组合龙
+            for (let j = 0; j <= 2; j++)
+                for (let i = 0; i <= 2; i++)
+                    if (jin_huase[j][i])
+                        if (!(cnt[j * 9 + 1 + i] === 1 && cnt[j * 9 + 4 + i] === 1 && cnt[j * 9 + 7 + i] === 1))
+                            zuhelong = false;
+            return !zuhelong ? 4 : 5;
+        }
+    }
+    if (is_guobiao() && tiles.length >= 11) { // 国标不含全不靠的组合龙
+        let condition = [
+            [1, 4, 7, 11, 14, 17, 21, 24, 27],
+            [1, 4, 7, 12, 15, 18, 20, 23, 26],
+            [2, 5, 8, 10, 13, 16, 21, 24, 27],
+            [2, 5, 8, 12, 15, 18, 19, 22, 25],
+            [3, 6, 9, 10, 13, 16, 20, 23, 26],
+            [3, 6, 9, 11, 14, 17, 19, 22, 25],
+        ];
+        let flag = [true, true, true, true, true, true];
+        for (let j in condition)
+            for (let i in condition[j])
+                if (cnt[condition[j][i]] === 0)
+                    flag[j] = false;
+
+        for (let row in condition) {
+            if (flag[row]) {
+                let new_tiles = tiles.slice();
+                for (let i in condition[row])
+                    for (let j in new_tiles)
+                        if (new_tiles[j] === int2Tile(condition[row][i])) {
+                            new_tiles.splice(parseInt(j), 1);
+                            break;
+                        }
+                if (calcHupai(new_tiles) === 1)
+                    return 6 + parseInt(row);
+            }
+        }
+    }
+    if (is_yifanjieguyi() && tiles.length === 14) {
+        let shisanbuda = true;
+        let duizi_num = 0;
+        for (let i = Constants.TILE_NUM.C1m; i <= Constants.TILE_NUM.C7z; i++) {
+            if (cnt[i] === 2)
+                duizi_num++;
+            if (cnt[i] >= 3)
+                shisanbuda = false;
+        }
+        if (duizi_num !== 1)
+            shisanbuda = false;
+
+        for (let j = 0; j <= 2; j++)
+            for (let i = 1; i <= 7; i++)
+                if (cnt[j * 9 + i] >= 1)
+                    if (cnt[j * 9 + i + 1] !== 0 || cnt[j * 9 + i + 2] !== 0)
+                        shisanbuda = false;
+        if (shisanbuda)
+            return 12;
+    }
+    return 0;
+};
+
+/**
+ * 计算 seat 号玩家的所有听牌
+ * @example
+ * // 当 player_tiles[0] 为 separate('1122335577889m')
+ * calcTingpai(0)
+ * // return [{tile: '6m'}, {tile: '9m'}]
+ * @param seat - seat 号玩家
+ * @param type - 是否考虑听第5张(无虚听), 默认不考虑
+ */
+export const calcTingpai = (seat: Seat, type: boolean = false): { tile: Tile }[] => {
+    if (is_chuanma() && huazhu(seat))
+        return [];
+    let tiles = player_tiles[seat];
+    let cnt: number[] = [];
+    for (let i = Constants.CBD; i <= Constants.TILE_NUM.C7z; i++)
+        cnt[i] = 0;
+    for (let i in tiles)
+        cnt[tile2Int(tiles[i])]++;
+
+    if (is_guobiao() && tiles.includes(Constants.HUAPAI)) // 国标无法听花牌, 有花牌一定不是听牌型
+        return [];
+
+    let ret: { tile: Tile }[] = [];
+    for (let i = Constants.TILE_NUM.C1m; i <= Constants.TILE_NUM.C7z; i++) { // 试所有牌作为听牌, 检查是否为和牌型
+        tiles.push(int2Tile(i));
+        cnt[i]++;
+        // cnt[i] <= 4 为了除去虚听
+        if ((cnt[i] <= 4 || type) && calcHupai(tiles) !== 0 && calcHupai(tiles) !== 12)
+            ret.push({tile: int2Tile(i)});
+
+        tiles.pop();
+        cnt[i]--;
+    }
+    return ret;
+};
+
+/**
+ * 获取最近操作信息, 忽略 RecordChangeTile, RecordSelectGap, RecordGangResult, RecordFillAwaitingTiles 这几个操作
+ * @param num - 倒数第 num 个操作, 默认为1
+ */
+export const getLstAction = (num: number = 1): Action => {
+    if (actions.length > 0) {
+        let ret = actions.length;
+        for (let i = 0; i < num; i++) {
+            ret--;
+            while (['RecordChangeTile', 'RecordSelectGap', 'RecordGangResult', 'RecordFillAwaitingTiles'].includes(actions[ret].name))
+                ret--;
+        }
+        return actions[ret];
+    } else
+        throw new Error(errorRoundInfo() + 'actions 为空');
+};
 
 // 玩家的巡目所对应的操作位置
 export const calcXun = (): void => {
@@ -106,7 +571,7 @@ export const tile2Int = (tile: Tile, type: boolean = false, is_SP_tile: boolean 
         if (tile[1] === 'z')
             return 27 + parseInt(tile) + Constants.SPT_OFFSET;
     }
-    throw new Error(roundInfo() + `tile2Int 输入不合规: ${tile}`);
+    throw new Error(errorRoundInfo() + `tile2Int 输入不合规: ${tile}`);
 };
 
 /**
@@ -148,7 +613,7 @@ export const int2Tile = (x: number, type: boolean = false): Tile => {
         if (x === 37)
             return '0s' + Constants.SPT_SUFFIX as Tile;
     }
-    throw new Error(roundInfo() + `int2Tile 输入不合规: ${x}`);
+    throw new Error(errorRoundInfo() + `int2Tile 输入不合规: ${x}`);
 };
 
 // 手牌理牌算法
@@ -369,6 +834,26 @@ export const huazhu = (seat: Seat): boolean => {
     return false;
 };
 
+/**
+ * 龙之目玉, 更新目玉
+ */
+export const updateMuyu = (): void => {
+    let type = muyu_info.count === 0; // 更新类型, true 表示生成新目玉, false 表示计数
+    if (type) {
+        muyu_info.id++;
+        muyu_info.count = 5;
+        if (muyu.seats.length > 0) {
+            muyu_info.seat = parseInt(muyu.seats[0]) as Seat;
+            muyu.seats = muyu.seats.substring(1) as MuyuSeats;
+        } else
+            muyu_info.seat = Math.floor(Math.random() * player_cnt) as Seat;
+        for (let i = 0; i < player_cnt; i++)
+            muyu.times[i] = 1;
+        muyu.times[muyu_info.seat]++;
+    } else
+        muyu_info.count--;
+};
+
 // 幻境传说, 判断 tile 是否为 dora
 export const isDora = (tile: Tile): boolean => {
     if (tile2Int(tile, true) >= Constants.TILE_NUM.C0m && tile2Int(tile, true) <= Constants.TILE_NUM.C0s)
@@ -471,8 +956,74 @@ export const calcXiaKeShang = (): [number, number, number, number] => {
     return times;
 };
 
+/**
+ * calcSudian 组 - 立直
+ *
+ * 根据算得的番计算素点
+ * @param x - 和牌信息
+ * @param type - 有效值0和1, 0是一般模式, 1表示比较模式, 默认为一般模式
+ */
+export const calcSudian = (x: CalcFanRet, type: number = 0): number => {
+    let fanfu = get_fanfu(), val = 0;
+    for (let i in x.fans)
+        val += x.fans[i].val;
+    if (is_qingtianjing())
+        return x.fu * Math.pow(2, val + 2);
+
+    if (x.yiman)
+        return 8000 * val;
+
+    else if (val < fanfu)
+        return -2000;
+    else if (val >= 13 && !no_leijiyiman())
+        return 8000 + type * (val + x.fu * 0.01);
+    else if (val >= 11)
+        return 6000 + type * (val + x.fu * 0.01);
+    else if (val >= 8)
+        return 4000 + type * (val + x.fu * 0.01);
+    else if (val >= 6)
+        return 3000 + type * (val + x.fu * 0.01);
+    else if (val >= 5)
+        return 2000 + type * (val + x.fu * 0.01);
+    else if (is_qieshang() && (val === 4 && x.fu === 30 || val === 3 && x.fu === 60))
+        return 2000 + type * (val + x.fu * 0.01);
+    else
+        return Math.min(Math.pow(2, val + 2) * x.fu, 2000) + type * (val + x.fu * 0.01);
+};
+
+/**
+ * calcSudian 组 - 川麻
+ *
+ * 根据算得的番计算素点
+ * @param x - 和牌信息
+ * @param type - 有效值0和1, 0是一般模式, 1表示比较模式, 默认为一般模式
+ */
+export const calcSudianChuanma = (x: CalcFanRet, type: number = 0): number => {
+    let val = 0;
+    for (let i in x.fans)
+        val = val + x.fans[i].val;
+    if (val === 0)
+        return 0;
+    return Math.min(1000 * Math.pow(2, val - 1), 32000) + type * val;
+};
+
+/**
+ * calcSudian 组 - 国标
+ *
+ * 根据算得的番计算素点
+ * @param x - 和牌信息
+ * @param no_huapai - 是否不考虑花牌, 默认考虑
+ */
+export const calcSudianGuobiao = (x: CalcFanRet, no_huapai: boolean = false): number => {
+    let val = 0;
+    for (let i in x.fans)
+        if (!(no_huapai && x.fans[i].id >= 8091 && x.fans[i].id <= 8099))
+            val = val + x.fans[i].val;
+    return val * scale_points();
+};
+
 // 辅助函数, chang, ju, ben 转换为控制台输出的所在小局
-export const roundInfo = (): string => {
-    let chang_word = [`东`, `南`, `西`, `北`];
+export const errorRoundInfo = (): string => {
+    const chang_word = [`东`, `南`, `西`, `北`];
     return `${chang_word[chang]}${ju + 1}局${ben}本场: `;
 };

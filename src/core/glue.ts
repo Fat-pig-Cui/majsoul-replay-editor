@@ -6,20 +6,13 @@
  */
 
 import {
-    chang, ju, ben,
-    delta_scores, hules_history,
-    actions,
-    awaiting_tiles,
-    hunzhiyiji_info,
-    liqibang,
-    muyu,
-    paishan,
-    scores,
-    yongchang_data
+    chang, ju, ben, delta_scores, hules_history,
+    actions, awaiting_tiles, hunzhiyiji_info, liqibang,
+    muyu_info, paishan, scores, yongchang_data,
+    player_tiles, all_data
 } from "./core";
 import {is_chuanma, is_heqie_mode, is_hunzhiyiji, is_muyu, is_xiakeshang, is_yongchang, is_zhanxing} from "./misc";
-import {player_tiles, all_data, calcTingpai, getLeftTileCnt, getLstAction} from "./core";
-import {calcDoras, calcXiaKeShang, calcXun, getAllTingpai} from "./utils";
+import {calcTingpai, getLeftTileCnt, getLstAction, calcDoras, calcXiaKeShang, calcXun, getAllTingpai} from "./utils";
 
 /**
  * 胶水代码: 开局
@@ -45,10 +38,10 @@ export let addNewRound = (left_tile_count: number, fake_hash_code: string, opens
             tiles3: player_tiles[3].slice(),
             paishan: paishan.join(''),
             scores: scores.slice(),
-            tingpai: !is_chuanma() ? getAllTingpai(): undefined,
+            tingpai: !is_chuanma() ? getAllTingpai() : undefined,
             doras: calcDoras(),
             opens: opens,
-            muyu: is_muyu() ? JSON.parse(JSON.stringify(muyu)) : undefined,
+            muyu: is_muyu() ? JSON.parse(JSON.stringify(muyu_info)) : undefined,
             md5: !is_sha256 ? fake_hash_code : undefined,
             sha256: is_sha256 ? fake_hash_code : undefined,
             xia_ke_shang: is_xiakeshang() ? {score_coefficients: calcXiaKeShang()} : undefined,
@@ -76,7 +69,7 @@ export let addDealTile = (seat: Seat, draw_card: Tile, liqi: Liqi, tile_state: b
             liqi: liqi ? liqi : undefined,
             doras: calcDoras(),
             tile_state: tile_state ? tile_state : undefined,
-            muyu: is_muyu() ? JSON.parse(JSON.stringify(muyu)) : undefined,
+            muyu: is_muyu() ? JSON.parse(JSON.stringify(muyu_info)) : undefined,
             tile_index: is_zhanxing() ? zhanxing_index : undefined,
             hun_zhi_yi_ji_info: is_hunzhiyiji() ? hunzhiyiji_data : undefined,
         }
@@ -126,7 +119,7 @@ export let addDiscardTile = (seat: Seat, tile: Tile, moqie: boolean, is_liqi: bo
             doras: calcDoras(),
             tingpais: is_heqie_mode() ? undefined : calcTingpai(seat),
             tile_state: tile_state ? tile_state : undefined,
-            muyu: is_muyu() ? JSON.parse(JSON.stringify(muyu)) : undefined,
+            muyu: is_muyu() ? JSON.parse(JSON.stringify(muyu_info)) : undefined,
             yongchang: is_yongchang() ? JSON.parse(JSON.stringify(yongchang_data[seat])) : undefined,
             hun_zhi_yi_ji_info: is_hunzhiyiji() && hunzhiyiji_info[seat].liqi && !hunzhiyiji_info[seat].overload ? JSON.parse(JSON.stringify(hunzhiyiji_info[seat])) : undefined,
             liqi_type_beishuizhizhan: is_liqi ? beishui_type : undefined,
@@ -213,7 +206,7 @@ export let addChiPengGang = (seat: Seat, split_tiles: Tile[], froms: Seat[], typ
             scores: scores.slice(),
             tingpais: is_heqie_mode() ? undefined : calcTingpai(seat),
             tile_states: tile_states,
-            muyu: is_muyu() ? JSON.parse(JSON.stringify(muyu)) : undefined,
+            muyu: is_muyu() ? JSON.parse(JSON.stringify(muyu_info)) : undefined,
             yongchang: is_yongchang() ? JSON.parse(JSON.stringify(yongchang_data[froms[froms.length - 1]])) : undefined,
             hun_zhi_yi_ji_info: is_hunzhiyiji() && hunzhiyiji_info[seat].liqi ? JSON.parse(JSON.stringify(hunzhiyiji_info[froms[froms.length - 1]])) : undefined,
         }

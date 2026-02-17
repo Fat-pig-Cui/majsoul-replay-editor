@@ -1,21 +1,24 @@
 /**
- * @file: main.ts - 外部使用的函数
+ * @file: main.ts - 外部使用的变量和函数
  * @author: GrandDawn, Fat-pig-Cui
  * @email: chubbypig@qq.com
  * @github: https://github.com/Fat-pig-Cui/majsoul-replay-editor
  */
 
-import {player_datas, begin_tiles, player_tiles, all_data} from './core/core'
-import {clearProject, setConfig, setDiscardTiles, setDealTiles, setPaishan} from './core/core'
-import {randomPaishan, roundBegin, mopai, qiepai, mingpai, zimingpai} from './core/core'
-import {hupai, huangpai, liuju, setMuyuSeats, huanpai, dingque} from './core/core'
-import {kaipai, kaipaiLock, setRound, getLeftTileCnt, demoGame, normalMoqie} from './core/core'
-import {moqieLiqi, comboMopai, mingQiepai, zimoHu, moqieLiuju, judgeTile} from './core/core'
-import {allEqualTiles, isEqualTile, decompose, separate, separateWithMoqie, separateWithParam} from './core/core'
-import {calcHupai, calcTingpai, getLstAction, setScores, resetReplay} from './core/core'
-import {reportYaku, reportYaku_yiji} from "./core/core";
+import {player_datas, begin_tiles, player_tiles, all_data} from './core/core';
 import {protected_tiles} from "./core/core";
-import {cmp} from "./core/utils";
+import {clearProject, setConfig, setDiscardTiles, setDealTiles, setPaishan} from './core/core';
+import {randomPaishan, roundBegin, mopai, qiepai, mingpai, zimingpai} from './core/core';
+import {hupai, huangpai, liuju, setMuyuSeats, huanpai, dingque} from './core/core';
+import {kaipai, kaipaiLock, setRound, setScores} from './core/core';
+import {normalMoqie, moqieLiqi, comboMopai, mingQiepai, zimoHu, moqieLiuju} from './core/core';
+import {demoGame, reportYaku, reportYaku_yiji} from "./core/core";
+
+import {getLeftTileCnt, judgeTile, allEqualTiles, isEqualTile, decompose} from "./core/utils";
+import {separate, separateWithMoqie, separateWithParam} from './core/utils';
+import {calcHupai, calcTingpai, getLstAction, cmp} from './core/utils';
+
+import {resetReplay} from "./core/override";
 
 export type t_player_datas = typeof player_datas;
 export type t_begin_tiles = typeof begin_tiles;
@@ -65,57 +68,6 @@ export type t_reportYaku = typeof reportYaku;
 export type t_reportYaku_yiji = typeof reportYaku_yiji;
 export type t_protected_tiles = typeof protected_tiles;
 export type t_cmp = typeof cmp;
-
-export {
-    player_datas,
-    begin_tiles,
-    player_tiles,
-    all_data,
-    clearProject,
-    setConfig,
-    setDiscardTiles,
-    setDealTiles,
-    setPaishan,
-    randomPaishan,
-    roundBegin,
-    mopai,
-    qiepai,
-    mingpai,
-    zimingpai,
-    hupai,
-    huangpai,
-    liuju,
-    setMuyuSeats,
-    huanpai,
-    dingque,
-    kaipai,
-    kaipaiLock,
-    setRound,
-    getLeftTileCnt,
-    demoGame,
-    normalMoqie,
-    moqieLiqi,
-    comboMopai,
-    mingQiepai,
-    zimoHu,
-    moqieLiuju,
-    judgeTile,
-    allEqualTiles,
-    isEqualTile,
-    decompose,
-    separate,
-    separateWithMoqie,
-    separateWithParam,
-    calcHupai,
-    calcTingpai,
-    getLstAction,
-    setScores,
-    resetReplay,
-    reportYaku,
-    reportYaku_yiji,
-    protected_tiles,
-    cmp,
-};
 
 declare type MRE_Type = {
     player_datas: t_player_datas;
