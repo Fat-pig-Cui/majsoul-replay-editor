@@ -15,6 +15,7 @@ player_datas[0].views = player_datas[1].views = player_datas[2].views = player_d
     {slot: 0, item_id: 305621}, // 立直棒-盆栽
     {slot: 5, item_id: 305500}, // 头像框-豆芽
     {slot: 6, item_id: 305801}, // 桌布-锦鲤游
+    {slot: 7, item_id: 305715}, // 牌背-新手报到
 ];
 
 setConfig({
@@ -31,4 +32,7 @@ setConfig({
 });
 
 // 具体内容在 src/core/core.ts 的 reportYaku 函数中
+// 为了考虑版面, 有重复的语音
+// 若要去掉重复的语音, 则给该函数加上参数 true 即可
 reportYaku();
+// reportYaku(true);

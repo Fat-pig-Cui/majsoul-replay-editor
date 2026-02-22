@@ -6,7 +6,7 @@ chars = db.chars
 views = db.views
 titles = db.titles
 
-get_slot = db.get_slot
+get_slot = db.get_slot_items
 get_view = db.get_view
 get_title = db.get_title
 

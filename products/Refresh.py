@@ -4,6 +4,9 @@
 """
 import os
 
+# _debug = False
+_debug = True
+
 if os.name == 'posix':  # 类 Unix 系统
     python_exe = 'python3 '
 else:
@@ -35,7 +38,8 @@ paths_3P = [
     '最长菜名与最高番数',
 ]
 
-os.system(python_exe + 'DatabaseToggle.py')
+if not _debug:
+    os.system(python_exe + 'DatabaseToggle.py')
 
 for path in paths:
     change_dir = path_prefix + path

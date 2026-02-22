@@ -17,6 +17,7 @@ player_datas[0].views = player_datas[1].views = player_datas[2].views = player_d
     {slot: 0, item_id: 305621}, // 立直棒-盆栽
     {slot: 5, item_id: 305500}, // 头像框-豆芽
     {slot: 6, item_id: 305801}, // 桌布-锦鲤游
+    {slot: 7, item_id: 305715}, // 牌背-新手报到
 ];
 
 setConfig({

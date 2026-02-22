@@ -2,7 +2,7 @@
     与 Database.py 对应的操作函数
     不要直接运行这个文件, 这个文件只提供函数供其他文件调用
 """
-from products.Database import *
+from products.Database import chars, outfile_names, pattern_name, pattern_id, cuv
 import os
 import re
 
@@ -56,23 +56,6 @@ def generator(player_num=4):
                     tmp_nickname.append(chars[index]['skin'][j]['name'])
                     tmp_avatar_id.append(chars[index]['skin'][j]['id'])
 
-            for line in infile:
-                result = re.search(pattern_name, line)
-                if name_count < 4 and result:
-                    # 匹配成功, result[0] 是全体, result[1] 是 nickname
-                    line = line.replace(result[1], tmp_nickname[name_count])
-                    name_count += 1
-                if id_count < 4 and name_count == 4:
-                    result = re.search(pattern_id, line)
-                    if result:
-                        # 匹配成功, result[0] 是全体, result[1] 是 avatar_id
-                        line = line.replace(result[1], str(tmp_avatar_id[id_count]))
-                        id_count += 1
-                outfile.write(line)
-                if flag_views and chars[index]['id'] in char_unique_views and id_count == 4 and name_count == 4:
-                    outfile.write('\n' + char_unique_views[chars[index]['id']])
-                    flag_views = False
-
         elif player_num == 3:
             if len(chars[index]['skin']) == 1 or len(chars[index]['skin']) == 2:
                 for j in [0, 1, 2]:
@@ -93,22 +76,24 @@ def generator(player_num=4):
                     tmp_nickname.append(chars[index]['skin'][j]['name'])
                     tmp_avatar_id.append(chars[index]['skin'][j]['id'])
 
-            for line in infile:
-                result = re.search(pattern_name, line)
-                if name_count < 3 and result:
-                    # 匹配成功, result[0] 是全体, result[1] 是 nickname
-                    line = line.replace(result[1], tmp_nickname[name_count])
-                    name_count += 1
-                if id_count < 3 and name_count == 3:
-                    result = re.search(pattern_id, line)
-                    if result:
-                        # 匹配成功, result[0] 是全体, result[1] 是 avatar_id
-                        line = line.replace(result[1], str(tmp_avatar_id[id_count]))
-                        id_count += 1
-                outfile.write(line)
-                if flag_views and chars[index]['id'] in char_unique_views_3P and id_count == 3 and name_count == 3:
-                    outfile.write('\n' + char_unique_views_3P[chars[index]['id']])
-                    flag_views = False
+        for line in infile:
+            result = re.search(pattern_name, line)
+            if name_count < player_num and result:
+                # 匹配成功, result[0] 是全体, result[1] 是 nickname
+                line = line.replace(result[1], tmp_nickname[name_count])
+                name_count += 1
+            if id_count < player_num and name_count == player_num:
+                result = re.search(pattern_id, line)
+                if result:
+                    # 匹配成功, result[0] 是全体, result[1] 是 avatar_id
+                    line = line.replace(result[1], str(tmp_avatar_id[id_count]))
+                    id_count += 1
+            outfile.write(line)
+            char_unique_views = cuv.get_char_unique_views(chars[index]['id'], player_num)
+            if flag_views and char_unique_views and id_count == player_num and name_count == player_num:
+                outfile.write('\n' + char_unique_views)
+                flag_views = False
+
         infile.seek(0)
         outfile.close()
 

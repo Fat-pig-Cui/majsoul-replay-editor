@@ -13,6 +13,7 @@ player_datas[0].views = player_datas[1].views = player_datas[2].views = player_d
     {slot: 0, item_id: 305620}, // 立直棒-秘传之卷
     {slot: 1, item_id: 305222}, // 和牌-天地无用
     {slot: 2, item_id: 305322}, // 立直-毒烟玉
+    {slot: 7, item_id: 305714}, // 牌背-手里剑
 ];
 
 setConfig({
@@ -29,4 +30,7 @@ setConfig({
 });
 
 // 具体内容在 src/core/core.ts 的 reportYaku 函数中
+// 为了考虑版面, 有重复的语音
+// 若要去掉重复的语音, 则给该函数加上参数 true 即可
 reportYaku();
+// reportYaku(true);

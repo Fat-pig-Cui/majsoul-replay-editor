@@ -9,6 +9,11 @@ player_datas[1].avatar_id = 400105;
 player_datas[2].avatar_id = 400106;
 player_datas[3].avatar_id = 400107;
 
+player_datas[0].views = player_datas[1].views = player_datas[2].views = player_datas[3].views = [
+    {slot: 1, item_id: 30520002}, // 和牌-虚空结界
+    {slot: 2, item_id: 30530002}, // 立直-星河入梦
+];
+
 setConfig({
     category: 1,
     meta: {mode_id: 0},

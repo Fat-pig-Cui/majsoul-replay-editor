@@ -12,7 +12,7 @@ player_datas[0].title = player_datas[1].title = player_datas[2].title = 600038;
 // 主播(猫爪)认证
 player_datas[0].verified = player_datas[1].verified = player_datas[2].verified = 1;
 player_datas[0].views = player_datas[1].views = player_datas[2].views = [
-    {slot: 6, item_id: 30580005}, // 桌布-预热开场
+    {slot: 6, item_id: 30580016}, // 桌布-锦绣余年
 ];
 
 setConfig({

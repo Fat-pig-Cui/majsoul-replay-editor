@@ -14,7 +14,7 @@ player_datas[0].title = player_datas[1].title = player_datas[2].title = player_d
 // 主播(猫爪)认证
 player_datas[0].verified = player_datas[1].verified = player_datas[2].verified = player_datas[3].verified = 1;
 player_datas[0].views = player_datas[1].views = player_datas[2].views = player_datas[3].views = [
-    {slot: 6, item_id: 30580005}, // 桌布-预热开场
+    {slot: 6, item_id: 30580016}, // 桌布-锦绣余年
 ];
 
 setConfig({
@@ -31,4 +31,7 @@ setConfig({
 });
 
 // 具体内容在 src/core/core.ts 的 reportYaku 函数中
+// 为了考虑版面, 有重复的语音
+// 若要去掉重复的语音, 则给该函数加上参数 true 即可
 reportYaku();
+// reportYaku(true);

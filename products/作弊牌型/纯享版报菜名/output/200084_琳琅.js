@@ -26,4 +26,7 @@ setConfig({
 });
 
 // 具体内容在 src/core/core.ts 的 reportYaku 函数中
+// 为了考虑版面, 有重复的语音
+// 若要去掉重复的语音, 则给该函数加上参数 true 即可
 reportYaku();
+// reportYaku(true);

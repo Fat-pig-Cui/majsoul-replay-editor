@@ -10,9 +10,8 @@ player_datas[0].avatar_id = 406702;
 player_datas[1].avatar_id = 406703;
 player_datas[2].avatar_id = 406704;
 
-player_datas[0].views = player_datas[1].views = player_datas[2].views = [
-    {slot: 6, item_id: 305812}, // 桌布-仙境茶话会
-];
+// 主播(猫爪)认证
+player_datas[0].verified = player_datas[1].verified = player_datas[2].verified = 1;
 
 setConfig({
     category: 1,

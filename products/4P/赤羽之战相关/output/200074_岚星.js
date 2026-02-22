@@ -15,6 +15,7 @@ player_datas[0].views = player_datas[1].views = player_datas[2].views = player_d
     {slot: 0, item_id: 305620}, // 立直棒-秘传之卷
     {slot: 1, item_id: 305222}, // 和牌-天地无用
     {slot: 2, item_id: 305322}, // 立直-毒烟玉
+    {slot: 7, item_id: 305714}, // 牌背-手里剑
 ];
 
 setConfig({

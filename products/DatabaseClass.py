@@ -64,16 +64,23 @@ class DatabaseClass:
                     return item
         return None
 
-    def get_slot(self, slot_id):
+    def get_slot(self, item_id):
         for slot in self.views:
-            if slot['slot'] == slot_id:
-                return slot['item']
+            for item in slot['item']:
+                if item['id'] == item_id:
+                    return slot['slot']
         return None
 
     def get_title(self, title_id):
         for title in self.titles:
             if title['id'] == title_id:
                 return title
+        return None
+
+    def get_slot_items(self, slot_id):
+        for slot in self.views:
+            if slot['slot'] == slot_id:
+                return slot['item']
         return None
 
 

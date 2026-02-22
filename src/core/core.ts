@@ -1943,7 +1943,7 @@ export let lianzhuang_cnt: number;
 // 国标玩家是否已错和
 export let cuohu: [boolean, boolean, boolean, boolean];
 // 何切模式: 主视角要保护的牌(防止切出去)
-export let protected_tiles: { seat: Seat, tiles: string[] } = {seat: 0, tiles: []};
+export let protected_tiles: { seat: Seat, tiles: string[] };
 /**
  * 各种振听, 有效长度为玩家数, 不超过4
  *
@@ -5508,8 +5508,9 @@ export const demoGame = (): void => {
 
 /**
  * 用于报菜名的示例牌局
+ * @param type - 是否去掉重复的番种(去掉可能会使得界面显示差一点, 但不会出现重复的语音, 如"国士无双")
  */
-export const reportYaku = (): void => {
+export const reportYaku = (type: boolean = false): void => {
     if (config.mode.detail_rule._report_yakus) {
         let origin_huleOnePlayer = huleOnePlayer;
 
@@ -5685,6 +5686,8 @@ export const reportYaku = (): void => {
                 {val: 14, id: 33}, // 里宝牌
                 {val: 5, id: 9100}, // 流局满贯
             ];
+            if (type)
+                fans.splice(13, 1);
             player_tiles[seat].pop();
             delta_scores = [-16000, -8000, 32000, -8000];
             return {
@@ -5779,6 +5782,8 @@ export const reportYaku = (): void => {
                 {val: 2, id: 49}, // 国士无双十三面
                 {val: 2, id: 50}, // 大四喜
             ];
+            if (type)
+                fans.shift();
             player_tiles[seat].pop();
             delta_scores = [-96000, -48000, 192000, -48000];
             return {
@@ -6243,67 +6248,19 @@ export const reportYaku_yiji = (): void => {
         // 第8局
         huleOnePlayer = seat => {
             let fans = [
-                {val: 0, id: 9501}, // 登录语音普通
-                {val: 6, id: 1018},
-                {val: 6, id: 1019},
-                {val: 6, id: 1015},
-                {val: 6, id: 1016},
-                {val: 6, id: 1017},
-                {val: 4, id: 1010},
-                {val: 4, id: 1011},
-                {val: 4, id: 1012},
-                {val: 5, id: 1013},
-                {val: 5, id: 1020},
-                {val: 1, id: 1021},
-            ];
-            player_tiles[seat].pop();
-            delta_scores = [-16000, -8000, 32000, -8000];
-            return {
-                count: 64,
-                doras: [doras[0]],
-                li_doras: [],
-                fans: fans,
-                fu: 170,
-                hand: player_tiles[seat].slice(),
-                hu_tile: player_tiles[seat][player_tiles[seat].length - 1],
-                liqi: false,
-                ming: [],
-                point_rong: 32000,
-                point_sum: 32000,
-                point_zimo_qin: 16000,
-                point_zimo_xian: 8000,
-                qinjia: false,
-                seat: seat,
-                title_id: 11,
-                yiman: false,
-                zimo: true,
-            };
-        };
-        begin_tiles[0] = '1112340678999m7z';
-        begin_tiles[1] = '1112340678999p';
-        begin_tiles[2] = '5555555555555z';
-        begin_tiles[3] = '1112340678999s';
-        randomPaishan('75z', '7z....');
-        roundBegin();
-        qiepai();
-        normalMoqie();
-        zimoHu();
-
-        setRound(2, 0, 0);
-
-        // 第9局
-        huleOnePlayer = seat => {
-            let fans = [
-                {val: 5, id: 1014},
-                {val: 2, id: 1005},
-                {val: 3, id: 1006},
-                {val: 3, id: 1007},
-                {val: 3, id: 1008},
-                {val: 3, id: 1009},
-                {val: 1, id: 1001},
-                {val: 1, id: 1004},
-                {val: 1, id: 1000},
-                {val: 1, id: 1002},
+                {val: 6, id: 1015}, // 清龙七对
+                {val: 6, id: 1016}, // 十八罗汉
+                {val: 6, id: 1017}, // 清十八罗汉
+                {val: 4, id: 1010}, // 清对
+                {val: 4, id: 1011}, // 将对
+                {val: 4, id: 1012}, // 龙七对
+                {val: 5, id: 1013}, // 清七对
+                {val: 5, id: 1020}, // 清幺九
+                {val: 5, id: 1014}, // 清金钩钓
+                {val: 3, id: 1008}, // 带幺九
+                {val: 3, id: 1009}, // 金钩钓
+                {val: 1, id: 1000}, // 根
+                {val: 1, id: 1002}, // 杠上炮
                 {val: 0, id: 9311}, // 听牌
                 {val: 0, id: 9312}, // 未听牌
             ];
@@ -6342,7 +6299,7 @@ export const reportYaku_yiji = (): void => {
 
         setRound(2, 0, 0);
 
-        // 第10局
+        // 第9局
         huleOnePlayer = seat => {
             let fans = [
                 {val: 0, id: 9500},
@@ -6396,7 +6353,7 @@ export const reportYaku_yiji = (): void => {
 
         setRound(2, 0, 0);
 
-        // 第11局
+        // 第10局
         huleOnePlayer = seat => {
             let fans = [
                 {val: 0, id: 9515},

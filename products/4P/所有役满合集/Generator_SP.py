@@ -2,7 +2,7 @@
     这个文件使用 file_names 里面的文件来对所有报菜名进行同步刷新
     和 Function.py 中的函数大差不差, 数据在 Database.py 中
 """
-from products.Database import *
+from products.Database import chars, pattern_name, pattern_id, cuv
 import os
 import re
 
@@ -40,7 +40,6 @@ def generator_sp():
         tmp_avatar_id = []
         for index in range(len(chars)):
             outfile = open('./output/' + outfile_dirname[index] + '/' + file_name, 'w', encoding='utf-8')
-            # flag_hand = True
             flag_views = True
             name_count = id_count = 0
 
@@ -76,8 +75,9 @@ def generator_sp():
                         line = line.replace(result[1], str(tmp_avatar_id[id_count]))
                         id_count += 1
                 outfile.write(line)
-                if flag_views and chars[index]['id'] in char_unique_views and id_count == 4 and name_count == 4:
-                    outfile.write('\n' + char_unique_views[chars[index]['id']])
+                char_unique_views = cuv.get_char_unique_views(chars[index]['id'])
+                if flag_views and char_unique_views and id_count == 4 and name_count == 4:
+                    outfile.write('\n' + char_unique_views)
                     flag_views = False
             infile.seek(0)
             outfile.close()

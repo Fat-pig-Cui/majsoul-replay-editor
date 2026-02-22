@@ -1,9 +1,9 @@
 clearProject();
 
-player_datas[0].nickname = '坂田银时';
-player_datas[1].nickname = '桂小太郎';
-player_datas[2].nickname = '高杉晋助';
-player_datas[3].nickname = '坂本辰马';
+player_datas[0].nickname = '坂田银时-契约';
+player_datas[1].nickname = '桂小太郎-契约';
+player_datas[2].nickname = '高杉晋助-契约';
+player_datas[3].nickname = '坂本辰马-契约';
 player_datas[0].avatar_id = 40011302;
 player_datas[1].avatar_id = 40011402;
 player_datas[2].avatar_id = 40011502;

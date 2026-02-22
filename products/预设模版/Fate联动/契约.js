@@ -1,9 +1,9 @@
 clearProject();
 
-player_datas[0].nickname = '间桐樱';
-player_datas[1].nickname = '远坂凛';
-player_datas[2].nickname = 'Saber';
-player_datas[3].nickname = 'Archer';
+player_datas[0].nickname = '间桐樱-契约';
+player_datas[1].nickname = '远坂凛-契约';
+player_datas[2].nickname = 'Saber-契约';
+player_datas[3].nickname = 'Archer-契约';
 player_datas[0].avatar_id = 40010802;
 player_datas[1].avatar_id = 40010902;
 player_datas[2].avatar_id = 40011002;
