@@ -76,7 +76,7 @@
         for (let i = 0; i < json.player_count; i++) {
             for (let k in new_fulus[i]) {
                 let tile_type = new_fulus[i][k].at(-1);
-                if (new_fulus[i][k].indexOf('_') !== -1) {
+                if (new_fulus[i][k].includes('_')) {
                     let index = new_fulus[i][k].indexOf('_');
                     let ming_tile = new_fulus[i][k][index + 1] + tile_type;
                     let own_tiles = [];
@@ -85,7 +85,7 @@
                             own_tiles.push(new_fulus[i][k][j] + tile_type);
                         else
                             j++;
-                    let is_jiagang = new_fulus[i][k].indexOf('^') !== -1;
+                    let is_jiagang = new_fulus[i][k].includes('^');
                     let type = '';
                     if (own_tiles[0] !== own_tiles[1])
                         type = 'chi';
@@ -135,8 +135,8 @@
             for (let j in new_qiepai_set[i])
                 new_discard_tiles[i].push({
                     tile: new_qiepai_set[i][j].substring(0, 2),
-                    moqie: new_qiepai_set[i][j].indexOf('g') !== -1,
-                    is_liqi: new_qiepai_set[i][j].indexOf('r') !== -1,
+                    moqie: new_qiepai_set[i][j].includes('g'),
+                    is_liqi: new_qiepai_set[i][j].includes('r'),
                 });
         }
 

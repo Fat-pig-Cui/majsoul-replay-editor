@@ -27,6 +27,7 @@ setConfig({
     /* 将从天凤牌谱编辑的数据赋值给 json 变量, 两个例子:
     {"title":["",""],"name":["COM0","COM1","COM2","COM3"],"rule":{"aka":1},"log":[[[0,0,0],[25000,25000,25000,25000],[13],[],[13,14,41,41,43,31,11,28,26,17,36,29,36],[26,"p414141",17,"c121314",43,45,37,31,26,23,19,43,21,24,32,11,35,52],[43,31,11,28,26,17,45,36,37,26,43,60,23,19,17,36,32,60],[39,47,46,41,22,34,17,33,14,37,25,19,18],[45,53,23,28,13,32,34,33,47,46,19,43,27,23,24,32,25,16],[39,47,46,60,41,22,34,17,33,14,37,33,23,18,46,45,43,47],[19,31,32,38,13,37,14,22,26,16,12,14,22],[12,38,39,28,39,35,47,42,25,42,21,23,46,44,27,37,34,18],[19,31,32,38,60,60,60,60,60,60,60,60,60,60,60,60,60,60],[41,11,42,11,18,15,21,36,33,33,45,21,38],[24,44,12,44,27,31,17,16,22,18,51,46,35,15,39,15,38,29],[41,11,60,42,11,60,60,60,60,60,60,38,21,18,60,27,60,46],["全員聴牌"]]]}
     {"title":["",""],"name":["COM0","COM1","COM2","COM3"],"rule":{"aka":1},"log":[[[0,0,1],[25000,25000,25000,25000],[52],[],[43,39,21,18,29,41,34,42,31,19,18,31,36],[15,28,37,22,27,42,33,15,19,37,46,13,27,17,26,43,35,12,42],[43,39,21,60,18,29,41,34,"r15",60,60,60,60,60,60,60,60,60,60],[47,42,13,45,45,21,19,11,23,35,14,12,24],[26,24,14,25,31,41,44,44,34,16,17,17,38,14,46,21,34,36],[47,42,13,45,60,60,60,60,14,19,16,45,12,35,21,14,26,34],[15,51,41,41,45,45,29,47,46,22,18,34,26],[16,16,39,"p454545",38,"p414141",44,11,"15p1551",36,23,33,25,23,14,11,17,12],[29,47,46,22,18,34,60,60,26,60,60,60,60,60,60,60,60,60],[29,39,44,24,13,32,38,22,28,39,16,23,36],[46,47,19,37,35,38,31,27,29,12,47,21,28,27,43,32,24,25],[29,60,39,60,60,44,24,60,31,32,60,36,13,39,29,27,23,19],["全員聴牌"]]]}
+    {"title":["",""],"name":["","","",""],"rule":{"aka":1},"log":[[[0,0,0],[25000,25000,25000,25000],[],[],[11,12,13,14,15,16,17,18,19,11,11,19,19],[33,43,41,46],["r60",60,60,60],[32,34,36,36,36,38,38,38,46,46,34,34,47],["c333234",28],[47,60],[25,25,26,26,27,27,26,27,28,28,35,39,44],["2525p52","p282828"],[44,39],[47,47,45,45,46,41,41,29,29,29,41,21,52],["47p4747",45,39,"414141m41",47,45,23],[52,21,60,0,"47k474747","454545a45",60],["全員聴牌"]]]}
     */
     // log[0][0]: 等于 chang * 4 + ju
     // log[0][1]: 本场数
@@ -155,11 +156,11 @@ setConfig({
         mopai_xunmu[seat]++;
 
         if (typeof new_qiepai_set[seat][qiepai_xunmu[seat]] == 'string') {
-            if (new_qiepai_set[seat][qiepai_xunmu[seat]].indexOf('a') > -1)
+            if (new_qiepai_set[seat][qiepai_xunmu[seat]].includes('a'))
                 nxt_step = 'angang';
-            else if (new_qiepai_set[seat][qiepai_xunmu[seat]].indexOf('k') > -1)
+            else if (new_qiepai_set[seat][qiepai_xunmu[seat]].includes('k'))
                 nxt_step = 'jiagang';
-            else if (new_qiepai_set[seat][qiepai_xunmu[seat]].indexOf('r') > -1)
+            else if (new_qiepai_set[seat][qiepai_xunmu[seat]].includes('r'))
                 nxt_step = 'qiepai';
         } else
             nxt_step = 'qiepai';
@@ -188,7 +189,7 @@ setConfig({
                 let tmp_fulu = new_mopai_set[tmp_seat][mopai_xunmu[tmp_seat]];
                 let tmp_fulu_from_seat, tmp_fulu_type;
                 [tmp_fulu_from_seat, tmp_fulu_type] = judge_fulu(tmp_fulu, tmp_seat);
-                if (tmp_fulu_from_seat === seat && tmp_fulu_type === 'a') {
+                if (tmp_fulu_from_seat === seat && tmp_fulu_type === 'm') {
                     nxt_step = 'minggang';
                     seat = tmp_seat;
                     return;
@@ -230,7 +231,7 @@ setConfig({
             let fulu_types = ['c', 'p', 'm'];
             let fulu_type = '';
             for (let i in fulu_types)
-                if (tmp_fulu.indexOf(fulu_types[i]) > -1) {
+                if (tmp_fulu.includes(fulu_types[i])) {
                     let index = tmp_fulu.indexOf(fulu_types[i]);
                     if (index === 6)
                         index = 4;
@@ -281,9 +282,10 @@ setConfig({
     }
 
     function parse_fulu(fulu) {
+        // 'c': 吃, 'p': 碰, 'm': 明杠, 'a': 暗杠, 'k': 加杠
         let fulu_types = ['c', 'p', 'm', 'a', 'k'];
         for (let i in fulu_types)
-            if (fulu.indexOf(fulu_types[i]) > -1) {
+            if (fulu.includes(fulu_types[i])) {
                 let index = fulu.indexOf(fulu_types[i]);
                 return [fulu.substring(0, index) + fulu.substring(index + 3), fulu_types[i]];
             }
