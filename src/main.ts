@@ -6,13 +6,13 @@
  */
 
 import {player_datas, begin_tiles, player_tiles, all_data} from './core/core';
-import {protected_tiles} from "./core/core";
 import {clearProject, setConfig, setDiscardTiles, setDealTiles, setPaishan} from './core/core';
 import {randomPaishan, roundBegin, mopai, qiepai, mingpai, zimingpai} from './core/core';
 import {hupai, huangpai, liuju, setMuyuSeats, huanpai, dingque} from './core/core';
 import {kaipai, kaipaiLock, setRound, setScores} from './core/core';
 import {normalMoqie, moqieLiqi, comboMopai, mingQiepai, zimoHu, moqieLiuju} from './core/core';
 import {demoGame, reportYaku, reportYaku_yiji} from "./core/core";
+import {setProtectedTiles} from "./core/core";
 
 import {getLeftTileCnt, judgeTile, allEqualTiles, isEqualTile, decompose} from "./core/utils";
 import {separate, separateWithMoqie, separateWithParam} from './core/utils';
@@ -66,7 +66,7 @@ export type t_setScores = typeof setScores;
 export type t_resetReplay = typeof resetReplay;
 export type t_reportYaku = typeof reportYaku;
 export type t_reportYaku_yiji = typeof reportYaku_yiji;
-export type t_protected_tiles = typeof protected_tiles;
+export type t_setProtectedTiles = typeof setProtectedTiles;
 export type t_cmp = typeof cmp;
 
 declare type MRE_Type = {
@@ -116,7 +116,7 @@ declare type MRE_Type = {
     resetReplay: t_resetReplay;
     reportYaku: t_reportYaku;
     reportYaku_yiji: t_reportYaku_yiji;
-    protected_tiles: t_protected_tiles;
+    setProtectedTiles: t_setProtectedTiles;
     cmp: t_cmp;
 };
 
@@ -167,7 +167,7 @@ export const MRE: MRE_Type = {
     resetReplay: resetReplay,
     reportYaku: reportYaku,
     reportYaku_yiji: reportYaku_yiji,
-    protected_tiles: protected_tiles,
+    setProtectedTiles: setProtectedTiles,
     cmp: cmp,
 };
 
@@ -217,5 +217,5 @@ export const MRE: MRE_Type = {
 (window as any).resetReplay = resetReplay;
 (window as any).reportYaku = reportYaku;
 (window as any).reportYaku_yiji = reportYaku_yiji;
-(window as any).protected_tiles = protected_tiles;
+(window as any).setProtectedTiles = setProtectedTiles;
 (window as any).cmp = cmp;

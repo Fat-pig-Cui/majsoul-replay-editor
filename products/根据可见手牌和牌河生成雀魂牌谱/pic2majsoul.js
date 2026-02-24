@@ -151,8 +151,8 @@
 
         randomPaishan('', zhishipais + '....');
         roundBegin();
-        protected_tiles.seat = json.mainrole;
-        protected_tiles.tiles = separate(json.tiles).sort(cmp);
+
+        setProtectedTiles({seat: json.mainrole, tiles: separate(json.tiles).sort(cmp)})
 
         // paihe 经过该函数变为数组格式
         function separate_tiles(tiles) {

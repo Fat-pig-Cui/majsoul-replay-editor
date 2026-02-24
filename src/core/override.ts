@@ -90,16 +90,16 @@ export const editOffline = (): void => {
                 for (let i in slots) {
                     let slot = slots[i];
                     let item_id = views_pool[slot][Math.floor(Math.random() * views_pool[slot].length)];
-                    if (slot === 11 && ret[seat].title === 600001) {
+                    if (slot === 11) {
                         ret[seat].title = item_id;
                         continue;
                     }
-                    if (slot === 5 && ret[seat].avatar_frame === 0)
+                    if (slot === 5)
                         ret[seat].avatar_frame = item_id;
                     let existed = false;
                     for (let j in ret[seat].views)
                         if (ret[seat].views[j].slot === slot) {
-                            // ret[seat].views[j].item_id = item_id;
+                            ret[seat].views[j].item_id = item_id;
                             existed = true;
                             break;
                         }
@@ -406,8 +406,8 @@ const optimizeFunction = (): void => {
                 text += '背水之战';
             else if (x.amusement_switches instanceof Array && x.amusement_switches.includes(18))
                 text += '下克上';
-                // else if (x._random_views || x._random_skin)
-            //     text = '随机装扮';
+            else if (x._random_views || x._random_skin)
+                text = '随机装扮';
             else
                 text += this.room_mode_desc(config.mode.mode);
         }

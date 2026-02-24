@@ -2,11 +2,148 @@ var MRE = (function (exports) {
     'use strict';
 
     /**
-     * @file: misc.ts - 一些比较简短的函数和随机装扮相关的函数
+     * @file: misc.ts - 随机装扮相关的函数和一些比较简短的函数
      * @author: GrandDawn, Fat-pig-Cui
      * @email: chubbypig@qq.com
      * @github: https://github.com/Fat-pig-Cui/majsoul-replay-editor
      */
+    /**
+     * 回放用装扮随机池和中文服无法加载和排除的装扮, 键是 slot, 值是对应的装扮id数组
+     */
+    const views_pool = {}, invalid_views = {
+        // 头像框
+        5: [
+            305501, // 头像框-默认
+            305510, // 头像框-四象战
+            305511, // 头像框-四象战
+            305512, // 头像框-四象战
+            305513, // 头像框-四象战
+            305514, // 头像框-四象战
+            305515, // 头像框-四象战
+            305516, // 头像框-四象战
+            305517, // 头像框-四象战
+            305518, // 头像框-四象战
+            305519, // 头像框-四象战
+            305524, // 头像框-四象战
+            305525, // 双聖の眷属たち
+            305526, // Team Championship Limited Portrait Frame
+            305527, // 头像框-四象战
+            305528, // 头像框-四象战
+            305530, // 头像框-四象战
+            305531, // 头像框-四象战
+            305532, // 头像框-四象战
+            305533, // 双聖の眷属たち
+            305534, // 头像框-四象战
+            305535, // 头像框-四象战
+            305536, // 头像框-四象战
+            305538, // 头像框-四象战
+            305539, // 双聖の眷属たち
+            305540, // 头像框-四象战
+            305541, // 头像框-四象战
+            305543, // 头像框-四象战
+            305544, // 头像框-四象战
+            305546, // 双聖の眷属たち
+            305547, // 头像框-四象战
+            305548, // 头像框-四象战
+            305549, // 头像框-四象战
+            305550, // 头像框-四象战
+            305553, // 双聖の眷属たち
+            305555, // 头像框-豆芽测试用
+            30550001, // 头像框-四象战
+            30550002, // 头像框-四象战
+            30550003, // 头像框-四象战
+            30550004, // 头像框-四象战
+            30550005, // 头像框-四象战
+            30550006, // 头像框-四象战
+            30550007, // 双聖の眷属たち
+            30550008, // 头像框-四象战
+            30550009, // 头像框-四象战
+            30550010, // 头像框-四象战
+            30550011, // 头像框-四象战
+            30550013, // 双聖の眷属たち
+            30550015, // 头像框-四象战
+            30550018, // Limited Portrait Frame
+            30550019, // 프로필 테두리 - MKC 2025
+            30550024, // 双聖の眷属たち
+        ],
+        // 称号
+        11: [
+            600017, // 认证玩家
+            600025, // 限时称号测试用
+            600026, // 雀魂公認の選ばれしプレイヤーG
+            600029, // インターハイ王者
+            600041, // 最強鴉天狗の愛弟子
+            600043, // Limited Title
+            600044, // 花より団子
+            600048, // 伝説の名コンビ
+            600049, // 伝説の迷コンビ
+            600051, // 虹懸かる右手
+            600055, // 麻雀スクワッド
+            600066, // みんな家族
+            600067, // ぶいすぽ女傑
+            600069, // インターハイ王者
+            600071, // 煌めく女王の星
+            600072, // 闘魂杯王者
+            600073, // 華風戦優勝
+            600076, // 雀魂インビ夏王者
+            600077, // 雀魂インビ冬将軍
+            600081, // 野鳥観察部
+            600082, // ななしサンマ王
+            600085, // ぶいすぽの頂
+            600087, // 雀荘牌舞台
+            600088, // 闘魂杯王者
+            600089, // 麒麟位2024
+            600090, // 四象战冠军
+            600091, // 四象战冠军
+            600092, // 四象战冠军
+            600093, // 花ノ国 戦国最強
+            600095, // 双聖戦優勝
+            600097, // 雀魂インビ夏王者
+            600098, // 限定称号
+            600099, // 四象战冠军
+            600100, // 四象战冠军
+            600102, // 豪勇無双のまつたけ
+            600103, // 華風戦優勝
+            600104, // Limited Title
+            600105, // MKC 2025 국사무쌍
+            600106, // 四象战冠军
+            600109, // 雀魂インビ冬将軍
+            600110, // ぶいすぽの覇者
+            600111, // プロ×魂天覇者
+            600114, // あやまらないよ！
+            600115, // 双聖戦優勝
+            600122, // 麒麟位2025
+            600129, // 双聖戦優勝
+            600131, // Limited Title
+            600133, // Limited Title
+            600136, // チームシリウス
+            600138, // にじLリーグ優勝
+            600143, // MKC 2026 국사무쌍
+            600146, // 華風戦優勝
+            600150, // 開運全甲斐だ
+        ],
+    };
+    // 更新装扮随机池
+    const updateViews = () => {
+        // 建议玩家随机的装扮: 立直棒(0), 和牌特效(1), 立直特效(2), 头像框(5), 桌布(6), 牌背(7), 称号(11), 牌面(13)
+        const slots = [0, 1, 2, 5, 6, 7, 11, 13];
+        for (let i in slots) {
+            views_pool[slots[i]] = [];
+            if (invalid_views[slots[i]] === undefined)
+                invalid_views[slots[i]] = [];
+        }
+        const Items = cfg.item_definition.item.rows_, Titles = cfg.item_definition.title.rows_;
+        for (let i in Items) {
+            if (Items[i].name_chs === '(已过期)' || Items[i].category !== 5 || Items[i].type === 11)
+                continue;
+            let slot = Items[i].type;
+            if (slots.includes(slot) && !invalid_views[slot].includes(Items[i].id))
+                views_pool[slot].push(Items[i].id);
+        }
+        for (let i in Titles)
+            if (!invalid_views[11].includes(Titles[i].id))
+                views_pool[11].push(Titles[i].id);
+    };
     // 回放的桌布, 默认为当前使用的桌布
     const get_tablecloth_id = () => {
         if (typeof config.mode.detail_rule._tablecloth_id == 'number')
@@ -274,138 +411,6 @@ var MRE = (function (exports) {
     const is_random_skin = () => config.mode.detail_rule._random_skin;
     // 是否随机装扮, 范围包括立直棒, 和牌特效, 立直特效, 头像框, 桌布, 称号, 开启此选项后设置的对应装扮均无效
     const is_random_views = () => config.mode.detail_rule._random_views;
-    /**
-     * 回放用装扮随机池和中文服无法加载和排除的装扮, 键是 slot, 值是对应的装扮id数组
-     */
-    const views_pool = {}, invalid_views = {
-        // 头像框
-        5: [
-            305501, // 头像框-默认
-            305510, // 头像框-四象战
-            305511, // 头像框-四象战
-            305512, // 头像框-四象战
-            305513, // 头像框-四象战
-            305514, // 头像框-四象战
-            305515, // 头像框-四象战
-            305516, // 头像框-四象战
-            305517, // 头像框-四象战
-            305518, // 头像框-四象战
-            305519, // 头像框-四象战
-            305524, // 头像框-四象战
-            305525, // 双聖の眷属たち
-            305526, // Team Championship Limited Portrait Frame
-            305527, // 头像框-四象战
-            305528, // 头像框-四象战
-            305530, // 头像框-四象战
-            305531, // 头像框-四象战
-            305532, // 头像框-四象战
-            305533, // 双聖の眷属たち
-            305534, // 头像框-四象战
-            305535, // 头像框-四象战
-            305536, // 头像框-四象战
-            305538, // 头像框-四象战
-            305539, // 双聖の眷属たち
-            305540, // 头像框-四象战
-            305541, // 头像框-四象战
-            305543, // 头像框-四象战
-            305544, // 头像框-四象战
-            305546, // 双聖の眷属たち
-            305547, // 头像框-四象战
-            305548, // 头像框-四象战
-            305549, // 头像框-四象战
-            305550, // 头像框-四象战
-            305553, // 双聖の眷属たち
-            305555, // 头像框-豆芽测试用
-            30550001, // 头像框-四象战
-            30550002, // 头像框-四象战
-            30550003, // 头像框-四象战
-            30550004, // 头像框-四象战
-            30550005, // 头像框-四象战
-            30550006, // 头像框-四象战
-            30550007, // 双聖の眷属たち
-            30550008, // 头像框-四象战
-            30550009, // 头像框-四象战
-            30550010, // 头像框-四象战
-            30550011, // 头像框-四象战
-            30550013, // 双聖の眷属たち
-            30550015, // 头像框-四象战
-            30550018, // Limited Portrait Frame
-            30550019, // 프로필 테두리 - MKC 2025
-            30550024, // 双聖の眷属たち
-        ],
-        // 称号
-        11: [
-            600001, // 无称号
-            600017, // 认证玩家
-            600025, // 限时称号测试用
-            600026, // 雀魂公認の選ばれしプレイヤーG
-            600029, // インターハイ王者
-            600041, // 最強鴉天狗の愛弟子
-            600043, // Limited Title
-            600044, // 花より団子
-            600048, // 伝説の名コンビ
-            600049, // 伝説の迷コンビ
-            600051, // 虹懸かる右手
-            600055, // 麻雀スクワッド
-            600066, // みんな家族
-            600067, // ぶいすぽ女傑
-            600069, // インターハイ王者
-            600071, // 煌めく女王の星
-            600072, // 闘魂杯王者
-            600073, // 華風戦優勝
-            600076, // 雀魂インビ夏王者
-            600077, // 雀魂インビ冬将軍
-            600081, // 野鳥観察部
-            600082, // ななしサンマ王
-            600085, // ぶいすぽの頂
-            600087, // 雀荘牌舞台
-            600088, // 闘魂杯王者
-            600089, // 麒麟位2024
-            600090, // 四象战冠军
-            600091, // 四象战冠军
-            600092, // 四象战冠军
-            600093, // 花ノ国 戦国最強
-            600095, // 双聖戦優勝
-            600097, // 雀魂インビ夏王者
-            600098, // 限定称号
-            600099, // 四象战冠军
-            600100, // 四象战冠军
-            600102, // 豪勇無双のまつたけ
-            600103, // 華風戦優勝
-            600104, // Limited Title
-            600105, // MKC 2025 국사무쌍
-            600106, // 四象战冠军
-            600109, // 雀魂インビ冬将軍
-            600110, // ぶいすぽの覇者
-            600111, // プロ×魂天覇者
-            600114, // あやまらないよ！
-            600115, // 双聖戦優勝
-            600122, // 麒麟位2025
-            600133, // Limited Title
-            600136, // チームシリウス
-        ],
-    };
-    // 更新装扮随机池
-    const updateViews = () => {
-        // 建议玩家随机的装扮: 立直棒(0), 和牌特效(1), 立直特效(2), 头像框(5), 桌布(6), 牌背(7), 称号(11), 牌面(13)
-        const slots = [0, 1, 2, 5, 6, 7, 11, 13];
-        for (let i in slots) {
-            views_pool[slots[i]] = [];
-            if (invalid_views[slots[i]] === undefined)
-                invalid_views[slots[i]] = [];
-        }
-        const Items = cfg.item_definition.item.rows_, Titles = cfg.item_definition.title.rows_;
-        for (let i in Items) {
-            if (Items[i].name_chs === '(已过期)' || Items[i].category !== 5 || Items[i].type === 11)
-                continue;
-            let slot = Items[i].type;
-            if (slots.includes(slot) && !invalid_views[slot].includes(Items[i].id))
-                views_pool[slot].push(Items[i].id);
-        }
-        for (let i in Titles)
-            if (!invalid_views[11].includes(Titles[i].id))
-                views_pool[11].push(Titles[i].id);
-    };
 
     /**
      * @file: constants.ts - 一些常量和自制的番种信息
@@ -4036,16 +4041,16 @@ var MRE = (function (exports) {
                     for (let i in slots) {
                         let slot = slots[i];
                         let item_id = views_pool[slot][Math.floor(Math.random() * views_pool[slot].length)];
-                        if (slot === 11 && ret[seat].title === 600001) {
+                        if (slot === 11) {
                             ret[seat].title = item_id;
                             continue;
                         }
-                        if (slot === 5 && ret[seat].avatar_frame === 0)
+                        if (slot === 5)
                             ret[seat].avatar_frame = item_id;
                         let existed = false;
                         for (let j in ret[seat].views)
                             if (ret[seat].views[j].slot === slot) {
-                                // ret[seat].views[j].item_id = item_id;
+                                ret[seat].views[j].item_id = item_id;
                                 existed = true;
                                 break;
                             }
@@ -4334,8 +4339,8 @@ var MRE = (function (exports) {
                     text += '背水之战';
                 else if (x.amusement_switches instanceof Array && x.amusement_switches.includes(18))
                     text += '下克上';
-                // else if (x._random_views || x._random_skin)
-                //     text = '随机装扮';
+                else if (x._random_views || x._random_skin)
+                    text = '随机装扮';
                 else
                     text += this.room_mode_desc(config.mode.mode);
             }
@@ -6682,6 +6687,10 @@ var MRE = (function (exports) {
      */
     const setScores = (s) => {
         scores = s;
+    };
+    // 设置主视角的座次和手牌(何切模式)
+    const setProtectedTiles = (p_t) => {
+        protected_tiles = p_t;
     };
     // 对局的模式
     let config;
@@ -11058,7 +11067,7 @@ var MRE = (function (exports) {
         resetReplay: resetReplay,
         reportYaku: reportYaku,
         reportYaku_yiji: reportYaku_yiji,
-        protected_tiles: protected_tiles,
+        setProtectedTiles: setProtectedTiles,
         cmp: cmp,
     };
     window.player_datas = player_datas;
@@ -11107,7 +11116,7 @@ var MRE = (function (exports) {
     window.resetReplay = resetReplay;
     window.reportYaku = reportYaku;
     window.reportYaku_yiji = reportYaku_yiji;
-    window.protected_tiles = protected_tiles;
+    window.setProtectedTiles = setProtectedTiles;
     window.cmp = cmp;
 
     exports.MRE = MRE;

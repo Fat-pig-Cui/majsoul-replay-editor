@@ -1861,6 +1861,10 @@ export const setScores = (s: Players_Number): void => {
     scores = s;
 };
 
+// 设置主视角的座次和手牌(何切模式)
+export const setProtectedTiles = (p_t: { seat: Seat, tiles: string[] }): void => {
+    protected_tiles = p_t;
+};
 
 // 对局的模式
 export let config: Config;

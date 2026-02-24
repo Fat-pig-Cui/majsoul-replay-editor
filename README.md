@@ -49,14 +49,16 @@ B站视频教程(偏过时): [【雀魂】如何自制牌谱回放](https://www.
 
 [字典](doc/0_字典.md) 是用来查阅的, 建议编辑牌谱时使用, [字典_template](doc/字典_template.md) 是生成字典的模版, 无需阅读
 
-另外还可以阅读由 Copilot 生成的 [copilot_instructions](.github/copilot-instructions.md), 里面有一些关于代码结构和工作流的说明, 以及一些常见问题的解答
+另外还可以阅读由 Copilot 生成的 [copilot_instructions](.github/copilot-instructions.md), 里面有一些关于代码结构和工作流的说明,
+以及一些常见问题的解答
 
 ---
 
-为了便于维护和封装, 最近正在用 TypeScript 重写项目, 目前的 `main.js` 由 [src](src) 文件夹下的 TypeScript 文件编译而来, 
+为了便于维护和封装, 最近正在用 TypeScript 重写项目, 目前的 `main.js` 由 [src](src) 文件夹下的 TypeScript 文件编译而来,
 有很多不完善的地方, 这里暂存了老版本: [main_old.js](main_old.js)
 
 如何从ts编译为js:
+
 1. 安装 Node.js 和 npm
 2. 在项目根目录下运行 `npm install` 安装依赖
 3. 运行 `npm run build` 即可覆盖生成 `main.js`
@@ -159,7 +161,7 @@ B站视频教程(偏过时): [【雀魂】如何自制牌谱回放](https://www.
         - 说明文档(wiki)的编写
         - 示例牌谱的编写
     - [Fat-pig-Cui](https://github.com/Fat-pig-Cui) (我, 维护者):
-        - `main.js` 用 TypeScript 重构, 添加 TSDoc, 功能的大量扩充(包括国标功能的实现)
+        - `main.js` 用 TypeScript 拆分重构, 添加 TSDoc, 功能的大量扩充(包括国标功能的实现)
         - `add_function.js` 的维护与扩充
         - 说明文档的重排优化, 细节补充
         - 自制牌谱的大量补充, 及批处理脚本刷新牌谱的编写
