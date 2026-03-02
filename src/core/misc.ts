@@ -128,35 +128,33 @@ export const views_pool: { [p: number]: number[] } = {}, invalid_views: { [p: nu
 export const updateViews = (): void => {
     // 建议玩家随机的装扮: 立直棒(0), 和牌特效(1), 立直特效(2), 头像框(5), 桌布(6), 牌背(7), 称号(11), 牌面(13)
     const slots = [0, 1, 2, 5, 6, 7, 11, 13];
-    for (let i in slots) {
-        views_pool[slots[i]] = [];
-        if (invalid_views[slots[i]] === undefined)
-            invalid_views[slots[i]] = [];
+    for (const slot of slots) {
+        views_pool[slot] = [];
+        if (invalid_views[slot] === undefined)
+            invalid_views[slot] = [];
     }
 
     const Items = cfg.item_definition.item.rows_, Titles = cfg.item_definition.title.rows_;
-    for (let i in Items) {
-        if (Items[i].name_chs === '(已过期)' || Items[i].category !== 5 || Items[i].type === 11)
+    for (const item of Items) {
+        if (item.name_chs === '(已过期)' || item.category !== 5 || item.type === 11)
             continue;
-        let slot = Items[i].type;
-        if (slots.includes(slot) && !invalid_views[slot].includes(Items[i].id))
-            views_pool[slot].push(Items[i].id);
+        const slot = item.type;
+        if (slots.includes(slot) && !invalid_views[slot].includes(item.id))
+            views_pool[slot].push(item.id);
     }
-    for (let i in Titles)
-        if (!invalid_views[11].includes(Titles[i].id))
-            views_pool[11].push(Titles[i].id);
+    for (const title of Titles)
+        if (!invalid_views[11].includes(title.id))
+            views_pool[11].push(title.id);
 };
 
 // 回放的桌布, 默认为当前使用的桌布
 export const get_tablecloth_id = (): number => {
     if (typeof config.mode.detail_rule._tablecloth_id == 'number')
         return config.mode.detail_rule._tablecloth_id;
-    if (all_data.player_datas[0].views) {
-        let views = all_data.player_datas[0].views;
-        for (let i in views)
-            if (views[i].slot === 6)
-                return views[i].item_id;
-    }
+    if (all_data.player_datas[0].views)
+        for (const view of all_data.player_datas[0].views)
+            if (view.slot === 6)
+                return view.item_id;
     return uiscript.UI_Sushe.now_desktop_id;
 };
 
@@ -164,12 +162,10 @@ export const get_tablecloth_id = (): number => {
 export const get_mjp_id = (): number => {
     if (typeof config.mode.detail_rule._mjp_id == 'number')
         return config.mode.detail_rule._mjp_id;
-    if (all_data.player_datas[0].views) {
-        let views = all_data.player_datas[0].views;
-        for (let i in views)
-            if (views[i].slot === 7)
-                return views[i].item_id;
-    }
+    if (all_data.player_datas[0].views)
+        for (const view of all_data.player_datas[0].views)
+            if (view.slot === 7)
+                return view.item_id;
     return uiscript.UI_Sushe.now_mjp_id;
 };
 
@@ -177,42 +173,38 @@ export const get_mjp_id = (): number => {
 export const get_mjpsurface_id = (): number => {
     if (typeof config.mode.detail_rule._mjpsurface_id == 'number')
         return config.mode.detail_rule._mjpsurface_id;
-    if (all_data.player_datas[0].views) {
-        let views = all_data.player_datas[0].views;
-        for (let i in views)
-            if (views[i].slot === 13)
-                return views[i].item_id;
-    }
+    if (all_data.player_datas[0].views)
+        for (const view of all_data.player_datas[0].views)
+            if (view.slot === 13)
+                return view.item_id;
     return uiscript.UI_Sushe.now_mjp_surface_id;
 };
 
 // 初始点数
 export const get_init_point = (): number => {
-    if (typeof config.mode.detail_rule.init_point == 'number' && config.mode.detail_rule.init_point > -1)
-        return config.mode.detail_rule.init_point;
-    return -1;
+    const init_point = config.mode.detail_rule.init_point;
+    return typeof init_point == 'number' && init_point > -1 ? init_point : -1;
 };
 
 // 红宝牌数量
 export const get_aka_cnt = (): number => {
-    if (typeof config.mode.detail_rule.dora_count == 'number' && config.mode.detail_rule.dora_count > -1)
-        return config.mode.detail_rule.dora_count;
-    return -1;
+    const dora_count = config.mode.detail_rule.dora_count;
+    return typeof dora_count == 'number' && dora_count > -1 ? dora_count : -1;
 };
 
 // 番缚, 默认为1
 export const get_fanfu = (): number => {
-    if (typeof config.mode.detail_rule.fanfu == 'number' && config.mode.detail_rule.fanfu > 1)
-        return config.mode.detail_rule.fanfu;
-    return 1;
+    const fanfu = config.mode.detail_rule.fanfu;
+    return typeof fanfu == 'number' && fanfu > 1 ? fanfu : 1;
 };
 
 // ------------------------------------------------------------------------
 
 // 牌谱第一局的 chang, ju, ben 和场供中的立直棒个数(最后一个参数可以省略)
 export const get_chang_ju_ben_num = (): [Seat, Seat, number, number?] => {
-    if (config.mode.detail_rule._chang_ju_ben_num_ instanceof Array && config.mode.detail_rule._chang_ju_ben_num_.length >= 3)
-        return config.mode.detail_rule._chang_ju_ben_num_;
+    const chang_ju_ben_num = config.mode.detail_rule._chang_ju_ben_num_;
+    if (chang_ju_ben_num instanceof Array && chang_ju_ben_num.length >= 3)
+        return chang_ju_ben_num;
     return [0, 0, 0, 0];
 };
 
@@ -225,9 +217,8 @@ export const get_init_scores = (): Players_Number | [] => {
 
 // 回放的主视角
 export const get_mainrole_seat = (): Seat | -1 => {
-    if (typeof config.mode.detail_rule._mainrole_ == 'number' && config.mode.detail_rule._mainrole_ > -1 && config.mode.detail_rule._mainrole_ < 4)
-        return config.mode.detail_rule._mainrole_;
-    return -1;
+    const mainrole = config.mode.detail_rule._mainrole_;
+    return typeof mainrole == 'number' && mainrole > -1 && mainrole < 4 ? mainrole : -1;
 };
 
 // ------------------------------------------------------------------------
@@ -252,28 +243,27 @@ export const is_mingjing = (): boolean => config.mode.detail_rule.jiuchao_mode;
 // 是否为暗夜之战模式
 export const is_anye = (): boolean => config.mode.detail_rule.reveal_discard;
 
-// 是否为幻境传说模式
-export const is_field_spell = (): boolean => typeof config.mode.detail_rule.field_spell_mode == 'number';
-
-// 获取幻境传说模式的庄家卡
-export const get_field_spell_mode1 = (): FieldSpellNumber => {
-    if (!is_field_spell())
+/**
+ * 获取幻境传说模式的庄家卡(1), 机会卡(2)或命运卡(3), 返回对应的卡牌编号(1-5), 0代表没有
+ * @param card - 获取的卡牌你类型, 1代表庄家卡, 2代表机会卡, 3代表命运卡
+ * @returns 对应的卡牌编号(1-5), 0代表没有
+ */
+export const get_field_spell_mode = (card: 1 | 2 | 3): FieldSpellNumber => {
+    const field_spell_mode = config.mode.detail_rule.field_spell_mode;
+    if (typeof field_spell_mode != 'number' || field_spell_mode < 0)
         return 0;
-    return Math.floor(config.mode.detail_rule.field_spell_mode % 10) as FieldSpellNumber;
-};
 
-// 获取幻境传说模式的机会卡
-export const get_field_spell_mode2 = (): FieldSpellNumber => {
-    if (!is_field_spell())
-        return 0;
-    return Math.floor((config.mode.detail_rule.field_spell_mode / 100) % 10) as FieldSpellNumber;
-};
+    let ret = 0;
+    if (card === 1)
+        ret = Math.floor(field_spell_mode % 10);
+    else if (card === 2)
+        ret = Math.floor(config.mode.detail_rule.field_spell_mode / 100) % 10;
+    else if (card === 3)
+        ret = Math.floor(config.mode.detail_rule.field_spell_mode / 10000);
 
-// 获取幻境传说模式的命运卡
-export const get_field_spell_mode3 = (): FieldSpellNumber => {
-    if (!is_field_spell())
+    if (ret < 1 || ret > 5)
         return 0;
-    return Math.floor(config.mode.detail_rule.field_spell_mode / 10000) as FieldSpellNumber;
+    return ret as FieldSpellNumber;
 };
 
 // 是否为占星之战模式
@@ -319,58 +309,50 @@ export const is_openhand = (): boolean => config.mode.detail_rule.open_hand;
 // ------------------------------------------------------------------------
 // 立直所需要的立直棒个数, 默认为1
 export const get_liqi_need = (): number => {
-    if (typeof config.mode.detail_rule._liqi_need == 'number' && config.mode.detail_rule._liqi_need > -1)
-        return config.mode.detail_rule._liqi_need;
-    return 1;
+    const liqi_need = config.mode.detail_rule._liqi_need;
+    return typeof liqi_need == 'number' && liqi_need > -1 ? liqi_need : 1;
 };
 
 // 本场点数的倍数, 默认为1
 export const get_ben_times = (): number => {
-    if (typeof config.mode.detail_rule._ben_times == 'number' && config.mode.detail_rule._ben_times > -1)
-        return config.mode.detail_rule._ben_times;
-    return 1;
+    const ben_times = config.mode.detail_rule._ben_times;
+    return typeof ben_times == 'number' && ben_times > -1 ? ben_times : 1;
 };
 
 // 四麻一个玩家听牌的罚符, 默认为段位规则: 1000
 export const get_fafu_1ting = (): number => {
-    if (typeof config.mode.detail_rule._fafu_1ting == 'number')
-        return config.mode.detail_rule._fafu_1ting;
-    return 1000;
+    const fafu_1ting = config.mode.detail_rule._fafu_1ting;
+    return typeof fafu_1ting == 'number' ? fafu_1ting : 1000;
 };
 
 // 四麻两个玩家听牌的罚符, 默认为段位规则: 1500
 export const get_fafu_2ting = (): number => {
-    if (typeof config.mode.detail_rule._fafu_2ting == 'number')
-        return config.mode.detail_rule._fafu_2ting;
-    return 1500;
+    const fafu_2ting = config.mode.detail_rule._fafu_2ting;
+    return typeof fafu_2ting == 'number' ? fafu_2ting : 1500;
 };
 
 // 四麻三个玩家听牌的罚符, 默认为段位规则: 3000
 export const get_fafu_3ting = (): number => {
-    if (typeof config.mode.detail_rule._fafu_3ting == 'number')
-        return config.mode.detail_rule._fafu_3ting;
-    return 3000;
+    const fafu_3ting = config.mode.detail_rule._fafu_3ting;
+    return typeof fafu_3ting == 'number' ? fafu_3ting : 3000;
 };
 
 // 三麻一个玩家听牌的罚符, 默认为段位规则: 1000
 export const get_fafu_3p_1ting = (): number => {
-    if (typeof config.mode.detail_rule._fafu_3p_1ting == 'number')
-        return config.mode.detail_rule._fafu_3p_1ting;
-    return 1000;
+    const fafu_3p_1ting = config.mode.detail_rule._fafu_3p_1ting;
+    return typeof fafu_3p_1ting == 'number' ? fafu_3p_1ting : 1000;
 };
 
 // 三麻两个玩家听牌的罚符, 默认为段位规则: 2000
 export const get_fafu_3p_2ting = (): number => {
-    if (typeof config.mode.detail_rule._fafu_3p_2ting == 'number')
-        return config.mode.detail_rule._fafu_3p_2ting;
-    return 2000;
+    const fafu_3p_2ting = config.mode.detail_rule._fafu_3p_2ting;
+    return typeof fafu_3p_2ting == 'number' ? fafu_3p_2ting : 2000;
 };
 
 // 二麻听牌的罚符, 默认为 1000
 export const get_fafu_2p = (): number => {
-    if (typeof config.mode.detail_rule._fafu_2p == 'number')
-        return config.mode.detail_rule._fafu_2p;
-    return 1000;
+    const fafu_2p = config.mode.detail_rule._fafu_2p;
+    return typeof fafu_2p == 'number' ? fafu_2p : 1000;
 };
 
 // 是否有切上满贯
@@ -470,16 +452,14 @@ export const is_guobiao_lianzhuang = (): boolean => config.mode.detail_rule._guo
 
 // 国标模式为了美观, 将点数放大的倍数
 export const scale_points = (): number => {
-    if (typeof config.mode.detail_rule._scale_points == 'number')
-        return config.mode.detail_rule._scale_points;
-    return 100;
+    const scale_points = config.mode.detail_rule._scale_points;
+    return typeof scale_points == 'number' ? scale_points : 100;
 };
 
 // 国标模式诈和, 错和赔各家的点数
 export const cuohu_points = (): number => {
-    if (typeof config.mode.detail_rule._cuohu_points == 'number')
-        return config.mode.detail_rule._cuohu_points;
-    return 10;
+    const cuohu_points = config.mode.detail_rule._cuohu_points;
+    return typeof cuohu_points == 'number' ? cuohu_points : 10;
 };
 
 // 国标诈和, 错和后玩家是否陪打

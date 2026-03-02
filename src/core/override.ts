@@ -5,18 +5,53 @@
  * @github: https://github.com/Fat-pig-Cui/majsoul-replay-editor
  */
 
-import {all_data, player_datas, player_cnt, protected_tiles} from "./core";
+import {all_data, player_datas, player_cnt} from "./core";
 import {
     get_mainrole_seat,
     get_mjp_id,
     get_mjpsurface_id,
-    get_tablecloth_id, is_guobiao, is_heqie_mode,
+    get_tablecloth_id, is_guobiao,
     is_random_skin,
     is_random_views,
     updateViews,
     views_pool
 } from "./misc";
 import {DIYFans, guobiaoFans} from "./constants";
+
+const overrideStore: {
+    backedUp: boolean;
+    originals: {
+        checkPaiPu?: CheckPaiPu;
+        resetData?: ResetData;
+        OnChoosedPai?: OnChoosedPaiFn;
+        seat2LocalPosition?: SeatTransformFn;
+        localPosition2Seat?: SeatTransformFn;
+    };
+} = {
+    backedUp: false,
+    originals: {},
+};
+
+const backupOriginalsOnce = (): void => {
+    if (overrideStore.backedUp)
+        return;
+
+    // 只备份“注入当下”能拿到的原函数引用；后续 export var 也以它为准
+    overrideStore.originals.checkPaiPu = GameMgr.Inst.checkPaiPu as CheckPaiPu;
+    overrideStore.originals.resetData = uiscript.UI_Replay.prototype.resetData as ResetData;
+    overrideStore.originals.OnChoosedPai = view.ViewPai.prototype.OnChoosedPai as OnChoosedPaiFn;
+    overrideStore.originals.seat2LocalPosition = view.DesktopMgr.prototype.seat2LocalPosition as SeatTransformFn;
+    overrideStore.originals.localPosition2Seat = view.DesktopMgr.prototype.localPosition2Seat as SeatTransformFn;
+
+    // 同步导出变量：保证外部（例如 add_function.js）仍可读取“最初备份的原版”
+    checkPaiPu = overrideStore.originals.checkPaiPu;
+    resetData = overrideStore.originals.resetData;
+    OnChoosedPai = overrideStore.originals.OnChoosedPai;
+    seat2LocalPosition = overrideStore.originals.seat2LocalPosition;
+    localPosition2Seat = overrideStore.originals.localPosition2Seat;
+
+    overrideStore.backedUp = true;
+};
 
 /**
  * 重写的回放接口, 其中
@@ -25,17 +60,21 @@ import {DIYFans, guobiaoFans} from "./constants";
  *
  * OnChoosedPai, seat2LocalPosition, localPosition2Seat 在 add_function.js 中重写
  */
-export var checkPaiPu: Function, resetData: Function, OnChoosedPai: Function, seat2LocalPosition: Function,
-    localPosition2Seat: Function;
+export var checkPaiPu: CheckPaiPu | undefined,
+    resetData: ResetData | undefined,
+    OnChoosedPai: OnChoosedPaiFn | undefined,
+    seat2LocalPosition: SeatTransformFn | undefined,
+    localPosition2Seat: SeatTransformFn | undefined;
 
 /**
  * 复原以查看真实牌谱
  */
 export const resetReplay = (): void => {
-    if (checkPaiPu !== undefined)
-        GameMgr.Inst.checkPaiPu = checkPaiPu;
-    if (resetData !== undefined)
-        uiscript.UI_Replay.prototype.resetData = resetData;
+    backupOriginalsOnce();
+    if (overrideStore.originals.checkPaiPu)
+        GameMgr.Inst.checkPaiPu = overrideStore.originals.checkPaiPu;
+    if (overrideStore.originals.resetData)
+        uiscript.UI_Replay.prototype.resetData = overrideStore.originals.resetData;
 };
 
 // 使补充和优化函数只执行一次的控制变量
@@ -43,9 +82,9 @@ export let inst_once_chkP = true;
 
 // 在线编辑(进入牌谱之后的修改, 包括切换视角和切换巡目, 只在 editOffline 中的 resetData 中调用)
 const editOnline = (): void => {
-    let rounds: { actions: Actions, xun: number[] }[] = [];
-    for (let i in all_data.all_actions)
-        rounds.push({actions: all_data.all_actions[i], xun: all_data.xun[i][view.DesktopMgr.Inst.seat]});
+    const rounds: { actions: Actions, xun: number[] }[] = [];
+    for (const actions1 of all_data.all_actions)
+        rounds.push({actions: actions1, xun: all_data.xun[rounds.length][view.DesktopMgr.Inst.seat]});
     uiscript.UI_Replay.Inst.rounds = rounds;
     uiscript.UI_Replay.Inst.gameResult.result.players = all_data.players;
 };
@@ -54,9 +93,9 @@ const editOnline = (): void => {
 export const editOffline = (): void => {
     // 修改玩家信息
     const editPlayerDatas = (): void => {
-        let ret: PlayerDatas = [null, null];
+        const ret: PlayerDatas = [null, null];
         // 建议玩家随机的装扮: 立直棒(0), 和牌特效(1), 立直特效(2), 头像框(5), 桌布(6), 牌背(7), 称号(11), 牌面(13)
-        let slots = [0, 1, 2, 5, 6, 7, 11, 13];
+        const slots = [0, 1, 2, 5, 6, 7, 11, 13];
         for (let seat: Seat = 0; seat < player_cnt; seat++) {
             ret[seat] = {
                 account_id: player_datas[seat].avatar_id * 10 + seat, // 账号唯一id, 这里没什么用随便设的
@@ -79,7 +118,7 @@ export const editOffline = (): void => {
                 views: player_datas[seat].views, // 装扮槽
             };
             if (is_random_skin()) {
-                let skin_len = cfg.item_definition.skin.rows_.length;
+                const skin_len = cfg.item_definition.skin.rows_.length;
                 let skin_id = cfg.item_definition.skin.rows_[Math.floor(Math.random() * skin_len)].id;
                 while (skin_id === 400000 || skin_id === 400001)
                     skin_id = cfg.item_definition.skin.rows_[Math.floor(Math.random() * skin_len)].id;
@@ -87,9 +126,8 @@ export const editOffline = (): void => {
                 ret[seat].character.charid = cfg.item_definition.skin.map_[skin_id].character_id;
             }
             if (is_random_views())
-                for (let i in slots) {
-                    let slot = slots[i];
-                    let item_id = views_pool[slot][Math.floor(Math.random() * views_pool[slot].length)];
+                for (const slot of slots) {
+                    const item_id = views_pool[slot][Math.floor(Math.random() * views_pool[slot].length)];
                     if (slot === 11) {
                         ret[seat].title = item_id;
                         continue;
@@ -97,9 +135,9 @@ export const editOffline = (): void => {
                     if (slot === 5)
                         ret[seat].avatar_frame = item_id;
                     let existed = false;
-                    for (let j in ret[seat].views)
-                        if (ret[seat].views[j].slot === slot) {
-                            ret[seat].views[j].item_id = item_id;
+                    for (const view of ret[seat].views)
+                        if (view.slot === slot) {
+                            view.item_id = item_id;
                             existed = true;
                             break;
                         }
@@ -115,21 +153,14 @@ export const editOffline = (): void => {
         player_datas.splice(player_cnt);
     };
 
-    if (checkPaiPu === undefined)
-        checkPaiPu = GameMgr.Inst.checkPaiPu;
-    if (resetData === undefined)
-        resetData = uiscript.UI_Replay.prototype.resetData;
-    if (OnChoosedPai === undefined)
-        OnChoosedPai = view.ViewPai.prototype.OnChoosedPai;
-    if (seat2LocalPosition === undefined)
-        seat2LocalPosition = view.DesktopMgr.prototype.seat2LocalPosition;
-    if (localPosition2Seat === undefined)
-        localPosition2Seat = view.DesktopMgr.prototype.localPosition2Seat;
+    // 备份原函数（只做一次），并同步导出变量
+    backupOriginalsOnce();
 
     // 重写对局信息
     uiscript.UI_Replay.prototype.resetData = function () {
         try {
-            resetData.call(this);
+            // 始终调用“最初备份的原版”，避免导出变量被外部覆盖导致链条断裂
+            overrideStore.originals.resetData?.call(this);
             editOnline();
         } catch (e) {
             console.error(e);
@@ -209,7 +240,7 @@ export const editOffline = (): void => {
                                 Laya.loader.load(`${game.LoadMgr.getAtlasRoot()}myres2/mjpm/${GameMgr.Inst.mjp_surface_view}/ui.atlas`);
                             }
                             // 第一场的主视角
-                            let tmp_seat = get_mainrole_seat();
+                            const tmp_seat = get_mainrole_seat();
                             if (tmp_seat !== -1)
                                 account_id = all_data.player_datas[tmp_seat].account_id;
                             else // 第一局的亲家
@@ -292,7 +323,6 @@ export const editOffline = (): void => {
                 }
             );
         }
-
     };
 };
 
@@ -302,9 +332,9 @@ export const editOffline = (): void => {
 
 const optimizeFunction = (): void => {
     // 修正多赤的暗杠
-    view.ActionAnGangAddGang.getAngangTile = (tile, seat) => {
-        let hand = view.DesktopMgr.Inst.players[view.DesktopMgr.Inst.seat2LocalPosition(seat)].hand;
-        let mj_tile = mjcore.MJPai.Create(tile);
+    view.ActionAnGangAddGang.getAngangTile = (tile: Tile, seat: Seat) => {
+        const hand = view.DesktopMgr.Inst.players[view.DesktopMgr.Inst.seat2LocalPosition(seat)].hand;
+        const mj_tile = mjcore.MJPai.Create(tile);
         let dora_cnt = 0; // 红宝牌数量
         let touming_cnt = 0; // 透明牌数量
 
@@ -316,9 +346,9 @@ const optimizeFunction = (): void => {
                 touming_cnt = Math.min(touming_cnt + 1, 4);
         }
 
-        let angang_tiles = [];
+        const angang_tiles = [];
         for (let i = 0; i < 4; i++) {
-            let mjp = mjcore.MJPai.Create(tile);
+            const mjp = mjcore.MJPai.Create(tile);
             mjp.dora = false;
             mjp.touming = false;
             angang_tiles.push(mjp);
@@ -335,7 +365,7 @@ const optimizeFunction = (): void => {
 
     // 添加 category 为 3: '段位场' , 99: '装扮预览' 的情况
     // 逐渐取代 '四人东' 为对应模式的名称
-    game.Tools.get_room_desc = function (config) {
+    game.Tools.get_room_desc = function (config: Config) {
         if (!config)
             return {
                 text: '',
@@ -343,7 +373,7 @@ const optimizeFunction = (): void => {
             };
         let text = '';
         if (config.meta && config.meta.tournament_id) {
-            let n = cfg.tournament.tournaments.get(config.meta.tournament_id);
+            const n = cfg.tournament.tournaments.get(config.meta.tournament_id);
             return n && (text = n.name),
                 {
                     text: text,
@@ -356,9 +386,9 @@ const optimizeFunction = (): void => {
         } else if (4 === config.category)
             text += '比赛场\xB7';
         else if (2 === config.category) {
-            let S = config.meta;
+            const S = config.meta;
             if (S) {
-                let M = cfg.desktop.matchmode.get(S.mode_id);
+                const M = cfg.desktop.matchmode.get(S.mode_id);
                 M && (text += M['room_name_' + GameMgr.client_language] + '\xB7');
             }
         } else if (100 === config.category)
@@ -375,7 +405,7 @@ const optimizeFunction = (): void => {
         else if (3 === config.category)
             text += '段位场\xB7';
         if (config.category && config.mode.detail_rule) {
-            let x = config.mode.detail_rule;
+            const x = config.mode.detail_rule;
             if (x.xuezhandaodi)
                 text += '修罗之战';
             else if (x.chuanma)
@@ -445,8 +475,10 @@ const optimizeFunction = (): void => {
             2 === K.mode ? this.img_mode.visible = false : (this.img_mode.visible = true,
                 this.img_mode.skin = 0 === K.mode ? game.Tools.localUISrc('myres/mjdesktop/pg_zimo.png') : game.Tools.localUISrc('myres/mjdesktop/pg_he.png')),
             this._showPai(K),
+            // 添加下面
             this.container_dora.visible = !(view.DesktopMgr.Inst.is_chuanma_mode() || is_guobiao()),
             this.container_lidora.visible = !(view.DesktopMgr.Inst.is_chuanma_mode() || is_guobiao());
+            // 添加上面
         var O = K.fan_names.length
             , m = 100;
         this.container_fan_yiman.visible = false,
@@ -855,8 +887,10 @@ const optimizeFunction = (): void => {
             2 === K.mode ? this.img_mode.visible = false : (this.img_mode.visible = true,
                 this.img_mode.skin = 0 === K.mode ? game.Tools.localUISrc('myres/mjdesktop/pg_zimo.png') : game.Tools.localUISrc('myres/mjdesktop/pg_he.png')),
             this._showPai(K),
+            // 添加下面
             this.container_dora.visible = !(view.DesktopMgr.Inst.is_chuanma_mode() || is_guobiao()),
             this.container_lidora.visible = !(view.DesktopMgr.Inst.is_chuanma_mode() || is_guobiao());
+            // 添加上面
         var Z = K.fan_names.length;
         this.container_fan_yiman.visible = false,
             this.container_fan_8.visible = false,
@@ -960,7 +994,7 @@ const optimizeFunction = (): void => {
 
     // 国标麻将不显示符数
     uiscript.UI_Win.prototype.setFanFu = function (B, K) {
-        // cloneImage 函数由猫粮工作室老板娘'丝茉茉'提供
+        // cloneImage 函数由猫粮工作室老板娘"丝茉茉"提供
         const cloneImage = original => {
             const clone = new Laya.Image();
             original.parent.addChildAt(clone, 0);
@@ -989,7 +1023,9 @@ const optimizeFunction = (): void => {
                     this.fan_imgs[z].visible = true,
                     this.fan_imgs[z].skin = game.Tools.localUISrc('myres/mjdesktop/number/h_' + Z.toString() + '.png');
             }
+        // 添加下面
         this.container_fu.visible = !(view.DesktopMgr.Inst.is_chuanma_mode() || is_guobiao());
+        // 添加上面
         for (var z = 0; 3 > z; z++)
             if (0 === K)
                 this.fu_imgs[z].visible = false;
@@ -1005,109 +1041,5 @@ const optimizeFunction = (): void => {
             this.tweenManager.addTweenTo(this.container_fu, {
                 alpha: 1
             }, 200);
-    };
-
-    // 牌偷梁换柱, 用于何切模式, 其他家视角
-    // P: mjcore 生成的 tile
-    // T: -1 配牌明牌, 0: 正常牌, 1: 透明牌
-    // n: 从左到右扫描还是从右到左扫描, 默认从左到右
-    view.ViewPlayer_Other.prototype._RecordRemoveHandPai = function (P, T, n) {
-        void 0 === n && (n = !0);
-        let S, M, A, o;
-        n ? (S = 0,
-            M = this.hand.length - 1,
-            A = 1) : (S = this.hand.length - 1,
-            M = 0,
-            A = -1),
-        view.DesktopMgr.Inst.is_peipai_open_mode() && (T = -1);
-        let F = -1;
-        if (-1 === T || 1 === T)
-            for (o = S; o !== M + A; o += A)
-                if (this.hand[o].is_open && mjcore.MJPai.isSame(P, this.hand[o].val)) {
-                    F = o;
-                    break;
-                }
-        if (-1 === F && (-1 === T || 0 === T))
-            for (o = S; o !== M + A; o += A)
-                if (!this.hand[o].is_open && mjcore.MJPai.isSame(P, this.hand[o].val)) {
-                    F = o;
-                    break;
-                }
-
-        // 添加下面
-        if (is_heqie_mode() && this.hand.length > 0)
-            if (this.seat === protected_tiles.seat) {
-                for (let i = 0; i < this.hand.length; i++)
-                    if (this.hand[i].val.toString() !== protected_tiles.tiles[i]) {
-                        F = i;
-                        break;
-                    }
-            } else
-                F = this.hand.length - 1;
-        // 添加上面
-
-        if (-1 !== F) {
-            this.hand[F].Destory();
-            for (o = F; o < this.hand.length - 1; o++)
-                this.hand[o] = this.hand[o + 1];
-            this.hand.pop();
-        }
-    };
-
-    // 自家视角
-    view.ViewPlayer_Me.prototype._RemoveHandPai = function (r, P, T) {
-        void 0 === T && (T = !0);
-        view.DesktopMgr.Inst.is_peipai_open_mode() && (T = -1);
-        let S, n = -1;
-        if (-1 === P || 1 === P)
-            if (T) {
-                for (S = this.hand.length - 1; S >= 0; S--)
-                    if (mjcore.MJPai.isSame(r, this.hand[S].val) && this.hand[S].is_open) {
-                        n = S;
-                        break;
-                    }
-            } else
-                for (S = 0; S < this.hand.length; S++)
-                    if (mjcore.MJPai.isSame(r, this.hand[S].val) && this.hand[S].is_open) {
-                        n = S;
-                        break;
-                    }
-        if (-1 === n && (-1 === P || 0 === P))
-            if (T) {
-                for (S = this.hand.length - 1; S >= 0; S--)
-                    if (mjcore.MJPai.isSame(r, this.hand[S].val) && !this.hand[S].is_open) {
-                        n = S;
-                        break;
-                    }
-            } else
-                for (S = 0; S < this.hand.length; S++)
-                    if (mjcore.MJPai.isSame(r, this.hand[S].val) && !this.hand[S].is_open) {
-                        n = S;
-                        break;
-                    }
-
-        // 添加下面
-        if (is_heqie_mode() && this.hand.length > 0)
-            if (this.seat === protected_tiles.seat) {
-                for (let i = 0; i < this.hand.length; i++)
-                    if (this.hand[i].val.toString() !== protected_tiles.tiles[i]) {
-                        n = i;
-                        break;
-                    }
-            } else
-                n = this.hand.length - 1;
-        // 添加上面
-
-        if (-1 !== n) {
-            let M = this.hand[n];
-            for (let A = n; A < this.hand.length - 1; A++)
-                this.hand[A] = this.hand[A + 1], this.hand[A].SetIndex(A, !1, !0);
-            return this.hand.pop(),
-                this._OnRemovePai(M),
-                M.Reset(),
-                this.handpool.push(M),
-                !0;
-        }
-        return !1;
     };
 };

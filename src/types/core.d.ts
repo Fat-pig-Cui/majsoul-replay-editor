@@ -44,7 +44,11 @@ type MuyuCountType = 0 | 1 | 2 | 3 | 4 | 5;
 
 type Config = {
     category: number,
-    meta: { mode_id?: number, room_id?: number },
+    meta: {
+        tournament_id?: { mode_id?: number; room_id?: number };
+        mode_id?: number,
+        room_id?: number
+    },
     mode: {
         mode: number,
         detail_rule: {
@@ -153,6 +157,7 @@ type DoraCnt = {
     bonus?: number, // 多翻的指示牌数量
 };
 type ActionData = {
+    paishan?: string;
     ju?: Seat;
     seat?: Seat,
     tile?: Tile,
@@ -162,6 +167,7 @@ type ActionData = {
     type?: number,
     is_liqi?: boolean,
     lock_state?: LockState,
+    sha256?: string,
 };
 type BaopaiInfo = { seat: Seat, val: number };
 type MuyuInfo = {
@@ -171,7 +177,7 @@ type MuyuInfo = {
     count_max: 5,
 };
 type ChuanmaGangInfo = { from: Seat, to: Seat, val: number };
-type ChuanmaGangs = { over: ChuanmaGangInfo[], not_over: [ChuanmaGangInfo?] };
+type ChuanmaGangs = { over: ChuanmaGangInfo[], not_over: ChuanmaGangInfo | null };
 
 type Paihe_Player = { liujumanguan: boolean, tiles: Tile[] };
 type PlayerDatas_Player = {

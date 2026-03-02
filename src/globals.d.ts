@@ -45,8 +45,8 @@ import type {
     t_resetReplay,
     t_reportYaku,
     t_reportYaku_yiji,
-    t_setProtectedTiles,
-    t_cmp
+    t_cmp,
+    t_fixPaishan,
 } from './main';
 
 declare global {
@@ -101,6 +101,6 @@ declare global {
     let resetReplay: t_resetReplay;
     let reportYaku: t_reportYaku;
     let reportYaku_yiji: t_reportYaku_yiji;
-    let setProtectedTiles: t_setProtectedTiles;
     let cmp: t_cmp;
+    let fixPaishan: t_fixPaishan;
 }

@@ -6,25 +6,25 @@
  */
 
 // 常量集合
-export class Constants {
+export const Constants = {
     // 亲家起手牌数量
-    public static readonly QIN_TILE_NUM = 14;
+    QIN_TILE_NUM: 14,
     // 闲家起手牌数量
-    public static readonly XIAN_TILE_NUM = 13;
+    XIAN_TILE_NUM: 13,
     // 特殊牌的后缀
-    public static readonly SPT_SUFFIX = 't';
+    SPT_SUFFIX: 't',
     // 特殊牌和普通牌数字编码的差值
-    public static readonly SPT_OFFSET = 40;
+    SPT_OFFSET: 40,
     // 国标麻将起和番
-    public static readonly GB_BASE_FAN = 8;
+    GB_BASE_FAN: 8,
     // 万象修罗百搭牌编码
-    public static readonly TBD = 'bd';
+    TBD: 'bd',
     // 国标麻将起和番
-    public static readonly HUAPAI = '0m';
+    HUAPAI: '0m',
     // 万象修罗百搭牌数字编码
-    public static readonly CBD = 0;
+    CBD: 0,
     // 常用牌的数字编码
-    public static readonly TILE_NUM = Object.freeze({
+    TILE_NUM: {
         C1m: 1,
         C9m: 9,
         C1p: 10,
@@ -41,7 +41,7 @@ export class Constants {
         C5m: 5,
         C5p: 14,
         C5s: 23,
-    });
+    },
 
     /**
      * 顺子中比它大的牌, 如果某张牌的数字编码(不区分红宝牌)为 i, 则由它构成的顺子中比它大1的牌的数字编码为 NXT2[i]
@@ -52,15 +52,15 @@ export class Constants {
      *
      * 数组长度为37
      */
-    public static readonly NXT2: readonly number[] = [0, 2, 3, 4, 5, 6, 7, 8, 9, 35, 11, 12, 13, 14, 15, 16, 17, 18, 35, 20, 21, 22, 23, 24, 25, 26, 27, 35, 35, 35, 35, 35, 35, 35, 35, 36, 0];
+    NXT2: [0, 2, 3, 4, 5, 6, 7, 8, 9, 35, 11, 12, 13, 14, 15, 16, 17, 18, 35, 20, 21, 22, 23, 24, 25, 26, 27, 35, 35, 35, 35, 35, 35, 35, 35, 36, 0],
 
     /**
      * 宝牌指示牌表, 如果某张指示牌的数字编码(不区分红宝牌)为 i, 则它对应的宝牌的数字编码为 DORA_NXT[i]
      *
      * 数组长度35
      */
-    public static readonly DORA_NXT: readonly number[] = [0, 2, 3, 4, 5, 6, 7, 8, 9, 1, 11, 12, 13, 14, 15, 16, 17, 18, 10, 20, 21, 22, 23, 24, 25, 26, 27, 19, 29, 30, 31, 28, 33, 34, 32];
-}
+    DORA_NXT: [0, 2, 3, 4, 5, 6, 7, 8, 9, 1, 11, 12, 13, 14, 15, 16, 17, 18, 10, 20, 21, 22, 23, 24, 25, 26, 27, 19, 29, 30, 31, 28, 33, 34, 32],
+} as const;
 
 // 自定义番种: 役种名称的汉字需要在已有的里面选, 否则不会显示
 export const DIYFans = (): void => {

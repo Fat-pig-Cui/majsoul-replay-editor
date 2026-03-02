@@ -97,6 +97,11 @@ declare type UIScript_Type = {
     }
 };
 
+type CheckPaiPu = (this: any, game_uuid: string, account_id: number, paipu_config: 0 | 2) => void;
+type ResetData = (this: any) => void;
+type OnChoosedPaiFn = (this: any, ...args: any[]) => any;
+type SeatTransformFn = (this: any, seat: Seat) => any;
+
 declare var app: any;
 declare var game: any;
 declare var Laya: any

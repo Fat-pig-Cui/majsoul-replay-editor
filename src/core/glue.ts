@@ -22,31 +22,28 @@ import {calcTingpai, getLeftTileCnt, getLstAction, calcDoras, calcXiaKeShang, ca
  * @param is_sha256 - 牌山是否包含起手
  */
 export let addNewRound = (left_tile_count: number, fake_hash_code: string, opens: Opens, is_sha256: boolean): void => {
-    actions.push(JSON.parse(JSON.stringify({
-        name: 'RecordNewRound',
-        data: {
-            chang: chang,
-            ju: ju,
-            ben: ben,
-            ju_count: is_chuanma() ? all_data.all_actions.length : undefined,
-            seat: ju,
-            left_tile_count: left_tile_count,
-            liqibang: liqibang,
-            tiles0: player_tiles[0].slice(),
-            tiles1: player_tiles[1].slice(),
-            tiles2: player_tiles[2].slice(),
-            tiles3: player_tiles[3].slice(),
-            paishan: paishan.join(''),
-            scores: scores.slice(),
-            tingpai: !is_chuanma() ? getAllTingpai() : undefined,
-            doras: calcDoras(),
-            opens: opens,
-            muyu: is_muyu() ? JSON.parse(JSON.stringify(muyu_info)) : undefined,
-            md5: !is_sha256 ? fake_hash_code : undefined,
-            sha256: is_sha256 ? fake_hash_code : undefined,
-            xia_ke_shang: is_xiakeshang() ? {score_coefficients: calcXiaKeShang()} : undefined,
-        }
-    })));
+    pushAction('RecordNewRound', {
+        chang: chang,
+        ju: ju,
+        ben: ben,
+        ju_count: is_chuanma() ? all_data.all_actions.length : undefined,
+        seat: ju,
+        left_tile_count: left_tile_count,
+        liqibang: liqibang,
+        tiles0: player_tiles[0],
+        tiles1: player_tiles[1],
+        tiles2: player_tiles[2],
+        tiles3: player_tiles[3],
+        paishan: paishan.join(''),
+        scores: scores,
+        tingpai: !is_chuanma() ? getAllTingpai() : undefined,
+        doras: calcDoras(),
+        opens: opens,
+        muyu: is_muyu() ? muyu_info : undefined,
+        md5: !is_sha256 ? fake_hash_code : undefined,
+        sha256: is_sha256 ? fake_hash_code : undefined,
+        xia_ke_shang: is_xiakeshang() ? {score_coefficients: calcXiaKeShang()} : undefined,
+    });
     calcXun();
 };
 
@@ -60,20 +57,17 @@ export let addNewRound = (left_tile_count: number, fake_hash_code: string, opens
  * @param hunzhiyiji_data - 魂之一击: 魂之一击立直数据
  */
 export let addDealTile = (seat: Seat, draw_card: Tile, liqi: Liqi, tile_state: boolean, zhanxing_index: AwaitingIndex, hunzhiyiji_data: HunzhiyijiInfo_Player): void => {
-    actions.push(JSON.parse(JSON.stringify({
-        name: 'RecordDealTile',
-        data: {
-            seat: seat,
-            tile: draw_card,
-            left_tile_count: getLeftTileCnt(),
-            liqi: liqi ? liqi : undefined,
-            doras: calcDoras(),
-            tile_state: tile_state ? tile_state : undefined,
-            muyu: is_muyu() ? JSON.parse(JSON.stringify(muyu_info)) : undefined,
-            tile_index: is_zhanxing() ? zhanxing_index : undefined,
-            hun_zhi_yi_ji_info: is_hunzhiyiji() ? hunzhiyiji_data : undefined,
-        }
-    })));
+    pushAction('RecordDealTile', {
+        seat: seat,
+        tile: draw_card,
+        left_tile_count: getLeftTileCnt(),
+        liqi: liqi ? liqi : undefined,
+        doras: calcDoras(),
+        tile_state: tile_state ? tile_state : undefined,
+        muyu: is_muyu() ? muyu_info : undefined,
+        tile_index: is_zhanxing() ? zhanxing_index : undefined,
+        hun_zhi_yi_ji_info: is_hunzhiyiji() ? hunzhiyiji_data : undefined,
+    });
     calcXun();
 };
 
@@ -83,16 +77,13 @@ export let addDealTile = (seat: Seat, draw_card: Tile, liqi: Liqi, tile_state: b
  * @param liqi - 刚立直玩家的立直信息
  */
 export let addFillAwaitingTiles = (seat: Seat, liqi: Liqi): void => {
-    actions.push(JSON.parse(JSON.stringify({
-        name: 'RecordFillAwaitingTiles',
-        data: {
-            operation: {seat: seat},
-            awaiting_tiles: awaiting_tiles.slice(),
-            left_tile_count: getLeftTileCnt(),
-            liqi: liqi ? liqi : undefined,
-            doras: calcDoras(),
-        }
-    })));
+    pushAction('RecordFillAwaitingTiles', {
+        operation: {seat: seat},
+        awaiting_tiles: awaiting_tiles,
+        left_tile_count: getLeftTileCnt(),
+        liqi: liqi ? liqi : undefined,
+        doras: calcDoras(),
+    });
 };
 
 /**
@@ -107,24 +98,21 @@ export let addFillAwaitingTiles = (seat: Seat, liqi: Liqi): void => {
  * @param beishui_type - 背水之战: 立直类型
  */
 export let addDiscardTile = (seat: Seat, tile: Tile, moqie: boolean, is_liqi: boolean, is_wliqi: boolean, is_kailiqi: boolean, tile_state: boolean, beishui_type: BeishuiType): void => {
-    actions.push(JSON.parse(JSON.stringify({
-        name: 'RecordDiscardTile',
-        data: {
-            seat: seat,
-            tile: tile,
-            moqie: moqie,
-            is_liqi: is_liqi,
-            is_wliqi: is_wliqi,
-            is_kailiqi: is_kailiqi,
-            doras: calcDoras(),
-            tingpais: is_heqie_mode() ? undefined : calcTingpai(seat),
-            tile_state: tile_state ? tile_state : undefined,
-            muyu: is_muyu() ? JSON.parse(JSON.stringify(muyu_info)) : undefined,
-            yongchang: is_yongchang() ? JSON.parse(JSON.stringify(yongchang_data[seat])) : undefined,
-            hun_zhi_yi_ji_info: is_hunzhiyiji() && hunzhiyiji_info[seat].liqi && !hunzhiyiji_info[seat].overload ? JSON.parse(JSON.stringify(hunzhiyiji_info[seat])) : undefined,
-            liqi_type_beishuizhizhan: is_liqi ? beishui_type : undefined,
-        }
-    })));
+    pushAction('RecordDiscardTile', {
+        seat: seat,
+        tile: tile,
+        moqie: moqie,
+        is_liqi: is_liqi,
+        is_wliqi: is_wliqi,
+        is_kailiqi: is_kailiqi,
+        doras: calcDoras(),
+        tingpais: is_heqie_mode() ? undefined : calcTingpai(seat),
+        tile_state: tile_state ? tile_state : undefined,
+        muyu: is_muyu() ? muyu_info : undefined,
+        yongchang: is_yongchang() ? yongchang_data[seat] : undefined,
+        hun_zhi_yi_ji_info: is_hunzhiyiji() && hunzhiyiji_info[seat].liqi && !hunzhiyiji_info[seat].overload ? hunzhiyiji_info[seat] : undefined,
+        liqi_type_beishuizhizhan: is_liqi ? beishui_type : undefined,
+    });
 };
 
 /**
@@ -136,19 +124,16 @@ export let addDiscardTile = (seat: Seat, tile: Tile, moqie: boolean, is_liqi: bo
  * @param is_wliqi - 是否为双立直
  */
 export let addRevealTile = (seat: Seat, tile: Tile, moqie: boolean, is_liqi: boolean, is_wliqi: boolean): void => {
-    actions.push(JSON.parse(JSON.stringify({
-        name: 'RecordRevealTile',
-        data: {
-            seat: seat,
-            tile: tile,
-            moqie: moqie,
-            is_liqi: is_liqi,
-            is_wliqi: is_wliqi,
-            liqibang: liqibang,
-            scores: scores.slice(),
-            tingpais: is_heqie_mode() ? undefined : calcTingpai(seat),
-        }
-    })));
+    pushAction('RecordRevealTile', {
+        seat: seat,
+        tile: tile,
+        moqie: moqie,
+        is_liqi: is_liqi,
+        is_wliqi: is_wliqi,
+        liqibang: liqibang,
+        scores: scores,
+        tingpais: is_heqie_mode() ? undefined : calcTingpai(seat),
+    });
 };
 
 /**
@@ -158,16 +143,13 @@ export let addRevealTile = (seat: Seat, tile: Tile, moqie: boolean, is_liqi: boo
  * @param tile - 切的牌
  */
 export let addLockTile = (seat: Seat, lock_state: LockState, tile: Tile | '' = ''): void => {
-    actions.push(JSON.parse(JSON.stringify({
-        name: 'RecordLockTile',
-        data: {
-            seat: seat,
-            tile: tile,
-            scores: scores.slice(),
-            liqibang: liqibang,
-            lock_state: lock_state,
-        }
-    })));
+    pushAction('RecordLockTile', {
+        seat: seat,
+        tile: tile,
+        scores: scores,
+        liqibang: liqibang,
+        lock_state: lock_state,
+    });
 };
 
 /**
@@ -175,14 +157,11 @@ export let addLockTile = (seat: Seat, lock_state: LockState, tile: Tile | '' = '
  * @param seat - 开牌的玩家
  */
 export let addUnveilTile = (seat: Seat): void => {
-    actions.push(JSON.parse(JSON.stringify({
-        name: 'RecordUnveilTile',
-        data: {
-            seat: seat,
-            scores: scores.slice(),
-            liqibang: liqibang,
-        }
-    })));
+    pushAction('RecordUnveilTile', {
+        seat: seat,
+        scores: scores,
+        liqibang: liqibang,
+    });
 };
 
 /**
@@ -195,22 +174,19 @@ export let addUnveilTile = (seat: Seat): void => {
  * @param tile_states - 配牌明牌: 鸣出去的牌是否为明牌
  */
 export let addChiPengGang = (seat: Seat, split_tiles: Tile[], froms: Seat[], type: ChiPengGangType, liqi: Liqi, tile_states: boolean[]): void => {
-    actions.push(JSON.parse(JSON.stringify({
-        name: 'RecordChiPengGang',
-        data: {
-            seat: seat,
-            tiles: split_tiles,
-            type: type,
-            froms: froms,
-            liqi: liqi,
-            scores: scores.slice(),
-            tingpais: is_heqie_mode() ? undefined : calcTingpai(seat),
-            tile_states: tile_states,
-            muyu: is_muyu() ? JSON.parse(JSON.stringify(muyu_info)) : undefined,
-            yongchang: is_yongchang() ? JSON.parse(JSON.stringify(yongchang_data[froms[froms.length - 1]])) : undefined,
-            hun_zhi_yi_ji_info: is_hunzhiyiji() && hunzhiyiji_info[seat].liqi ? JSON.parse(JSON.stringify(hunzhiyiji_info[froms[froms.length - 1]])) : undefined,
-        }
-    })));
+    pushAction('RecordChiPengGang', {
+        seat: seat,
+        tiles: split_tiles,
+        type: type,
+        froms: froms,
+        liqi: liqi,
+        scores: scores,
+        tingpais: is_heqie_mode() ? undefined : calcTingpai(seat),
+        tile_states: tile_states,
+        muyu: is_muyu() ? muyu_info : undefined,
+        yongchang: is_yongchang() ? yongchang_data[froms[froms.length - 1]] : undefined,
+        hun_zhi_yi_ji_info: is_hunzhiyiji() && hunzhiyiji_info[seat].liqi ? hunzhiyiji_info[froms[froms.length - 1]] : undefined,
+    });
     calcXun();
 };
 
@@ -222,17 +198,14 @@ export let addChiPengGang = (seat: Seat, split_tiles: Tile[], froms: Seat[], typ
  * @param tile_states - 配牌明牌: 鸣出去的牌是否为明牌
  */
 export let addAnGangAddGang = (seat: Seat, tile: Tile, ziming_type: ZiMingType, tile_states: boolean[]): void => {
-    actions.push(JSON.parse(JSON.stringify({
-        name: 'RecordAnGangAddGang',
-        data: {
-            seat: seat,
-            tiles: tile,
-            type: ziming_type,
-            doras: calcDoras(),
-            tingpais: is_heqie_mode() ? undefined : calcTingpai(seat),
-            tile_states: tile_states,
-        }
-    })));
+    pushAction('RecordAnGangAddGang', {
+        seat: seat,
+        tiles: tile,
+        type: ziming_type,
+        doras: calcDoras(),
+        tingpais: is_heqie_mode() ? undefined : calcTingpai(seat),
+        tile_states: tile_states,
+    });
 };
 
 /**
@@ -242,16 +215,13 @@ export let addAnGangAddGang = (seat: Seat, tile: Tile, ziming_type: ZiMingType, 
  * @param tile_states - 配牌明牌: 拔出去的牌是否为明牌
  */
 export let addBaBei = (seat: Seat, tile: Tile, tile_states: boolean[]): void => {
-    actions.push(JSON.parse(JSON.stringify({
-        name: 'RecordBaBei',
-        data: {
-            seat: seat,
-            tile: tile,
-            tile_states: tile_states,
-            doras: calcDoras(),
-            tingpais: is_heqie_mode() ? undefined : calcTingpai(seat),
-        }
-    })));
+    pushAction('RecordBaBei', {
+        seat: seat,
+        tile: tile,
+        tile_states: tile_states,
+        doras: calcDoras(),
+        tingpais: is_heqie_mode() ? undefined : calcTingpai(seat),
+    });
 };
 
 /**
@@ -261,16 +231,13 @@ export let addBaBei = (seat: Seat, tile: Tile, tile_states: boolean[]): void => 
  * @param baopait - 包牌玩家, 注意和数值比 seat 大1
  */
 export let endHule = (hule_info: HuleInfo[], old_scores: Players_Number, baopait: BaopaiT): void => {
-    actions.push(JSON.parse(JSON.stringify({
-        name: 'RecordHule',
-        data: {
-            hules: hule_info,
-            old_scores: old_scores,
-            delta_scores: delta_scores.slice(),
-            scores: scores.slice(),
-            baopai: baopait,
-        }
-    })));
+    pushAction('RecordHule', {
+        hules: hule_info,
+        old_scores: old_scores,
+        delta_scores: delta_scores,
+        scores: scores,
+        baopai: baopait,
+    });
 };
 
 /**
@@ -280,16 +247,13 @@ export let endHule = (hule_info: HuleInfo[], old_scores: Players_Number, baopait
  * @param liqi - 刚立直玩家的立直信息
  */
 export let addHuleXueZhanMid = (hule_info: HuleInfo[], old_scores: Players_Number, liqi: Liqi): void => {
-    actions.push(JSON.parse(JSON.stringify({
-        name: 'RecordHuleXueZhanMid',
-        data: {
-            hules: hule_info,
-            old_scores: old_scores,
-            delta_scores: delta_scores.slice(),
-            scores: scores.slice(),
-            liqi: liqi,
-        }
-    })));
+    pushAction('RecordHuleXueZhanMid', {
+        hules: hule_info,
+        old_scores: old_scores,
+        delta_scores: delta_scores,
+        scores: scores,
+        liqi: liqi,
+    });
 };
 
 /**
@@ -298,16 +262,13 @@ export let addHuleXueZhanMid = (hule_info: HuleInfo[], old_scores: Players_Numbe
  * @param old_scores - 结算前分数
  */
 export let endHuleXueZhanEnd = (hule_info: HuleInfo[], old_scores: Players_Number): void => {
-    actions.push(JSON.parse(JSON.stringify({
-        name: 'RecordHuleXueZhanEnd',
-        data: {
-            hules: hule_info,
-            old_scores: old_scores,
-            delta_scores: delta_scores.slice(),
-            scores: scores.slice(),
-            hules_history: hules_history.slice(),
-        }
-    })));
+    pushAction('RecordHuleXueZhanEnd', {
+        hules: hule_info,
+        old_scores: old_scores,
+        delta_scores: delta_scores,
+        scores: scores,
+        hules_history: hules_history,
+    });
 };
 
 /**
@@ -316,17 +277,14 @@ export let endHuleXueZhanEnd = (hule_info: HuleInfo[], old_scores: Players_Numbe
  * @param old_scores - 结算前分数
  */
 export let addHuleXueLiuMid = (hule_info: HuleInfo[], old_scores: Players_Number): void => {
-    actions.push(JSON.parse(JSON.stringify({
-        name: 'RecordHuleXueLiuMid',
-        data: {
-            old_scores: old_scores,
-            delta_scores: delta_scores.slice(),
-            scores: scores.slice(),
-            hules: hule_info,
-            tingpais: getLstAction().name === 'RecordNewRound' && !is_heqie_mode() ? calcTingpai(ju) : [],
-            baopai: 0,
-        }
-    })));
+    pushAction('RecordHuleXueLiuMid', {
+        old_scores: old_scores,
+        delta_scores: delta_scores,
+        scores: scores,
+        hules: hule_info,
+        tingpais: getLstAction().name === 'RecordNewRound' && !is_heqie_mode() ? calcTingpai(ju) : [],
+        baopai: 0,
+    });
 };
 
 /**
@@ -335,17 +293,14 @@ export let addHuleXueLiuMid = (hule_info: HuleInfo[], old_scores: Players_Number
  * @param old_scores - 结算前分数
  */
 export let endHuleXueLiuEnd = (hule_info: HuleInfo[], old_scores: Players_Number): void => {
-    actions.push(JSON.parse(JSON.stringify({
-        name: 'RecordHuleXueLiuEnd',
-        data: {
-            old_scores: old_scores,
-            delta_scores: delta_scores.slice(),
-            scores: scores.slice(),
-            hules: hule_info,
-            hules_history: hules_history.slice(),
-            baopai: 0,
-        }
-    })));
+    pushAction('RecordHuleXueLiuEnd', {
+        old_scores: old_scores,
+        delta_scores: delta_scores,
+        scores: scores,
+        hules: hule_info,
+        hules_history: hules_history,
+        baopai: 0,
+    });
 };
 
 
@@ -356,15 +311,12 @@ export let endHuleXueLiuEnd = (hule_info: HuleInfo[], old_scores: Players_Number
  * @param scores_info - 结算相关信息
  */
 export let endNoTile = (liujumanguan: boolean, ting_info: TingInfo, scores_info: ScoresInfo): void => {
-    actions.push(JSON.parse(JSON.stringify({
-        name: 'RecordNoTile',
-        data: {
-            scores: scores_info,
-            players: ting_info,
-            liujumanguan: liujumanguan,
-            hules_history: hules_history.slice(),
-        }
-    })));
+    pushAction('RecordNoTile', {
+        scores: scores_info,
+        players: ting_info,
+        liujumanguan: liujumanguan,
+        hules_history: hules_history,
+    });
 };
 
 /**
@@ -376,17 +328,14 @@ export let endNoTile = (liujumanguan: boolean, ting_info: TingInfo, scores_info:
  * @param allplayertiles - 所有玩家的手牌, 只有在四家立直和三家和了有效
  */
 export let endLiuJu = (type: LiujuType, seat: Seat, liqi: Liqi, tiles: Tile[], allplayertiles: string[]): void => {
-    actions.push(JSON.parse(JSON.stringify({
-        name: 'RecordLiuJu',
-        data: {
-            type: type,
-            seat: type === 1 || type === 5 ? seat : undefined,
-            liqi: liqi != null ? liqi : undefined,
-            tiles: type === 1 ? tiles : undefined,
-            allplayertiles: type === 4 || type === 5 ? allplayertiles : undefined,
-            hules_history: hules_history.slice(),
-        }
-    })));
+    pushAction('RecordLiuJu', {
+        type: type,
+        seat: type === 1 || type === 5 ? seat : undefined,
+        liqi: liqi != null ? liqi : undefined,
+        tiles: type === 1 ? tiles : undefined,
+        allplayertiles: type === 4 || type === 5 ? allplayertiles : undefined,
+        hules_history: hules_history,
+    });
 };
 
 /**
@@ -395,16 +344,13 @@ export let endLiuJu = (type: LiujuType, seat: Seat, liqi: Liqi, tiles: Tile[], a
  * @param type - 换牌方式, 0: 逆时针, 1: 对家, 2: 顺时针
  */
 export let addChangeTile = (change_tile_infos: ChangeTileInfo, type: HuanpaiType): void => {
-    actions.push(JSON.parse(JSON.stringify({
-        name: 'RecordChangeTile',
-        data: {
-            change_tile_infos: change_tile_infos,
-            change_type: type,
-            doras: calcDoras(),
-            tingpai: !is_chuanma() ? getAllTingpai() : undefined,
-            operations: [],
-        }
-    })));
+    pushAction('RecordChangeTile', {
+        change_tile_infos: change_tile_infos,
+        change_type: type,
+        doras: calcDoras(),
+        tingpai: !is_chuanma() ? getAllTingpai() : undefined,
+        operations: [],
+    });
 };
 
 /**
@@ -412,13 +358,10 @@ export let addChangeTile = (change_tile_infos: ChangeTileInfo, type: HuanpaiType
  * @param gap_types - 所有玩家的定缺
  */
 export let addSelectGap = (gap_types: Gaps): void => {
-    actions.push(JSON.parse(JSON.stringify({
-        name: 'RecordSelectGap',
-        data: {
-            gap_types: gap_types,
-            tingpai: getAllTingpai(),
-        }
-    })));
+    pushAction('RecordSelectGap', {
+        gap_types: gap_types,
+        tingpai: getAllTingpai(),
+    });
 };
 
 /**
@@ -426,16 +369,13 @@ export let addSelectGap = (gap_types: Gaps): void => {
  * @param old_scores - 结算前分数
  */
 export let addGangResult = (old_scores: Players_Number): void => {
-    actions.push(JSON.parse(JSON.stringify({
-        name: 'RecordGangResult',
-        data: {
-            gang_infos: {
-                old_scores: old_scores,
-                delta_scores: delta_scores.slice(),
-                scores: scores.slice(),
-            }
+    pushAction('RecordGangResult', {
+        gang_infos: {
+            old_scores: old_scores,
+            delta_scores: delta_scores,
+            scores: scores,
         }
-    })));
+    });
 };
 
 /**
@@ -443,17 +383,14 @@ export let addGangResult = (old_scores: Players_Number): void => {
  * @param old_scores - 结算前分数
  */
 export let addGangResultEnd = (old_scores: Players_Number): void => {
-    actions.push(JSON.parse(JSON.stringify({
-        name: 'RecordGangResultEnd',
-        data: {
-            gang_infos: {
-                old_scores: old_scores,
-                delta_scores: delta_scores.slice(),
-                scores: scores.slice(),
-                hules_history: hules_history.slice(),
-            },
-        }
-    })));
+    pushAction('RecordGangResultEnd', {
+        gang_infos: {
+            old_scores: old_scores,
+            delta_scores: delta_scores,
+            scores: scores,
+            hules_history: hules_history,
+        },
+    });
 };
 
 /**
@@ -463,16 +400,25 @@ export let addGangResultEnd = (old_scores: Players_Number): void => {
  * @param old_scores - 结算前分数
  */
 export let addCuohu = (seat: Seat, zimo: boolean, old_scores: Players_Number): void => {
+    pushAction('RecordCuohu', {
+        cuohu_info: {
+            seat: seat,
+            zimo: zimo,
+            old_scores: old_scores,
+            delta_scores: delta_scores,
+            scores: scores,
+        },
+    });
+};
+
+/**
+ * 胶水代码: 记录操作, 由上面所有的胶水函数调用
+ * @param name
+ * @param data
+ */
+const pushAction = (name: string, data: any): void => {
     actions.push(JSON.parse(JSON.stringify({
-        name: 'RecordCuohu',
-        data: {
-            cuohu_info: {
-                seat: seat,
-                zimo: zimo,
-                old_scores: old_scores,
-                delta_scores: delta_scores.slice(),
-                scores: scores.slice(),
-            },
-        }
+        name: name,
+        data: data,
     })));
 };
