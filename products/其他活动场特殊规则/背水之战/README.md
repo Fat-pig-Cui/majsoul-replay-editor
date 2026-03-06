@@ -15,7 +15,7 @@
 
 ### 切牌
 
-`qiepai(seat, tile, is_liqi, f_moqie, bs_type)`
+`qiepai(seat, tile, is_liqi, bs_type)`
 
 与段位场的切牌相比, 多了一个参数 `bs_type`, `bs_type` 的值可以是 `[0]`, `[1]`, `[2]`
 

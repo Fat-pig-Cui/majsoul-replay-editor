@@ -492,16 +492,16 @@ export const calcXun = (): void => {
 export const calcDoras = (): Doras => {
     if (dora_cnt.cnt > 5)
         dora_cnt.cnt = 5;
-    if (dora_cnt.licnt > 5)
-        dora_cnt.licnt = 5;
+    if (dora_cnt.li_cnt > 5)
+        dora_cnt.li_cnt = 5;
     if (no_ganglidora())
-        dora_cnt.licnt = 1;
+        dora_cnt.li_cnt = 1;
     if (no_gangdora())
-        dora_cnt.cnt = dora_cnt.licnt = 1;
+        dora_cnt.cnt = dora_cnt.li_cnt = 1;
     if (no_lidora())
-        dora_cnt.licnt = 0;
+        dora_cnt.li_cnt = 0;
     if (is_chuanma() || is_guobiao() || no_dora())
-        dora_cnt.cnt = dora_cnt.licnt = 0;
+        dora_cnt.cnt = dora_cnt.li_cnt = 0;
     const doras0: Doras = [];
     for (let i = 0; i < dora_cnt.cnt; i++)
         doras0[i] = doras[i];

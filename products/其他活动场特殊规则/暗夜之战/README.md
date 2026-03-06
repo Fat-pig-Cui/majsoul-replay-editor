@@ -25,7 +25,7 @@
 
 ### 切牌(暗夜之战)
 
-`qiepai(seat, tile, is_liqi, f_moqie, anpai)`
+`qiepai(seat, tile, is_liqi, anpai)`
 
 与段位场相比多了个参数 `anpai`, 如果 `anpai` 的值是字符串 `'anpai'` 时, 在暗夜之战切牌会暗牌, 否则不会暗牌
 

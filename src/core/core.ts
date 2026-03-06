@@ -12,8 +12,7 @@ import {
     get_init_point, get_init_scores, get_liqi_need, is_anye,
     is_baogang, is_begin_open, is_beishuizhizhan, is_chuanma, is_cuohupeida, is_dora3, is_dora_jifan, is_fufenliqi,
     is_guobiao, is_guobiao_huapai, is_guobiao_lianzhuang, is_guobiao_no_8fanfu, is_guyi,
-    is_hunzhiyiji, is_mingjing, is_mopai_paishan, is_muyu,
-    is_openhand, is_qingtianjing, is_renhumanguan, is_ronghuzhahu,
+    is_hunzhiyiji, is_mingjing, is_muyu, is_openhand, is_qingtianjing, is_renhumanguan, is_ronghuzhahu,
     is_sanxiangliuju, is_sigangbaopai, is_sixifuhe,
     is_tiandichuangzao, is_tianming, is_toutiao, is_wanwushengzhang, is_wanxiangxiuluo, is_xiakeshang, is_xueliu,
     is_xuezhandaodi, is_yifanjieguyi, is_yongchang,
@@ -249,17 +248,6 @@ export const randomPaishan = (ps_head: string = '', ps_back: string = ''): void 
                 else
                     cnt[tile2Int(tile as Tile, true)]--;
 
-    if (is_mopai_paishan() && deal_tiles[base_info.ju].length > 0) {
-        para_tiles[0] = [];
-        while (deal_tiles[0].length > 0 || deal_tiles[1].length > 0 || deal_tiles[2].length > 0 || deal_tiles[3].length > 0)
-            for (let i = base_info.ju + 1; i < base_info.ju + 1 + player_cnt; i++)
-                if (deal_tiles[i % player_cnt].length > 0) {
-                    const tile = deal_tiles[i % player_cnt].shift();
-                    if (tile !== '..')
-                        para_tiles[0].push(tile);
-                }
-    }
-
     // 减去两个参数的牌
     for (const para_tile of para_tiles)
         for (const tile of para_tile)
@@ -338,7 +326,7 @@ export const roundBegin = (): void => {
     init();
 
     if (is_dora3() || is_muyu())
-        dora_cnt.cnt = dora_cnt.licnt = 3;
+        dora_cnt.cnt = dora_cnt.li_cnt = 3;
 
     // 剩余牌数量
     const left_cnt = getLeftTileCnt();
@@ -369,23 +357,23 @@ export const roundBegin = (): void => {
 
     paishan = paishan.slice(0, 136);
     // 添加起手进牌山
-    let qishou_len = 0, is_sha256 = false, has_intergrity = true;
+    let begin_len = 0, is_sha256 = false, has_integrity = true;
     const qishou_tiles: Tile[] = [], random_tiles: Players_TileArray = [[], [], [], []];
     for (let i = 0; i < player_cnt; i++) {
         if (i === base_info.ju) {
             if (player_tiles[i].length !== Constants.QIN_TILE_NUM)
-                has_intergrity = false;
+                has_integrity = false;
         } else if (player_tiles[i].length !== Constants.XIAN_TILE_NUM)
-            has_intergrity = false;
+            has_integrity = false;
 
         for (const tile of player_tiles[i])
             if (tile !== Constants.TBD) {
-                qishou_len++;
+                begin_len++;
                 random_tiles[i].push(tile);
             }
         random_tiles[i].sort(randomCmp);
     }
-    if (has_intergrity && qishou_len + paishan.length <= 136) {
+    if (has_integrity && begin_len + paishan.length <= 136) {
         is_sha256 = true;
         for (let i = 0; i < 3; i++)
             for (let j = base_info.ju; j < base_info.ju + player_cnt; j++)
@@ -408,7 +396,7 @@ export const roundBegin = (): void => {
     addNewRound(left_cnt, fake_hash_code, opens, is_sha256);
 
     if (is_sha256)
-        paishan.splice(0, qishou_len);
+        paishan.splice(0, begin_len);
 };
 
 /**
@@ -525,7 +513,7 @@ export const mopai = (...args: any[]): void => {
         // 开杠翻指示牌
         if (dora_cnt.lastype === 2) {
             dora_cnt.cnt += 1 + dora_cnt.bonus;
-            dora_cnt.licnt += 1 + dora_cnt.bonus;
+            dora_cnt.li_cnt += 1 + dora_cnt.bonus;
             dora_cnt.bonus = dora_cnt.lastype = 0;
         }
 
@@ -575,12 +563,11 @@ export const mopai = (...args: any[]): void => {
  * - {Seat} - 切牌的玩家, 没有此参数时按照正常对局流程
  * - {Tile} - 切的牌, 没有此参数时将根据 discard_tiles 确定或摸切
  * - {boolean|'kailiqi'} - 是否立直, 默认不立直, 若为 'kailiqi', 则为开立直
- * - {'moqie' | 'shouqie'} - 何切模式: 值为 'moqie' 表示强制显示摸切, 值为 'shouqie' 或其他情况则强制显示手切
  * - {'anpai' | 'anpai_ignore_1000'}  - 暗夜之战: 当值为字符串 'anpai' 时, 表示暗牌, 若为 'anpai_ignore_1000' 则不会支付1000点, 默认不暗牌
  * - {[BeishuiType]} - 背水之战: 立直类型, 有效值为 '[0]', '[1]', '[2]', 默认为普通立直, 需要配合 is_liqi 使用
  */
 export const qiepai = (...args: any[]): void => {
-    let seat: Seat, tile: Tile, is_liqi: boolean, f_moqie: 'moqie' | 'shouqie', anpai: 'anpai' | 'anpai_ignore_1000',
+    let seat: Seat, tile: Tile, is_liqi: boolean, anpai: 'anpai' | 'anpai_ignore_1000',
         beishui_type: BeishuiType;
     let is_kailiqi = false;
     // 参数预处理
@@ -589,8 +576,6 @@ export const qiepai = (...args: any[]): void => {
             anpai = arg;
         else if (arg === 'kailiqi')
             is_kailiqi = is_liqi = true;
-        else if (['moqie', 'shouqie'].includes(arg))
-            f_moqie = arg;
         else if (typeof arg == 'number') {
             if (isValidSeat(arg))
                 seat = arg;
@@ -717,7 +702,7 @@ export const qiepai = (...args: any[]): void => {
         // 开杠翻指示牌
         if (dora_cnt.lastype === 1) {
             dora_cnt.cnt += 1 + dora_cnt.bonus;
-            dora_cnt.licnt += 1 + dora_cnt.bonus;
+            dora_cnt.li_cnt += 1 + dora_cnt.bonus;
             dora_cnt.bonus = dora_cnt.lastype = 0;
         }
     }
@@ -800,23 +785,23 @@ export const mingpai = (...args: any[]): void => {
         for (const tile of tiles)
             tile_states.push(eraseMingpai(seat, tile));
 
-    let type: ChiPengGangType, froms: Seat[], split_tiles: Tile[];
+    let type: ChiPengGangType, tiles_from: Seat[], fulu_tiles: Tile[];
     if (!isEqualTile(tiles[0], tile)) { // 吃
         type = 0;
-        froms = [seat, seat, from];
-        split_tiles = [tiles[0], tiles[1], tile];
+        tiles_from = [seat, seat, from];
+        fulu_tiles = [tiles[0], tiles[1], tile];
     } else if (tiles.length === 2) { // 碰
         type = 1;
-        froms = [seat, seat, from];
-        split_tiles = [tiles[0], tiles[1], tile];
+        tiles_from = [seat, seat, from];
+        fulu_tiles = [tiles[0], tiles[1], tile];
 
         // 幻境传说: 庄家卡4
         if (get_field_spell_mode(1) === 4 && seat === base_info.ju)
             dora_cnt.lastype = is_dora_jifan() ? 2 : 1;
     } else if (tiles.length === 3) { // 大明杠
         type = 2;
-        froms = [seat, seat, seat, from];
-        split_tiles = [tiles[0], tiles[1], tiles[2], tile];
+        tiles_from = [seat, seat, seat, from];
+        fulu_tiles = [tiles[0], tiles[1], tiles[2], tile];
 
         // 幻境传说: 庄家卡4
         if (get_field_spell_mode(1) === 4 && seat === base_info.ju)
@@ -841,7 +826,7 @@ export const mingpai = (...args: any[]): void => {
         }
     }
     // 副露信息 push 到 fulu
-    fulu[seat].push({type: type, tile: split_tiles.slice(), from: from});
+    fulu[seat].push({type: type, tile: fulu_tiles.slice(), from: from});
 
     // 从 player_tiles 中移除鸣出去的牌
     for (const tile of tiles)
@@ -858,7 +843,7 @@ export const mingpai = (...args: any[]): void => {
         base_info.liqibang += 2;
     }
 
-    addChiPengGang(seat, split_tiles, froms, type, liqi, tile_states);
+    addChiPengGang(seat, fulu_tiles, tiles_from, type, liqi, tile_states);
 
     // 川麻开杠击飞
     if (jifei)
@@ -983,7 +968,7 @@ export const zimingpai = (...args: any[]): void => {
     // 上个操作补完: 开杠翻指示牌
     if (dora_cnt.lastype === 1) {
         dora_cnt.cnt += 1 + dora_cnt.bonus;
-        dora_cnt.licnt += 1 + dora_cnt.bonus;
+        dora_cnt.li_cnt += 1 + dora_cnt.bonus;
         dora_cnt.bonus = dora_cnt.lastype = 0;
     }
 
@@ -1234,7 +1219,7 @@ export const hupai = (...args: any[]): void => {
     // 非血战到底, 血流成河模式
     if (!is_xuezhandaodi() && !is_wanxiangxiuluo() && !is_chuanma() && !is_xueliu()) {
         const ret: HuleInfo[] = [];
-        let baopait: BaopaiT = 0;
+        let baopai_player: BaopaiPlayer = 0;
         for (const seat of seats)
             ret.push(!is_guobiao() ? huleOnePlayer(seat) : huleOnePlayerGuobiao(seat));
         // 国标错和陪打
@@ -1260,14 +1245,14 @@ export const hupai = (...args: any[]): void => {
         // '包'字的选择
         // 包牌比包杠优先, 因为雀魂目前没有包杠, 以雀魂为主
         if (!is_guobiao() && base_info.baogang_seat !== -1)
-            baopait = base_info.baogang_seat + 1;
+            baopai_player = base_info.baogang_seat + 1;
         base_info.baogang_seat = -1;
         // 多家包牌, 自摸情况下以最先包牌的玩家为准
         // 荣和情况下, 以距放铳玩家最近的玩家的最先包牌的玩家为准
         if (!is_guobiao())
             for (const seat of seats)
                 if (baopai[seat].length > 0) {
-                    baopait = baopai[seat][0].seat + 1;
+                    baopai_player = baopai[seat][0].seat + 1;
                     break;
                 }
         let old_scores = scores.slice() as Players_Number;
@@ -1280,7 +1265,7 @@ export const hupai = (...args: any[]): void => {
             delta_scores = [12300, 0, 0, 0];
             scores = [21500, 0, 20300, 0];
         }
-        endHule(ret, old_scores, baopait as BaopaiT);
+        endHule(ret, old_scores, baopai_player as BaopaiPlayer);
 
         for (let i = 0; i < player_cnt; i++)
             delta_scores[i] = 0;
@@ -2038,7 +2023,7 @@ export const init = (): void => {
     mingpais = [[], [], [], []];
     mingpais.splice(player_cnt);
     chuanma_gangs = {over: [], not_over: null};
-    dora_cnt = {cnt: 1, licnt: 1, lastype: 0, bonus: 0};
+    dora_cnt = {cnt: 1, li_cnt: 1, lastype: 0, bonus: 0};
     huled = [false, false, false, false];
     huled.splice(player_cnt);
     hules_history = [];
@@ -2196,7 +2181,7 @@ export let huleOnePlayer = (seat: Seat): HuleInfo => {
     const doras0: Doras = calcDoras();
     const li_doras0: Doras = [];
     if (liqi_info[seat].liqi !== 0)
-        for (let i = 0; i < dora_cnt.licnt; i++)
+        for (let i = 0; i < dora_cnt.li_cnt; i++)
             li_doras0[i] = li_doras[i];
 
     if (zhahu) {
@@ -2859,7 +2844,7 @@ export const calcFan = (seat: Seat, zimo: boolean, fangchong?: Seat): CalcFanRet
                         all_doras[0] += cnt2[Constants.DORA_NXT[tile2Int(doras[i])]];
                     }
                 }
-                for (let i = 0; i < dora_cnt.licnt; i++) {
+                for (let i = 0; i < dora_cnt.li_cnt; i++) {
                     if (player_cnt === 3 && tile2Int(li_doras[i]) === Constants.TILE_NUM.C1m)
                         all_doras[3] += cnt2[Constants.TILE_NUM.C9m];
                     else if (player_cnt === 2) {
@@ -2960,7 +2945,7 @@ export const calcFan = (seat: Seat, zimo: boolean, fangchong?: Seat): CalcFanRet
                         all_doras[0] += cnt2[Constants.DORA_NXT[tile2Int(doras[i])]];
                     }
                 }
-                for (let i = 0; i < dora_cnt.licnt; i++) {
+                for (let i = 0; i < dora_cnt.li_cnt; i++) {
                     if (player_cnt === 3 && tile2Int(li_doras[i]) === Constants.TILE_NUM.C1m)
                         all_doras[3] += cnt2[Constants.TILE_NUM.C9m];
                     else if (player_cnt === 2) {
@@ -3321,7 +3306,7 @@ export const calcFan = (seat: Seat, zimo: boolean, fangchong?: Seat): CalcFanRet
                     all_doras[0] += cnt2[Constants.DORA_NXT[tile2Int(doras[i])]];
                 }
             }
-            for (let i = 0; i < dora_cnt.licnt; i++) {
+            for (let i = 0; i < dora_cnt.li_cnt; i++) {
                 if (player_cnt === 3 && tile2Int(li_doras[i]) === Constants.TILE_NUM.C1m)
                     all_doras[3] += cnt2[Constants.TILE_NUM.C9m];
                 else if (player_cnt === 2) {

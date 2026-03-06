@@ -65,7 +65,7 @@
             category: 3,
             meta: {mode_id: 0},
             mode: {
-                mode: ply_cnt === 3 ? 12 : 2,
+                mode: tiles[3].length !== 0 ? 12 : 2,
                 detail_rule: { // 无流满, 无罚符
                     _no_liujumanguan: true,
                     _fafu_1ting: 0,

@@ -9,9 +9,10 @@
      * - player_count: 玩家数
      * - chang_ju_ben_num: 所在小局, 第一个是什么场, 第二个是谁坐庄, 第三个是本场数, 第四个是刚开局时场上立直棒个数(默认为0)
      * - mainrole: 主视角的 seat
-     * - tiles: 主视角在何切的巡目的手牌(若是第一类何切, 则不包含刚摸的牌)
+     * - tiles0-3: 各家在何切的巡目的手牌(若是第一类何切, 则不包含刚摸的牌, 若未知则置为空)
      * - lst_mopai: 第一类何切中何切巡目刚摸的牌, 若是第二类何切, 则要置为空
      * - dora: 宝牌指示牌, 从左到右
+     * - li_dora: 里宝牌指示牌, 从左到右, 长度要和 dora 一致, 若未知则置为空
      * - scores: 所有玩家这小局开始时的点数
      * - paihe0-3: 各家的牌河, 牌不要缩写, 包含被鸣走的牌
      *             牌有后缀g表示摸切, 无g则为手切
@@ -21,15 +22,21 @@
      *            '_'表示下一张牌是倾倒的鸣的其他家的牌, '^'表示加杠, 先'_'后'^'
      *            大明杠对家的牌的'_'放在第二个数字前
      *            暗杠的巡目在轮到该暗杠副露时的下一个摸牌巡, 加杠的巡目在碰对应副露之后下一个摸牌巡
-     * @type {{player_count: number, chang_ju_ben_num: number[], mainrole: number, tiles: string, lst_mopai: string, dora: string[], scores: number[], paihe0: string, paihe1: string, paihe2: string, paihe3: string, fulu0: string[], fulu1: string[], fulu2: string[], fulu3: string[]}}
+     * - first_op: 庄家第一个操作, 0: 切牌(含立直), 1: 暗杠/拔北, 2. 和牌(天和), 默认为0, 若是第二类何切则无论如何都置为0
+     * - end_mode: 结束方式, 0: 和牌, 1: 荒牌流局, 2: 途中流局(若不符合途中流局条件则会报错), 默认为1
+     * - hu_seat: 和牌玩家的所有 seat, 只在 end_mode 是 0 的时候有效, 若为空则自动判断谁可以和牌(若无人能和牌会报错)
      */
     const json = {
         player_count: 4,
         chang_ju_ben_num: [0, 2, 10],
         mainrole: 2,
-        tiles: '123m6z',
+        tiles0: '5m489p359s234z',
+        tiles1: '6z',
+        tiles2: '123m6z',
+        tiles3: '48m126p112359s26z',
         lst_mopai: '6z',
-        dora: ['4p', '3z', '8p', '1s'],
+        dora: ['4s', '3z', '8p', '1s'],
+        li_dora: ['9p', '9m', '4m', '9m'],
         scores: [9500, 14700, 64800, 11000],
         paihe0: '6s5p4s8m6p6s6mg4mg9pg5mg7pg7mg7s0mg3pg1mg2mg',
         paihe1: '5p8p9sg4p2sg3sg3pg1m2zg6m7mg8s8pg2zg3mg5p3m4m',
@@ -39,23 +46,17 @@
         fulu1: ['_666s', '_534p', '_888m', '8_88s'],
         fulu2: ['5555z', '7777z', '1111z'],
         fulu3: [],
+        first_op: 1,
+        end_mode: 0,
+        hu_seat: [],
     };
-    /**
-     * @type {{type: string, own_tiles: string[], ming_tile: string|undefined, from: number}[][]}
-     */
-    const fulus_info = [[], [], [], []];
-    /**
-     * @type {{tile: string, moqie: boolean, is_liqi: boolean}[][]}
-     */
-    const new_discard_tiles = [[], [], [], []];
-    /**
-     * @type {string[][]}
-     */
-    const new_deal_tiles = [[], [], [], []];
-    const qiepai_xun = [0, 0, 0, 0], fulu_index = [0, 0, 0, 0];
-    // 预处理
+
     (function () {
         clearProject();
+        player_datas[0].nickname = '一姬-契约';
+        player_datas[1].nickname = '新年初诣';
+        player_datas[2].nickname = '一姬当千';
+        player_datas[3].nickname = '绮春歌';
         player_datas[0].avatar_id = 400102;
         player_datas[1].avatar_id = 400104;
         player_datas[2].avatar_id = 400105;
@@ -80,7 +81,22 @@
                 }
             }
         });
+    })();
 
+    /**
+     * @type {{type: string, own_tiles: string[], ming_tile: string|undefined, from: number}[][]}
+     */
+    const fulus_info = [[], [], [], []];
+    /**
+     * @type {{tile: string, moqie: boolean, is_liqi: boolean}[][]}
+     */
+    const new_discard_tiles = [[], [], [], []];
+    /**
+     * @type {string[][]}
+     */
+    const new_deal_tiles = [[], [], [], []];
+    // 预处理
+    (function () {
         // 解析 fulu 至 fulus_info
         const new_fulus = [json.fulu0, json.fulu1, json.fulu2, json.fulu3];
         for (let i = 0; i < json.player_count; i++) {
@@ -154,18 +170,18 @@
                 });
         }
 
-        // 从 tiles, fulus_info 和 new_discard_tiles 解析至 new_deal_tiles
+        // 从 fulus_info, new_discard_tiles 和 tiles0-3 解析至 new_deal_tiles
         const zhuang_seat = json.chang_ju_ben_num[1];
         const first_tile = new_discard_tiles[zhuang_seat][0];
-        if (!first_tile.moqie){
+        if (!first_tile.moqie) {
             new_deal_tiles[zhuang_seat].push(first_tile.tile);
             new_discard_tiles[zhuang_seat].shift();
         }
         for (let i = 0; i < json.player_count; i++) {
             for (const tmp_fulu of fulus_info[i])
-                if (tmp_fulu.type !== 'jiagang')
+                if (tmp_fulu.type !== 'jiagang') {
                     new_deal_tiles[i].push(...tmp_fulu.own_tiles);
-                else
+                } else
                     new_deal_tiles[i].push(tmp_fulu.ming_tile);
         }
         for (let i = 0; i < json.player_count; i++)
@@ -173,12 +189,16 @@
                 if (!discard_tile.moqie)
                     new_deal_tiles[i].push(discard_tile.tile);
         new_discard_tiles[zhuang_seat].unshift(first_tile);
-        new_deal_tiles[json.mainrole].push(...separate(json.tiles));
+        for (let i = 0; i < json.player_count; i++)
+            new_deal_tiles[i].push(...separate(json['tiles' + i]));
 
         const dora = json.dora;
+        const li_dora = json.li_dora;
+        while (li_dora.length < dora.length)
+            li_dora.push('.');
         let zhishipais = '';
         for (let i = dora.length - 1; i >= 0; i--)
-            zhishipais += '.' + dora[i];
+            zhishipais += li_dora[i] + dora[i];
         if (json.player_count === 3)
             zhishipais += '....';
 
@@ -197,6 +217,7 @@
         function separate_tiles(tiles) {
             if (!tiles)
                 return [];
+            tiles = tiles.replace(/\s*/g, '');
             const ret = [];
             while (tiles.length > 0) {
                 // 牌河中的牌有三种可能
@@ -218,7 +239,12 @@
         }
     })();
 
-    let seat = json.chang_ju_ben_num[1], nxt_step = 'qiepai';
+    let seat = json.chang_ju_ben_num[1];
+    let nxt_step = 'qiepai';
+    if (json.first_op === 1)
+        nxt_step = 'angang';
+    else if (json.first_op === 2)
+        nxt_step = 'hupai/liuju';
     while (true) {
         switch (nxt_step) {
             case 'mopai':
@@ -236,47 +262,45 @@
             case 'jiagang':
                 new_zimingpai();
                 break;
+            default:
+                break;
         }
-        if (nxt_step === 'liuju')
+        if (nxt_step === 'hupai/liuju')
             break;
 
         function new_mopai() {
-            if (qiepai_xun[seat] >= new_discard_tiles[seat].length) {
-                nxt_step = 'liuju';
+            if (new_discard_tiles[seat].length <= 0) {
+                nxt_step = 'hupai/liuju';
                 return;
             }
 
-            if (fulus_info[seat][fulu_index[seat]] && (fulus_info[seat][fulu_index[seat]].type === 'angang' || fulus_info[seat][fulu_index[seat]].type === 'jiagang'))
-                nxt_step = fulus_info[seat][fulu_index[seat]].type;
+            if (fulus_info[seat].length > 0 && (fulus_info[seat][0].type === 'angang' || fulus_info[seat][0].type === 'jiagang'))
+                nxt_step = fulus_info[seat][0].type;
             else
                 nxt_step = 'qiepai';
-            let tile;
+
+            let tile = new_discard_tiles[seat][0].tile;
             if (nxt_step === 'jiagang')
-                tile = fulus_info[seat][fulu_index[seat]].own_tiles[0];
-            else {
-                if (!new_discard_tiles[seat][qiepai_xun[seat]].moqie || nxt_step === 'angang')
-                    tile = new_deal_tiles[seat].shift();
-                else
-                    tile = new_discard_tiles[seat][qiepai_xun[seat]].tile;
-            }
+                tile = fulus_info[seat][0].own_tiles[0];
+            else if (!new_discard_tiles[seat][0].moqie || nxt_step === 'angang')
+                tile = new_deal_tiles[seat].shift();
 
             mopai(seat, tile);
         }
 
+        // 先看其他家谁可以鸣主视角的牌, 再看主视角自己切什么牌
         function new_qiepai() {
-            const tile_info = new_discard_tiles[seat][qiepai_xun[seat]];
-            qiepai_xun[seat]++;
-            const tile = tile_info.tile;
-            const f_moqie = tile_info.moqie ? 'moqie' : 'shouqie';
+            const tile_info = new_discard_tiles[seat].shift();
+            const tile = tile_info.moqie ? undefined : tile_info.tile;
 
-            qiepai(seat, tile, tile_info.is_liqi, f_moqie);
+            qiepai(seat, tile, tile_info.is_liqi);
 
             // 明杠, 碰
             const op = ['minggang', 'peng'];
             for (const j in op)
                 for (let i = seat + 1; i < seat + json.player_count; i++) {
                     const tmp_seat = i % json.player_count;
-                    const tmp_fulu = fulus_info[tmp_seat][fulu_index[tmp_seat]];
+                    const tmp_fulu = fulus_info[tmp_seat][0];
                     if (tmp_fulu && tmp_fulu.type === op[j] && tmp_fulu.from === seat && tmp_fulu.ming_tile === tile) {
                         nxt_step = op[j];
                         seat = tmp_seat;
@@ -284,7 +308,7 @@
                     }
                 }
 
-            const tmp_seat = (seat + 1) % json.player_count, tmp_fulu = fulus_info[tmp_seat][fulu_index[tmp_seat]];
+            const tmp_seat = (seat + 1) % json.player_count, tmp_fulu = fulus_info[tmp_seat][0];
             if (tmp_fulu && tmp_fulu.type === 'chi' && tmp_fulu.from === seat && tmp_fulu.ming_tile === tile) {
                 nxt_step = 'chi';
                 seat = tmp_seat;
@@ -296,8 +320,7 @@
         }
 
         function new_mingpai() {
-            const tmp_fulu = fulus_info[seat][fulu_index[seat]];
-            fulu_index[seat]++;
+            const tmp_fulu = fulus_info[seat].shift();
 
             mingpai(seat, tmp_fulu.own_tiles.join(''));
 
@@ -308,8 +331,7 @@
         }
 
         function new_zimingpai() {
-            const tmp_fulu = fulus_info[seat][fulu_index[seat]];
-            fulu_index[seat]++;
+            const tmp_fulu = fulus_info[seat].shift();
 
             zimingpai(seat, tmp_fulu.own_tiles[0], tmp_fulu.type);
 
@@ -319,96 +341,15 @@
     if (json.lst_mopai)
         mopai(json.mainrole, json.lst_mopai);
 
-    huangpai();
+    if (json.end_mode === 0) {
+        if (json.hu_seat.length === 0)
+            hupai();
+        else
+            hupai(json.hu_seat);
+    } else if (json.end_mode === 1)
+        huangpai();
+    else if (json.end_mode === 2)
+        liuju();
+
     fixPaishan();
 })();
-
-// // official
-// const json = {
-//     player_count: 4,
-//     chang_ju_ben_num: [0, 0, 0],
-//     mainrole: 2,
-//     tiles: '0566m6p89s',
-//     lst_mopai: '',
-//     dora: ['0p'],
-//     paihe0: '3z9s1p2pg8m9p1z4s5mr',
-//     paihe1: '7z2z3m5z1sg1zg4zg4zg',
-//     paihe2: '9p7z6z2p8m4s4zg1mg',
-//     paihe3: '9p7zg9s7sg5sg4z4p7pg',
-//     fulu0: [],
-//     fulu1: [],
-//     fulu2: ['_555z', '_111z'],
-//     fulu3: [],
-// };
-//
-// // https://www.bilibili.com/opus/1100855183761473545
-// const json = {
-//     player_count: 4,
-//     chang_ju_ben_num: [1, 0, 0],
-//     mainrole: 0,
-//     tiles: '34055m11346p406s',
-//     lst_mopai: '5p',
-//     dora: ['2z'],
-//     paihe0: '9m9p6z5z6zg8p9pg3zg',
-//     paihe1: '1s9s7z2z8m1z4mg3mg',
-//     paihe2: '4zg6z7m7mg9mg1p8pg6m',
-//     paihe3: '9m9mg2z1p1zg6z5p4z',
-//     fulu0: [],
-//     fulu1: [],
-//     fulu2: [],
-//     fulu3: [],
-// };
-//
-// // https://www.bilibili.com/opus/1096031042145353764
-// const json = {
-//     player_count: 4,
-//     chang_ju_ben_num: [0, 2, 0],
-//     mainrole: 0,
-//     tiles: '2220m56p3066778s',
-//     lst_mopai: '4s',
-//     dora: ['7p'],
-//     paihe0: '7z2s5mg2zg3z3z9s2pg5zg',
-//     paihe1: '9s2z8s4s6m7mg1zg7zg4m',
-//     paihe2: '9m9mg4p4zg2zr1zg9sg6zg4zg4sg5zg',
-//     paihe3: '5z2sg1s1zg7p3m1pg6zg2pg1pg',
-//     fulu0: [],
-//     fulu1: [],
-//     fulu2: [],
-//     fulu3: [],
-// };
-//
-// // https://www.bilibili.com/opus/1090866786329427968
-// const json = {
-//     player_count: 4,
-//     chang_ju_ben_num: [1, 2, 0],
-//     mainrole: 2,
-//     tiles: '446m456p44556s77z',
-//     lst_mopai: '0p',
-//     dora: ['6z', '1p'],
-//     paihe0: '8p5z5p9s6zg7s4zg5m9sg',
-//     paihe1: '1zg5zg3z2s1sg8sg1zg1sg7pr',
-//     paihe2: '4z1z9s8s2z7p8pg6pg',
-//     paihe3: '1z4zg2m8s9m2z9p2zg',
-//     fulu0: ['33_3z', '7777m'],
-//     fulu1: [],
-//     fulu2: [],
-//     fulu3: [],
-// };
-//
-// // https://www.bilibili.com/opus/1064906303211569152
-// const json = {
-//     player_count: 4,
-//     chang_ju_ben_num: [0, 3, 0],
-//     mainrole: 0,
-//     tiles: '355m123405p3345s',
-//     lst_mopai: '5m',
-//     dora: ['5p'],
-//     paihe0: '9m4z8s8p7zg',
-//     paihe1: '4z1m9p7zg6z',
-//     paihe2: '1s9s7z1z3m',
-//     paihe3: '7z5z2m8s9sg9p',
-//     fulu0: [],
-//     fulu1: [],
-//     fulu2: ['_444z'],
-//     fulu3: [],
-// };

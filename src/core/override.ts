@@ -98,7 +98,7 @@ export const editOffline = (): void => {
         const slots = [0, 1, 2, 5, 6, 7, 11, 13];
         for (let seat: Seat = 0; seat < player_cnt; seat++) {
             ret[seat] = {
-                account_id: player_datas[seat].avatar_id * 10 + seat, // 账号唯一id, 这里没什么用随便设的
+                account_id: 100000 + seat, // 账号唯一id, 这里没什么用随便设的
                 seat: seat as Seat, // 座次
                 nickname: player_datas[seat].nickname, // 昵称
                 avatar_id: player_datas[seat].avatar_id, // 头像id
@@ -166,6 +166,7 @@ export const editOffline = (): void => {
             console.error(e);
         }
     };
+
     // 重写查看牌谱函数, 修改房间信息和玩家信息
     GameMgr.Inst.checkPaiPu = function (game_uuid: string, account_id: number, paipu_config: 0 | 2) {
         try { // 添加下面
@@ -374,11 +375,11 @@ const optimizeFunction = (): void => {
         let text = '';
         if (config.meta && config.meta.tournament_id) {
             const n = cfg.tournament.tournaments.get(config.meta.tournament_id);
-            return n && (text = n.name),
-                {
-                    text: text,
-                    isSimhei: !0
-                };
+            n && (text = n.name);
+            return {
+                text: text,
+                isSimhei: !0
+            };
         }
         if (1 === config.category) {
             if (config.mode.detail_rule)
@@ -448,7 +449,7 @@ const optimizeFunction = (): void => {
         };
     };
 
-    // 国标添加圈风刻, 门风刻语音, 并不显示宝牌指示牌
+    // 国标添加圈风刻, 门风刻语音; 并不显示宝牌指示牌
     uiscript.UI_Win.prototype.showRecord = function (K) {
         var z = this;
         if (!view.DesktopMgr.Inst.record_show_anim)
@@ -478,7 +479,7 @@ const optimizeFunction = (): void => {
             // 添加下面
             this.container_dora.visible = !(view.DesktopMgr.Inst.is_chuanma_mode() || is_guobiao()),
             this.container_lidora.visible = !(view.DesktopMgr.Inst.is_chuanma_mode() || is_guobiao());
-            // 添加上面
+        // 添加上面
         var O = K.fan_names.length
             , m = 100;
         this.container_fan_yiman.visible = false,
@@ -890,7 +891,7 @@ const optimizeFunction = (): void => {
             // 添加下面
             this.container_dora.visible = !(view.DesktopMgr.Inst.is_chuanma_mode() || is_guobiao()),
             this.container_lidora.visible = !(view.DesktopMgr.Inst.is_chuanma_mode() || is_guobiao());
-            // 添加上面
+        // 添加上面
         var Z = K.fan_names.length;
         this.container_fan_yiman.visible = false,
             this.container_fan_8.visible = false,
@@ -992,7 +993,7 @@ const optimizeFunction = (): void => {
             this.btn_confirm.getChildByName('confirm').x = 131;
     };
 
-    // 国标麻将不显示符数
+    // 国标麻将不显示符数; 番数扩展到百位显示
     uiscript.UI_Win.prototype.setFanFu = function (B, K) {
         // cloneImage 函数由猫粮工作室老板娘"丝茉茉"提供
         const cloneImage = original => {

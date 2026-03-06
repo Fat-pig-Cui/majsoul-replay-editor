@@ -431,9 +431,6 @@ export const is_wanwushengzhang = (): boolean => config.mode.detail_rule._wanwus
 // 是否允许大小四喜复合
 export const is_sixifuhe = (): boolean => config.mode.detail_rule._sixifuhe;
 
-// 是否根据 deal_tiles 确定牌山
-export const is_mopai_paishan = (): boolean => config.mode.detail_rule._mopai_paishan;
-
 // ------------------------------------------------------------------------
 // 是否为国标模式
 export const is_guobiao = (): boolean => config.mode.detail_rule._guobiao;

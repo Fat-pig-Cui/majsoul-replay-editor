@@ -1,6 +1,6 @@
 clearProject();
 
-// 赤羽之战的天和是不破地和的, 有汪汪录佐证: 137期片尾 https://www.bilibili.com/video/BV1jX4y1P7zi
+// 赤羽之战的天和是不破地和的, 有汪汪录佐证: 137期片尾 https://www.bilibili.com/video/BV1jX4y1P7zi?t=598
 
 player_datas[0].nickname = '一姬-契约';
 player_datas[1].nickname = '新年初诣';

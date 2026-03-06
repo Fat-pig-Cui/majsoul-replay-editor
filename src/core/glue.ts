@@ -167,25 +167,25 @@ export let addUnveilTile = (seat: Seat): void => {
 /**
  * 胶水代码: 他家鸣牌(吃/碰/明杠)
  * @param seat - 鸣牌的玩家
- * @param split_tiles - 参与鸣牌的所有牌
- * @param froms - 副露的牌来自哪些玩家
+ * @param fulu_tiles - 参与鸣牌的所有牌
+ * @param tiles_from - 副露的牌来自哪些玩家
  * @param type - 操作类型, 0吃, 1碰, 2明杠
  * @param liqi - 刚立直玩家的立直信息
  * @param tile_states - 配牌明牌: 鸣出去的牌是否为明牌
  */
-export let addChiPengGang = (seat: Seat, split_tiles: Tile[], froms: Seat[], type: ChiPengGangType, liqi: Liqi, tile_states: boolean[]): void => {
+export let addChiPengGang = (seat: Seat, fulu_tiles: Tile[], tiles_from: Seat[], type: ChiPengGangType, liqi: Liqi, tile_states: boolean[]): void => {
     pushAction('RecordChiPengGang', {
         seat: seat,
-        tiles: split_tiles,
+        tiles: fulu_tiles,
         type: type,
-        froms: froms,
+        froms: tiles_from,
         liqi: liqi,
         scores: scores,
         tingpais: calcTingpai(seat),
         tile_states: tile_states,
         muyu: is_muyu() ? muyu_info : undefined,
-        yongchang: is_yongchang() ? yongchang_data[froms[froms.length - 1]] : undefined,
-        hun_zhi_yi_ji_info: is_hunzhiyiji() && hunzhiyiji_info[seat].liqi ? hunzhiyiji_info[froms[froms.length - 1]] : undefined,
+        yongchang: is_yongchang() ? yongchang_data[tiles_from[tiles_from.length - 1]] : undefined,
+        hun_zhi_yi_ji_info: is_hunzhiyiji() && hunzhiyiji_info[seat].liqi ? hunzhiyiji_info[tiles_from[tiles_from.length - 1]] : undefined,
     });
     calcXun();
 };
@@ -228,15 +228,15 @@ export let addBaBei = (seat: Seat, tile: Tile, tile_states: boolean[]): void => 
  * 胶水代码: 和牌
  * @param hule_info - 本次和牌所有的和牌信息
  * @param old_scores - 结算前分数
- * @param baopait - 包牌玩家, 注意和数值比 seat 大1
+ * @param baopai_player - 包牌玩家, 注意和数值比 seat 大1
  */
-export let endHule = (hule_info: HuleInfo[], old_scores: Players_Number, baopait: BaopaiT): void => {
+export let endHule = (hule_info: HuleInfo[], old_scores: Players_Number, baopai_player: BaopaiPlayer): void => {
     pushAction('RecordHule', {
         hules: hule_info,
         old_scores: old_scores,
         delta_scores: delta_scores,
         scores: scores,
-        baopai: baopait,
+        baopai: baopai_player,
     });
 };
 

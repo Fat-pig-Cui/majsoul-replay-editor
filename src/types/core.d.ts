@@ -22,7 +22,7 @@ type ZiMingType = 2 | 3;
 type LiujuType = 1 | 2 | 3 | 4 | 5;
 // 包牌玩家, 注意有包牌的话包牌的值为 Seat + 1, 没有包牌为0
 // 即 seat 为 0,1,2,3 的玩家包牌值分别为 1,2,3,4
-type BaopaiT = Seat | 4;
+type BaopaiPlayer = Seat | 4;
 // 换牌类型 0: 逆时针, 1: 对家, 2: 顺时针
 type HuanpaiType = 0 | 1 | 2;
 // 占星之战的选牌 index
@@ -117,7 +117,6 @@ type Config = {
             _tianguishi_vs_yuantiankemei?: boolean,
             _report_yakus?: boolean,
             _sixifuhe?: boolean,
-            _mopai_paishan?: boolean,
             _guobiao?: boolean,
             _guobiao_huapai?: boolean,
             _guobiao_no_8fanfu?: boolean,
@@ -166,7 +165,7 @@ type Liqi = {
 };
 type DoraCnt = {
     cnt: DoraCntType,
-    licnt: DoraCntType,
+    li_cnt: DoraCntType,
     lastype: DoraLasType,
     bonus?: number, // 多翻的指示牌数量
 };
@@ -359,4 +358,4 @@ type AllData = {
     players: Players,
 };
 
-declare var editFunction: Function, editFunction2: Function;
+declare var editFunction: () => undefined, editFunction2: () => undefined;
