@@ -14,8 +14,7 @@ import {normalMoqie, moqieLiqi, comboMopai, mingQiepai, zimoHu, moqieLiuju} from
 import {demoGame, reportYaku, reportYaku_yiji} from "./core/core";
 
 import {getLeftTileCnt, judgeTile, allEqualTiles, isEqualTile, decompose} from "./core/utils";
-import {separate, separateWithMoqie, separateWithParam} from './core/utils';
-import {calcHupai, calcTingpai, getLstAction, cmp} from './core/utils';
+import {separate, calcHupai, calcTingpai, getLstAction} from './core/utils';
 import {fixPaishan} from './core/utils';
 
 import {resetReplay} from "./core/override";
@@ -57,8 +56,6 @@ export type t_allEqualTiles = typeof allEqualTiles;
 export type t_isEqualTile = typeof isEqualTile;
 export type t_decompose = typeof decompose;
 export type t_separate = typeof separate;
-export type t_separateWithMoqie = typeof separateWithMoqie;
-export type t_separateWithParam = typeof separateWithParam;
 export type t_calcHupai = typeof calcHupai;
 export type t_calcTingpai = typeof calcTingpai;
 export type t_getLstAction = typeof getLstAction;
@@ -66,7 +63,6 @@ export type t_setScores = typeof setScores;
 export type t_resetReplay = typeof resetReplay;
 export type t_reportYaku = typeof reportYaku;
 export type t_reportYaku_yiji = typeof reportYaku_yiji;
-export type t_cmp = typeof cmp;
 export type t_fixPaishan = typeof fixPaishan;
 
 declare type MRE_Type = {
@@ -107,8 +103,6 @@ declare type MRE_Type = {
     isEqualTile: t_isEqualTile;
     decompose: t_decompose;
     separate: t_separate;
-    separateWithMoqie: t_separateWithMoqie;
-    separateWithParam: t_separateWithParam;
     calcHupai: t_calcHupai;
     calcTingpai: t_calcTingpai;
     getLstAction: t_getLstAction;
@@ -116,7 +110,6 @@ declare type MRE_Type = {
     resetReplay: t_resetReplay;
     reportYaku: t_reportYaku;
     reportYaku_yiji: t_reportYaku_yiji;
-    cmp: t_cmp;
     fixPaishan: t_fixPaishan;
 };
 
@@ -158,8 +151,6 @@ export const MRE: MRE_Type = {
     isEqualTile: isEqualTile,
     decompose: decompose,
     separate: separate,
-    separateWithMoqie: separateWithMoqie,
-    separateWithParam: separateWithParam,
     calcHupai: calcHupai,
     calcTingpai: calcTingpai,
     getLstAction: getLstAction,
@@ -167,7 +158,6 @@ export const MRE: MRE_Type = {
     resetReplay: resetReplay,
     reportYaku: reportYaku,
     reportYaku_yiji: reportYaku_yiji,
-    cmp: cmp,
     fixPaishan: fixPaishan,
 };
 
@@ -208,8 +198,6 @@ export const MRE: MRE_Type = {
 (window as any).isEqualTile = isEqualTile;
 (window as any).decompose = decompose;
 (window as any).separate = separate;
-(window as any).separateWithMoqie = separateWithMoqie;
-(window as any).separateWithParam = separateWithParam;
 (window as any).calcHupai = calcHupai;
 (window as any).calcTingpai = calcTingpai;
 (window as any).getLstAction = getLstAction;
@@ -217,5 +205,4 @@ export const MRE: MRE_Type = {
 (window as any).resetReplay = resetReplay;
 (window as any).reportYaku = reportYaku;
 (window as any).reportYaku_yiji = reportYaku_yiji;
-(window as any).cmp = cmp;
 (window as any).fixPaishan = fixPaishan;

@@ -36,8 +36,6 @@ import type {
     t_isEqualTile,
     t_decompose,
     t_separate,
-    t_separateWithMoqie,
-    t_separateWithParam,
     t_calcHupai,
     t_calcTingpai,
     t_getLstAction,
@@ -45,7 +43,6 @@ import type {
     t_resetReplay,
     t_reportYaku,
     t_reportYaku_yiji,
-    t_cmp,
     t_fixPaishan,
 } from './main';
 
@@ -92,8 +89,6 @@ declare global {
     let isEqualTile: t_isEqualTile;
     let decompose: t_decompose;
     let separate: t_separate;
-    let separateWithMoqie: t_separateWithMoqie;
-    let separateWithParam: t_separateWithParam;
     let calcHupai: t_calcHupai;
     let calcTingpai: t_calcTingpai;
     let getLstAction: t_getLstAction;
@@ -101,6 +96,5 @@ declare global {
     let resetReplay: t_resetReplay;
     let reportYaku: t_reportYaku;
     let reportYaku_yiji: t_reportYaku_yiji;
-    let cmp: t_cmp;
     let fixPaishan: t_fixPaishan;
 }

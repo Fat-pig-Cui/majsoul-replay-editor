@@ -38,6 +38,14 @@ import {
 } from "./glue";
 import {editOffline} from "./override";
 
+// player_cnt
+// liqi_need
+// chang, ju, ben, liqibang, benchangbang
+// base_points
+// draw_type, lst_draw_type
+// baogang_seat, first_hu_seat
+// lianzhuang_cnt
+
 // 玩家的个人信息
 export const player_datas: PlayerDatas = [null, null];
 
@@ -89,6 +97,7 @@ export const clearProject = (): void => {
     chang = ju = ben = liqibang = lianzhuang_cnt = 0;
     discard_tiles = [[], [], [], []];
     deal_tiles = [[], [], [], []];
+    gaps = [0, 0, 0, 0];
 
     all_data.all_actions = [];
     all_data.xun = [];
@@ -101,7 +110,8 @@ export const clearProject = (): void => {
  * 设置对局的模式
  */
 export const setConfig = (c: Config): void => {
-    config = c;
+    for (const key in c)
+        config[key] = c[key];
 };
 
 /**
@@ -124,7 +134,7 @@ export const setDealTiles = (tiles: Players_String): void => {
  * 手动设置牌山(参数不含起手)
  */
 export const setPaishan = (ps: string): void => {
-    paishan = separate(ps);
+    paishan.push(...separate(ps));
 };
 
 /**
@@ -1691,9 +1701,10 @@ export const dingque = (x: GapsInput): void => {
     const all_dingque = x.split('') as [GapInputType, GapInputType, GapInputType, GapInputType];
     const dict: { m: GapType, p: GapType, s: GapType } = {'m': 1 as GapType, 'p': 0 as GapType, 's': 2 as GapType}; // 注意 012 分别对应 pms, 而不是 mps
     const ret: Gaps = [0, 0, 0, 0];
-    for (let i: Seat = 0; i < player_cnt; i++)
+    for (let i: Seat = 0; i < player_cnt; i++) {
         ret[i] = dict[all_dingque[i]];
-    gaps = ret;
+        gaps[i] = ret[i];
+    }
 
     addSelectGap(ret);
 };
@@ -1859,7 +1870,8 @@ export const moqieLiuju = (): void => {
  * 设置玩家的实时点数
  */
 export const setScores = (s: Players_Number): void => {
-    scores = s;
+    for (let i = 0; i < player_cnt; i++)
+        scores[i] = s[i];
 };
 
 // 对局的模式
@@ -3774,7 +3786,7 @@ export const calcFan = (seat: Seat, zimo: boolean, fangchong?: Seat): CalcFanRet
 
             if (is_yifanjieguyi()) {
                 let tuibudao = true;
-                for (let i:number = Constants.TILE_NUM.C1m; i <= Constants.TILE_NUM.C7z; i++)
+                for (let i: number = Constants.TILE_NUM.C1m; i <= Constants.TILE_NUM.C7z; i++)
                     if (i !== 10 && i !== 11 && i !== 12 && i !== 13 && i !== 14 && i !== 17 && i !== 18)
                         if (i !== 20 && i !== 22 && i !== 23 && i !== 24 && i !== 26 && i !== 27)
                             if (i !== 32 && cnt2[i] >= 1) {

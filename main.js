@@ -4876,6 +4876,13 @@ var MRE = (function (exports) {
      * @email: chubbypig@qq.com
      * @github: https://github.com/Fat-pig-Cui/majsoul-replay-editor
      */
+    // player_cnt
+    // liqi_need
+    // chang, ju, ben, liqibang, benchangbang
+    // base_points
+    // draw_type, lst_draw_type
+    // baogang_seat, first_hu_seat
+    // lianzhuang_cnt
     // 玩家的个人信息
     const player_datas = [null, null];
     // 玩家的起手
@@ -4923,6 +4930,7 @@ var MRE = (function (exports) {
         chang = ju = ben = liqibang = lianzhuang_cnt = 0;
         discard_tiles = [[], [], [], []];
         deal_tiles = [[], [], [], []];
+        gaps = [0, 0, 0, 0];
         all_data.all_actions = [];
         all_data.xun = [];
         all_data.player_datas = player_datas;
@@ -4933,7 +4941,8 @@ var MRE = (function (exports) {
      * 设置对局的模式
      */
     const setConfig = (c) => {
-        config = c;
+        for (const key in c)
+            config[key] = c[key];
     };
     /**
      * 设置玩家的切牌集合
@@ -4953,7 +4962,7 @@ var MRE = (function (exports) {
      * 手动设置牌山(参数不含起手)
      */
     const setPaishan = (ps) => {
-        paishan = separate(ps);
+        paishan.push(...separate(ps));
     };
     /**
      * 随机牌山函数, 最后会将随机牌山赋给全局变量 paishan, paishan.join('') 就是牌谱界面显示的牌山字符串代码
@@ -6378,9 +6387,10 @@ var MRE = (function (exports) {
         const all_dingque = x.split('');
         const dict = { 'm': 1, 'p': 0, 's': 2 }; // 注意 012 分别对应 pms, 而不是 mps
         const ret = [0, 0, 0, 0];
-        for (let i = 0; i < player_cnt; i++)
+        for (let i = 0; i < player_cnt; i++) {
             ret[i] = dict[all_dingque[i]];
-        gaps = ret;
+            gaps[i] = ret[i];
+        }
         addSelectGap(ret);
     };
     /**
@@ -6536,7 +6546,8 @@ var MRE = (function (exports) {
      * 设置玩家的实时点数
      */
     const setScores = (s) => {
-        scores = s;
+        for (let i = 0; i < player_cnt; i++)
+            scores[i] = s[i];
     };
     // 对局的模式
     let config;
@@ -10903,8 +10914,6 @@ var MRE = (function (exports) {
         isEqualTile: isEqualTile,
         decompose: decompose,
         separate: separate,
-        separateWithMoqie: separateWithMoqie,
-        separateWithParam: separateWithParam,
         calcHupai: calcHupai,
         calcTingpai: calcTingpai,
         getLstAction: getLstAction,
@@ -10912,7 +10921,6 @@ var MRE = (function (exports) {
         resetReplay: resetReplay,
         reportYaku: reportYaku,
         reportYaku_yiji: reportYaku_yiji,
-        cmp: cmp,
         fixPaishan: fixPaishan,
     };
     window.player_datas = player_datas;
@@ -10952,8 +10960,6 @@ var MRE = (function (exports) {
     window.isEqualTile = isEqualTile;
     window.decompose = decompose;
     window.separate = separate;
-    window.separateWithMoqie = separateWithMoqie;
-    window.separateWithParam = separateWithParam;
     window.calcHupai = calcHupai;
     window.calcTingpai = calcTingpai;
     window.getLstAction = getLstAction;
@@ -10961,7 +10967,6 @@ var MRE = (function (exports) {
     window.resetReplay = resetReplay;
     window.reportYaku = reportYaku;
     window.reportYaku_yiji = reportYaku_yiji;
-    window.cmp = cmp;
     window.fixPaishan = fixPaishan;
 
     exports.MRE = MRE;
