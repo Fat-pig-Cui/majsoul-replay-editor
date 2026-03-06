@@ -25,19 +25,19 @@
      */
     const json = {
         player_count: 4,
-        chang_ju_ben_num: [0, 0, 0],
+        chang_ju_ben_num: [0, 2, 10],
         mainrole: 2,
-        tiles: '0566m6p89s',
-        lst_mopai: '',
-        dora: ['0p'],
-        scores: [25000, 25000, 25000, 25000],
-        paihe0: '3z9s1p2pg8m9p1z4s5mr',
-        paihe1: '7z2z3m5z1sg1zg4zg4zg',
-        paihe2: '9p7z6z2p8m4s4zg1mg',
-        paihe3: '9p7zg9s7sg5sg4z4p7pg',
-        fulu0: [],
-        fulu1: [],
-        fulu2: ['_555z', '_111z'],
+        tiles: '123m6z',
+        lst_mopai: '6z',
+        dora: ['4p', '3z', '8p', '1s'],
+        scores: [9500, 14700, 64800, 11000],
+        paihe0: '6s5p4s8m6p6s6mg4mg9pg5mg7pg7mg7s0mg3pg1mg2mg',
+        paihe1: '5p8p9sg4p2sg3sg3pg1m2zg6m7mg8s8pg2zg3mg5p3m4m',
+        paihe2: '6m0p7p0s7s7s3z2s9mg4zg1s3p6mg5sg2p1p2sg5mgr',
+        paihe3: '2m4s7s3s7pg2mg4p8s7mg4sg1pg4z3zg9sg2pg2pg9pg9mg',
+        fulu0: ['_213m'],
+        fulu1: ['_666s', '_534p', '_888m', '8_88s'],
+        fulu2: ['5555z', '7777z', '1111z'],
         fulu3: [],
     };
     /**
@@ -65,9 +65,15 @@
             meta: {mode_id: 0},
             mode: {
                 mode: json.player_count === 3 ? 12 : 2,
-                detail_rule: {
-                    _heqie_mode: true, // 何切模式一定要开启, 否则会报错
-                    _no_liujumanguan: true, // 无流满
+                detail_rule: { // 无流满, 无罚符
+                    _no_liujumanguan: true,
+                    _fafu_1ting: 0,
+                    _fafu_2ting: 0,
+                    _fafu_3ting: 0,
+                    _fafu_3p_1ting: 0,
+                    _fafu_3p_2ting: 0,
+                    _fafu_2p: 0,
+
                     _chang_ju_ben_num_: json.chang_ju_ben_num,
                     _mainrole_: json.mainrole,
                     _scores_: json.scores,
@@ -149,7 +155,12 @@
         }
 
         // 从 tiles, fulus_info 和 new_discard_tiles 解析至 new_deal_tiles
-        new_deal_tiles[json.mainrole] = separate(json.tiles);
+        const zhuang_seat = json.chang_ju_ben_num[1];
+        const first_tile = new_discard_tiles[zhuang_seat][0];
+        if (!first_tile.moqie){
+            new_deal_tiles[zhuang_seat].push(first_tile.tile);
+            new_discard_tiles[zhuang_seat].shift();
+        }
         for (let i = 0; i < json.player_count; i++) {
             for (const tmp_fulu of fulus_info[i])
                 if (tmp_fulu.type !== 'jiagang')
@@ -161,8 +172,8 @@
             for (const discard_tile of new_discard_tiles[i])
                 if (!discard_tile.moqie)
                     new_deal_tiles[i].push(discard_tile.tile);
-
-        const zhuang_seat = json.chang_ju_ben_num[1];
+        new_discard_tiles[zhuang_seat].unshift(first_tile);
+        new_deal_tiles[json.mainrole].push(...separate(json.tiles));
 
         const dora = json.dora;
         let zhishipais = '';

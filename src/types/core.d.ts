@@ -118,7 +118,6 @@ type Config = {
             _report_yakus?: boolean,
             _sixifuhe?: boolean,
             _mopai_paishan?: boolean,
-            _heqie_mode?: boolean,
             _guobiao?: boolean,
             _guobiao_huapai?: boolean,
             _guobiao_no_8fanfu?: boolean,
@@ -131,6 +130,21 @@ type Config = {
         },
         testing_environment?: any
     };
+};
+
+type BaseInfo = {
+    chang: Seat,
+    ju: Seat,
+    ben: number,
+    liqibang: number,
+    benchangbang: number,
+    liqi_need: number,
+    base_point: number,
+    draw_type: 0 | 1
+    lst_draw_type: 0 | 1,
+    baogang_seat: -1 | Seat,
+    first_hu_seat: -1 | Seat,
+    lianzhuang_cnt: number,
 };
 
 type FuluInfo = { type: FuLuType, tile: Tile[], from?: Seat };

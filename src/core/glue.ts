@@ -6,12 +6,12 @@
  */
 
 import {
-    chang, ju, ben, delta_scores, hules_history,
-    actions, awaiting_tiles, hunzhiyiji_info, liqibang,
+    delta_scores, hules_history,
+    actions, awaiting_tiles, hunzhiyiji_info,
     muyu_info, paishan, scores, yongchang_data,
-    player_tiles, all_data
+    player_tiles, all_data, base_info
 } from "./core";
-import {is_chuanma, is_heqie_mode, is_hunzhiyiji, is_muyu, is_xiakeshang, is_yongchang, is_zhanxing} from "./misc";
+import {is_chuanma, is_hunzhiyiji, is_muyu, is_xiakeshang, is_yongchang, is_zhanxing} from "./misc";
 import {calcTingpai, getLeftTileCnt, getLstAction, calcDoras, calcXiaKeShang, calcXun, getAllTingpai} from "./utils";
 
 /**
@@ -23,13 +23,13 @@ import {calcTingpai, getLeftTileCnt, getLstAction, calcDoras, calcXiaKeShang, ca
  */
 export let addNewRound = (left_tile_count: number, fake_hash_code: string, opens: Opens, is_sha256: boolean): void => {
     pushAction('RecordNewRound', {
-        chang: chang,
-        ju: ju,
-        ben: ben,
+        chang: base_info.chang,
+        ju: base_info.ju,
+        ben: base_info.ben,
         ju_count: is_chuanma() ? all_data.all_actions.length : undefined,
-        seat: ju,
+        seat: base_info.ju,
         left_tile_count: left_tile_count,
-        liqibang: liqibang,
+        liqibang: base_info.liqibang,
         tiles0: player_tiles[0],
         tiles1: player_tiles[1],
         tiles2: player_tiles[2],
@@ -106,7 +106,7 @@ export let addDiscardTile = (seat: Seat, tile: Tile, moqie: boolean, is_liqi: bo
         is_wliqi: is_wliqi,
         is_kailiqi: is_kailiqi,
         doras: calcDoras(),
-        tingpais: is_heqie_mode() ? undefined : calcTingpai(seat),
+        tingpais: calcTingpai(seat),
         tile_state: tile_state ? tile_state : undefined,
         muyu: is_muyu() ? muyu_info : undefined,
         yongchang: is_yongchang() ? yongchang_data[seat] : undefined,
@@ -130,9 +130,9 @@ export let addRevealTile = (seat: Seat, tile: Tile, moqie: boolean, is_liqi: boo
         moqie: moqie,
         is_liqi: is_liqi,
         is_wliqi: is_wliqi,
-        liqibang: liqibang,
+        liqibang: base_info.liqibang,
         scores: scores,
-        tingpais: is_heqie_mode() ? undefined : calcTingpai(seat),
+        tingpais: calcTingpai(seat),
     });
 };
 
@@ -147,7 +147,7 @@ export let addLockTile = (seat: Seat, lock_state: LockState, tile: Tile | '' = '
         seat: seat,
         tile: tile,
         scores: scores,
-        liqibang: liqibang,
+        liqibang: base_info.liqibang,
         lock_state: lock_state,
     });
 };
@@ -160,7 +160,7 @@ export let addUnveilTile = (seat: Seat): void => {
     pushAction('RecordUnveilTile', {
         seat: seat,
         scores: scores,
-        liqibang: liqibang,
+        liqibang: base_info.liqibang,
     });
 };
 
@@ -181,7 +181,7 @@ export let addChiPengGang = (seat: Seat, split_tiles: Tile[], froms: Seat[], typ
         froms: froms,
         liqi: liqi,
         scores: scores,
-        tingpais: is_heqie_mode() ? undefined : calcTingpai(seat),
+        tingpais: calcTingpai(seat),
         tile_states: tile_states,
         muyu: is_muyu() ? muyu_info : undefined,
         yongchang: is_yongchang() ? yongchang_data[froms[froms.length - 1]] : undefined,
@@ -203,7 +203,7 @@ export let addAnGangAddGang = (seat: Seat, tile: Tile, ziming_type: ZiMingType, 
         tiles: tile,
         type: ziming_type,
         doras: calcDoras(),
-        tingpais: is_heqie_mode() ? undefined : calcTingpai(seat),
+        tingpais: calcTingpai(seat),
         tile_states: tile_states,
     });
 };
@@ -220,7 +220,7 @@ export let addBaBei = (seat: Seat, tile: Tile, tile_states: boolean[]): void => 
         tile: tile,
         tile_states: tile_states,
         doras: calcDoras(),
-        tingpais: is_heqie_mode() ? undefined : calcTingpai(seat),
+        tingpais: calcTingpai(seat),
     });
 };
 
@@ -282,7 +282,7 @@ export let addHuleXueLiuMid = (hule_info: HuleInfo[], old_scores: Players_Number
         delta_scores: delta_scores,
         scores: scores,
         hules: hule_info,
-        tingpais: getLstAction().name === 'RecordNewRound' && !is_heqie_mode() ? calcTingpai(ju) : [],
+        tingpais: getLstAction().name === 'RecordNewRound' ? calcTingpai(base_info.ju) : [],
         baopai: 0,
     });
 };

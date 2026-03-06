@@ -6,20 +6,19 @@
  */
 
 import {
-    actions, ben, chang, dora_cnt,
-    doras, fulu, gaps, huled, ju,
+    actions, dora_cnt,
+    doras, fulu, gaps, huled,
     liqi_info, lizhizt, mingpais, paihe,
     player_cnt, prelizhizt, pretongxunzt, scores,
     shezhangzt, shoumoqie, tongxunzt,
     xun, yongchang_data, zhenting,
     awaiting_tiles, muyu_info, muyu, paishan,
-    player_tiles, all_data
+    player_tiles, all_data, base_info, lst_liqi
 } from "./core";
 import {
-    get_fanfu,
-    is_chuanma,
+    get_fanfu, get_field_spell_mode,
+    is_chuanma, is_fufenliqi,
     is_guobiao,
-    is_heqie_mode,
     is_qieshang,
     is_qingtianjing,
     is_wanxiangxiuluo,
@@ -751,14 +750,13 @@ export const isBeishuiType = (beishui_type: number): beishui_type is BeishuiType
 // 开局计算所有玩家的听牌, 亲家去掉最后一张牌后再计算, 但仍然不会显示
 export const getAllTingpai = (): { seat: number, tingpais1: { tile: string }[] }[] => {
     const tingpai: { seat: number, tingpais1: { tile: string }[] }[] = [];
-    const lastile = player_tiles[ju].pop();
-    if (!is_heqie_mode())
-        for (let i: Seat = 0; i < player_cnt; i++) {
-            const tingpais1 = calcTingpai(i as Seat);
-            if (tingpais1.length > 0)
-                tingpai.push({seat: i, tingpais1: tingpais1});
-        }
-    player_tiles[ju].push(lastile);
+    const lastile = player_tiles[base_info.ju].pop();
+    for (let i: Seat = 0; i < player_cnt; i++) {
+        const tingpais1 = calcTingpai(i as Seat);
+        if (tingpais1.length > 0)
+            tingpai.push({seat: i, tingpais1: tingpais1});
+    }
+    player_tiles[base_info.ju].push(lastile);
     return tingpai;
 };
 
@@ -789,6 +787,47 @@ export const fulu2Ming = (seat: Seat): string[] => {
     }
     return ming;
 };
+
+/**
+ * 把 lst_liqi 中的信息赋值给 liqi_info, 并返回胶水代码用的 liqi
+ * @param type - 是否允许立直失败, 只会出现在血战到底模式中, 默认不允许
+ */
+export const lstLiqi2Liqi = (type: boolean = false): Liqi => {
+    let ret = null;
+    if (lst_liqi != null) {
+        let need_bangzi = base_info.liqi_need;
+        if (lst_liqi.beishui_type === 1)
+            need_bangzi = 5;
+        else if (lst_liqi.beishui_type === 2)
+            need_bangzi = 10;
+        if (scores[lst_liqi.seat] >= need_bangzi * 1000 || is_fufenliqi()) {
+            base_info.liqibang += need_bangzi;
+            scores[lst_liqi.seat] -= need_bangzi * 1000;
+            liqi_info[lst_liqi.seat] = {
+                liqi: lst_liqi.liqi,
+                yifa: get_field_spell_mode(2) === 2 ? 3 : 1, // 幻境传说: 机会卡2
+                kai: lst_liqi.kai,
+                beishui_type: lst_liqi.beishui_type,
+                xia_ke_shang: {score_coefficients: calcXiaKeShang()},
+            };
+            ret = {
+                seat: lst_liqi.seat,
+                liqibang: base_info.liqibang,
+                score: scores[lst_liqi.seat],
+                liqi_type_beishuizhizhan: lst_liqi.beishui_type,
+                xia_ke_shang: {score_coefficients: calcXiaKeShang()},
+            };
+        } else if (type)
+            ret = {
+                seat: lst_liqi.seat,
+                liqibang: base_info.liqibang,
+                score: scores[lst_liqi.seat],
+                failed: true,
+            };
+    }
+    return ret;
+};
+
 
 /**
  * 配牌明牌, 如果有明的牌则去掉, 返回 true, 没有则返回 false
@@ -1022,7 +1061,7 @@ export const errRoundInfo = (): string => {
     if (is_chuanma())
         return `第${all_data.all_actions.length + 1}局: `;
     const chang_word = [`东`, `南`, `西`, `北`];
-    return `第${all_data.all_actions.length + 1}局(${chang_word[chang]}${ju + 1}局${ben}本场): `;
+    return `第${all_data.all_actions.length + 1}局(${chang_word[base_info.chang]}${base_info.ju + 1}局${base_info.ben}本场): `;
 };
 
 // 根据已结束的对局进行牌山修正, 用于"天凤牌谱编辑器数据转雀魂格式"和"根据可见手牌和牌河生成雀魂牌谱"的最后
