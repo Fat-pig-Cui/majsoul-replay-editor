@@ -23,7 +23,7 @@
  * - dora: 宝牌指示牌, 从左到右
  * - li_dora: 里宝牌指示牌, 从左到右, 长度要和 dora 一致, 若未知则置为空
  * - scores: 所有玩家这小局开始时的点数
- * - paihe0-3: 各家的牌河, 牌不要缩写, 包含被鸣走的牌
+ * - paihe0-3: 各家的牌河, 牌不要缩写, 包含被鸣走的牌, 牌之间空格不影响
  *             牌有后缀g表示摸切, 无g则为手切
  *             有后缀r表示立直, 无r表示非立直
  *             g和r顺序不分先后
@@ -32,8 +32,8 @@
  *            大明杠对家的牌的'_'放在第二个数字前
  *            暗杠的巡目在轮到该暗杠副露时的下一个摸牌巡, 加杠的巡目在碰对应副露之后下一个摸牌巡
  * - first_op: 庄家第一个操作, 0: 切牌(含立直), 1: 暗杠/拔北, 2. 和牌(天和), 默认为0, 若是第二类何切则无论如何都置为0
- * - end_mode: 结束方式, 0: 和牌, 1: 荒牌流局, 2: 途中流局(若不符合途中流局条件则会报错), 默认为1
- * - hu_seat: 和牌玩家的所有 seat, 只在 end_mode 是 0 的时候有效, 若为空则自动判断谁可以和牌(若无人能和牌会报错)
+ * - end_mode: 结束方式, 0: 荒牌流局, 1: 和牌, 2: 途中流局(若不符合途中流局条件则会报错), 默认为1
+ * - hu_seat: 和牌玩家的所有 seat, 只在 end_mode 是 1 的时候有效, 若为空则自动判断谁可以和牌(若无人能和牌会报错)
  */
 const json = {
     player_count: 4,
@@ -47,16 +47,16 @@ const json = {
     dora: ['4s', '3z', '8p', '1s'],
     li_dora: ['9p', '9m', '4m', '9m'],
     scores: [9500, 14700, 64800, 11000],
-    paihe0: '6s5p4s8m6p6s6mg4mg9pg5mg7pg7mg7s0mg3pg1mg2mg',
-    paihe1: '5p8p9sg4p2sg3sg3pg1m2zg6m7mg8s8pg2zg3mg5p3m4m',
-    paihe2: '6m0p7p0s7s7s3z2s9mg4zg1s3p6mg5sg2p1p2sg5mgr',
-    paihe3: '2m4s7s3s7pg2mg4p8s7mg4sg1pg4z3zg9sg2pg2pg9pg9mg',
+    paihe0: '6s5p4s8m6p6s6mg4mg9pg 5mg7pg7mg7s0mg3pg 1mg2mg',
+    paihe1: '5p8p9sg4p2sg3sg 3pg1m2zg6m7mg8s 8pg2zg3mg5p3m4m',
+    paihe2: '6m0p7p0s7s7s 3z2s9mg4zg1s3p 6mg5sg2p1p2sg5mgr',
+    paihe3: '2m4s7s3s7pg2mg4p 8s7mg4sg1pg4z3zg9sg 2pg2pg9pg9mg',
     fulu0: ['_213m'],
     fulu1: ['_666s', '_534p', '_888m', '8_88s'],
     fulu2: ['5555z', '7777z', '1111z'],
     fulu3: [],
     first_op: 1,
-    end_mode: 0,
+    end_mode: 1,
     hu_seat: [],
 };
 ```
@@ -78,60 +78,89 @@ const json = {
     player_count: 4,
     chang_ju_ben_num: [1, 0, 0],
     mainrole: 0,
-    tiles: '34055m11346p406s',
+    tiles0: '34055m11346p406s',
+    tiles1: '',
+    tiles2: '',
+    tiles3: '',
     lst_mopai: '5p',
     dora: ['2z'],
-    paihe0: '9m9p6z5z6zg8p9pg3zg',
-    paihe1: '1s9s7z2z8m1z4mg3mg',
-    paihe2: '4zg6z7m7mg9mg1p8pg6m',
-    paihe3: '9m9mg2z1p1zg6z5p4z',
+    li_dora: [],
+    scores: [26500, 23900, 19300, 30300],
+    paihe0: '9m9p6z5z6zg8p 9pg3zg',
+    paihe1: '1s9s7z2z8m1z 4mg3mg',
+    paihe2: '4zg6z7m7mg9mg1p 8pg6m',
+    paihe3: '9m9mg2z1p1zg6z 5p4z',
     fulu0: [],
     fulu1: [],
     fulu2: [],
     fulu3: [],
+    first_op: 0,
+    end_mode: 0,
+    hu_seat: [],
 };
 // https://www.bilibili.com/opus/1096031042145353764
 const json = {
     player_count: 4,
     chang_ju_ben_num: [0, 2, 0],
     mainrole: 0,
-    tiles: '2220m56p3066778s',
+    tiles0: '2220m56p3066778s',
+    tiles1: '',
+    tiles2: '',
+    tiles3: '',
     lst_mopai: '4s',
     dora: ['7p'],
-    paihe0: '7z2s5mg2zg3z3z9s2pg5zg',
-    paihe1: '9s2z8s4s6m7mg1zg7zg4m',
-    paihe2: '9m9mg4p4zg2zr1zg9sg6zg4zg4sg5zg',
-    paihe3: '5z2sg1s1zg7p3m1pg6zg2pg1pg',
+    li_dora: [],
+    scores: [23400, 25500, 23100, 28000],
+    paihe0: '7z2s5mg2zg3z3z 9s2pg5zg',
+    paihe1: '9s2z8s4s6m7mg 1zg7zg4m',
+    paihe2: '9m9mg4p4zg2zr1zg 9sg6zg4zg5zg',
+    paihe3: '5z2sg1s1zg7p3m 1pg6zg2pg1pg',
     fulu0: [],
     fulu1: [],
     fulu2: [],
     fulu3: [],
+    first_op: 0,
+    end_mode: 0,
+    hu_seat: [],
 };
 // https://www.bilibili.com/opus/1090866786329427968
 const json = {
     player_count: 4,
     chang_ju_ben_num: [1, 2, 0],
     mainrole: 2,
-    tiles: '446m456p44556s77z',
+    tiles0: '',
+    tiles1: '',
+    tiles2: '446m456p44556s77z',
+    tiles3: '',
     lst_mopai: '0p',
     dora: ['6z', '1p'],
-    paihe0: '8p5z5p9s6zg7s4zg5m9sg',
-    paihe1: '1zg5zg3z2s1sg8sg1zg1sg7pr',
-    paihe2: '4z1z9s8s2z7p8pg6pg',
-    paihe3: '1z4zg2m8s9m2z9p2zg',
+    li_dora: [],
+    scores: [24400, 16400, 32600, 26600],
+    paihe0: '8p5z5p9s6zg7s 4zg5m9sg',
+    paihe1: '1zg5zg3z2s1sg8sg1zg 1sg7pr',
+    paihe2: '4z1z9s8s2z7p 8pg6pg',
+    paihe3: '1z4zg2m8s9m2z 9p2zg',
     fulu0: ['33_3z', '7777m'],
     fulu1: [],
     fulu2: [],
     fulu3: [],
+    first_op: 0,
+    end_mode: 0,
+    hu_seat: [],
 };
 // https://www.bilibili.com/opus/1064906303211569152
 const json = {
     player_count: 4,
     chang_ju_ben_num: [0, 3, 0],
     mainrole: 0,
-    tiles: '355m123405p3345s',
+    tiles0: '355m123405p3345s',
+    tiles1: '',
+    tiles2: '',
+    tiles3: '',
     lst_mopai: '5m',
     dora: ['5p'],
+    li_dora: [],
+    scores: [21500, 18600, 34500, 25400],
     paihe0: '9m4z8s8p7zg',
     paihe1: '4z1m9p7zg6z',
     paihe2: '1s9s7z1z3m',
@@ -140,5 +169,8 @@ const json = {
     fulu1: [],
     fulu2: ['_444z'],
     fulu3: [],
+    first_op: 0,
+    end_mode: 0,
+    hu_seat: [],
 };
 ```

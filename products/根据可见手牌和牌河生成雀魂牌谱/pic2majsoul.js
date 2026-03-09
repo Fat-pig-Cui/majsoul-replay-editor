@@ -14,7 +14,7 @@
      * - dora: 宝牌指示牌, 从左到右
      * - li_dora: 里宝牌指示牌, 从左到右, 长度要和 dora 一致, 若未知则置为空
      * - scores: 所有玩家这小局开始时的点数
-     * - paihe0-3: 各家的牌河, 牌不要缩写, 包含被鸣走的牌
+     * - paihe0-3: 各家的牌河, 牌不要缩写, 包含被鸣走的牌, 牌之间空格不影响
      *             牌有后缀g表示摸切, 无g则为手切
      *             有后缀r表示立直, 无r表示非立直
      *             g和r顺序不分先后
@@ -23,8 +23,8 @@
      *            大明杠对家的牌的'_'放在第二个数字前
      *            暗杠的巡目在轮到该暗杠副露时的下一个摸牌巡, 加杠的巡目在碰对应副露之后下一个摸牌巡
      * - first_op: 庄家第一个操作, 0: 切牌(含立直), 1: 暗杠/拔北, 2. 和牌(天和), 默认为0, 若是第二类何切则无论如何都置为0
-     * - end_mode: 结束方式, 0: 和牌, 1: 荒牌流局, 2: 途中流局(若不符合途中流局条件则会报错), 默认为1
-     * - hu_seat: 和牌玩家的所有 seat, 只在 end_mode 是 0 的时候有效, 若为空则自动判断谁可以和牌(若无人能和牌会报错)
+     * - end_mode: 结束方式, 0: 荒牌流局, 1: 和牌, 2: 途中流局(若不符合途中流局条件则会报错), 默认为1
+     * - hu_seat: 和牌玩家的所有 seat, 只在 end_mode 是 1 的时候有效, 若为空则自动判断谁可以和牌(若无人能和牌会报错)
      */
     const json = {
         player_count: 4,
@@ -38,16 +38,16 @@
         dora: ['4s', '3z', '8p', '1s'],
         li_dora: ['9p', '9m', '4m', '9m'],
         scores: [9500, 14700, 64800, 11000],
-        paihe0: '6s5p4s8m6p6s6mg4mg9pg5mg7pg7mg7s0mg3pg1mg2mg',
-        paihe1: '5p8p9sg4p2sg3sg3pg1m2zg6m7mg8s8pg2zg3mg5p3m4m',
-        paihe2: '6m0p7p0s7s7s3z2s9mg4zg1s3p6mg5sg2p1p2sg5mgr',
-        paihe3: '2m4s7s3s7pg2mg4p8s7mg4sg1pg4z3zg9sg2pg2pg9pg9mg',
+        paihe0: '6s5p4s8m6p6s6mg4mg9pg 5mg7pg7mg7s0mg3pg 1mg2mg',
+        paihe1: '5p8p9sg4p2sg3sg 3pg1m2zg6m7mg8s 8pg2zg3mg5p3m4m',
+        paihe2: '6m0p7p0s7s7s 3z2s9mg4zg1s3p 6mg5sg2p1p2sg5mgr',
+        paihe3: '2m4s7s3s7pg2mg4p 8s7mg4sg1pg4z3zg9sg 2pg2pg9pg9mg',
         fulu0: ['_213m'],
         fulu1: ['_666s', '_534p', '_888m', '8_88s'],
         fulu2: ['5555z', '7777z', '1111z'],
         fulu3: [],
         first_op: 1,
-        end_mode: 0,
+        end_mode: 1,
         hu_seat: [],
     };
 
@@ -341,15 +341,15 @@
     if (json.lst_mopai)
         mopai(json.mainrole, json.lst_mopai);
 
-    if (json.end_mode === 0) {
+    if (json.end_mode === 1) {
         if (json.hu_seat.length === 0)
             hupai();
         else
             hupai(json.hu_seat);
-    } else if (json.end_mode === 1)
-        huangpai();
-    else if (json.end_mode === 2)
+    } else if (json.end_mode === 2)
         liuju();
+    else
+        huangpai();
 
     fixPaishan();
 })();
