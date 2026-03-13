@@ -351,5 +351,5 @@
     else
         huangpai();
 
-    fixPaishan();
+    fixPaishan(json.dora.length, json.li_dora.length);
 })();

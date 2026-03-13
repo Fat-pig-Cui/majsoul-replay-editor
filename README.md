@@ -54,8 +54,8 @@ B站视频教程(偏过时): [【雀魂】如何自制牌谱回放](https://www.
 
 ---
 
-为了便于维护和封装, 最近正在用 TypeScript 重写项目, 目前的 `main.js` 由 [src](src) 文件夹下的 TypeScript 文件编译而来,
-有很多不完善的地方, 这里暂存了老版本: [main_old.js](main_old.js)
+为了便于维护和封装, 最近正在用 TypeScript 重写项目, 目前的 `main.js` 由 [src](src) 文件夹下的 TypeScript 文件编译而来, 
+这里暂存了老版本: [main_old.js](main_old.js)
 
 如何从ts编译为js:
 
