@@ -63,6 +63,7 @@ export const getLeftTileCnt = (): number => {
  * - 'P': 饼子
  * - 'S': 索子
  * - 'L': 组成绿一色的牌
+ * - 'jiangdui': 川麻: 组成将对的牌
  * - 'quanshuang': 国标: 组成全双刻的牌
  * - 'quanda': 国标: 组成全大的牌
  * - 'quanzhong': 国标: 组成全中的牌
@@ -70,13 +71,16 @@ export const getLeftTileCnt = (): number => {
  * - 'dayuwu': 国标: 组成大于五的牌
  * - 'xiaoyuwu': 国标: 组成小于五的牌
  * - 'tuibudao': 国标: 组成推不倒的牌
+ * - 'hongkongque': 一番街古役: 组成红孔雀的牌
+ * - 'hongyidian': 一番街古役: 组成红一点的牌
+ * - 'heiyise': 一番街古役: 组成黑一色的牌
  */
 export const judgeTile = (tile: Tile, type: string): boolean => {
     if (typeof tile != 'string' || tile.length === 1)
         throw new Error(errRoundInfo() + `judgeTile: tile 格式不合规: ${tile}`);
     if (tile === Constants.TBD)
         return true;
-    const x = tile2Int(tile);
+    tile = simplify(tile);
     switch (type) {
         case 'Y':
             return tile[0] === '1' || tile[0] === '9' || tile[1] === 'z';
@@ -93,28 +97,36 @@ export const judgeTile = (tile: Tile, type: string): boolean => {
         case 'S':
             return tile[1] === 's';
         case 'L':
-            return x === Constants.TILE_NUM.C1s + 1 || x === Constants.TILE_NUM.C1s + 2 || x === Constants.TILE_NUM.C1s + 3 || x === Constants.TILE_NUM.C1s + 5 || x === Constants.TILE_NUM.C1s + 7 || x === Constants.TILE_NUM.C5z + 1;
+            return separate('23468s6z').includes(tile);
+        case 'jiangdui':
+            return tile[1] !== 'z' && (tile[0] === '2' || tile[0] === '5' || tile[0] === '8');
         case 'quanshuang':
-            return x <= Constants.TILE_NUM.C9s && ((x - 1) % 9 + 1) % 2 === 0;
+            return tile[1] !== 'z' && parseInt(tile) % 2 === 0;
         case 'quanda':
-            return x <= Constants.TILE_NUM.C9s && (x - 1) % 9 >= 6;
+            return tile[1] !== 'z' && parseInt(tile) >= 7;
         case 'quanzhong':
-            return x <= Constants.TILE_NUM.C9s && (x - 1) % 9 >= 3 && (x - 1) % 9 <= 5;
+            return tile[1] !== 'z' && parseInt(tile) >= 4 && parseInt(tile) <= 6;
         case 'quanxiao':
-            return x <= Constants.TILE_NUM.C9s && (x - 1) % 9 <= 2;
+            return tile[1] !== 'z' && parseInt(tile) <= 3;
         case 'dayuwu':
-            return x <= Constants.TILE_NUM.C9s && (x - 1) % 9 >= 5;
+            return tile[1] !== 'z' && parseInt(tile) >= 6;
         case 'xiaoyuwu':
-            return x <= Constants.TILE_NUM.C9s && (x - 1) % 9 <= 3;
+            return tile[1] !== 'z' && parseInt(tile) <= 4;
         case 'tuibudao':
-            return x === 10 || x === 11 || x === 12 || x === 13 || x === 14 || x === 17 || x === 18 || x === 20 || x === 22 || x === 23 || x === 24 || x === 26 || x === 27 || x === 32;
+            return separate('1234589p245689s5z').includes(tile);
+        case 'hongkongque':
+            return separate('1579s7z').includes(tile);
+        case 'hongyidian':
+            return separate('23468s7z').includes(tile);
+        case 'heiyise':
+            return separate('248p1234z').includes(tile);
         default:
             throw new Error(errRoundInfo() + `judgeTile: type 格式不合规: ${type}`);
     }
 };
 
 /**
- * 返回和 tile 等效的所有牌, 优先把红宝牌和含有 Constants.SPT_SUFFIX 放到后面
+ * 返回和 tile 等效的所有牌, 优先把红宝牌和含有 SPT_SUFFIX 放到后面
  * @example
  * // return ['5m', '0m', '5mt', '0mt']
  * allEqualTiles('5m')
@@ -122,7 +134,7 @@ export const judgeTile = (tile: Tile, type: string): boolean => {
 export const allEqualTiles = (tile: Tile): Tile[] => {
     if (tile === Constants.TBD)
         return [Constants.TBD];
-    tile = tile.substring(0, 2) as Tile; // 去掉可能存在的 Constants.SPT_SUFFIX
+    tile = tile[0] + tile[1]; // 去掉可能存在的 SPT_SUFFIX
     if (tile[0] === '0' || tile[0] === '5' && tile[1] !== 'z')
         return ['5' + tile[1], '5' + tile[1] + Constants.SPT_SUFFIX, '0' + tile[1], '0' + tile[1] + Constants.SPT_SUFFIX] as Tile[];
     else
@@ -133,6 +145,44 @@ export const allEqualTiles = (tile: Tile): Tile[] => {
  * 判断两个牌是否等效
  */
 export const isEqualTile = (x: Tile, y: Tile): boolean => allEqualTiles(x).includes(y);
+
+/**
+ * 将 tile 牌简化: 去掉最后的 SPT_SUFFIX, 并将红宝牌转换为普通牌
+ */
+export const simplify = (tile: Tile): Tile => {
+    if (tile[0] == '0')
+        return '5' + tile[1] as Tile;
+    return tile[0] + tile[1] as Tile;
+};
+
+/**
+ * 按照排序返回 tile 的下一张牌, 忽略红宝牌
+ */
+export const nextTile = (tile: Tile): Tile => {
+    tile = simplify(tile);
+    if (tile === '7z')
+        return '0m';
+    const group = ['m', 'p', 's', 'z'];
+    const cur_index = group.indexOf(tile[1]);
+    if (tile[0] === '9')
+        return '1' + group[cur_index + 1] as Tile;
+    return (parseInt(tile) + 1) + tile[1] as Tile;
+};
+
+/**
+ * 给定牌顺子给出中间的牌
+ */
+export const shunziMidTile = (tiles: Tile[]): Tile => {
+    if (tiles.length !== 3)
+        throw new Error(errRoundInfo() + `shunziMidTile: 输入牌数量不为3: ${tiles}`);
+    const nums: number[] = [];
+    for (let tile of tiles) {
+        tile = simplify(tile);
+        nums.push(parseInt(tile[0]));
+    }
+    nums.sort((a, b) => a - b);
+    return nums[1] + tiles[0][1] as Tile;
+};
 
 /**
  * 解析牌, 会将简化后牌编码恢复成单个并列样子
@@ -194,7 +244,7 @@ function separateUnified(
             // 维持旧行为：只报错不抛异常
             console.error(errRoundInfo() + `separate: 牌格式不合规: ${tmp_tile}`);
         }
-        if (s.length > 2 && s[2] === Constants.SPT_SUFFIX) { // 第3位是 Constants.SPT_SUFFIX, 则是特殊牌
+        if (s.length > 2 && s[2] === Constants.SPT_SUFFIX) { // 特殊牌
             ret.push(s.substring(0, 3) as Tile);
             s = s.substring(3);
         } else {
@@ -257,22 +307,23 @@ export const separateWithParam = (tiles: string | TileWithParam[]): TileWithPara
  * - 12: 一番街古役: 十三不搭
  */
 export const calcHupai = (tiles: Tile[], type: boolean = false): number => {
-    const cnt: number[] = [], tmp: number[] = [];
-    for (let i = Constants.CBD; i <= Constants.TILE_NUM.C7z; i++) // 是 Constants.CBD 而不是 Constants.TILE_NUM.C1m 是因为百搭牌
-        cnt[i] = tmp[i] = 0;
+    const cnt: TileNum = {}, tmp: TileNum = {};
+    for (const tile of Constants.TILE_NO_AKA)
+        cnt[tile] = tmp[tile] = 0;
+    cnt[Constants.TBD] = 0;
     for (const tile of tiles)
-        cnt[tile2Int(tile)]++;
+        cnt[simplify(tile)]++;
 
     if (is_guobiao() && tiles.includes(Constants.HUAPAI))  // 国标无法听花牌, 有花牌一定不是和牌型
         return 0;
 
-    if (is_wanxiangxiuluo() && cnt[Constants.CBD] === 1 && !type) {
+    if (is_wanxiangxiuluo() && cnt[Constants.TBD] === 1 && !type) {
         const tmp_tiles: Tile[] = [];
         for (const tile of tiles)
             if (tile !== Constants.TBD)
                 tmp_tiles.push(tile);
-        for (let i = Constants.TILE_NUM.C1m; i <= Constants.TILE_NUM.C7z; i++) { // 百搭牌试所有牌
-            tmp_tiles.push(int2Tile(i));
+        for (const tile of Constants.TILE_NO_AKA) { // 百搭牌试所有牌
+            tmp_tiles.push(tile);
             const result = calcHupai(tmp_tiles, true);
             if (result !== 0) // 存在百搭牌使得成为和牌型, 则返回
                 return result;
@@ -280,17 +331,17 @@ export const calcHupai = (tiles: Tile[], type: boolean = false): number => {
         }
         return 0;
     }
-
-    for (let i = Constants.TILE_NUM.C1m; i <= Constants.TILE_NUM.C7z; i++) {
-        if (cnt[i] >= 2) { // 假设雀头, 则剩下的只有4个面子
-            cnt[i] -= 2;
+    const group = Constants.GROUP;
+    for (const tile of Constants.TILE_NO_AKA) {
+        if (cnt[tile] >= 2) { // 假设雀头, 则剩下的只有4个面子
+            cnt[tile] -= 2;
             let ok = true; // 先假设能和, 再依条件否定
-            for (let j = Constants.TILE_NUM.C1m; j <= Constants.TILE_NUM.C7z; j++)
-                tmp[j] = cnt[j];
-            tmp[Constants.TILE_NUM.C0m] = tmp[Constants.TILE_NUM.C0p] = tmp[Constants.TILE_NUM.C0s] = 0;
+            for (const tl of Constants.TILE_NO_AKA)
+                tmp[tl] = cnt[tl];
+            tmp['0m'] = tmp['0p'] = tmp['0s'] = 0;
 
-            for (let k = 1; k <= 3; k++) {
-                for (let j = k * 9 - 8; j !== 0; j = Constants.NXT2[j]) {
+            for (let k = 0; k < 3; k++) {
+                for (let j = 1 + group[k]; j !== '0s'; j = Constants.NXT2[j]) {
                     if (tmp[j] < 0) { // 若牌数量减为了负数, 说明有有未成形的顺子
                         ok = false;
                         break;
@@ -300,47 +351,48 @@ export const calcHupai = (tiles: Tile[], type: boolean = false): number => {
                     tmp[Constants.NXT2[j]] -= tmp[j];
                     tmp[Constants.NXT2[Constants.NXT2[j]]] -= tmp[j];
                 }
-                tmp[Constants.TILE_NUM.C0m] = tmp[Constants.TILE_NUM.C0p] = tmp[Constants.TILE_NUM.C0s] = 0;
+                tmp['0m'] = tmp['0p'] = tmp['0s'] = 0;
             }
             // 若字牌不能构成暗刻
-            for (let j = Constants.TILE_NUM.C1z; j <= Constants.TILE_NUM.C7z; j++)
-                if (tmp[j] % 3 !== 0)
+            for (const tile of Constants.HONOR_TILE)
+                if (tmp[tile] % 3 !== 0)
                     ok = false;
 
-            cnt[i] += 2;
             if (ok)
                 return 1;
+
+            cnt[tile] += 2;
         }
     }
 
     // 七对子
     let duizi = 0;
-    for (let i = Constants.TILE_NUM.C1m; i <= Constants.TILE_NUM.C7z; i++) {
-        if (cnt[i] === 2)
+    for (const tile of Constants.TILE_NO_AKA) {
+        if (cnt[tile] === 2)
             duizi++;
         // 本来只要判断 cnt[i] === 4 就行, 这里扩展成作弊大于四张牌的情况
-        if (cnt[i] >= 4 && cnt[i] % 2 === 0 && (is_chuanma() || is_guobiao()))
-            duizi += cnt[i] / 2;
+        if (cnt[tile] >= 4 && cnt[tile] % 2 === 0 && (is_chuanma() || is_guobiao()))
+            duizi += cnt[tile] / 2;
     }
     if (duizi === 7)
         return 2;
 
     // 国士无双
     let guoshi = true;
-    for (let i = Constants.TILE_NUM.C1m; i <= Constants.TILE_NUM.C7z; i++) {
-        if (judgeTile(int2Tile(i), 'Y')) {
-            if (cnt[i] === 0) // 所有幺九牌都至少有一张
+    for (const tile of Constants.TILE_NO_AKA) {
+        if (Constants.YAOJIU_TILE.includes(tile)) {
+            if (cnt[tile] === 0) // 所有幺九牌都至少有一张
                 guoshi = false;
-        } else if (cnt[i] > 0) // 存在非幺九牌
+        } else if (cnt[tile] > 0) // 存在非幺九牌
             guoshi = false;
     }
     if (guoshi)
         return 3;
 
-    if (is_guobiao() && tiles.length === 14) { // 国标的全不靠和七星不靠
+    if (is_guobiao() && tiles.length === Constants.QIN_TILE_NUM) { // 国标的全不靠和七星不靠
         let quanbukao = true;
-        for (let i = Constants.TILE_NUM.C1m; i <= Constants.TILE_NUM.C7z; i++)
-            if (cnt[i] >= 2)
+        for (const tile of Constants.TILE_NO_AKA)
+            if (cnt[tile] >= 2)
                 quanbukao = false;
         // 3*3 的数组, 每一行代表一个花色, 三行分别对应 m, p, s 色, 每一行的三个元素分别代表是否有147, 258, 369中的牌
         const jin_huase = [
@@ -348,15 +400,15 @@ export const calcHupai = (tiles: Tile[], type: boolean = false): number => {
             [false, false, false],
             [false, false, false],
         ];
-        for (let j = 0; j <= 2; j++)
+        for (let j = 0; j < 3; j++)
             for (let i = 0; i <= 8; i++)
-                if (cnt[j * 9 + i + 1] === 1)
+                if (cnt[i + 1 + group[j]] === 1)
                     jin_huase[j][i % 3] = true;
 
         // jin_huase 的每一行, 每一列都最多只有一个 true
-        for (let i = 0; i <= 2; i++) {
+        for (let i = 0; i < 3; i++) {
             let true_cnt_row = 0, true_cnt_col = 0;
-            for (let j = 0; j <= 2; j++) {
+            for (let j = 0; j < 3; j++) {
                 if (jin_huase[i][j]) // 扫描每一行
                     true_cnt_row++;
                 if (jin_huase[j][i]) // 扫描每一列
@@ -367,24 +419,18 @@ export const calcHupai = (tiles: Tile[], type: boolean = false): number => {
         }
         if (quanbukao) {
             let zuhelong = true; // 是否复合组合龙
-            for (let j = 0; j <= 2; j++)
-                for (let i = 0; i <= 2; i++)
+            for (let j = 0; j < 3; j++)
+                for (let i = 0; i < 3; i++)
                     if (jin_huase[j][i])
-                        if (!(cnt[j * 9 + 1 + i] === 1 && cnt[j * 9 + 4 + i] === 1 && cnt[j * 9 + 7 + i] === 1))
+                        if (!(cnt[i + 1 + group[j]] === 1 && cnt[i + 4 + group[j]] === 1 && cnt[i + 7 + group[j]] === 1))
                             zuhelong = false;
             return !zuhelong ? 4 : 5;
         }
     }
     if (is_guobiao() && tiles.length >= 11) { // 国标不含全不靠的组合龙
-        const condition = [
-            [1, 4, 7, 11, 14, 17, 21, 24, 27],
-            [1, 4, 7, 12, 15, 18, 20, 23, 26],
-            [2, 5, 8, 10, 13, 16, 21, 24, 27],
-            [2, 5, 8, 12, 15, 18, 19, 22, 25],
-            [3, 6, 9, 10, 13, 16, 20, 23, 26],
-            [3, 6, 9, 11, 14, 17, 19, 22, 25],
-        ];
+        const condition = Constants.GB_CONDITIONS;
         const flag = [true, true, true, true, true, true];
+
         for (let row in condition)
             for (let i in condition[row])
                 if (cnt[condition[row][i]] === 0)
@@ -395,7 +441,7 @@ export const calcHupai = (tiles: Tile[], type: boolean = false): number => {
                 const new_tiles = tiles.slice();
                 for (let i in condition[row])
                     for (let j in new_tiles)
-                        if (new_tiles[j] === int2Tile(condition[row][i])) {
+                        if (new_tiles[j] === condition[row][i]) {
                             new_tiles.splice(parseInt(j), 1);
                             break;
                         }
@@ -407,19 +453,19 @@ export const calcHupai = (tiles: Tile[], type: boolean = false): number => {
     if (is_yifanjieguyi() && tiles.length === 14) {
         let shisanbuda = true;
         let duizi_num = 0;
-        for (let i = Constants.TILE_NUM.C1m; i <= Constants.TILE_NUM.C7z; i++) {
-            if (cnt[i] === 2)
+        for (const tile of Constants.TILE_NO_AKA) {
+            if (cnt[tile] === 2)
                 duizi_num++;
-            if (cnt[i] >= 3)
+            if (cnt[tile] >= 3)
                 shisanbuda = false;
         }
         if (duizi_num !== 1)
             shisanbuda = false;
 
-        for (let j = 0; j <= 2; j++)
-            for (let i = 1; i <= 7; i++)
-                if (cnt[j * 9 + i] >= 1)
-                    if (cnt[j * 9 + i + 1] !== 0 || cnt[j * 9 + i + 2] !== 0)
+        for (let j = 0; j < 3; j++)
+            for (let i = 1; i <= 8; i++)
+                if (cnt[i + group[j]] >= 1)
+                    if (cnt[i + 1 + group[j]] !== 0 || (i + 2 <= 9 && cnt[i + 2 + group[j]] !== 0))
                         shisanbuda = false;
         if (shisanbuda)
             return 12;
@@ -440,26 +486,28 @@ export const calcTingpai = (seat: Seat, type: boolean = false): { tile: Tile }[]
     if (is_chuanma() && huazhu(seat))
         return [];
     const tiles = player_tiles[seat];
-    const cnt: number[] = [];
-    for (let i = Constants.CBD; i <= Constants.TILE_NUM.C7z; i++)
-        cnt[i] = 0;
+    const cnt: TileNum = {};
+    for (const tile of Constants.TILE_NO_AKA)
+        cnt[tile] = 0;
     for (const tile of tiles)
-        cnt[tile2Int(tile)]++;
+        cnt[simplify(tile)]++;
 
     if (is_guobiao() && tiles.includes(Constants.HUAPAI)) // 国标无法听花牌, 有花牌一定不是听牌型
         return [];
+    if (tiles.length % 3 !== 1) // 牌数量不对
+        return [];
 
     const ret: { tile: Tile }[] = [];
-    for (let i = Constants.TILE_NUM.C1m; i <= Constants.TILE_NUM.C7z; i++) { // 试所有牌作为听牌, 检查是否为和牌型
-        tiles.push(int2Tile(i));
-        cnt[i]++;
+    for (const tile of Constants.TILE_NO_AKA) { // 试所有牌作为听牌, 检查是否为和牌型
+        tiles.push(tile);
+        cnt[tile]++;
         // cnt[i] <= 4 为了除去虚听
         const result = calcHupai(tiles);
-        if ((cnt[i] <= 4 || type) && result !== 0 && result !== 12)
-            ret.push({tile: int2Tile(i)});
+        if ((cnt[tile] <= 4 || type) && result !== 0 && result !== 12)
+            ret.push({tile: tile});
 
         tiles.pop();
-        cnt[i]--;
+        cnt[tile]--;
     }
     return ret;
 };
@@ -473,7 +521,7 @@ export const getLstAction = (num: number = 1): Action => {
         let ret = actions.length;
         for (let i = 0; i < num; i++) {
             ret--;
-            while (['RecordChangeTile', 'RecordSelectGap', 'RecordGangResult', 'RecordFillAwaitingTiles'].includes(actions[ret].name))
+            while (ret >= 0 && ['RecordChangeTile', 'RecordSelectGap', 'RecordGangResult', 'RecordFillAwaitingTiles'].includes(actions[ret].name))
                 ret--;
         }
         return actions[ret];
@@ -508,103 +556,29 @@ export const calcDoras = (): Doras => {
     return doras0;
 };
 
-/**
- * tile 编码转换为数字编码
- * @param tile - 输入的牌
- * @param type - 是否区分红宝牌, 默认不区分
- * @param is_SP_tile - 是否区分以 Constants.SPT_SUFFIX 结尾的特殊牌, 默认不区分
- */
-export const tile2Int = (tile: Tile, type: boolean = false, is_SP_tile: boolean = false): number => {
-    if (tile === Constants.TBD) // 万象修罗百搭牌
-        return 0;
-    if (!is_SP_tile || tile.length <= 2) {
-        if (type && tile[0] === '0') {
-            if (tile[1] === 'm')
-                return 35;
-            if (tile[1] === 'p')
-                return 36;
-            if (tile[1] === 's')
-                return 37;
-        }
-        if (tile[0] === '0')
-            tile = '5' + tile[1];
-
-        if (tile[1] === 'm')
-            return parseInt(tile);
-        if (tile[1] === 'p')
-            return 9 + parseInt(tile);
-        if (tile[1] === 's')
-            return 18 + parseInt(tile);
-        if (tile[1] === 'z')
-            return 27 + parseInt(tile);
-    } else if (tile[2] === Constants.SPT_SUFFIX) {
-        if (type && tile[0] === '0') {
-            if (tile[1] === 'm')
-                return 35 + Constants.SPT_OFFSET;
-            if (tile[1] === 'p')
-                return 36 + Constants.SPT_OFFSET;
-            if (tile[1] === 's')
-                return 37 + Constants.SPT_OFFSET;
-        }
-        if (tile[0] === '0')
-            tile = '5' + tile[1];
-
-        if (tile[1] === 'm')
-            return parseInt(tile) + Constants.SPT_OFFSET;
-        if (tile[1] === 'p')
-            return 9 + parseInt(tile) + Constants.SPT_OFFSET;
-        if (tile[1] === 's')
-            return 18 + parseInt(tile) + Constants.SPT_OFFSET;
-        if (tile[1] === 'z')
-            return 27 + parseInt(tile) + Constants.SPT_OFFSET;
-    }
-    throw new Error(errRoundInfo() + `tile2Int 输入不合规: ${tile}`);
-};
-
-/**
- * 数字编码转换为 tile 编码
- * @param x - 数字编码
- * @param type - 是否生成带 Constants.SPT_SUFFIX 结尾的特殊牌
- */
-export const int2Tile = (x: number, type: boolean = false): Tile => {
-    if (x === 0)
-        return Constants.TBD;
-    if (!type) {
-        if (x >= 1 && x <= 9)
-            return x.toString() + 'm' as Tile;
-        if (x >= 10 && x <= 18)
-            return (x - 9).toString() + 'p' as Tile;
-        if (x >= 19 && x <= 27)
-            return (x - 18).toString() + 's' as Tile;
-        if (x >= 28 && x <= 34)
-            return (x - 27).toString() + 'z' as Tile;
-        if (x === 35)
-            return '0m';
-        if (x === 36)
-            return '0p';
-        if (x === 37)
-            return '0s';
-    } else {
-        if (x >= 1 && x <= 9)
-            return x.toString() + 'm' + Constants.SPT_SUFFIX as Tile;
-        if (x >= 10 && x <= 18)
-            return (x - 9).toString() + 'p' + Constants.SPT_SUFFIX as Tile;
-        if (x >= 19 && x <= 27)
-            return (x - 18).toString() + 's' + Constants.SPT_SUFFIX as Tile;
-        if (x >= 28 && x <= 34)
-            return (x - 27).toString() + 'z' + Constants.SPT_SUFFIX as Tile;
-        if (x === 35)
-            return '0m' + Constants.SPT_SUFFIX as Tile;
-        if (x === 36)
-            return '0p' + Constants.SPT_SUFFIX as Tile;
-        if (x === 37)
-            return '0s' + Constants.SPT_SUFFIX as Tile;
-    }
-    throw new Error(errRoundInfo() + `int2Tile 输入不合规: ${x}`);
-};
-
 // 手牌理牌算法
-export const cmp = (x: Tile, y: Tile): number => tile2Int(x) - tile2Int(y);
+export const cmp = (x: Tile, y: Tile): number => {
+    x = simplify(x);
+    y = simplify(y);
+    if (x === y)
+        return 0;
+    if (x === Constants.TBD)
+        return -1;
+    if (y === Constants.TBD)
+        return 1;
+    const group = Constants.GROUP;
+    const group_index_x = group.indexOf(x[1]), group_index_y = group.indexOf(y[1]);
+    const num_x = parseInt(x), num_y = parseInt(y);
+    if (group_index_x > group_index_y)
+        return 1;
+    else if (group_index_x < group_index_y)
+        return -1;
+    else if (num_x > num_y)
+        return 1;
+    else if (num_x < num_y)
+        return -1;
+    return 0;
+};
 
 // 随机排序比较函数
 export const randomCmp = () => Math.random() - 0.5;
@@ -835,8 +809,8 @@ export const lstLiqi2Liqi = (type: boolean = false): Liqi => {
  * @param tile - 牌的种类
  */
 export const eraseMingpai = (seat: Seat, tile: Tile): boolean => {
-    if (mingpais[seat][tile2Int(tile, true)] > 0) {
-        mingpais[seat][tile2Int(tile, true)]--;
+    if (mingpais[seat][tile] > 0) {
+        mingpais[seat][tile]--;
         return true;
     }
     return false;
@@ -846,20 +820,20 @@ export const eraseMingpai = (seat: Seat, tile: Tile): boolean => {
 export const huazhu = (seat: Seat): boolean => {
     // 注意 gaps 的 012 分别对应 pms, 而不是 mps
     for (const tile of player_tiles[seat]) { // 查手牌
-        if (Math.floor((tile2Int(tile) - 1) / 9) === 0 && gaps[seat] === 1)
+        if (tile[1] === 'm' && gaps[seat] === 1)
             return true;
-        if (Math.floor((tile2Int(tile) - 1) / 9) === 1 && gaps[seat] === 0)
+        if (tile[1] === 'p' && gaps[seat] === 0)
             return true;
-        if (Math.floor((tile2Int(tile) - 1) / 9) === 2 && gaps[seat] === 2)
+        if (tile[1] === 's' && gaps[seat] === 2)
             return true;
     }
     for (const f of fulu[seat]) { // 查副露
-        const tile0 = f.tile[0];
-        if (Math.floor((tile2Int(tile0) - 1) / 9) === 0 && gaps[seat] === 1)
+        const tile = f.tile[0];
+        if (tile[1] === 'm' && gaps[seat] === 1)
             return true;
-        if (Math.floor((tile2Int(tile0) - 1) / 9) === 1 && gaps[seat] === 0)
+        if (tile[1] === 'p' && gaps[seat] === 0)
             return true;
-        if (Math.floor((tile2Int(tile0) - 1) / 9) === 2 && gaps[seat] === 2)
+        if (tile[1] === 's' && gaps[seat] === 2)
             return true;
     }
     return false;
@@ -887,12 +861,12 @@ export const updateMuyu = (): void => {
 
 // 幻境传说, 判断 tile 是否为 dora
 export const isDora = (tile: Tile): boolean => {
-    const num = tile2Int(tile, true), num_no_aka = tile2Int(tile);
-    if (num >= Constants.TILE_NUM.C0m && num <= Constants.TILE_NUM.C0s)
+    tile = simplify(tile);
+    if (tile === '0m' || tile === '0p' || tile === '0s')
         return true;
     const doras0 = calcDoras();
     for (const dora0 of doras0)
-        if (num_no_aka === Constants.DORA_NXT[tile2Int(dora0)])
+        if (tile === Constants.DORA_NXT[dora0])
             return true;
     return false;
 };

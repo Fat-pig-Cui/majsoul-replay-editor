@@ -131,6 +131,8 @@ type Config = {
     };
 };
 
+type TileNum = { [tile in Tile]?: number; };
+
 type BaseInfo = {
     chang: Seat,
     ju: Seat,
@@ -327,9 +329,9 @@ type HuleInfo = {
     cuohu?: boolean,
 };
 type FansType = { id: number; val: number; }[];
-type TypeCnt = [number, number, number, number, number, number, number, number][];
+type TypeCnt = { [tile in Tile]?: [number, number, number, number, number, number, number, number]; };
 type CalcFanRet = { yiman?: boolean, fans: FansType, fu: number, dora_bonus?: number };
-type Open_Player = { seat: Seat, tiles: string[], count: number[] };
+type Open_Player = { seat: Seat, tiles: Tile[], count: number[] };
 type Opens = [Open_Player, Open_Player, Open_Player?, Open_Player?];
 type TingInfo = { tingpai: boolean, hand: Tile[], tings: { tile: Tile }[] }[];
 type ScoresInfo = {

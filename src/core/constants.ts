@@ -6,61 +6,171 @@
  */
 
 // 常量集合
-export const Constants = {
+export class Constants {
     // 亲家起手牌数量
-    QIN_TILE_NUM: 14,
+    public static readonly QIN_TILE_NUM = 14;
     // 闲家起手牌数量
-    XIAN_TILE_NUM: 13,
+    public static readonly XIAN_TILE_NUM = 13;
+    // 任何情况下牌山的最大长度
+    public static readonly PAISHAN_MAX_LEN = 136;
     // 特殊牌的后缀
-    SPT_SUFFIX: 't',
-    // 特殊牌和普通牌数字编码的差值
-    SPT_OFFSET: 40,
+    public static readonly SPT_SUFFIX = 't';
     // 国标麻将起和番
-    GB_BASE_FAN: 8,
+    public static readonly GB_BASE_FAN = 8;
     // 万象修罗百搭牌编码
-    TBD: 'bd',
-    // 国标麻将起和番
-    HUAPAI: '0m',
-    // 万象修罗百搭牌数字编码
-    CBD: 0,
-    // 常用牌的数字编码
-    TILE_NUM: {
-        C1m: 1,
-        C9m: 9,
-        C1p: 10,
-        C9p: 18,
-        C1s: 19,
-        C9s: 27,
-        C1z: 28,
-        C4z: 31,
-        C5z: 32,
-        C7z: 34,
-        C0m: 35,
-        C0p: 36,
-        C0s: 37,
-        C5m: 5,
-        C5p: 14,
-        C5s: 23,
-    },
+    public static readonly TBD = 'bd';
+    // 国标麻将花牌编码
+    public static readonly HUAPAI = '0m';
+    // 麻将牌的四种类型
+    public static readonly GROUP: readonly [string, string, string, string] = ['m', 'p', 's', 'z'];
+
+    public static readonly MAN_MID_TILE: readonly Tile[] = ['2m', '3m', '4m', '5m', '6m', '7m', '8m'];
+    public static readonly MAN_TER_TILE: readonly Tile[] = ['1m', '9m'];
+    public static readonly AKA_MAN_TILE: readonly Tile[] = ['0m'];
+
+    public static readonly MAN_TILE_NO_AKA: readonly Tile[] = [...Constants.MAN_MID_TILE, ...Constants.MAN_TER_TILE];
+    public static readonly MAN_TILE: readonly Tile[] = [...Constants.MAN_TILE_NO_AKA, ...Constants.AKA_MAN_TILE];
+
+    public static readonly PIN_MID_TILE: readonly Tile[] = ['2p', '3p', '4p', '5p', '6p', '7p', '8p'];
+    public static readonly PIN_TER_TILE: readonly Tile[] = ['1p', '9p'];
+    public static readonly AKA_PIN_TILE: readonly Tile[] = ['0p'];
+
+    public static readonly PIN_TILE_NO_AKA: readonly Tile[] = [...Constants.PIN_MID_TILE, ...Constants.PIN_TER_TILE];
+    public static readonly PIN_TILE: readonly Tile[] = [...Constants.PIN_TILE_NO_AKA, ...Constants.AKA_PIN_TILE];
+
+    public static readonly SOU_MID_TILE: readonly Tile[] = ['2s', '3s', '4s', '5s', '6s', '7s', '8s'];
+    public static readonly SOU_TER_TILE: readonly Tile[] = ['1s', '9s'];
+    public static readonly AKA_SOU_TILE: readonly Tile[] = ['0s'];
+
+    public static readonly SOU_TILE_NO_AKA = [...Constants.SOU_MID_TILE, ...Constants.SOU_TER_TILE];
+    public static readonly SOU_TILE: readonly Tile[] = [...Constants.SOU_TILE_NO_AKA, ...Constants.AKA_SOU_TILE];
+
+    public static readonly WIND_TILE: readonly Tile[] = ['1z', '2z', '3z', '4z'];
+    public static readonly DRAGON_TILE: readonly Tile[] = ['5z', '6z', '7z'];
+    public static readonly HONOR_TILE: readonly Tile[] = [...Constants.WIND_TILE, ...Constants.DRAGON_TILE];
+
+    public static readonly TERMINAL_TILE: readonly Tile[] = [...Constants.MAN_TER_TILE, ...Constants.PIN_TER_TILE, ...Constants.SOU_TER_TILE];
+    public static readonly YAOJIU_TILE: readonly Tile[] = [...Constants.TERMINAL_TILE, ...Constants.HONOR_TILE];
+
+    public static readonly AKA_TILE: readonly Tile[] = [...Constants.AKA_MAN_TILE, ...Constants.AKA_PIN_TILE, ...Constants.AKA_SOU_TILE];
+
+    public static readonly TILE_NO_AKA: readonly Tile[] = [
+        ...Constants.MAN_TILE_NO_AKA,
+        ...Constants.PIN_TILE_NO_AKA,
+        ...Constants.SOU_TILE_NO_AKA,
+        ...Constants.HONOR_TILE,
+    ];
+
+    public static readonly TILE: readonly Tile[] = [
+        ...Constants.MAN_TILE,
+        ...Constants.PIN_TILE,
+        ...Constants.SOU_TILE,
+        ...Constants.HONOR_TILE,
+    ];
 
     /**
      * 顺子中比它大的牌, 如果某张牌的数字编码(不区分红宝牌)为 i, 则由它构成的顺子中比它大1的牌的数字编码为 NXT2[i]
      *
      * 故可得出 即 j, NXT2[j], NXT2[NXT2[j]] 构成递增的顺子
      *
-     * 如果不存在, 则指向 35, 36
+     * 如果不存在, 则指向 '0m', '0p'
      *
      * 数组长度为37
      */
-    NXT2: [0, 2, 3, 4, 5, 6, 7, 8, 9, 35, 11, 12, 13, 14, 15, 16, 17, 18, 35, 20, 21, 22, 23, 24, 25, 26, 27, 35, 35, 35, 35, 35, 35, 35, 35, 36, 0],
+    public static readonly NXT2 = {
+        '1m': '2m',
+        '2m': '3m',
+        '3m': '4m',
+        '4m': '5m',
+        '5m': '6m',
+        '6m': '7m',
+        '7m': '8m',
+        '8m': '9m',
+        '9m': '0m',
+        '1p': '2p',
+        '2p': '3p',
+        '3p': '4p',
+        '4p': '5p',
+        '5p': '6p',
+        '6p': '7p',
+        '7p': '8p',
+        '8p': '9p',
+        '9p': '0m',
+        '1s': '2s',
+        '2s': '3s',
+        '3s': '4s',
+        '4s': '5s',
+        '5s': '6s',
+        '6s': '7s',
+        '7s': '8s',
+        '8s': '9s',
+        '9s': '0m',
+        '1z': '0m',
+        '2z': '0m',
+        '3z': '0m',
+        '4z': '0m',
+        '5z': '0m',
+        '6z': '0m',
+        '7z': '0m',
+        '0m': '0p',
+        '0p': '0s',
+        '0s': '0s',
+    };
 
     /**
      * 宝牌指示牌表, 如果某张指示牌的数字编码(不区分红宝牌)为 i, 则它对应的宝牌的数字编码为 DORA_NXT[i]
      *
      * 数组长度35
      */
-    DORA_NXT: [0, 2, 3, 4, 5, 6, 7, 8, 9, 1, 11, 12, 13, 14, 15, 16, 17, 18, 10, 20, 21, 22, 23, 24, 25, 26, 27, 19, 29, 30, 31, 28, 33, 34, 32],
-} as const;
+    public static readonly DORA_NXT = {
+        '1m': '2m',
+        '2m': '3m',
+        '3m': '4m',
+        '4m': '5m',
+        '5m': '6m',
+        '6m': '7m',
+        '7m': '8m',
+        '8m': '9m',
+        '9m': '1m',
+        '1p': '2p',
+        '2p': '3p',
+        '3p': '4p',
+        '4p': '5p',
+        '5p': '6p',
+        '6p': '7p',
+        '7p': '8p',
+        '8p': '9p',
+        '9p': '1p',
+        '1s': '2s',
+        '2s': '3s',
+        '3s': '4s',
+        '4s': '5s',
+        '5s': '6s',
+        '6s': '7s',
+        '7s': '8s',
+        '8s': '9s',
+        '9s': '1s',
+        '1z': '2z',
+        '2z': '3z',
+        '3z': '4z',
+        '4z': '1z',
+        '5z': '6z',
+        '6z': '7z',
+        '7z': '5z',
+    };
+
+    /**
+     * 国标麻将组合龙的六种情况所需要的牌型
+     */
+    public static readonly GB_CONDITIONS: Tile[][] = [
+        ['1m', '4m', '7m', '2p', '5p', '8p', '3s', '6s', '9s'],
+        ['1m', '4m', '7m', '3p', '6p', '9p', '2s', '5s', '8s'],
+        ['2m', '5m', '8m', '3p', '6p', '9p', '1s', '4s', '7s'],
+        ['2m', '5m', '8m', '1p', '4p', '7p', '3s', '6s', '9s'],
+        ['3m', '6m', '9m', '1p', '4p', '7p', '2s', '5s', '8s'],
+        ['3m', '6m', '9m', '2p', '5p', '8p', '1s', '4s', '7s'],
+    ];
+}
 
 // 自定义番种: 役种名称的汉字需要在已有的里面选, 否则不会显示
 export const DIYFans = (): void => {
