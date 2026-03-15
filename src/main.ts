@@ -11,11 +11,12 @@ import {randomPaishan, roundBegin, mopai, qiepai, mingpai, zimingpai} from './co
 import {hupai, huangpai, liuju, setMuyuSeats, huanpai, dingque} from './core/core';
 import {kaipai, kaipaiLock, setRound, setScores} from './core/core';
 import {normalMoqie, moqieLiqi, comboMopai, mingQiepai, zimoHu, moqieLiuju} from './core/core';
-import {demoGame, reportYaku, reportYaku_yiji} from "./core/core";
 
 import {getLeftTileCnt, judgeTile, allEqualTiles, isEqualTile, decompose} from "./core/utils";
 import {separate, calcHupai, calcTingpai, getLstAction} from './core/utils';
 import {fixPaishan} from './core/utils';
+
+import {demoGame, reportYaku, reportYaku_yiji} from "./core/sample";
 
 import {resetReplay} from "./core/override";
 

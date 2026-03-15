@@ -183,6 +183,10 @@ type ActionData = {
     is_liqi?: boolean,
     lock_state?: LockState,
     sha256?: string,
+    old_scores?: number[],
+    delta_scores?: number[],
+    scores?: number[],
+    baopai?: Seat | 4,
 };
 type BaopaiInfo = { seat: Seat, val: number };
 type MuyuInfo = {

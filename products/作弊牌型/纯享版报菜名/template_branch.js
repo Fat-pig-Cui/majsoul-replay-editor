@@ -22,5 +22,5 @@ setConfig({
     }
 });
 
-// 具体内容在 src/core/core.ts 的 reportYaku_yiji 函数中
+// 具体内容在 src/core/sample.ts 的 reportYaku_yiji 函数中
 reportYaku_yiji();
