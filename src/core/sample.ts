@@ -1,8 +1,13 @@
-import {
-    all_data, actions, begin_tiles, player_cnt, mopai,
-    normalMoqie, qiepai, randomPaishan, roundEnd,
-    gameBegin, moqieLiqi, hupai
-} from "./core";
+/**
+ * @file: sample.ts - 一些定制化的牌谱, 包括示例牌局和报菜名牌局
+ * @author: Fat-pig-Cui
+ * @email: chubbypig@qq.com
+ * @github: https://github.com/Fat-pig-Cui/majsoul-replay-editor
+ */
+
+import {all_data, actions, begin_tiles, base_info} from "./data";
+import {mopai, qiepai, randomPaishan, roundEnd, gameBegin, hupai} from "./core";
+import {normalMoqie, moqieLiqi} from "./simplifyFunction";
 import {is_report_yakus} from "./misc";
 
 /**
@@ -11,10 +16,10 @@ import {is_report_yakus} from "./misc";
 export const demoGame = (): void => {
     gameBegin();
     begin_tiles[0] = '11223344556777z';
-    if (player_cnt === 2) {
+    if (base_info.player_cnt === 2) {
         begin_tiles[1] = '1112340678999m';
         randomPaishan('6z', '55z............');
-    } else if (player_cnt === 3) {
+    } else if (base_info.player_cnt === 3) {
         begin_tiles[1] = '1112340678999p';
         begin_tiles[2] = '1112340678999s';
         randomPaishan('6z', '55z........');

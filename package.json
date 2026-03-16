@@ -1,5 +1,6 @@
 {
   "name": "majsoul-replay-editor",
+  "type": "module",
   "scripts": {
     "build": "rollup -c",
     "watch": "rollup -c -w",

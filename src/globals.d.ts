@@ -9,7 +9,6 @@ import type {
     t_setDealTiles,
     t_setPaishan,
     t_randomPaishan,
-    t_roundBegin,
     t_mopai,
     t_qiepai,
     t_mingpai,
@@ -62,7 +61,6 @@ declare global {
     let setDealTiles: t_setDealTiles;
     let setPaishan: t_setPaishan;
     let randomPaishan: t_randomPaishan;
-    let roundBegin: t_roundBegin;
     let mopai: t_mopai;
     let qiepai: t_qiepai;
     let mingpai: t_mingpai;

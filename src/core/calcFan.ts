@@ -6,21 +6,21 @@
  */
 
 import {
+    baopai, base_info, dora_cnt, dora_indicator, fulu,
+    hunzhiyiji_info, liqi_info, paihe, paishan, player_tiles,
+    sigang_bao, yongchang_data,
+} from "./data";
+import {
     get_field_spell_mode, is_beishuizhizhan, is_guyi, is_hunzhiyiji, is_qingtianjing,
     is_renhumanguan, is_sigangbaopai, is_sixifuhe, is_tiandichuangzao, is_wanwushengzhang,
     is_wanxiangxiuluo, is_xuezhandaodi, is_yifanjieguyi, is_yongchang, no_lianfengsifu,
     no_normalbaopai, no_shiduan, no_wyakuman, no_yifa
 } from "./misc";
+import {isEqualTile, judgeTile, calcHupai, calcTingpai, getLstAction} from "./exportedUtils";
 import {
-    calcSudian, calcSudianChuanma, calcSudianGuobiao, cmp, calcHupai,
-    isEqualTile, judgeTile, calcTingpai, getLstAction, huazhu,
+    calcSudian, calcSudianChuanma, calcSudianGuobiao, cmp, huazhu,
     nextTile, shunziMidTile, simplify
 } from "./utils";
-import {
-    baopai, base_info, dora_cnt, doras, fulu,
-    hunzhiyiji_info, li_doras, liqi_info, paihe, paishan,
-    player_cnt, player_tiles, sigang_bao, yongchang_data,
-} from "./core";
 import {Constants} from "./constants";
 
 /**
@@ -97,9 +97,9 @@ export const calcFan = (seat: Seat, zimo: boolean, fangchong?: Seat): CalcFanRet
             const ans: CalcFanRet = {yiman: !is_qingtianjing(), fans: [], fu: 25};
 
             let wangpai_num = 14;
-            if (player_cnt === 3)
+            if (base_info.player_cnt === 3)
                 wangpai_num = 18;
-            else if (player_cnt === 2)
+            else if (base_info.player_cnt === 2)
                 wangpai_num = 22;
             if (is_qingtianjing()) {
                 if (is_hunzhiyiji()) {
@@ -186,33 +186,33 @@ export const calcFan = (seat: Seat, zimo: boolean, fangchong?: Seat): CalcFanRet
                         all_doras[2]++;
                     }
                 for (let i = 0; i < dora_cnt.cnt; i++) {
-                    if (player_cnt === 3 && isEqualTile(doras[i], '1m'))
+                    if (base_info.player_cnt === 3 && isEqualTile(dora_indicator[0][i], '1m'))
                         all_doras[0] += cnt2['9m'];
-                    else if (player_cnt === 2) {
-                        if (isEqualTile(doras[i], '1p'))
+                    else if (base_info.player_cnt === 2) {
+                        if (isEqualTile(dora_indicator[0][i], '1p'))
                             all_doras[0] += cnt2['9p'];
-                        if (isEqualTile(doras[i], '1s'))
+                        if (isEqualTile(dora_indicator[0][i], '1s'))
                             all_doras[0] += cnt2['9s'];
                     } else {
                         // 幻境传说: 机会卡3
                         if (get_field_spell_mode(2) === 3)
-                            all_doras[0] += cnt2[simplify(doras[i])];
-                        all_doras[0] += cnt2[Constants.DORA_NXT[simplify(doras[i])]];
+                            all_doras[0] += cnt2[simplify(dora_indicator[0][i])];
+                        all_doras[0] += cnt2[Constants.DORA_NXT[simplify(dora_indicator[0][i])]];
                     }
                 }
                 for (let i = 0; i < dora_cnt.li_cnt; i++) {
-                    if (player_cnt === 3 && isEqualTile(doras[i], '1m'))
+                    if (base_info.player_cnt === 3 && isEqualTile(dora_indicator[0][i], '1m'))
                         all_doras[3] += cnt2['9m'];
-                    else if (player_cnt === 2) {
-                        if (isEqualTile(doras[i], '1p'))
+                    else if (base_info.player_cnt === 2) {
+                        if (isEqualTile(dora_indicator[0][i], '1p'))
                             all_doras[3] += cnt2['9p'];
-                        if (isEqualTile(doras[i], '1s'))
+                        if (isEqualTile(dora_indicator[0][i], '1s'))
                             all_doras[3] += cnt2['9s'];
                     } else {
                         // 幻境传说: 机会卡3
                         if (get_field_spell_mode(2) === 3)
-                            all_doras[3] += cnt2[simplify(li_doras[i])];
-                        all_doras[3] += cnt2[Constants.DORA_NXT[simplify(li_doras[i])]];
+                            all_doras[3] += cnt2[simplify(dora_indicator[1][i])];
+                        all_doras[3] += cnt2[Constants.DORA_NXT[simplify(dora_indicator[1][i])]];
                     }
                 }
                 // 幻境传说: 庄家卡5
@@ -287,33 +287,33 @@ export const calcFan = (seat: Seat, zimo: boolean, fangchong?: Seat): CalcFanRet
                         all_doras[2]++;
                     }
                 for (let i = 0; i < dora_cnt.cnt; i++) {
-                    if (player_cnt === 3 && isEqualTile(doras[i], '1m'))
+                    if (base_info.player_cnt === 3 && isEqualTile(dora_indicator[0][i], '1m'))
                         all_doras[0] += cnt2['9m'];
-                    else if (player_cnt === 2) {
-                        if (isEqualTile(doras[i], '1p'))
+                    else if (base_info.player_cnt === 2) {
+                        if (isEqualTile(dora_indicator[0][i], '1p'))
                             all_doras[0] += cnt2['9p'];
-                        if (isEqualTile(doras[i], '1s'))
+                        if (isEqualTile(dora_indicator[0][i], '1s'))
                             all_doras[0] += cnt2['9s'];
                     } else {
                         // 幻境传说: 机会卡3
                         if (get_field_spell_mode(2) === 3)
-                            all_doras[0] += cnt2[simplify(doras[i])];
-                        all_doras[0] += cnt2[Constants.DORA_NXT[simplify(doras[i])]];
+                            all_doras[0] += cnt2[simplify(dora_indicator[0][i])];
+                        all_doras[0] += cnt2[Constants.DORA_NXT[simplify(dora_indicator[0][i])]];
                     }
                 }
                 for (let i = 0; i < dora_cnt.li_cnt; i++) {
-                    if (player_cnt === 3 && isEqualTile(doras[i], '1m'))
+                    if (base_info.player_cnt === 3 && isEqualTile(dora_indicator[0][i], '1m'))
                         all_doras[3] += cnt2['9m'];
-                    else if (player_cnt === 2) {
-                        if (isEqualTile(doras[i], '1p'))
+                    else if (base_info.player_cnt === 2) {
+                        if (isEqualTile(dora_indicator[0][i], '1p'))
                             all_doras[3] += cnt2['9p'];
-                        if (isEqualTile(doras[i], '1s'))
+                        if (isEqualTile(dora_indicator[0][i], '1s'))
                             all_doras[3] += cnt2['9s'];
                     } else {
                         // 幻境传说: 机会卡3
                         if (get_field_spell_mode(2) === 3)
-                            all_doras[3] += cnt2[simplify(li_doras[i])];
-                        all_doras[3] += cnt2[Constants.DORA_NXT[simplify(li_doras[i])]];
+                            all_doras[3] += cnt2[simplify(dora_indicator[1][i])];
+                        all_doras[3] += cnt2[Constants.DORA_NXT[simplify(dora_indicator[1][i])]];
                     }
                 }
                 // 幻境传说: 庄家卡5
@@ -616,7 +616,7 @@ export const calcFan = (seat: Seat, zimo: boolean, fangchong?: Seat): CalcFanRet
                     pinghu = false;
                 if (type_cnt[tile][7] === 1) {
                     // 雀头是自风, 场风, 三元
-                    if (((seat - base_info.ju + player_cnt) % player_cnt + 1) + 'z' === tile)
+                    if (((seat - base_info.ju + base_info.player_cnt) % base_info.player_cnt + 1) + 'z' === tile)
                         pinghu = false;
                     if ((base_info.chang + 1) + 'z' === tile)
                         pinghu = false;
@@ -661,33 +661,33 @@ export const calcFan = (seat: Seat, zimo: boolean, fangchong?: Seat): CalcFanRet
                     all_doras[2]++;
                 }
             for (let i = 0; i < dora_cnt.cnt; i++) {
-                if (player_cnt === 3 && isEqualTile(doras[i], '1m'))
+                if (base_info.player_cnt === 3 && isEqualTile(dora_indicator[0][i], '1m'))
                     all_doras[0] += cnt2['9m'];
-                else if (player_cnt === 2) {
-                    if (isEqualTile(doras[i], '1p'))
+                else if (base_info.player_cnt === 2) {
+                    if (isEqualTile(dora_indicator[0][i], '1p'))
                         all_doras[0] += cnt2['9p'];
-                    if (isEqualTile(doras[i], '1s'))
+                    if (isEqualTile(dora_indicator[0][i], '1s'))
                         all_doras[0] += cnt2['9s'];
                 } else {
                     // 幻境传说: 机会卡3
                     if (get_field_spell_mode(2) === 3)
-                        all_doras[0] += cnt2[simplify(doras[i])];
-                    all_doras[0] += cnt2[Constants.DORA_NXT[simplify(doras[i])]];
+                        all_doras[0] += cnt2[simplify(dora_indicator[0][i])];
+                    all_doras[0] += cnt2[Constants.DORA_NXT[simplify(dora_indicator[0][i])]];
                 }
             }
             for (let i = 0; i < dora_cnt.li_cnt; i++) {
-                if (player_cnt === 3 && isEqualTile(li_doras[i], '1m'))
+                if (base_info.player_cnt === 3 && isEqualTile(dora_indicator[1][i], '1m'))
                     all_doras[3] += cnt2['9m'];
-                else if (player_cnt === 2) {
-                    if (isEqualTile(li_doras[i], '1p'))
+                else if (base_info.player_cnt === 2) {
+                    if (isEqualTile(dora_indicator[1][i], '1p'))
                         all_doras[3] += cnt2['9p'];
-                    if (isEqualTile(li_doras[i], '1s'))
+                    if (isEqualTile(dora_indicator[1][i], '1s'))
                         all_doras[3] += cnt2['9s'];
                 } else {
                     // 幻境传说: 机会卡3
                     if (get_field_spell_mode(2) === 3)
-                        all_doras[3] += cnt2[simplify(li_doras[i])];
-                    all_doras[3] += cnt2[Constants.DORA_NXT[simplify(li_doras[i])]];
+                        all_doras[3] += cnt2[simplify(dora_indicator[1][i])];
+                    all_doras[3] += cnt2[Constants.DORA_NXT[simplify(dora_indicator[1][i])]];
                 }
             }
             // cnt2 不记录红宝牌, 所以不能用 cnt2
@@ -811,7 +811,7 @@ export const calcFan = (seat: Seat, zimo: boolean, fangchong?: Seat): CalcFanRet
                 ans.fans.push(tmp);
             }
             let wangpai_num = 14;
-            if (player_cnt === 2)
+            if (base_info.player_cnt === 2)
                 wangpai_num = 18;
 
             if (is_guyi() || is_yifanjieguyi()) {
@@ -1009,8 +1009,11 @@ export const calcFan = (seat: Seat, zimo: boolean, fangchong?: Seat): CalcFanRet
                 ans.fans.push({val: kezi['6z'], id: 8}); // 发
             if (kezi['7z'] >= 1)
                 ans.fans.push({val: kezi['7z'], id: 9}); // 中
-            if (kezi[(seat - base_info.ju + player_cnt) % player_cnt + 1 + 'z'] >= 1)
-                ans.fans.push({val: kezi[(seat - base_info.ju + player_cnt) % player_cnt + 1 + 'z'], id: 10}); // 自风
+            if (kezi[(seat - base_info.ju + base_info.player_cnt) % base_info.player_cnt + 1 + 'z'] >= 1)
+                ans.fans.push({
+                    val: kezi[(seat - base_info.ju + base_info.player_cnt) % base_info.player_cnt + 1 + 'z'],
+                    id: 10
+                }); // 自风
             if (kezi[base_info.chang + 1 + 'z'] >= 1)
                 ans.fans.push({val: kezi[base_info.chang + 1 + 'z'], id: 11}); // 场风
 
@@ -1193,10 +1196,10 @@ export const calcFan = (seat: Seat, zimo: boolean, fangchong?: Seat): CalcFanRet
                 if (type_cnt[tile][7] === 1) {
                     // 雀头符, 雀头是自风, 场风, 三元
                     if (no_lianfengsifu()) {
-                        if (tile === ((seat - base_info.ju + player_cnt) % player_cnt + 1 + 'z') || tile === base_info.chang + 1 + 'z')
+                        if (tile === ((seat - base_info.ju + base_info.player_cnt) % base_info.player_cnt + 1 + 'z') || tile === base_info.chang + 1 + 'z')
                             ans.fu += 2;
                     } else {
-                        if (tile === ((seat - base_info.ju + player_cnt) % player_cnt + 1 + 'z'))
+                        if (tile === ((seat - base_info.ju + base_info.player_cnt) % base_info.player_cnt + 1 + 'z'))
                             ans.fu += 2;
                         if (tile === base_info.chang + 1 + 'z')
                             ans.fu += 2;
@@ -1971,7 +1974,7 @@ export const calcFanGuobiao = (seat: Seat, zimo: boolean): CalcFanRet => {
             }
 
             let first_tile = true;
-            for (let i = 0; i < player_cnt; i++) {
+            for (let i = 0; i < base_info.player_cnt; i++) {
                 if (i === base_info.ju)
                     continue;
                 if (!(liqi_info[i].yifa !== 0 && liqi_info[i].liqi === 0))
@@ -1989,7 +1992,7 @@ export const calcFanGuobiao = (seat: Seat, zimo: boolean): CalcFanRet => {
                     ans.fans.push({val: 8, id: 8085}); // 人和
                     // 不计 不求人, 自摸
                     banFan([8055, 8081]);
-                } else if (liqi_info[(base_info.ju + 1) % player_cnt].yifa === 0) {
+                } else if (liqi_info[(base_info.ju + 1) % base_info.player_cnt].yifa === 0) {
                     ans.fans.push({val: 8, id: 8085}); // 人和
                     // 不计 门前清
                     banFan(8063);
@@ -2394,7 +2397,7 @@ export const calcFanGuobiao = (seat: Seat, zimo: boolean): CalcFanRet => {
                 ans.fans.push({val: 4, id: 8056}); // 双明杠
 
             let lastile_num = 0;
-            for (let i = 0; i < player_cnt; i++) {
+            for (let i = 0; i < base_info.player_cnt; i++) {
                 for (const tile of paihe[i].tiles) // 查牌河, 注意被鸣走的牌还在 paihe 中
                     if (isEqualTile(lastile, tile))
                         lastile_num++;
@@ -2434,7 +2437,7 @@ export const calcFanGuobiao = (seat: Seat, zimo: boolean): CalcFanRet => {
                     ban_yaojiuke_num++;
                 }
             if (!isBanned(8062))
-                for (let i = 0; i < kezi[(seat - base_info.ju + player_cnt) % player_cnt + 1 + 'z']; i++) {
+                for (let i = 0; i < kezi[(seat - base_info.ju + base_info.player_cnt) % base_info.player_cnt + 1 + 'z']; i++) {
                     ans.fans.push({val: 2, id: 8062}); // 门风刻
                     // 这副刻子不计幺九刻
                     ban_yaojiuke_num++;
@@ -2617,10 +2620,10 @@ export const calcFanGuobiao = (seat: Seat, zimo: boolean): CalcFanRet => {
                 if (type_cnt[tile][7] === 1) {
                     // 雀头符, 雀头是自风, 场风, 三元
                     if (no_lianfengsifu()) {
-                        if (tile === ((seat - base_info.ju + player_cnt) % player_cnt + 1 + 'z') || tile === base_info.chang + 1 + 'z')
+                        if (tile === ((seat - base_info.ju + base_info.player_cnt) % base_info.player_cnt + 1 + 'z') || tile === base_info.chang + 1 + 'z')
                             ans.fu += 2;
                     } else {
-                        if (tile === ((seat - base_info.ju + player_cnt) % player_cnt + 1 + 'z'))
+                        if (tile === ((seat - base_info.ju + base_info.player_cnt) % base_info.player_cnt + 1 + 'z'))
                             ans.fu += 2;
                         if (tile === base_info.chang + 1 + 'z')
                             ans.fu += 2;
@@ -2655,7 +2658,7 @@ export const calcFanGuobiao = (seat: Seat, zimo: boolean): CalcFanRet => {
         }
 
         let first_tile = true;
-        for (let i = 0; i < player_cnt; i++) {
+        for (let i = 0; i < base_info.player_cnt; i++) {
             if (i === base_info.ju)
                 continue;
             if (!(liqi_info[i].yifa !== 0 && liqi_info[i].liqi === 0))
@@ -2668,7 +2671,7 @@ export const calcFanGuobiao = (seat: Seat, zimo: boolean): CalcFanRet => {
         if (liqi_info[seat].yifa !== 0 && liqi_info[seat].liqi === 0 && seat !== base_info.ju && zimo) {
             ans.fans.push({val: 8, id: 8085}); // 人和
             ban_zimo = true;
-        } else if (liqi_info[seat].yifa !== 0 && liqi_info[seat].liqi === 0 && seat !== base_info.ju && !zimo && liqi_info[(base_info.ju + 1) % player_cnt].yifa === 0)
+        } else if (liqi_info[seat].yifa !== 0 && liqi_info[seat].liqi === 0 && seat !== base_info.ju && !zimo && liqi_info[(base_info.ju + 1) % base_info.player_cnt].yifa === 0)
             ans.fans.push({val: 8, id: 8085}); // 人和
 
         if (paishan.length === 0)
@@ -2681,7 +2684,7 @@ export const calcFanGuobiao = (seat: Seat, zimo: boolean): CalcFanRet => {
             ans.fans.push({val: 8, id: 8046}); // 抢杠和
         else {
             let lastile_num = 0;
-            for (let i = 0; i < player_cnt; i++) {
+            for (let i = 0; i < base_info.player_cnt; i++) {
                 for (const tile of paihe[i].tiles) // 查牌河, 注意被鸣走的牌还在 paihe 中
                     if (isEqualTile(lastile, tile))
                         lastile_num++;

@@ -5,14 +5,11 @@
  * @github: https://github.com/Fat-pig-Cui/majsoul-replay-editor
  */
 
-import {all_data, config} from "./core";
+import {all_data, config, views_pool} from "./data";
 
-/**
- * 回放用装扮随机池和中文服无法加载和排除的装扮, 键是 slot, 值是对应的装扮id数组
- */
-export const views_pool: { [p: number]: number[] } = {}, invalid_views: { [p: number]: number[] } = {
-    // 头像框
-    5: [
+// 中文服无法加载和排除的装扮, 键是 slot, 值是对应的装扮id数组
+const invalid_views: { [p: number]: number[] } = {
+    5: [ // 头像框
         305501,  // 头像框-默认
         305510,  // 头像框-四象战
         305511,  // 头像框-四象战
@@ -65,9 +62,8 @@ export const views_pool: { [p: number]: number[] } = {}, invalid_views: { [p: nu
         30550018,  // Limited Portrait Frame
         30550019,  // 프로필 테두리 - MKC 2025
         30550024,  // 双聖の眷属たち
-    ],
-    // 称号
-    11: [
+    ], // 头像框
+    11: [ // 称号
         600017,  // 认证玩家
         600025,  // 限时称号测试用
         600026,  // 雀魂公認の選ばれしプレイヤーG
@@ -121,7 +117,7 @@ export const views_pool: { [p: number]: number[] } = {}, invalid_views: { [p: nu
         600143,  // MKC 2026 국사무쌍
         600146,  // 華風戦優勝
         600150,  // 開運全甲斐だ
-    ],
+    ], // 称号
 };
 
 // 更新装扮随机池

@@ -5,16 +5,10 @@
  * @github: https://github.com/Fat-pig-Cui/majsoul-replay-editor
  */
 
-import {all_data, player_datas, player_cnt} from "./core";
+import {all_data, player_datas, base_info, views_pool} from "./data";
 import {
-    get_mainrole_seat,
-    get_mjp_id,
-    get_mjpsurface_id,
-    get_tablecloth_id, is_guobiao,
-    is_random_skin,
-    is_random_views,
-    updateViews,
-    views_pool
+    get_mainrole_seat, get_mjp_id, get_mjpsurface_id, get_tablecloth_id,
+    is_guobiao, is_random_skin, is_random_views, updateViews
 } from "./misc";
 import {DIYFans, guobiaoFans} from "./constants";
 
@@ -78,7 +72,7 @@ export const resetReplay = (): void => {
 };
 
 // 使补充和优化函数只执行一次的控制变量
-export let inst_once_chkP = true;
+let inst_once_chkP = true;
 
 // 在线编辑(进入牌谱之后的修改, 包括切换视角和切换巡目, 只在 editOffline 中的 resetData 中调用)
 const editOnline = (): void => {
@@ -96,7 +90,7 @@ export const editOffline = (): void => {
         const ret: PlayerDatas = [null, null];
         // 建议玩家随机的装扮: 立直棒(0), 和牌特效(1), 立直特效(2), 头像框(5), 桌布(6), 牌背(7), 称号(11), 牌面(13)
         const slots = [0, 1, 2, 5, 6, 7, 11, 13];
-        for (let seat: Seat = 0; seat < player_cnt; seat++) {
+        for (let seat: Seat = 0; seat < base_info.player_cnt; seat++) {
             ret[seat] = {
                 account_id: 100000 + seat, // 账号唯一id, 这里没什么用随便设的
                 seat: seat as Seat, // 座次
@@ -148,9 +142,9 @@ export const editOffline = (): void => {
                         });
                 }
         }
-        for (let i = 0; i < player_cnt; i++)
+        for (let i = 0; i < base_info.player_cnt; i++)
             all_data.player_datas[i] = player_datas[i] = ret[i];
-        player_datas.splice(player_cnt);
+        player_datas.splice(base_info.player_cnt);
     };
 
     // 备份原函数（只做一次），并同步导出变量
@@ -262,7 +256,7 @@ export const editOffline = (): void => {
                                             if (typeof editFunction2 == 'function' && inst_once_chkP)
                                                 editFunction2();
                                             inst_once_chkP = false;
-                                            if (player_cnt === 2) {
+                                            if (base_info.player_cnt === 2) {
                                                 view.DesktopMgr.Inst.rule_mode = view.ERuleMode.Liqi2;
                                                 uiscript.UI_DesktopInfo.Inst.refreshSeat();
                                             }

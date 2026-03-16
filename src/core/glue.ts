@@ -10,9 +10,10 @@ import {
     actions, awaiting_tiles, hunzhiyiji_info,
     muyu_info, paishan, scores, yongchang_data,
     player_tiles, all_data, base_info
-} from "./core";
+} from "./data";
 import {is_chuanma, is_hunzhiyiji, is_muyu, is_xiakeshang, is_yongchang, is_zhanxing} from "./misc";
-import {calcTingpai, getLeftTileCnt, getLstAction, calcDoras, calcXiaKeShang, calcXun, getAllTingpai} from "./utils";
+import {calcTingpai, getLeftTileCnt, getLstAction} from "./exportedUtils";
+import {calcDoras, calcXiaKeShang, calcXun, getAllTingpai} from "./utils";
 
 /**
  * 胶水代码: 开局
@@ -21,7 +22,7 @@ import {calcTingpai, getLeftTileCnt, getLstAction, calcDoras, calcXiaKeShang, ca
  * @param opens - 配牌明牌: 明的牌
  * @param is_sha256 - 牌山是否包含起手
  */
-export let addNewRound = (left_tile_count: number, fake_hash_code: string, opens: Opens, is_sha256: boolean): void => {
+export const addNewRound = (left_tile_count: number, fake_hash_code: string, opens: Opens, is_sha256: boolean): void => {
     pushAction('RecordNewRound', {
         chang: base_info.chang,
         ju: base_info.ju,
@@ -56,7 +57,7 @@ export let addNewRound = (left_tile_count: number, fake_hash_code: string, opens
  * @param zhanxing_index - 占星之战: 摸的牌在候选池的位置
  * @param hunzhiyiji_data - 魂之一击: 魂之一击立直数据
  */
-export let addDealTile = (seat: Seat, draw_card: Tile, liqi: Liqi, tile_state: boolean, zhanxing_index: AwaitingIndex, hunzhiyiji_data: HunzhiyijiInfo_Player): void => {
+export const addDealTile = (seat: Seat, draw_card: Tile, liqi: Liqi, tile_state: boolean, zhanxing_index: AwaitingIndex, hunzhiyiji_data: HunzhiyijiInfo_Player): void => {
     pushAction('RecordDealTile', {
         seat: seat,
         tile: draw_card,
@@ -76,7 +77,7 @@ export let addDealTile = (seat: Seat, draw_card: Tile, liqi: Liqi, tile_state: b
  * @param seat - 要摸牌的玩家
  * @param liqi - 刚立直玩家的立直信息
  */
-export let addFillAwaitingTiles = (seat: Seat, liqi: Liqi): void => {
+export const addFillAwaitingTiles = (seat: Seat, liqi: Liqi): void => {
     pushAction('RecordFillAwaitingTiles', {
         operation: {seat: seat},
         awaiting_tiles: awaiting_tiles,
@@ -97,7 +98,7 @@ export let addFillAwaitingTiles = (seat: Seat, liqi: Liqi): void => {
  * @param tile_state - 配牌明牌: 切的牌是否为明的牌
  * @param beishui_type - 背水之战: 立直类型
  */
-export let addDiscardTile = (seat: Seat, tile: Tile, moqie: boolean, is_liqi: boolean, is_wliqi: boolean, is_kailiqi: boolean, tile_state: boolean, beishui_type: BeishuiType): void => {
+export const addDiscardTile = (seat: Seat, tile: Tile, moqie: boolean, is_liqi: boolean, is_wliqi: boolean, is_kailiqi: boolean, tile_state: boolean, beishui_type: BeishuiType): void => {
     pushAction('RecordDiscardTile', {
         seat: seat,
         tile: tile,
@@ -123,7 +124,7 @@ export let addDiscardTile = (seat: Seat, tile: Tile, moqie: boolean, is_liqi: bo
  * @param is_liqi - 是否立直
  * @param is_wliqi - 是否为双立直
  */
-export let addRevealTile = (seat: Seat, tile: Tile, moqie: boolean, is_liqi: boolean, is_wliqi: boolean): void => {
+export const addRevealTile = (seat: Seat, tile: Tile, moqie: boolean, is_liqi: boolean, is_wliqi: boolean): void => {
     pushAction('RecordRevealTile', {
         seat: seat,
         tile: tile,
@@ -142,7 +143,7 @@ export let addRevealTile = (seat: Seat, tile: Tile, moqie: boolean, is_liqi: boo
  * @param lock_state - 锁定状态, 0 为未锁定, 1 为锁定, 2 为无人开牌
  * @param tile - 切的牌
  */
-export let addLockTile = (seat: Seat, lock_state: LockState, tile: Tile | '' = ''): void => {
+export const addLockTile = (seat: Seat, lock_state: LockState, tile: Tile | '' = ''): void => {
     pushAction('RecordLockTile', {
         seat: seat,
         tile: tile,
@@ -156,7 +157,7 @@ export let addLockTile = (seat: Seat, lock_state: LockState, tile: Tile | '' = '
  * 胶水代码: 暗夜之战开牌
  * @param seat - 开牌的玩家
  */
-export let addUnveilTile = (seat: Seat): void => {
+export const addUnveilTile = (seat: Seat): void => {
     pushAction('RecordUnveilTile', {
         seat: seat,
         scores: scores,
@@ -173,7 +174,7 @@ export let addUnveilTile = (seat: Seat): void => {
  * @param liqi - 刚立直玩家的立直信息
  * @param tile_states - 配牌明牌: 鸣出去的牌是否为明牌
  */
-export let addChiPengGang = (seat: Seat, fulu_tiles: Tile[], tiles_from: Seat[], type: ChiPengGangType, liqi: Liqi, tile_states: boolean[]): void => {
+export const addChiPengGang = (seat: Seat, fulu_tiles: Tile[], tiles_from: Seat[], type: ChiPengGangType, liqi: Liqi, tile_states: boolean[]): void => {
     pushAction('RecordChiPengGang', {
         seat: seat,
         tiles: fulu_tiles,
@@ -197,7 +198,7 @@ export let addChiPengGang = (seat: Seat, fulu_tiles: Tile[], tiles_from: Seat[],
  * @param ziming_type - 操作类型, 2加杠, 3暗杠
  * @param tile_states - 配牌明牌: 鸣出去的牌是否为明牌
  */
-export let addAnGangAddGang = (seat: Seat, tile: Tile, ziming_type: ZiMingType, tile_states: boolean[]): void => {
+export const addAnGangAddGang = (seat: Seat, tile: Tile, ziming_type: ZiMingType, tile_states: boolean[]): void => {
     pushAction('RecordAnGangAddGang', {
         seat: seat,
         tiles: tile,
@@ -214,7 +215,7 @@ export let addAnGangAddGang = (seat: Seat, tile: Tile, ziming_type: ZiMingType, 
  * @param tile - 拔的牌
  * @param tile_states - 配牌明牌: 拔出去的牌是否为明牌
  */
-export let addBaBei = (seat: Seat, tile: Tile, tile_states: boolean[]): void => {
+export const addBaBei = (seat: Seat, tile: Tile, tile_states: boolean[]): void => {
     pushAction('RecordBaBei', {
         seat: seat,
         tile: tile,
@@ -230,7 +231,7 @@ export let addBaBei = (seat: Seat, tile: Tile, tile_states: boolean[]): void => 
  * @param old_scores - 结算前分数
  * @param baopai_player - 包牌玩家, 注意和数值比 seat 大1
  */
-export let endHule = (hule_info: HuleInfo[], old_scores: Players_Number, baopai_player: BaopaiPlayer): void => {
+export const endHule = (hule_info: HuleInfo[], old_scores: Players_Number, baopai_player: BaopaiPlayer): void => {
     pushAction('RecordHule', {
         hules: hule_info,
         old_scores: old_scores,
@@ -246,7 +247,7 @@ export let endHule = (hule_info: HuleInfo[], old_scores: Players_Number, baopai_
  * @param old_scores - 结算前分数
  * @param liqi - 刚立直玩家的立直信息
  */
-export let addHuleXueZhanMid = (hule_info: HuleInfo[], old_scores: Players_Number, liqi: Liqi): void => {
+export const addHuleXueZhanMid = (hule_info: HuleInfo[], old_scores: Players_Number, liqi: Liqi): void => {
     pushAction('RecordHuleXueZhanMid', {
         hules: hule_info,
         old_scores: old_scores,
@@ -261,7 +262,7 @@ export let addHuleXueZhanMid = (hule_info: HuleInfo[], old_scores: Players_Numbe
  * @param hule_info - 本次和牌所有的和牌信息
  * @param old_scores - 结算前分数
  */
-export let endHuleXueZhanEnd = (hule_info: HuleInfo[], old_scores: Players_Number): void => {
+export const endHuleXueZhanEnd = (hule_info: HuleInfo[], old_scores: Players_Number): void => {
     pushAction('RecordHuleXueZhanEnd', {
         hules: hule_info,
         old_scores: old_scores,
@@ -276,7 +277,7 @@ export let endHuleXueZhanEnd = (hule_info: HuleInfo[], old_scores: Players_Numbe
  * @param hule_info - 本次和牌所有的和牌信息
  * @param old_scores - 结算前分数
  */
-export let addHuleXueLiuMid = (hule_info: HuleInfo[], old_scores: Players_Number): void => {
+export const addHuleXueLiuMid = (hule_info: HuleInfo[], old_scores: Players_Number): void => {
     pushAction('RecordHuleXueLiuMid', {
         old_scores: old_scores,
         delta_scores: delta_scores,
@@ -292,7 +293,7 @@ export let addHuleXueLiuMid = (hule_info: HuleInfo[], old_scores: Players_Number
  * @param hule_info - 本次和牌所有的和牌信息
  * @param old_scores - 结算前分数
  */
-export let endHuleXueLiuEnd = (hule_info: HuleInfo[], old_scores: Players_Number): void => {
+export const endHuleXueLiuEnd = (hule_info: HuleInfo[], old_scores: Players_Number): void => {
     pushAction('RecordHuleXueLiuEnd', {
         old_scores: old_scores,
         delta_scores: delta_scores,
@@ -310,7 +311,7 @@ export let endHuleXueLiuEnd = (hule_info: HuleInfo[], old_scores: Players_Number
  * @param ting_info - 玩家的听牌信息
  * @param scores_info - 结算相关信息
  */
-export let endNoTile = (liujumanguan: boolean, ting_info: TingInfo, scores_info: ScoresInfo): void => {
+export const endNoTile = (liujumanguan: boolean, ting_info: TingInfo, scores_info: ScoresInfo): void => {
     pushAction('RecordNoTile', {
         scores: scores_info,
         players: ting_info,
@@ -327,7 +328,7 @@ export let endNoTile = (liujumanguan: boolean, ting_info: TingInfo, scores_info:
  * @param tiles - 玩家的手牌, 只有在九种九牌有效
  * @param allplayertiles - 所有玩家的手牌, 只有在四家立直和三家和了有效
  */
-export let endLiuJu = (type: LiujuType, seat: Seat, liqi: Liqi, tiles: Tile[], allplayertiles: string[]): void => {
+export const endLiuJu = (type: LiujuType, seat: Seat, liqi: Liqi, tiles: Tile[], allplayertiles: string[]): void => {
     pushAction('RecordLiuJu', {
         type: type,
         seat: type === 1 || type === 5 ? seat : undefined,
@@ -343,7 +344,7 @@ export let endLiuJu = (type: LiujuType, seat: Seat, liqi: Liqi, tiles: Tile[], a
  * @param change_tile_infos - 换三张主体信息
  * @param type - 换牌方式, 0: 逆时针, 1: 对家, 2: 顺时针
  */
-export let addChangeTile = (change_tile_infos: ChangeTileInfo, type: HuanpaiType): void => {
+export const addChangeTile = (change_tile_infos: ChangeTileInfo, type: HuanpaiType): void => {
     pushAction('RecordChangeTile', {
         change_tile_infos: change_tile_infos,
         change_type: type,
@@ -357,7 +358,7 @@ export let addChangeTile = (change_tile_infos: ChangeTileInfo, type: HuanpaiType
  * 胶水代码: 川麻: 定缺
  * @param gap_types - 所有玩家的定缺
  */
-export let addSelectGap = (gap_types: Gaps): void => {
+export const addSelectGap = (gap_types: Gaps): void => {
     pushAction('RecordSelectGap', {
         gap_types: gap_types,
         tingpai: getAllTingpai(),
@@ -368,7 +369,7 @@ export let addSelectGap = (gap_types: Gaps): void => {
  * 胶水代码: 川麻: 刮风下雨
  * @param old_scores - 结算前分数
  */
-export let addGangResult = (old_scores: Players_Number): void => {
+export const addGangResult = (old_scores: Players_Number): void => {
     pushAction('RecordGangResult', {
         gang_infos: {
             old_scores: old_scores,
@@ -382,7 +383,7 @@ export let addGangResult = (old_scores: Players_Number): void => {
  * 胶水代码: 川麻: 刮风下雨完场
  * @param old_scores - 结算前分数
  */
-export let addGangResultEnd = (old_scores: Players_Number): void => {
+export const addGangResultEnd = (old_scores: Players_Number): void => {
     pushAction('RecordGangResultEnd', {
         gang_infos: {
             old_scores: old_scores,
@@ -399,7 +400,7 @@ export let addGangResultEnd = (old_scores: Players_Number): void => {
  * @param zimo - 是否为自摸
  * @param old_scores - 结算前分数
  */
-export let addCuohu = (seat: Seat, zimo: boolean, old_scores: Players_Number): void => {
+export const addCuohu = (seat: Seat, zimo: boolean, old_scores: Players_Number): void => {
     pushAction('RecordCuohu', {
         cuohu_info: {
             seat: seat,

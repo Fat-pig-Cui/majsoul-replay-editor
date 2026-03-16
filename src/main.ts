@@ -5,16 +5,18 @@
  * @github: https://github.com/Fat-pig-Cui/majsoul-replay-editor
  */
 
-import {player_datas, begin_tiles, player_tiles, all_data} from './core/core';
-import {clearProject, setConfig, setDiscardTiles, setDealTiles, setPaishan} from './core/core';
-import {randomPaishan, roundBegin, mopai, qiepai, mingpai, zimingpai} from './core/core';
-import {hupai, huangpai, liuju, setMuyuSeats, huanpai, dingque} from './core/core';
-import {kaipai, kaipaiLock, setRound, setScores} from './core/core';
-import {normalMoqie, moqieLiqi, comboMopai, mingQiepai, zimoHu, moqieLiuju} from './core/core';
+import {player_datas, begin_tiles, player_tiles, all_data} from './core/data';
 
-import {getLeftTileCnt, judgeTile, allEqualTiles, isEqualTile, decompose} from "./core/utils";
-import {separate, calcHupai, calcTingpai, getLstAction} from './core/utils';
-import {fixPaishan} from './core/utils';
+import {clearProject, randomPaishan, mopai, qiepai, mingpai, zimingpai, hupai, huangpai, liuju} from './core/core';
+
+import {setConfig, setDiscardTiles, setDealTiles, setPaishan, setRound, setScores} from './core/shortFunction';
+
+import {setMuyuSeats, huanpai, dingque, kaipai, kaipaiLock} from './core/activityFunction';
+
+import {normalMoqie, moqieLiqi, comboMopai, mingQiepai, zimoHu, moqieLiuju} from './core/simplifyFunction';
+
+import {getLeftTileCnt, judgeTile, allEqualTiles, isEqualTile, decompose} from "./core/exportedUtils";
+import {separate, calcHupai, calcTingpai, getLstAction, fixPaishan} from './core/exportedUtils';
 
 import {demoGame, reportYaku, reportYaku_yiji} from "./core/sample";
 
@@ -30,7 +32,6 @@ export type t_setDiscardTiles = typeof setDiscardTiles;
 export type t_setDealTiles = typeof setDealTiles;
 export type t_setPaishan = typeof setPaishan;
 export type t_randomPaishan = typeof randomPaishan;
-export type t_roundBegin = typeof roundBegin;
 export type t_mopai = typeof mopai;
 export type t_qiepai = typeof qiepai;
 export type t_mingpai = typeof mingpai;
@@ -77,7 +78,6 @@ declare type MRE_Type = {
     setDealTiles: t_setDealTiles;
     setPaishan: t_setPaishan;
     randomPaishan: t_randomPaishan;
-    roundBegin: t_roundBegin;
     mopai: t_mopai;
     qiepai: t_qiepai;
     mingpai: t_mingpai;
@@ -125,7 +125,6 @@ export const MRE: MRE_Type = {
     setDealTiles: setDealTiles,
     setPaishan: setPaishan,
     randomPaishan: randomPaishan,
-    roundBegin: roundBegin,
     mopai: mopai,
     qiepai: qiepai,
     mingpai: mingpai,
@@ -172,7 +171,6 @@ export const MRE: MRE_Type = {
 (window as any).setDealTiles = setDealTiles;
 (window as any).setPaishan = setPaishan;
 (window as any).randomPaishan = randomPaishan;
-(window as any).roundBegin = roundBegin;
 (window as any).mopai = mopai;
 (window as any).qiepai = qiepai;
 (window as any).mingpai = mingpai;

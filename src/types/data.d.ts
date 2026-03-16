@@ -115,8 +115,8 @@ type Config = {
             _tiandichuangzao?: boolean,
             _wanwushengzhang?: boolean,
             _tianguishi_vs_yuantiankemei?: boolean,
-            _report_yakus?: boolean,
             _sixifuhe?: boolean,
+            _report_yakus?: boolean,
             _guobiao?: boolean,
             _guobiao_huapai?: boolean,
             _guobiao_no_8fanfu?: boolean,
@@ -133,6 +133,14 @@ type Config = {
 
 type TileNum = { [tile in Tile]?: number; };
 
+type ZhenTing = {
+    tongxun: [Players_Boolean, Players_Boolean];
+    liqi: [Players_Boolean, Players_Boolean];
+    shezhang: Players_Boolean;
+    result: Players_Boolean;
+}
+// 0 为未锁定, 1 为锁定, 2 为无人开牌
+type LockState = 0 | 1 | 2;
 type BaseInfo = {
     chang: Seat,
     ju: Seat,
@@ -146,11 +154,13 @@ type BaseInfo = {
     baogang_seat: -1 | Seat,
     first_hu_seat: -1 | Seat,
     lianzhuang_cnt: number,
+    player_cnt: PlayerNum,
 };
 
 type FuluInfo = { type: FuLuType, tile: Tile[], from?: Seat };
 type Partition = { type: PartitionType, tile: Tile[] }[];
 type LstLiqi = {
+    valid: boolean,
     seat: Seat,
     liqi: LiqiNumType,
     kai: boolean,
@@ -234,6 +244,8 @@ type Player_Player = {
     part_point_2: number,
     total_point: number,
 };
+// 幻境传说模式号码
+type FieldSpellNumber = 0 | 1 | 2 | 3 | 4 | 5;
 type HunzhiyijiInfo_Player = {
     seat: Seat,
     liqi: LiqiNumType,
@@ -270,6 +282,7 @@ type GapType = 0 | 1 | 2;
 type Gaps = [GapType, GapType, GapType, GapType];
 
 type Doras = [Tile?, Tile?, Tile?, Tile?, Tile?];
+type DoraIndicator = [Doras, Doras];
 
 type ActionName =
     | 'RecordNewRound'
