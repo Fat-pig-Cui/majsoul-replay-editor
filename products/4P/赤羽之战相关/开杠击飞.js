@@ -27,6 +27,6 @@ begin_tiles[0] = '11113334448889m';
 begin_tiles[1] = '1112345678999p';
 begin_tiles[2] = '1112345678999s';
 begin_tiles[3] = '2223455567888s';
-roundBegin();
+randomPaishan();
 dingque('psmp');
 zimingpai(true);

@@ -30,7 +30,6 @@ begin_tiles[1] = '1112223334445z';
 begin_tiles[2] = '111234478899p5z';
 begin_tiles[3] = '1112225555888s';
 randomPaishan('3m8s');
-roundBegin();
 comboMopai();
 qiepai();
 normalMoqie();
@@ -43,7 +42,7 @@ begin_tiles[0] = '222345m234p789s55z';
 begin_tiles[1] = '1112223334445z';
 begin_tiles[2] = '1112345678999p';
 begin_tiles[3] = '1112345678999s';
-roundBegin();
+randomPaishan();
 hupai();
 
 // 第3(85)局: 地和
@@ -51,7 +50,7 @@ begin_tiles[0] = '3m1112223334445z';
 begin_tiles[1] = '22245m234p789s55z';
 begin_tiles[2] = '1112345678999p';
 begin_tiles[3] = '1112345678999s';
-roundBegin();
+randomPaishan();
 qiepai('3m');
 hupai();
 
@@ -63,7 +62,6 @@ begin_tiles[1] = '22245m234p789s55z';
 begin_tiles[2] = '1112345678999p';
 begin_tiles[3] = '1112345678999s';
 randomPaishan('3m');
-roundBegin();
 qiepai();
 zimoHu();
 
@@ -74,7 +72,6 @@ begin_tiles[1] = '1112345678999p';
 begin_tiles[2] = '22245m234p789s55z';
 begin_tiles[3] = '1112345678999s';
 randomPaishan('3m');
-roundBegin();
 qiepai();
 normalMoqie();
 hupai();

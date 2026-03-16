@@ -25,7 +25,7 @@ begin_tiles[0] = '11122555666777z';
 begin_tiles[1] = '1112340678999m';
 begin_tiles[2] = '1112340678999p';
 begin_tiles[3] = '1112340678999s';
-roundBegin();
+randomPaishan();
 hupai();
 
 // 第2局: 东亲, 东起 天和, 字一色, 小四喜, 四暗刻单骑
@@ -33,7 +33,7 @@ begin_tiles[0] = '11122233344555z';
 begin_tiles[1] = '1112340678999m';
 begin_tiles[2] = '1112340678999p';
 begin_tiles[3] = '1112340678999s';
-roundBegin();
+randomPaishan();
 hupai();
 
 // 第3局: 东亲, 南起 地和, 大三元, 字一色, 四暗刻单骑
@@ -42,7 +42,6 @@ begin_tiles[1] = '1112555666777z';
 begin_tiles[2] = '1112340678999p';
 begin_tiles[3] = '1112340678999s';
 randomPaishan('2z');
-roundBegin();
 qiepai();
 zimoHu();
 
@@ -52,7 +51,6 @@ begin_tiles[2] = '1112223334455z';
 begin_tiles[3] = '1112340678999p';
 begin_tiles[0] = '1112340678999s';
 randomPaishan('4z');
-roundBegin();
 qiepai();
 zimoHu();
 
@@ -62,7 +60,6 @@ begin_tiles[3] = '1112223334555z';
 begin_tiles[0] = '1112340678999p';
 begin_tiles[1] = '1112340678999s';
 randomPaishan('4z');
-roundBegin();
 qiepai();
 zimoHu();
 
@@ -72,7 +69,6 @@ begin_tiles[0] = '1112340678999m';
 begin_tiles[1] = '1112340678999p';
 begin_tiles[2] = '1112340678999s';
 randomPaishan('', '2567z');
-roundBegin();
 comboMopai(4);
 hupai();
 
@@ -82,6 +78,5 @@ begin_tiles[0] = '1112340678999m';
 begin_tiles[1] = '1112340678999p';
 begin_tiles[2] = '1112340678999s';
 randomPaishan('', '4532z');
-roundBegin();
 comboMopai(4);
 hupai();

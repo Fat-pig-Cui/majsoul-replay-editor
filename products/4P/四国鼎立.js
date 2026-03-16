@@ -22,6 +22,6 @@ begin_tiles[0] = '129m19p19s1234567z';
 begin_tiles[1] = '19m19p19s1234567z';
 begin_tiles[2] = '19m19p19s1234567z';
 begin_tiles[3] = '19m19p19s1234567z';
-roundBegin();
+randomPaishan();
 qiepai('2m');
 moqieLiuju();

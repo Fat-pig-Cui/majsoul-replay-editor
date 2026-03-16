@@ -26,7 +26,7 @@ begin_tiles[0] = '222888m22255s789p';
 begin_tiles[1] = '1112345699m789s';
 begin_tiles[2] = '1112345699p588s';
 begin_tiles[3] = '1112345699s789m';
-roundBegin();
+randomPaishan();
 huanpai(['789p', '789s', '588s', '789m'], 1);
 dingque('psmp');
 hupai();

@@ -17,7 +17,6 @@ setConfig({
 begin_tiles[0] = '11112223334445z';
 begin_tiles[1] = '1112340678999m';
 randomPaishan('', '5m432z');
-roundBegin();
 comboMopai('1z');
 comboMopai('2z');
 zimingpai('3z', 'angang');

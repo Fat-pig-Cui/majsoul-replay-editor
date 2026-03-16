@@ -27,7 +27,6 @@ begin_tiles[1] = '1m9s11223344567z';
 begin_tiles[2] = '1666777888999p';
 begin_tiles[3] = '1666777888999s';
 randomPaishan('9mDD1m', 'D432z');
-roundBegin();
 qiepai('1z');
 for (let i = 0; i < 3; i++) {
     mingQiepai(i + 5 + 'z');
@@ -47,7 +46,6 @@ begin_tiles[2] = '12389s11223344z';
 begin_tiles[3] = '1112223s888999s';
 setDiscardTiles(['6z3s', '1234z', '1289s', '57z67s']);
 randomPaishan('3s', '76s75z');
-roundBegin();
 qiepai(true);
 for (let i = 0; i < 4; i++) {
     mingQiepai(2);

@@ -31,7 +31,6 @@ begin_tiles[1] = '112233449999m5z';
 begin_tiles[2] = '112233449999p5z';
 begin_tiles[3] = '112233449999s5z';
 randomPaishan('234s1p.2p.3p.4p.1m..2m..3m..4m', '1s432z');
-roundBegin();
 comboMopai(4);
 qiepai();
 for (let i = 0; i < 4; i++) {
@@ -57,7 +56,6 @@ begin_tiles[1] = '112233449999m5z';
 begin_tiles[2] = '111222888999p5z';
 begin_tiles[3] = '111222888999s5z';
 randomPaishan('.1z.2z.3z.4z.1234m');
-roundBegin();
 qiepai();
 normalMoqie(2);
 for (let i = 0; i < 4; i++) {
@@ -82,7 +80,6 @@ begin_tiles[1] = '111122226666p5z';
 begin_tiles[2] = '333305559999p5z';
 begin_tiles[3] = '112233449999m5z';
 randomPaishan('1234z1m.2m.3m.4m.4p..4p..4p..4p');
-roundBegin();
 for (let i = 0; i < 4; i++) {
     qiepai('9s');
     normalMoqie();
@@ -112,7 +109,6 @@ begin_tiles[1] = '112233449999m5z';
 begin_tiles[2] = '112233449999p5z';
 begin_tiles[3] = '1111222266667s';
 randomPaishan('..1z..2z..3z..4z..1m.2m.3m.4m.1p2p3p4p', '5z....');
-roundBegin();
 qiepai();
 normalMoqie(3);
 for (let i = 0; i < 4; i++) {

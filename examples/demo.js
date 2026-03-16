@@ -22,5 +22,5 @@ begin_tiles[0] = '11122233344477z';
 begin_tiles[1] = '1112340678999m';
 begin_tiles[2] = '1112340678999p';
 begin_tiles[3] = '1112340678999s';
-roundBegin();
+randomPaishan();
 hupai();

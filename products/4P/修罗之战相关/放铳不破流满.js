@@ -27,7 +27,6 @@ begin_tiles[1] = '1112223336999m';
 begin_tiles[2] = '406m2223555788p';
 begin_tiles[3] = '2222445566778s';
 randomPaishan('Y...'.repeat(16) + '1mY..Y');
-roundBegin();
 qiepai();
 normalMoqie(65);
 hupai();

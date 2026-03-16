@@ -25,7 +25,6 @@ begin_tiles[1] = '1116mt66m22556p88s';
 begin_tiles[2] = '340mt3pt4p23334405s';
 begin_tiles[3] = '1111pt2p88s555777z';
 randomPaishan('3s..0p', '44p2422s..52p');
-roundBegin();
 qiepai();
 mingpai();
 mopai();

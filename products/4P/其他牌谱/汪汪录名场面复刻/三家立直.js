@@ -31,7 +31,6 @@ begin_tiles[1] = '23067999p678s277z';
 begin_tiles[2] = '12233456p246s33z';
 setDiscardTiles(['4s6s', '2z8s3p', '2s8s1z']);
 randomPaishan('5s1z8s4z6s3p1z', '7s4z.......8s');
-roundBegin();
 qiepai(true);
 moqieLiqi();
 moqieLiqi();

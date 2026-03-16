@@ -29,7 +29,6 @@ begin_tiles[1] = '457m28p3577s5557z';
 begin_tiles[2] = '234569m2345p124z';
 begin_tiles[3] = '2233448m3467p18s';
 randomPaishan('1m1s1234z');
-roundBegin();
 huanpai(['9m16p', '28p7z', '124z', '8m18s'], 1);
 qiepai('7z');
 hupai();

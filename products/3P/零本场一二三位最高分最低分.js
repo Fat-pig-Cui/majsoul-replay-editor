@@ -28,7 +28,6 @@ begin_tiles[0] = '11112223334446z';
 begin_tiles[1] = '1112340678999p';
 begin_tiles[2] = '222444666888s6z';
 randomPaishan('6z', '1m432z');
-roundBegin();
 for (let i = 0; i < 4; i++) {
     zimingpai(i + 1 + 'z', 'angang');
     mopai();
@@ -45,7 +44,6 @@ begin_tiles[0] = '2222444666888s6z';
 begin_tiles[1] = '1112223334446z';
 begin_tiles[2] = '1112340678999p';
 randomPaishan('76z', '1m864s');
-roundBegin();
 for (let i = 0; i < 4; i++) {
     zimingpai((i + 1) * 2 + 's', 'angang');
     mopai();
@@ -61,5 +59,5 @@ setScores([105000, 0, 0]);
 begin_tiles[0] = '11122233344466z';
 begin_tiles[1] = '1112340678999p';
 begin_tiles[2] = '1112340678999s';
-roundBegin();
+randomPaishan();
 hupai();

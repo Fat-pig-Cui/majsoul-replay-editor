@@ -27,7 +27,6 @@ begin_tiles[1] = '2589m445569p159s';
 begin_tiles[2] = '112346689p3467s';
 begin_tiles[3] = '114699m469p3467s';
 randomPaishan('', '23785p');
-roundBegin();
 huanpai(['159s', '159s', '238p', '469p'], 1);
 dingque('msmp');
 qiepai('9p');

@@ -28,7 +28,6 @@ begin_tiles[1] = '11345678m23456p';
 begin_tiles[2] = '2223405567888m';
 begin_tiles[3] = '2223405567888s';
 randomPaishan('5677z1p', '1z....');
-roundBegin();
 qiepai('8p');
 for (let i = 0; i < 3; i++) {
     normalMoqie();
@@ -45,7 +44,6 @@ begin_tiles[1] = '11345678m23456p';
 begin_tiles[2] = '2223405567888m';
 begin_tiles[3] = '2223405567888s';
 randomPaishan('12344z1p', '5z....');
-roundBegin();
 qiepai();
 for (let i = 0; i < 4; i++) {
     normalMoqie();

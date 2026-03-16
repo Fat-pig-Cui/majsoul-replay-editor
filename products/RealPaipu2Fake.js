@@ -75,15 +75,15 @@
             txt += `player_datas[${i}]=${JSON.stringify(json.head.accounts[i])};\n`;
         txt += `\nsetConfig(${JSON.stringify(json.head.config)});\n\n`;
 
-        let actions = json.data.data.actions;
-        for (let i in actions)
+        const actions = json.data.data.actions;
+        for (const i in actions)
             if (actions[i].result) {
-                let tmp = actions[i].result.name.split('.');
+                const tmp = actions[i].result.name.split('.');
                 actions[i].result.name = tmp[tmp.length - 1];
-                let Data = actions[i].result.data;
+                const Data = actions[i].result.data;
 
                 if (actions[i].result.name === 'RecordNewRound') {
-                    let chang = Data.chang, ju = Data.ju, ben = Data.ben;
+                    const chang = Data.chang, ju = Data.ju, ben = Data.ben;
                     txt += `// ${roundinfo(chang, ju, ben)}\n`;
                     txt += `begin_tiles[0]='${Data.tiles0.join('')}';\n`;
                     txt += `begin_tiles[1]='${Data.tiles1.join('')}';\n`;
@@ -101,10 +101,9 @@
                             }
                         txt += `setMuyuSeats('${muyuseats})';\n`;
                     }
-                    txt += `roundBegin();\n`;
                 }
                 if (actions[i].result.name === 'RecordDiscardTile') {
-                    let tile = Data.tile, is_liqi = Data.is_liqi, moqie = Data.moqie;
+                    const tile = Data.tile, is_liqi = Data.is_liqi, moqie = Data.moqie;
                     if (is_liqi) {
                         if (moqie)
                             txt += `qiepai(true);\n`;
@@ -116,22 +115,22 @@
                         else
                             txt += `qiepai('${tile}');\n`;
                     }
-                    let beishui_type = Data.liqi_type_beishuizhizhan;
+                    const beishui_type = Data.liqi_type_beishuizhizhan;
                     if (beishui_type !== undefined)
                         txt = txt.substring(0, txt.length - 3) + `,[${beishui_type}]);\n`;
                 }
                 if (actions[i].result.name === 'RecordChangeTile') {
-                    let tls = ['', '', '', ''];
+                    const tls = ['', '', '', ''];
                     for (let i = 0; i < tls.length; i++)
                         tls[i] = Data.chang_tile_infos[i].out_tiles.join('');
-                    let type = Data.change_type;
+                    const type = Data.change_type;
                     txt += `huanpai(['${tls[0]}','${tls[1]}','${tls[2]}','${tls[3]}'],${type});\n`;
                 }
                 if (actions[i].result.name === 'RecordSelectGap') {
-                    let gap_types = Data.gap_types;
-                    let words = {'0': 'p', '1': 'm', '2': 's'};
+                    const gap_types = Data.gap_types;
+                    const words = {'0': 'p', '1': 'm', '2': 's'};
                     let ret = '';
-                    for (let i in gap_types)
+                    for (const i in gap_types)
                         ret += words[gap_types[i]];
                     txt += `dingque('${ret}');\n`;
                 }
@@ -142,10 +141,10 @@
                         txt += `mopai();\n`;
                 }
                 if (actions[i].result.name === 'RecordChiPengGang') {
-                    let froms = Data.froms, seat = Data.seat, tiles = Data.tiles;
+                    const froms = Data.froms, seat = Data.seat, tiles = Data.tiles;
 
                     let c_tiles = '';
-                    for (let i in tiles)
+                    for (const i in tiles)
                         if (froms[i] === seat)
                             c_tiles += tiles[i];
                     let j = i + 1;
@@ -157,8 +156,8 @@
                         txt += `mingpai(${seat},'${c_tiles}');\n`;
                 }
                 if (actions[i].result.name === 'RecordAnGangAddGang') {
-                    let tile = Data.tiles, type = Data.type;
-                    let c_type = type === 3 ? 'angang' : 'jiagang';
+                    const tile = Data.tiles, type = Data.type;
+                    const c_type = type === 3 ? 'angang' : 'jiagang';
 
                     let j = i + 1;
                     while (!actions[j].result)
@@ -169,14 +168,14 @@
                         txt += `zimingpai('${tile}','${c_type}');\n`;
                 }
                 if (actions[i].result.name === 'RecordBaBei') {
-                    let tile = Data.tile;
+                    const tile = Data.tile;
                     txt += `zimingpai('${tile}','babei');\n`;
                 }
                 if (actions[i].result.name === 'RecordHule') {
-                    let allseats = [];
-                    for (let i in Data.hules)
-                        allseats.push(Data.hules[i].seat);
-                    txt += `hupai(${allseats});\n\n`;
+                    const all_seats = [];
+                    for (const i in Data.hules)
+                        all_seats.push(Data.hules[i].seat);
+                    txt += `hupai(${all_seats});\n\n`;
                 }
                 if (actions[i].result.name === 'RecordLiuJu') {
                     txt += `liuju();\n\n`;
@@ -185,23 +184,23 @@
                     txt += `huangpai();\n\n`;
                 }
                 if (actions[i].result.name === 'RecordHuleXueZhanMid') {
-                    let allseats = [];
-                    for (let i in Data.hules)
-                        allseats.push(Data.hules[i].seat);
-                    txt += `hupai([${allseats}]);\n\n`;
+                    const all_seats = [];
+                    for (const i in Data.hules)
+                        all_seats.push(Data.hules[i].seat);
+                    txt += `hupai([${all_seats}]);\n\n`;
                 }
                 if (actions[i].result.name === 'RecordHuleXueZhanEnd') {
-                    let allseats = [];
-                    for (let i in Data.hules)
-                        allseats.push(Data.hules[i].seat);
-                    txt += `hupai([${allseats}],true);\n\n\n\n`;
+                    const all_seats = [];
+                    for (const i in Data.hules)
+                        all_seats.push(Data.hules[i].seat);
+                    txt += `hupai([${all_seats}],true);\n\n\n\n`;
                 }
                 if (actions[i].result.name === 'RecordGangResult') { // 不需要
                 }
                 if (actions[i].result.name === 'RecordGangResultEnd') { // 不需要
                 }
                 if (actions[i].result.name === 'RecordRevealTile') {
-                    let tile = Data.tile, is_liqi = Data.is_liqi;
+                    const tile = Data.tile, is_liqi = Data.is_liqi;
                     if (is_liqi)
                         txt += `qiepai('${tile}',true,'anpai');\n`;
                     else
@@ -212,7 +211,7 @@
                     while (!actions[j].result)
                         j--;
                     if (actions[j].result.name === 'RecordUnveilTile') {
-                        let seat = actions[j].result.data.seat;
+                        const seat = actions[j].result.data.seat;
                         if (actions[j].result.data.lock_state === 1)
                             txt += `kaipaiLock(${seat});\n`;
                         else if (actions[j].result.data.lock_state === 0)

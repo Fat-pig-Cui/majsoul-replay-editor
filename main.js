@@ -7577,6 +7577,7 @@ var MRE = (function (exports) {
         if ((_b = (_a = view === null || view === void 0 ? void 0 : view.DesktopMgr) === null || _a === void 0 ? void 0 : _a.Inst) === null || _b === void 0 ? void 0 : _b.active)
             throw new Error('clearProject: 请退出当前牌谱后再载入自制牌谱');
         game_begin_once = true;
+        round_begin_once = true;
         for (let i = 0; i < 4; i++) {
             player_datas[i] = {
                 nickname: `电脑${i}`,
@@ -7647,6 +7648,7 @@ var MRE = (function (exports) {
      */
     const setPaishan = (ps) => {
         paishan.push(...separate(ps));
+        roundBegin();
     };
     /**
      * 随机牌山函数, 最后会将随机牌山赋给全局变量 paishan, paishan.join('') 就是牌谱界面显示的牌山字符串代码
@@ -7794,6 +7796,7 @@ var MRE = (function (exports) {
                     console.warn(errRoundInfo() + `paishan 不合规: ${3 - cnt2[tile]} 个 ${tile}t`);
             }
         paishan = para_tiles[0].concat(remain_tiles, para_tiles[1]);
+        roundBegin();
         function randomize(tls) {
             for (const i in tls)
                 if (['H', 'T'].includes(tls[i][0])) {
@@ -7816,6 +7819,8 @@ var MRE = (function (exports) {
     const roundBegin = () => {
         if (all_data.all_actions.length === 0)
             gameBegin();
+        if (!round_begin_once)
+            return;
         init();
         if (is_dora3() || is_muyu())
             dora_cnt.cnt = dora_cnt.li_cnt = 3;
@@ -7880,6 +7885,7 @@ var MRE = (function (exports) {
         addNewRound(left_cnt, fake_hash_code, opens, is_sha256);
         if (is_sha256)
             paishan.splice(0, begin_len);
+        round_begin_once = false;
     };
     /**
      * 摸牌, 参数顺序可以不一致, 包含
@@ -8204,13 +8210,13 @@ var MRE = (function (exports) {
             if (player_cnt === 4 && !is_chuanma()) {
                 seat = (from + 1) % player_cnt;
                 if (tile[1] !== 'z' && !['1', '2'].includes(tile[0])) // 吃上端
-                    if (trying([parseInt(tile) - 2 + tile[1], parseInt(tile) - 1 + tile[1]], seat))
+                    if (trying([parseInt(simplify(tile)) - 2 + tile[1], parseInt(simplify(tile)) - 1 + tile[1]], seat))
                         return;
                 if (tile[1] !== 'z' && !['1', '9'].includes(tile[0])) // 吃中间
-                    if (trying([parseInt(tile) - 1 + tile[1], parseInt(tile) + 1 + tile[1]], seat))
+                    if (trying([parseInt(simplify(tile)) - 1 + tile[1], parseInt(simplify(tile)) + 1 + tile[1]], seat))
                         return;
                 if (tile[1] !== 'z' && !['8', '9'].includes(tile[0])) // 吃下端
-                    if (trying([parseInt(tile) + 1 + tile[1], parseInt(tile) + 2 + tile[1]], seat))
+                    if (trying([parseInt(simplify(tile)) + 1 + tile[1], parseInt(simplify(tile)) + 2 + tile[1]], seat))
                         return;
             }
             throw new Error(errRoundInfo() + `mingpai: seat: ${from} 的切牌: ${tile} 没有玩家能 mingpai`);
@@ -9295,6 +9301,8 @@ var MRE = (function (exports) {
     let pretongxunzt, prelizhizt, shezhangzt, tongxunzt, lizhizt, zhenting;
     // 使 gameBegin 每个牌谱只运行一次的变量
     let game_begin_once;
+    // 使 roundBegin 每个小局只运行一次的变量
+    let round_begin_once;
     // 只在一开局生效或者整个对局期间都不会变化的值的初始化
     const gameBegin = () => {
         if (!game_begin_once)
@@ -10041,6 +10049,7 @@ var MRE = (function (exports) {
             base_info.ju = 0;
         }
         base_info.chang %= player_cnt;
+        round_begin_once = true;
         gameEnd();
     };
     // 计算终局界面玩家的点数

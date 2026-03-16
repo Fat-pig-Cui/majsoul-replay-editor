@@ -23,7 +23,6 @@ begin_tiles[1] = '111234067899m1z';
 begin_tiles[2] = '111234067899p2z';
 begin_tiles[3] = '111234067899s3z';
 randomPaishan('777zPHHHPHHHSHHHSSMPPSMPPSMPPSMPPSMPSSMPSSMPSSMPSSMPMSMPMSMP1zSMP7z5z9p9sM9m', '5z....');
-roundBegin();
 qiepai('8m');
 normalMoqie(59);
 normalMoqie('8m');

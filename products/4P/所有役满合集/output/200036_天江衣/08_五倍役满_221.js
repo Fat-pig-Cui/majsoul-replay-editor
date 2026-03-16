@@ -36,7 +36,7 @@ begin_tiles[0] = '22m111222333444z';
 begin_tiles[1] = '1112340678999m';
 begin_tiles[2] = '1112340678999p';
 begin_tiles[3] = '1112340678999s';
-roundBegin();
+randomPaishan();
 hupai();
 
 // 第2局: 东亲, 南起 地和, 四暗刻单骑, 大四喜
@@ -45,7 +45,6 @@ begin_tiles[1] = '2m111222333444z';
 begin_tiles[2] = '1112340678999m';
 begin_tiles[3] = '1112340678999p';
 randomPaishan('2m');
-roundBegin();
 qiepai();
 zimoHu();
 
@@ -55,7 +54,6 @@ begin_tiles[2] = '1112340678999m';
 begin_tiles[3] = '1112340678999p';
 begin_tiles[0] = '1112340678999s';
 randomPaishan('5z');
-roundBegin();
 qiepai();
 normalMoqie();
 hupai();
@@ -66,6 +64,5 @@ begin_tiles[2] = '1112340678999m';
 begin_tiles[3] = '1112340678999p';
 begin_tiles[0] = '1112340678999s';
 randomPaishan('', '2m432z');
-roundBegin();
 comboMopai(4);
 hupai();

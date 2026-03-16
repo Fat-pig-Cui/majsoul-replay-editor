@@ -28,6 +28,5 @@ begin_tiles[1] = 'b112340679m899s';
 begin_tiles[2] = 'b112340679p344z';
 begin_tiles[3] = 'b112340679s899m';
 randomPaishan('', '1z....');
-roundBegin();
 huanpai(['899p', '899s', '344z', '899m'], 1);
 hupai(true);

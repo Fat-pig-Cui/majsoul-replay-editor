@@ -25,7 +25,6 @@ begin_tiles[1] = '222205558888m6z';
 begin_tiles[2] = '222205558888s3z';
 begin_tiles[3] = '3333444467777s';
 randomPaishan('...9p', '4444z8888p776251z');
-roundBegin();
 qiepai('1p', true, [2]);
 normalMoqie(3);
 mopai();

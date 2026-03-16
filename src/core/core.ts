@@ -63,6 +63,7 @@ export const clearProject = (): void => {
         throw new Error('clearProject: 请退出当前牌谱后再载入自制牌谱');
 
     game_begin_once = true;
+    round_begin_once = true;
     for (let i = 0; i < 4; i++) {
         player_datas[i] = {
             nickname: `电脑${i}`,
@@ -138,6 +139,7 @@ export const setDealTiles = (tiles: Players_String): void => {
  */
 export const setPaishan = (ps: string): void => {
     paishan.push(...separate(ps));
+    roundBegin();
 };
 
 /**
@@ -298,6 +300,8 @@ export const randomPaishan = (ps_head: string = '', ps_back: string = ''): void 
 
     paishan = para_tiles[0].concat(remain_tiles, para_tiles[1]) as Tile[];
 
+    roundBegin();
+
     function randomize(tls: TileWithParam[]): void {
         for (const i in tls)
             if (['H', 'T'].includes(tls[i][0])) {
@@ -321,6 +325,8 @@ export const randomPaishan = (ps_head: string = '', ps_back: string = ''): void 
 export const roundBegin = (): void => {
     if (all_data.all_actions.length === 0)
         gameBegin();
+    if (!round_begin_once)
+        return;
 
     init();
 
@@ -394,6 +400,8 @@ export const roundBegin = (): void => {
 
     if (is_sha256)
         paishan.splice(0, begin_len);
+
+    round_begin_once = false;
 };
 
 /**
@@ -759,13 +767,13 @@ export const mingpai = (...args: any[]): void => {
         if (player_cnt === 4 && !is_chuanma()) {
             seat = (from + 1) % player_cnt as Seat;
             if (tile[1] !== 'z' && !['1', '2'].includes(tile[0])) // 吃上端
-                if (trying([parseInt(tile) - 2 + tile[1], parseInt(tile) - 1 + tile[1]] as Tile[], seat))
+                if (trying([parseInt(simplify(tile)) - 2 + tile[1], parseInt(simplify(tile)) - 1 + tile[1]] as Tile[], seat))
                     return;
             if (tile[1] !== 'z' && !['1', '9'].includes(tile[0])) // 吃中间
-                if (trying([parseInt(tile) - 1 + tile[1], parseInt(tile) + 1 + tile[1]] as Tile[], seat))
+                if (trying([parseInt(simplify(tile)) - 1 + tile[1], parseInt(simplify(tile)) + 1 + tile[1]] as Tile[], seat))
                     return;
             if (tile[1] !== 'z' && !['8', '9'].includes(tile[0])) // 吃下端
-                if (trying([parseInt(tile) + 1 + tile[1], parseInt(tile) + 2 + tile[1]] as Tile[], seat))
+                if (trying([parseInt(simplify(tile)) + 1 + tile[1], parseInt(simplify(tile)) + 2 + tile[1]] as Tile[], seat))
                     return;
         }
 
@@ -1938,7 +1946,9 @@ export let pretongxunzt: Players_Boolean, prelizhizt: Players_Boolean, shezhangz
     tongxunzt: Players_Boolean, lizhizt: Players_Boolean, zhenting: Players_Boolean;
 
 // 使 gameBegin 每个牌谱只运行一次的变量
-export let game_begin_once: boolean;
+let game_begin_once: boolean;
+// 使 roundBegin 每个小局只运行一次的变量
+let round_begin_once: boolean;
 
 // 只在一开局生效或者整个对局期间都不会变化的值的初始化
 export const gameBegin = (): void => {
@@ -2718,6 +2728,7 @@ export const roundEnd = (): void => {
         base_info.ju = 0;
     }
     base_info.chang %= player_cnt;
+    round_begin_once = true;
 
     gameEnd();
 };

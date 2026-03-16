@@ -25,7 +25,6 @@ begin_tiles[1] = '2228m333557777s';
 begin_tiles[2] = '233344447777m0s';
 begin_tiles[3] = '05556666888m08p';
 randomPaishan('YYYD'.repeat(16) + 'Y', 'D864s');
-roundBegin();
 comboMopai(4);
 qiepai(true);
 moqieLiuju();

@@ -20,6 +20,5 @@ begin_tiles[0] = '19m19p189s1234567z';
 begin_tiles[1] = '19m19p19s1234567z';
 begin_tiles[2] = '19m19p19s1234567z';
 randomPaishan('', 'YYYYYDYYYYYYYY');
-roundBegin();
 qiepai('8s');
 moqieLiuju();

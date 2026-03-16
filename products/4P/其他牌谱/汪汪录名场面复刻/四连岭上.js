@@ -30,7 +30,6 @@ begin_tiles[1] = '9m348p230799s125z';
 begin_tiles[2] = '1m147p1225679s37z';
 setDiscardTiles(['2p4p9m5z7p3z8s4s5s6s5p5s9p6p', '9m8p5z8p2p2p8p3z4p7p6z1z3p9p', '1m3z5z1p7z4p5z9s3p3z1s9s3s']);
 randomPaishan('2z6p2s5z9m3s6p3z8p9s7p2p8s2p7p8s4z5z4z3z6s6s4s3p9p7p3z5p6z8p4s7s3s6p4z4s1s', '1p.3s.6p.4z.6z1m7z1z9p1z8p');
-roundBegin();
 qiepai();
 normalMoqie(2);
 mingQiepai();

@@ -25,7 +25,6 @@ begin_tiles[1] = 'b368m223344s666z';
 begin_tiles[2] = 'b111356799p345z';
 begin_tiles[3] = 'b112457999m248s';
 randomPaishan('6z', '5z....');
-roundBegin();
 huanpai(['248p', '368m', '345z', '248s'], 1);
 qiepai('5s');
 mopai();

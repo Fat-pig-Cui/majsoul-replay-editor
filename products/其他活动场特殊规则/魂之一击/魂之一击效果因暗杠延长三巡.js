@@ -25,7 +25,6 @@ begin_tiles[1] = '1111340678999m';
 begin_tiles[2] = '1111330678999p';
 begin_tiles[3] = '1111340678999s';
 randomPaishan('.....2m', '77m....22223333z.7m2s2p');
-roundBegin();
 qiepai(true);
 normalMoqie(5);
 mopai();

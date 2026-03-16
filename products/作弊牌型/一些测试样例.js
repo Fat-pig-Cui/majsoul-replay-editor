@@ -27,7 +27,6 @@ begin_tiles[1] = '6z'.repeat(13);
 begin_tiles[2] = '6z'.repeat(13);
 begin_tiles[3] = '6z'.repeat(13);
 setPaishan('6z'.repeat(83));
-roundBegin();
 comboMopai(4);
 hupai();
 
@@ -36,7 +35,7 @@ begin_tiles[0] = '77777777777777z';
 begin_tiles[1] = '1112340678999m';
 begin_tiles[2] = '1112340678999p';
 begin_tiles[3] = '1112340678999s';
-roundBegin();
+randomPaishan();
 hupai();
 
 // 无限立直, 第一次立直之后再次立直, 本质上都是无效的, 只有发声和牌横着的效果, 没有放立直棒动作, 也不影响立直番数和一发的计算
@@ -46,7 +45,6 @@ begin_tiles[1] = '1112340678999m';
 begin_tiles[2] = '1112340678999p';
 begin_tiles[3] = '1112340678999s';
 randomPaishan('', '666z............');
-roundBegin();
 qiepai(true);
 for (let i = 0; i < 17; i++) {
     normalMoqie(3);
@@ -62,7 +60,6 @@ begin_tiles[1] = '1112340678999m';
 begin_tiles[2] = '1111236789999p';
 begin_tiles[3] = '1112340678999s';
 randomPaishan('00p', '4p.4p.4p.4p.000p');
-roundBegin();
 comboMopai(3);
 qiepai('7p');
 normalMoqie();

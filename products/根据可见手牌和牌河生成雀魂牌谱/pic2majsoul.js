@@ -211,7 +211,6 @@
         }
 
         randomPaishan('', zhishipais + '....');
-        roundBegin();
 
         // paihe 经过该函数变为数组格式
         function separate_tiles(tiles) {

@@ -26,7 +26,6 @@ begin_tiles[2] = '1111330678999p';
 begin_tiles[3] = '1111340678999s';
 setMuyuSeats('1230');
 randomPaishan('', '77m....22223333z7m3p2s2p');
-roundBegin();
 comboMopai(3);
 qiepai();
 mingQiepai('9p');

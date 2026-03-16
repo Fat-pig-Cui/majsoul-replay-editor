@@ -134,7 +134,6 @@
                 zhishipais += dict[biao_dora[i]];
             }
             randomPaishan('', zhishipais + '....');
-            roundBegin();
 
             function process(tls) {
                 let ret = '';

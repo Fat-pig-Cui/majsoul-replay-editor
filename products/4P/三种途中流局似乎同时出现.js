@@ -33,7 +33,6 @@ begin_tiles[1] = '111999m111999p6z';
 begin_tiles[2] = '222444666888s6z';
 begin_tiles[3] = '111333777999s6z';
 randomPaishan('1m2s1s', '23333z');
-roundBegin();
 comboMopai();
 qiepai(true);
 for (let i = 0; i < 3; i++) {

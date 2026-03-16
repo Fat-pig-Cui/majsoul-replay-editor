@@ -27,7 +27,6 @@ begin_tiles[1] = '1112340678999m';
 begin_tiles[2] = '1112340678999p';
 begin_tiles[3] = '1112223345599s';
 randomPaishan('1z', '7565656567z7432z');
-roundBegin();
 qiepai('9s', true);
 mingQiepai('4s');
 mopai();

@@ -37,7 +37,6 @@ begin_tiles[2] = '139m267p14599s25z';
 begin_tiles[3] = '234s449m249p4467z';
 setDiscardTiles(['1z8p4s', '4z7z9s', '1z2z1m', '1z3z7z']);
 randomPaishan('4z1z1z8p7z2z3z4s9s1m4p1p', '7z....');
-roundBegin();
 qiepai();
 normalMoqie(11);
 zimoHu();

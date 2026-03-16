@@ -1,6 +1,6 @@
 import {
     all_data, actions, begin_tiles, player_cnt, mopai,
-    normalMoqie, qiepai, randomPaishan, roundBegin, roundEnd,
+    normalMoqie, qiepai, randomPaishan, roundEnd,
     gameBegin, moqieLiqi, hupai
 } from "./core";
 import {is_report_yakus} from "./misc";
@@ -24,7 +24,6 @@ export const demoGame = (): void => {
         begin_tiles[3] = '1112340678999s';
         randomPaishan('6z', '55z....');
     }
-    roundBegin();
     qiepai(true);
     moqieLiqi();
     hupai();
@@ -358,7 +357,6 @@ const reportGame = (is_yiji: boolean = false, rm_duplicate?: boolean): void => {
     begin_tiles[2] = '5555555555555z';
     begin_tiles[3] = '1112340678999s';
     randomPaishan('75z', '7z....');
-    roundBegin();
     qiepai();
     normalMoqie();
     mopai();

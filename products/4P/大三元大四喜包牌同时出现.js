@@ -24,7 +24,6 @@ begin_tiles[2] = '23468s11223344z';
 begin_tiles[3] = '122344s66788s57z';
 setDiscardTiles(['6z3s', '1234z', '2468s', '57z71s']);
 randomPaishan('3s', '2s....');
-roundBegin();
 qiepai(true);
 mingQiepai(12);
 normalMoqie();

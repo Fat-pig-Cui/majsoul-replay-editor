@@ -28,7 +28,6 @@ begin_tiles[1] = '357m1123467899p';
 begin_tiles[2] = '159m1123467899s';
 begin_tiles[3] = '2224466888m159p';
 randomPaishan('5p5s5m');
-roundBegin();
 huanpai(['159s', '357m', '159m', '159p'], 1);
 dingque('psmp');
 hupai();

@@ -28,7 +28,7 @@ begin_tiles[0] = '222p22s555666777z';
 begin_tiles[1] = '1112340678999m';
 begin_tiles[2] = '1112340678999p';
 begin_tiles[3] = '1112340678999s';
-roundBegin();
+randomPaishan();
 hupai();
 
 // 第2局: 东亲, 东起 天和, 字一色, 四暗刻单骑
@@ -36,7 +36,7 @@ begin_tiles[0] = '11122233355566z';
 begin_tiles[1] = '1112340678999m';
 begin_tiles[2] = '1112340678999p';
 begin_tiles[3] = '1112340678999s';
-roundBegin();
+randomPaishan();
 hupai();
 
 // 第3局: 东亲, 东起 天和, 绿一色, 四暗刻单骑
@@ -44,7 +44,7 @@ begin_tiles[0] = '222444666888s66z';
 begin_tiles[1] = '1112340678999m';
 begin_tiles[2] = '1112340678999p';
 begin_tiles[3] = '1112340678999s';
-roundBegin();
+randomPaishan();
 hupai();
 
 // 第4局: 东亲, 东起 天和, 清老头, 四暗刻单骑
@@ -52,7 +52,7 @@ begin_tiles[0] = '111999m111999p11s';
 begin_tiles[1] = '2223405567888m';
 begin_tiles[2] = '2223405567888p';
 begin_tiles[3] = '2223405567888s';
-roundBegin();
+randomPaishan();
 hupai();
 
 // 第5局: 东亲, 东起 天和, 小四喜, 四暗刻单骑
@@ -60,7 +60,7 @@ begin_tiles[0] = '111m11122233344z';
 begin_tiles[1] = '2223405567888m';
 begin_tiles[2] = '2223405567888p';
 begin_tiles[3] = '2223405567888s';
-roundBegin();
+randomPaishan();
 hupai();
 
 // 第6局: 东亲, 南起 地和, 大三元, 四暗刻单骑
@@ -69,7 +69,6 @@ begin_tiles[1] = '222p2s555666777z';
 begin_tiles[2] = '1112340678999p';
 begin_tiles[3] = '1112340678999s';
 randomPaishan('2s');
-roundBegin();
 qiepai();
 zimoHu();
 
@@ -79,7 +78,6 @@ begin_tiles[2] = '22m11122233344z';
 begin_tiles[3] = '1112340678999p';
 begin_tiles[0] = '1112340678999s';
 randomPaishan('4z');
-roundBegin();
 qiepai();
 zimoHu();
 
@@ -89,7 +87,6 @@ begin_tiles[3] = '1112223335556z';
 begin_tiles[0] = '1112340678999p';
 begin_tiles[1] = '1112340678999s';
 randomPaishan('6z');
-roundBegin();
 qiepai();
 zimoHu();
 
@@ -99,7 +96,6 @@ begin_tiles[0] = '222444666888s6z';
 begin_tiles[1] = '1112340678999p';
 begin_tiles[2] = '1112340678999s';
 randomPaishan('6z');
-roundBegin();
 qiepai();
 zimoHu();
 
@@ -109,7 +105,6 @@ begin_tiles[1] = '111999m111999p1s';
 begin_tiles[2] = '2223405567888p';
 begin_tiles[3] = '2223405567888s';
 randomPaishan('1s');
-roundBegin();
 qiepai();
 zimoHu();
 
@@ -119,7 +114,6 @@ begin_tiles[2] = '111m1112223334z';
 begin_tiles[3] = '2223405567888p';
 begin_tiles[0] = '2223405567888s';
 randomPaishan('4z');
-roundBegin();
 qiepai();
 zimoHu();
 
@@ -129,7 +123,6 @@ begin_tiles[3] = '2223405567888m';
 begin_tiles[0] = '2223405567888p';
 begin_tiles[1] = '2223405567888s';
 randomPaishan('32z');
-roundBegin();
 qiepai('3z');
 normalMoqie(2);
 hupai();
@@ -140,7 +133,6 @@ begin_tiles[3] = '2223405567888m';
 begin_tiles[0] = '2223405567888p';
 begin_tiles[1] = '2223405567888s';
 randomPaishan('', '2567z');
-roundBegin();
 comboMopai(4);
 hupai();
 
@@ -150,7 +142,6 @@ begin_tiles[3] = '2223405567888m';
 begin_tiles[0] = '2223405567888p';
 begin_tiles[1] = '1113405567888s';
 randomPaishan('4z', '7z');
-roundBegin();
 qiepai('1s');
 mingpai();
 normalMoqie();
@@ -162,7 +153,6 @@ begin_tiles[3] = '2223405567888m';
 begin_tiles[0] = '2223405567888p';
 begin_tiles[1] = '1113405567888s';
 randomPaishan('64z');
-roundBegin();
 qiepai();
 normalMoqie(2);
 hupai();
@@ -173,7 +163,6 @@ begin_tiles[3] = '2223405567888m';
 begin_tiles[0] = '2223405567888p';
 begin_tiles[1] = '2223405567888s';
 randomPaishan('', '6532z');
-roundBegin();
 comboMopai(4);
 hupai();
 
@@ -183,7 +172,6 @@ begin_tiles[3] = '1112340678999m';
 begin_tiles[0] = '1112340678999p';
 begin_tiles[1] = '1111333377779s';
 randomPaishan('', '6z864s');
-roundBegin();
 comboMopai(4);
 hupai();
 
@@ -193,7 +181,6 @@ begin_tiles[3] = '2223405567888m';
 begin_tiles[0] = '2223405567888p';
 begin_tiles[1] = '2223405567888s';
 randomPaishan('', '1s9p1p9m');
-roundBegin();
 comboMopai(4);
 hupai();
 
@@ -203,6 +190,5 @@ begin_tiles[3] = '2223405567888m';
 begin_tiles[0] = '2223405567888p';
 begin_tiles[1] = '2223405567888s';
 randomPaishan('', '4z3z2z1z');
-roundBegin();
 comboMopai(4);
 hupai();
