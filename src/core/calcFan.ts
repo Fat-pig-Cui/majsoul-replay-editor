@@ -1,26 +1,23 @@
 /**
- * @file: calcFan.ts - 根据牌算番核心文件, 分为立直, 川麻, 国标三个部分
+ * @file: calcFan.ts - 核心文件, 根据牌算番, 分为立直, 川麻, 国标三个部分
  * @author: GrandDawn, Fat-pig-Cui
  * @email: chubbypig@qq.com
  * @github: https://github.com/Fat-pig-Cui/majsoul-replay-editor
  */
 
 import {
-    baopai, base_info, dora_cnt, dora_indicator, fulu,
-    hunzhiyiji_info, liqi_info, paihe, paishan, player_tiles,
+    baopai, base_info, dora_cnt, dora_indicator, fulu, hunzhiyiji_info, liqi_info, paihe, paishan, player_tiles,
     sigang_bao, yongchang_data,
 } from "./data";
 import {
-    get_field_spell_mode, is_beishuizhizhan, is_guyi, is_hunzhiyiji, is_qingtianjing,
-    is_renhumanguan, is_sigangbaopai, is_sixifuhe, is_tiandichuangzao, is_wanwushengzhang,
-    is_wanxiangxiuluo, is_xuezhandaodi, is_yifanjieguyi, is_yongchang, no_lianfengsifu,
-    no_normalbaopai, no_shiduan, no_wyakuman, no_yifa
+    get_field_spell_mode, is_beishuizhizhan, is_guyi, is_hunzhiyiji, is_qingtianjing, is_renhumanguan, is_sigangbaopai,
+    is_sixifuhe, is_tiandichuangzao, is_wanwushengzhang, is_wanxiangxiuluo, is_xuezhandaodi, is_yifanjieguyi,
+    is_yongchang, no_lianfengsifu, no_normalbaopai, no_shiduan, no_wyakuman, no_yifa
 } from "./misc";
-import {isEqualTile, judgeTile, calcHupai, calcTingpai, getLstAction} from "./exportedUtils";
 import {
-    calcSudian, calcSudianChuanma, calcSudianGuobiao, cmp, huazhu,
-    nextTile, shunziMidTile, simplify
+    calcSudian, calcSudianChuanma, calcSudianGuobiao, cmp, huazhu, nextTile, shunziMidTile, simplify
 } from "./utils";
+import {isEqualTile, judgeTile, calcHupai, calcTingpai, getLstAction} from "./exportedUtils";
 import {Constants} from "./constants";
 
 /**

@@ -27,8 +27,8 @@ export const getLeftTileCnt = (): number => {
 /**
  * 判断 tile 牌是否满足 type 规则
  * @example
- * // return true
  * judgeTile('1m', 'M')
+ * // return true
  * @param tile - 要验的牌
  * @param type - 规则:
  * - 'H': 字牌
@@ -104,8 +104,8 @@ export const judgeTile = (tile: Tile, type: string): boolean => {
 /**
  * 返回和 tile 等效的所有牌, 优先把红宝牌和含有 SPT_SUFFIX 放到后面
  * @example
- * // return ['5m', '0m', '5mt', '0mt']
  * allEqualTiles('5m')
+ * // return ['5m', '0m', '5mt', '0mt']
  */
 export const allEqualTiles = (tile: Tile): Tile[] => {
     if (tile === Constants.TBD)
@@ -125,8 +125,8 @@ export const isEqualTile = (x: Tile, y: Tile): boolean => allEqualTiles(x).inclu
 /**
  * 解析牌, 会将简化后牌编码恢复成单个并列样子
  * @example
- * // return '1m2m3m9p9p'
  * decompose('123m99p')
+ * // return '1m2m3m9p9p'
  */
 export const decompose = (tiles: string): string => {
     const x = tiles.replace(/\s*/g, '');
@@ -152,7 +152,6 @@ export const decompose = (tiles: string): string => {
     return ret;
 };
 
-
 /**
  * 拆分牌为数组（统一实现）。
  *
@@ -160,7 +159,7 @@ export const decompose = (tiles: string): string => {
  * - mode = 'extended': 等价于 separateWithMoqie / separateWithParam（允许摸切/随机牌 token）
  */
 type SeparateMode = 'strict' | 'extended';
-export const separateUnified = (
+const separateUnified = (
     tiles: string | (Tile | TileWithMoqie | TileWithParam)[],
     mode: SeparateMode = 'strict'
 ): (Tile | TileWithMoqie | TileWithParam)[] => {
@@ -193,8 +192,8 @@ export const separateUnified = (
 /**
  * 拆分牌为数组, 与 decompose 类似, 不过返回的是数组
  * @example
- * // return ['1m', '2m', '3m', '9p', '9p']
  * separate('123m99p')
+ * // return ['1m', '2m', '3m', '9p', '9p']
  */
 export const separate = (tiles: string | Tile[]): Tile[] => {
     return separateUnified(tiles, 'strict') as Tile[];
@@ -203,8 +202,8 @@ export const separate = (tiles: string | Tile[]): Tile[] => {
 /**
  * 拆分牌为数组, 比 separate 更进一步, 加入了摸切
  * @example
- * // return ['1m', '2m', '3m', '..', '9p']
  * separateWithMoqie('123m.9p')
+ * // return ['1m', '2m', '3m', '..', '9p']
  */
 export const separateWithMoqie = (tiles: string | TileWithMoqie[]): TileWithMoqie[] => {
     return separateUnified(tiles, 'extended') as TileWithMoqie[];
@@ -213,13 +212,12 @@ export const separateWithMoqie = (tiles: string | TileWithMoqie[]): TileWithMoqi
 /**
  * 拆分牌为数组, 比 separateWithMoqie 更进一步, 可以拆分随机牌
  * @example
- * // return ['1m', '2m', '3m', 'YY', '9p']
  * separateWithParam('123mY9p')
+ * // return ['1m', '2m', '3m', 'YY', '9p']
  */
 export const separateWithParam = (tiles: string | TileWithParam[]): TileWithParam[] => {
     return separateUnified(tiles, 'extended') as TileWithParam[];
 };
-
 
 /**
  * 计算手牌为 tiles 时的和牌型
@@ -465,10 +463,8 @@ export const getLstAction = (num: number = 1): Action => {
         throw new Error(errRoundInfo() + 'actions 为空');
 };
 
-
 /**
  * 根据已结束的对局进行牌山修正, 用于"天凤牌谱编辑器数据转雀魂格式"和"根据可见手牌和牌河生成雀魂牌谱"的最后
- *
  * @param dora_num - 表指示牌数量, 默认为1
  * @param li_dora_num - 里指示牌刷领, 默认为0
  */

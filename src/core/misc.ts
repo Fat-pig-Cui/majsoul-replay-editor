@@ -248,7 +248,6 @@ export const get_field_spell_mode = (card: 1 | 2 | 3): FieldSpellNumber => {
     const field_spell_mode = config.mode.detail_rule.field_spell_mode;
     if (typeof field_spell_mode != 'number' || field_spell_mode < 0)
         return 0;
-
     let ret = 0;
     if (card === 1)
         ret = Math.floor(field_spell_mode % 10);
@@ -256,7 +255,6 @@ export const get_field_spell_mode = (card: 1 | 2 | 3): FieldSpellNumber => {
         ret = Math.floor(config.mode.detail_rule.field_spell_mode / 100) % 10;
     else if (card === 3)
         ret = Math.floor(config.mode.detail_rule.field_spell_mode / 10000);
-
     if (ret < 1 || ret > 5)
         return 0;
     return ret as FieldSpellNumber;

@@ -6,9 +6,7 @@
  */
 
 import {
-    delta_scores, hules_history,
-    actions, awaiting_tiles, hunzhiyiji_info,
-    muyu_info, paishan, scores, yongchang_data,
+    delta_scores, hules_history, actions, awaiting_tiles, hunzhiyiji_info, muyu_info, paishan, scores, yongchang_data,
     player_tiles, all_data, base_info
 } from "./data";
 import {is_chuanma, is_hunzhiyiji, is_muyu, is_xiakeshang, is_yongchang, is_zhanxing} from "./misc";
@@ -418,8 +416,5 @@ export const addCuohu = (seat: Seat, zimo: boolean, old_scores: Players_Number):
  * @param data
  */
 const pushAction = (name: string, data: any): void => {
-    actions.push(JSON.parse(JSON.stringify({
-        name: name,
-        data: data,
-    })));
+    actions.push(JSON.parse(JSON.stringify({name: name, data: data})));
 };

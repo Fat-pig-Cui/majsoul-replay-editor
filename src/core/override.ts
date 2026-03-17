@@ -7,8 +7,8 @@
 
 import {all_data, player_datas, base_info, views_pool} from "./data";
 import {
-    get_mainrole_seat, get_mjp_id, get_mjpsurface_id, get_tablecloth_id,
-    is_guobiao, is_random_skin, is_random_views, updateViews
+    get_mainrole_seat, get_mjp_id, get_mjpsurface_id, get_tablecloth_id, is_guobiao, is_random_skin, is_random_views,
+    updateViews
 } from "./misc";
 import {DIYFans, guobiaoFans} from "./constants";
 

@@ -6,16 +6,12 @@
  */
 
 import {
-    actions, dora_cnt, dora_indicator, fulu, gaps,
-    huled, liqi_info, mingpais, paihe, scores,
-    base_info, shoumoqie, xun, yongchang_data,
-    muyu_info, muyu, player_tiles, all_data,
-    lst_liqi, zhenting
+    actions, dora_cnt, dora_indicator, fulu, gaps, huled, liqi_info, mingpais, paihe, scores, base_info, shoumoqie, xun,
+    yongchang_data, muyu_info, muyu, player_tiles, all_data, lst_liqi, zhenting
 } from "./data";
 import {
-    get_fanfu, get_field_spell_mode, is_chuanma, is_fufenliqi, is_guobiao,
-    is_qieshang, is_qingtianjing, is_xiakeshang, no_dora, no_gangdora,
-    no_ganglidora, no_leijiyiman, no_lidora, no_zhenting, scale_points
+    get_fanfu, get_field_spell_mode, is_chuanma, is_fufenliqi, is_guobiao, is_qieshang, is_qingtianjing, is_xiakeshang,
+    no_dora, no_gangdora, no_ganglidora, no_leijiyiman, no_lidora, no_zhenting, scale_points
 } from "./misc";
 import {calcHupai, calcTingpai, getLstAction, isEqualTile} from "./exportedUtils";
 import {Constants} from "./constants";
@@ -133,7 +129,7 @@ export const inTiles = (x: Tile | Tile[], y: Tile[]): boolean => {
 };
 
 // 更新 seat 号玩家的舍张振听状态
-export const updateShezhangzt = (seat: Seat): void => {
+export const judgeShezhangzt = (seat: Seat): void => {
     if (!is_chuanma() && !is_guobiao() && !no_zhenting()) {
         zhenting.shezhang[seat] = false;
         const tingpais = calcTingpai(seat);
@@ -152,7 +148,7 @@ export const updateShezhangzt = (seat: Seat): void => {
  * @param tile - 相关操作的牌
  * @param is_angang - 是否为暗杠, 默认否
  */
-export const updatePrezhenting = (seat: Seat, tile: Tile, is_angang: boolean = false): void => {
+export const prejudgeZhenting = (seat: Seat, tile: Tile, is_angang: boolean = false): void => {
     if (!is_chuanma() && !is_guobiao() && !no_zhenting()) {
         // 同巡振听预判断
         for (let i: Seat = 0; i < base_info.player_cnt; i++) {
@@ -390,7 +386,7 @@ export const updateMuyu = (): void => {
 // 幻境传说, 判断 tile 是否为 dora
 export const isDora = (tile: Tile): boolean => {
     tile = simplify(tile);
-    if (tile === '0m' || tile === '0p' || tile === '0s')
+    if (tile[0] === '0')
         return true;
     const doras0 = calcDoras();
     for (const dora0 of doras0)
@@ -477,8 +473,8 @@ export const updateShoumoqie = (seat: Seat): void => {
 };
 
 // 下克上, 返回各家的打点倍数
-export const calcXiaKeShang = (): [number, number, number, number] => {
-    const times: [number, number, number, number] = [1, 1, 1, 1];
+export const calcXiaKeShang = (): Players_Number => {
+    const times: Players_Number = [1, 1, 1, 1];
     for (let i = 0; i < base_info.player_cnt; i++)
         if (is_xiakeshang() && scores[i] < 30000) {
             if (scores[i] < 10000)

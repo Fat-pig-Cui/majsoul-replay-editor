@@ -7,7 +7,7 @@
 
 import {paishan, config, deal_tiles, discard_tiles, base_info, scores} from "./data";
 import {separate, separateWithMoqie} from "./exportedUtils";
-import {init} from "./core";
+import {roundBegin} from "./core";
 
 /**
  * 设置对局的模式
@@ -38,7 +38,7 @@ export const setDealTiles = (tiles: Players_String): void => {
  */
 export const setPaishan = (ps: string): void => {
     paishan.push(...separate(ps));
-    init();
+    roundBegin();
 };
 
 /**
