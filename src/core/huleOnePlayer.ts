@@ -6,12 +6,12 @@
  */
 
 import {
-    all_data, base_info, muyu, delta_scores, hunzhiyiji_info, liqi_info, player_tiles, dora_cnt, dora_indicator, huled,
-    baopai, zhenting, spell_hourglass, cuohu
+    base_info, muyu, delta_scores, hunzhiyiji_info, liqi_info, player_tiles, dora_cnt, dora_indicator, huled, baopai,
+    zhenting, spell_hourglass, cuohu
 } from "./data";
 import {
     cuohu_points, get_ben_times, get_field_spell_mode, is_guobiao_no_8fanfu, is_hunzhiyiji, is_qingtianjing, no_zimosun,
-    is_wanxiangxiuluo, is_xiakeshang, is_xuezhandaodi, is_tianming, no_guoshiangang,  scale_points
+    is_wanxiangxiuluo, is_xiakeshang, is_xuezhandaodi, is_tianming, no_guoshiangang, scale_points
 } from "./misc";
 import {
     calcDoras, calcSudian, calcSudianChuanma, calcSudianGuobiao, calcTianming, calcXiaKeShang, errRoundInfo, fulu2Ming,
@@ -27,94 +27,37 @@ import {Constants} from "./constants";
  * 计算 seat 号玩家的和牌导致的各家点数变动
  */
 export const huleOnePlayer = (seat: Seat): HuleInfo => {
-    /**
-     * 点数切上到整百
-     * @param point - 原点数
-     */
-    const qieshang = (point: number): number => Math.ceil(point / 100) * 100;
-
-    const lst_action = getLstAction(), lst_name = getLstAction().name;
-    let zimo = false;
-    if (lst_name === 'RecordDealTile' || lst_name === 'RecordNewRound')
-        zimo = true;
-    else
-        push2PlayerTiles(seat);
-    let fangchong_seat: Seat;
-    const delta_scores_backup = delta_scores.slice();
-    if (!zimo)
-        fangchong_seat = lst_action.data.seat;
-
+    const {lst_action, lst_name, zimo, fangchong_seat, hand, hu_tile} = dataInit(seat);
+    // -------------------------------------------
     if (is_hunzhiyiji() && !zimo && hunzhiyiji_info[fangchong_seat].liqi !== 0)
         hunzhiyiji_info[fangchong_seat].overload = true;
 
-    const ming = fulu2Ming(seat);
-    const qinjia = seat === base_info.ju;
-    const liqi = liqi_info[seat].liqi !== 0;
-    const hand = player_tiles[seat].slice();
-    const hu_tile = hand[hand.length - 1];
-    hand.pop();
-    // -------------------------------------------
     const points = calcFan(seat, zimo, fangchong_seat);
     const sudian = calcSudian(points);
-    let val = 0, title_id = 0;
-    for (const fan of points.fans)
-        val += fan.val;
-    if (!is_qingtianjing()) {
-        if (points.yiman)
-            title_id = val + 4;
-        else if (sudian === 8000)
-            title_id = 11;
-        else if (sudian === 6000)
-            title_id = 4;
-        else if (sudian === 4000)
-            title_id = 3;
-        else if (sudian === 3000)
-            title_id = 2;
-        else if (sudian === 2000)
-            title_id = 1;
-    }
-    // -------------------------------------------
-    let tianming_bonus = 1;
-    if (is_tianming())
-        tianming_bonus = calcTianming(seat, zimo);
-    const xia_ke_shang_coefficient = calcXiaKeShang()[seat];
+    const val = points.fans.reduce((sum, fan) => sum + fan.val, 0);
 
-    const extra_times = tianming_bonus * xia_ke_shang_coefficient;
+    const delta_scores_backup = delta_scores.slice();
+    const qinjia = seat === base_info.ju;
+    const title_id = judgeTitleId();
     // -------------------------------------------
-    let zhahu = false;
-    if (calcHupai(player_tiles[seat]) === 0 || sudian === -2000)
-        zhahu = true;
-    if ((calcHupai(player_tiles[seat]) !== 3 || no_guoshiangang()) && lst_name === 'RecordAnGangAddGang' && lst_action.data.type === 3)
-        zhahu = true;
-    if (!zimo && zhenting.result[seat])
-        zhahu = true;
-    if (lst_name === 'RecordRevealTile' || lst_name === 'RecordLockTile' && lst_action.data.lock_state !== 0)
-        zhahu = true;
-    let point_rong: number, point_sum: number, point_zimo_qin: number, point_zimo_xian: number;
+    const tianming_bonus = is_tianming() ? calcTianming(seat, zimo) : 1;
+    const xia_ke_shang_coefficient = calcXiaKeShang()[seat];
+    const extra_times = tianming_bonus * xia_ke_shang_coefficient;
 
     const doras0: Doras = calcDoras();
-    const li_doras0: Doras = [];
-    if (liqi_info[seat].liqi !== 0)
-        for (let i = 0; i < dora_cnt.li_cnt; i++)
-            li_doras0[i] = dora_indicator[1][i];
-
-    if (zhahu) {
+    const li_doras0: Doras = liqi_info[seat].liqi !== 0 ? dora_indicator[1].slice(0, dora_cnt.li_cnt) as Doras : [];
+    // -------------------------------------------
+    if (judgeZhahu()) {
         if (seat === base_info.ju)
-            base_info.lianzhuang_cnt = -1; // 任意荒牌流局都会导致连庄数重置, 而在 hupai 中会加1, 所以这里是 -1
-        [point_rong, point_sum, point_zimo_qin, point_zimo_xian] = calcPoint(-2000);
+            base_info.lianzhuang_cnt = -1; // 诈和会导致连庄数重置, 而在 hupai 中会加1, 所以这里是 -1
+        const [point_rong, point_sum, point_zimo_qin, point_zimo_xian] = calcPoint(Constants.ZHAHU_SUDIAN);
         for (let i = 0; i < base_info.player_cnt; i++) {
             if (i === seat || huled[i])
                 continue;
-            let delta_point = 0;
-            if (i === base_info.ju || seat === base_info.ju) {
-                delta_point = point_zimo_qin * muyu.times[i] * muyu.times[seat];
-                delta_scores[i] -= delta_point;
-                delta_scores[seat] += delta_point;
-            } else {
-                delta_point = point_zimo_xian * muyu.times[i] * muyu.times[seat];
-                delta_scores[i] -= delta_point;
-                delta_scores[seat] += delta_point;
-            }
+            if (i === base_info.ju || seat === base_info.ju)
+                movePoint(point_zimo_qin * muyu.times[i] * muyu.times[seat], i as Seat, seat);
+            else
+                movePoint(point_zimo_xian * muyu.times[i] * muyu.times[seat], i as Seat, seat);
         }
         player_tiles[seat].pop();
         console.log(errRoundInfo() + `seat: ${seat} 诈和`);
@@ -126,8 +69,8 @@ export const huleOnePlayer = (seat: Seat): HuleInfo => {
             fu: 0,
             hand: hand,
             hu_tile: hu_tile,
-            liqi: liqi,
-            ming: ming,
+            liqi: liqi_info[seat].liqi !== 0,
+            ming: fulu2Ming(seat),
             point_rong: -point_rong,
             point_sum: -point_sum,
             point_zimo_qin: -point_zimo_qin,
@@ -141,25 +84,17 @@ export const huleOnePlayer = (seat: Seat): HuleInfo => {
         };
     }
 
-    [point_rong, point_sum, point_zimo_qin, point_zimo_xian] = calcPoint(sudian);
-    point_rong = qieshang(point_rong) * extra_times;
-    point_sum = qieshang(point_sum) * extra_times;
-    point_zimo_qin = qieshang(point_zimo_qin) * extra_times;
-    point_zimo_xian = qieshang(point_zimo_xian) * extra_times;
+    const [point_rong, point_sum, point_zimo_qin, point_zimo_xian] = calcPoint(sudian);
 
+    let delta_point = 0;
     // 有包牌
     if (baopai[seat].length > 0) {
-        let delta_point = 0;
-        let yiman_sudian = 8000;
+        const yiman_sudian = Constants.YIMAN_SUDIAN;
         let all_bao_val = 0;
         for (const bao of baopai[seat])
             all_bao_val += bao.val;
 
-        let feibao_rong: number, feibao_zimo_qin: number, feibao_zimo_xian: number;
-        [feibao_rong, , feibao_zimo_qin, feibao_zimo_xian] = calcPoint((val - all_bao_val) * yiman_sudian);
-        feibao_rong = qieshang(feibao_rong) * extra_times;
-        feibao_zimo_qin = qieshang(feibao_zimo_qin) * extra_times;
-        feibao_zimo_xian = qieshang(feibao_zimo_xian) * extra_times;
+        const [feibao_rong, , feibao_zimo_qin, feibao_zimo_xian] = calcPoint((val - all_bao_val) * yiman_sudian);
 
         if (zimo) {
             // 包牌部分, 包牌家全包
@@ -167,87 +102,66 @@ export const huleOnePlayer = (seat: Seat): HuleInfo => {
                 for (let i = 0; i < base_info.player_cnt; i++) {
                     if (i === seat || huled[i])
                         continue;
-                    if (i === base_info.ju || seat === base_info.ju) {
+                    if (i === base_info.ju || seat === base_info.ju)
                         delta_point = bao.val * 2 * yiman_sudian * muyu.times[i] * muyu.times[seat] * extra_times;
-                        delta_scores[bao.seat] -= delta_point;
-                        delta_scores[seat] += delta_point;
-                    } else {
+                    else
                         delta_point = bao.val * yiman_sudian * muyu.times[i] * muyu.times[seat] * extra_times;
-                        delta_scores[bao.seat] -= delta_point;
-                        delta_scores[seat] += delta_point;
-                    }
+                    movePoint(delta_point, bao.seat, seat);
                 }
             }
             // 非包牌部分: 没有包杠, 则是一般自摸; 存在包杠, 则包杠全包
             for (let i = 0; i < base_info.player_cnt; i++) {
                 if (i === seat || huled[i])
                     continue;
-                let equal_seat = i;
+                let equal_seat = i as Seat;
                 if (base_info.baogang_seat !== -1 && !huled[base_info.baogang_seat])
                     equal_seat = base_info.baogang_seat;
-                if (i === base_info.ju || seat === base_info.ju) {
-                    delta_point = feibao_zimo_qin * muyu.times[i] * muyu.times[seat];
-                    delta_scores[equal_seat] -= delta_point;
-                    delta_scores[seat] += delta_point;
-                } else {
-                    delta_point = feibao_zimo_xian * muyu.times[i] * muyu.times[seat];
-                    delta_scores[equal_seat] -= delta_point;
-                    delta_scores[seat] += delta_point;
-                }
+                if (i === base_info.ju || seat === base_info.ju)
+                    delta_point = feibao_zimo_qin * muyu.times[i] * muyu.times[seat] * extra_times;
+                else
+                    delta_point = feibao_zimo_xian * muyu.times[i] * muyu.times[seat] * extra_times;
+                movePoint(delta_point, equal_seat, seat);
             }
-        } else {
+        } else { // 放铳
             // 包牌部分
             for (const bao of baopai[seat]) {
-                delta_point = bao.val * yiman_sudian * 2 * muyu.times[fangchong_seat] * muyu.times[seat] * extra_times;
+                delta_point = bao.val * 2 * yiman_sudian * muyu.times[fangchong_seat] * muyu.times[seat] * extra_times;
                 if (qinjia)
                     delta_point *= 1.5;
-                delta_scores[bao.seat] -= delta_point;
-                delta_scores[seat] += delta_point;
+                movePoint(delta_point, bao.seat, seat);
             }
             // 非包牌部分: 非包牌部分 + 包牌部分/2 => 非包牌部分 + (全部 - 非包牌部分)/2 => (全部 + 非包牌部分)/2
-            delta_point = (point_rong + feibao_rong) / 2 * muyu.times[fangchong_seat] * muyu.times[seat];
-            delta_scores[fangchong_seat] -= delta_point;
-            delta_scores[seat] += delta_point;
+            delta_point = (point_rong + feibao_rong) / 2 * muyu.times[fangchong_seat] * muyu.times[seat] * extra_times;
+            movePoint(delta_point, fangchong_seat, seat);
         }
     }
     // 无包牌情况下的包杠, 自摸全由包杠家负担
     else if (base_info.baogang_seat !== -1 && !huled[base_info.baogang_seat] && zimo) {
-        let delta_point = 0;
         for (let i = 0; i < base_info.player_cnt; i++) {
             if (i === seat || huled[i])
                 continue;
-            if (i === base_info.ju || seat === base_info.ju) {
+            if (i === base_info.ju || seat === base_info.ju)
                 delta_point = point_zimo_qin * muyu.times[i] * muyu.times[seat];
-                delta_scores[base_info.baogang_seat] -= delta_point;
-                delta_scores[seat] += delta_point;
-            } else {
+            else
                 delta_point = point_zimo_xian * muyu.times[i] * muyu.times[seat];
-                delta_scores[base_info.baogang_seat] -= delta_point;
-                delta_scores[seat] += delta_point;
-            }
+            movePoint(delta_point, base_info.baogang_seat, seat);
         }
     }
     // 一般情况
     else {
-        let delta_point = 0;
         if (zimo) {
             for (let i = 0; i < base_info.player_cnt; i++) {
                 if (i === seat || huled[i])
                     continue;
-                if (i === base_info.ju || seat === base_info.ju) {
+                if (i === base_info.ju || seat === base_info.ju)
                     delta_point = point_zimo_qin * muyu.times[i] * muyu.times[seat];
-                    delta_scores[i] -= delta_point;
-                    delta_scores[seat] += delta_point;
-                } else {
+                else
                     delta_point = point_zimo_xian * muyu.times[i] * muyu.times[seat];
-                    delta_scores[i] -= delta_point;
-                    delta_scores[seat] += delta_point;
-                }
+                movePoint(delta_point, i as Seat, seat);
             }
         } else {
             delta_point = point_rong * muyu.times[fangchong_seat] * muyu.times[seat];
-            delta_scores[fangchong_seat] -= delta_point;
-            delta_scores[seat] += delta_point;
+            movePoint(delta_point, fangchong_seat, seat);
         }
     }
     const dadian = Math.max(delta_scores[seat], -delta_scores[seat]);
@@ -270,16 +184,12 @@ export const huleOnePlayer = (seat: Seat): HuleInfo => {
                 delta_scores[fangchong_seat] += diff;
         }
     }
-
     // 幻境传说: 庄家卡5
-    if (get_field_spell_mode(1) === 5 && seat === base_info.ju && !zimo) {
-        delta_scores[seat] += points.dora_bonus * 1000;
-        delta_scores[fangchong_seat] -= points.dora_bonus * 1000;
-    }
+    if (get_field_spell_mode(1) === 5 && seat === base_info.ju && !zimo)
+        movePoint(points.dora_bonus * 1000, fangchong_seat, seat);
 
     calcChangGong();
     player_tiles[seat].pop();
-
     return {
         count: val,
         doras: doras0,
@@ -288,8 +198,8 @@ export const huleOnePlayer = (seat: Seat): HuleInfo => {
         fu: points.fu,
         hand: hand,
         hu_tile: hu_tile,
-        liqi: liqi,
-        ming: ming,
+        liqi: liqi_info[seat].liqi !== 0,
+        ming: fulu2Ming(seat),
         point_rong: point_rong,
         point_sum: point_sum,
         point_zimo_qin: point_zimo_qin,
@@ -304,12 +214,44 @@ export const huleOnePlayer = (seat: Seat): HuleInfo => {
         dadian: is_xuezhandaodi() || is_wanxiangxiuluo() || base_info.player_cnt === 2 ? dadian : undefined,
     };
 
+    // 判断是否为诈和
+    function judgeZhahu(): boolean {
+        if ((calcHupai(player_tiles[seat]) !== 3 || no_guoshiangang()) && lst_name === 'RecordAnGangAddGang' && lst_action.data.type === 3)
+            return true;
+        if (lst_name === 'RecordRevealTile' || lst_name === 'RecordLockTile' && lst_action.data.lock_state !== 0)
+            return true;
+        return sudian === -2000 || !zimo && zhenting.result[seat];
+    }
+
+    // 判断 title_id
+    function judgeTitleId(): number {
+        let title_id = 0;
+        if (!is_qingtianjing()) {
+            if (points.yiman)
+                title_id = val + 4;
+            else if (sudian === 8000)
+                title_id = 11;
+            else if (sudian === 6000)
+                title_id = 4;
+            else if (sudian === 4000)
+                title_id = 3;
+            else if (sudian === 3000)
+                title_id = 2;
+            else if (sudian === 2000)
+                title_id = 1;
+        }
+        return title_id;
+    }
+
     /**
      * 通过素点计算 荣和, 自摸总计, 自摸收亲, 自摸收闲 的点数
      * @param c_sudian - 素点
      * @returns [荣和, 自摸总计, 自摸收亲, 自摸收闲]
      */
     function calcPoint(c_sudian: number): [number, number, number, number] {
+        // 点数切上到整百
+        const qieshang = (point: number): number => Math.ceil(point / 100) * 100;
+
         let rong: number, sum: number, zimo_qin: number, zimo_xian: number;
         if (qinjia) {
             rong = 6 * c_sudian;
@@ -331,7 +273,10 @@ export const huleOnePlayer = (seat: Seat): HuleInfo => {
             } else
                 sum = base_info.player_cnt * c_sudian;
         }
-        return [rong, sum, zimo_qin, zimo_xian];
+        const ret: [number, number, number, number] = [rong, sum, zimo_qin, zimo_xian];
+        for (const i in ret)
+            ret[i] = qieshang(ret[i]) * extra_times;
+        return ret;
     }
 
     // 计算本场供托划分
@@ -358,15 +303,13 @@ export const huleOnePlayer = (seat: Seat): HuleInfo => {
         let delta_point: number;
         if (equal_seat !== undefined) {
             delta_point = (base_info.player_cnt - 1) * 100 * base_info.benchangbang * get_ben_times();
-            delta_scores[equal_seat] -= delta_point;
-            delta_scores[seat] += delta_point;
+            movePoint(delta_point, equal_seat, seat);
         } else {
             delta_point = 100 * base_info.benchangbang * get_ben_times();
             for (let i = 0; i < base_info.player_cnt; i++) {
                 if (i === seat || huled[i])
                     continue;
-                delta_scores[i] -= delta_point;
-                delta_scores[seat] += delta_point;
+                movePoint(delta_point, i as Seat, seat);
             }
         }
         base_info.benchangbang = 0;
@@ -382,45 +325,25 @@ export const huleOnePlayer = (seat: Seat): HuleInfo => {
  * 计算 seat 号玩家的和牌导致的各家点数变动
  */
 export const huleOnePlayerChuanma = (seat: Seat): HuleInfo => {
-    const lst_action = getLstAction(), lst_name = getLstAction().name;
-    let zimo = false;
-    if (lst_name === 'RecordDealTile' || lst_name === 'RecordNewRound')
-        zimo = true;
-    else
-        push2PlayerTiles(seat);
-    let fangchong_seat: Seat;
-    if (!zimo)
-        fangchong_seat = lst_action.data.seat;
-
-    const ming = fulu2Ming(seat);
-    const hand = player_tiles[seat].slice();
-    const hu_tile = hand[hand.length - 1];
-    hand.pop();
+    const {lst_action, lst_name, zimo, fangchong_seat, hand, hu_tile} = dataInit(seat);
     // -------------------------------------------
     const points = calcFanChuanma(seat, zimo);
     const sudian = calcSudianChuanma(points);
-    let val = 0;
-    for (const fan of points.fans)
-        val += fan.val;
+    const val = points.fans.reduce((sum, fan) => sum + fan.val, 0);
     // -------------------------------------------
-    let zhahu = false;
-    if (huazhu(seat) || calcHupai(player_tiles[seat]) === 0)
-        zhahu = true;
-    if (lst_name === 'RecordAnGangAddGang' && lst_action.data.type === 3)
-        zhahu = true;
+    const zhahu = huazhu(seat) || lst_name === 'RecordAnGangAddGang' && lst_action.data.type === 3;
     if (zhahu) {
         for (let i = 0; i < base_info.player_cnt; i++) {
             if (i === seat || huled[i])
                 continue;
-            delta_scores[i] -= -33000;
-            delta_scores[seat] += -33000;
+            movePoint(Constants.ZHAHU_SUDIAN_CHUANMA - 1000, i as Seat, seat);
         }
         player_tiles[seat].pop();
-        console.log(`第${all_data.all_actions.length + 1}局: seat: ${seat} 玩家诈和`);
+        console.log(errRoundInfo() + `seat: ${seat} 玩家诈和`);
         return {
             seat: seat,
             hand: hand,
-            ming: ming,
+            ming: fulu2Ming(seat),
             hu_tile: hu_tile,
             zimo: zimo,
             yiman: false,
@@ -439,20 +362,17 @@ export const huleOnePlayerChuanma = (seat: Seat): HuleInfo => {
         for (let i = 0; i < base_info.player_cnt; i++) {
             if (i === seat || huled[i])
                 continue;
-            delta_scores[i] -= sudian + 1000;
-            delta_scores[seat] += sudian + 1000;
+            movePoint(sudian + 1000, i as Seat, seat);
         }
-    else {
-        delta_scores[fangchong_seat] -= sudian;
-        delta_scores[seat] += sudian;
-    }
+    else
+        movePoint(sudian, fangchong_seat, seat);
+
     const dadian = Math.max(delta_scores[seat], -delta_scores[seat]);
     player_tiles[seat].pop();
-    // ---------------------------------------------------
     return {
         seat: seat,
         hand: hand,
-        ming: ming,
+        ming: fulu2Ming(seat),
         hu_tile: hu_tile,
         zimo: zimo,
         yiman: false,
@@ -474,49 +394,22 @@ export const huleOnePlayerChuanma = (seat: Seat): HuleInfo => {
  * 计算 seat 号玩家的和牌导致的各家点数变动
  */
 export const huleOnePlayerGuobiao = (seat: Seat): HuleInfo => {
-    const lst_action = getLstAction(), lst_name = getLstAction().name;
-    let zimo = false;
-    if (lst_name === 'RecordDealTile' || lst_name === 'RecordNewRound')
-        zimo = true;
-    else
-        push2PlayerTiles(seat);
-    let fangchong_seat: Seat;
-    if (!zimo)
-        fangchong_seat = lst_action.data.seat;
-
-    const ming = fulu2Ming(seat);
-    const qinjia = seat === base_info.ju;
-    const hand = player_tiles[seat].slice();
-    const hu_tile = hand[hand.length - 1];
-    hand.pop();
+    const {lst_action, lst_name, zimo, fangchong_seat, hand, hu_tile} = dataInit(seat);
     // -------------------------------------------
     const points = calcFanGuobiao(seat, zimo);
     const sudian = calcSudianGuobiao(points), sudian_no_huapai = calcSudianGuobiao(points, true);
-    let val = 0;
-    for (const fan of points.fans)
-        val += fan.val;
+    const val = points.fans.reduce((sum, fan) => sum + fan.val, 0);
     // -------------------------------------------
-    let zhahu = false, is_cuohu = false;
-    if (calcHupai(player_tiles[seat]) === 0)
-        zhahu = true;
-    // 国标无法听花牌, 所以和拔的花牌一定是诈和
-    if (lst_name === 'RecordBaBei' || lst_name === 'RecordAnGangAddGang' && lst_action.data.type === 3)
-        zhahu = true;
-    if (!is_guobiao_no_8fanfu() && sudian_no_huapai < Constants.GB_BASE_FAN * scale_points())
-        is_cuohu = true;
-    if (cuohu[seat]) // 已错和的玩家再次和牌, 仍然是错和
-        is_cuohu = true;
-
+    const {zhahu, is_cuohu} = judgeZhahuCuohu();
     if (zhahu || is_cuohu) { // 诈和, 错和赔三家各 cuohu_points() * scale_points() 点
         for (let i = 0; i < base_info.player_cnt; i++) {
             if (i === seat)
                 continue;
-            delta_scores[i] += cuohu_points() * scale_points();
-            delta_scores[seat] -= cuohu_points() * scale_points();
+            movePoint(-cuohu_points() * scale_points(), i as Seat, seat);
         }
         if (!zimo)
             player_tiles[seat].pop();
-        console.log(errRoundInfo() + `seat: ${seat} 玩家诈和或错和`);
+        console.log(errRoundInfo() + `seat: ${seat} 诈和或错和`);
         return {
             count: 0,
             doras: [] as Doras,
@@ -526,12 +419,12 @@ export const huleOnePlayerGuobiao = (seat: Seat): HuleInfo => {
             hand: hand,
             hu_tile: hu_tile,
             liqi: false,
-            ming: ming,
+            ming: fulu2Ming(seat),
             point_rong: 3 * cuohu_points() * scale_points(),
             point_sum: 3 * cuohu_points() * scale_points(),
             point_zimo_qin: cuohu_points() * scale_points(),
             point_zimo_xian: cuohu_points() * scale_points(),
-            qinjia: qinjia,
+            qinjia: false,
             seat: seat,
             title_id: 0,
             yiman: false,
@@ -543,18 +436,15 @@ export const huleOnePlayerGuobiao = (seat: Seat): HuleInfo => {
         for (let i = 0; i < base_info.player_cnt; i++) {
             if (i === seat)
                 continue;
-            delta_scores[i] -= sudian + Constants.GB_BASE_FAN * scale_points();
-            delta_scores[seat] += sudian + Constants.GB_BASE_FAN * scale_points();
+            movePoint(sudian + Constants.GB_BASE_FAN * scale_points(), i as Seat, seat);
         }
     } else {
-        delta_scores[fangchong_seat] -= sudian;
-        delta_scores[seat] += sudian;
+        movePoint(sudian, fangchong_seat, seat);
 
         for (let i = 0; i < base_info.player_cnt; i++) {
             if (i === seat)
                 continue;
-            delta_scores[i] -= Constants.GB_BASE_FAN * scale_points();
-            delta_scores[seat] += Constants.GB_BASE_FAN * scale_points();
+            movePoint(Constants.GB_BASE_FAN, i as Seat, seat);
         }
     }
     player_tiles[seat].pop();
@@ -567,16 +457,49 @@ export const huleOnePlayerGuobiao = (seat: Seat): HuleInfo => {
         hand: hand,
         hu_tile: hu_tile,
         liqi: false,
-        ming: ming,
+        ming: fulu2Ming(seat),
         point_rong: sudian + 3 * Constants.GB_BASE_FAN * scale_points(),
         point_sum: 3 * (sudian + Constants.GB_BASE_FAN * scale_points()),
         point_zimo_qin: sudian + Constants.GB_BASE_FAN * scale_points(),
         point_zimo_xian: sudian + Constants.GB_BASE_FAN * scale_points(),
-        qinjia: qinjia,
+        qinjia: false,
         seat: seat,
         title_id: 0,
         yiman: false,
         zimo: zimo,
         cuohu: false,
     };
+
+    // 判断是否为诈和或错和
+    function judgeZhahuCuohu() {
+        let zhahu = false, is_cuohu = false;
+        if (calcHupai(player_tiles[seat]) === 0)
+            zhahu = true;
+        // 国标无法听花牌, 所以和拔的花牌一定是诈和
+        if (lst_name === 'RecordBaBei' || lst_name === 'RecordAnGangAddGang' && lst_action.data.type === 3)
+            zhahu = true;
+        if (!is_guobiao_no_8fanfu() && sudian_no_huapai < Constants.GB_BASE_FAN * scale_points())
+            is_cuohu = true;
+        if (cuohu[seat]) // 已错和的玩家再次和牌, 仍然是错和
+            is_cuohu = true;
+        return {zhahu, is_cuohu};
+    }
+};
+
+// 初始化部分数据
+const dataInit = (seat: Seat) => {
+    const lst_action = getLstAction(), lst_name = getLstAction().name;
+    const zimo = ['RecordNewRound', 'RecordDealTile'].includes(lst_name);
+    if (!zimo)
+        push2PlayerTiles(seat);
+    const fangchong_seat: Seat = !zimo ? lst_action.data.seat : undefined;
+    const hand = player_tiles[seat].slice();
+    const hu_tile = hand.pop();
+    return {lst_action, lst_name, zimo, fangchong_seat, hand, hu_tile};
+};
+
+// 在 delta_scores 中, from 号玩家交给 to 号玩家 point 点数
+const movePoint = (point: number, from: Seat, to: Seat): void => {
+    delta_scores[from] -= point;
+    delta_scores[to] += point;
 };

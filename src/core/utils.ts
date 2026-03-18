@@ -496,31 +496,29 @@ export const calcXiaKeShang = (): Players_Number => {
  */
 export const calcSudian = (x: CalcFanRet, type: number = 0): number => {
     const fanfu = get_fanfu();
-    let val = 0;
-    for (const fan of x.fans)
-        val += fan.val;
+    const val = x.fans.reduce((sum, fan) => sum + fan.val, 0);
     if (is_qingtianjing())
         return x.fu * Math.pow(2, val + 2);
 
     if (x.yiman)
-        return 8000 * val;
+        return Constants.YIMAN_SUDIAN * val;
 
     else if (val < fanfu)
-        return -2000;
+        return Constants.ZHAHU_SUDIAN;
     else if (val >= 13 && !no_leijiyiman())
-        return 8000 + type * (val + x.fu * 0.01);
+        return Constants.MANGUAN_SUDIAN * 4 + type * (val + x.fu * 0.01);
     else if (val >= 11)
-        return 6000 + type * (val + x.fu * 0.01);
+        return Constants.MANGUAN_SUDIAN * 3 + type * (val + x.fu * 0.01);
     else if (val >= 8)
-        return 4000 + type * (val + x.fu * 0.01);
+        return Constants.MANGUAN_SUDIAN * 2 + type * (val + x.fu * 0.01);
     else if (val >= 6)
-        return 3000 + type * (val + x.fu * 0.01);
+        return Constants.MANGUAN_SUDIAN * 1.5 + type * (val + x.fu * 0.01);
     else if (val >= 5)
-        return 2000 + type * (val + x.fu * 0.01);
+        return Constants.MANGUAN_SUDIAN + type * (val + x.fu * 0.01);
     else if (is_qieshang() && (val === 4 && x.fu === 30 || val === 3 && x.fu === 60))
-        return 2000 + type * (val + x.fu * 0.01);
+        return Constants.MANGUAN_SUDIAN + type * (val + x.fu * 0.01);
     else
-        return Math.min(Math.pow(2, val + 2) * x.fu, 2000) + type * (val + x.fu * 0.01);
+        return Math.min(Math.pow(2, val + 2) * x.fu, Constants.MANGUAN_SUDIAN) + type * (val + x.fu * 0.01);
 };
 
 /**
@@ -531,9 +529,7 @@ export const calcSudian = (x: CalcFanRet, type: number = 0): number => {
  * @param type - 有效值0和1, 0是一般模式, 1表示比较模式, 默认为一般模式
  */
 export const calcSudianChuanma = (x: CalcFanRet, type: number = 0): number => {
-    let val = 0;
-    for (const fan of x.fans)
-        val += fan.val;
+    const val = x.fans.reduce((sum, fan) => sum + fan.val, 0);
     if (val === 0)
         return 0;
     return Math.min(1000 * Math.pow(2, val - 1), 32000) + type * val;

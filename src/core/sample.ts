@@ -36,12 +36,11 @@ export const demoGame = (): void => {
 
 /**
  * 用于报菜名的示例牌局
- * @param rm_duplicate - 是否去掉重复的番种(去掉可能会使得界面显示差一点, 但不会出现重复的语音, 如"国士无双")
  */
-export const reportYaku = (rm_duplicate: boolean = false): void => {
+export const reportYaku = (): void => {
     if (is_report_yakus())
-        for (let i = 0; i < 7; i++)
-            reportGame(false, rm_duplicate);
+        for (let i = 0; i < 2; i++)
+            reportGame();
 };
 
 /**
@@ -53,7 +52,7 @@ export const reportYaku_yiji = (): void => {
             reportGame(true);
 };
 
-const generateHuleInfo = (num: number, rm_duplicate: boolean): Action => {
+const generateHuleInfo = (index: number): Action => {
     const all_fans = [
         [
             {val: 1, id: 2}, // 立直
@@ -68,7 +67,6 @@ const generateHuleInfo = (num: number, rm_duplicate: boolean): Action => {
             {val: 1, id: 13}, // 一杯口
             {val: 3, id: 28}, // 二杯口
             {val: 2, id: 25}, // 七对子
-        ], [
             {val: 1, id: 7}, // 役牌 白
             {val: 1, id: 8}, // 役牌 发
             {val: 1, id: 9}, // 役牌 中
@@ -81,7 +79,6 @@ const generateHuleInfo = (num: number, rm_duplicate: boolean): Action => {
             {val: 1, id: 9107}, // 役牌 北
             {val: 1, id: 9108}, // 役牌 连北
             {val: 1, id: 12}, // 断幺九
-        ], [
             {val: 2, id: 15}, // 混全带幺九
             {val: 2, id: 16}, // 一气通贯
             {val: 2, id: 17}, // 三色同顺
@@ -94,7 +91,6 @@ const generateHuleInfo = (num: number, rm_duplicate: boolean): Action => {
             {val: 3, id: 26}, // 纯全带幺九
             {val: 3, id: 27}, // 混一色
             {val: 6, id: 29}, // 清一色
-        ], [
             {val: 1, id: 31}, // 宝牌
             {val: 2, id: 31}, // 宝牌
             {val: 3, id: 31}, // 宝牌
@@ -108,27 +104,7 @@ const generateHuleInfo = (num: number, rm_duplicate: boolean): Action => {
             {val: 11, id: 34}, // 拔北宝牌
             {val: 12, id: 34}, // 拔北宝牌
             {val: 13, id: 33}, // 里宝牌
-            {val: 14, id: 33}, // 里宝牌
             {val: 5, id: 9100}, // 流局满贯
-        ], [
-            {val: 1, id: 35}, // 天和
-            {val: 1, id: 36}, // 地和
-            {val: 1, id: 37}, // 大三元
-            {val: 1, id: 38}, // 四暗刻
-            {val: 1, id: 39}, // 字一色
-            {val: 1, id: 40}, // 绿一色
-            {val: 1, id: 41}, // 清老头
-            {val: 1, id: 42}, // 国士无双
-        ], [
-            {val: 1, id: 42}, // 国士无双
-            {val: 1, id: 43}, // 小四喜
-            {val: 1, id: 44}, // 四杠子
-            {val: 1, id: 45}, // 九莲宝灯
-            {val: 2, id: 47}, // 纯正九莲宝灯
-            {val: 2, id: 48}, // 四暗刻单骑
-            {val: 2, id: 49}, // 国士无双十三面
-            {val: 2, id: 50}, // 大四喜
-        ], [
             {val: 6, id: 1015}, // 清龙七对
             {val: 6, id: 1016}, // 十八罗汉
             {val: 6, id: 1017}, // 清十八罗汉
@@ -142,11 +118,23 @@ const generateHuleInfo = (num: number, rm_duplicate: boolean): Action => {
             {val: 3, id: 1009}, // 金钩钓
             {val: 1, id: 1000}, // 根
             {val: 1, id: 1002}, // 杠上炮
+        ], [
+            {val: 1, id: 35}, // 天和
+            {val: 1, id: 36}, // 地和
+            {val: 1, id: 37}, // 大三元
+            {val: 1, id: 38}, // 四暗刻
+            {val: 1, id: 39}, // 字一色
+            {val: 1, id: 40}, // 绿一色
+            {val: 1, id: 41}, // 清老头
+            {val: 1, id: 42}, // 国士无双
+            {val: 1, id: 43}, // 小四喜
+            {val: 1, id: 44}, // 四杠子
+            {val: 1, id: 45}, // 九莲宝灯
+            {val: 2, id: 47}, // 纯正九莲宝灯
+            {val: 2, id: 48}, // 四暗刻单骑
+            {val: 2, id: 49}, // 国士无双十三面
+            {val: 2, id: 50}, // 大四喜
         ]];
-    if (rm_duplicate) {
-        all_fans[3].splice(13, 1);
-        all_fans[6].shift();
-    }
     return {
         "name": "RecordHule",
         "data": {
@@ -154,20 +142,20 @@ const generateHuleInfo = (num: number, rm_duplicate: boolean): Action => {
                 "count": 64,
                 "doras": ["7z"],
                 "li_doras": [],
-                "fans": all_fans[num - 1],
+                "fans": all_fans[index],
                 "fu": 170,
                 "hand": ["5z", "5z", "5z", "5z", "5z", "5z", "5z", "5z", "5z", "5z", "5z", "5z", "5z"],
                 "hu_tile": "5z",
                 "liqi": false,
                 "ming": [],
-                "point_rong": [5, 6].includes(num) ? 192000 : 32000,
-                "point_sum": [5, 6].includes(num) ? 192000 : 32000,
-                "point_zimo_qin": [5, 6].includes(num) ? 96000 : 16000,
-                "point_zimo_xian": [5, 6].includes(num) ? 48000 : 8000,
+                "point_rong": index === 1 ? 192000 : 32000,
+                "point_sum": index === 1 ? 192000 : 32000,
+                "point_zimo_qin": index === 1 ? 96000 : 16000,
+                "point_zimo_xian": index === 1 ? 48000 : 8000,
                 "qinjia": false,
                 "seat": 2,
-                "title_id": [5, 6].includes(num) ? 10 : 11,
-                "yiman": [5, 6].includes(num),
+                "title_id": index === 1 ? 10 : 11,
+                "yiman": index === 1,
                 "zimo": true
             }],
             "old_scores": [300000, 300000, 300000, 300000],
@@ -178,7 +166,7 @@ const generateHuleInfo = (num: number, rm_duplicate: boolean): Action => {
     };
 };
 
-const generateHuleInfo_yiji = (num: number): Action => {
+const generateHuleInfo_yiji = (index: number): Action => {
     const all_fans = [
         [
             {val: 0, id: 9500}, // 自我介绍
@@ -332,20 +320,20 @@ const generateHuleInfo_yiji = (num: number): Action => {
                 "count": 64,
                 "doras": ["7z"],
                 "li_doras": [],
-                "fans": all_fans[num - 1],
+                "fans": all_fans[index],
                 "fu": 170,
                 "hand": ["5z", "5z", "5z", "5z", "5z", "5z", "5z", "5z", "5z", "5z", "5z", "5z", "5z"],
                 "hu_tile": "5z",
                 "liqi": false,
                 "ming": [],
-                "point_rong": [6, 7].includes(num) ? 192000 : 32000,
-                "point_sum": [6, 7].includes(num) ? 192000 : 32000,
-                "point_zimo_qin": [6, 7].includes(num) ? 96000 : 16000,
-                "point_zimo_xian": [6, 7].includes(num) ? 48000 : 8000,
+                "point_rong": [5, 6].includes(index) ? 192000 : 32000,
+                "point_sum": [5, 6].includes(index) ? 192000 : 32000,
+                "point_zimo_qin": [5, 6].includes(index) ? 96000 : 16000,
+                "point_zimo_xian": [5, 6].includes(index) ? 48000 : 8000,
                 "qinjia": false,
                 "seat": 2,
-                "title_id": [6, 7].includes(num) ? 10 : 11,
-                "yiman": [6, 7].includes(num),
+                "title_id": [5, 6].includes(index) ? 10 : 11,
+                "yiman": [5, 6].includes(index),
                 "zimo": true
             }],
             "old_scores": [300000, 300000, 300000, 300000],
@@ -356,7 +344,7 @@ const generateHuleInfo_yiji = (num: number): Action => {
     };
 };
 
-const reportGame = (is_yiji: boolean = false, rm_duplicate?: boolean): void => {
+const reportGame = (is_yiji: boolean = false): void => {
     begin_tiles[0] = '1112340678999m7z';
     begin_tiles[1] = '1112340678999p';
     begin_tiles[2] = '5555555555555z';
@@ -366,8 +354,8 @@ const reportGame = (is_yiji: boolean = false, rm_duplicate?: boolean): void => {
     normalMoqie();
     mopai();
     if (is_yiji)
-        actions.push(generateHuleInfo_yiji(all_data.all_actions.length + 1));
+        actions.push(generateHuleInfo_yiji(all_data.all_actions.length));
     else
-        actions.push(generateHuleInfo(all_data.all_actions.length + 1, rm_duplicate));
+        actions.push(generateHuleInfo(all_data.all_actions.length));
     roundEnd();
 };

@@ -13,6 +13,14 @@ export class Constants {
     public static readonly XIAN_TILE_NUM = 13;
     // 任何情况下牌山的最大长度
     public static readonly PAISHAN_MAX_LEN = 136;
+    // 满贯的素点
+    public static readonly MANGUAN_SUDIAN = 2000;
+    // 役满的素点
+    public static readonly YIMAN_SUDIAN = 8000;
+    // 立直诈和的素点(赔满贯)
+    public static readonly ZHAHU_SUDIAN = -2000;
+    // 川麻诈和的素点(赔6番)
+    public static readonly ZHAHU_SUDIAN_CHUANMA = -32000;
     // 特殊牌的后缀
     public static readonly SPT_SUFFIX = 't';
     // 国标麻将起和番
@@ -200,7 +208,7 @@ export const DIYFans = (): void => {
     // 9106: 连西
     // 9107: 北
     // 9108: 连北
-    _[9100] = {id: 9100, name_chs: '流局满贯', show_index: 2000, sound: 'fan_liujumanguan'};
+    _[9100] = {id: 9100, name_chs: '流局满贯', show_index: 1000, sound: 'fan_liujumanguan'};
     _[9101] = {id: 9101, name_chs: '役牌 东', show_index: 150, sound: 'fan_dong'};
     _[9102] = {id: 9102, name_chs: '役牌 连东', show_index: 150, sound: 'fan_doubledong'};
     _[9103] = {id: 9103, name_chs: '役牌 南', show_index: 150, sound: 'fan_nan'};

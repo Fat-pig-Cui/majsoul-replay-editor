@@ -443,7 +443,9 @@ const optimizeFunction = (): void => {
         };
     };
 
-    // 国标添加圈风刻, 门风刻语音; 并不显示宝牌指示牌
+    // 1. 国标添加圈风刻, 门风刻语音
+    // 2. 并不显示宝牌指示牌
+    // 3. 番种数超过上限时, 会循环报菜名
     uiscript.UI_Win.prototype.showRecord = function (K) {
         var z = this;
         if (!view.DesktopMgr.Inst.record_show_anim)
@@ -606,9 +608,14 @@ const optimizeFunction = (): void => {
         }),
             m += 500;
         for (var I = function (B) {
+            if (!(B % Y.numChildren)) // 添加该 if
+                C.timerManager.addTimerOnce(m, function (){
+                    for (var k = 0; k < Y.numChildren; k++)
+                    Y.getChildAt(k).visible = false;
+                });
             var Z = game.Tools.get_chara_audio(s, Q[B].sound);
             C.timerManager.addTimerOnce(m, function () {
-                var s = Y.getChildAt(B)
+                var s = Y.getChildAt(B % Y.numChildren) // 加入 % Y.numChildren
                     , U = s.getChildByName('l_name');
                 U.text = Q[B].name,
                     U.color = Q[B].isSpecialFan ? '#ffc74c' : '#f1eeda';
@@ -636,7 +643,7 @@ const optimizeFunction = (): void => {
                         view.AudioMgr.PlayAudio(211, 1, 0.5)) : view.AudioMgr.PlayAudio(211, 1, 1);
             }),
                 m += Z ? Z.time_length > 500 ? Z.time_length : 500 : 500;
-        }, C = this, j = 0; O > j && j < Y.numChildren; j++)
+        }, C = this, j = 0; j < O; j++) // 去掉 j < Y.numChildren 的循环条件
             I(j);
         this.container_fan.visible = false,
             this.container_fu.visible = false,
