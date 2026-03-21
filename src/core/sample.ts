@@ -139,7 +139,7 @@ const generateHuleInfo = (index: number): Action => {
         "name": "RecordHule",
         "data": {
             "hules": [{
-                "count": 64,
+                "count": 64, // 207
                 "doras": ["7z"],
                 "li_doras": [],
                 "fans": all_fans[index],

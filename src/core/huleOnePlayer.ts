@@ -90,9 +90,7 @@ export const huleOnePlayer = (seat: Seat): HuleInfo => {
     // 有包牌
     if (baopai[seat].length > 0) {
         const yiman_sudian = Constants.YIMAN_SUDIAN;
-        let all_bao_val = 0;
-        for (const bao of baopai[seat])
-            all_bao_val += bao.val;
+        const all_bao_val = baopai[seat].reduce((sum, bao) => sum + bao.val, 0);
 
         const [feibao_rong, , feibao_zimo_qin, feibao_zimo_xian] = calcPoint((val - all_bao_val) * yiman_sudian);
 
@@ -220,7 +218,7 @@ export const huleOnePlayer = (seat: Seat): HuleInfo => {
             return true;
         if (lst_name === 'RecordRevealTile' || lst_name === 'RecordLockTile' && lst_action.data.lock_state !== 0)
             return true;
-        return sudian === -2000 || !zimo && zhenting.result[seat];
+        return sudian === Constants.ZHAHU_SUDIAN || !zimo && zhenting.result[seat];
     }
 
     // 判断 title_id
@@ -331,7 +329,7 @@ export const huleOnePlayerChuanma = (seat: Seat): HuleInfo => {
     const sudian = calcSudianChuanma(points);
     const val = points.fans.reduce((sum, fan) => sum + fan.val, 0);
     // -------------------------------------------
-    const zhahu = huazhu(seat) || lst_name === 'RecordAnGangAddGang' && lst_action.data.type === 3;
+    const zhahu = calcHupai(player_tiles[seat]) === 0 || huazhu(seat) || lst_name === 'RecordAnGangAddGang' && lst_action.data.type === 3;
     if (zhahu) {
         for (let i = 0; i < base_info.player_cnt; i++) {
             if (i === seat || huled[i])
@@ -444,7 +442,7 @@ export const huleOnePlayerGuobiao = (seat: Seat): HuleInfo => {
         for (let i = 0; i < base_info.player_cnt; i++) {
             if (i === seat)
                 continue;
-            movePoint(Constants.GB_BASE_FAN, i as Seat, seat);
+            movePoint(Constants.GB_BASE_FAN * scale_points(), i as Seat, seat);
         }
     }
     player_tiles[seat].pop();

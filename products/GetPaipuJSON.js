@@ -13,14 +13,14 @@
 
     function parseRecords(gameDetailRecords, json) {
         if (gameDetailRecords.version === 0) {
-            for (let i in gameDetailRecords.records) {
+            for (const i in gameDetailRecords.records) {
                 const record = pbWrapper.decode(gameDetailRecords.records[i]);
                 const pb = net.ProtobufManager.lookupType(record.name);
                 const data = JSON.parse(JSON.stringify(pb.decode(record.data)));
                 json.records[i] = {name: record.name, data: data};
             }
         } else if (gameDetailRecords.version === 210715) {
-            for (let i in gameDetailRecords.actions) {
+            for (const i in gameDetailRecords.actions) {
                 if (gameDetailRecords.actions[i].type === 1) {
                     const record = pbWrapper.decode(gameDetailRecords.actions[i].result);
                     const pb = net.ProtobufManager.lookupType(record.name);
@@ -40,7 +40,7 @@
     }
 
     function download(data, uuid) {
-        let a = document.createElement('a');
+        const a = document.createElement('a');
         a.href = URL.createObjectURL(
             new Blob([JSON.stringify(data, null, '  ')],
                 {type: 'text/plain'}));
@@ -63,7 +63,7 @@
             let gameDetailRecordsJson = JSON.parse(JSON.stringify(gameDetailRecords));
             gameDetailRecordsJson = parseRecords(gameDetailRecords, gameDetailRecordsJson);
             gameRecord.data = '';
-            let gameRecordJson = JSON.parse(JSON.stringify(gameRecord));
+            const gameRecordJson = JSON.parse(JSON.stringify(gameRecord));
             gameRecordJson.data = {name: gameDetailRecordsWrapper.name, data: gameDetailRecordsJson};
             download(gameRecordJson, uuid);
         });

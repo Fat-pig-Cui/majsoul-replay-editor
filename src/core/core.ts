@@ -404,7 +404,7 @@ export const mopai = (...args: any[]): void => {
 
         // 魂之一击: 已过载的玩家, push 一次过载数据
         if (is_hunzhiyiji()) {
-            let count = hunzhiyiji_info[lst_seat].continue_deal_count;
+            const count = hunzhiyiji_info[lst_seat].continue_deal_count;
             if (lst_name !== 'RecordAnGangAddGang')
                 if (hunzhiyiji_info[lst_seat].liqi && count === 0 && !hunzhiyiji_info[lst_seat].overload) {
                     hunzhiyiji_info[lst_seat].overload = true;
@@ -482,9 +482,7 @@ export const qiepai = (...args: any[]): void => {
     updateZhenting();
 
     // 确定立直类型
-    let is_wliqi = false;
-    if (is_liqi && liqi_info[seat].yifa !== 0 && liqi_info[seat].liqi === 0)
-        is_wliqi = true;
+    const is_wliqi = is_liqi && liqi_info[seat].yifa !== 0 && liqi_info[seat].liqi === 0;
 
     // 确定 lst_liqi
     if (is_liqi && liqi_info[seat].liqi === 0) {
@@ -834,10 +832,7 @@ export const zimingpai = (...args: any[]): void => {
     }
 
     // 和 tile 等效牌的个数
-    let tile_cnt = 0;
-    for (const t of player_tiles[seat])
-        if (isEqualTile(tile, t))
-            tile_cnt++;
+    const tile_cnt = player_tiles[seat].filter(t => isEqualTile(t, tile)).length;
 
     // 拔北
     let is_babei = tile_cnt >= 1 && (base_info.player_cnt === 3 || base_info.player_cnt === 2) && isEqualTile(tile, '4z') && (!type || type === 'babei');
@@ -852,8 +847,8 @@ export const zimingpai = (...args: any[]): void => {
 
     let is_jiagang = false;
     if (tile_cnt > 0 && (!type || type === 'jiagang'))
-        for (let i in fulu[seat])
-            if (player_tiles[seat].lastIndexOf(tile) > 0 && isEqualTile(fulu[seat][i].tile[0], tile) && fulu[seat][i].type === 1) {
+        for (const f of fulu[seat])
+            if (player_tiles[seat].lastIndexOf(tile) > 0 && isEqualTile(f.tile[0], tile) && f.type === 1) {
                 is_jiagang = true;
                 break;
             }

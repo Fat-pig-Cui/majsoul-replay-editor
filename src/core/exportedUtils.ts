@@ -365,16 +365,16 @@ export const calcHupai = (tiles: Tile[], type: boolean = false): number => {
         const condition = Constants.GB_CONDITIONS;
         const flag = [true, true, true, true, true, true];
 
-        for (let row in condition)
-            for (let i in condition[row])
+        for (const row in condition)
+            for (const i in condition[row])
                 if (cnt[condition[row][i]] === 0)
                     flag[row] = false;
 
-        for (let row in condition) {
+        for (const row in condition) {
             if (flag[row]) {
                 const new_tiles = tiles.slice();
-                for (let i in condition[row])
-                    for (let j in new_tiles)
+                for (const i in condition[row])
+                    for (const j in new_tiles)
                         if (new_tiles[j] === condition[row][i]) {
                             new_tiles.splice(parseInt(j), 1);
                             break;
@@ -453,7 +453,7 @@ export const calcTingpai = (seat: Seat, type: boolean = false): { tile: Tile }[]
 export const getLstAction = (num: number = 1): Action => {
     if (actions.length > 0) {
         let ret = actions.length;
-        for (let i = 0; i < num; i++) {
+        for (let i = 0; i < num && ret >= 0; i++) {
             ret--;
             while (ret >= 0 && ['RecordChangeTile', 'RecordSelectGap', 'RecordGangResult', 'RecordFillAwaitingTiles'].includes(actions[ret].name))
                 ret--;

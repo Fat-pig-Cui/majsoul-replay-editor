@@ -13,14 +13,14 @@
 
     function parseRecords(gameDetailRecords, json) {
         if (gameDetailRecords.version === 0) {
-            for (let i in gameDetailRecords.records) {
+            for (const i in gameDetailRecords.records) {
                 const record = pbWrapper.decode(gameDetailRecords.records[i]);
                 const pb = net.ProtobufManager.lookupType(record.name);
                 const data = JSON.parse(JSON.stringify(pb.decode(record.data)));
                 json.records[i] = {name: record.name, data: data};
             }
         } else if (gameDetailRecords.version === 210715) {
-            for (let i in gameDetailRecords.actions) {
+            for (const i in gameDetailRecords.actions) {
                 if (gameDetailRecords.actions[i].type === 1) {
                     const record = pbWrapper.decode(gameDetailRecords.actions[i].result);
                     const pb = net.ProtobufManager.lookupType(record.name);
@@ -40,7 +40,7 @@
     }
 
     function download(data, uuid) {
-        let a = document.createElement('a');
+        const a = document.createElement('a');
         a.href = URL.createObjectURL(new Blob([data], {type: 'text/plain'}));
         a.download = `fake_paipu_${uuid}.js`;
         a.style.display = 'none';
@@ -61,7 +61,7 @@
             let gameDetailRecordsJson = JSON.parse(JSON.stringify(gameDetailRecords));
             gameDetailRecordsJson = parseRecords(gameDetailRecords, gameDetailRecordsJson);
             gameRecord.data = '';
-            let gameRecordJson = JSON.parse(JSON.stringify(gameRecord));
+            const gameRecordJson = JSON.parse(JSON.stringify(gameRecord));
             gameRecordJson.data = {name: gameDetailRecordsWrapper.name, data: gameDetailRecordsJson};
 
             json2js(gameRecordJson, uuid);
@@ -71,18 +71,18 @@
         let txt = '';
         txt += `clearProject();\n\n// ${uuid}\n\n`;
 
-        for (let i in json.head.accounts)
-            txt += `player_datas[${i}]=${JSON.stringify(json.head.accounts[i])};\n`;
+        for (const account of json.head.accounts)
+            txt += `player_datas[${i}]=${JSON.stringify(account)};\n`;
         txt += `\nsetConfig(${JSON.stringify(json.head.config)});\n\n`;
 
         const actions = json.data.data.actions;
-        for (const i in actions)
-            if (actions[i].result) {
-                const tmp = actions[i].result.name.split('.');
-                actions[i].result.name = tmp[tmp.length - 1];
-                const Data = actions[i].result.data;
+        for (const action of actions)
+            if (action.result) {
+                const tmp = action.result.name.split('.');
+                action.result.name = tmp[tmp.length - 1];
+                const Data = action.result.data;
 
-                if (actions[i].result.name === 'RecordNewRound') {
+                if (action.result.name === 'RecordNewRound') {
                     const chang = Data.chang, ju = Data.ju, ben = Data.ben;
                     txt += `// ${roundinfo(chang, ju, ben)}\n`;
                     txt += `begin_tiles[0]='${Data.tiles0.join('')}';\n`;
@@ -95,14 +95,14 @@
                         let muyuseats = '', tmp = [];
                         for (let j = i + 1; j < actions.length; j++)
                             if (actions[j].result && actions[j].result.data.muyu) {
-                                if (!tmp[actions[i].result.data.muyu.seat])
-                                    muyuseats += actions[i].result.data.muyu.seat.toString();
-                                tmp[actions[i].result.data.muyu.seat] = actions[i].result.data.muyu.count !== 0;
+                                if (!tmp[action.result.data.muyu.seat])
+                                    muyuseats += action.result.data.muyu.seat.toString();
+                                tmp[action.result.data.muyu.seat] = action.result.data.muyu.count !== 0;
                             }
                         txt += `setMuyuSeats('${muyuseats})';\n`;
                     }
                 }
-                if (actions[i].result.name === 'RecordDiscardTile') {
+                if (action.result.name === 'RecordDiscardTile') {
                     const tile = Data.tile, is_liqi = Data.is_liqi, moqie = Data.moqie;
                     if (is_liqi) {
                         if (moqie)
@@ -119,14 +119,14 @@
                     if (beishui_type !== undefined)
                         txt = txt.substring(0, txt.length - 3) + `,[${beishui_type}]);\n`;
                 }
-                if (actions[i].result.name === 'RecordChangeTile') {
+                if (action.result.name === 'RecordChangeTile') {
                     const tls = ['', '', '', ''];
                     for (let i = 0; i < tls.length; i++)
                         tls[i] = Data.chang_tile_infos[i].out_tiles.join('');
                     const type = Data.change_type;
                     txt += `huanpai(['${tls[0]}','${tls[1]}','${tls[2]}','${tls[3]}'],${type});\n`;
                 }
-                if (actions[i].result.name === 'RecordSelectGap') {
+                if (action.result.name === 'RecordSelectGap') {
                     const gap_types = Data.gap_types;
                     const words = {'0': 'p', '1': 'm', '2': 's'};
                     let ret = '';
@@ -134,13 +134,13 @@
                         ret += words[gap_types[i]];
                     txt += `dingque('${ret}');\n`;
                 }
-                if (actions[i].result.name === 'RecordDealTile') {
+                if (action.result.name === 'RecordDealTile') {
                     if (Data.tile_index)
                         txt += `mopai([${Data.tile_index}]);\n`;
                     else
                         txt += `mopai();\n`;
                 }
-                if (actions[i].result.name === 'RecordChiPengGang') {
+                if (action.result.name === 'RecordChiPengGang') {
                     const froms = Data.froms, seat = Data.seat, tiles = Data.tiles;
 
                     let c_tiles = '';
@@ -155,7 +155,7 @@
                     else
                         txt += `mingpai(${seat},'${c_tiles}');\n`;
                 }
-                if (actions[i].result.name === 'RecordAnGangAddGang') {
+                if (action.result.name === 'RecordAnGangAddGang') {
                     const tile = Data.tiles, type = Data.type;
                     const c_type = type === 3 ? 'angang' : 'jiagang';
 
@@ -167,46 +167,46 @@
                     else
                         txt += `zimingpai('${tile}','${c_type}');\n`;
                 }
-                if (actions[i].result.name === 'RecordBaBei') {
+                if (action.result.name === 'RecordBaBei') {
                     const tile = Data.tile;
                     txt += `zimingpai('${tile}','babei');\n`;
                 }
-                if (actions[i].result.name === 'RecordHule') {
+                if (action.result.name === 'RecordHule') {
                     const all_seats = [];
                     for (const i in Data.hules)
                         all_seats.push(Data.hules[i].seat);
                     txt += `hupai(${all_seats});\n\n`;
                 }
-                if (actions[i].result.name === 'RecordLiuJu') {
+                if (action.result.name === 'RecordLiuJu') {
                     txt += `liuju();\n\n`;
                 }
-                if (actions[i].result.name === 'RecordNoTile') {
+                if (action.result.name === 'RecordNoTile') {
                     txt += `huangpai();\n\n`;
                 }
-                if (actions[i].result.name === 'RecordHuleXueZhanMid') {
+                if (action.result.name === 'RecordHuleXueZhanMid') {
                     const all_seats = [];
                     for (const i in Data.hules)
                         all_seats.push(Data.hules[i].seat);
                     txt += `hupai([${all_seats}]);\n\n`;
                 }
-                if (actions[i].result.name === 'RecordHuleXueZhanEnd') {
+                if (action.result.name === 'RecordHuleXueZhanEnd') {
                     const all_seats = [];
                     for (const i in Data.hules)
                         all_seats.push(Data.hules[i].seat);
                     txt += `hupai([${all_seats}],true);\n\n\n\n`;
                 }
-                if (actions[i].result.name === 'RecordGangResult') { // 不需要
+                if (action.result.name === 'RecordGangResult') { // 不需要
                 }
-                if (actions[i].result.name === 'RecordGangResultEnd') { // 不需要
+                if (action.result.name === 'RecordGangResultEnd') { // 不需要
                 }
-                if (actions[i].result.name === 'RecordRevealTile') {
+                if (action.result.name === 'RecordRevealTile') {
                     const tile = Data.tile, is_liqi = Data.is_liqi;
                     if (is_liqi)
                         txt += `qiepai('${tile}',true,'anpai');\n`;
                     else
                         txt += `qiepai('${tile}','anpai');\n`;
                 }
-                if (actions[i].result.name === 'RecordLockTile') {
+                if (action.result.name === 'RecordLockTile') {
                     let j = i - 1;
                     while (!actions[j].result)
                         j--;
@@ -218,11 +218,11 @@
                             txt += `kaipai(${seat});\n`;
                     }
                 }
-                if (actions[i].result.name === 'RecordUnveilTile') { // 不需要
+                if (action.result.name === 'RecordUnveilTile') { // 不需要
                 }
-                if (actions[i].result.name === 'RecordNewCard') { // 不需要
+                if (action.result.name === 'RecordNewCard') { // 不需要
                 }
-                if (actions[i].result.name === 'RecordFillAwaitingTiles') { // 不需要
+                if (action.result.name === 'RecordFillAwaitingTiles') { // 不需要
                 }
             }
         // txt += `all_data.players = ${JSON.stringify(json.head.result.players)};\n`;

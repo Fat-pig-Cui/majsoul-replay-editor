@@ -46,10 +46,8 @@ export const shunziMidTile = (tiles: Tile[]): Tile => {
     if (tiles.length !== 3)
         throw new Error(errRoundInfo() + `shunziMidTile: 输入牌数量不为3: ${tiles}`);
     const nums: number[] = [];
-    for (let tile of tiles) {
-        tile = simplify(tile);
-        nums.push(parseInt(tile[0]));
-    }
+    for (const tile of tiles)
+        nums.push(parseInt(simplify(tile)[0]));
     nums.sort((a, b) => a - b);
     return nums[1] + tiles[0][1] as Tile;
 };
@@ -273,7 +271,7 @@ export const push2PlayerTiles = (seat: Seat): void => {
 export const fulu2Ming = (seat: Seat): string[] => {
     const ming: string[] = [];
     for (const f of fulu[seat]) {
-        let tiles = f.tile;
+        const tiles = f.tile;
         if (f.type === 0)
             ming.push(`shunzi(${tiles[0]},${tiles[1]},${tiles[2]})`);
         else if (f.type === 1)
@@ -402,14 +400,14 @@ export const isDora = (tile: Tile): boolean => {
  */
 export const calcTianming = (seat: Seat, zimo: boolean): number => {
     let sum = 1;
-    for (let i in player_tiles[seat]) { // 查手牌
+    for (const i in player_tiles[seat]) { // 查手牌
         if (!zimo && parseInt(i) === player_tiles[seat].length - 1) // 不是自摸, 则最后一张牌不考虑
             break;
         if (player_tiles[seat][i].length >= 2 && player_tiles[seat][i][2] === Constants.SPT_SUFFIX)
             sum++;
     }
     for (const f of fulu[seat]) // 查副露
-        for (let j in f.tile) {
+        for (const j in f.tile) {
             if (f.type !== 3 && parseInt(j) === f.tile.length - 1) // 不是暗杠, 则最后一张牌不考虑
                 break;
             if (f.tile[j].length > 2 && f.tile[j][2] === Constants.SPT_SUFFIX)
@@ -420,8 +418,7 @@ export const calcTianming = (seat: Seat, zimo: boolean): number => {
 
 // 咏唱之战, 更新 seat 号玩家手摸切信息
 export const updateShoumoqie = (seat: Seat): void => {
-    for (let k = 0; k < 2; k++) { // k 为 0 表示摸切, 为 1 表示手切
-        const flag = !!k;
+    for (const flag of [false, true]) {
         let len = 0;
         for (let i = 0; i < shoumoqie[seat].length; i++)
             if (shoumoqie[seat][i] === flag) {

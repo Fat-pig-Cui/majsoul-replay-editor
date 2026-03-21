@@ -47,52 +47,52 @@ import type {
 
 declare global {
     // 玩家的个人信息
-    let player_datas: t_player_datas;
+    const player_datas: t_player_datas;
     // 玩家的起手
-    let begin_tiles: t_begin_tiles;
+    const begin_tiles: t_begin_tiles;
     // 玩家当时的手牌
-    let player_tiles: t_player_tiles;
+    const player_tiles: t_player_tiles;
     // 完成编辑后的所有信息集合
-    let all_data: t_all_data;
+    const all_data: t_all_data;
 
-    let clearProject: t_clearProject;
-    let setConfig: t_setConfig;
-    let setDiscardTiles: t_setDiscardTiles;
-    let setDealTiles: t_setDealTiles;
-    let setPaishan: t_setPaishan;
-    let randomPaishan: t_randomPaishan;
-    let mopai: t_mopai;
-    let qiepai: t_qiepai;
-    let mingpai: t_mingpai;
-    let zimingpai: t_zimingpai;
-    let hupai: t_hupai;
-    let huangpai: t_huangpai;
-    let liuju: t_liuju;
-    let setMuyuSeats: t_setMuyuSeats;
-    let huanpai: t_huanpai;
-    let dingque: t_dingque;
-    let kaipai: t_kaipai;
-    let kaipaiLock: t_kaipaiLock;
-    let setRound: t_setRound;
-    let getLeftTileCnt: t_getLeftTileCnt;
-    let demoGame: t_demoGame;
-    let normalMoqie: t_normalMoqie;
-    let moqieLiqi: t_moqieLiqi;
-    let comboMopai: t_comboMopai;
-    let mingQiepai: t_mingQiepai;
-    let zimoHu: t_zimoHu;
-    let moqieLiuju: t_moqieLiuju;
-    let judgeTile: t_judgeTile;
-    let allEqualTiles: t_allEqualTiles;
-    let isEqualTile: t_isEqualTile;
-    let decompose: t_decompose;
-    let separate: t_separate;
-    let calcHupai: t_calcHupai;
-    let calcTingpai: t_calcTingpai;
-    let getLstAction: t_getLstAction;
-    let setScores: t_setScores;
-    let resetReplay: t_resetReplay;
-    let reportYaku: t_reportYaku;
-    let reportYaku_yiji: t_reportYaku_yiji;
-    let fixPaishan: t_fixPaishan;
+    const clearProject: t_clearProject;
+    const setConfig: t_setConfig;
+    const setDiscardTiles: t_setDiscardTiles;
+    const setDealTiles: t_setDealTiles;
+    const setPaishan: t_setPaishan;
+    const randomPaishan: t_randomPaishan;
+    const mopai: t_mopai;
+    const qiepai: t_qiepai;
+    const mingpai: t_mingpai;
+    const zimingpai: t_zimingpai;
+    const hupai: t_hupai;
+    const huangpai: t_huangpai;
+    const liuju: t_liuju;
+    const setMuyuSeats: t_setMuyuSeats;
+    const huanpai: t_huanpai;
+    const dingque: t_dingque;
+    const kaipai: t_kaipai;
+    const kaipaiLock: t_kaipaiLock;
+    const setRound: t_setRound;
+    const getLeftTileCnt: t_getLeftTileCnt;
+    const demoGame: t_demoGame;
+    const normalMoqie: t_normalMoqie;
+    const moqieLiqi: t_moqieLiqi;
+    const comboMopai: t_comboMopai;
+    const mingQiepai: t_mingQiepai;
+    const zimoHu: t_zimoHu;
+    const moqieLiuju: t_moqieLiuju;
+    const judgeTile: t_judgeTile;
+    const allEqualTiles: t_allEqualTiles;
+    const isEqualTile: t_isEqualTile;
+    const decompose: t_decompose;
+    const separate: t_separate;
+    const calcHupai: t_calcHupai;
+    const calcTingpai: t_calcTingpai;
+    const getLstAction: t_getLstAction;
+    const setScores: t_setScores;
+    const resetReplay: t_resetReplay;
+    const reportYaku: t_reportYaku;
+    const reportYaku_yiji: t_reportYaku_yiji;
+    const fixPaishan: t_fixPaishan;
 }

@@ -1035,10 +1035,8 @@ var MRE = (function (exports) {
         if (tiles.length !== 3)
             throw new Error(errRoundInfo() + `shunziMidTile: 输入牌数量不为3: ${tiles}`);
         const nums = [];
-        for (let tile of tiles) {
-            tile = simplify(tile);
-            nums.push(parseInt(tile[0]));
-        }
+        for (const tile of tiles)
+            nums.push(parseInt(simplify(tile)[0]));
         nums.sort((a, b) => a - b);
         return nums[1] + tiles[0][1];
     };
@@ -1249,7 +1247,7 @@ var MRE = (function (exports) {
     const fulu2Ming = (seat) => {
         const ming = [];
         for (const f of fulu[seat]) {
-            let tiles = f.tile;
+            const tiles = f.tile;
             if (f.type === 0)
                 ming.push(`shunzi(${tiles[0]},${tiles[1]},${tiles[2]})`);
             else if (f.type === 1)
@@ -1375,14 +1373,14 @@ var MRE = (function (exports) {
      */
     const calcTianming = (seat, zimo) => {
         let sum = 1;
-        for (let i in player_tiles[seat]) { // 查手牌
+        for (const i in player_tiles[seat]) { // 查手牌
             if (!zimo && parseInt(i) === player_tiles[seat].length - 1) // 不是自摸, 则最后一张牌不考虑
                 break;
             if (player_tiles[seat][i].length >= 2 && player_tiles[seat][i][2] === Constants.SPT_SUFFIX)
                 sum++;
         }
         for (const f of fulu[seat]) // 查副露
-            for (let j in f.tile) {
+            for (const j in f.tile) {
                 if (f.type !== 3 && parseInt(j) === f.tile.length - 1) // 不是暗杠, 则最后一张牌不考虑
                     break;
                 if (f.tile[j].length > 2 && f.tile[j][2] === Constants.SPT_SUFFIX)
@@ -1392,8 +1390,7 @@ var MRE = (function (exports) {
     };
     // 咏唱之战, 更新 seat 号玩家手摸切信息
     const updateShoumoqie = (seat) => {
-        for (let k = 0; k < 2; k++) { // k 为 0 表示摸切, 为 1 表示手切
-            const flag = !!k;
+        for (const flag of [false, true]) {
             let len = 0;
             for (let i = 0; i < shoumoqie[seat].length; i++)
                 if (shoumoqie[seat][i] === flag) {
@@ -1854,15 +1851,15 @@ var MRE = (function (exports) {
         if (is_guobiao() && tiles.length >= 11) { // 国标不含全不靠的组合龙
             const condition = Constants.GB_CONDITIONS;
             const flag = [true, true, true, true, true, true];
-            for (let row in condition)
-                for (let i in condition[row])
+            for (const row in condition)
+                for (const i in condition[row])
                     if (cnt[condition[row][i]] === 0)
                         flag[row] = false;
-            for (let row in condition) {
+            for (const row in condition) {
                 if (flag[row]) {
                     const new_tiles = tiles.slice();
-                    for (let i in condition[row])
-                        for (let j in new_tiles)
+                    for (const i in condition[row])
+                        for (const j in new_tiles)
                             if (new_tiles[j] === condition[row][i]) {
                                 new_tiles.splice(parseInt(j), 1);
                                 break;
@@ -1935,7 +1932,7 @@ var MRE = (function (exports) {
     const getLstAction = (num = 1) => {
         if (actions.length > 0) {
             let ret = actions.length;
-            for (let i = 0; i < num; i++) {
+            for (let i = 0; i < num && ret >= 0; i++) {
                 ret--;
                 while (ret >= 0 && ['RecordChangeTile', 'RecordSelectGap', 'RecordGangResult', 'RecordFillAwaitingTiles'].includes(actions[ret].name))
                     ret--;
@@ -2436,8 +2433,9 @@ var MRE = (function (exports) {
         const tiles = player_tiles[seat];
         const lastile = tiles[tiles.length - 1];
         const ret = { yiman: false, fans: [], fu: 0 };
-        const cnt = {}, cnt2 = {}; // cnt 不含副露, 并将红宝牌/透明牌转化为普通牌
-        // cnt2 是包含副露的牌数量集合, 不含红包牌和拔北宝牌
+        // cnt 不含副露, 不含红包牌和拔北宝牌
+        // cnt2 包含副露, 不含红包牌和拔北宝牌
+        const cnt = {}, cnt2 = {};
         for (const tile of Constants.TILE)
             cnt[tile] = cnt2[tile] = 0;
         for (const tile of tiles) {
@@ -2457,6 +2455,7 @@ var MRE = (function (exports) {
         // 幻境传说: 庄家卡1: 庄家门清状态下荣和只能是立直状态, 否则诈和
         if (get_field_spell_mode(1) === 1 && seat === base_info.ju && fulu_cnt === 0 && !zimo && liqi_info[seat].liqi !== 0)
             return ret;
+        const lst_name = getLstAction().name;
         if (!is_wanxiangxiuluo())
             normalCalc();
         else if (cnt[Constants.TBD] === 1) {
@@ -2482,7 +2481,7 @@ var MRE = (function (exports) {
             function specialCalc() {
                 // 删除 ans 中番为 id 的番
                 const deleteFan = (id) => {
-                    for (let i in ans.fans)
+                    for (const i in ans.fans)
                         if (ans.fans[i].id === id) {
                             ans.fans.splice(parseInt(i), 1);
                             break;
@@ -2491,11 +2490,7 @@ var MRE = (function (exports) {
                 const menqing = fulu_cnt === 0;
                 let tianhu = false;
                 const ans = { yiman: !is_qingtianjing(), fans: [], fu: 25 };
-                let wangpai_num = 14;
-                if (base_info.player_cnt === 3)
-                    wangpai_num = 18;
-                else if (base_info.player_cnt === 2)
-                    wangpai_num = 22;
+                const wangpai_num = base_info.player_cnt === 2 ? 18 : 14;
                 if (is_qingtianjing()) {
                     if (is_hunzhiyiji()) {
                         if (hunzhiyiji_info[seat].liqi === 1)
@@ -2551,7 +2546,6 @@ var MRE = (function (exports) {
                                 ans.fans.push({ val: 1, id: 30 }); // 一发
                         }
                     }
-                    let lst_name = getLstAction().name;
                     if (is_guyi() || is_yifanjieguyi()) {
                         if (lst_name === 'RecordDiscardTile' && getLstAction().data.is_liqi)
                             ans.fans.push({ val: 1, id: 51 }); // 燕返
@@ -2569,11 +2563,6 @@ var MRE = (function (exports) {
                         ans.fans.push({ val: 1, id: 5 }); // 海底摸月
                     if (!zimo && paishan.length === wangpai_num)
                         ans.fans.push({ val: 1, id: 6 }); // 河底捞鱼
-                    const cnt2 = {}; // cnt2 包含副露, 不含红宝牌和拔北宝牌
-                    for (const tile of Constants.TILE_NO_AKA)
-                        cnt2[tile] = 0;
-                    for (const tile of tiles)
-                        cnt2[simplify(tile)]++;
                     // 四种dora: 表dora, 红dora, 拔北dora, 里dora
                     const all_doras = [0, 0, 0, 0];
                     // 先把拔北给算上, 然后减去
@@ -2625,10 +2614,8 @@ var MRE = (function (exports) {
                     if (all_doras[2] > 0)
                         ans.fans.push({ val: all_doras[2], id: 34 }); // 北宝牌
                     if (liqi_info[seat].liqi !== 0) {
-                        let times = 1;
                         // 幻境传说: 机会卡1
-                        if (get_field_spell_mode(2) === 1)
-                            times = 2;
+                        const times = get_field_spell_mode(2) === 1 ? 2 : 1;
                         ans.fans.push({ val: all_doras[3] * times, id: 33 }); // 里宝牌
                     }
                 }
@@ -2679,7 +2666,7 @@ var MRE = (function (exports) {
         function calc0(tingpaifu, partition_tmp) {
             // 删除 ans 中番为 id 的番
             const deleteFan = (id) => {
-                for (let i in ans.fans)
+                for (const i in ans.fans)
                     if (ans.fans[i].id === id) {
                         ans.fans.splice(parseInt(i), 1);
                         break;
@@ -2731,148 +2718,61 @@ var MRE = (function (exports) {
                 if (type === 0 || type === 5)
                     type_cnt[shunziMidTile(p.tile)][type]++;
             }
-            let beikou = 0, santongshun = false, sanlianke = false;
+            let beikou = 0;
             for (const tile of Constants.TILE_NO_AKA) {
                 kezi_num += kezi[tile];
                 anke_num += anke[tile];
                 gangzi_num += gangzi[tile];
                 duizi_num += type_cnt[tile][7];
-                if (Constants.MAN_MID_TILE.includes(tile) || Constants.PIN_MID_TILE.includes(tile) || Constants.SOU_MID_TILE.includes(tile))
-                    if (kezi[parseInt(tile) - 1 + tile[1]] >= 1 && kezi[tile] >= 1 && kezi[parseInt(tile) + 1 + tile[1]] >= 1)
-                        sanlianke = true;
                 // 这里的杯口数量算上副露的, 最后在判断是否有效
                 beikou += Math.floor(shunzi[tile] / 2);
-                if (Math.floor(shunzi[tile] / 3) >= 1)
-                    santongshun = true;
             }
             const group = Constants.GROUP;
             // ---------------------------
-            let flag_ziyise = true, flag_lvyise = true, flag_qinglaotou = true, flag_duanyao = true, flag_hunlaotou = true;
-            for (const tile of Constants.TILE_NO_AKA)
-                if (cnt2[tile] > 0) {
-                    if (!Constants.HONOR_TILE.includes(tile))
-                        flag_ziyise = false; // 字一色
-                    if (!Constants.TERMINAL_TILE.includes(tile))
-                        flag_qinglaotou = false; // 清老头
-                    if (Constants.YAOJIU_TILE.includes(tile))
-                        flag_duanyao = false; // 断幺九
-                    if (!Constants.YAOJIU_TILE.includes(tile))
-                        flag_hunlaotou = false; // 混老头
-                    if (!judgeTile(tile, 'L'))
-                        flag_lvyise = false; // 绿一色
-                }
-            // ---------------------------------
-            let wumenqi = true;
-            for (let i = 0; i < 5; i++) {
-                const wumen_lows = ['1m', '1p', '1s', '1z', '5z'], wumen_highs = ['9m', '9p', '9s', '4z', '7z'];
-                let flag = false;
-                for (let j = parseInt(wumen_lows[i]); j <= parseInt(wumen_highs[i]); j++)
-                    flag || (flag = cnt2[j + wumen_lows[i][1]] > 0);
-                if (!flag)
-                    wumenqi = false;
-            }
-            // ---------------------------------
-            // jiulian[0] 用于判断是否为九莲, jiulian[1] 表示多出来的一张牌
-            let jiulian = [false], yiqi = false, hunyise, qingyise;
-            const jlbd = [0, 3, 1, 1, 1, 1, 1, 1, 1, 3];
-            for (let k = 0; k <= 2; k++) {
-                if (shunzi['2' + group[k]] >= 1 && shunzi['5' + group[k]] >= 1 && shunzi['8' + group[k]] >= 1)
-                    yiqi = true;
-                jiulian = [true];
-                for (let i = 1; i <= 9; i++)
-                    if (cnt2[i + group[k]] < jlbd[i]) // 手牌中各种牌数量不满足
-                        jiulian = [false];
-                    else if (cnt2[i + group[k]] > jlbd[i]) // 多出来的牌
-                        jiulian[1] = i + group[k];
-                if (jiulian[0])
-                    break;
-            }
-            if (gangzi_num >= 1) // 九莲不允许有杠子
-                jiulian = [false];
+            let ziyise = true, lvyise = true, qinglaotou = true, duanyao = true, hunlaotou = true;
             let hunyise_man = true, hunyise_pin = true, hunyise_sou = true;
             let qingyise_man = true, qingyise_pin = true, qingyise_sou = true;
-            for (const tile of Constants.TILE_NO_AKA) {
-                if (tile[1] !== 'm' && cnt2[tile] > 0) {
-                    if (tile[1] !== 'z')
-                        hunyise_man = false;
-                    qingyise_man = false;
+            let hongkongque = true, hongyidian = true, heiyise = true;
+            let tuibudao = true;
+            for (const tile of Constants.TILE_NO_AKA)
+                if (cnt2[tile] > 0) {
+                    if (!judgeTile(tile, 'H'))
+                        ziyise = false; // 字一色
+                    if (!judgeTile(tile, 'T'))
+                        qinglaotou = false; // 清老头
+                    if (!judgeTile(tile, 'D'))
+                        duanyao = false; // 断幺九
+                    if (!judgeTile(tile, 'Y'))
+                        hunlaotou = false; // 混老头
+                    if (!judgeTile(tile, 'L'))
+                        lvyise = false; // 绿一色
+                    if (tile[1] !== 'm') {
+                        if (tile[1] !== 'z')
+                            hunyise_man = false;
+                        qingyise_man = false;
+                    }
+                    if (tile[1] !== 'p') {
+                        if (tile[1] !== 'z')
+                            hunyise_pin = false;
+                        qingyise_pin = false;
+                    }
+                    if (tile[1] !== 's') {
+                        if (tile[1] !== 'z')
+                            hunyise_sou = false;
+                        qingyise_sou = false;
+                    }
+                    if (!judgeTile(tile, 'hongkongque'))
+                        hongkongque = false;
+                    if (!judgeTile(tile, 'hongyidian'))
+                        hongyidian = false;
+                    if (!judgeTile(tile, 'heiyise'))
+                        heiyise = false;
+                    if (!judgeTile(tile, 'tuibudao'))
+                        tuibudao = false;
                 }
-                if (tile[1] !== 'p' && cnt2[tile] > 0) {
-                    if (tile[1] !== 'z')
-                        hunyise_pin = false;
-                    qingyise_pin = false;
-                }
-                if (tile[1] !== 's' && cnt2[tile] > 0) {
-                    if (tile[1] !== 'z')
-                        hunyise_sou = false;
-                    qingyise_sou = false;
-                }
-            }
-            hunyise = hunyise_man || hunyise_pin || hunyise_sou;
-            qingyise = qingyise_man || qingyise_pin || qingyise_sou;
-            // ----------------------------------
-            let sanse = false, sansetongke = false;
-            for (let i = 1; i <= 9; i++) {
-                if (shunzi[i + 'm'] >= 1 && shunzi[i + 'p'] >= 1 && shunzi[i + 's'] >= 1)
-                    sanse = true;
-                if (kezi[i + 'm'] >= 1 && kezi[i + 'p'] >= 1 && kezi[i + 's'] >= 1)
-                    sansetongke = true;
-            }
-            // ----------------------------------
-            let chunquandai = true, hunquandai = true;
-            for (let j = 0; j < 3; j++)
-                for (let i = 1; i <= 9; i++) {
-                    // 从顺子和(刻子, 雀头)的角度判断是否有全带, 先顺子后(刻子, 雀头)
-                    if (i > 2 && i < 8 && shunzi[i + group[j]] >= 1)
-                        chunquandai = hunquandai = false;
-                    if (i > 1 && i < 9 && kezi[i + group[j]] + type_cnt[i + group[j]][7] >= 1)
-                        chunquandai = hunquandai = false;
-                }
-            for (let i = 1; i <= 7; i++)
-                if (kezi[i + 'z'] + type_cnt[i + 'z'][7] >= 1)
-                    chunquandai = false;
-            // ------------------------------------
-            let pinghu = true;
-            if (duizi_num === 7)
-                pinghu = false;
-            for (const tile of Constants.TILE_NO_AKA) {
-                if (kezi[tile] >= 1) // 有刻子
-                    pinghu = false;
-                if (type_cnt[tile][7] === 1) {
-                    // 雀头是自风, 场风, 三元
-                    if (((seat - base_info.ju + base_info.player_cnt) % base_info.player_cnt + 1) + 'z' === tile)
-                        pinghu = false;
-                    if ((base_info.chang + 1) + 'z' === tile)
-                        pinghu = false;
-                    if (Constants.DRAGON_TILE.includes(tile))
-                        pinghu = false;
-                }
-            }
-            // 顺子两面听判断
-            let flag_liangmian = false;
-            if (parseInt(simplify(lastile)) >= 4 && parseInt(simplify(lastile)) <= 9) // 数牌4-9
-                if (shunzi[parseInt(simplify(lastile)) - 1 + lastile[1]] >= 1) // 顺子的中心比 lastile 小 1
-                    flag_liangmian = true;
-            if (parseInt(simplify(lastile)) >= 1 && parseInt(simplify(lastile)) <= 6) // 数牌1-6
-                if (shunzi[parseInt(simplify(lastile)) + 1 + lastile[1]] >= 1) // 顺子的中心比 lastile 大 1
-                    flag_liangmian = true;
-            if (!flag_liangmian)
-                pinghu = false;
-            // -------------------------------------
-            let xiaosanyuan = false, dasanyuan = false, xiaosixi = false, dasixi = false;
-            for (let i = 0; i < 3; i++)
-                if (type_cnt[5 + i + 'z'][7] === 1 && kezi[5 + (i + 1) % 3 + 'z'] >= 1 && kezi[5 + (i + 2) % 3 + 'z'] >= 1)
-                    xiaosanyuan = true;
-            if (kezi['5z'] >= 1 && kezi['6z'] >= 1 && kezi['7z'] >= 1)
-                dasanyuan = true;
-            for (let i = 0; i < 4; i++)
-                if (type_cnt[1 + i + 'z'][7] === 1 && kezi[1 + (i + 1) % 4 + 'z'] >= 1 && kezi[1 + (i + 2) % 4 + 'z'] >= 1 && kezi[1 + (i + 3) % 4 + 'z'] >= 1)
-                    xiaosixi = true;
-            if (kezi['1z'] >= 1 && kezi['2z'] >= 1 && kezi['3z'] >= 1 && kezi['4z'] >= 1)
-                dasixi = true;
             // -------------------------------------
             // 四种dora: 表dora, 红dora, 拔北dora, 里dora
-            let all_doras = [0, 0, 0, 0];
+            const all_doras = [0, 0, 0, 0];
             // 先把拔北给算上, 然后减去
             for (const f of fulu[seat])
                 if (f.type === 4) {
@@ -2923,6 +2823,7 @@ var MRE = (function (exports) {
                 if (f.type === 4)
                     cnt2[simplify(f.tile[0])]--;
             // 幻境传说: 庄家卡5
+            // 正是存在这个, 所以 dora 的计算不能放到后面, 因为算完有役满之后就 return 了, 而算不到 dora_bonus
             if (get_field_spell_mode(1) === 5 && seat === base_info.ju && !zimo)
                 ans.dora_bonus = all_doras[0] + all_doras[1] + all_doras[3];
             // ------------------------------------
@@ -2958,56 +2859,7 @@ var MRE = (function (exports) {
                         ans.fans.push({ val: !is_qingtianjing() ? 1 : 13, id: 36 }); // 地和
                 else if (is_guyi() || is_yifanjieguyi())
                     ans.fans.push({ val: !is_qingtianjing() ? 1 : 13, id: 59 }); // 人和
-            if (dasanyuan) {
-                if (!is_xuezhandaodi() && !is_wanxiangxiuluo() && !no_normalbaopai()) {
-                    let fulu_sanyuan = 0;
-                    for (const f of fulu[seat]) {
-                        const type = f.type;
-                        if ((type === 1 || type === 2 || type === 3) && Constants.DRAGON_TILE.includes(simplify(f.tile[0]))) {
-                            fulu_sanyuan++;
-                            if (fulu_sanyuan === 3 && f.from !== undefined)
-                                baopai[seat].push({ seat: f.from, val: 1 });
-                        }
-                    }
-                }
-                ans.fans.push({ val: !is_qingtianjing() ? 1 : 13, id: 37 }); // 大三元
-            }
-            if (menqing && anke_num === 4 && (type_cnt[simplify(lastile)][7] === 1 || tianhu)) {
-                const tmp = { val: !is_qingtianjing() ? 2 : 26, id: 48 }; // 四暗刻单骑
-                if (no_wyakuman())
-                    tmp.val /= 2;
-                ans.fans.push(tmp);
-            }
-            else if (menqing && anke_num === 4 && anke[simplify(lastile)] - gangzi[simplify(lastile)] >= 1 && !tianhu)
-                ans.fans.push({ val: !is_qingtianjing() ? 1 : 13, id: 38 }); // 四暗刻
-            if (flag_ziyise)
-                ans.fans.push({ val: !is_qingtianjing() ? 1 : 13, id: 39 }); // 字一色
-            if (flag_lvyise)
-                ans.fans.push({ val: !is_qingtianjing() ? 1 : 13, id: 40 }); // 绿一色
-            if (flag_qinglaotou)
-                ans.fans.push({ val: !is_qingtianjing() ? 1 : 13, id: 41 }); // 清老头
-            if (xiaosixi && (!dasixi || is_sixifuhe()))
-                ans.fans.push({ val: !is_qingtianjing() ? 1 : 13, id: 43 }); // 小四喜
-            if (gangzi_num === 4) {
-                if (!is_xuezhandaodi() && !is_wanxiangxiuluo() && is_sigangbaopai() && sigang_bao[seat]) {
-                    let fulu_gangzi = 0;
-                    for (const f of fulu[seat])
-                        if (f.type === 2 || f.type === 3) {
-                            fulu_gangzi++;
-                            if (fulu_gangzi === 4 && f.from !== undefined)
-                                baopai[seat].push({ seat: f.from, val: 1 });
-                        }
-                }
-                ans.fans.push({ val: !is_qingtianjing() ? 1 : 13, id: 44 }); // 四杠子
-            }
-            if (menqing && jiulian[0] && (isEqualTile(lastile, jiulian[1]) || tianhu)) {
-                const tmp = { val: !is_qingtianjing() ? 2 : 26, id: 47 }; // 纯正九莲宝灯
-                if (no_wyakuman())
-                    tmp.val /= 2;
-                ans.fans.push(tmp);
-            }
-            if (menqing && jiulian[0] && !isEqualTile(lastile, jiulian[1]) && !tianhu)
-                ans.fans.push({ val: !is_qingtianjing() ? 1 : 13, id: 45 }); // 九莲宝灯
+            const dasixi = kezi['1z'] >= 1 && kezi['2z'] >= 1 && kezi['3z'] >= 1 && kezi['4z'] >= 1;
             if (dasixi) {
                 if (!is_xuezhandaodi() && !is_wanxiangxiuluo() && !no_normalbaopai()) {
                     let fulu_sixi = 0;
@@ -3025,17 +2877,82 @@ var MRE = (function (exports) {
                     tmp.val /= 2;
                 ans.fans.push(tmp);
             }
-            let wangpai_num = 14;
-            if (base_info.player_cnt === 2)
-                wangpai_num = 18;
+            // jiulian[0] 用于判断是否为九莲, jiulian[1] 表示多出来的一张牌
+            const jiulian = [false];
+            const jlbd = [0, 3, 1, 1, 1, 1, 1, 1, 1, 3];
+            for (let k = 0; k < 3; k++) {
+                jiulian[0] = true;
+                for (let i = 1; i <= 9; i++)
+                    if (cnt2[i + group[k]] < jlbd[i]) // 手牌中各种牌数量不满足
+                        jiulian[0] = false;
+                    else if (cnt2[i + group[k]] > jlbd[i]) // 多出来的牌
+                        jiulian[1] = i + group[k];
+                if (jiulian[0])
+                    break;
+            }
+            if (gangzi_num >= 1) // 九莲不允许有杠子
+                jiulian[0] = false;
+            if (menqing && jiulian[0] && (isEqualTile(lastile, jiulian[1]) || tianhu)) {
+                const tmp = { val: !is_qingtianjing() ? 2 : 26, id: 47 }; // 纯正九莲宝灯
+                if (no_wyakuman())
+                    tmp.val /= 2;
+                ans.fans.push(tmp);
+            }
+            if (menqing && anke_num === 4 && (type_cnt[simplify(lastile)][7] === 1 || tianhu)) {
+                const tmp = { val: !is_qingtianjing() ? 2 : 26, id: 48 }; // 四暗刻单骑
+                if (no_wyakuman())
+                    tmp.val /= 2;
+                ans.fans.push(tmp);
+            }
+            else if (menqing && anke_num === 4 && anke[simplify(lastile)] - gangzi[simplify(lastile)] >= 1 && !tianhu)
+                ans.fans.push({ val: !is_qingtianjing() ? 1 : 13, id: 38 }); // 四暗刻
+            if (kezi['5z'] >= 1 && kezi['6z'] >= 1 && kezi['7z'] >= 1) {
+                if (!is_xuezhandaodi() && !is_wanxiangxiuluo() && !no_normalbaopai()) {
+                    let fulu_sanyuan = 0;
+                    for (const f of fulu[seat]) {
+                        const type = f.type;
+                        if ((type === 1 || type === 2 || type === 3) && Constants.DRAGON_TILE.includes(simplify(f.tile[0]))) {
+                            fulu_sanyuan++;
+                            if (fulu_sanyuan === 3 && f.from !== undefined)
+                                baopai[seat].push({ seat: f.from, val: 1 });
+                        }
+                    }
+                }
+                ans.fans.push({ val: !is_qingtianjing() ? 1 : 13, id: 37 }); // 大三元
+            }
+            if (ziyise)
+                ans.fans.push({ val: !is_qingtianjing() ? 1 : 13, id: 39 }); // 字一色
+            if (lvyise)
+                ans.fans.push({ val: !is_qingtianjing() ? 1 : 13, id: 40 }); // 绿一色
+            if (qinglaotou)
+                ans.fans.push({ val: !is_qingtianjing() ? 1 : 13, id: 41 }); // 清老头
+            let xiaosixi = false;
+            for (let i = 0; i < 4; i++)
+                if (type_cnt[1 + i + 'z'][7] === 1 && kezi[1 + (i + 1) % 4 + 'z'] >= 1 && kezi[1 + (i + 2) % 4 + 'z'] >= 1 && kezi[1 + (i + 3) % 4 + 'z'] >= 1)
+                    xiaosixi = true;
+            if (xiaosixi && (!dasixi || is_sixifuhe()))
+                ans.fans.push({ val: !is_qingtianjing() ? 1 : 13, id: 43 }); // 小四喜
+            if (gangzi_num === 4) {
+                if (!is_xuezhandaodi() && !is_wanxiangxiuluo() && is_sigangbaopai() && sigang_bao[seat]) {
+                    let fulu_gangzi = 0;
+                    for (const f of fulu[seat])
+                        if (f.type === 2 || f.type === 3) {
+                            fulu_gangzi++;
+                            if (fulu_gangzi === 4 && f.from !== undefined)
+                                baopai[seat].push({ seat: f.from, val: 1 });
+                        }
+                }
+                ans.fans.push({ val: !is_qingtianjing() ? 1 : 13, id: 44 }); // 四杠子
+            }
+            if (menqing && jiulian[0] && !isEqualTile(lastile, jiulian[1]) && !tianhu)
+                ans.fans.push({ val: !is_qingtianjing() ? 1 : 13, id: 45 }); // 九莲宝灯
+            const wangpai_num = base_info.player_cnt === 2 ? 18 : 14;
             if (is_guyi() || is_yifanjieguyi()) {
                 for (let j = 0; j < 3; j++) {
                     let flag = true;
                     for (let i = 2; i <= 8; i++)
-                        if (cnt2[i + group[j]] !== 2) {
+                        if (cnt2[i + group[j]] !== 2)
                             flag = false;
-                            break;
-                        }
                     if (flag) {
                         if (j === 0)
                             ans.fans.push({ val: !is_qingtianjing() ? 1 : 13, id: 62 }); // 大数邻
@@ -3049,7 +2966,7 @@ var MRE = (function (exports) {
                 if (liqi_info[seat].liqi === 2)
                     if (zimo && paishan.length === wangpai_num && base_info.lst_draw_type === 1 || !zimo && paishan.length === wangpai_num)
                         ans.fans.push({ val: !is_qingtianjing() ? 1 : 13, id: 63 }); // 石上三年
-                if (flag_ziyise && duizi_num === 7 && !no_wyakuman()) {
+                if (ziyise && duizi_num === 7 && !no_wyakuman()) {
                     deleteFan(39); // 删除字一色
                     const tmp = { val: !is_qingtianjing() ? 2 : 26, id: 64 }; // 大七星
                     if (no_wyakuman())
@@ -3072,17 +2989,8 @@ var MRE = (function (exports) {
                     ans.fans.push({ val: !is_qingtianjing() ? 1 : 13, id: 9703 }); // 四连刻
                 if (sitongshun)
                     ans.fans.push({ val: !is_qingtianjing() ? 1 : 13, id: 9704 }); // 一色四同顺
-                let hongkongque = true, hongyidian = true, heiyise = true;
                 if (cnt2['7z'] === 0)
                     hongkongque = hongyidian = false;
-                for (const tile of Constants.TILE_NO_AKA) {
-                    if (!judgeTile(tile, 'hongkongque') && cnt2[tile] >= 1)
-                        hongkongque = false;
-                    if (!judgeTile(tile, 'hongyidian') && cnt2[tile] >= 1)
-                        hongyidian = false;
-                    if (!judgeTile(tile, 'heiyise') && cnt2[tile] >= 1)
-                        heiyise = false;
-                }
                 if (hongkongque)
                     ans.fans.push({ val: !is_qingtianjing() ? 1 : 13, id: 9705 }); // 红孔雀
                 if (hongyidian)
@@ -3099,7 +3007,7 @@ var MRE = (function (exports) {
                         ans.fans.push({ val: !is_qingtianjing() ? 1 : 13, id: 9709 }); // 百万石
                 }
                 let jinmenqiao = false;
-                for (let i = 0; i <= 2; i++)
+                for (let i = 0; i < 3; i++)
                     if (shunzi[2 + group[i]] >= 1 && shunzi[4 + group[i]] >= 1 && shunzi[6 + group[i]] >= 1 && shunzi[8 + group[i]] >= 1)
                         jinmenqiao = true;
                 if (menqing && jinmenqiao)
@@ -3117,7 +3025,7 @@ var MRE = (function (exports) {
                     xinganxian_part2 = true;
                 if (menqing && xinganxian_part1 && xinganxian_part2)
                     ans.fans.push({ val: !is_qingtianjing() ? 1 : 13, id: 9711 }); // 东北新干线
-                if (flag_lvyise && cnt2['6z'] === 0) {
+                if (lvyise && cnt2['6z'] === 0) {
                     deleteFan(40);
                     ans.fans.push({ val: !is_qingtianjing() ? 2 : 26, id: 9712 }); // 无发绿一色
                 }
@@ -3131,10 +3039,13 @@ var MRE = (function (exports) {
             if (ans.fans.length > 0 && !is_qingtianjing())
                 return ans;
             // ------------------------------------
+            // ------------------------------------
+            // ------------------------------------
             ans.yiman = false;
             if (liqi_info[seat].yifa !== 0 && liqi_info[seat].liqi === 0 && seat !== base_info.ju && !zimo)
-                if (is_renhumanguan())
+                if (is_renhumanguan() && !is_guyi() && !is_yifanjieguyi())
                     ans.fans.push({ val: 5, id: 65 }); // 人和2
+            // ------------------------------------
             if (is_hunzhiyiji()) {
                 if (hunzhiyiji_info[seat].liqi === 1)
                     ans.fans.push({ val: 2, id: 804 }); // 立直
@@ -3189,18 +3100,6 @@ var MRE = (function (exports) {
                         ans.fans.push({ val: 1, id: 30 }); // 一发
                 }
             }
-            const lst_name = getLstAction().name;
-            if (is_guyi() || is_yifanjieguyi()) {
-                if (lst_name === 'RecordDiscardTile' && getLstAction().data.is_liqi)
-                    ans.fans.push({ val: 1, id: 51 }); // 燕返
-                if (!zimo && base_info.lst_draw_type === 0 && lst_name === 'RecordDiscardTile')
-                    if (getLstAction(3) !== undefined && (getLstAction(3).name === 'RecordAnGangAddGang' || getLstAction(3).name === 'RecordChiPengGang'))
-                        ans.fans.push({ val: 1, id: 52 }); // 杠振
-                if (fulu_cnt === 4)
-                    ans.fans.push({ val: 1, id: 53 }); // 十二落抬
-            }
-            if (menqing && zimo)
-                ans.fans.push({ val: 1, id: 1 }); // 门前清自摸和
             if (lst_name === 'RecordAnGangAddGang')
                 ans.fans.push({ val: 1, id: 3 }); // 枪杠
             if (zimo && base_info.lst_draw_type === 0)
@@ -3209,6 +3108,102 @@ var MRE = (function (exports) {
                 ans.fans.push({ val: 1, id: 5 }); // 海底摸月
             if (!zimo && paishan.length === wangpai_num)
                 ans.fans.push({ val: 1, id: 6 }); // 河底捞鱼
+            if (menqing && zimo)
+                ans.fans.push({ val: 1, id: 1 }); // 门前清自摸和
+            // ------------------------------------
+            const hunyise = hunyise_man || hunyise_pin || hunyise_sou;
+            const qingyise = qingyise_man || qingyise_pin || qingyise_sou;
+            if (qingyise)
+                ans.fans.push({ val: menqing ? 6 : 5, id: 29 }); // 清一色
+            // ------------------------------------
+            // 3 番
+            if (beikou === 2 && menqing)
+                ans.fans.push({ val: 3, id: 28 }); // 二杯口
+            let chunquandai = true, hunquandai = true;
+            for (let j = 0; j < 3; j++)
+                for (let i = 1; i <= 9; i++) {
+                    // 从顺子和(刻子, 雀头)的角度判断是否有全带, 先顺子后(刻子, 雀头)
+                    if (i > 2 && i < 8 && shunzi[i + group[j]] >= 1)
+                        chunquandai = hunquandai = false;
+                    if (i > 1 && i < 9 && kezi[i + group[j]] + type_cnt[i + group[j]][7] >= 1)
+                        chunquandai = hunquandai = false;
+                }
+            for (let i = 1; i <= 7; i++)
+                if (kezi[i + 'z'] + type_cnt[i + 'z'][7] >= 1)
+                    chunquandai = false;
+            if (chunquandai)
+                ans.fans.push({ val: menqing ? 3 : 2, id: 26 }); // 纯全带幺九
+            if (hunyise && !qingyise)
+                ans.fans.push({ val: menqing ? 3 : 2, id: 27 }); // 混一色
+            // ------------------------------------
+            // 2 番
+            if (duizi_num === 7)
+                ans.fans.push({ val: 2, id: 25 }); // 七对子
+            if (hunquandai && !chunquandai && !hunlaotou)
+                ans.fans.push({ val: menqing ? 2 : 1, id: 15 }); // 混全带幺九
+            let yiqi = false;
+            for (let i = 0; i < 3; i++)
+                if (shunzi['2' + group[i]] >= 1 && shunzi['5' + group[i]] >= 1 && shunzi['8' + group[i]] >= 1)
+                    yiqi = true;
+            if (yiqi)
+                ans.fans.push({ val: menqing ? 2 : 1, id: 16 }); // 一气通贯
+            let sanse = false, sansetongke = false;
+            for (let i = 1; i <= 9; i++) {
+                if (i > 1 && i < 9 && shunzi[i + 'm'] >= 1 && shunzi[i + 'p'] >= 1 && shunzi[i + 's'] >= 1)
+                    sanse = true;
+                if (kezi[i + 'm'] >= 1 && kezi[i + 'p'] >= 1 && kezi[i + 's'] >= 1)
+                    sansetongke = true;
+            }
+            if (sanse)
+                ans.fans.push({ val: menqing ? 2 : 1, id: 17 }); // 三色同顺
+            if (sansetongke)
+                ans.fans.push({ val: 2, id: 19 }); // 三色同刻
+            if (gangzi_num === 3)
+                ans.fans.push({ val: 2, id: 20 }); // 三杠子
+            if (kezi_num === 4)
+                ans.fans.push({ val: 2, id: 21 }); // 对对和
+            if (anke_num === 3)
+                ans.fans.push({ val: 2, id: 22 }); // 三暗刻
+            let xiaosanyuan = false;
+            for (let i = 0; i < 3; i++)
+                if (type_cnt[5 + i + 'z'][7] === 1 && kezi[5 + (i + 1) % 3 + 'z'] >= 1 && kezi[5 + (i + 2) % 3 + 'z'] >= 1)
+                    xiaosanyuan = true;
+            if (xiaosanyuan)
+                ans.fans.push({ val: 2, id: 23 }); // 小三元
+            if (hunlaotou && !qinglaotou)
+                ans.fans.push({ val: 2, id: 24 }); // 混老头
+            // ------------------------------------
+            // 1 番
+            let pinghu = true;
+            if (duizi_num === 7)
+                pinghu = false;
+            for (const tile of Constants.TILE_NO_AKA) {
+                if (kezi[tile] >= 1) // 有刻子
+                    pinghu = false;
+                if (type_cnt[tile][7] === 1) {
+                    // 雀头是自风, 场风, 三元
+                    if (((seat - base_info.ju + base_info.player_cnt) % base_info.player_cnt + 1) + 'z' === tile)
+                        pinghu = false;
+                    if ((base_info.chang + 1) + 'z' === tile)
+                        pinghu = false;
+                    if (Constants.DRAGON_TILE.includes(tile))
+                        pinghu = false;
+                }
+            }
+            // 顺子两面听判断
+            let flag_liangmian = false;
+            if (parseInt(simplify(lastile)) >= 4 && parseInt(simplify(lastile)) <= 9) // 数牌4-9
+                if (shunzi[parseInt(simplify(lastile)) - 1 + lastile[1]] >= 1) // 顺子的中心比 lastile 小 1
+                    flag_liangmian = true;
+            if (parseInt(simplify(lastile)) >= 1 && parseInt(simplify(lastile)) <= 6) // 数牌1-6
+                if (shunzi[parseInt(simplify(lastile)) + 1 + lastile[1]] >= 1) // 顺子的中心比 lastile 大 1
+                    flag_liangmian = true;
+            if (!flag_liangmian)
+                pinghu = false;
+            if (pinghu && menqing)
+                ans.fans.push({ val: 1, id: 14 }); // 平和
+            if (beikou === 1 && menqing)
+                ans.fans.push({ val: 1, id: 13 }); // 一杯口
             if (kezi['5z'] >= 1)
                 ans.fans.push({ val: kezi['5z'], id: 7 }); // 白
             if (kezi['6z'] >= 1)
@@ -3222,49 +3217,44 @@ var MRE = (function (exports) {
                 }); // 自风
             if (kezi[base_info.chang + 1 + 'z'] >= 1)
                 ans.fans.push({ val: kezi[base_info.chang + 1 + 'z'], id: 11 }); // 场风
-            if (flag_duanyao && (!no_shiduan() || no_shiduan() && menqing))
+            if (duanyao && (!no_shiduan() || no_shiduan() && menqing))
                 // 幻境传说: 机会卡4
                 ans.fans.push({ val: get_field_spell_mode(2) === 4 ? 3 : 1, id: 12 }); // 断幺九
-            if (beikou === 1 && menqing)
-                ans.fans.push({ val: 1, id: 13 }); // 一杯口
-            if (pinghu && menqing)
-                ans.fans.push({ val: 1, id: 14 }); // 平和
-            if (hunquandai && !chunquandai && !flag_hunlaotou)
-                ans.fans.push({ val: menqing ? 2 : 1, id: 15 }); // 混全带幺九
-            if (yiqi)
-                ans.fans.push({ val: menqing ? 2 : 1, id: 16 }); // 一气通贯
-            if (sanse)
-                ans.fans.push({ val: menqing ? 2 : 1, id: 17 }); // 三色同顺
-            if (sansetongke)
-                ans.fans.push({ val: 2, id: 19 }); // 三色同刻
-            if (gangzi_num === 3)
-                ans.fans.push({ val: 2, id: 20 }); // 三杠子
-            if (kezi_num === 4)
-                ans.fans.push({ val: 2, id: 21 }); // 对对和
-            if (anke_num === 3)
-                ans.fans.push({ val: 2, id: 22 }); // 三暗刻
-            if (xiaosanyuan)
-                ans.fans.push({ val: 2, id: 23 }); // 小三元
-            if (flag_hunlaotou && !flag_qinglaotou)
-                ans.fans.push({ val: 2, id: 24 }); // 混老头
-            if (duizi_num === 7)
-                ans.fans.push({ val: 2, id: 25 }); // 七对子
+            // ------------------------------------
+            if (is_guyi() || is_yifanjieguyi()) {
+                if (lst_name === 'RecordDiscardTile' && getLstAction().data.is_liqi)
+                    ans.fans.push({ val: 1, id: 51 }); // 燕返
+                if (!zimo && base_info.lst_draw_type === 0 && lst_name === 'RecordDiscardTile')
+                    if (getLstAction(3) !== undefined && (getLstAction(3).name === 'RecordAnGangAddGang' || getLstAction(3).name === 'RecordChiPengGang'))
+                        ans.fans.push({ val: 1, id: 52 }); // 杠振
+                if (fulu_cnt === 4)
+                    ans.fans.push({ val: 1, id: 53 }); // 十二落抬
+            }
+            let wumenqi = true;
+            const wumen_lows = ['1m', '1p', '1s', '1z', '5z'], wumen_highs = ['9m', '9p', '9s', '4z', '7z'];
+            for (let i = 0; i < 5; i++) {
+                let flag = false;
+                for (let j = parseInt(wumen_lows[i]); j <= parseInt(wumen_highs[i]); j++)
+                    flag || (flag = cnt2[j + wumen_lows[i][1]] > 0);
+                if (!flag)
+                    wumenqi = false;
+            }
             if ((is_guyi() || is_yifanjieguyi()) && wumenqi)
                 ans.fans.push({ val: 2, id: 54 }); // 五门齐
+            let santongshun = false, sanlianke = false;
+            for (const tile of Constants.TILE_NO_AKA) {
+                if (!judgeTile(tile, 'H'))
+                    if (kezi[parseInt(tile) - 1 + tile[1]] >= 1 && kezi[tile] >= 1 && kezi[parseInt(tile) + 1 + tile[1]] >= 1)
+                        sanlianke = true;
+                if (Math.floor(shunzi[tile] / 3) >= 1)
+                    santongshun = true;
+            }
             if ((is_guyi() || is_yifanjieguyi()) && sanlianke)
                 ans.fans.push({ val: 2, id: 55 }); // 三连刻
-            if (chunquandai)
-                ans.fans.push({ val: menqing ? 3 : 2, id: 26 }); // 纯全带幺九
-            if (hunyise && !qingyise)
-                ans.fans.push({ val: menqing ? 3 : 2, id: 27 }); // 混一色
             if ((is_guyi() || is_yifanjieguyi()) && santongshun) {
                 deleteFan(13); // 删除一杯口
                 ans.fans.push({ val: menqing ? 3 : 2, id: 56 }); // 一色三同顺
             }
-            if (beikou === 2 && menqing)
-                ans.fans.push({ val: 3, id: 28 }); // 二杯口
-            if (qingyise)
-                ans.fans.push({ val: menqing ? 6 : 5, id: 29 }); // 清一色
             if (is_guyi()) {
                 if (zimo && paishan.length === wangpai_num && base_info.lst_draw_type === 1 && simplify(lastile) === '1p') {
                     deleteFan(5); // 删除海底摸月
@@ -3276,12 +3266,6 @@ var MRE = (function (exports) {
                 }
             }
             if (is_yifanjieguyi()) {
-                let tuibudao = true;
-                for (const tile of Constants.TILE_NO_AKA)
-                    if (!judgeTile(tile, 'tuibudao') && cnt2[tile] >= 1) {
-                        tuibudao = false;
-                        break;
-                    }
                 let have_0m = false, have_0p = false, have_0s = false;
                 for (const tile of tiles) {
                     if (tile.substring(0, 2) === '0m')
@@ -3300,7 +3284,7 @@ var MRE = (function (exports) {
                         if (tile.substring(0, 2) === '0s')
                             have_0s = true;
                     }
-                let chisanse = have_0m && have_0p && have_0s;
+                const chisanse = have_0m && have_0p && have_0s;
                 let sansetongguan = false;
                 for (let i = 0; i < 3; i++)
                     for (let j = (i + 1) % 3; j !== i; j = (j + 1) % 3) {
@@ -3328,10 +3312,8 @@ var MRE = (function (exports) {
             if (all_doras[2] > 0)
                 ans.fans.push({ val: all_doras[2], id: 34 }); // 北宝牌
             if (liqi_info[seat].liqi !== 0) {
-                let times = 1;
                 // 幻境传说: 机会卡1
-                if (get_field_spell_mode(2) === 1)
-                    times = 2;
+                const times = get_field_spell_mode(2) === 1 ? 2 : 1;
                 ans.fans.push({ val: all_doras[3] * times, id: 33 }); // 里宝牌
             }
             if (is_hunzhiyiji())
@@ -3382,6 +3364,8 @@ var MRE = (function (exports) {
         }
         const lastile = tiles[tiles.length - 1];
         const ret = { fans: [], fu: 0 };
+        // cnt 不含副露, 不含红包牌和拔北宝牌
+        // cnt2 包含副露, 不含红包牌和拔北宝牌
         const cnt = {}, cnt2 = {};
         for (const tile of Constants.TILE)
             cnt[tile] = cnt2[tile] = 0;
@@ -3471,22 +3455,20 @@ var MRE = (function (exports) {
                         quandai = false;
                 }
             // --------------------------
-            let qingyise;
             let qingyise_man = true, qingyise_pin = true, qingyise_sou = true;
-            for (const tile of Constants.TILE_NO_AKA) {
-                if (tile[1] !== 'm' && cnt2[tile] > 0)
-                    qingyise_man = false;
-                if (tile[1] !== 'p' && cnt2[tile] > 0)
-                    qingyise_pin = false;
-                if (tile[1] !== 's' && cnt2[tile] > 0)
-                    qingyise_sou = false;
-            }
-            qingyise = qingyise_man || qingyise_pin || qingyise_sou;
-            // ---------------------------
             let jiangdui = true;
             for (const tile of Constants.TILE_NO_AKA)
-                if (!judgeTile(tile, 'jiangdui') && cnt2[tile] > 0)
-                    jiangdui = false;
+                if (cnt2[tile] > 0) {
+                    if (tile[1] !== 'm')
+                        qingyise_man = false;
+                    if (tile[1] !== 'p')
+                        qingyise_pin = false;
+                    if (tile[1] !== 's')
+                        qingyise_sou = false;
+                    if (!judgeTile(tile, 'jiangdui'))
+                        jiangdui = false;
+                }
+            const qingyise = qingyise_man || qingyise_pin || qingyise_sou;
             // ---------------------------
             ans.fans[1000] = 0;
             ans.fans[1003] = 1;
@@ -3585,6 +3567,8 @@ var MRE = (function (exports) {
         const tiles = player_tiles[seat];
         const lastile = tiles[tiles.length - 1];
         const ret = { fans: [], fu: 0 };
+        // cnt 不含副露, 不含红包牌和拔北宝牌
+        // cnt2 包含副露, 不含红包牌和拔北宝牌
         const cnt = {}, cnt2 = {};
         for (const tile of Constants.TILE)
             cnt[tile] = cnt2[tile] = 0;
@@ -3611,10 +3595,7 @@ var MRE = (function (exports) {
             updateRet(ans);
         }
         if (result === 4 || result === 5) { // 一定是全不靠或七星不靠
-            let qixingbukao = true;
-            for (const tile of Constants.HONOR_TILE)
-                if (cnt[tile] === 0)
-                    qixingbukao = false;
+            const qixingbukao = Constants.HONOR_TILE.every(tile => cnt[tile] > 0);
             const ans = { fans: [], fu: 25 };
             if (qixingbukao)
                 ans.fans.push({ val: 24, id: 8019 }); // 七星不靠
@@ -3715,7 +3696,7 @@ var MRE = (function (exports) {
                 if (type === 0 || type === 5)
                     type_cnt[shunziMidTile(p.tile)][type]++;
             }
-            let beikou = 0, santongshun = false;
+            let beikou = 0;
             for (const tile of Constants.TILE_NO_AKA) {
                 anke_num += anke[tile];
                 gangzi_num += gangzi[tile];
@@ -3725,127 +3706,61 @@ var MRE = (function (exports) {
                 angang_num += type_cnt[tile][3];
                 // 这里的杯口数量算上副露的, 最后在判断是否有效
                 beikou += Math.floor(shunzi[tile] / 2);
-                if (shunzi[tile] === 3)
-                    santongshun = true;
             }
             const group = Constants.GROUP;
             // --------------------------
             // --------------------------
             // --------------------------
-            let flag_ziyise = true, flag_lvyise = true, flag_qinglaotou = true, flag_duanyao = true, flag_hunlaotou = true;
-            for (const tile of Constants.TILE_NO_AKA)
-                if (cnt2[tile] > 0) {
-                    if (!Constants.HONOR_TILE.includes(tile))
-                        flag_ziyise = false; // 字一色
-                    if (!Constants.TERMINAL_TILE.includes(tile))
-                        flag_qinglaotou = false; // 清老头
-                    if (Constants.YAOJIU_TILE.includes(tile))
-                        flag_duanyao = false; // 断幺九
-                    if (!Constants.YAOJIU_TILE.includes(tile))
-                        flag_hunlaotou = false; // 混老头
-                    if (!judgeTile(tile, 'L'))
-                        flag_lvyise = false; // 绿一色
-                }
-            // ---------------------------------
-            let wumenqi = true;
-            for (let i = 0; i < 5; i++) {
-                const wumen_lows = ['1m', '1p', '1s', '1z', '5z'], wumen_highs = ['9m', '9p', '9s', '4z', '7z'];
-                let flag = false;
-                for (let j = parseInt(wumen_lows[i]); j <= parseInt(wumen_highs[i]); j++)
-                    flag || (flag = cnt2[j + wumen_lows[i][1]] > 0);
-                if (!flag)
-                    wumenqi = false;
-            }
-            // ---------------------------------
-            let jiulian = false, yiqi = false, hunyise, qingyise;
-            const jlbd = [0, 3, 1, 1, 1, 1, 1, 1, 1, 3];
-            for (let k = 0; k < 3; k++) {
-                if (shunzi['2' + group[k]] >= 1 && shunzi['5' + group[k]] >= 1 && shunzi['8' + group[k]] >= 1)
-                    yiqi = true;
-                jiulian = true;
-                for (let i = 1; i <= 9; i++)
-                    if (cnt2[i + group[k]] < jlbd[i]) // 手牌中各种牌数量不满足
-                        jiulian = false;
-                    else if (cnt2[i + group[k]] > jlbd[i] && simplify(lastile) !== i + group[k]) // 多出来的牌不是 lastile
-                        jiulian = false;
-                if (jiulian)
-                    break;
-            }
-            if (gangzi_num >= 1) // 九莲不允许有杠子
-                jiulian = false;
-            // --------------------------
+            let ziyise = true, lvyise = true, qinglaotou = true, duanyao = true, hunlaotou = true;
             let hunyise_man = true, hunyise_pin = true, hunyise_sou = true;
             let qingyise_man = true, qingyise_pin = true, qingyise_sou = true;
-            for (const tile of Constants.TILE_NO_AKA) {
-                if (tile[1] !== 'm' && cnt2[tile] > 0) {
-                    if (tile[1] !== 'z')
-                        hunyise_man = false;
-                    qingyise_man = false;
-                }
-                if (tile[1] !== 'p' && cnt2[tile] > 0) {
-                    if (tile[1] !== 'z')
-                        hunyise_pin = false;
-                    qingyise_pin = false;
-                }
-                if (tile[1] !== 's' && cnt2[tile] > 0) {
-                    if (tile[1] !== 'z')
-                        hunyise_sou = false;
-                    qingyise_sou = false;
-                }
-            }
-            hunyise = hunyise_man || hunyise_pin || hunyise_sou;
-            qingyise = qingyise_man || qingyise_pin || qingyise_sou;
-            // --------------------------
-            let santongke = false, shuangtongke = false;
-            for (let i = 1; i <= 9; i++) {
-                if (kezi[i + 'm'] >= 1 && kezi[i + 'p'] >= 1 && kezi[i + 's'] >= 1)
-                    santongke = true;
-                else if (kezi[i + 'm'] >= 1 && kezi[i + 'p'] >= 1 || kezi[i + 'm'] >= 1 && kezi[i + 's'] >= 1 || kezi[i + 'p'] >= 1 && kezi[i + 's'] >= 1)
-                    shuangtongke = true;
-            }
-            // --------------------------
-            let xiaosanyuan = false, dasanyuan = false, xiaosixi = false, dasixi = false;
-            for (let i = 0; i < 3; i++)
-                if (type_cnt[5 + i + 'z'][7] === 1 && kezi[5 + (i + 1) % 3 + 'z'] >= 1 && kezi[5 + (i + 2) % 3 + 'z'] >= 1)
-                    xiaosanyuan = true;
-            if (kezi['5z'] >= 1 && kezi['6z'] >= 1 && kezi['7z'] >= 1)
-                dasanyuan = true;
-            for (let i = 0; i < 4; i++)
-                if (type_cnt[1 + i + 'z'][7] === 1 && kezi[1 + (i + 1) % 4 + 'z'] >= 1 && kezi[1 + (i + 2) % 4 + 'z'] >= 1 && kezi[1 + (i + 3) % 4 + 'z'] >= 1)
-                    xiaosixi = true;
-            if (kezi['1z'] >= 1 && kezi['2z'] >= 1 && kezi['3z'] >= 1 && kezi['4z'] >= 1)
-                dasixi = true;
-            // --------------------------
-            let hunquandai = true;
-            for (let j = 0; j < 3; j++)
-                for (let i = 1; i <= 9; i++) {
-                    // 从顺子和(刻子, 雀头)的角度判断是否有全带, 先顺子后(刻子, 雀头)
-                    if (i > 2 && i < 8 && shunzi[i + group[j]] >= 1)
-                        hunquandai = false;
-                    if (i > 1 && i < 9 && kezi[i + group[j]] + type_cnt[i + group[j]][7] >= 1)
-                        hunquandai = false;
-                }
-            // --------------------------
-            let pinghu = true;
-            if (duizi_num === 7)
-                pinghu = false;
+            let tuibudao = true, quanshuangke = true, dayuwu = true, xiaoyuwu = true;
+            let quanda = true, quanzhong = true, quanxiao = true;
+            let wuzi = true;
             for (const tile of Constants.TILE_NO_AKA)
-                if (kezi[tile] >= 1 || Constants.HONOR_TILE.includes(tile) && type_cnt[tile][7] >= 1) { // 有刻子或雀头是字牌
-                    pinghu = false;
-                    break;
+                if (cnt2[tile] > 0) {
+                    if (!judgeTile(tile, 'H'))
+                        ziyise = false; // 字一色
+                    if (!judgeTile(tile, 'T'))
+                        qinglaotou = false; // 清幺九
+                    if (!judgeTile(tile, 'D'))
+                        duanyao = false; // 断幺
+                    if (!judgeTile(tile, 'Y'))
+                        hunlaotou = false; // 混幺九
+                    if (!judgeTile(tile, 'L'))
+                        lvyise = false; // 绿一色
+                    if (tile[1] !== 'm') {
+                        if (tile[1] !== 'z')
+                            hunyise_man = false;
+                        qingyise_man = false;
+                    }
+                    if (tile[1] !== 'p') {
+                        if (tile[1] !== 'z')
+                            hunyise_pin = false;
+                        qingyise_pin = false;
+                    }
+                    if (tile[1] !== 's') {
+                        if (tile[1] !== 'z')
+                            hunyise_sou = false;
+                        qingyise_sou = false;
+                    }
+                    if (!judgeTile(tile, 'tuibudao'))
+                        tuibudao = false;
+                    if (!judgeTile(tile, 'quanshuang'))
+                        quanshuangke = false;
+                    if (!judgeTile(tile, 'quanda'))
+                        quanda = false;
+                    if (!judgeTile(tile, 'quanzhong'))
+                        quanzhong = false;
+                    if (!judgeTile(tile, 'quanxiao'))
+                        quanxiao = false;
+                    if (!judgeTile(tile, 'dayuwu'))
+                        dayuwu = false;
+                    if (!judgeTile(tile, 'xiaoyuwu'))
+                        xiaoyuwu = false;
+                    if (judgeTile(tile, 'H'))
+                        wuzi = false;
                 }
-            // --------------------------
-            let sansetongshun = false, ersetongshun_num = 0;
-            for (let i = 2; i <= 8; i++) {
-                if (shunzi[i + 'm'] >= 1 && shunzi[i + 'p'] >= 1 && shunzi[i + 's'] >= 1)
-                    sansetongshun = true;
-                for (let j = 0; j < 3; j++)
-                    for (let k = j + 1; k < 3; k++)
-                        if (shunzi[i + group[j]] >= 1 && shunzi[i + group[k]] >= 1) {
-                            ersetongshun_num += shunzi[i + group[j]] >= 2 && shunzi[i + group[k]] >= 2 ? 2 : 1;
-                            break;
-                        }
-            }
             // ---------------------------
             // ---------------------------
             // ---------------------------
@@ -3887,23 +3802,39 @@ var MRE = (function (exports) {
             // --------------------------
             // --------------------------
             // 88 番, 十三幺不在 calc 函数中, 另算
+            const dasixi = kezi['1z'] >= 1 && kezi['2z'] >= 1 && kezi['3z'] >= 1 && kezi['4z'] >= 1;
             if (dasixi && !isBanned(8000)) {
                 ans.fans.push({ val: 88, id: 8000 }); // 大四喜
                 // 不计 三风刻, 碰碰和, 圈风刻, 门风刻, 幺九刻
                 banFan([8037, 8047, 8061, 8062, 8074]);
             }
+            const dasanyuan = kezi['5z'] >= 1 && kezi['6z'] >= 1 && kezi['7z'] >= 1;
             if (dasanyuan && !isBanned(8001)) {
                 ans.fans.push({ val: 88, id: 8001 }); // 大三元
                 // 不计 双箭刻, 箭刻, 组成大三元的三副刻子不计幺九刻
                 banFan([8053, 8058, 8059, 8060]);
                 ban_yaojiuke_num += 3;
             }
-            if (flag_lvyise && !isBanned(8002)) {
+            if (lvyise && !isBanned(8002)) {
                 ans.fans.push({ val: 88, id: 8002 }); // 绿一色
                 // 不计 混一色
                 banFan(8048);
             }
             // 国标中的九莲对标立直麻将中的纯九
+            let jiulian = false;
+            const jlbd = [0, 3, 1, 1, 1, 1, 1, 1, 1, 3];
+            for (let k = 0; k < 3; k++) {
+                jiulian = true;
+                for (let i = 1; i <= 9; i++)
+                    if (cnt2[i + group[k]] < jlbd[i]) // 手牌中各种牌数量不满足
+                        jiulian = false;
+                    else if (cnt2[i + group[k]] > jlbd[i] && simplify(lastile) !== i + group[k]) // 多出来的牌不是 lastile
+                        jiulian = false;
+                if (jiulian)
+                    break;
+            }
+            if (gangzi_num >= 1) // 九莲不允许有杠子
+                jiulian = false;
             if (jiulian && !isBanned(8003)) {
                 ans.fans.push({ val: 88, id: 8003 }); // 九莲宝灯
                 // 不计 清一色, 不求人, 门前清, 无字, 一个幺九刻
@@ -3916,7 +3847,7 @@ var MRE = (function (exports) {
                 banFan([8047, 8080]);
             }
             let lianqidui = false;
-            for (let i = 0; i <= 2; i++)
+            for (let i = 0; i < 3; i++)
                 if (type_cnt[3 + group[i]][7] >= 1 && type_cnt[4 + group[i]][7] >= 1 && type_cnt[5 + group[i]][7] >= 1 && type_cnt[6 + group[i]][7] >= 1 && type_cnt[7 + group[i]][7] >= 1) {
                     if (type_cnt[1 + group[i]][7] >= 1 && type_cnt[2 + group[i]][7] >= 1)
                         lianqidui = true;
@@ -3933,23 +3864,31 @@ var MRE = (function (exports) {
             }
             // ---------------------------
             // 64 番
-            if (flag_qinglaotou && !isBanned(8007)) {
+            if (qinglaotou && !isBanned(8007)) {
                 ans.fans.push({ val: 64, id: 8007 }); // 清幺九
                 // 不计 混幺九, 碰碰和, 全带幺, 双同刻, 幺九刻, 无字
                 banFan([8017, 8047, 8054, 8066, 8074, 8077]);
             }
+            let xiaosixi = false;
+            for (let i = 0; i < 4; i++)
+                if (type_cnt[1 + i + 'z'][7] === 1 && kezi[1 + (i + 1) % 4 + 'z'] >= 1 && kezi[1 + (i + 2) % 4 + 'z'] >= 1 && kezi[1 + (i + 3) % 4 + 'z'] >= 1)
+                    xiaosixi = true;
             if (xiaosixi && !isBanned(8008)) {
                 ans.fans.push({ val: 64, id: 8008 }); // 小四喜
                 // 不计 三风刻, 幺九刻
                 banFan([8037, 8074]);
             }
+            let xiaosanyuan = false;
+            for (let i = 0; i < 3; i++)
+                if (type_cnt[5 + i + 'z'][7] === 1 && kezi[5 + (i + 1) % 3 + 'z'] >= 1 && kezi[5 + (i + 2) % 3 + 'z'] >= 1)
+                    xiaosanyuan = true;
             if (xiaosanyuan && !isBanned(8009)) {
                 ans.fans.push({ val: 64, id: 8009 }); // 小三元
                 // 不计 箭刻, 双箭刻, 组成小三元的两副刻子不计幺九刻
                 banFan([8058, 8059, 8060, 8053]);
                 ban_yaojiuke_num += 2;
             }
-            if (flag_ziyise && !isBanned(8010)) {
+            if (ziyise && !isBanned(8010)) {
                 ans.fans.push({ val: 64, id: 8010 }); // 字一色
                 // 不计 混幺九, 碰碰和, 全带幺, 幺九刻
                 // 此外删除判断漏洞的混一色
@@ -3961,7 +3900,7 @@ var MRE = (function (exports) {
                 banFan([8047, 8055, 8063]);
             }
             let yiseshuanglonghui = false;
-            for (let i = 0; i <= 2; i++)
+            for (let i = 0; i < 3; i++)
                 if (shunzi[2 + group[i]] >= 2 && shunzi[8 + group[i]] >= 2 && type_cnt[5 + group[i]][7] >= 1)
                     yiseshuanglonghui = true;
             if (yiseshuanglonghui && !isBanned(8012)) {
@@ -3992,7 +3931,7 @@ var MRE = (function (exports) {
             // ---------------------------
             // 32 番
             let sibugao = false;
-            for (let i = 0; i <= 2; i++) {
+            for (let i = 0; i < 3; i++) {
                 for (let j = 2; j <= 5; j++)
                     if (shunzi[j + group[i]] >= 1 && shunzi[j + 1 + group[i]] >= 1 && shunzi[j + 2 + group[i]] >= 1 && shunzi[j + 3 + group[i]] >= 1)
                         sibugao = true;
@@ -4006,7 +3945,7 @@ var MRE = (function (exports) {
             }
             if (gangzi_num === 3)
                 ans.fans.push({ val: 32, id: 8016 }); // 三杠
-            if (flag_hunlaotou && !flag_qinglaotou && !isBanned(8017)) {
+            if (hunlaotou && !qinglaotou && !isBanned(8017)) {
                 ans.fans.push({ val: 32, id: 8017 }); // 混幺九
                 // 不计 碰碰和, 全带幺, 幺九刻
                 banFan([8047, 8054, 8074]);
@@ -4019,10 +3958,6 @@ var MRE = (function (exports) {
                 // 不计 不求人, 门前清, 单钓将
                 banFan([8055, 8063, 8080]);
             }
-            let quanshuangke = true;
-            for (const tile of Constants.TILE_NO_AKA)
-                if (!judgeTile(tile, 'quanshuang') && cnt2[tile] >= 1)
-                    quanshuangke = false;
             if (duizi_num >= 2) // 不能是七对
                 quanshuangke = false;
             if (quanshuangke && !isBanned(8020)) {
@@ -4030,11 +3965,13 @@ var MRE = (function (exports) {
                 // 不计 碰碰和, 断幺, 无字
                 banFan([8047, 8069, 8077]);
             }
+            const qingyise = qingyise_man || qingyise_pin || qingyise_sou;
             if (qingyise && !isBanned(8021)) {
                 ans.fans.push({ val: 24, id: 8021 }); // 清一色
                 // 不计 无字
                 banFan(8077);
             }
+            const santongshun = Constants.TILE_NO_AKA.some(tile => shunzi[tile] === 3);
             if (santongshun && !isBanned(8022)) {
                 ans.fans.push({ val: 24, id: 8022 }); // 一色三同顺
                 // 不计 一色三节高, 一般高
@@ -4049,15 +3986,6 @@ var MRE = (function (exports) {
                 ans.fans.push({ val: 24, id: 8023 }); // 一色三节高
                 // 不计一色三同顺
                 banFan(8022);
-            }
-            let quanda = true, quanzhong = true, quanxiao = true;
-            for (const tile of Constants.TILE_NO_AKA) {
-                if (!judgeTile(tile, 'quanda') && cnt2[tile] >= 1)
-                    quanda = false;
-                if (!judgeTile(tile, 'quanzhong') && cnt2[tile] >= 1)
-                    quanzhong = false;
-                if (!judgeTile(tile, 'quanxiao') && cnt2[tile] >= 1)
-                    quanxiao = false;
             }
             if (quanda && !isBanned(8024)) {
                 ans.fans.push({ val: 24, id: 8024 }); // 全大
@@ -4076,6 +4004,10 @@ var MRE = (function (exports) {
             }
             // ---------------------------
             // 16 番
+            let yiqi = false;
+            for (let k = 0; k < 3; k++)
+                if (shunzi['2' + group[k]] >= 1 && shunzi['5' + group[k]] >= 1 && shunzi['8' + group[k]] >= 1)
+                    yiqi = true;
             if (yiqi && !isBanned(8027)) {
                 ans.fans.push({ val: 16, id: 8027 }); // 清龙
                 // 不计 连六, 老少副
@@ -4116,6 +4048,13 @@ var MRE = (function (exports) {
                 // 不计 断幺, 无字
                 banFan([8069, 8077]);
             }
+            let santongke = false, shuangtongke = false;
+            for (let i = 1; i <= 9; i++) {
+                if (kezi[i + 'm'] >= 1 && kezi[i + 'p'] >= 1 && kezi[i + 's'] >= 1)
+                    santongke = true;
+                else if (kezi[i + 'm'] >= 1 && kezi[i + 'p'] >= 1 || kezi[i + 'm'] >= 1 && kezi[i + 's'] >= 1 || kezi[i + 'p'] >= 1 && kezi[i + 's'] >= 1)
+                    shuangtongke = true;
+            }
             if (santongke && !isBanned(8031)) {
                 ans.fans.push({ val: 16, id: 8031 }); // 三同刻
                 // 不计 双同刻
@@ -4126,13 +4065,6 @@ var MRE = (function (exports) {
             // ---------------------------
             // 12 番
             // 全不靠和组合龙不在 calc 函数中, 另算
-            let dayuwu = true, xiaoyuwu = true;
-            for (const tile of Constants.TILE_NO_AKA) {
-                if (!judgeTile(tile, 'dayuwu') && cnt2[tile] >= 1)
-                    dayuwu = false;
-                if (!judgeTile(tile, 'xiaoyuwu') && cnt2[tile] >= 1)
-                    xiaoyuwu = false;
-            }
             if (dayuwu && !isBanned(8035)) {
                 ans.fans.push({ val: 12, id: 8035 }); // 大于五
                 // 不计 无字
@@ -4161,18 +4093,23 @@ var MRE = (function (exports) {
                     if (shunzi[3 * i + 2 + 'm'] >= 1 && shunzi[3 * j + 2 + 'p'] >= 1 && shunzi[3 * k + 2 + 's'] >= 1)
                         hualong = true;
                 }
+            let sansetongshun = false, ersetongshun_num = 0;
+            for (let i = 2; i <= 8; i++) {
+                if (shunzi[i + 'm'] >= 1 && shunzi[i + 'p'] >= 1 && shunzi[i + 's'] >= 1)
+                    sansetongshun = true;
+                for (let j = 0; j < 3; j++)
+                    for (let k = j + 1; k < 3; k++)
+                        if (shunzi[i + group[j]] >= 1 && shunzi[i + group[k]] >= 1) {
+                            ersetongshun_num += shunzi[i + group[j]] >= 2 && shunzi[i + group[k]] >= 2 ? 2 : 1;
+                            break;
+                        }
+            }
             if (hualong && !isBanned(8038)) {
                 ans.fans.push({ val: 8, id: 8038 }); // 花龙
                 // 还有喜相逢时, 删除连六和老少副
                 if (ersetongshun_num >= 1)
                     banFan([8072, 8073]);
             }
-            let tuibudao = true;
-            for (const tile of Constants.TILE_NO_AKA)
-                if (!judgeTile(tile, 'tuibudao') && cnt2[tile] >= 1) {
-                    tuibudao = false;
-                    break;
-                }
             if (tuibudao && !isBanned(8039)) {
                 ans.fans.push({ val: 8, id: 8039 }); // 推不倒
                 // 不计 缺一门
@@ -4216,6 +4153,7 @@ var MRE = (function (exports) {
             // 6 番
             if (kezi_num === 4 && !isBanned(8047))
                 ans.fans.push({ val: 6, id: 8047 }); // 碰碰和
+            const hunyise = hunyise_man || hunyise_pin || hunyise_sou;
             if (hunyise && !qingyise && !isBanned(8048))
                 ans.fans.push({ val: 6, id: 8048 }); // 混一色
             let sansesanbugao = false;
@@ -4228,12 +4166,18 @@ var MRE = (function (exports) {
                     }
             if (sansesanbugao && !isBanned(8049))
                 ans.fans.push({ val: 6, id: 8049 }); // 三色三步高
+            let wumenqi = true;
+            const wumen_lows = ['1m', '1p', '1s', '1z', '5z'], wumen_highs = ['9m', '9p', '9s', '4z', '7z'];
+            for (let i = 0; i < 5; i++) {
+                let flag = false;
+                for (let j = parseInt(wumen_lows[i]); j <= parseInt(wumen_highs[i]); j++)
+                    flag || (flag = cnt2[j + wumen_lows[i][1]] > 0);
+                if (!flag)
+                    wumenqi = false;
+            }
             if (wumenqi && !isBanned(8050))
                 ans.fans.push({ val: 6, id: 8050 }); // 五门齐
-            let quanqiuren = true;
-            if (zimo || fulu_cnt !== 4)
-                quanqiuren = false;
-            if (quanqiuren && !isBanned(8051)) {
+            if (!zimo && fulu_cnt === 4 && !isBanned(8051)) {
                 ans.fans.push({ val: 6, id: 8051 }); // 全求人
                 // 不计 单钓将
                 banFan(8080);
@@ -4255,6 +4199,15 @@ var MRE = (function (exports) {
             }
             // ---------------------------
             // 4 番
+            let hunquandai = true;
+            for (let j = 0; j < 3; j++)
+                for (let i = 1; i <= 9; i++) {
+                    // 从顺子和(刻子, 雀头)的角度判断是否有全带, 先顺子后(刻子, 雀头)
+                    if (i > 2 && i < 8 && shunzi[i + group[j]] >= 1)
+                        hunquandai = false;
+                    if (i > 1 && i < 9 && kezi[i + group[j]] + type_cnt[i + group[j]][7] >= 1)
+                        hunquandai = false;
+                }
             if (hunquandai && !isBanned(8054))
                 ans.fans.push({ val: 4, id: 8054 }); // 全带幺
             if (menqing && zimo && !isBanned(8055)) {
@@ -4311,15 +4264,18 @@ var MRE = (function (exports) {
                 }
             if (menqing && !zimo && !isBanned(8063))
                 ans.fans.push({ val: 2, id: 8063 }); // 门前清
+            let pinghu = true;
+            if (duizi_num === 7)
+                pinghu = false;
+            for (const tile of Constants.TILE_NO_AKA)
+                if (kezi[tile] >= 1 || Constants.HONOR_TILE.includes(tile) && type_cnt[tile][7] >= 1) // 有刻子或雀头是字牌
+                    pinghu = false;
             if (pinghu && !isBanned(8064)) {
                 ans.fans.push({ val: 2, id: 8064 }); // 平和
                 // 不计 无字
                 banFan(8077);
             }
-            let siguiyi_num = 0;
-            for (const tile of Constants.TILE_NO_AKA)
-                if (cnt2[tile] === 4 && gangzi[tile] === 0)
-                    siguiyi_num++;
+            const siguiyi_num = Constants.TILE_NO_AKA.filter(tile => cnt2[tile] === 4 && gangzi[tile] === 0).length;
             if (siguiyi_num >= 1 && !isBanned(8065))
                 ans.fans.push({ val: 2 * siguiyi_num, id: 8065 }); // 四归一
             if (shuangtongke && !isBanned(8066))
@@ -4328,7 +4284,7 @@ var MRE = (function (exports) {
                 ans.fans.push({ val: 2, id: 8067 }); // 双暗刻
             if (angang_num === 1 && gangzi_num === 1 && !isBanned(8068))
                 ans.fans.push({ val: 2, id: 8068 }); // 暗杠
-            if (flag_duanyao && !isBanned(8069)) {
+            if (duanyao && !isBanned(8069)) {
                 ans.fans.push({ val: 2, id: 8069 }); // 断幺
                 // 不计 无字
                 banFan(8077);
@@ -4355,14 +4311,12 @@ var MRE = (function (exports) {
             if (laoshaofu_num >= 1 && !isBanned(8073))
                 // 有2个一般高, 喜相逢的情况下老少副最多只会算1个
                 ans.fans.push({ val: beikou >= 2 || ersetongshun_num >= 2 ? 1 : laoshaofu_num, id: 8073 }); // 老少副
-            let yaojiuke_num = -ban_yaojiuke_num;
-            for (const tile of Constants.YAOJIU_TILE)
-                yaojiuke_num += kezi[tile];
+            const yaojiuke_num = Constants.YAOJIU_TILE.reduce((sum, tile) => sum + kezi[tile], -ban_yaojiuke_num);
             if (!isBanned(8074) && yaojiuke_num >= 1)
                 ans.fans.push({ val: yaojiuke_num, id: 8074 }); // 幺九刻
             if (minggang_num === 1 && gangzi_num === 1 && !isBanned(8075))
                 ans.fans.push({ val: 1, id: 8075 }); // 明杠
-            let queyimen = false, have_m = 0, have_p = 0, have_s = 0;
+            let have_m = 0, have_p = 0, have_s = 0;
             for (let i = 1; i <= 9; i++) {
                 if (cnt2[i + 'm'] >= 1)
                     have_m = 1;
@@ -4371,14 +4325,9 @@ var MRE = (function (exports) {
                 if (cnt2[i + 's'] >= 1)
                     have_s = 1;
             }
-            if (have_m + have_p + have_s === 2)
-                queyimen = true;
+            const queyimen = have_m + have_p + have_s === 2;
             if (queyimen && !isBanned(8076))
                 ans.fans.push({ val: 1, id: 8076 }); // 缺一门
-            let wuzi = true;
-            for (const tile of Constants.HONOR_TILE)
-                if (cnt2[tile] >= 1)
-                    wuzi = false;
             if (wuzi && !isBanned(8077))
                 ans.fans.push({ val: 1, id: 8077 }); // 无字
             const cnt_hand = {}; // cnt 在 dfs 之后已经清零了, 所以要想再得到手牌情况需要重新遍历
@@ -4430,10 +4379,7 @@ var MRE = (function (exports) {
             // ---------------------------
             // ---------------------------
             // 花牌
-            let huapai_num = 0;
-            for (const f of fulu[seat])
-                if (f.type === 4)
-                    huapai_num++;
+            const huapai_num = fulu[seat].filter(f => f.type === 4).length;
             if (huapai_num >= 1 && huapai_num <= 8)
                 ans.fans.push({ val: huapai_num, id: 8090 + huapai_num });
             else if (huapai_num >= 9)
@@ -4519,13 +4465,13 @@ var MRE = (function (exports) {
                 const cnt0 = cnt[tile];
                 if (num % 3 === 2) { // 有对子
                     const kezi_num = (num - 2) / 3;
-                    for (let j = 0; j < kezi_num; j++)
+                    for (let i = 0; i < kezi_num; i++)
                         partition.push({ type: 6, tile: [tile, tile, tile] });
                     partition.push({ type: 7, tile: [tile, tile] });
                     dfs0(tile, partition, cnt);
                 }
                 else if (num % 3 === 0) // 3 的倍数, 全是当成刻子
-                    for (let j = 0; j < num / 3; j++)
+                    for (let i = 0; i < num / 3; i++)
                         partition.push({ type: 6, tile: [tile, tile, tile] });
                 if (cnt[Constants.NXT2[tile]] >= cnt0 && cnt[Constants.NXT2[Constants.NXT2[tile]]] >= cnt0) {
                     cnt[tile] -= cnt0;
@@ -4589,7 +4535,7 @@ var MRE = (function (exports) {
             fu += tingpaifu; // 听牌型符
         for (const tile of Constants.TILE_NO_AKA) {
             // 刻子符(幺九/中张, 明刻明杠, 暗杠暗刻)
-            if (Constants.YAOJIU_TILE.includes(tile)) {
+            if (judgeTile(tile, 'Y')) {
                 fu += type_cnt[tile][1] * 4;
                 fu += type_cnt[tile][2] * 16;
                 fu += type_cnt[tile][3] * 32;
@@ -4697,9 +4643,7 @@ var MRE = (function (exports) {
         // 有包牌
         if (baopai[seat].length > 0) {
             const yiman_sudian = Constants.YIMAN_SUDIAN;
-            let all_bao_val = 0;
-            for (const bao of baopai[seat])
-                all_bao_val += bao.val;
+            const all_bao_val = baopai[seat].reduce((sum, bao) => sum + bao.val, 0);
             const [feibao_rong, , feibao_zimo_qin, feibao_zimo_xian] = calcPoint((val - all_bao_val) * yiman_sudian);
             if (zimo) {
                 // 包牌部分, 包牌家全包
@@ -4825,7 +4769,7 @@ var MRE = (function (exports) {
                 return true;
             if (lst_name === 'RecordRevealTile' || lst_name === 'RecordLockTile' && lst_action.data.lock_state !== 0)
                 return true;
-            return sudian === -2000 || !zimo && zhenting.result[seat];
+            return sudian === Constants.ZHAHU_SUDIAN || !zimo && zhenting.result[seat];
         }
         // 判断 title_id
         function judgeTitleId() {
@@ -4933,7 +4877,7 @@ var MRE = (function (exports) {
         const sudian = calcSudianChuanma(points);
         const val = points.fans.reduce((sum, fan) => sum + fan.val, 0);
         // -------------------------------------------
-        const zhahu = huazhu(seat) || lst_name === 'RecordAnGangAddGang' && lst_action.data.type === 3;
+        const zhahu = calcHupai(player_tiles[seat]) === 0 || huazhu(seat) || lst_name === 'RecordAnGangAddGang' && lst_action.data.type === 3;
         if (zhahu) {
             for (let i = 0; i < base_info.player_cnt; i++) {
                 if (i === seat || huled[i])
@@ -5044,7 +4988,7 @@ var MRE = (function (exports) {
             for (let i = 0; i < base_info.player_cnt; i++) {
                 if (i === seat)
                     continue;
-                movePoint(Constants.GB_BASE_FAN, i, seat);
+                movePoint(Constants.GB_BASE_FAN * scale_points(), i, seat);
             }
         }
         player_tiles[seat].pop();
@@ -6519,7 +6463,7 @@ var MRE = (function (exports) {
                 addLockTile(lst_seat, 2);
             // 魂之一击: 已过载的玩家, push 一次过载数据
             if (is_hunzhiyiji()) {
-                let count = hunzhiyiji_info[lst_seat].continue_deal_count;
+                const count = hunzhiyiji_info[lst_seat].continue_deal_count;
                 if (lst_name !== 'RecordAnGangAddGang')
                     if (hunzhiyiji_info[lst_seat].liqi && count === 0 && !hunzhiyiji_info[lst_seat].overload) {
                         hunzhiyiji_info[lst_seat].overload = true;
@@ -6591,9 +6535,7 @@ var MRE = (function (exports) {
         zhenting.tongxun[0][seat] = zhenting.tongxun[1][seat] = false;
         updateZhenting();
         // 确定立直类型
-        let is_wliqi = false;
-        if (is_liqi && liqi_info[seat].yifa !== 0 && liqi_info[seat].liqi === 0)
-            is_wliqi = true;
+        const is_wliqi = is_liqi && liqi_info[seat].yifa !== 0 && liqi_info[seat].liqi === 0;
         // 确定 lst_liqi
         if (is_liqi && liqi_info[seat].liqi === 0) {
             lst_liqi.valid = true;
@@ -6904,10 +6846,7 @@ var MRE = (function (exports) {
             dora_cnt.bonus = dora_cnt.lastype = 0;
         }
         // 和 tile 等效牌的个数
-        let tile_cnt = 0;
-        for (const t of player_tiles[seat])
-            if (isEqualTile(tile, t))
-                tile_cnt++;
+        const tile_cnt = player_tiles[seat].filter(t => isEqualTile(t, tile)).length;
         // 拔北
         let is_babei = tile_cnt >= 1 && (base_info.player_cnt === 3 || base_info.player_cnt === 2) && isEqualTile(tile, '4z') && (!type || type === 'babei');
         // 拔西, 并入拔北
@@ -6919,8 +6858,8 @@ var MRE = (function (exports) {
         let is_angang = tile_cnt >= 4 && (!type || type === 'angang');
         let is_jiagang = false;
         if (tile_cnt > 0 && (!type || type === 'jiagang'))
-            for (let i in fulu[seat])
-                if (player_tiles[seat].lastIndexOf(tile) > 0 && isEqualTile(fulu[seat][i].tile[0], tile) && fulu[seat][i].type === 1) {
+            for (const f of fulu[seat])
+                if (player_tiles[seat].lastIndexOf(tile) > 0 && isEqualTile(f.tile[0], tile) && f.type === 1) {
                     is_jiagang = true;
                     break;
                 }
@@ -8059,7 +7998,7 @@ var MRE = (function (exports) {
             "name": "RecordHule",
             "data": {
                 "hules": [{
-                        "count": 64,
+                        "count": 64, // 207
                         "doras": ["7z"],
                         "li_doras": [],
                         "fans": all_fans[index],

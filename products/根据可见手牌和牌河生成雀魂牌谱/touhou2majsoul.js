@@ -15,7 +15,7 @@
     const {c, j, b, n} = {c: Math.floor(log[0][0][0] / 4), j: log[0][0][1] % 4, b: log[0][0][1], n: log[0][0][2]};
     const chang_ju_ben_num = [c, j, b, n];
     log[0].shift();
-    let tmp_scores = log[0].shift();
+    const tmp_scores = log[0].shift();
     const biao_dora = log[0].shift();
     const li_dora = log[0].shift();
     const dict = {
@@ -52,7 +52,8 @@
             if (tmp_scores[i] !== 25000)
                 all_4p_points = false;
         if (all_4p_points) // 三麻点数修正
-            tmp_scores = [35000, 35000, 35000];
+            for (let i = 0; i < ply_cnt; i++)
+                tmp_scores[i] = 35000;
     }
 
     (function () {
@@ -178,8 +179,7 @@
             const tmp_seat = i % ply_cnt;
             if (typeof new_mopai_set[tmp_seat][mopai_xunmu[tmp_seat]] == 'string') {
                 const tmp_fulu = new_mopai_set[tmp_seat][mopai_xunmu[tmp_seat]];
-                let tmp_fulu_from_seat, tmp_fulu_type;
-                [tmp_fulu_from_seat, tmp_fulu_type] = judge_fulu(tmp_fulu, tmp_seat);
+                const [tmp_fulu_from_seat, tmp_fulu_type] = judge_fulu(tmp_fulu, tmp_seat);
                 if (tmp_fulu_from_seat === seat && tmp_fulu_type === 'm') {
                     nxt_step = 'minggang';
                     seat = tmp_seat;
@@ -192,8 +192,7 @@
             const tmp_seat = i % ply_cnt;
             if (typeof new_mopai_set[tmp_seat][mopai_xunmu[tmp_seat]] == 'string') {
                 const tmp_fulu = new_mopai_set[tmp_seat][mopai_xunmu[tmp_seat]];
-                let tmp_fulu_from_seat, tmp_fulu_type;
-                [tmp_fulu_from_seat, tmp_fulu_type] = judge_fulu(tmp_fulu, tmp_seat);
+                const [tmp_fulu_from_seat, tmp_fulu_type] = judge_fulu(tmp_fulu, tmp_seat);
                 if (tmp_fulu_from_seat === seat && tmp_fulu_type === 'p') {
                     nxt_step = 'peng';
                     seat = tmp_seat;
@@ -205,8 +204,7 @@
         const tmp_seat = (seat + 1) % ply_cnt;
         if (typeof new_mopai_set[tmp_seat][mopai_xunmu[tmp_seat]] == 'string') {
             const tmp_fulu = new_mopai_set[tmp_seat][mopai_xunmu[tmp_seat]];
-            let tmp_fulu_from_seat, tmp_fulu_type;
-            [tmp_fulu_from_seat, tmp_fulu_type] = judge_fulu(tmp_fulu, tmp_seat);
+            const [tmp_fulu_from_seat, tmp_fulu_type] = judge_fulu(tmp_fulu, tmp_seat);
             if (tmp_fulu_from_seat === seat && tmp_fulu_type === 'c') {
                 nxt_step = 'chi';
                 seat = tmp_seat;
@@ -221,7 +219,7 @@
             const fulu_types = ['c', 'p', 'm'];
             let fulu_local_seat = 0;
             let fulu_type = '';
-            for (let i in fulu_types)
+            for (const i in fulu_types)
                 if (tmp_fulu.includes(fulu_types[i])) {
                     let index = tmp_fulu.indexOf(fulu_types[i]);
                     if (index === 6)
@@ -262,8 +260,7 @@
         const fulu = new_qiepai_set[seat][qiepai_xunmu[seat]];
         qiepai_xunmu[seat]++;
 
-        let tmp_tiles, fulu_type;
-        [tmp_tiles, fulu_type] = parse_fulu(fulu);
+        const [tmp_tiles, fulu_type] = parse_fulu(fulu);
         const tile = dict[parseInt(tmp_tiles.substring(0, 2))];
         const type = fulu_type === 'a' ? 'angang' : 'jiagang';
 

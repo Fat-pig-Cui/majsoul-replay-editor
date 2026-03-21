@@ -101,7 +101,7 @@
         const new_fulus = [json.fulu0, json.fulu1, json.fulu2, json.fulu3];
         for (let i = 0; i < json.player_count; i++) {
             for (const k in new_fulus[i]) {
-                let tile_type = new_fulus[i][k].at(-1);
+                const tile_type = new_fulus[i][k].at(-1);
                 if (new_fulus[i][k].includes('_')) {
                     let index = new_fulus[i][k].indexOf('_');
                     const ming_tile = new_fulus[i][k][index + 1] + tile_type;
