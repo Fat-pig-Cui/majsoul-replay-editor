@@ -25,33 +25,6 @@ export const simplify = (tile: Tile): Tile => {
     return tile[0] + tile[1] as Tile;
 };
 
-/**
- * 按照排序返回 tile 的下一张牌, 忽略红宝牌
- */
-export const nextTile = (tile: Tile): Tile => {
-    tile = simplify(tile);
-    if (tile === '7z')
-        return '0m';
-    const group = ['m', 'p', 's', 'z'];
-    const cur_index = group.indexOf(tile[1]);
-    if (tile[0] === '9')
-        return '1' + group[cur_index + 1] as Tile;
-    return (parseInt(tile) + 1) + tile[1] as Tile;
-};
-
-/**
- * 给定牌顺子给出中间的牌
- */
-export const shunziMidTile = (tiles: Tile[]): Tile => {
-    if (tiles.length !== 3)
-        throw new Error(errRoundInfo() + `shunziMidTile: 输入牌数量不为3: ${tiles}`);
-    const nums: number[] = [];
-    for (const tile of tiles)
-        nums.push(parseInt(simplify(tile)[0]));
-    nums.sort((a, b) => a - b);
-    return nums[1] + tiles[0][1] as Tile;
-};
-
 // 玩家的巡目所对应的操作位置
 export const calcXun = (): void => {
     for (let i = 0; i < base_info.player_cnt; i++)
@@ -235,12 +208,12 @@ export const isValidSeat = (seat: number): seat is Seat => {
 
 // 判断 awaiting_index 参数是否为 AwaitingIndex 类型
 export const isAwaitingIndex = (awaiting_index: number): awaiting_index is AwaitingIndex => {
-    return awaiting_index === 0 || awaiting_index === 1 || awaiting_index === 2;
+    return [0, 1, 2].includes(awaiting_index);
 };
 
 // 判断 beishui_type 参数是否为 BeishuiType 类型
 export const isBeishuiType = (beishui_type: number): beishui_type is BeishuiType => {
-    return beishui_type === 0 || beishui_type === 1 || beishui_type === 2;
+    return [0, 1, 2].includes(beishui_type);
 };
 
 // 开局计算所有玩家的听牌, 亲家去掉最后一张牌后再计算, 但仍然不会显示

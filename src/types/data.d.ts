@@ -117,7 +117,6 @@ type Config = {
             _tianguishi_vs_yuantiankemei?: boolean,
             _sixifuhe?: boolean,
             _report_yakus?: boolean,
-            _play_mode?: boolean;
             _guobiao?: boolean,
             _guobiao_huapai?: boolean,
             _guobiao_no_8fanfu?: boolean,

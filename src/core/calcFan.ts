@@ -15,7 +15,7 @@ import {
     is_yongchang, no_lianfengsifu, no_normalbaopai, no_shiduan, no_wyakuman, no_yifa
 } from "./misc";
 import {
-    calcSudian, calcSudianChuanma, calcSudianGuobiao, cmp, huazhu, nextTile, shunziMidTile, simplify
+    calcSudian, calcSudianChuanma, calcSudianGuobiao, cmp, errRoundInfo, huazhu, simplify
 } from "./utils";
 import {isEqualTile, judgeTile, calcHupai, calcTingpai, getLstAction} from "./exportedUtils";
 import {Constants} from "./constants";
@@ -2336,4 +2336,31 @@ const calcFu = (tingpaifu: 0 | 2, duizi_num: number, pinghu: boolean, type_cnt: 
     if (fulu_cnt !== 0 && fu === 20)
         fu = 30;
     return fu;
+};
+
+/**
+ * 按照排序返回 tile 的下一张牌, 忽略红宝牌
+ */
+const nextTile = (tile: Tile): Tile => {
+    tile = simplify(tile);
+    if (tile === '7z')
+        return '0m';
+    const group = ['m', 'p', 's', 'z'];
+    const cur_index = group.indexOf(tile[1]);
+    if (tile[0] === '9')
+        return '1' + group[cur_index + 1] as Tile;
+    return (parseInt(tile) + 1) + tile[1] as Tile;
+};
+
+/**
+ * 给定牌顺子给出中间的牌
+ */
+const shunziMidTile = (tiles: Tile[]): Tile => {
+    if (tiles.length !== 3)
+        throw new Error(errRoundInfo() + `shunziMidTile: 输入牌数量不为3: ${tiles}`);
+    const nums: number[] = [];
+    for (const tile of tiles)
+        nums.push(parseInt(simplify(tile)[0]));
+    nums.sort((a, b) => a - b);
+    return nums[1] + tiles[0][1] as Tile;
 };

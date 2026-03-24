@@ -16,7 +16,7 @@ import {setMuyuSeats, huanpai, dingque, kaipai, kaipaiLock} from './core/activit
 import {normalMoqie, moqieLiqi, comboMopai, mingQiepai, zimoHu, moqieLiuju} from './core/simplifyFunction';
 
 import {getLeftTileCnt, judgeTile, allEqualTiles, isEqualTile, decompose} from "./core/exportedUtils";
-import {separate, calcHupai, calcTingpai, getLstAction, fixPaishan} from './core/exportedUtils';
+import {separate, calcHupai, calcTingpai, getLstAction} from './core/exportedUtils';
 
 import {demoGame, setPlayGame, reportYaku, reportYaku_yiji} from "./core/sample";
 
@@ -67,7 +67,6 @@ export type t_setScores = typeof setScores;
 export type t_resetReplay = typeof resetReplay;
 export type t_reportYaku = typeof reportYaku;
 export type t_reportYaku_yiji = typeof reportYaku_yiji;
-export type t_fixPaishan = typeof fixPaishan;
 
 (window as any).player_datas = player_datas;
 (window as any).begin_tiles = begin_tiles;
@@ -114,4 +113,3 @@ export type t_fixPaishan = typeof fixPaishan;
 (window as any).resetReplay = resetReplay;
 (window as any).reportYaku = reportYaku;
 (window as any).reportYaku_yiji = reportYaku_yiji;
-(window as any).fixPaishan = fixPaishan;

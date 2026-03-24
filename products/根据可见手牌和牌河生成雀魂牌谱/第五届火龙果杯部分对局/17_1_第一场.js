@@ -45,12 +45,12 @@ setConfig({
     }
 });
 
-const jsons = [
+setPlayGame([
     { // 东1局0本场
         tiles0: '577m67p77s',
         tiles1: '34588m33445p',
         tiles2: '067m2226899p678s',
-        tiles3: '', // 防止听牌的牌
+        tiles3: '',
         lst_mopai: '',
         dora: ['3z'],
         li_dora: [],
@@ -128,8 +128,8 @@ const jsons = [
     }, // 东4局0本场
     { // 东4局1本场
         tiles0: '225m5568p466s',
-        tiles1: '', // 防止听牌的牌
-        tiles2: '', // 防止听牌的牌
+        tiles1: '',
+        tiles2: '',
         tiles3: '333m99p23456778s',
         lst_mopai: '',
         dora: ['4m'],
@@ -189,8 +189,8 @@ const jsons = [
     { // 南2局0本场
         tiles0: '27m1277888p4456s',
         tiles1: '13m22334467899p',
-        tiles2: '', // 防止听牌的牌
-        tiles3: '', // 防止听牌的牌
+        tiles2: '',
+        tiles3: '',
         lst_mopai: '',
         dora: ['9m'],
         li_dora: [],
@@ -266,7 +266,4 @@ const jsons = [
         hu_seat: [2],
         first_op: 0,
     }, // 南4局0本场
-];
-
-for (const json of jsons)
-    setPlayGame(json);
+]);

@@ -44,7 +44,6 @@ import type {
     t_resetReplay,
     t_reportYaku,
     t_reportYaku_yiji,
-    t_fixPaishan,
 } from './main';
 
 declare global {
@@ -99,5 +98,4 @@ declare global {
     const resetReplay: t_resetReplay;
     const reportYaku: t_reportYaku;
     const reportYaku_yiji: t_reportYaku_yiji;
-    const fixPaishan: t_fixPaishan;
 }

@@ -123,7 +123,7 @@ export class Constants {
         '0m': '0p',
         '0p': '0s',
         '0s': '0s',
-    };
+    } as const;
 
     /**
      * 宝牌指示牌表, 如果某张指示牌的数字编码(不区分红宝牌)为 i, 则它对应的宝牌的数字编码为 DORA_NXT[i]
@@ -165,7 +165,7 @@ export class Constants {
         '5z': '6z',
         '6z': '7z',
         '7z': '5z',
-    };
+    } as const;
 
     /**
      * 国标麻将组合龙的六种情况所需要的牌型

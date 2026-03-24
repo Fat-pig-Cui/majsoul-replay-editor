@@ -5,7 +5,7 @@
  * @github: https://github.com/Fat-pig-Cui/majsoul-replay-editor
  */
 
-import {actions, all_data, awaiting_tiles, base_info, deal_remain_tiles, paishan, player_tiles} from "./data";
+import {actions, awaiting_tiles, base_info, paishan, player_tiles} from "./data";
 import {is_chuanma, is_guobiao, is_wanxiangxiuluo, is_yifanjieguyi, is_zhanxing} from "./misc";
 import {errRoundInfo, simplify, huazhu, isTile} from "./utils";
 import {Constants} from "./constants";
@@ -461,84 +461,4 @@ export const getLstAction = (num: number = 1): Action => {
         return actions[ret];
     } else
         throw new Error(errRoundInfo() + 'actions 为空');
-};
-
-/**
- * 根据已结束的对局进行牌山修正, 用于"天凤牌谱编辑器数据转雀魂格式"和"根据可见手牌和牌河生成雀魂牌谱"的最后
- * @param dora_num - 表指示牌数量, 默认为1
- * @param li_dora_num - 里指示牌刷领, 默认为0
- */
-export const fixPaishan = (dora_num: number = 1, li_dora_num: number = 0): void => {
-    let qishou_num = 53, all_lingshang_num = 4;
-    if (base_info.player_cnt === 3) {
-        qishou_num = 40;
-        all_lingshang_num = 8;
-    } else if (base_info.player_cnt === 2) {
-        qishou_num = 27;
-        all_lingshang_num = 12;
-    }
-    const data_new_round = all_data.all_actions[all_data.all_actions.length - 1][0].data;
-    if (!data_new_round.sha256)
-        qishou_num = 0;
-
-    let normal_num = 0, lingshang_num = 0;
-    const normal_tiles: Tile[] = [], lingshang_tiles: Tile[] = [];
-
-    const cur_actions = all_data.all_actions[all_data.all_actions.length - 1];
-    for (const i in cur_actions) {
-        if (cur_actions[i].name === 'RecordDealTile') {
-            let is_lingshang = false;
-            const lst_action = cur_actions[parseInt(i) - 1];
-            if (lst_action.name === 'RecordChiPengGang' && lst_action.data.type === 2) // 上一个操作是暗杠, 则这张牌是岭上牌
-                is_lingshang = true;
-            if (lst_action.name === 'RecordAnGangAddGang' || lst_action.name === 'RecordBaBei') // 上一个操作是暗杠/加杠/拔北, 则这张牌是岭上牌
-                is_lingshang = true;
-
-            if (is_lingshang) {
-                lingshang_num++;
-                lingshang_tiles.push(cur_actions[i].data.tile);
-            } else {
-                normal_num++;
-                normal_tiles.push(cur_actions[i].data.tile);
-            }
-        }
-    }
-    const new_paishan: Tile[] = separate(data_new_round.paishan);
-    const protected_index = [];
-    for (let i = 0; i < dora_num; i++)
-        protected_index.push(new_paishan.length - 1 - all_lingshang_num - i * 2);
-    for (let i = 0; i < li_dora_num; i++)
-        protected_index.push(new_paishan.length - 2 - all_lingshang_num - i * 2);
-
-    for (let i = 0; i < normal_num; i++) {
-        if (new_paishan[qishou_num + i] === normal_tiles[i])
-            continue;
-        let same_index = -1;
-        for (let j = qishou_num + i + 1; j < new_paishan.length; j++)
-            if (!protected_index.includes(j) && new_paishan[j] === normal_tiles[i]) {
-                same_index = j;
-                break;
-            }
-        if (same_index !== -1) {
-            const tmp = new_paishan[qishou_num + i];
-            new_paishan[qishou_num + i] = new_paishan[same_index];
-            new_paishan[same_index] = tmp;
-        }
-    }
-    for (let i = 0; i < lingshang_num; i++) {
-        if (new_paishan[new_paishan.length - 1 - i] === lingshang_tiles[i])
-            continue;
-        let same_index = -1;
-        for (let j = new_paishan.length - 2 - i; j >= qishou_num; j--)
-            if (!protected_index.includes(j) && new_paishan[j] === lingshang_tiles[i]) {
-                same_index = j;
-                break;
-            }
-        if (same_index !== -1) {
-            const tmp = new_paishan[new_paishan.length - 1 - i];
-            new_paishan[new_paishan.length - 1 - i] = new_paishan[same_index];
-            new_paishan[same_index] = tmp;
-        }
-    }
-    data_new_round.paishan = new_paishan.join('');
 };
