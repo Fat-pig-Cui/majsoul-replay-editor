@@ -3,7 +3,6 @@ clearProject();
 player_datas[0] = {
     nickname: '114231',
     avatar_id: 405001, // 赤木茂
-    level: {id: 10501, score: 2000},
     views: [
         {slot: 0, item_id: 305002}, // 大葱立直棒
         {slot: 1, item_id: 305034}, // 和牌-爆炎龙卷
@@ -14,7 +13,6 @@ player_datas[1] = {
     nickname: '北雨听海',
     avatar_id: 402602, // 雏桃-契约
     title: 600006, // 魂之契约者-中阶
-    level: {id: 10302, score: 700},
     views: [
         {slot: 0, item_id: 305003}, // 狗骨头立直棒
         {slot: 1, item_id: 305008}, // 和牌-旋风
@@ -26,7 +24,6 @@ player_datas[2] = {
     avatar_id: 402202, // 约瑟夫-契约
     title: 600038, // 神社贵宾
     avatar_frame: 305523, // 头像框-猫咪军团的身份
-    level: {id: 10501, score: 2000},
     views: [
         {slot: 0, item_id: 305049}, // 立直棒-炎夏型一姬甜筒
         {slot: 1, item_id: 308021}, // 和牌-高岭之花
@@ -39,7 +36,6 @@ player_datas[3] = {
     avatar_id: 400102, // 一姬-契约
     title: 600045, // 一姬当千
     avatar_frame: 305500, // 头像框-豆芽
-    level: {id: 10401, score: 1400},
     views: [
         {slot: 0, item_id: 305019}, // 24K金棒
         {slot: 1, item_id: 308026}, // 和牌-绝对的命令

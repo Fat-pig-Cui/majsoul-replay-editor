@@ -5,7 +5,7 @@
  * @github: https://github.com/Fat-pig-Cui/majsoul-replay-editor
  */
 
-import {actions, all_data, awaiting_tiles, base_info, paishan, player_tiles} from "./data";
+import {actions, all_data, awaiting_tiles, base_info, deal_remain_tiles, paishan, player_tiles} from "./data";
 import {is_chuanma, is_guobiao, is_wanxiangxiuluo, is_yifanjieguyi, is_zhanxing} from "./misc";
 import {errRoundInfo, simplify, huazhu, isTile} from "./utils";
 import {Constants} from "./constants";

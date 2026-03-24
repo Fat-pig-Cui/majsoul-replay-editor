@@ -428,6 +428,9 @@ export const is_sixifuhe = (): boolean => config.mode.detail_rule._sixifuhe;
 // 是否为报番模式, 适用于纯享版报菜名
 export const is_report_yakus = (): boolean => config.mode.detail_rule._report_yakus;
 
+// 是否为是否为游玩模式, 适用于"根据可见手牌和牌河生成雀魂牌谱"
+export const is_play_mode = (): boolean => config.mode.detail_rule._play_mode;
+
 // ------------------------------------------------------------------------
 // 是否为国标模式
 export const is_guobiao = (): boolean => config.mode.detail_rule._guobiao;

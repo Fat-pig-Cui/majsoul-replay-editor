@@ -107,13 +107,13 @@
                     const ming_tile = new_fulus[i][k][index + 1] + tile_type;
                     const own_tiles = [];
                     for (let j = 0; j < new_fulus[i][k].length - 1; j++)
-                        if (new_fulus[i][k][j] !== '_')
+                        if (new_fulus[i][k][j] !== '_' && new_fulus[i][k][j] !== '^')
                             own_tiles.push(new_fulus[i][k][j] + tile_type);
                         else
                             j++;
                     const is_jiagang = new_fulus[i][k].includes('^');
                     let type = '';
-                    if (own_tiles[0] !== own_tiles[1])
+                    if (!isEqualTile(own_tiles[0], own_tiles[1]))
                         type = 'chi';
                     else if (is_jiagang)
                         type = 'jiagang';
@@ -122,9 +122,9 @@
                     else if (own_tiles.length === 3)
                         type = 'minggang';
 
-                    const tmp_fulu = new_fulus[i][k];
+                    let tmp_fulu = new_fulus[i][k];
                     if (is_jiagang)
-                        tmp_fulu.splice(tmp_fulu.indexOf('^'), 2);
+                        tmp_fulu = tmp_fulu.substring(0, tmp_fulu.indexOf('^')) + tmp_fulu.substring(tmp_fulu.indexOf('^') + 2);
 
                     if (type === 'minggang' && index === 3)
                         index = 2;
@@ -132,17 +132,16 @@
                     if (type === 'jiagang') { // 加杠多一个碰, 方便算法实现, 并且加杠的 from 优化
                         fulus_info[i].push({
                             type: 'peng',
-                            own_tiles: own_tiles.slice(0, 2),
+                            own_tiles: own_tiles,
                             ming_tile: ming_tile,
                             from: from,
                         });
                         from = i;
-                        own_tiles.splice(1);
                     }
                     fulus_info[i].push({
                         type: type,
                         own_tiles: own_tiles,
-                        ming_tile: ming_tile,
+                        ming_tile: type !== 'jiagang' ? ming_tile : new_fulus[i][k][new_fulus[i][k].indexOf('_') + 1] + tile_type,
                         from: from,
                     });
                 } else {
@@ -279,9 +278,7 @@
                 nxt_step = 'qiepai';
 
             let tile = new_discard_tiles[seat][0].tile;
-            if (nxt_step === 'jiagang')
-                tile = fulus_info[seat][0].own_tiles[0];
-            else if (!new_discard_tiles[seat][0].moqie || nxt_step === 'angang')
+            if (!new_discard_tiles[seat][0].moqie || nxt_step === 'angang')
                 tile = new_deal_tiles[seat].shift();
 
             mopai(seat, tile);
@@ -290,9 +287,10 @@
         // 先看其他家谁可以鸣主视角的牌, 再看主视角自己切什么牌
         function new_qiepai() {
             const tile_info = new_discard_tiles[seat].shift();
-            const tile = tile_info.moqie ? undefined : tile_info.tile;
+            const para_tile = tile_info.moqie ? undefined : tile_info.tile;
+            const tile = tile_info.tile;
 
-            qiepai(seat, tile, tile_info.is_liqi);
+            qiepai(seat, para_tile, tile_info.is_liqi);
 
             // 明杠, 碰
             const op = ['minggang', 'peng'];
@@ -300,7 +298,7 @@
                 for (let i = seat + 1; i < seat + json.player_count; i++) {
                     const tmp_seat = i % json.player_count;
                     const tmp_fulu = fulus_info[tmp_seat][0];
-                    if (tmp_fulu && tmp_fulu.type === op[j] && tmp_fulu.from === seat && tmp_fulu.ming_tile === tile) {
+                    if (tmp_fulu && tmp_fulu.type === op[j] && tmp_fulu.from === seat && isEqualTile(tmp_fulu.ming_tile, tile)) {
                         nxt_step = op[j];
                         seat = tmp_seat;
                         return;
@@ -308,7 +306,7 @@
                 }
 
             const tmp_seat = (seat + 1) % json.player_count, tmp_fulu = fulus_info[tmp_seat][0];
-            if (tmp_fulu && tmp_fulu.type === 'chi' && tmp_fulu.from === seat && tmp_fulu.ming_tile === tile) {
+            if (tmp_fulu && tmp_fulu.type === 'chi' && tmp_fulu.from === seat && isEqualTile(tmp_fulu.ming_tile, tile)) {
                 nxt_step = 'chi';
                 seat = tmp_seat;
                 return;

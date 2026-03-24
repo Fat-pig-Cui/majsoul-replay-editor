@@ -77,8 +77,8 @@ let inst_once_chkP = true;
 // 在线编辑(进入牌谱之后的修改, 包括切换视角和切换巡目, 只在 editOffline 中的 resetData 中调用)
 const editOnline = (): void => {
     const rounds: { actions: Actions, xun: number[] }[] = [];
-    for (const actions1 of all_data.all_actions)
-        rounds.push({actions: actions1, xun: all_data.xun[rounds.length][view.DesktopMgr.Inst.seat]});
+    for (const actions of all_data.all_actions)
+        rounds.push({actions: actions, xun: all_data.xun[rounds.length][view.DesktopMgr.Inst.seat]});
     uiscript.UI_Replay.Inst.rounds = rounds;
     uiscript.UI_Replay.Inst.gameResult.result.players = all_data.players;
 };

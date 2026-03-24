@@ -8,14 +8,14 @@
 import {
     actions, all_data, awaiting_tiles, baopai, base_info, begin_tiles, chuanma_gangs, config, cuohu, deal_tiles,
     delta_scores, discard_tiles, dora_cnt, dora_indicator, fulu, gaps, huled, hules_history, hunzhiyiji_info, liqi_info,
-    lst_liqi, mingpais, muyu, muyu_info, paihe, paishan, player_datas, player_tiles, scores, shoumoqie, sigang_bao,
-    spell_hourglass, xun, yongchang_data, zhenting
+    lst_liqi, mingpais, muyu, muyu_info, paihe, paishan, player_datas, player_tiles,
+    deal_remain_tiles, scores, shoumoqie, sigang_bao, spell_hourglass, xun, yongchang_data, zhenting
 } from "./data";
 import {
     cuohu_points, get_aka_cnt, get_chang_ju_ben_num, get_fafu_1ting, get_fafu_2p, get_fafu_2ting, get_fafu_3p_1ting,
     get_fafu_3p_2ting, get_fafu_3ting, get_field_spell_mode, get_init_point, get_init_scores, get_liqi_need, is_anye,
     is_baogang, is_begin_open, is_beishuizhizhan, is_chuanma, is_cuohupeida, is_dora3, is_dora_jifan, is_fufenliqi,
-    is_guobiao, is_guobiao_huapai, is_guobiao_lianzhuang, is_hunzhiyiji, is_mingjing, is_muyu, is_openhand,
+    is_guobiao, is_guobiao_huapai, is_guobiao_lianzhuang, is_hunzhiyiji, is_mingjing, is_muyu, is_openhand, is_play_mode,
     is_report_yakus, is_ronghuzhahu, is_sanxiangliuju, is_tianming, is_toutiao, is_wanxiangxiuluo, is_xueliu,
     is_xuezhandaodi, is_yongchang, is_zhanxing, no_liujumanguan, no_zimosun, scale_points
 } from "./misc";
@@ -196,22 +196,24 @@ export const randomPaishan = (ps_head: string = '', ps_back: string = ''): void 
                 else
                     cnt[tile]--;
 
-    const remain_tiles: Tile[] = [];
+    deal_remain_tiles.length = 0;
     for (const tile of Constants.TILE) {
         for (let j = 0; j < cnt[tile]; j++)
-            remain_tiles.push(tile);
+            deal_remain_tiles.push(tile);
         if (is_mingjing())
             for (let j = 0; j < cnt2[tile]; j++)
-                remain_tiles.push(tile + Constants.SPT_SUFFIX as Tile);
+                deal_remain_tiles.push(tile + Constants.SPT_SUFFIX as Tile);
     }
 
-    remain_tiles.sort(randomCmp);
+    deal_remain_tiles.sort(randomCmp);
+    const remain_tiles: Tile[] = deal_remain_tiles.slice();
 
     for (const para_tile of para_tiles)
         randomize(para_tile);
     for (let i = 0; i < base_info.player_cnt; i++)
         randomize(tiles[i]);
     // 补全玩家起手
+    // if (!is_play_mode())
     for (let i = 0; i < base_info.player_cnt; i++) {
         while (tiles[i].length < Constants.XIAN_TILE_NUM)
             tiles[i].push(remain_tiles.pop());
@@ -358,10 +360,16 @@ export const mopai = (...args: any[]): void => {
     else if (base_info.draw_type === 0)
         draw_card = paishan[paishan.length - 1];
 
+    if (is_play_mode())
+        if (!deal_remain_tiles.includes(draw_card))
+            draw_card = Constants.TBD;
+        else
+            deal_remain_tiles.splice(deal_remain_tiles.indexOf(draw_card), 1);
+
     player_tiles[seat].push(draw_card);
 
     if (!is_zhanxing())
-        base_info.draw_type === 1 ? paishan.shift() : paishan.pop();
+        base_info.draw_type === 0 ? paishan.pop() : paishan.shift();
     base_info.lst_draw_type = base_info.draw_type;
     base_info.draw_type = 1;
 
@@ -846,9 +854,9 @@ export const zimingpai = (...args: any[]): void => {
     let is_angang = tile_cnt >= 4 && (!type || type === 'angang');
 
     let is_jiagang = false;
-    if (tile_cnt > 0 && (!type || type === 'jiagang'))
+    if (tile_cnt > 0 && (!type || type === 'jiagang') && player_tiles[seat].includes(tile))
         for (const f of fulu[seat])
-            if (player_tiles[seat].lastIndexOf(tile) > 0 && isEqualTile(f.tile[0], tile) && f.type === 1) {
+            if (isEqualTile(f.tile[0], tile) && f.type === 1) {
                 is_jiagang = true;
                 break;
             }

@@ -75,8 +75,8 @@
             txt += `player_datas[${i}]=${JSON.stringify(account)};\n`;
         txt += `\nsetConfig(${JSON.stringify(json.head.config)});\n\n`;
 
-        const actions = json.data.data.actions;
-        for (const action of actions)
+        const actions1 = json.data.data.actions;
+        for (const action of actions1)
             if (action.result) {
                 const tmp = action.result.name.split('.');
                 action.result.name = tmp[tmp.length - 1];
@@ -93,8 +93,8 @@
                     txt += `setPaishan('${Data.paishan}');\n`;
                     if (json.head.config.mode && json.head.config.mode.detail_rule && json.head.config.mode.detail_rule.muyu_mode) {
                         let muyuseats = '', tmp = [];
-                        for (let j = i + 1; j < actions.length; j++)
-                            if (actions[j].result && actions[j].result.data.muyu) {
+                        for (let j = i + 1; j < actions1.length; j++)
+                            if (actions1[j].result && actions1[j].result.data.muyu) {
                                 if (!tmp[action.result.data.muyu.seat])
                                     muyuseats += action.result.data.muyu.seat.toString();
                                 tmp[action.result.data.muyu.seat] = action.result.data.muyu.count !== 0;
@@ -148,9 +148,9 @@
                         if (froms[i] === seat)
                             c_tiles += tiles[i];
                     let j = i + 1;
-                    while (!actions[j].result)
+                    while (!actions1[j].result)
                         j++;
-                    if (actions[j].result.name === 'RecordGangResultEnd')
+                    if (actions1[j].result.name === 'RecordGangResultEnd')
                         txt += `mingpai(${seat},'${c_tiles}',true);\n`;
                     else
                         txt += `mingpai(${seat},'${c_tiles}');\n`;
@@ -160,9 +160,9 @@
                     const c_type = type === 3 ? 'angang' : 'jiagang';
 
                     let j = i + 1;
-                    while (!actions[j].result)
+                    while (!actions1[j].result)
                         j++;
-                    if (actions[j].result.name === 'RecordGangResultEnd')
+                    if (actions1[j].result.name === 'RecordGangResultEnd')
                         txt += `zimingpai('${tile}','${c_type}',true);\n`;
                     else
                         txt += `zimingpai('${tile}','${c_type}');\n`;
@@ -208,13 +208,13 @@
                 }
                 if (action.result.name === 'RecordLockTile') {
                     let j = i - 1;
-                    while (!actions[j].result)
+                    while (!actions1[j].result)
                         j--;
-                    if (actions[j].result.name === 'RecordUnveilTile') {
-                        const seat = actions[j].result.data.seat;
-                        if (actions[j].result.data.lock_state === 1)
+                    if (actions1[j].result.name === 'RecordUnveilTile') {
+                        const seat = actions1[j].result.data.seat;
+                        if (actions1[j].result.data.lock_state === 1)
                             txt += `kaipaiLock(${seat});\n`;
-                        else if (actions[j].result.data.lock_state === 0)
+                        else if (actions1[j].result.data.lock_state === 0)
                             txt += `kaipai(${seat});\n`;
                     }
                 }

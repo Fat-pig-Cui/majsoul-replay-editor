@@ -171,5 +171,8 @@ export const zhenting: ZhenTing = {
     result: [false, false],
 };
 
+// 当前局面还有多少可用牌
+export const deal_remain_tiles: Tile[] = [];
+
 // 回放用装扮随机池, 键是 slot, 值是对应的装扮id数组
 export const views_pool: { [p: number]: number[] } = {};

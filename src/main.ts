@@ -5,7 +5,7 @@
  * @github: https://github.com/Fat-pig-Cui/majsoul-replay-editor
  */
 
-import {player_datas, begin_tiles, player_tiles, all_data} from './core/data';
+import {player_datas, begin_tiles, player_tiles, all_data, actions} from './core/data';
 
 import {clearProject, randomPaishan, mopai, qiepai, mingpai, zimingpai, hupai, huangpai, liuju} from './core/core';
 
@@ -18,7 +18,7 @@ import {normalMoqie, moqieLiqi, comboMopai, mingQiepai, zimoHu, moqieLiuju} from
 import {getLeftTileCnt, judgeTile, allEqualTiles, isEqualTile, decompose} from "./core/exportedUtils";
 import {separate, calcHupai, calcTingpai, getLstAction, fixPaishan} from './core/exportedUtils';
 
-import {demoGame, reportYaku, reportYaku_yiji} from "./core/sample";
+import {demoGame, setPlayGame, reportYaku, reportYaku_yiji} from "./core/sample";
 
 import {resetReplay} from "./core/override";
 
@@ -26,6 +26,7 @@ export type t_player_datas = typeof player_datas;
 export type t_begin_tiles = typeof begin_tiles;
 export type t_player_tiles = typeof player_tiles;
 export type t_all_data = typeof all_data;
+export type t_actions = typeof actions;
 export type t_clearProject = typeof clearProject;
 export type t_setConfig = typeof setConfig;
 export type t_setDiscardTiles = typeof setDiscardTiles;
@@ -47,6 +48,7 @@ export type t_kaipaiLock = typeof kaipaiLock;
 export type t_setRound = typeof setRound;
 export type t_getLeftTileCnt = typeof getLeftTileCnt;
 export type t_demoGame = typeof demoGame;
+export type t_setPlayGame = typeof setPlayGame;
 export type t_normalMoqie = typeof normalMoqie;
 export type t_moqieLiqi = typeof moqieLiqi;
 export type t_comboMopai = typeof comboMopai;
@@ -67,104 +69,11 @@ export type t_reportYaku = typeof reportYaku;
 export type t_reportYaku_yiji = typeof reportYaku_yiji;
 export type t_fixPaishan = typeof fixPaishan;
 
-declare type MRE_Type = {
-    player_datas: t_player_datas;
-    begin_tiles: t_begin_tiles;
-    player_tiles: t_player_tiles;
-    all_data: t_all_data;
-    clearProject: t_clearProject;
-    setConfig: t_setConfig;
-    setDiscardTiles: t_setDiscardTiles;
-    setDealTiles: t_setDealTiles;
-    setPaishan: t_setPaishan;
-    randomPaishan: t_randomPaishan;
-    mopai: t_mopai;
-    qiepai: t_qiepai;
-    mingpai: t_mingpai;
-    zimingpai: t_zimingpai;
-    hupai: t_hupai;
-    huangpai: t_huangpai;
-    liuju: t_liuju;
-    setMuyuSeats: t_setMuyuSeats;
-    huanpai: t_huanpai;
-    dingque: t_dingque;
-    kaipai: t_kaipai;
-    kaipaiLock: t_kaipaiLock;
-    setRound: t_setRound;
-    getLeftTileCnt: t_getLeftTileCnt;
-    demoGame: t_demoGame;
-    normalMoqie: t_normalMoqie;
-    moqieLiqi: t_moqieLiqi;
-    comboMopai: t_comboMopai;
-    mingQiepai: t_mingQiepai;
-    zimoHu: t_zimoHu;
-    moqieLiuju: t_moqieLiuju;
-    judgeTile: t_judgeTile;
-    allEqualTiles: t_allEqualTiles;
-    isEqualTile: t_isEqualTile;
-    decompose: t_decompose;
-    separate: t_separate;
-    calcHupai: t_calcHupai;
-    calcTingpai: t_calcTingpai;
-    getLstAction: t_getLstAction;
-    setScores: t_setScores;
-    resetReplay: t_resetReplay;
-    reportYaku: t_reportYaku;
-    reportYaku_yiji: t_reportYaku_yiji;
-    fixPaishan: t_fixPaishan;
-};
-
-export const MRE: MRE_Type = {
-    player_datas: player_datas,
-    begin_tiles: begin_tiles,
-    player_tiles: player_tiles,
-    all_data: all_data,
-    clearProject: clearProject,
-    setConfig: setConfig,
-    setDiscardTiles: setDiscardTiles,
-    setDealTiles: setDealTiles,
-    setPaishan: setPaishan,
-    randomPaishan: randomPaishan,
-    mopai: mopai,
-    qiepai: qiepai,
-    mingpai: mingpai,
-    zimingpai: zimingpai,
-    hupai: hupai,
-    huangpai: huangpai,
-    liuju: liuju,
-    setMuyuSeats: setMuyuSeats,
-    huanpai: huanpai,
-    dingque: dingque,
-    kaipai: kaipai,
-    kaipaiLock: kaipaiLock,
-    setRound: setRound,
-    getLeftTileCnt: getLeftTileCnt,
-    demoGame: demoGame,
-    normalMoqie: normalMoqie,
-    moqieLiqi: moqieLiqi,
-    comboMopai: comboMopai,
-    mingQiepai: mingQiepai,
-    zimoHu: zimoHu,
-    moqieLiuju: moqieLiuju,
-    judgeTile: judgeTile,
-    allEqualTiles: allEqualTiles,
-    isEqualTile: isEqualTile,
-    decompose: decompose,
-    separate: separate,
-    calcHupai: calcHupai,
-    calcTingpai: calcTingpai,
-    getLstAction: getLstAction,
-    setScores: setScores,
-    resetReplay: resetReplay,
-    reportYaku: reportYaku,
-    reportYaku_yiji: reportYaku_yiji,
-    fixPaishan: fixPaishan,
-};
-
 (window as any).player_datas = player_datas;
 (window as any).begin_tiles = begin_tiles;
 (window as any).player_tiles = player_tiles;
 (window as any).all_data = all_data;
+(window as any).actions = actions;
 (window as any).clearProject = clearProject;
 (window as any).setConfig = setConfig;
 (window as any).setDiscardTiles = setDiscardTiles;
@@ -186,6 +95,7 @@ export const MRE: MRE_Type = {
 (window as any).setRound = setRound;
 (window as any).getLeftTileCnt = getLeftTileCnt;
 (window as any).demoGame = demoGame;
+(window as any).setPlayGame = setPlayGame;
 (window as any).normalMoqie = normalMoqie;
 (window as any).moqieLiqi = moqieLiqi;
 (window as any).comboMopai = comboMopai;

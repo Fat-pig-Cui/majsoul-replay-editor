@@ -117,6 +117,7 @@ type Config = {
             _tianguishi_vs_yuantiankemei?: boolean,
             _sixifuhe?: boolean,
             _report_yakus?: boolean,
+            _play_mode?: boolean;
             _guobiao?: boolean,
             _guobiao_huapai?: boolean,
             _guobiao_no_8fanfu?: boolean,
@@ -193,6 +194,7 @@ type ActionData = {
     is_liqi?: boolean,
     lock_state?: LockState,
     sha256?: string,
+    md5?: string,
     old_scores?: number[],
     delta_scores?: number[],
     scores?: number[],

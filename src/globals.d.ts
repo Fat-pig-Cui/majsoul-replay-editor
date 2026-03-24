@@ -3,6 +3,7 @@ import type {
     t_begin_tiles,
     t_player_tiles,
     t_all_data,
+    t_actions,
     t_clearProject,
     t_setConfig,
     t_setDiscardTiles,
@@ -24,6 +25,7 @@ import type {
     t_setRound,
     t_getLeftTileCnt,
     t_demoGame,
+    t_setPlayGame,
     t_normalMoqie,
     t_moqieLiqi,
     t_comboMopai,
@@ -54,6 +56,8 @@ declare global {
     const player_tiles: t_player_tiles;
     // 完成编辑后的所有信息集合
     const all_data: t_all_data;
+    // 当前对局的所有信息集合,
+    const actions: t_actions;
 
     const clearProject: t_clearProject;
     const setConfig: t_setConfig;
@@ -76,6 +80,7 @@ declare global {
     const setRound: t_setRound;
     const getLeftTileCnt: t_getLeftTileCnt;
     const demoGame: t_demoGame;
+    const setPlayGame: t_setPlayGame;
     const normalMoqie: t_normalMoqie;
     const moqieLiqi: t_moqieLiqi;
     const comboMopai: t_comboMopai;
