@@ -1,13 +1,13 @@
 clearProject();
 
-player_datas[0].nickname = '一姬-契约';
-player_datas[1].nickname = '一姬当千';
-player_datas[2].nickname = '绮春歌';
-player_datas[3].nickname = '校园微风';
-player_datas[0].avatar_id = 400102;
-player_datas[1].avatar_id = 400105;
-player_datas[2].avatar_id = 400106;
-player_datas[3].avatar_id = 400107;
+player_datas[0].nickname = '北原莉莉-契约';
+player_datas[1].nickname = '北原莉莉';
+player_datas[2].nickname = '北原莉莉-契约';
+player_datas[3].nickname = '北原莉莉';
+player_datas[0].avatar_id = 406102;
+player_datas[1].avatar_id = 406101;
+player_datas[2].avatar_id = 406102;
+player_datas[3].avatar_id = 406101;
 
 // 头像框-圣堂百合
 player_datas[0].avatar_frame = player_datas[1].avatar_frame = player_datas[2].avatar_frame = player_datas[3].avatar_frame = 305537;

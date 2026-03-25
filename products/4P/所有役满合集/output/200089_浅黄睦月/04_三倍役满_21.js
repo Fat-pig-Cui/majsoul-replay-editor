@@ -1,13 +1,13 @@
 clearProject();
 
-player_datas[0].nickname = '一姬-契约';
-player_datas[1].nickname = '一姬当千';
-player_datas[2].nickname = '绮春歌';
-player_datas[3].nickname = '校园微风';
-player_datas[0].avatar_id = 400102;
-player_datas[1].avatar_id = 400105;
-player_datas[2].avatar_id = 400106;
-player_datas[3].avatar_id = 400107;
+player_datas[0].nickname = '浅黄睦月-契约';
+player_datas[1].nickname = '浅黄睦月';
+player_datas[2].nickname = '浅黄睦月-契约';
+player_datas[3].nickname = '华芳雅韵';
+player_datas[0].avatar_id = 408902;
+player_datas[1].avatar_id = 408901;
+player_datas[2].avatar_id = 408902;
+player_datas[3].avatar_id = 408903;
 
 player_datas[0].views = player_datas[1].views = player_datas[2].views = player_datas[3].views = [
     {slot: 0, item_id: 308038}, // 立直棒-大蛇比纳

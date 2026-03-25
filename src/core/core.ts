@@ -1,5 +1,5 @@
 /**
- * @file: core.ts - 牌谱文件, 包含牌谱编辑的基础函数
+ * @file: core.ts - 核心文件, 包含牌谱编辑的基础函数
  * @author: GrandDawn, Fat-pig-Cui
  * @email: chubbypig@qq.com
  * @github: https://github.com/Fat-pig-Cui/majsoul-replay-editor

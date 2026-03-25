@@ -1,5 +1,5 @@
 /**
- * @file: huleOnePlayer.ts - 核心文件, 计算 seat 号玩家的和牌导致的各家点数变动, 分为立直, 川麻, 国标三个部分
+ * @file: huleOnePlayer.ts - 核心文件, 计算某位玩家的和牌导致的各家点数变动, 分为立直, 川麻, 国标三个部分
  * @author: GrandDawn, Fat-pig-Cui
  * @email: chubbypig@qq.com
  * @github: https://github.com/Fat-pig-Cui/majsoul-replay-editor

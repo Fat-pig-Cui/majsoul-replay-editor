@@ -2,7 +2,7 @@
     'use strict';
 
     /**
-     * @file: data.ts - 数据文件, 所有非函数的 export 变量都在这里
+     * @file: data.ts - 核心数据文件, 包含所有非函数的 export 变量
      * @author: Fat-pig-Cui
      * @email: chubbypig@qq.com
      * @github: https://github.com/Fat-pig-Cui/majsoul-replay-editor
@@ -21,6 +21,8 @@
         player_datas: [null, null],
         players: [null, null],
     };
+    // 最终要注入到牌谱回放中的内容的内容, 每小局结束后 push 到 all_data.actions 中并清空
+    const actions = [];
     // ============================================================
     /**
      * 一系列基本数据类型的变量集合:
@@ -77,8 +79,6 @@
     const dora_indicator = [[], []];
     // dora相关数据
     const dora_cnt = { cnt: 1, li_cnt: 1, lastype: 0, bonus: 0 };
-    // 最终要注入到牌谱回放中的内容的内容, 每小局结束后 push 到 all_data.actions 中并清空
-    const actions = [];
     // 血战到底/血流成河: 玩家和牌历史
     const hules_history = [];
     // 玩家是否已和牌
@@ -4497,7 +4497,7 @@
     };
 
     /**
-     * @file: huleOnePlayer.ts - 核心文件, 计算 seat 号玩家的和牌导致的各家点数变动, 分为立直, 川麻, 国标三个部分
+     * @file: huleOnePlayer.ts - 核心文件, 计算某位玩家的和牌导致的各家点数变动, 分为立直, 川麻, 国标三个部分
      * @author: GrandDawn, Fat-pig-Cui
      * @email: chubbypig@qq.com
      * @github: https://github.com/Fat-pig-Cui/majsoul-replay-editor
@@ -5083,7 +5083,7 @@
     };
 
     /**
-     * @file: override.ts - 重写游戏函数以实现编辑功能
+     * @file: override.ts - 重写游戏函数以实现编辑功能, 以及部分强化功能
      * @author: Fat-pig-Cui
      * @email: chubbypig@qq.com
      * @github: https://github.com/Fat-pig-Cui/majsoul-replay-editor
@@ -6051,7 +6051,7 @@
     };
 
     /**
-     * @file: core.ts - 牌谱文件, 包含牌谱编辑的基础函数
+     * @file: core.ts - 核心文件, 包含牌谱编辑的基础函数
      * @author: GrandDawn, Fat-pig-Cui
      * @email: chubbypig@qq.com
      * @github: https://github.com/Fat-pig-Cui/majsoul-replay-editor
@@ -7627,7 +7627,7 @@
     };
 
     /**
-     * @file: shortFunction.ts - 一些比较简短的函数
+     * @file: shortFunction.ts - 一些要 export 的比较简短的函数
      * @author: Fat-pig-Cui
      * @email: chubbypig@qq.com
      * @github: https://github.com/Fat-pig-Cui/majsoul-replay-editor
@@ -7787,7 +7787,7 @@
     };
 
     /**
-     * @file: sample.ts - 一些定制化的牌谱, 包括示例牌局和报菜名牌局
+     * @file: sample.ts - 一些定制化的牌谱, 包括示例牌局, 根据截图自制牌谱和报菜名牌局
      * @author: Fat-pig-Cui
      * @email: chubbypig@qq.com
      * @github: https://github.com/Fat-pig-Cui/majsoul-replay-editor

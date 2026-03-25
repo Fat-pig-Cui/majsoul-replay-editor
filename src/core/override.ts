@@ -1,5 +1,5 @@
 /**
- * @file: override.ts - 重写游戏函数以实现编辑功能
+ * @file: override.ts - 重写游戏函数以实现编辑功能, 以及部分强化功能
  * @author: Fat-pig-Cui
  * @email: chubbypig@qq.com
  * @github: https://github.com/Fat-pig-Cui/majsoul-replay-editor

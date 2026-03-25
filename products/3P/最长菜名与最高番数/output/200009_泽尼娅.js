@@ -4,11 +4,11 @@ clearProject();
 // 最后一局闲家的最长菜名(15条55番)
 
 player_datas[0].nickname = '泽尼娅-契约';
-player_datas[1].nickname = '异想烂漫';
-player_datas[2].nickname = '校园微风';
+player_datas[1].nickname = '校园微风';
+player_datas[2].nickname = '共沐夜色';
 player_datas[0].avatar_id = 400902;
-player_datas[1].avatar_id = 400906;
-player_datas[2].avatar_id = 400907;
+player_datas[1].avatar_id = 400907;
+player_datas[2].avatar_id = 400908;
 
 player_datas[0].views = player_datas[1].views = player_datas[2].views = [
     {slot: 6, item_id: 30580008}, // 桌布-小恶魔日记

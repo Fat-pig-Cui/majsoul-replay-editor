@@ -1,13 +1,13 @@
 clearProject();
 
-player_datas[0].nickname = '一姬-契约';
-player_datas[1].nickname = '一姬当千';
-player_datas[2].nickname = '绮春歌';
-player_datas[3].nickname = '校园微风';
-player_datas[0].avatar_id = 400102;
-player_datas[1].avatar_id = 400105;
-player_datas[2].avatar_id = 400106;
-player_datas[3].avatar_id = 400107;
+player_datas[0].nickname = '卡维-契约';
+player_datas[1].nickname = '卡维';
+player_datas[2].nickname = '命运之夏';
+player_datas[3].nickname = '拂晓的G大调';
+player_datas[0].avatar_id = 401002;
+player_datas[1].avatar_id = 401001;
+player_datas[2].avatar_id = 401003;
+player_datas[3].avatar_id = 401004;
 
 player_datas[0].views = player_datas[1].views = player_datas[2].views = player_datas[3].views = [
     {slot: 0, item_id: 305612}, // 立直棒-陨石法杖

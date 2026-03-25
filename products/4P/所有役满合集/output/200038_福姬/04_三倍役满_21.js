@@ -1,13 +1,13 @@
 clearProject();
 
-player_datas[0].nickname = '一姬-契约';
-player_datas[1].nickname = '一姬当千';
-player_datas[2].nickname = '绮春歌';
-player_datas[3].nickname = '校园微风';
-player_datas[0].avatar_id = 400102;
-player_datas[1].avatar_id = 400105;
-player_datas[2].avatar_id = 400106;
-player_datas[3].avatar_id = 400107;
+player_datas[0].nickname = '福姬-契约';
+player_datas[1].nickname = '假日之滨';
+player_datas[2].nickname = '异想烂漫';
+player_datas[3].nickname = '缘结祈岁';
+player_datas[0].avatar_id = 403802;
+player_datas[1].avatar_id = 403805;
+player_datas[2].avatar_id = 403806;
+player_datas[3].avatar_id = 403807;
 
 // 称号-神社贵宾
 player_datas[0].title = player_datas[1].title = player_datas[2].title = player_datas[3].title = 600038;

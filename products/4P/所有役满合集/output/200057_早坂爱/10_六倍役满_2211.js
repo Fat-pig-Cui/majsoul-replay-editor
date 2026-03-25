@@ -1,13 +1,13 @@
 clearProject();
 
-player_datas[0].nickname = '一姬-契约';
-player_datas[1].nickname = '一姬当千';
-player_datas[2].nickname = '绮春歌';
-player_datas[3].nickname = '校园微风';
-player_datas[0].avatar_id = 400102;
-player_datas[1].avatar_id = 400105;
-player_datas[2].avatar_id = 400106;
-player_datas[3].avatar_id = 400107;
+player_datas[0].nickname = '早坂爱-契约';
+player_datas[1].nickname = '早坂爱';
+player_datas[2].nickname = '早坂爱-契约';
+player_datas[3].nickname = '偷心怪盗';
+player_datas[0].avatar_id = 405702;
+player_datas[1].avatar_id = 405701;
+player_datas[2].avatar_id = 405702;
+player_datas[3].avatar_id = 405703;
 
 player_datas[0].views = player_datas[1].views = player_datas[2].views = player_datas[3].views = [
     {slot: 0, item_id: 308018}, // 立直棒-恋之反省

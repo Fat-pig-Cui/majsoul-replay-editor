@@ -11328,5 +11328,125 @@ CFG_ACTIVITY_ACTIVITY_MAP_ = {
         "name_kr": "",
         "need_popout": 0,
         "type": "chest_replace_up"
+    },
+    "260281": {
+        "id": 260281,
+        "name_chs": "",
+        "name_chs_t": "",
+        "name_en": "",
+        "name_jp": "",
+        "name_kr": "",
+        "need_popout": 1,
+        "type": "daily_sign"
+    },
+    "260301": {
+        "id": 260301,
+        "name_chs": "花与暖夜",
+        "name_chs_t": "花與暖夜",
+        "name_en": "Soft Night, Sweet Petals",
+        "name_jp": "花の暖夜",
+        "name_kr": "꽃과 포근한 밤",
+        "need_popout": 1,
+        "type": "task"
+    },
+    "260302": {
+        "id": 260302,
+        "name_chs": "独家报道时间",
+        "name_chs_t": "獨家報導時間",
+        "name_en": "Off-the-Record Exclusive",
+        "name_jp": "独占インタビュー",
+        "name_kr": "단독취재타임",
+        "need_popout": 0,
+        "type": "period_task"
+    },
+    "260310": {
+        "id": 260310,
+        "name_chs": "",
+        "name_chs_t": "",
+        "name_en": "",
+        "name_jp": "",
+        "name_kr": "",
+        "need_popout": 0,
+        "type": "event_cross_time"
+    },
+    "260311": {
+        "id": 260311,
+        "name_chs": "",
+        "name_chs_t": "",
+        "name_en": "",
+        "name_jp": "",
+        "name_kr": "",
+        "need_popout": 0,
+        "type": "shop"
+    },
+    "260312": {
+        "id": 260312,
+        "name_chs": "",
+        "name_chs_t": "",
+        "name_en": "",
+        "name_jp": "",
+        "name_kr": "",
+        "need_popout": 0,
+        "type": "item"
+    },
+    "260320": {
+        "id": 260320,
+        "name_chs": "",
+        "name_chs_t": "",
+        "name_en": "",
+        "name_jp": "",
+        "name_kr": "",
+        "need_popout": 0,
+        "type": "chest_up"
+    },
+    "260321": {
+        "id": 260321,
+        "name_chs": "",
+        "name_chs_t": "",
+        "name_en": "",
+        "name_jp": "",
+        "name_kr": "",
+        "need_popout": 0,
+        "type": "chest_up"
+    },
+    "260322": {
+        "id": 260322,
+        "name_chs": "",
+        "name_chs_t": "",
+        "name_en": "",
+        "name_jp": "",
+        "name_kr": "",
+        "need_popout": 0,
+        "type": "chest_up"
+    },
+    "260330": {
+        "id": 260330,
+        "name_chs": "",
+        "name_chs_t": "",
+        "name_en": "",
+        "name_jp": "",
+        "name_kr": "",
+        "need_popout": 0,
+        "type": "chest_replace_up"
+    },
+    "260331": {
+        "id": 260331,
+        "name_chs": "",
+        "name_chs_t": "",
+        "name_en": "",
+        "name_jp": "",
+        "name_kr": "",
+        "need_popout": 0,
+        "type": "chest_replace_up"
+    },
+    "260332": {
+        "id": 260332,
+        "name_chs": "",
+        "name_chs_t": "",
+        "name_en": "",
+        "name_jp": "",
+        "name_kr": "",
+        "need_popout": 0,
+        "type": "chest_replace_up"
     }
 }

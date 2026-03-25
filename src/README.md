@@ -1,0 +1,25 @@
+# main.js 的 TypeScript 源码结构
+
+- src
+    - [main.ts](main.ts): 入口文件, 包含所有导出到 window 的变量和函数
+    - [globals.d.ts](globals.d.ts): 导出到 window 的变量和函数的声明全局, 用于 products 文件夹下的 JavaScript 牌谱文件编写时的自动补全
+    - core
+        - [core.ts](core/core.ts): 核心文件, 包含牌谱编辑的基础函数
+        - [huleOnePlayer.ts](core/huleOnePlayer.ts): 核心文件, 计算某位玩家的和牌导致的各家点数变动, 分为立直, 川麻, 国标三个部分
+        - [calcFan.ts](core/calcFan.ts): 核心文件, 根据牌算番, 分为立直, 川麻, 国标三个部分
+        - [data.ts](core/data.ts): 核心数据文件, 包含所有非函数的 export 变量
+        - [shortFunction.ts](core/shortFunction.ts): 一些要 export 的比较简短的函数
+        - [simplifyFunction.ts](core/simplifyFunction.ts): 便捷函数
+        - [exportedUtils.ts](core/exportedUtils.ts): 一些要 export 的辅助函数
+        - [sample.ts](core/sample.ts): 一些定制化的牌谱, 包括示例牌局, 根据截图自制牌谱和报菜名牌局
+        - [constants.ts](core/constants.ts): 一些常量和自制的番种信息
+        - [activityFunction.ts](core/activityFunction.ts): 活动场相关函数
+        - [glue.ts](core/glue.ts): 胶水代码, 用于连接界面和核心逻辑
+        - [misc.ts](core/misc.ts): 随机装扮相关的函数和一些比较简短的函数
+        - [override.ts](core/override.ts): 重写游戏函数以实现编辑功能, 以及部分强化功能
+        - [utils.ts](core/utils.ts): 一些内部的辅助函数
+    - types: 类型文件
+        - [data.d.ts](types/data.d.ts): 包含绝大部分自定义类型
+        - [sample.d.ts](types/sample.d.ts): sample.ts 中"根据截图自制牌谱"要用到的类型
+        - [constants.d.ts](types/constants.d.ts): constants.ts 中特有的类型, 除了屏蔽类型检查没什么用
+        - [override.d.ts](types/override.d.ts): override.ts 中重写函数的类型, 除了屏蔽类型检查没什么用

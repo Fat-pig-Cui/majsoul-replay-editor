@@ -1,5 +1,5 @@
 /**
- * @file: shortFunction.ts - 一些比较简短的函数
+ * @file: shortFunction.ts - 一些要 export 的比较简短的函数
  * @author: Fat-pig-Cui
  * @email: chubbypig@qq.com
  * @github: https://github.com/Fat-pig-Cui/majsoul-replay-editor

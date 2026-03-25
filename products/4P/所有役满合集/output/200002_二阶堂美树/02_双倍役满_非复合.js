@@ -1,13 +1,13 @@
 clearProject();
 
-player_datas[0].nickname = '一姬-契约';
-player_datas[1].nickname = '一姬当千';
-player_datas[2].nickname = '绮春歌';
-player_datas[3].nickname = '校园微风';
-player_datas[0].avatar_id = 400102;
-player_datas[1].avatar_id = 400105;
-player_datas[2].avatar_id = 400106;
-player_datas[3].avatar_id = 400107;
+player_datas[0].nickname = '二阶堂美树-契约';
+player_datas[1].nickname = '万象沐春';
+player_datas[2].nickname = '鸢尾花之夜';
+player_datas[3].nickname = '玩转夏日';
+player_datas[0].avatar_id = 400202;
+player_datas[1].avatar_id = 400206;
+player_datas[2].avatar_id = 400207;
+player_datas[3].avatar_id = 400208;
 
 // 称号-喵国大护法
 player_datas[0].title = player_datas[1].title = player_datas[2].title = player_datas[3].title = 600021;

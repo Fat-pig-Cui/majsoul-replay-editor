@@ -1,11 +1,11 @@
 clearProject();
 
 player_datas[0].nickname = '寺崎千穗理-契约';
-player_datas[1].nickname = '佳期不负';
-player_datas[2].nickname = '玩转夏日';
+player_datas[1].nickname = '玩转夏日';
+player_datas[2].nickname = '共沐夜色';
 player_datas[0].avatar_id = 403302;
-player_datas[1].avatar_id = 403303;
-player_datas[2].avatar_id = 403304;
+player_datas[1].avatar_id = 403304;
+player_datas[2].avatar_id = 403305;
 
 setConfig({
     category: 1,

@@ -1,5 +1,5 @@
 /**
- * @file: data.ts - 数据文件, 所有非函数的 export 变量都在这里
+ * @file: data.ts - 核心数据文件, 包含所有非函数的 export 变量
  * @author: Fat-pig-Cui
  * @email: chubbypig@qq.com
  * @github: https://github.com/Fat-pig-Cui/majsoul-replay-editor
@@ -22,6 +22,9 @@ export const all_data: AllData = {
     player_datas: [null, null],
     players: [null, null],
 };
+
+// 最终要注入到牌谱回放中的内容的内容, 每小局结束后 push 到 all_data.actions 中并清空
+export const actions: Actions = [];
 
 // ============================================================
 
@@ -92,9 +95,6 @@ export const dora_indicator: DoraIndicator = [[], []];
 
 // dora相关数据
 export const dora_cnt: DoraCnt = {cnt: 1, li_cnt: 1, lastype: 0, bonus: 0};
-
-// 最终要注入到牌谱回放中的内容的内容, 每小局结束后 push 到 all_data.actions 中并清空
-export const actions: Actions = [];
 
 // 血战到底/血流成河: 玩家和牌历史
 export const hules_history: HuleInfo[] = [];

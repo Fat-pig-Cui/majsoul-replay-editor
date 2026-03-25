@@ -55,7 +55,7 @@ declare global {
     const player_tiles: t_player_tiles;
     // 完成编辑后的所有信息集合
     const all_data: t_all_data;
-    // 当前对局的所有信息集合,
+    // 当前对局的所有信息集合
     const actions: t_actions;
 
     const clearProject: t_clearProject;

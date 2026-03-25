@@ -1,13 +1,13 @@
 clearProject();
 
-player_datas[0].nickname = '一姬-契约';
-player_datas[1].nickname = '一姬当千';
-player_datas[2].nickname = '绮春歌';
-player_datas[3].nickname = '校园微风';
-player_datas[0].avatar_id = 400102;
-player_datas[1].avatar_id = 400105;
-player_datas[2].avatar_id = 400106;
-player_datas[3].avatar_id = 400107;
+player_datas[0].nickname = '八木唯-契约';
+player_datas[1].nickname = '四方雀者';
+player_datas[2].nickname = '异想烂漫';
+player_datas[3].nickname = '云踪侠影';
+player_datas[0].avatar_id = 400702;
+player_datas[1].avatar_id = 400707;
+player_datas[2].avatar_id = 400708;
+player_datas[3].avatar_id = 400709;
 
 player_datas[0].views = player_datas[1].views = player_datas[2].views = player_datas[3].views = [
     {slot: 6, item_id: 30580007}, // 动态桌布-星间飞行

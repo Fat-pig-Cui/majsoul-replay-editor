@@ -36,9 +36,9 @@ def generator_sp():
     for file_name in file_names:
         infile = open('./' + file_name, 'r', encoding='utf-8')
 
-        tmp_nickname = []
-        tmp_avatar_id = []
         for index in range(len(chars)):
+            tmp_nickname = []
+            tmp_avatar_id = []
             outfile = open('./output/' + outfile_dirname[index] + '/' + file_name, 'w', encoding='utf-8')
             flag_views = True
             name_count = id_count = 0

@@ -1,13 +1,13 @@
 clearProject();
 
-player_datas[0].nickname = '一姬-契约';
-player_datas[1].nickname = '一姬当千';
-player_datas[2].nickname = '绮春歌';
-player_datas[3].nickname = '校园微风';
-player_datas[0].avatar_id = 400102;
-player_datas[1].avatar_id = 400105;
-player_datas[2].avatar_id = 400106;
-player_datas[3].avatar_id = 400107;
+player_datas[0].nickname = '福路美穗子-契约';
+player_datas[1].nickname = '福路美穗子';
+player_datas[2].nickname = '福路美穗子-契约';
+player_datas[3].nickname = '兔耳派对';
+player_datas[0].avatar_id = 406302;
+player_datas[1].avatar_id = 406301;
+player_datas[2].avatar_id = 406302;
+player_datas[3].avatar_id = 406303;
 
 player_datas[0].views = player_datas[1].views = player_datas[2].views = player_datas[3].views = [
     {slot: 0, item_id: 308023}, // 立直棒-爱心便当

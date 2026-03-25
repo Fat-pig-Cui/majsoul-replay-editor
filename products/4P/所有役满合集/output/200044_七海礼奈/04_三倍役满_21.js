@@ -1,13 +1,13 @@
 clearProject();
 
-player_datas[0].nickname = '一姬-契约';
-player_datas[1].nickname = '一姬当千';
-player_datas[2].nickname = '绮春歌';
-player_datas[3].nickname = '校园微风';
-player_datas[0].avatar_id = 400102;
-player_datas[1].avatar_id = 400105;
-player_datas[2].avatar_id = 400106;
-player_datas[3].avatar_id = 400107;
+player_datas[0].nickname = '七海礼奈-契约';
+player_datas[1].nickname = '白色礼赞';
+player_datas[2].nickname = '枕边私语';
+player_datas[3].nickname = '云窗春几枝';
+player_datas[0].avatar_id = 404402;
+player_datas[1].avatar_id = 404403;
+player_datas[2].avatar_id = 404404;
+player_datas[3].avatar_id = 404405;
 
 setConfig({
     category: 1,

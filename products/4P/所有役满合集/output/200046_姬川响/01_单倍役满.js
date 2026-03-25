@@ -1,13 +1,13 @@
 clearProject();
 
-player_datas[0].nickname = '一姬-契约';
-player_datas[1].nickname = '一姬当千';
-player_datas[2].nickname = '绮春歌';
-player_datas[3].nickname = '校园微风';
-player_datas[0].avatar_id = 400102;
-player_datas[1].avatar_id = 400105;
-player_datas[2].avatar_id = 400106;
-player_datas[3].avatar_id = 400107;
+player_datas[0].nickname = '姬川响-契约';
+player_datas[1].nickname = '姬川响';
+player_datas[2].nickname = '新岁添喜';
+player_datas[3].nickname = '奇遇星光';
+player_datas[0].avatar_id = 404602;
+player_datas[1].avatar_id = 404601;
+player_datas[2].avatar_id = 404603;
+player_datas[3].avatar_id = 404604;
 
 // 主播(猫爪)认证
 player_datas[0].verified = player_datas[1].verified = player_datas[2].verified = player_datas[3].verified = 1;

@@ -1,5 +1,5 @@
 /**
- * @file: sample.ts - 一些定制化的牌谱, 包括示例牌局和报菜名牌局
+ * @file: sample.ts - 一些定制化的牌谱, 包括示例牌局, 根据截图自制牌谱和报菜名牌局
  * @author: Fat-pig-Cui
  * @email: chubbypig@qq.com
  * @github: https://github.com/Fat-pig-Cui/majsoul-replay-editor
