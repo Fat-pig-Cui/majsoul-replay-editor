@@ -39,6 +39,13 @@ type RoundJson = {
 
 type NewFuluInfo = { type: string, own_tiles: Tile[], ming_tile?: Tile, from: number };
 type NewFulu = [NewFuluInfo[], NewFuluInfo[], NewFuluInfo[]?, NewFuluInfo[]?];
-type NewTile = { tile: Tile, moqie: boolean, is_liqi: boolean};
+type NewTile = { tile: Tile, moqie: boolean, is_liqi: boolean };
 type NewDiscardTiles = [NewTile[], NewTile[], NewTile[]?, NewTile[]?];
 
+type TenhouJSON = {
+    title: string[],
+    name: string[],
+    rule: { aka: number },
+    log: TenhouInfo[][],
+}
+type TenhouInfo = (number | string)[]

@@ -13,14 +13,14 @@
 
     function parseRecords(gameDetailRecords, json) {
         if (gameDetailRecords.version === 0) {
-            for (const i in gameDetailRecords.records) {
+            for (const i of gameDetailRecords.records.keys()) {
                 const record = pbWrapper.decode(gameDetailRecords.records[i]);
                 const pb = net.ProtobufManager.lookupType(record.name);
                 const data = JSON.parse(JSON.stringify(pb.decode(record.data)));
                 json.records[i] = {name: record.name, data: data};
             }
         } else if (gameDetailRecords.version === 210715) {
-            for (const i in gameDetailRecords.actions) {
+            for (const i of gameDetailRecords.actions.keys()) {
                 if (gameDetailRecords.actions[i].type === 1) {
                     const record = pbWrapper.decode(gameDetailRecords.actions[i].result);
                     const pb = net.ProtobufManager.lookupType(record.name);

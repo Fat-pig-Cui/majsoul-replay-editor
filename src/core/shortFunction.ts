@@ -13,7 +13,7 @@ import {roundBegin} from "./core";
  * 设置对局的模式
  */
 export const setConfig = (c: Config): void => {
-    for (const key in c)
+    for (const key of Object.keys(c))
         config[key] = c[key];
 };
 
@@ -21,16 +21,16 @@ export const setConfig = (c: Config): void => {
  * 设置玩家的切牌集合
  */
 export const setDiscardTiles = (tiles: Players_String): void => {
-    for (const i in tiles)
-        discard_tiles[i] = separateWithMoqie(tiles[i]);
+    for (const seat of Object.keys(tiles))
+        discard_tiles[seat] = separateWithMoqie(tiles[seat]);
 };
 
 /**
  * 设置玩家的摸牌集合
  */
 export const setDealTiles = (tiles: Players_String): void => {
-    for (const i in tiles)
-        deal_tiles[i] = separateWithMoqie(tiles[i]);
+    for (const seat of Object.keys(tiles))
+        deal_tiles[seat] = separateWithMoqie(tiles[seat]);
 };
 
 /**

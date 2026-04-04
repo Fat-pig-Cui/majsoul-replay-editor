@@ -24,8 +24,6 @@ import type {
     t_kaipaiLock,
     t_setRound,
     t_getLeftTileCnt,
-    t_demoGame,
-    t_setPlayGame,
     t_normalMoqie,
     t_moqieLiqi,
     t_comboMopai,
@@ -33,7 +31,6 @@ import type {
     t_zimoHu,
     t_moqieLiuju,
     t_judgeTile,
-    t_allEqualTiles,
     t_isEqualTile,
     t_decompose,
     t_separate,
@@ -41,9 +38,12 @@ import type {
     t_calcTingpai,
     t_getLstAction,
     t_setScores,
-    t_resetReplay,
+    t_demoGame,
+    t_setPlayGame,
+    t_tenhou2Majsoul,
     t_reportYaku,
     t_reportYaku_yiji,
+    t_resetReplay,
 } from './main';
 
 declare global {
@@ -78,8 +78,6 @@ declare global {
     const kaipaiLock: t_kaipaiLock;
     const setRound: t_setRound;
     const getLeftTileCnt: t_getLeftTileCnt;
-    const demoGame: t_demoGame;
-    const setPlayGame: t_setPlayGame;
     const normalMoqie: t_normalMoqie;
     const moqieLiqi: t_moqieLiqi;
     const comboMopai: t_comboMopai;
@@ -87,7 +85,6 @@ declare global {
     const zimoHu: t_zimoHu;
     const moqieLiuju: t_moqieLiuju;
     const judgeTile: t_judgeTile;
-    const allEqualTiles: t_allEqualTiles;
     const isEqualTile: t_isEqualTile;
     const decompose: t_decompose;
     const separate: t_separate;
@@ -95,7 +92,10 @@ declare global {
     const calcTingpai: t_calcTingpai;
     const getLstAction: t_getLstAction;
     const setScores: t_setScores;
-    const resetReplay: t_resetReplay;
+    const demoGame: t_demoGame;
+    const setPlayGame: t_setPlayGame;
+    const tenhou2Majsoul: t_tenhou2Majsoul;
     const reportYaku: t_reportYaku;
     const reportYaku_yiji: t_reportYaku_yiji;
+    const resetReplay: t_resetReplay;
 }

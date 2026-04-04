@@ -5,11 +5,11 @@
  * @github: https://github.com/Fat-pig-Cui/majsoul-replay-editor
  */
 
-import {all_data, actions, begin_tiles, base_info} from "./data";
-import {mopai, qiepai, randomPaishan, roundEnd, gameBegin, hupai, huangpai, liuju, mingpai, zimingpai} from "./core";
-import {normalMoqie, moqieLiqi} from "./simplifyFunction";
+import {actions, all_data, base_info, begin_tiles} from "./data";
+import {gameBegin, huangpai, hupai, liuju, mingpai, mopai, qiepai, randomPaishan, roundEnd, zimingpai} from "./core";
+import {moqieLiqi, normalMoqie} from "./simplifyFunction";
 import {isEqualTile, separate} from "./exportedUtils";
-import {randomCmp, errRoundInfo} from "./utils";
+import {errRoundInfo, randomCmp} from "./utils";
 import {is_report_yakus} from "./misc";
 import {Constants} from "./constants";
 
@@ -37,6 +37,11 @@ export const demoGame = (): void => {
     hupai();
 };
 
+/**
+ * 根据截图自制牌谱
+ *
+ * @param jsons - 截图中的信息, 详见 RoundJson 的定义, 或查看 products 文件夹下的"根据可见手牌和牌河生成雀魂牌谱"
+ */
 export const setPlayGame = (jsons: RoundJson | RoundJson[]): void => {
     if (!(jsons instanceof Array))
         jsons = [jsons];
@@ -341,6 +346,250 @@ export const setPlayGame = (jsons: RoundJson | RoundJson[]): void => {
     }
 };
 
+export const tenhou2Majsoul = (json: TenhouJSON) => {
+    if (!json)
+        throw new Error('User canceled input');
+    gameBegin();
+
+    // log[0][0][0]: 等于 chang * 4 + ju
+    // log[0][0][1]: 本场数
+    // log[0][0][2]: 供托棒子个数
+    const log = json.log;
+    log[0].shift();
+    const tmp_scores = log[0].shift() as number[];
+    const biao_dora = log[0].shift() as number[];
+    const li_dora = log[0].shift() as number[];
+    const dict = Constants.TOUHOU_DICT;
+
+    // 起手
+    const tiles: number[][] = [];
+    // 广义摸牌组
+    const new_mopai_set: TenhouInfo[] = [[], [], [], []];
+    // 广义切牌组
+    const new_qiepai_set: TenhouInfo[] = [[], [], [], []];
+    // 各家摸牌的巡目河切牌的巡目
+    const mopai_xunmu = [0, 0, 0, 0], qiepai_xunmu = [0, 0, 0, 0];
+
+    for (let i = 0; i < Math.floor(log[0].length / 3); i++) {
+        tiles[i] = log[0][3 * i] as number[];
+        new_mopai_set[i] = log[0][3 * i + 1];
+        new_qiepai_set[i] = log[0][3 * i + 2];
+    }
+
+    const ply_cnt = tiles[3].length === 0 ? 3 : 4;
+
+    if (ply_cnt === 3) { // 三麻点数修正
+        let all_4p_points = true;
+        for (const seat of tmp_scores.keys())
+            if (tmp_scores[seat] !== 25000)
+                all_4p_points = false;
+        if (all_4p_points) // 三麻点数修正
+            for (let i = 0; i < ply_cnt; i++)
+                tmp_scores[i] = 35000;
+    }
+
+    // while 循环关键变量: seat: 要操作的玩家, nxt_step: 下个操作的类型
+    let seat = base_info.ju, nxt_step = 'mopai';
+    while (true) {
+        switch (nxt_step) {
+            case 'mopai':
+                new_mopai();
+                break;
+            case 'qiepai':
+                new_qiepai();
+                break;
+            case 'chi':
+            case 'peng':
+            case 'minggang':
+                new_mingpai();
+                break;
+            case 'angang':
+            case 'jiagang':
+                new_zimingpai();
+                break;
+            case 'babei':
+                break;
+        }
+        if (nxt_step === 'liuju') {
+
+            huangpai();
+            fixPaishan();
+
+            break;
+        }
+    }
+
+    // new_mopai 不会改变 seat
+    function new_mopai() {
+        if (mopai_xunmu[seat] >= new_mopai_set[seat].length) {
+            nxt_step = 'liuju';
+            return;
+        }
+        // 开局, 亲家补全至14张牌
+        if (seat === base_info.ju && mopai_xunmu[base_info.ju] === 0) {
+            tiles[base_info.ju].push(new_mopai_set[base_info.ju][mopai_xunmu[base_info.ju]] as number);
+
+            for (const seat of tiles.keys())
+                begin_tiles[seat] = process(tiles[seat]);
+
+            let zhishipais = '';
+            for (let i = biao_dora.length - 1; i >= 0; i--) {
+                if (li_dora[i] !== undefined)
+                    zhishipais += dict[li_dora[i]];
+                zhishipais += dict[biao_dora[i]];
+            }
+
+            randomPaishan('', zhishipais + '....');
+
+            function process(tls: number[]) {
+                let ret = '';
+                for (const touhou_tile of tls)
+                    ret += dict[touhou_tile];
+                return ret;
+            }
+        } else
+            mopai(seat, dict[new_mopai_set[seat][mopai_xunmu[seat]]]);
+
+        mopai_xunmu[seat]++;
+
+        const nxt_qiepai = new_qiepai_set[seat][qiepai_xunmu[seat]];
+        if (typeof nxt_qiepai == 'string') {
+            if (nxt_qiepai.includes('a'))
+                nxt_step = 'angang';
+            else if (nxt_qiepai.includes('k'))
+                nxt_step = 'jiagang';
+            else if (nxt_qiepai.includes('r'))
+                nxt_step = 'qiepai';
+        } else
+            nxt_step = 'qiepai';
+    }
+
+    function new_qiepai() {
+        if (qiepai_xunmu[seat] >= new_qiepai_set[seat].length) {
+            nxt_step = 'liuju';
+            return;
+        }
+        let is_liqi = false;
+        let tile: Tile;
+        const nxt_qiepai = new_qiepai_set[seat][qiepai_xunmu[seat]];
+        if (typeof nxt_qiepai == 'string') {
+            tile = dict[parseInt(nxt_qiepai.substring(1))];
+            is_liqi = true;
+        } else
+            tile = dict[nxt_qiepai];
+
+        qiepai(seat, tile, is_liqi);
+
+        qiepai_xunmu[seat]++;
+
+        // 明杠
+        for (let i = seat + 1; i < seat + ply_cnt; i++) {
+            const tmp_seat = i % ply_cnt as Seat;
+            const nxt_mopai = new_mopai_set[tmp_seat][mopai_xunmu[tmp_seat]];
+            if (typeof nxt_mopai == 'string') {
+                const [tmp_fulu_from_seat, tmp_fulu_type] = judge_fulu(nxt_mopai, tmp_seat);
+                if (tmp_fulu_from_seat === seat && tmp_fulu_type === 'm') {
+                    nxt_step = 'minggang';
+                    seat = tmp_seat;
+                    return;
+                }
+            }
+        }
+        // 碰
+        for (let i = seat + 1; i < seat + ply_cnt; i++) {
+            const tmp_seat = i % ply_cnt as Seat;
+            const nxt_mopai = new_mopai_set[tmp_seat][mopai_xunmu[tmp_seat]];
+            if (typeof nxt_mopai == 'string') {
+                const [tmp_fulu_from_seat, tmp_fulu_type] = judge_fulu(nxt_mopai, tmp_seat);
+                if (tmp_fulu_from_seat === seat && tmp_fulu_type === 'p') {
+                    nxt_step = 'peng';
+                    seat = tmp_seat;
+                    return;
+                }
+            }
+        }
+        // 吃
+        const tmp_seat = (seat + 1) % ply_cnt as Seat;
+        const nxt_mopai = new_mopai_set[tmp_seat][mopai_xunmu[tmp_seat]];
+        if (typeof nxt_mopai == 'string') {
+            const [tmp_fulu_from_seat, tmp_fulu_type] = judge_fulu(nxt_mopai, tmp_seat);
+            if (tmp_fulu_from_seat === seat && tmp_fulu_type === 'c') {
+                nxt_step = 'chi';
+                seat = tmp_seat;
+                return;
+            }
+        }
+        // 摸牌
+        seat = (seat + 1) % ply_cnt;
+        nxt_step = 'mopai';
+
+        function judge_fulu(tmp_fulu: string, tmp_seat: Seat) {
+            const fulu_types = ['c', 'p', 'm'];
+            let fulu_local_seat = 0;
+            let fulu_type = '';
+            for (const type of fulu_types)
+                if (tmp_fulu.includes(type)) {
+                    let index = tmp_fulu.indexOf(type);
+                    if (index === 6)
+                        index = 4;
+                    fulu_type = type;
+                    fulu_local_seat = 3 - index / 2;
+                    break;
+                }
+            const real_seat = (fulu_local_seat + tmp_seat) % 4;
+            return [real_seat, fulu_type];
+        }
+    }
+
+    // new_mingpai 不会改变 seat
+    function new_mingpai() {
+        const fulu = new_mopai_set[seat][mopai_xunmu[seat]];
+        mopai_xunmu[seat]++;
+
+        let [tmp_tiles, fulu_type] = parse_fulu(fulu);
+        const tiles: Tile[] = [];
+        while (tmp_tiles.length) {
+            tiles.push(dict[parseInt(tmp_tiles.substring(0, 2))]);
+            tmp_tiles = tmp_tiles.substring(2);
+        }
+
+        mingpai(seat, tiles.join(''));
+
+        if (fulu_type === 'm') {
+            qiepai_xunmu[seat]++;
+            nxt_step = 'mopai';
+        } else
+            nxt_step = 'qiepai';
+    }
+
+    // new_zimingpai 不会改变 seat
+    function new_zimingpai() {
+        const fulu = new_qiepai_set[seat][qiepai_xunmu[seat]];
+        qiepai_xunmu[seat]++;
+
+        const [tmp_tiles, fulu_type] = parse_fulu(fulu);
+        const tile = dict[parseInt(tmp_tiles.substring(0, 2))];
+        const type = fulu_type === 'a' ? 'angang' : 'jiagang';
+
+        zimingpai(seat, tile, type);
+
+        nxt_step = 'mopai';
+    }
+
+    function parse_fulu(fulu: string|number) {
+        // 'c': 吃, 'p': 碰, 'm': 明杠, 'a': 暗杠, 'k': 加杠
+        if (typeof fulu === 'number')
+            return [];
+        const fulu_types = ['c', 'p', 'm', 'a', 'k'];
+        for (const type of fulu_types)
+            if (fulu.includes(type)) {
+                const index = fulu.indexOf(type);
+                return [fulu.substring(0, index) + fulu.substring(index + 3), type];
+            }
+        return [];
+    }
+};
+
 /**
  * 用于报菜名的示例牌局
  */
@@ -381,10 +630,10 @@ const fixPaishan = (dora_num: number = 1, li_dora_num: number = 0): void => {
     const normal_tiles: Tile[] = [], lingshang_tiles: Tile[] = [];
 
     const cur_actions = all_data.all_actions[all_data.all_actions.length - 1];
-    for (const i in cur_actions) {
-        if (cur_actions[i].name === 'RecordDealTile') {
+    for (const [index, action] of cur_actions.entries()) {
+        if (action.name === 'RecordDealTile') {
             let is_lingshang = false;
-            const lst_action = cur_actions[parseInt(i) - 1];
+            const lst_action = cur_actions[index - 1];
             if (lst_action.name === 'RecordChiPengGang' && lst_action.data.type === 2) // 上一个操作是暗杠, 则这张牌是岭上牌
                 is_lingshang = true;
             if (lst_action.name === 'RecordAnGangAddGang' || lst_action.name === 'RecordBaBei') // 上一个操作是暗杠/加杠/拔北, 则这张牌是岭上牌
@@ -392,10 +641,10 @@ const fixPaishan = (dora_num: number = 1, li_dora_num: number = 0): void => {
 
             if (is_lingshang) {
                 lingshang_num++;
-                lingshang_tiles.push(cur_actions[i].data.tile);
+                lingshang_tiles.push(action.data.tile);
             } else {
                 normal_num++;
-                normal_tiles.push(cur_actions[i].data.tile);
+                normal_tiles.push(action.data.tile);
             }
         }
     }

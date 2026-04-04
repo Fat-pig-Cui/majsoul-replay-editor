@@ -13,14 +13,14 @@
 
     function parseRecords(gameDetailRecords, json) {
         if (gameDetailRecords.version === 0) {
-            for (const i in gameDetailRecords.records) {
+            for (const i of gameDetailRecords.records.keys()) {
                 const record = pbWrapper.decode(gameDetailRecords.records[i]);
                 const pb = net.ProtobufManager.lookupType(record.name);
                 const data = JSON.parse(JSON.stringify(pb.decode(record.data)));
                 json.records[i] = {name: record.name, data: data};
             }
         } else if (gameDetailRecords.version === 210715) {
-            for (const i in gameDetailRecords.actions) {
+            for (const i of gameDetailRecords.actions.keys()) {
                 if (gameDetailRecords.actions[i].type === 1) {
                     const record = pbWrapper.decode(gameDetailRecords.actions[i].result);
                     const pb = net.ProtobufManager.lookupType(record.name);
@@ -71,12 +71,12 @@
         let txt = '';
         txt += `clearProject();\n\n// ${uuid}\n\n`;
 
-        for (const account of json.head.accounts)
-            txt += `player_datas[${i}]=${JSON.stringify(account)};\n`;
+        for (const [index, account] of json.head.accounts.entries())
+            txt += `player_datas[${index}]=${JSON.stringify(account)};\n`;
         txt += `\nsetConfig(${JSON.stringify(json.head.config)});\n\n`;
 
         const actions1 = json.data.data.actions;
-        for (const action of actions1)
+        for (const [index, action] of actions1.entries())
             if (action.result) {
                 const tmp = action.result.name.split('.');
                 action.result.name = tmp[tmp.length - 1];
@@ -93,7 +93,7 @@
                     txt += `setPaishan('${Data.paishan}');\n`;
                     if (json.head.config.mode && json.head.config.mode.detail_rule && json.head.config.mode.detail_rule.muyu_mode) {
                         let muyuseats = '', tmp = [];
-                        for (let j = i + 1; j < actions1.length; j++)
+                        for (let j = index + 1; j < actions1.length; j++)
                             if (actions1[j].result && actions1[j].result.data.muyu) {
                                 if (!tmp[action.result.data.muyu.seat])
                                     muyuseats += action.result.data.muyu.seat.toString();
@@ -130,8 +130,8 @@
                     const gap_types = Data.gap_types;
                     const words = {'0': 'p', '1': 'm', '2': 's'};
                     let ret = '';
-                    for (const i in gap_types)
-                        ret += words[gap_types[i]];
+                    for (const type of gap_types)
+                        ret += words[type];
                     txt += `dingque('${ret}');\n`;
                 }
                 if (action.result.name === 'RecordDealTile') {
@@ -144,10 +144,10 @@
                     const froms = Data.froms, seat = Data.seat, tiles = Data.tiles;
 
                     let c_tiles = '';
-                    for (const i in tiles)
+                    for (const i of tiles.keys())
                         if (froms[i] === seat)
                             c_tiles += tiles[i];
-                    let j = i + 1;
+                    let j = index + 1;
                     while (!actions1[j].result)
                         j++;
                     if (actions1[j].result.name === 'RecordGangResultEnd')
@@ -159,7 +159,7 @@
                     const tile = Data.tiles, type = Data.type;
                     const c_type = type === 3 ? 'angang' : 'jiagang';
 
-                    let j = i + 1;
+                    let j = index + 1;
                     while (!actions1[j].result)
                         j++;
                     if (actions1[j].result.name === 'RecordGangResultEnd')
@@ -173,9 +173,9 @@
                 }
                 if (action.result.name === 'RecordHule') {
                     const all_seats = [];
-                    for (const i in Data.hules)
+                    for (const i of Data.hules.keys())
                         all_seats.push(Data.hules[i].seat);
-                    txt += `hupai(${all_seats});\n\n`;
+                    txt += `hupai(${all_seats.toString()});\n\n`;
                 }
                 if (action.result.name === 'RecordLiuJu') {
                     txt += `liuju();\n\n`;
@@ -185,15 +185,15 @@
                 }
                 if (action.result.name === 'RecordHuleXueZhanMid') {
                     const all_seats = [];
-                    for (const i in Data.hules)
+                    for (const i of Data.hules.keys())
                         all_seats.push(Data.hules[i].seat);
-                    txt += `hupai([${all_seats}]);\n\n`;
+                    txt += `hupai([${all_seats.toString()}]);\n\n`;
                 }
                 if (action.result.name === 'RecordHuleXueZhanEnd') {
                     const all_seats = [];
-                    for (const i in Data.hules)
+                    for (const i of Data.hules.keys())
                         all_seats.push(Data.hules[i].seat);
-                    txt += `hupai([${all_seats}],true);\n\n\n\n`;
+                    txt += `hupai([${all_seats.toString()}],true);\n\n\n\n`;
                 }
                 if (action.result.name === 'RecordGangResult') { // 不需要
                 }
@@ -207,7 +207,7 @@
                         txt += `qiepai('${tile}','anpai');\n`;
                 }
                 if (action.result.name === 'RecordLockTile') {
-                    let j = i - 1;
+                    let j = index - 1;
                     while (!actions1[j].result)
                         j--;
                     if (actions1[j].result.name === 'RecordUnveilTile') {

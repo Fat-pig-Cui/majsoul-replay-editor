@@ -2,12 +2,12 @@
 
 - src
     - [main.ts](main.ts): 入口文件, 包含所有导出到 window 的变量和函数
-    - [globals.d.ts](globals.d.ts): 导出到 window 的变量和函数的声明全局, 用于 products 文件夹下的 JavaScript 牌谱文件编写时的自动补全
+    - [globals.d.ts](globals.d.ts): 导出到 window 的变量和函数的声明全局, 用于编写 JavaScript 牌谱文件时的自动补全
     - core
         - [core.ts](core/core.ts): 核心文件, 包含牌谱编辑的基础函数
         - [huleOnePlayer.ts](core/huleOnePlayer.ts): 核心文件, 计算某位玩家的和牌导致的各家点数变动, 分为立直, 川麻, 国标三个部分
         - [calcFan.ts](core/calcFan.ts): 核心文件, 根据牌算番, 分为立直, 川麻, 国标三个部分
-        - [data.ts](core/data.ts): 核心数据文件, 包含所有非函数的 export 变量
+        - [data.ts](core/data.ts): 核心数据文件, 包含所有非函数变量
         - [shortFunction.ts](core/shortFunction.ts): 一些要 export 的比较简短的函数
         - [simplifyFunction.ts](core/simplifyFunction.ts): 便捷函数
         - [exportedUtils.ts](core/exportedUtils.ts): 一些要 export 的辅助函数

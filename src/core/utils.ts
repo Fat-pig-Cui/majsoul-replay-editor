@@ -19,10 +19,26 @@ import {Constants} from "./constants";
 /**
  * 将 tile 牌简化: 去掉最后的 SPT_SUFFIX, 并将红宝牌转换为普通牌
  */
-export const simplify = (tile: Tile): Tile => {
+export const simplify = (tile: Tile): SimpleTile => {
     if (tile[0] == '0')
-        return '5' + tile[1] as Tile;
-    return tile[0] + tile[1] as Tile;
+        return '5' + tile[1] as SimpleTile;
+    return tile[0] + tile[1] as SimpleTile;
+};
+
+/**
+ * 返回和 tile 等效的所有牌, 优先把红宝牌和含有 SPT_SUFFIX 放到后面
+ * @example
+ * allEqualTiles('5m')
+ * // return ['5m', '0m', '5mt', '0mt']
+ */
+export const allEqualTiles = (tile: Tile): Tile[] => {
+    if (tile === Constants.TBD)
+        return [Constants.TBD];
+    tile = tile[0] + tile[1]; // 去掉可能存在的 SPT_SUFFIX
+    if (tile[0] === '0' || tile[0] === '5' && tile[1] !== 'z')
+        return ['5' + tile[1], '5' + tile[1] + Constants.SPT_SUFFIX, '0' + tile[1], '0' + tile[1] + Constants.SPT_SUFFIX] as Tile[];
+    else
+        return [tile, tile + Constants.SPT_SUFFIX] as Tile[];
 };
 
 // 玩家的巡目所对应的操作位置
@@ -83,17 +99,17 @@ export const randomCmp = () => Math.random() - 0.5;
 export const inTiles = (x: Tile | Tile[], y: Tile[]): boolean => {
     if (typeof x == 'string')
         x = [x];
-    const table: any = {};
+    const cnt: TileNumAll = {};
     for (const tile of y) {
-        if (!table[tile])
-            table[tile] = 0;
-        table[tile]++;
+        if (cnt[tile] === undefined)
+            cnt[tile] = 0;
+        cnt[tile]++;
     }
     for (const tile of x) {
-        if (table[tile] === undefined)
+        if (cnt[tile] === undefined)
             return false;
-        table[tile]--;
-        if (table[tile] < 0)
+        cnt[tile]--;
+        if (cnt[tile] < 0)
             return false;
     }
     return true;
@@ -373,17 +389,17 @@ export const isDora = (tile: Tile): boolean => {
  */
 export const calcTianming = (seat: Seat, zimo: boolean): number => {
     let sum = 1;
-    for (const i in player_tiles[seat]) { // 查手牌
-        if (!zimo && parseInt(i) === player_tiles[seat].length - 1) // 不是自摸, 则最后一张牌不考虑
-            break;
-        if (player_tiles[seat][i].length >= 2 && player_tiles[seat][i][2] === Constants.SPT_SUFFIX)
+    for (const [index, tile] of player_tiles[seat].entries()) { // 查手牌
+        if (!zimo && index === player_tiles[seat].length - 1) // 不是自摸, 则最后一张牌不考虑
+            return;
+        if (tile.length >= 2 && tile[2] === Constants.SPT_SUFFIX)
             sum++;
     }
     for (const f of fulu[seat]) // 查副露
-        for (const j in f.tile) {
-            if (f.type !== 3 && parseInt(j) === f.tile.length - 1) // 不是暗杠, 则最后一张牌不考虑
-                break;
-            if (f.tile[j].length > 2 && f.tile[j][2] === Constants.SPT_SUFFIX)
+        for (const [index, tile] of f.tile.entries()) {
+            if (f.type !== 3 && index === f.tile.length - 1) // 不是暗杠, 则最后一张牌不考虑
+                return;
+            if (tile.length > 2 && tile[2] === Constants.SPT_SUFFIX)
                 sum++;
         }
     return sum;

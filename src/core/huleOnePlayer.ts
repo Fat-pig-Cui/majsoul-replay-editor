@@ -272,7 +272,7 @@ export const huleOnePlayer = (seat: Seat): HuleInfo => {
                 sum = base_info.player_cnt * c_sudian;
         }
         const ret: [number, number, number, number] = [rong, sum, zimo_qin, zimo_xian];
-        for (const i in ret)
+        for (const i of ret.keys())
             ret[i] = qieshang(ret[i]) * extra_times;
         return ret;
     }

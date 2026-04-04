@@ -49,7 +49,7 @@
 
 ### 和牌
 
-`hupai(all_seats, type)`
+`hupai(seats, type)`
 
 与段位场相比多了个参数 `type`, 值为 `false` 表示中途和牌, `true` 表示最终和牌(使得该小局结束的和牌,
 而不是玩家的最后和牌), 默认为中途和牌

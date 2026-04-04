@@ -2,7 +2,7 @@
 
 中文 | [English](README_en.md)
 
-自定义雀魂牌谱回放的注入脚本和一些自制牌谱回放文件, 支持国际中文服, 日服和美服的网页端
+自定义雀魂牌谱回放的注入脚本和一些自制牌谱回放文件, 适用于网页端, 完全支持国际中文服, 大部分支持日服和美服
 
 [中文服官网](https://www.maj-soul.com), [日服官网](https://mahjongsoul.com), [美服官网](https://mahjongsoul.yo-star.com)
 

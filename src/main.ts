@@ -15,10 +15,10 @@ import {setMuyuSeats, huanpai, dingque, kaipai, kaipaiLock} from './core/activit
 
 import {normalMoqie, moqieLiqi, comboMopai, mingQiepai, zimoHu, moqieLiuju} from './core/simplifyFunction';
 
-import {getLeftTileCnt, judgeTile, allEqualTiles, isEqualTile, decompose} from "./core/exportedUtils";
+import {getLeftTileCnt, judgeTile, isEqualTile, decompose} from "./core/exportedUtils";
 import {separate, calcHupai, calcTingpai, getLstAction} from './core/exportedUtils';
 
-import {demoGame, setPlayGame, reportYaku, reportYaku_yiji} from "./core/sample";
+import {demoGame, setPlayGame, tenhou2Majsoul, reportYaku, reportYaku_yiji} from "./core/sample";
 
 import {resetReplay} from "./core/override";
 
@@ -47,8 +47,6 @@ export type t_kaipai = typeof kaipai;
 export type t_kaipaiLock = typeof kaipaiLock;
 export type t_setRound = typeof setRound;
 export type t_getLeftTileCnt = typeof getLeftTileCnt;
-export type t_demoGame = typeof demoGame;
-export type t_setPlayGame = typeof setPlayGame;
 export type t_normalMoqie = typeof normalMoqie;
 export type t_moqieLiqi = typeof moqieLiqi;
 export type t_comboMopai = typeof comboMopai;
@@ -56,7 +54,6 @@ export type t_mingQiepai = typeof mingQiepai;
 export type t_zimoHu = typeof zimoHu;
 export type t_moqieLiuju = typeof moqieLiuju;
 export type t_judgeTile = typeof judgeTile;
-export type t_allEqualTiles = typeof allEqualTiles;
 export type t_isEqualTile = typeof isEqualTile;
 export type t_decompose = typeof decompose;
 export type t_separate = typeof separate;
@@ -64,9 +61,12 @@ export type t_calcHupai = typeof calcHupai;
 export type t_calcTingpai = typeof calcTingpai;
 export type t_getLstAction = typeof getLstAction;
 export type t_setScores = typeof setScores;
-export type t_resetReplay = typeof resetReplay;
+export type t_demoGame = typeof demoGame;
+export type t_setPlayGame = typeof setPlayGame;
+export type t_tenhou2Majsoul = typeof tenhou2Majsoul;
 export type t_reportYaku = typeof reportYaku;
 export type t_reportYaku_yiji = typeof reportYaku_yiji;
+export type t_resetReplay = typeof resetReplay;
 
 (window as any).player_datas = player_datas;
 (window as any).begin_tiles = begin_tiles;
@@ -93,8 +93,6 @@ export type t_reportYaku_yiji = typeof reportYaku_yiji;
 (window as any).kaipaiLock = kaipaiLock;
 (window as any).setRound = setRound;
 (window as any).getLeftTileCnt = getLeftTileCnt;
-(window as any).demoGame = demoGame;
-(window as any).setPlayGame = setPlayGame;
 (window as any).normalMoqie = normalMoqie;
 (window as any).moqieLiqi = moqieLiqi;
 (window as any).comboMopai = comboMopai;
@@ -102,7 +100,6 @@ export type t_reportYaku_yiji = typeof reportYaku_yiji;
 (window as any).zimoHu = zimoHu;
 (window as any).moqieLiuju = moqieLiuju;
 (window as any).judgeTile = judgeTile;
-(window as any).allEqualTiles = allEqualTiles;
 (window as any).isEqualTile = isEqualTile;
 (window as any).decompose = decompose;
 (window as any).separate = separate;
@@ -110,6 +107,9 @@ export type t_reportYaku_yiji = typeof reportYaku_yiji;
 (window as any).calcTingpai = calcTingpai;
 (window as any).getLstAction = getLstAction;
 (window as any).setScores = setScores;
-(window as any).resetReplay = resetReplay;
+(window as any).demoGame = demoGame;
+(window as any).setPlayGame = setPlayGame;
+(window as any).tenhou2Majsoul = tenhou2Majsoul;
 (window as any).reportYaku = reportYaku;
 (window as any).reportYaku_yiji = reportYaku_yiji;
+(window as any).resetReplay = resetReplay;

@@ -6,16 +6,16 @@
  */
 
 import {base_info, muyu, player_tiles, gaps, scores, paihe, chuanma_gangs, delta_scores} from "./data";
-import {separate, getLstAction} from "./exportedUtils"
-import {errRoundInfo, cmp} from "./utils";
+import {separate, getLstAction} from "./exportedUtils";
+import {errRoundInfo, cmp, isValidSeat} from "./utils";
 import {addChangeTile, addGangResult, addGangResultEnd, addLockTile, addSelectGap, addUnveilTile} from "./glue";
 import {Constants} from "./constants";
 
 /**
  * 龙之目玉: 设置拥有目玉的玩家队列
  */
-export const setMuyuSeats = (m_seats: MuyuSeats): void => {
-    muyu.seats = m_seats;
+export const setMuyuSeats = (muyu_seats: MuyuSeats): void => {
+    muyu.seats = muyu_seats;
 };
 
 /**
@@ -24,15 +24,27 @@ export const setMuyuSeats = (m_seats: MuyuSeats): void => {
  * @param type - 换牌方式, 0: 逆时针, 1: 对家, 2: 顺时针
  */
 export const huanpai = (tls: string[], type: HuanpaiType): void => {
+    if (tls.length !== 4)
+        throw new Error(errRoundInfo() + `huanpai: 第一个参数长度不为4, 要换三张换牌必须指定4名玩家交出去的牌, 玩家数也必须为4, tls: ${tls}`);
     const tiles = [separate(tls[0]), separate(tls[1]), separate(tls[2]), separate(tls[3])];
+    if (tiles.some(swap_tiles => swap_tiles.length !== 3))
+        console.error(errRoundInfo() + `huanpai: 换牌的牌数必须为3, 但有玩家的牌数不为3, tls: ${tls}`);
 
     const ret: ChangeTileInfo = [null, null, null, null];
     for (let seat: Seat = 0; seat < base_info.player_cnt; seat++) {
-        const in_seat = (seat - type + 3) % base_info.player_cnt;
-        for (let j = 0; j < tiles[seat].length; j++) {
-            player_tiles[seat].splice(player_tiles[seat].indexOf(tiles[seat][j]), 1);
-            player_tiles[seat].push(tiles[in_seat][j]);
+        for (const tile of tiles[seat]) {
+            const index = player_tiles[seat].indexOf(tile);
+            if (index === -1)
+                console.error(errRoundInfo() + `huanpai: seat: ${seat} 没有 ${tile} 这张牌`);
+            player_tiles[seat].splice(index, 1);
         }
+
+        const in_seat = (seat - type + 3) % base_info.player_cnt;
+        for (const tile of tiles[in_seat])
+            player_tiles[seat].push(tile);
+
+        player_tiles[seat].sort(cmp);
+        
         ret[seat] = {
             out_tiles: tiles[seat] as [Tile, Tile, Tile],
             out_tile_states: [0, 0, 0],
@@ -40,8 +52,6 @@ export const huanpai = (tls: string[], type: HuanpaiType): void => {
             in_tile_states: [0, 0, 0],
         };
     }
-    for (let i = 0; i < base_info.player_cnt; i++)
-        player_tiles[i].sort(cmp);
 
     addChangeTile(ret, type);
 };
@@ -55,7 +65,7 @@ export const huanpai = (tls: string[], type: HuanpaiType): void => {
  */
 export const dingque = (x: GapsInput): void => {
     const all_dingque = x.split('') as [GapInputType, GapInputType, GapInputType, GapInputType];
-    const dict: { m: GapType, p: GapType, s: GapType } = {'m': 1 as GapType, 'p': 0 as GapType, 's': 2 as GapType}; // 注意 012 分别对应 pms, 而不是 mps
+    const dict: { m: GapType, p: GapType, s: GapType } = {'m': 1, 'p': 0, 's': 2}; // 注意 012 分别对应 pms, 而不是 mps
     const ret: Gaps = [0, 0, 0, 0];
     for (let i: Seat = 0; i < base_info.player_cnt; i++) {
         ret[i] = dict[all_dingque[i]];
@@ -69,7 +79,7 @@ export const dingque = (x: GapsInput): void => {
  * seat 号玩家开牌并成功(暗夜之战)
  */
 export const kaipai = (seat: Seat): void => {
-    if (typeof seat != 'number')
+    if (!isValidSeat(seat))
         throw new Error(errRoundInfo() + `kaipai: 暗夜之战开牌必须指定玩家, seat: ${seat}`);
     if (getLstAction().name === 'RecordRevealTile') {
         const tile_seat = getLstAction().data.seat;

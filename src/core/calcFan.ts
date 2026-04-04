@@ -32,7 +32,7 @@ export const calcFan = (seat: Seat, zimo: boolean, fangchong?: Seat): CalcFanRet
     // 更新返回值
     const updateRet = (x: CalcFanRet): void => {
         if (calcSudian(ret, 1) < calcSudian(x, 1))
-            for (const key in x)
+            for (const key of Object.keys(x))
                 ret[key] = x[key];
     };
 
@@ -90,17 +90,15 @@ export const calcFan = (seat: Seat, zimo: boolean, fangchong?: Seat): CalcFanRet
         const result = calcHupai(tiles);
         if (result === 3 || result === 12)
             specialCalc();
-        dfs('1m', partition, cnt, lastile, zimo, updateRet, calc0);
+        dfs(Constants.DFS_BEGIN_TILE, partition, cnt, lastile, zimo, updateRet, calc0);
 
         // 能与特殊和牌型复合的番种的计算, 包括国士和一番街古役十三不搭
         function specialCalc(): void {
             // 删除 ans 中番为 id 的番
             const deleteFan = (id: number): void => {
-                for (const i in ans.fans)
-                    if (ans.fans[i].id === id) {
-                        ans.fans.splice(parseInt(i), 1);
-                        break;
-                    }
+                const index = ans.fans.findIndex(fan => fan.id === id);
+                if (index !== -1)
+                    ans.fans.splice(index, 1);
             };
 
             const menqing = fulu_cnt === 0;
@@ -282,11 +280,9 @@ export const calcFan = (seat: Seat, zimo: boolean, fangchong?: Seat): CalcFanRet
     function calc0(tingpaifu: 0 | 2, partition_tmp: Partition): CalcFanRet {
         // 删除 ans 中番为 id 的番
         const deleteFan = (id: number): void => {
-            for (const i in ans.fans)
-                if (ans.fans[i].id === id) {
-                    ans.fans.splice(parseInt(i), 1);
-                    break;
-                }
+            const index = ans.fans.findIndex(fan => fan.id === id);
+            if (index !== -1)
+                ans.fans.splice(index, 1);
         };
 
         baopai[seat] = []; // 重置和牌玩家包牌信息
@@ -1008,7 +1004,7 @@ export const calcFanChuanma = (seat: Seat, zimo: boolean, type: boolean = false)
     // 更新返回值
     const updateRet = (x: CalcFanRet): void => {
         if (calcSudianChuanma(ret, 1) < calcSudianChuanma(x, 1))
-            for (const key in x)
+            for (const key of Object.keys(x))
                 ret[key] = x[key];
     };
 
@@ -1051,7 +1047,7 @@ export const calcFanChuanma = (seat: Seat, zimo: boolean, type: boolean = false)
     if (huazhu(seat))
         return ret;
 
-    dfs('1m', partition, cnt, lastile, zimo, updateRet, calc0);
+    dfs(Constants.DFS_BEGIN_TILE, partition, cnt, lastile, zimo, updateRet, calc0);
 
     if (calcHupai(tiles) === 2) { // 七对子只有一种分解方式
         partition.length = 0;
@@ -1236,7 +1232,7 @@ export const calcFanGuobiao = (seat: Seat, zimo: boolean): CalcFanRet => {
     // 更新返回值
     const updateRet = (x: CalcFanRet): void => {
         if (calcSudianGuobiao(ret) < calcSudianGuobiao(x))
-            for (const key in x)
+            for (const key of Object.keys(x))
                 ret[key] = x[key];
     };
 
@@ -1265,7 +1261,7 @@ export const calcFanGuobiao = (seat: Seat, zimo: boolean): CalcFanRet => {
                 cnt2[simplify(tile)]++;
         }
 
-    dfs('1m', partition, cnt, lastile, zimo, updateRet, calc0);
+    dfs(Constants.DFS_BEGIN_TILE, partition, cnt, lastile, zimo, updateRet, calc0);
 
     const result = calcHupai(tiles);
     if (result === 3) {
@@ -1289,22 +1285,21 @@ export const calcFanGuobiao = (seat: Seat, zimo: boolean): CalcFanRet => {
         updateRet(ans);
     }
     if (result >= 6 && result <= 11) { // 没有全不靠的组合龙
-        const row = result - 6;
-        const condition = Constants.GB_CONDITIONS;
+        const condition = Constants.GB_CONDITIONS[result - 6];
         for (let i = 0; i < 3; i++) {
-            const new_shunzi = [condition[row][3 * i], condition[row][3 * i + 1], condition[row][3 * i + 2]];
+            const new_shunzi = [condition[3 * i], condition[3 * i + 1], condition[3 * i + 2]];
             partition.push({type: 8, tile: new_shunzi});
         }
-        for (const i in condition[row]) {
-            tiles.splice(tiles.indexOf(condition[row][i]), 1);
-            cnt[condition[row][i]]--;
+        for (const tile of condition) {
+            tiles.splice(tiles.indexOf(tile), 1);
+            cnt[tile]--;
         }
 
-        dfs('1m', partition, cnt, lastile, zimo, updateRet, calc0);
+        dfs(Constants.DFS_BEGIN_TILE, partition, cnt, lastile, zimo, updateRet, calc0);
 
-        for (const i in condition[row]) {
-            tiles.push(condition[row][i]);
-            cnt[condition[row][i]]++;
+        for (const tile of condition) {
+            tiles.push(tile);
+            cnt[tile]++;
         }
         tiles.sort(cmp);
 
@@ -2211,7 +2206,7 @@ export const calcFanGuobiao = (seat: Seat, zimo: boolean): CalcFanRet => {
 // 深度优先搜索, 对手牌和副露进行划分, 搜索到尽头划分数量达到5或7时, 开始算番
 const dfs = (tile: Tile, partition: Partition, cnt: TileNum, lastile: Tile, zimo: boolean, updateRet: (x: CalcFanRet) => void, calc0: (tingpaifu: 0 | 2, partition_tmp: Partition) => CalcFanRet): void => {
     const dfs0 = (tile: Tile, partition: Partition, cnt: TileNum): void => {
-        if (tile === '0m') {
+        if (tile === Constants.DFS_END_TILE) {
             if (partition.length === 5 || partition.length === 7)
                 calc(partition.slice(), lastile, zimo, updateRet, calc0);
             return;
@@ -2344,7 +2339,7 @@ const calcFu = (tingpaifu: 0 | 2, duizi_num: number, pinghu: boolean, type_cnt: 
 const nextTile = (tile: Tile): Tile => {
     tile = simplify(tile);
     if (tile === '7z')
-        return '0m';
+        return Constants.DFS_END_TILE;
     const group = ['m', 'p', 's', 'z'];
     const cur_index = group.indexOf(tile[1]);
     if (tile[0] === '9')

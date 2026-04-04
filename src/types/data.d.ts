@@ -1,10 +1,14 @@
 type HonorNumber = 1 | 2 | 3 | 4 | 5 | 6 | 7;
-type OrdinalNumber = 0 | HonorNumber | 8 | 9;
+type SimpleOrdinalNumber = HonorNumber | 8 | 9;
+type OrdinalNumber = 0 | SimpleOrdinalNumber;
 type HonorType = 'z';
 type OrdinalType = 'm' | 'p' | 's';
-type HonorTile = `${HonorNumber}${HonorType}${'' | 't'}`;
+type SimpleHonorTile = `${HonorNumber}${HonorType}`;
+type HonorTile = `${SimpleHonorTile}${'' | 't'}`;
+type SimpleOrdinalTile = `${SimpleOrdinalNumber}${OrdinalType}`;
 type OrdinalTile = `${OrdinalNumber}${OrdinalType}${'' | 't'}`;
 
+type SimpleTile = SimpleHonorTile | SimpleOrdinalTile | 'bd';
 type Tile = HonorTile | OrdinalTile | 'bd';
 type TileWithMoqie = Tile | '..';
 type TileWithParam = TileWithMoqie | 'YY' | 'DD' | 'TT' | 'HH' | 'MM' | 'PP' | 'SS';
@@ -131,7 +135,8 @@ type Config = {
     };
 };
 
-type TileNum = { [tile in Tile]?: number; };
+type TileNum = { [tile in SimpleTile]?: number; };
+type TileNumAll = { [tile in Tile]?: number; };
 
 type ZhenTing = {
     tongxun: [Players_Boolean, Players_Boolean];

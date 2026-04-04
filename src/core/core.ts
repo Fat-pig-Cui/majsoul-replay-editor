@@ -20,11 +20,11 @@ import {
     is_xuezhandaodi, is_yongchang, is_zhanxing, no_liujumanguan, no_zimosun, scale_points
 } from "./misc";
 import {
-    separate, separateWithParam, judgeTile, getLstAction, isEqualTile, allEqualTiles, calcHupai, calcTingpai,
+    separate, separateWithParam, judgeTile, getLstAction, isEqualTile, calcHupai, calcTingpai,
     getLeftTileCnt
 } from "./exportedUtils";
 import {
-    calcDoras, calcSudian, calcSudianChuanma, cmp, eraseMingpai, fulu2Ming, huazhu, inTiles, isAwaitingIndex,
+    allEqualTiles, calcDoras, calcSudian, calcSudianChuanma, cmp, eraseMingpai, fulu2Ming, huazhu, inTiles, isAwaitingIndex,
     isBeishuiType, isDora, isTile, isValidSeat, push2PlayerTiles, randomCmp, errRoundInfo, updateMuyu, prejudgeZhenting,
     judgeShezhangzt, updateShoumoqie, updateZhenting, lstLiqi2Liqi, simplify
 } from "./utils";
@@ -224,7 +224,7 @@ export const randomPaishan = (ps_head: string = '', ps_back: string = ''): void 
         begin_tiles[i] = tiles[i].join('');
 
     if (!is_report_yakus())
-        for (const tile in cnt) {
+        for (const tile of Object.keys(cnt)) {
             let full_num = 4, has_fault = false;
             if (cnt[tile] < 0) {
                 has_fault = true;
@@ -243,17 +243,17 @@ export const randomPaishan = (ps_head: string = '', ps_back: string = ''): void 
     roundBegin();
 
     function randomize(tls: TileWithParam[]): void {
-        for (const i in tls)
+        for (const i of tls.keys())
             if (['H', 'T'].includes(tls[i][0])) {
                 const index = remain_tiles.findIndex((tile: Tile) => judgeTile(tile, tls[i][0]));
                 tls[i] = index > -1 ? remain_tiles.splice(index, 1)[0] : remain_tiles.pop();
             }
-        for (const i in tls)
+        for (const i of tls.keys())
             if (['Y', 'D', 'M', 'P', 'S'].includes(tls[i][0])) {
                 const index = remain_tiles.findIndex((tile: Tile) => judgeTile(tile, tls[i][0]));
                 tls[i] = index > -1 ? remain_tiles.splice(index, 1)[0] : remain_tiles.pop();
             }
-        for (const i in tls)
+        for (const i of tls.keys())
             if (tls[i][0] === '.')
                 tls[i] = remain_tiles.pop();
     }
@@ -265,7 +265,7 @@ export const randomPaishan = (ps_head: string = '', ps_back: string = ''): void 
  * - {Tile} - 摸的牌, 没有此参数时将根据 deal_tiles 或牌山确定
  * - {AwaitingIndex} - 占星之战: 牌候选池中选择的牌位置, 后面会变为 AwaitingIndex 类型
  */
-export const mopai = (...args: any[]): void => {
+export const mopai = (...args: unknown[]): void => {
     let seat: Seat, tile: Tile, index: AwaitingIndex;
     // 参数预处理
     for (const arg of args)
@@ -425,14 +425,14 @@ export const mopai = (...args: any[]): void => {
  * - {'anpai' | 'anpai_ignore_1000'}  - 暗夜之战: 当值为字符串 'anpai' 时, 表示暗牌, 若为 'anpai_ignore_1000' 则不会支付1000点, 默认不暗牌
  * - {[BeishuiType]} - 背水之战: 立直类型, 有效值为 '[0]', '[1]', '[2]', 默认为普通立直, 需要配合 is_liqi 使用
  */
-export const qiepai = (...args: any[]): void => {
+export const qiepai = (...args: unknown[]): void => {
     let seat: Seat, tile: Tile, is_liqi: boolean, anpai: 'anpai' | 'anpai_ignore_1000',
         beishui_type: BeishuiType;
     let is_kailiqi = false;
     // 参数预处理
     for (const arg of args)
-        if (['anpai', 'anpai_ignore_1000'].includes(arg))
-            anpai = arg;
+        if (['anpai', 'anpai_ignore_1000'].includes(arg as string))
+            anpai = arg as 'anpai' | 'anpai_ignore_1000';
         else if (arg === 'kailiqi')
             is_kailiqi = is_liqi = true;
         else if (typeof arg == 'number') {
@@ -573,7 +573,7 @@ export const qiepai = (...args: any[]): void => {
  * - {string|string[]} - 鸣牌家从手里拿出来的牌, 没有此参数时将根据能否可以 明杠/碰/吃 确定鸣牌类型
  * - {boolean} - 川麻: 开杠刮风下雨是否击飞, 默认不击飞
  */
-export const mingpai = (...args: any[]): void => {
+export const mingpai = (...args: unknown[]): void => {
     let seat: Seat, tiles: Tile[], jifei: boolean;
     // 参数预处理
     for (const arg of args)
@@ -752,12 +752,12 @@ export const mingpai = (...args: any[]): void => {
         const x0 = allEqualTiles(x[0]).reverse(), x1 = allEqualTiles(x[1]).reverse(), x2: Tile[] = [];
         if (x.length === 3) // 大明杠
             x2.push(...allEqualTiles(x[2]).reverse());
-        for (const i in x0)
-            for (const j in x1) {
-                const try_tiles = [x0[i], x1[j]];
+        for (const tile0 of x0)
+            for (const tile1 of x1) {
+                const try_tiles = [tile0, tile1];
                 if (x.length === 3) // 大明杠
-                    for (const k in x2) {
-                        try_tiles.push(x2[k]);
+                    for (const tile2 of x2) {
+                        try_tiles.push(tile2);
                         if (tryMingpai(try_tiles))
                             return true;
                         try_tiles.pop();
@@ -791,12 +791,12 @@ export const mingpai = (...args: any[]): void => {
  * - {ZiMingInputType} - 操作类型, 暗杠/加杠/拔北分别为 'angang'/'jiagang'/'babei', 没有此参数时按照是否可以"拔北, 暗杠, 加杠"的顺序判断
  * - {boolean} - 川麻: 开杠刮风下雨是否击飞, 默认不击飞
  */
-export const zimingpai = (...args: any[]): void => {
+export const zimingpai = (...args: unknown[]): void => {
     let seat: Seat, tile: Tile, type: ZiMingInputType, jifei: boolean;
     // 参数预处理
     for (const arg of args)
-        if (['babei', 'angang', 'jiagang', 'baxi'].includes(arg))
-            type = arg;
+        if (['babei', 'angang', 'jiagang', 'baxi'].includes(arg as string))
+            type = arg as 'babei' | 'angang' | 'jiagang' | 'baxi';
         else if (typeof arg == 'number') {
             if (isValidSeat(arg))
                 seat = arg;
@@ -965,13 +965,13 @@ export const zimingpai = (...args: any[]): void => {
         // 暗杠
         for (const tile of player_tiles[seat]) {
             all_tiles = allEqualTiles(tile).reverse();
-            for (const x0 in all_tiles)
-                for (const x1 in all_tiles)
-                    for (const x2 in all_tiles)
-                        for (const x3 in all_tiles) {
-                            const tmp_angang = [all_tiles[x0], all_tiles[x1], all_tiles[x2], all_tiles[x3]];
+            for (const tile0 of all_tiles)
+                for (const tile1 of all_tiles)
+                    for (const tile2 of all_tiles)
+                        for (const tile3 of all_tiles) {
+                            const tmp_angang = [tile0, tile1, tile2, tile3];
                             if (inTiles(tmp_angang, player_tiles[seat])) {
-                                zimingpai(seat, all_tiles[x0], 'angang', jifei);
+                                zimingpai(seat, tile0, 'angang', jifei);
                                 return true;
                             }
                         }
@@ -1002,7 +1002,7 @@ export const zimingpai = (...args: any[]): void => {
  * - {Seat|Seat[]} - 本次和牌所有和牌的玩家, 没有此参数时按照正常对局流程
  * - {boolean} - 修罗/川麻: 是否为最终和牌, 默认为中途和牌
  */
-export const hupai = (...args: any[]): void => {
+export const hupai = (...args: unknown[]): void => {
     let seats: Seat[], type: boolean;
     // 参数预处理
     for (const arg of args)
@@ -1446,6 +1446,10 @@ export const liuju = (liuju_type?: LiujuType): void => {
             type = 1;
             tiles = player_tiles[seat].slice();
         }
+        if (liuju_type !== undefined){
+            type = 1;
+            tiles = player_tiles[seat].slice();
+        }
     }
 
     // 四风连打
@@ -1456,6 +1460,8 @@ export const liuju = (liuju_type?: LiujuType): void => {
                     if (isEqualTile(paihe[0].tiles[0], paihe[1].tiles[0]) && isEqualTile(paihe[1].tiles[0], paihe[2].tiles[0]) && isEqualTile(paihe[2].tiles[0], paihe[3].tiles[0]))
                         if (Constants.WIND_TILE.includes(simplify(paihe[0].tiles[0])))
                             type = 2;
+        if (liuju_type !== undefined)
+            type = 2;
     }
 
     // 四杠散了
@@ -1468,6 +1474,8 @@ export const liuju = (liuju_type?: LiujuType): void => {
                     break;
                 }
         if (dora_cnt.cnt === 5 && gang_player_cnt >= 2)
+            type = 3;
+        if (liuju_type !== undefined)
             type = 3;
     }
 
@@ -1482,6 +1490,8 @@ export const liuju = (liuju_type?: LiujuType): void => {
             if (lst_liqi.valid && liqi_player_cnt === 3)
                 type = 4;
         }
+        if (liuju_type !== undefined)
+            type = 4;
     }
 
     // 三家和了, 需要设置 '_sanxiangliuju'
@@ -1552,8 +1562,8 @@ export const gameBegin = (): void => {
     base_info.base_point = scores[0];
 
     const tmp_scores = get_init_scores() as Players_Number;
-    for (const i in tmp_scores)
-        scores[i] = tmp_scores[i];
+    for (const seat of tmp_scores.keys())
+        scores[seat] = tmp_scores[seat];
 
     game_begin_once = false;
 };
@@ -1641,7 +1651,7 @@ export const roundBegin = (): void => {
             for (const tile of tiles)
                 cnt[tile]++;
             mingpais[seat] = cnt;
-            for (const tile in cnt) {
+            for (const tile of Object.keys(cnt)) {
                 ret.tiles.push(tile as Tile);
                 ret.count.push(cnt[tile]);
             }

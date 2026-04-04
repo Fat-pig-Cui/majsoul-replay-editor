@@ -77,17 +77,17 @@ export const judgeTile = (tile: Tile, type: string): boolean => {
         case 'jiangdui':
             return tile[1] !== 'z' && (tile[0] === '2' || tile[0] === '5' || tile[0] === '8');
         case 'quanshuang':
-            return tile[1] !== 'z' && parseInt(tile) % 2 === 0;
+            return tile[1] !== 'z' && ['2', '4', '6', '8'].includes(tile[0]);
         case 'quanda':
-            return tile[1] !== 'z' && parseInt(tile) >= 7;
+            return tile[1] !== 'z' && ['7', '8', '9'].includes(tile[0]);
         case 'quanzhong':
-            return tile[1] !== 'z' && parseInt(tile) >= 4 && parseInt(tile) <= 6;
+            return tile[1] !== 'z' && ['4', '5', '6'].includes(tile[0]);
         case 'quanxiao':
-            return tile[1] !== 'z' && parseInt(tile) <= 3;
+            return tile[1] !== 'z' && ['1', '2', '3'].includes(tile[0]);
         case 'dayuwu':
-            return tile[1] !== 'z' && parseInt(tile) >= 6;
+            return tile[1] !== 'z' && ['6', '7', '8', '9'].includes(tile[0]);
         case 'xiaoyuwu':
-            return tile[1] !== 'z' && parseInt(tile) <= 4;
+            return tile[1] !== 'z' && ['1', '2', '3', '4'].includes(tile[0]);
         case 'tuibudao':
             return separate('1234589p245689s5z').includes(tile);
         case 'hongkongque':
@@ -102,25 +102,9 @@ export const judgeTile = (tile: Tile, type: string): boolean => {
 };
 
 /**
- * 返回和 tile 等效的所有牌, 优先把红宝牌和含有 SPT_SUFFIX 放到后面
- * @example
- * allEqualTiles('5m')
- * // return ['5m', '0m', '5mt', '0mt']
- */
-export const allEqualTiles = (tile: Tile): Tile[] => {
-    if (tile === Constants.TBD)
-        return [Constants.TBD];
-    tile = tile[0] + tile[1]; // 去掉可能存在的 SPT_SUFFIX
-    if (tile[0] === '0' || tile[0] === '5' && tile[1] !== 'z')
-        return ['5' + tile[1], '5' + tile[1] + Constants.SPT_SUFFIX, '0' + tile[1], '0' + tile[1] + Constants.SPT_SUFFIX] as Tile[];
-    else
-        return [tile, tile + Constants.SPT_SUFFIX] as Tile[];
-};
-
-/**
  * 判断两个牌是否等效
  */
-export const isEqualTile = (x: Tile, y: Tile): boolean => allEqualTiles(x).includes(y);
+export const isEqualTile = (x: Tile, y: Tile): boolean => simplify(x) === simplify(y);
 
 /**
  * 解析牌, 会将简化后牌编码恢复成单个并列样子
@@ -362,25 +346,21 @@ export const calcHupai = (tiles: Tile[], type: boolean = false): number => {
         }
     }
     if (is_guobiao() && tiles.length >= 11) { // 国标不含全不靠的组合龙
-        const condition = Constants.GB_CONDITIONS;
-        const flag = [true, true, true, true, true, true];
+        const conditions = Constants.GB_CONDITIONS;
+        const flags = [true, true, true, true, true, true];
 
-        for (const row in condition)
-            for (const i in condition[row])
-                if (cnt[condition[row][i]] === 0)
-                    flag[row] = false;
+        for (const [row, condition] of conditions.entries())
+            for (const tile of condition)
+                if (cnt[tile] === 0)
+                    flags[row] = false;
 
-        for (const row in condition) {
-            if (flag[row]) {
+        for (const [row, condition] of conditions.entries()) {
+            if (flags[row]) {
                 const new_tiles = tiles.slice();
-                for (const i in condition[row])
-                    for (const j in new_tiles)
-                        if (new_tiles[j] === condition[row][i]) {
-                            new_tiles.splice(parseInt(j), 1);
-                            break;
-                        }
+                for (const tile of condition)
+                    new_tiles.splice(new_tiles.indexOf(tile), 1);
                 if (calcHupai(new_tiles) === 1)
-                    return 6 + parseInt(row);
+                    return 6 + row;
             }
         }
     }

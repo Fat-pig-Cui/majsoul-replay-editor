@@ -1,5 +1,5 @@
 /**
- * @file: data.ts - 核心数据文件, 包含所有非函数的 export 变量
+ * @file: data.ts - 核心数据文件, 包含所有非函数变量
  * @author: Fat-pig-Cui
  * @email: chubbypig@qq.com
  * @github: https://github.com/Fat-pig-Cui/majsoul-replay-editor
