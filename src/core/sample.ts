@@ -5,7 +5,7 @@
  * @github: https://github.com/Fat-pig-Cui/majsoul-replay-editor
  */
 
-import {actions, all_data, base_info, begin_tiles} from "./data";
+import {all_data, base_info, begin_tiles} from "./data";
 import {gameBegin, huangpai, hupai, liuju, mingpai, mopai, qiepai, randomPaishan, roundEnd, zimingpai} from "./core";
 import {moqieLiqi, normalMoqie} from "./simplifyFunction";
 import {isEqualTile, separate} from "./exportedUtils";
@@ -48,25 +48,8 @@ export const setPlayGame = (jsons: RoundJson | RoundJson[]): void => {
     gameBegin();
 
     for (const json of jsons) {
-        const cnt: TileNum = {};
+        const cnt: TileNumAll = JSON.parse(JSON.stringify(base_info.all_tile_nums));
         const remain_tiles: Tile[] = [];
-        (function () {
-            for (const tile of Constants.TILE_NO_AKA)
-                cnt[tile] = 4;
-            cnt['5m'] = cnt['5p'] = cnt['5s'] = 3;
-            cnt['0m'] = cnt['0p'] = cnt['0s'] = 1;
-            if (base_info.player_cnt === 2) {
-                for (const tile of Constants.PIN_MID_TILE)
-                    cnt[tile] = 0;
-                for (const tile of Constants.SOU_MID_TILE)
-                    cnt[tile] = 0;
-                cnt['0p'] = cnt['0s'] = 0;
-            } else if (base_info.player_cnt === 3) {
-                for (const tile of Constants.MAN_MID_TILE)
-                    cnt[tile] = 0;
-                cnt['0m'] = 0;
-            }
-        })();
         // 玩家的副露信息
         const new_fulu: NewFulu = [[], [], [], []];
         // 玩家的切牌信息
@@ -77,8 +60,8 @@ export const setPlayGame = (jsons: RoundJson | RoundJson[]): void => {
         (function () {
             // 解析 fulu 至 new_fulu
             const json_fulus: string[][] = [json.fulu0, json.fulu1, json.fulu2, json.fulu3];
-            for (let i = 0; i < base_info.player_cnt; i++) {
-                for (const tmp_fulu of json_fulus[i]) {
+            for (let seat = 0; seat < base_info.player_cnt; seat++) {
+                for (const tmp_fulu of json_fulus[seat]) {
                     const tile_type: string = tmp_fulu[tmp_fulu.length - 1];
                     const own_tiles: Tile[] = [];
                     if (tmp_fulu.includes('_')) {
@@ -102,17 +85,17 @@ export const setPlayGame = (jsons: RoundJson | RoundJson[]): void => {
 
                         if (type === 'minggang' && index === 3)
                             index = 2;
-                        let from = (i + 3 - index) % base_info.player_cnt;
+                        let from = (seat + 3 - index) % base_info.player_cnt;
                         if (type === 'jiagang') { // 加杠多一个碰, 方便算法实现, 并且加杠的 from 优化
-                            new_fulu[i].push({
+                            new_fulu[seat].push({
                                 type: 'peng',
                                 own_tiles: own_tiles,
                                 ming_tile: ming_tile,
                                 from: from,
                             });
-                            from = i;
+                            from = seat;
                         }
-                        new_fulu[i].push({
+                        new_fulu[seat].push({
                             type: type,
                             own_tiles: own_tiles,
                             ming_tile: type !== 'jiagang' ? ming_tile : tmp_fulu[tmp_fulu.indexOf('_') + 1] + tile_type as Tile,
@@ -121,10 +104,10 @@ export const setPlayGame = (jsons: RoundJson | RoundJson[]): void => {
                     } else {
                         for (let j = 0; j < tmp_fulu.length - 1; j++)
                             own_tiles.push(tmp_fulu[j] + tile_type as Tile);
-                        new_fulu[i].push({
+                        new_fulu[seat].push({
                             type: 'angang',
                             own_tiles: own_tiles,
-                            from: i,
+                            from: seat,
                         });
                     }
                 }
@@ -133,10 +116,10 @@ export const setPlayGame = (jsons: RoundJson | RoundJson[]): void => {
             (function () {
                 const tmp_qiepai_set: string[] = [json.paihe0, json.paihe1, json.paihe2, json.paihe3];
                 const new_qiepai_set: string[][] = [[], [], [], []];
-                for (let i = 0; i < base_info.player_cnt; i++) {
-                    new_qiepai_set[i] = separate_tiles(tmp_qiepai_set[i]);
-                    for (const tile_with_suf of new_qiepai_set[i])
-                        new_discard_tiles[i].push({
+                for (let seat = 0; seat < base_info.player_cnt; seat++) {
+                    new_qiepai_set[seat] = separate_tiles(tmp_qiepai_set[seat]);
+                    for (const tile_with_suf of new_qiepai_set[seat])
+                        new_discard_tiles[seat].push({
                             tile: tile_with_suf.substring(0, 2) as Tile,
                             moqie: tile_with_suf.includes('g'),
                             is_liqi: tile_with_suf.includes('r'),
@@ -150,24 +133,24 @@ export const setPlayGame = (jsons: RoundJson | RoundJson[]): void => {
                 new_deal_tiles[base_info.ju].push(first_tile.tile);
                 new_discard_tiles[base_info.ju].shift();
             }
-            for (let i = 0; i < base_info.player_cnt; i++) {
-                for (const tmp_fulu of new_fulu[i])
+            for (let seat = 0; seat < base_info.player_cnt; seat++) {
+                for (const tmp_fulu of new_fulu[seat])
                     if (tmp_fulu.type !== 'jiagang')
-                        new_deal_tiles[i].push(...tmp_fulu.own_tiles);
+                        new_deal_tiles[seat].push(...tmp_fulu.own_tiles);
                     else
-                        new_deal_tiles[i].push(tmp_fulu.ming_tile);
+                        new_deal_tiles[seat].push(tmp_fulu.ming_tile);
             }
-            for (let i = 0; i < base_info.player_cnt; i++)
-                for (const discard_tile of new_discard_tiles[i]) {
+            for (let seat = 0; seat < base_info.player_cnt; seat++)
+                for (const discard_tile of new_discard_tiles[seat]) {
                     if (!discard_tile.moqie)
-                        new_deal_tiles[i].push(discard_tile.tile);
+                        new_deal_tiles[seat].push(discard_tile.tile);
                     else
                         cnt[discard_tile.tile]--;
                 }
             new_discard_tiles[base_info.ju].unshift(first_tile);
-            for (let i = 0; i < base_info.player_cnt; i++) {
-                new_deal_tiles[i].push(...separate(json['tiles' + i]));
-                for (const tile of new_deal_tiles[i])
+            for (let seat = 0; seat < base_info.player_cnt; seat++) {
+                new_deal_tiles[seat].push(...separate(json['tiles' + seat]));
+                for (const tile of new_deal_tiles[seat])
                     cnt[tile]--;
             }
 
@@ -194,12 +177,12 @@ export const setPlayGame = (jsons: RoundJson | RoundJson[]): void => {
             }
             remain_tiles.sort(randomCmp);
 
-            for (let i = 0; i < base_info.player_cnt; i++) {
-                const num = base_info.ju === i ? Constants.QIN_TILE_NUM : Constants.XIAN_TILE_NUM;
-                while (separate(begin_tiles[i]).length < num && new_deal_tiles[i].length > 0)
-                    begin_tiles[i] += new_deal_tiles[i].shift();
-                while (separate(begin_tiles[i]).length < num && remain_tiles.length > 0)
-                    begin_tiles[i] += remain_tiles.pop();
+            for (let seat = 0; seat < base_info.player_cnt; seat++) {
+                const num = base_info.ju === seat ? Constants.QIN_TILE_NUM : Constants.XIAN_TILE_NUM;
+                while (separate(begin_tiles[seat]).length < num && new_deal_tiles[seat].length > 0)
+                    begin_tiles[seat] += new_deal_tiles[seat].shift();
+                while (separate(begin_tiles[seat]).length < num && remain_tiles.length > 0)
+                    begin_tiles[seat] += remain_tiles.pop();
             }
 
             randomPaishan('', zhishipais + '....');
@@ -376,16 +359,14 @@ export const tenhou2Majsoul = (json: TenhouJSON) => {
         new_qiepai_set[i] = log[0][3 * i + 2];
     }
 
-    const ply_cnt = tiles[3].length === 0 ? 3 : 4;
-
-    if (ply_cnt === 3) { // 三麻点数修正
+    if (base_info.player_cnt === 3) { // 三麻点数修正
         let all_4p_points = true;
         for (const seat of tmp_scores.keys())
             if (tmp_scores[seat] !== 25000)
                 all_4p_points = false;
         if (all_4p_points) // 三麻点数修正
-            for (let i = 0; i < ply_cnt; i++)
-                tmp_scores[i] = 35000;
+            for (let seat = 0; seat < base_info.player_cnt; seat++)
+                tmp_scores[seat] = 35000;
     }
 
     // while 循环关键变量: seat: 要操作的玩家, nxt_step: 下个操作的类型
@@ -483,8 +464,8 @@ export const tenhou2Majsoul = (json: TenhouJSON) => {
         qiepai_xunmu[seat]++;
 
         // 明杠
-        for (let i = seat + 1; i < seat + ply_cnt; i++) {
-            const tmp_seat = i % ply_cnt as Seat;
+        for (let i = seat + 1; i < seat + base_info.player_cnt; i++) {
+            const tmp_seat = i % base_info.player_cnt as Seat;
             const nxt_mopai = new_mopai_set[tmp_seat][mopai_xunmu[tmp_seat]];
             if (typeof nxt_mopai == 'string') {
                 const [tmp_fulu_from_seat, tmp_fulu_type] = judge_fulu(nxt_mopai, tmp_seat);
@@ -496,8 +477,8 @@ export const tenhou2Majsoul = (json: TenhouJSON) => {
             }
         }
         // 碰
-        for (let i = seat + 1; i < seat + ply_cnt; i++) {
-            const tmp_seat = i % ply_cnt as Seat;
+        for (let i = seat + 1; i < seat + base_info.player_cnt; i++) {
+            const tmp_seat = i % base_info.player_cnt as Seat;
             const nxt_mopai = new_mopai_set[tmp_seat][mopai_xunmu[tmp_seat]];
             if (typeof nxt_mopai == 'string') {
                 const [tmp_fulu_from_seat, tmp_fulu_type] = judge_fulu(nxt_mopai, tmp_seat);
@@ -509,7 +490,7 @@ export const tenhou2Majsoul = (json: TenhouJSON) => {
             }
         }
         // 吃
-        const tmp_seat = (seat + 1) % ply_cnt as Seat;
+        const tmp_seat = (seat + 1) % base_info.player_cnt as Seat;
         const nxt_mopai = new_mopai_set[tmp_seat][mopai_xunmu[tmp_seat]];
         if (typeof nxt_mopai == 'string') {
             const [tmp_fulu_from_seat, tmp_fulu_type] = judge_fulu(nxt_mopai, tmp_seat);
@@ -520,7 +501,7 @@ export const tenhou2Majsoul = (json: TenhouJSON) => {
             }
         }
         // 摸牌
-        seat = (seat + 1) % ply_cnt;
+        seat = (seat + 1) % base_info.player_cnt;
         nxt_step = 'mopai';
 
         function judge_fulu(tmp_fulu: string, tmp_seat: Seat) {
@@ -990,8 +971,8 @@ const reportGame = (is_yiji: boolean = false): void => {
     normalMoqie();
     mopai();
     if (is_yiji)
-        actions.push(generateHuleInfo_yiji(all_data.all_actions.length));
+        all_data.cur_actions.push(generateHuleInfo_yiji(all_data.all_actions.length));
     else
-        actions.push(generateHuleInfo(all_data.all_actions.length));
+        all_data.cur_actions.push(generateHuleInfo(all_data.all_actions.length));
     roundEnd();
 };

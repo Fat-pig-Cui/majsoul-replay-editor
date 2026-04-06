@@ -5,9 +5,9 @@
  * @github: https://github.com/Fat-pig-Cui/majsoul-replay-editor
  */
 
-import {actions, awaiting_tiles, base_info, paishan, player_tiles} from "./data";
+import {all_data, awaiting_tiles, base_info, paishan, player_tiles} from "./data";
 import {is_chuanma, is_guobiao, is_wanxiangxiuluo, is_yifanjieguyi, is_zhanxing} from "./misc";
-import {errRoundInfo, simplify, huazhu, isTile} from "./utils";
+import {errRoundInfo, simplify, huazhu, isTile, decompose} from "./utils";
 import {Constants} from "./constants";
 
 /**
@@ -105,36 +105,6 @@ export const judgeTile = (tile: Tile, type: string): boolean => {
  * 判断两个牌是否等效
  */
 export const isEqualTile = (x: Tile, y: Tile): boolean => simplify(x) === simplify(y);
-
-/**
- * 解析牌, 会将简化后牌编码恢复成单个并列样子
- * @example
- * decompose('123m99p')
- * // return '1m2m3m9p9p'
- */
-export const decompose = (tiles: string): string => {
-    const x = tiles.replace(/\s*/g, '');
-    const random_tiles = '.HTYDMPS'; // 随机牌
-    const bd_tile_num = x.match(/b/g) ? x.match(/b/g).length : 0;
-    const matches = x.match(/\d+[mpsz]t?|\.|H|T|Y|D|M|P|S/g);
-
-    let ret = '';
-    for (let i = 0; i < bd_tile_num; i++)
-        ret += Constants.TBD; // 万象修罗百搭牌
-    for (const match of matches) {
-        if (match.length === 1 && random_tiles.includes(match)) {
-            ret += match + match;
-            continue;
-        }
-        const kind_index = match[match.length - 1] === Constants.SPT_SUFFIX ? match.length - 2 : match.length - 1;
-        let tile_kind = match[kind_index];
-        if (kind_index === match.length - 2)
-            tile_kind += Constants.SPT_SUFFIX;
-        for (let j = 0; j < kind_index; j++)
-            ret += match[j] + tile_kind;
-    }
-    return ret;
-};
 
 /**
  * 拆分牌为数组（统一实现）。
@@ -431,14 +401,14 @@ export const calcTingpai = (seat: Seat, type: boolean = false): { tile: Tile }[]
  * @param num - 倒数第 num 个操作, 默认为1
  */
 export const getLstAction = (num: number = 1): Action => {
-    if (actions.length > 0) {
-        let ret = actions.length;
+    if (all_data.cur_actions.length > 0) {
+        let ret = all_data.cur_actions.length;
         for (let i = 0; i < num && ret >= 0; i++) {
             ret--;
-            while (ret >= 0 && ['RecordChangeTile', 'RecordSelectGap', 'RecordGangResult', 'RecordFillAwaitingTiles'].includes(actions[ret].name))
+            while (ret >= 0 && ['RecordChangeTile', 'RecordSelectGap', 'RecordGangResult', 'RecordFillAwaitingTiles'].includes(all_data.cur_actions[ret].name))
                 ret--;
         }
-        return actions[ret];
+        return all_data.cur_actions[ret];
     } else
         throw new Error(errRoundInfo() + 'actions 为空');
 };

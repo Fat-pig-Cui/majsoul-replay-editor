@@ -1,16 +1,16 @@
 clearProject();
 
-// 南北两家的作用是在 Stage B 的时候分别代表另外两家摸打牌, 起手是随机的, 没什么用
-// 点数变动的特例化实现放到 hupai 函数中了
+// 南北两家的作用是在 Stage B 的时候分别代表另外两家摸打牌, 这两家的起手是随机的, 没什么用
+// 点数变动的特例化实现放到最后的匿名立即执行函数中了, 通过修改 all_data 实现
 
 player_datas[0].nickname = '天贵史';
 player_datas[1].nickname = '天贵史-替身';
 player_datas[2].nickname = '原田克美';
 player_datas[3].nickname = '原田克美-替身';
 player_datas[0].avatar_id = 404502; // A-37-契约
-player_datas[1].avatar_id = 404501; // A-37-初始
+player_datas[1].avatar_id = 404501; // A-37
 player_datas[2].avatar_id = 408502; // 袁枫-契约
-player_datas[3].avatar_id = 408501; // 袁枫-初始
+player_datas[3].avatar_id = 408501; // 袁枫
 
 player_datas[0].verified = player_datas[2].verified = 2;
 player_datas[0].title = 600034; // 称号-天选之证
@@ -26,7 +26,6 @@ setConfig({
         mode: 1,
         detail_rule: {
             reveal_discard: true,
-            _tianguishi_vs_yuantiankemei: true,
 
             _tablecloth_id: 305012,
             _mjp_id: 305724,
@@ -40,7 +39,7 @@ setConfig({
 
 begin_tiles[0] = '6m6779p135s123455z';
 begin_tiles[2] = '33m888p24679s136z';
-setDealTiles(['', '', '', '9s7z1s5z6s1p']);
+setDealTiles(['', '', '', '9s7z1s5z6s1p']); // 因为 Stage B 中原田克美是从另外的牌组中选牌, 和当前对局的麻将牌不在同一组, 所以单独拿出来
 setDiscardTiles(['4z9p7p2z3z1m1z7p6p3z6m1z4m2z2z5m9p3p4z5s', '', '1z8m9m6z9s4z6z1p9s4s2s9p3s5m4z2z4p1s2s', '']);
 randomPaishan('3z7z8m7z9m5z4z4m1m6z6s2m6s1p2m9s3z2m7z3s1z9p1m6s2z5m2z4z5m2z9p4p3p1s4z2s..1z3m5m5p4m..1s2p6z9p7s..3p7z3m', '8p.1m...4p');
 // Stage A
@@ -96,3 +95,12 @@ mopai(1);
 qiepai();
 mopai(0);
 hupai();
+(function () {
+    all_data.all_actions[0][118].data.delta_scores = [12300, 0, 0, 0];
+    all_data.all_actions[0][118].data.scores = [21500, 0, 20300, 0];
+    all_data.players[0].total_point = 21500;
+    all_data.players[1].total_point = 20300;
+    all_data.players[2].total_point = all_data.players[3].total_point = 0;
+    all_data.players[1].part_point_1 = 20300;
+    all_data.players[2].part_point_1 = all_data.players[3].part_point_1 = 0;
+})();

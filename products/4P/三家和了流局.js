@@ -17,7 +17,7 @@ setConfig({
     mode: {
         mode: 1,
         detail_rule: {
-            _sanxiangliuju: true,
+            have_sanjiahele: true,
         }
     }
 });

@@ -12,7 +12,7 @@ import {
 import {
     get_field_spell_mode, is_beishuizhizhan, is_guyi, is_hunzhiyiji, is_qingtianjing, is_renhumanguan, is_sigangbaopai,
     is_sixifuhe, is_tiandichuangzao, is_wanwushengzhang, is_wanxiangxiuluo, is_xuezhandaodi, is_yifanjieguyi,
-    is_yongchang, no_lianfengsifu, no_normalbaopai, no_shiduan, no_wyakuman, no_yifa
+    is_yongchang, no_composite_yakuman, no_lianfengsifu, no_normalbaopai, no_shiduan, no_wyakuman, no_yifa
 } from "./misc";
 import {
     calcSudian, calcSudianChuanma, calcSudianGuobiao, cmp, errRoundInfo, huazhu, simplify
@@ -477,7 +477,7 @@ export const calcFan = (seat: Seat, zimo: boolean, fangchong?: Seat): CalcFanRet
 
         const dasixi = kezi['1z'] >= 1 && kezi['2z'] >= 1 && kezi['3z'] >= 1 && kezi['4z'] >= 1;
         if (dasixi) {
-            if (!is_xuezhandaodi() && !is_wanxiangxiuluo() && !no_normalbaopai()) {
+            if (!is_xuezhandaodi() && !is_wanxiangxiuluo() && !no_normalbaopai() && !no_composite_yakuman()) {
                 let fulu_sixi = 0;
                 for (const f of fulu[seat]) {
                     const type = f.type;
@@ -525,7 +525,7 @@ export const calcFan = (seat: Seat, zimo: boolean, fangchong?: Seat): CalcFanRet
             ans.fans.push({val: !is_qingtianjing() ? 1 : 13, id: 38}); // 四暗刻
 
         if (kezi['5z'] >= 1 && kezi['6z'] >= 1 && kezi['7z'] >= 1) {
-            if (!is_xuezhandaodi() && !is_wanxiangxiuluo() && !no_normalbaopai()) {
+            if (!is_xuezhandaodi() && !is_wanxiangxiuluo() && !no_normalbaopai() && !no_composite_yakuman()) {
                 let fulu_sanyuan = 0;
                 for (const f of fulu[seat]) {
                     const type = f.type;
@@ -554,15 +554,16 @@ export const calcFan = (seat: Seat, zimo: boolean, fangchong?: Seat): CalcFanRet
             ans.fans.push({val: !is_qingtianjing() ? 1 : 13, id: 43}); // 小四喜
 
         if (gangzi_num === 4) {
-            if (!is_xuezhandaodi() && !is_wanxiangxiuluo() && is_sigangbaopai() && sigang_bao[seat]) {
-                let fulu_gangzi = 0;
-                for (const f of fulu[seat])
-                    if (f.type === 2 || f.type === 3) {
-                        fulu_gangzi++;
-                        if (fulu_gangzi === 4 && f.from !== undefined)
-                            baopai[seat].push({seat: f.from, val: 1});
-                    }
-            }
+            if (!is_xuezhandaodi() && !is_wanxiangxiuluo() && !no_composite_yakuman() && is_sigangbaopai())
+                if (sigang_bao[seat]) {
+                    let fulu_gangzi = 0;
+                    for (const f of fulu[seat])
+                        if (f.type === 2 || f.type === 3) {
+                            fulu_gangzi++;
+                            if (fulu_gangzi === 4 && f.from !== undefined)
+                                baopai[seat].push({seat: f.from, val: 1});
+                        }
+                }
             ans.fans.push({val: !is_qingtianjing() ? 1 : 13, id: 44}); // 四杠子
         }
 
@@ -1463,10 +1464,10 @@ export const calcFanGuobiao = (seat: Seat, zimo: boolean): CalcFanRet => {
         }
 
         let first_tile = true;
-        for (let i = 0; i < base_info.player_cnt; i++) {
-            if (i === base_info.ju)
+        for (let tmp_seat = 0; tmp_seat < base_info.player_cnt; tmp_seat++) {
+            if (tmp_seat === base_info.ju)
                 continue;
-            if (!(liqi_info[i].yifa !== 0 && liqi_info[i].liqi === 0))
+            if (!(liqi_info[tmp_seat].yifa !== 0 && liqi_info[tmp_seat].liqi === 0))
                 first_tile = false;
         }
         if (first_tile && seat !== base_info.ju && !zimo) {
@@ -1949,11 +1950,11 @@ export const calcFanGuobiao = (seat: Seat, zimo: boolean): CalcFanRet => {
             ans.fans.push({val: 4, id: 8056}); // 双明杠
 
         let lastile_num = 0;
-        for (let i = 0; i < base_info.player_cnt; i++) {
-            for (const tile of paihe[i].tiles) // 查牌河, 注意被鸣走的牌还在 paihe 中
+        for (let tmp_seat = 0; tmp_seat < base_info.player_cnt; tmp_seat++) {
+            for (const tile of paihe[tmp_seat].tiles) // 查牌河, 注意被鸣走的牌还在 paihe 中
                 if (isEqualTile(lastile, tile))
                     lastile_num++;
-            for (const f of fulu[i])  // 查副露
+            for (const f of fulu[tmp_seat])  // 查副露
                 if (f.from !== undefined)
                     for (let k = 0; k < f.tile.length - 1; k++) // -1 是要剔除掉被鸣走的牌
                         if (isEqualTile(lastile, f.tile[k]))
@@ -2157,10 +2158,10 @@ export const calcFanGuobiao = (seat: Seat, zimo: boolean): CalcFanRet => {
         }
 
         let first_tile = true;
-        for (let i = 0; i < base_info.player_cnt; i++) {
-            if (i === base_info.ju)
+        for (let tmp_seat = 0; tmp_seat < base_info.player_cnt; tmp_seat++) {
+            if (tmp_seat === base_info.ju)
                 continue;
-            if (!(liqi_info[i].yifa !== 0 && liqi_info[i].liqi === 0))
+            if (!(liqi_info[tmp_seat].yifa !== 0 && liqi_info[tmp_seat].liqi === 0))
                 first_tile = false;
         }
         if (first_tile && seat !== base_info.ju && !zimo)
@@ -2184,11 +2185,11 @@ export const calcFanGuobiao = (seat: Seat, zimo: boolean): CalcFanRet => {
             ans.fans.push({val: 8, id: 8046}); // 抢杠和
         else {
             let lastile_num = 0;
-            for (let i = 0; i < base_info.player_cnt; i++) {
-                for (const tile of paihe[i].tiles) // 查牌河, 注意被鸣走的牌还在 paihe 中
+            for (let tmp_seat = 0; tmp_seat < base_info.player_cnt; tmp_seat++) {
+                for (const tile of paihe[tmp_seat].tiles) // 查牌河, 注意被鸣走的牌还在 paihe 中
                     if (isEqualTile(lastile, tile))
                         lastile_num++;
-                for (const f of fulu[i])  // 查副露
+                for (const f of fulu[tmp_seat])  // 查副露
                     if (f.from !== undefined)
                         for (let k = 0; k < f.tile.length - 1; k++) // -1 是要剔除掉被鸣走的牌
                             if (isEqualTile(lastile, f.tile[k]))

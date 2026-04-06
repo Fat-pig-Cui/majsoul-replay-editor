@@ -67,9 +67,9 @@ export const dingque = (x: GapsInput): void => {
     const all_dingque = x.split('') as [GapInputType, GapInputType, GapInputType, GapInputType];
     const dict: { m: GapType, p: GapType, s: GapType } = {'m': 1, 'p': 0, 's': 2}; // 注意 012 分别对应 pms, 而不是 mps
     const ret: Gaps = [0, 0, 0, 0];
-    for (let i: Seat = 0; i < base_info.player_cnt; i++) {
-        ret[i] = dict[all_dingque[i]];
-        gaps[i] = ret[i];
+    for (let seat = 0; seat < base_info.player_cnt; seat++) {
+        ret[seat] = dict[all_dingque[seat]];
+        gaps[seat] = ret[seat];
     }
 
     addSelectGap(ret);
@@ -134,14 +134,14 @@ export const calcGangPoint = (type: boolean = false): void => {
     chuanma_gangs.not_over = null;
 
     const old_scores = scores.slice() as Players_Number;
-    for (let i = 0; i < base_info.player_cnt; i++)
-        scores[i] += delta_scores[i];
+    for (let seat = 0; seat < base_info.player_cnt; seat++)
+        scores[seat] += delta_scores[seat];
 
     if (!type)
         addGangResult(old_scores);
     else
         addGangResultEnd(old_scores);
 
-    for (let i = 0; i < base_info.player_cnt; i++)
-        delta_scores[i] = 0;
+    for (let seat = 0; seat < base_info.player_cnt; seat++)
+        delta_scores[seat] = 0;
 };

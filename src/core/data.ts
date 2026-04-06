@@ -21,10 +21,8 @@ export const all_data: AllData = {
     config: null,
     player_datas: [null, null],
     players: [null, null],
+    cur_actions: [],
 };
-
-// 最终要注入到牌谱回放中的内容的内容, 每小局结束后 push 到 all_data.actions 中并清空
-export const actions: Actions = [];
 
 // ============================================================
 
@@ -43,6 +41,7 @@ export const actions: Actions = [];
  * - baogang_seat: 包杠的玩家, 无人包杠则为-1
  * - first_hu_seat: 川麻: 某局第一位和牌玩家的 seat, 若没有则为-1
  * - lianzhuang_cnt: 庄家连续和牌连庄数量, 用于八连庄
+ * - all_tile_nums: 当前模式下各种种类的牌应有数量
  */
 export const base_info: BaseInfo = {
     chang: 0,
@@ -58,6 +57,7 @@ export const base_info: BaseInfo = {
     first_hu_seat: -1,
     lianzhuang_cnt: 0,
     player_cnt: 4,
+    all_tile_nums: {},
 };
 
 // 对局的模式

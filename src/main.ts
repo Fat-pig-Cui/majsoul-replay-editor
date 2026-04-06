@@ -5,7 +5,7 @@
  * @github: https://github.com/Fat-pig-Cui/majsoul-replay-editor
  */
 
-import {player_datas, begin_tiles, player_tiles, all_data, actions} from './core/data';
+import {player_datas, begin_tiles, player_tiles, all_data} from './core/data';
 
 import {clearProject, randomPaishan, mopai, qiepai, mingpai, zimingpai, hupai, huangpai, liuju} from './core/core';
 
@@ -15,7 +15,7 @@ import {setMuyuSeats, huanpai, dingque, kaipai, kaipaiLock} from './core/activit
 
 import {normalMoqie, moqieLiqi, comboMopai, mingQiepai, zimoHu, moqieLiuju} from './core/simplifyFunction';
 
-import {getLeftTileCnt, judgeTile, isEqualTile, decompose} from "./core/exportedUtils";
+import {getLeftTileCnt, judgeTile, isEqualTile} from "./core/exportedUtils";
 import {separate, calcHupai, calcTingpai, getLstAction} from './core/exportedUtils';
 
 import {demoGame, setPlayGame, tenhou2Majsoul, reportYaku, reportYaku_yiji} from "./core/sample";
@@ -26,7 +26,6 @@ export type t_player_datas = typeof player_datas;
 export type t_begin_tiles = typeof begin_tiles;
 export type t_player_tiles = typeof player_tiles;
 export type t_all_data = typeof all_data;
-export type t_actions = typeof actions;
 export type t_clearProject = typeof clearProject;
 export type t_setConfig = typeof setConfig;
 export type t_setDiscardTiles = typeof setDiscardTiles;
@@ -55,7 +54,6 @@ export type t_zimoHu = typeof zimoHu;
 export type t_moqieLiuju = typeof moqieLiuju;
 export type t_judgeTile = typeof judgeTile;
 export type t_isEqualTile = typeof isEqualTile;
-export type t_decompose = typeof decompose;
 export type t_separate = typeof separate;
 export type t_calcHupai = typeof calcHupai;
 export type t_calcTingpai = typeof calcTingpai;
@@ -72,7 +70,6 @@ export type t_resetReplay = typeof resetReplay;
 (window as any).begin_tiles = begin_tiles;
 (window as any).player_tiles = player_tiles;
 (window as any).all_data = all_data;
-(window as any).actions = actions;
 (window as any).clearProject = clearProject;
 (window as any).setConfig = setConfig;
 (window as any).setDiscardTiles = setDiscardTiles;
@@ -101,7 +98,6 @@ export type t_resetReplay = typeof resetReplay;
 (window as any).moqieLiuju = moqieLiuju;
 (window as any).judgeTile = judgeTile;
 (window as any).isEqualTile = isEqualTile;
-(window as any).decompose = decompose;
 (window as any).separate = separate;
 (window as any).calcHupai = calcHupai;
 (window as any).calcTingpai = calcTingpai;

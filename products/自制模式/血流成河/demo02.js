@@ -30,23 +30,19 @@ randomPaishan();
 huanpai(['789p', '789s', '588s', '789m'], 1);
 dingque('psmp');
 hupai();
-for (let cnt = 0; cnt < 55; cnt++) {
+while (getLeftTileCnt() !== 0) {
     mopai();
     if (calcHupai(player_tiles[getLstAction().data.seat]) !== 0)
         hupai();
     else {
         qiepai();
-        let seat = getLstAction().data.seat;
-        let tile = getLstAction().data.tile;
+        const seat = getLstAction().data.seat;
+        const tile = getLstAction().data.tile;
         let is_fangchong = false;
         for (let i = seat + 1; i < seat + 4; i++) {
-            let tmp_seat = i % 4;
-            let tmp_tingpais = calcTingpai(tmp_seat);
-            for (let j = 0; j < tmp_tingpais.length; j++)
-                if (isEqualTile(tile, tmp_tingpais[j].tile)) {
-                    is_fangchong = true;
-                    break;
-                }
+            const tmp_seat = i % 4;
+            const tmp_tingpais = calcTingpai(tmp_seat);
+            is_fangchong = tmp_tingpais.some(tingpai => isEqualTile(tile, tingpai.tile));
             if (is_fangchong)
                 break;
         }

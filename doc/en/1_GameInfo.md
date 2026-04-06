@@ -115,23 +115,23 @@ setConfig({
             _fafu_3p_1ting: 1000, // three-player variants
             _fafu_3p_2ting: 2000,
             _fafu_2p: 1000,  // two-player variant
-            _qieshangmanguan: false, // qieshang mangan
-            _toutiao: false, // head-jump
+            have_qieshangmanguan: false, // qieshang mangan
+            have_toutiao: false, // head-jump
             _renhumanguan: false, // renhu counts as mangan (5-fan)
             _no_normalbaopai: false, // disable normal bao-pai (big dragon/four winds indemnity)
             _sigangbaopai: false, // four-kong bao-pai
             _no_liujumanguan: false, // disable liuju mangan
             _no_yifa: false, // disable ippatsu
-            _no_lianfengsifu: false, // disable double-wind four-fu
+            disable_double_wind_four_fu: false, // disable double-wind four-fu
             _no_dora: false, // disable visible dora
             _no_lidora: false, // disable ura-dora
             _no_gangdora: false, // disable gang dora (visible)
             _no_ganglidora: false, // disable gang ura-dora
-            _dora_jifan: false, // immediate flip on open-gang dora
-            _sanxiangliuju: false, // three-player simultaneous win abortive draw
-            _no_leijiyiman: false, // disable accumulated yakuman
-            _no_wyakuman: false, // disable double yakuman
-            _no_guoshiangang: false, // disable guoshi ankan gun (国士暗杠)
+            ming_dora_immediately_open: false, // immediate flip on open-gang dora
+            have_sanjiahele: false, // three-player simultaneous win abortive draw
+            disable_leijiyiman: false, // disable accumulated yakuman
+            disable_double_yakuman: false, // disable double yakuman
+            disable_angang_guoshi: false, // disable guoshi ankan gun (国士暗杠)
             _fufenliqi: false, // disable point requirement for riichi
 
             _baogang: false, // bao-gang (kong liability)

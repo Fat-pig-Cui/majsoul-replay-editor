@@ -313,47 +313,31 @@ export const get_ben_times = (): number => {
     return typeof ben_times == 'number' && ben_times > -1 ? ben_times : 1;
 };
 
-// 四麻一个玩家听牌的罚符, 默认为段位规则: 1000
-export const get_fafu_1ting = (): number => {
-    const fafu_1ting = config.mode.detail_rule._fafu_1ting;
-    return typeof fafu_1ting == 'number' ? fafu_1ting : 1000;
-};
-
-// 四麻两个玩家听牌的罚符, 默认为段位规则: 1500
-export const get_fafu_2ting = (): number => {
-    const fafu_2ting = config.mode.detail_rule._fafu_2ting;
-    return typeof fafu_2ting == 'number' ? fafu_2ting : 1500;
-};
-
-// 四麻三个玩家听牌的罚符, 默认为段位规则: 3000
-export const get_fafu_3ting = (): number => {
-    const fafu_3ting = config.mode.detail_rule._fafu_3ting;
-    return typeof fafu_3ting == 'number' ? fafu_3ting : 3000;
-};
-
-// 三麻一个玩家听牌的罚符, 默认为段位规则: 1000
-export const get_fafu_3p_1ting = (): number => {
-    const fafu_3p_1ting = config.mode.detail_rule._fafu_3p_1ting;
-    return typeof fafu_3p_1ting == 'number' ? fafu_3p_1ting : 1000;
-};
-
-// 三麻两个玩家听牌的罚符, 默认为段位规则: 2000
-export const get_fafu_3p_2ting = (): number => {
-    const fafu_3p_2ting = config.mode.detail_rule._fafu_3p_2ting;
-    return typeof fafu_3p_2ting == 'number' ? fafu_3p_2ting : 2000;
-};
-
-// 二麻听牌的罚符, 默认为 1000
-export const get_fafu_2p = (): number => {
-    const fafu_2p = config.mode.detail_rule._fafu_2p;
-    return typeof fafu_2p == 'number' ? fafu_2p : 1000;
+// 听牌的罚符, 参数为听牌玩家和未听牌玩家的个数, 有效值 1, 2, 3
+export const get_fafu = (ting_cnt: number, no_ting_cnt: number): number => {
+    const fafu_1ting = config.mode.detail_rule.noting_fafu_1;
+    const fafu_2ting = config.mode.detail_rule.noting_fafu_2;
+    const fafu_3ting = config.mode.detail_rule.noting_fafu_3;
+    switch (ting_cnt) {
+// 一个玩家听牌的罚符, 默认为段位规则: 1000
+        case 1:
+            return typeof fafu_1ting == 'number' ? fafu_1ting : 1000;
+// 两个玩家听牌的罚符, 默认为段位规则: 四麻1500, 三麻2000
+        case 2:
+            return typeof fafu_2ting == 'number' ? fafu_2ting : no_ting_cnt === 1 ? 2000 : 1500;
+// 三个玩家听牌的罚符, 默认为段位规则: 3000
+        case 3:
+            return typeof fafu_3ting == 'number' ? fafu_3ting : 1000;
+        default:
+            return 0;
+    }
 };
 
 // 是否有切上满贯
-export const is_qieshang = (): boolean => config.mode.detail_rule._qieshangmanguan;
+export const is_qieshang = (): boolean => config.mode.detail_rule.have_qieshangmanguan;
 
 // 是否有头跳
-export const is_toutiao = (): boolean => config.mode.detail_rule._toutiao;
+export const is_toutiao = (): boolean => config.mode.detail_rule.have_toutiao;
 
 // 是否开启人和, 而且打点为满贯(5番)
 export const is_renhumanguan = (): boolean => config.mode.detail_rule._renhumanguan;
@@ -371,7 +355,7 @@ export const no_liujumanguan = (): boolean => config.mode.detail_rule._no_liujum
 export const no_yifa = (): boolean => config.mode.detail_rule._no_yifa;
 
 // 是否不算连风4符
-export const no_lianfengsifu = (): boolean => config.mode.detail_rule._no_lianfengsifu;
+export const no_lianfengsifu = (): boolean => config.mode.detail_rule.disable_double_wind_four_fu;
 
 // 是否禁用表宝牌
 export const no_dora = (): boolean => config.mode.detail_rule._no_dora;
@@ -386,19 +370,22 @@ export const no_gangdora = (): boolean => config.mode.detail_rule._no_gangdora;
 export const no_ganglidora = (): boolean => config.mode.detail_rule._no_ganglidora;
 
 // 明杠表宝牌是否即翻
-export const is_dora_jifan = (): boolean => config.mode.detail_rule._dora_jifan;
+export const is_dora_jifan = (): boolean => config.mode.detail_rule.ming_dora_immediately_open;
 
 // 是否有三家和了流局
-export const is_sanxiangliuju = (): boolean => config.mode.detail_rule._sanxiangliuju;
+export const is_sanxiangliuju = (): boolean => config.mode.detail_rule.have_sanjiahele;
 
 // 是否禁用累计役满(番数最高三倍满)
-export const no_leijiyiman = (): boolean => config.mode.detail_rule._no_leijiyiman;
+export const no_leijiyiman = (): boolean => config.mode.detail_rule.disable_leijiyiman;
 
 // 是否无双倍役满(纯九, 四暗刻单骑, 十三面, 大四喜算单倍役满)
-export const no_wyakuman = (): boolean => config.mode.detail_rule._no_wyakuman;
+export const no_wyakuman = (): boolean => config.mode.detail_rule.disable_double_yakuman;
+
+// 是否无复合役满(役满牌型打点最多只有一倍)
+export const no_composite_yakuman = (): boolean => config.mode.detail_rule.disable_composite_yakuman;
 
 // 是否禁用国士枪暗杠
-export const no_guoshiangang = (): boolean => config.mode.detail_rule._no_guoshiangang;
+export const no_guoshiangang = (): boolean => config.mode.detail_rule.disable_angang_guoshi;
 
 // 是否禁用立直需要点数限制(点数不够及负分的情况是否能立直)
 export const is_fufenliqi = (): boolean => config.mode.detail_rule._fufenliqi;

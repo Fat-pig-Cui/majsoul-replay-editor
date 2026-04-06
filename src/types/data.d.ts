@@ -62,9 +62,11 @@ type Config = {
             init_point?: number,
             dora_count?: number,
             fanfu?: number,
+
             _chang_ju_ben_num_?: [Seat, Seat, number, number?],
             _scores_?: [number, number, number?, number?],
             _mainrole_?: Seat,
+
             xuezhandaodi?: boolean,
             chuanma?: boolean,
             dora3_mode?: boolean,
@@ -81,46 +83,47 @@ type Config = {
             beishuizhizhan_mode?: boolean,
             amusement_switches?: number[],
             _xueliu?: boolean,
+
             guyi_mode?: boolean,
             _yifanjieguyi?: boolean,
             _no_shiduan?: boolean,
             _no_zimosun?: boolean,
             open_hand?: boolean,
+
             _liqi_need?: number,
             _ben_times?: number,
-            _fafu_1ting?: number,
-            _fafu_2ting?: number,
-            _fafu_3ting?: number,
-            _fafu_3p_1ting?: number,
-            _fafu_3p_2ting?: number,
-            _fafu_2p?: number,
-            _qieshangmanguan?: boolean,
-            _toutiao?: boolean,
+            noting_fafu_1?: number;
+            noting_fafu_2?: number;
+            noting_fafu_3?: number;
+            have_qieshangmanguan?: boolean,
+            have_toutiao?: boolean,
             _renhumanguan?: boolean,
             _no_normalbaopai?: boolean,
             _sigangbaopai?: boolean,
             _no_liujumanguan?: boolean,
             _no_yifa?: boolean,
-            _no_lianfengsifu?: boolean,
+            disable_double_wind_four_fu?: boolean,
             _no_dora?: boolean,
             _no_lidora?: boolean,
             _no_gangdora?: boolean,
             _no_ganglidora?: boolean,
-            _dora_jifan?: boolean,
-            _sanxiangliuju?: boolean,
-            _no_leijiyiman?: boolean,
-            _no_wyakuman?: boolean,
-            _no_guoshiangang?: boolean,
+            ming_dora_immediately_open?: boolean,
+            have_sanjiahele?: boolean,
+            disable_leijiyiman?: boolean,
+            disable_double_yakuman?: boolean,
+            disable_composite_yakuman?: boolean;
+            disable_angang_guoshi?: boolean,
             _fufenliqi?: boolean,
+
             _baogang?: boolean,
             _qingtianjing?: boolean,
             _no_zhenting?: boolean,
             _ronghuzhahu?: boolean,
             _tiandichuangzao?: boolean,
             _wanwushengzhang?: boolean,
-            _tianguishi_vs_yuantiankemei?: boolean,
             _sixifuhe?: boolean,
             _report_yakus?: boolean,
+
             _guobiao?: boolean,
             _guobiao_huapai?: boolean,
             _guobiao_no_8fanfu?: boolean,
@@ -128,6 +131,7 @@ type Config = {
             _scale_points?: number,
             _cuohu_points?: number,
             _cuohupeida?: boolean,
+
             _random_skin?: boolean,
             _random_views?: boolean,
         },
@@ -160,6 +164,7 @@ type BaseInfo = {
     first_hu_seat: -1 | Seat,
     lianzhuang_cnt: number,
     player_cnt: PlayerNum,
+    all_tile_nums: TileNumAll,
 };
 
 type FuluInfo = { type: FuLuType, tile: Tile[], from?: Seat };
@@ -381,6 +386,7 @@ type AllData = {
     config: Config,
     player_datas: PlayerDatas,
     players: Players,
+    cur_actions: Actions,
 };
 
 declare var editFunction: () => undefined, editFunction2: () => undefined;

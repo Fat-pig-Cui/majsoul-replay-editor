@@ -129,7 +129,7 @@ You can call this even if the wall is not fully consumed (it is allowed in almos
 - 2: Four identical winds in succession (四风连打)
 - 3: Four kans (four kongs dispersed) (四杠散了)
 - 4: Four players riichi (四家立直)
-- 5: Three players won simultaneously (三家和了) — requires `_sanxiangliuju` enabled in `detail_rule`
+- 5: Three players won simultaneously (三家和了) — requires `have_sanjiahele` enabled in `detail_rule`
 
 If omitted, the engine will automatically choose the abortive type except for the "three players won" case which currently must be invoked with an explicit parameter.
 

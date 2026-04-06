@@ -66,43 +66,41 @@ mopai();
 qiepai(true);
 mopai();
 qiepai('8s', true);
-{
-    let tmp_tingpais = calcTingpai(1);
-    let first_2 = false; // 2号玩家是否已经立直
-    let huled = false; // 是否已经胡牌
-    for (let i = 0; i < 52; i++) {
+(function () {
+    const tmp_tingpais = calcTingpai(1);
+    let is_first_2 = false; // 2号玩家是否已经立直
+    let is_huled = false; // 是否已经胡牌
+    while (getLeftTileCnt() !== 0) {
         mopai();
         if (calcHupai(player_tiles[getLstAction().data.seat]) !== 0) {
             hupai();
-            huled = true;
+            is_huled = true;
             break;
         } else {
             if (getLstAction().data.tile === '4z') {
                 zimingpai();
                 if (isEqualTile('4z', tmp_tingpais[0].tile)) {
                     hupai();
-                    huled = true;
+                    is_huled = true;
                     break;
                 } else
                     continue;
             }
-            if (!first_2 && getLstAction().data.seat === 2) {
-                first_2 = true;
+            if (!is_first_2 && getLstAction().data.seat === 2) {
+                is_first_2 = true;
                 qiepai(true);
             } else
                 qiepai();
-            let is_fangchong = false;
-            for (let j = 0; j < tmp_tingpais.length; j++)
-                if (isEqualTile(getLstAction().data.tile, tmp_tingpais[j].tile)) {
-                    is_fangchong = true;
-                    hupai();
-                    huled = true;
-                    break;
-                }
-            if (is_fangchong)
+            const is_fangchong = tmp_tingpais.some(tingpai =>
+                isEqualTile(getLstAction().data.tile, tingpai.tile)
+            );
+            if (is_fangchong) {
+                hupai();
+                is_huled = true;
                 break;
+            }
         }
     }
-    if (!huled)
+    if (!is_huled)
         huangpai();
-}
+})();

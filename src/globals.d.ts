@@ -3,7 +3,6 @@ import type {
     t_begin_tiles,
     t_player_tiles,
     t_all_data,
-    t_actions,
     t_clearProject,
     t_setConfig,
     t_setDiscardTiles,
@@ -32,7 +31,6 @@ import type {
     t_moqieLiuju,
     t_judgeTile,
     t_isEqualTile,
-    t_decompose,
     t_separate,
     t_calcHupai,
     t_calcTingpai,
@@ -55,8 +53,6 @@ declare global {
     const player_tiles: t_player_tiles;
     // 完成编辑后的所有信息集合
     const all_data: t_all_data;
-    // 当前对局的所有信息集合
-    const actions: t_actions;
 
     const clearProject: t_clearProject;
     const setConfig: t_setConfig;
@@ -86,7 +82,6 @@ declare global {
     const moqieLiuju: t_moqieLiuju;
     const judgeTile: t_judgeTile;
     const isEqualTile: t_isEqualTile;
-    const decompose: t_decompose;
     const separate: t_separate;
     const calcHupai: t_calcHupai;
     const calcTingpai: t_calcTingpai;

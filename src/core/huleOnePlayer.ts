@@ -11,7 +11,7 @@ import {
 } from "./data";
 import {
     cuohu_points, get_ben_times, get_field_spell_mode, is_guobiao_no_8fanfu, is_hunzhiyiji, is_qingtianjing, no_zimosun,
-    is_wanxiangxiuluo, is_xiakeshang, is_xuezhandaodi, is_tianming, no_guoshiangang, scale_points
+    is_wanxiangxiuluo, is_xiakeshang, is_xuezhandaodi, is_tianming, no_guoshiangang, scale_points, no_composite_yakuman
 } from "./misc";
 import {
     calcDoras, calcSudian, calcSudianChuanma, calcSudianGuobiao, calcTianming, calcXiaKeShang, errRoundInfo, fulu2Ming,
@@ -34,7 +34,8 @@ export const huleOnePlayer = (seat: Seat): HuleInfo => {
 
     const points = calcFan(seat, zimo, fangchong_seat);
     const sudian = calcSudian(points);
-    const val = points.fans.reduce((sum, fan) => sum + fan.val, 0);
+    const val = points.yiman && no_composite_yakuman() ? Math.max(...points.fans.map(fan => fan.val)) :
+        points.fans.reduce((sum, fan) => sum + fan.val, 0);
 
     const delta_scores_backup = delta_scores.slice();
     const qinjia = seat === base_info.ju;
@@ -51,13 +52,13 @@ export const huleOnePlayer = (seat: Seat): HuleInfo => {
         if (seat === base_info.ju)
             base_info.lianzhuang_cnt = -1; // 诈和会导致连庄数重置, 而在 hupai 中会加1, 所以这里是 -1
         const [point_rong, point_sum, point_zimo_qin, point_zimo_xian] = calcPoint(Constants.ZHAHU_SUDIAN);
-        for (let i = 0; i < base_info.player_cnt; i++) {
-            if (i === seat || huled[i])
+        for (let tmp_seat = 0; tmp_seat < base_info.player_cnt; tmp_seat++) {
+            if (tmp_seat === seat || huled[tmp_seat])
                 continue;
-            if (i === base_info.ju || seat === base_info.ju)
-                movePoint(point_zimo_qin * muyu.times[i] * muyu.times[seat], i as Seat, seat);
+            if (tmp_seat === base_info.ju || seat === base_info.ju)
+                movePoint(point_zimo_qin * muyu.times[tmp_seat] * muyu.times[seat], tmp_seat as Seat, seat);
             else
-                movePoint(point_zimo_xian * muyu.times[i] * muyu.times[seat], i as Seat, seat);
+                movePoint(point_zimo_xian * muyu.times[tmp_seat] * muyu.times[seat], tmp_seat as Seat, seat);
         }
         player_tiles[seat].pop();
         console.log(errRoundInfo() + `seat: ${seat} 诈和`);
@@ -97,27 +98,27 @@ export const huleOnePlayer = (seat: Seat): HuleInfo => {
         if (zimo) {
             // 包牌部分, 包牌家全包
             for (const bao of baopai[seat]) {
-                for (let i = 0; i < base_info.player_cnt; i++) {
-                    if (i === seat || huled[i])
+                for (let tmp_seat = 0; tmp_seat < base_info.player_cnt; tmp_seat++) {
+                    if (tmp_seat === seat || huled[tmp_seat])
                         continue;
-                    if (i === base_info.ju || seat === base_info.ju)
-                        delta_point = bao.val * 2 * yiman_sudian * muyu.times[i] * muyu.times[seat] * extra_times;
+                    if (tmp_seat === base_info.ju || seat === base_info.ju)
+                        delta_point = bao.val * 2 * yiman_sudian * muyu.times[tmp_seat] * muyu.times[seat] * extra_times;
                     else
-                        delta_point = bao.val * yiman_sudian * muyu.times[i] * muyu.times[seat] * extra_times;
+                        delta_point = bao.val * yiman_sudian * muyu.times[tmp_seat] * muyu.times[seat] * extra_times;
                     movePoint(delta_point, bao.seat, seat);
                 }
             }
             // 非包牌部分: 没有包杠, 则是一般自摸; 存在包杠, 则包杠全包
-            for (let i = 0; i < base_info.player_cnt; i++) {
-                if (i === seat || huled[i])
+            for (let tmp_seat = 0; tmp_seat < base_info.player_cnt; tmp_seat++) {
+                if (tmp_seat === seat || huled[tmp_seat])
                     continue;
-                let equal_seat = i as Seat;
+                let equal_seat = tmp_seat as Seat;
                 if (base_info.baogang_seat !== -1 && !huled[base_info.baogang_seat])
                     equal_seat = base_info.baogang_seat;
-                if (i === base_info.ju || seat === base_info.ju)
-                    delta_point = feibao_zimo_qin * muyu.times[i] * muyu.times[seat] * extra_times;
+                if (tmp_seat === base_info.ju || seat === base_info.ju)
+                    delta_point = feibao_zimo_qin * muyu.times[tmp_seat] * muyu.times[seat] * extra_times;
                 else
-                    delta_point = feibao_zimo_xian * muyu.times[i] * muyu.times[seat] * extra_times;
+                    delta_point = feibao_zimo_xian * muyu.times[tmp_seat] * muyu.times[seat] * extra_times;
                 movePoint(delta_point, equal_seat, seat);
             }
         } else { // 放铳
@@ -135,27 +136,27 @@ export const huleOnePlayer = (seat: Seat): HuleInfo => {
     }
     // 无包牌情况下的包杠, 自摸全由包杠家负担
     else if (base_info.baogang_seat !== -1 && !huled[base_info.baogang_seat] && zimo) {
-        for (let i = 0; i < base_info.player_cnt; i++) {
-            if (i === seat || huled[i])
+        for (let tmp_seat = 0; tmp_seat < base_info.player_cnt; tmp_seat++) {
+            if (tmp_seat === seat || huled[tmp_seat])
                 continue;
-            if (i === base_info.ju || seat === base_info.ju)
-                delta_point = point_zimo_qin * muyu.times[i] * muyu.times[seat];
+            if (tmp_seat === base_info.ju || seat === base_info.ju)
+                delta_point = point_zimo_qin * muyu.times[tmp_seat] * muyu.times[seat];
             else
-                delta_point = point_zimo_xian * muyu.times[i] * muyu.times[seat];
+                delta_point = point_zimo_xian * muyu.times[tmp_seat] * muyu.times[seat];
             movePoint(delta_point, base_info.baogang_seat, seat);
         }
     }
     // 一般情况
     else {
         if (zimo) {
-            for (let i = 0; i < base_info.player_cnt; i++) {
-                if (i === seat || huled[i])
+            for (let tmp_seat = 0; tmp_seat < base_info.player_cnt; tmp_seat++) {
+                if (tmp_seat === seat || huled[tmp_seat])
                     continue;
-                if (i === base_info.ju || seat === base_info.ju)
-                    delta_point = point_zimo_qin * muyu.times[i] * muyu.times[seat];
+                if (tmp_seat === base_info.ju || seat === base_info.ju)
+                    delta_point = point_zimo_qin * muyu.times[tmp_seat] * muyu.times[seat];
                 else
-                    delta_point = point_zimo_xian * muyu.times[i] * muyu.times[seat];
-                movePoint(delta_point, i as Seat, seat);
+                    delta_point = point_zimo_xian * muyu.times[tmp_seat] * muyu.times[seat];
+                movePoint(delta_point, tmp_seat as Seat, seat);
             }
         } else {
             delta_point = point_rong * muyu.times[fangchong_seat] * muyu.times[seat];
@@ -168,15 +169,15 @@ export const huleOnePlayer = (seat: Seat): HuleInfo => {
         const diff = 300 * spell_hourglass[seat];
         const win_point = delta_scores[seat] - delta_scores_backup[seat];
         if (win_point < diff)
-            for (let i = 0; i < base_info.player_cnt; i++)
-                delta_scores[i] = delta_scores_backup[i];
+            for (let tmp_seat = 0; tmp_seat < base_info.player_cnt; tmp_seat++)
+                delta_scores[tmp_seat] = delta_scores_backup[tmp_seat];
         else {
             delta_scores[seat] -= diff;
             if (zimo)
-                for (let i = 0; i < base_info.player_cnt; i++) {
-                    if (i === seat)
+                for (let tmp_seat = 0; tmp_seat < base_info.player_cnt; tmp_seat++) {
+                    if (tmp_seat === seat)
                         continue;
-                    delta_scores[i] += diff / 3;
+                    delta_scores[tmp_seat] += diff / 3;
                 }
             else
                 delta_scores[fangchong_seat] += diff;
@@ -226,7 +227,7 @@ export const huleOnePlayer = (seat: Seat): HuleInfo => {
         let title_id = 0;
         if (!is_qingtianjing()) {
             if (points.yiman)
-                title_id = val + 4;
+                title_id = (!no_composite_yakuman() ? val : Math.max(...points.fans.map(fan => fan.val))) + 4;
             else if (sudian === 8000)
                 title_id = 11;
             else if (sudian === 6000)
@@ -304,10 +305,10 @@ export const huleOnePlayer = (seat: Seat): HuleInfo => {
             movePoint(delta_point, equal_seat, seat);
         } else {
             delta_point = 100 * base_info.benchangbang * get_ben_times();
-            for (let i = 0; i < base_info.player_cnt; i++) {
-                if (i === seat || huled[i])
+            for (let tmp_seat = 0; tmp_seat < base_info.player_cnt; tmp_seat++) {
+                if (tmp_seat === seat || huled[tmp_seat])
                     continue;
-                movePoint(delta_point, i as Seat, seat);
+                movePoint(delta_point, tmp_seat as Seat, seat);
             }
         }
         base_info.benchangbang = 0;
@@ -331,10 +332,10 @@ export const huleOnePlayerChuanma = (seat: Seat): HuleInfo => {
     // -------------------------------------------
     const zhahu = calcHupai(player_tiles[seat]) === 0 || huazhu(seat) || lst_name === 'RecordAnGangAddGang' && lst_action.data.type === 3;
     if (zhahu) {
-        for (let i = 0; i < base_info.player_cnt; i++) {
-            if (i === seat || huled[i])
+        for (let tmp_seat = 0; tmp_seat < base_info.player_cnt; tmp_seat++) {
+            if (tmp_seat === seat || huled[tmp_seat])
                 continue;
-            movePoint(Constants.ZHAHU_SUDIAN_CHUANMA - 1000, i as Seat, seat);
+            movePoint(Constants.ZHAHU_SUDIAN_CHUANMA - 1000, tmp_seat as Seat, seat);
         }
         player_tiles[seat].pop();
         console.log(errRoundInfo() + `seat: ${seat} 玩家诈和`);
@@ -357,10 +358,10 @@ export const huleOnePlayerChuanma = (seat: Seat): HuleInfo => {
         };
     }
     if (zimo)
-        for (let i = 0; i < base_info.player_cnt; i++) {
-            if (i === seat || huled[i])
+        for (let tmp_seat = 0; tmp_seat < base_info.player_cnt; tmp_seat++) {
+            if (tmp_seat === seat || huled[tmp_seat])
                 continue;
-            movePoint(sudian + 1000, i as Seat, seat);
+            movePoint(sudian + 1000, tmp_seat as Seat, seat);
         }
     else
         movePoint(sudian, fangchong_seat, seat);
@@ -400,10 +401,10 @@ export const huleOnePlayerGuobiao = (seat: Seat): HuleInfo => {
     // -------------------------------------------
     const {zhahu, is_cuohu} = judgeZhahuCuohu();
     if (zhahu || is_cuohu) { // 诈和, 错和赔三家各 cuohu_points() * scale_points() 点
-        for (let i = 0; i < base_info.player_cnt; i++) {
-            if (i === seat)
+        for (let tmp_seat = 0; tmp_seat < base_info.player_cnt; tmp_seat++) {
+            if (tmp_seat === seat)
                 continue;
-            movePoint(-cuohu_points() * scale_points(), i as Seat, seat);
+            movePoint(-cuohu_points() * scale_points(), tmp_seat as Seat, seat);
         }
         if (!zimo)
             player_tiles[seat].pop();
@@ -431,18 +432,18 @@ export const huleOnePlayerGuobiao = (seat: Seat): HuleInfo => {
         };
     }
     if (zimo) {
-        for (let i = 0; i < base_info.player_cnt; i++) {
-            if (i === seat)
+        for (let tmp_seat = 0; tmp_seat < base_info.player_cnt; tmp_seat++) {
+            if (tmp_seat === seat)
                 continue;
-            movePoint(sudian + Constants.GB_BASE_FAN * scale_points(), i as Seat, seat);
+            movePoint(sudian + Constants.GB_BASE_FAN * scale_points(), tmp_seat as Seat, seat);
         }
     } else {
         movePoint(sudian, fangchong_seat, seat);
 
-        for (let i = 0; i < base_info.player_cnt; i++) {
-            if (i === seat)
+        for (let tmp_seat = 0; tmp_seat < base_info.player_cnt; tmp_seat++) {
+            if (tmp_seat === seat)
                 continue;
-            movePoint(Constants.GB_BASE_FAN * scale_points(), i as Seat, seat);
+            movePoint(Constants.GB_BASE_FAN * scale_points(), tmp_seat as Seat, seat);
         }
     }
     player_tiles[seat].pop();

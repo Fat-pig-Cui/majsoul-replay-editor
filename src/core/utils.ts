@@ -6,11 +6,13 @@
  */
 
 import {
-    actions, dora_cnt, dora_indicator, fulu, gaps, huled, liqi_info, mingpais, paihe, scores, base_info, shoumoqie, xun,
+    dora_cnt, dora_indicator, fulu, gaps, huled, liqi_info, mingpais, paihe, scores, base_info, shoumoqie, xun,
     yongchang_data, muyu_info, muyu, player_tiles, all_data, lst_liqi, zhenting
 } from "./data";
 import {
-    get_fanfu, get_field_spell_mode, is_chuanma, is_fufenliqi, is_guobiao, is_qieshang, is_qingtianjing, is_xiakeshang,
+    get_aka_cnt,
+    get_fanfu, get_field_spell_mode, is_chuanma, is_fufenliqi, is_guobiao, is_guobiao_huapai, is_mingjing,
+    is_qieshang, is_qingtianjing, is_wanxiangxiuluo, is_xiakeshang, no_composite_yakuman,
     no_dora, no_gangdora, no_ganglidora, no_leijiyiman, no_lidora, no_zhenting, scale_points
 } from "./misc";
 import {calcHupai, calcTingpai, getLstAction, isEqualTile} from "./exportedUtils";
@@ -41,11 +43,108 @@ export const allEqualTiles = (tile: Tile): Tile[] => {
         return [tile, tile + Constants.SPT_SUFFIX] as Tile[];
 };
 
+/**
+ * 获取当前模式各种牌的数量分布
+ */
+export const getTileNum = (): TileNumAll => {
+    const cnt: TileNumAll = {};
+    for (const tile of Constants.TILE) {
+        cnt[tile] = Constants.AKA_TILE.includes(tile) ? 0 : 4;
+        cnt[tile + Constants.SPT_SUFFIX] = 0;
+    }
+
+    let aka_cnt = 3;
+    if (get_aka_cnt() > -1)
+        aka_cnt = get_aka_cnt();
+    else if (base_info.player_cnt === 3)
+        aka_cnt = 2;
+    else if (base_info.player_cnt === 2)
+        aka_cnt = 1;
+
+    if (base_info.player_cnt === 2) { // 二麻
+        for (const tile of Constants.PIN_MID_TILE)
+            cnt[tile] = 0;
+        for (const tile of Constants.SOU_MID_TILE)
+            cnt[tile] = 0;
+        cnt['5m'] = 4 - aka_cnt;
+        cnt['0m'] = aka_cnt;
+    } else if (base_info.player_cnt === 3) { // 三麻
+        for (const tile of Constants.MAN_MID_TILE)
+            cnt[tile] = 0;
+        cnt['5p'] = cnt['5s'] = 4 - Math.floor(aka_cnt / 2);
+        cnt['0p'] = cnt['0s'] = Math.floor(aka_cnt / 2);
+    } else { // 四麻
+        if (aka_cnt === 4) {
+            cnt['5m'] = cnt['5s'] = 3;
+            cnt['5p'] = cnt['0p'] = 2;
+            cnt['0m'] = cnt['0s'] = 1;
+        } else {
+            cnt['5m'] = cnt['5p'] = cnt['5s'] = 4 - Math.floor(aka_cnt / 3);
+            cnt['0m'] = cnt['0p'] = cnt['0s'] = Math.floor(aka_cnt / 3);
+        }
+    }
+    if (is_chuanma()) {
+        for (const tile of Constants.HONOR_TILE)
+            cnt[tile] = 0;
+        cnt['0m'] = cnt['0p'] = cnt['0s'] = 0;
+        cnt['5m'] = cnt['5p'] = cnt['5s'] = 4;
+    }
+    if (is_guobiao()) {
+        cnt['0m'] = cnt['0p'] = cnt['0s'] = 0;
+        cnt['5m'] = cnt['5p'] = cnt['5s'] = 4;
+        // 用 HUAPAI 当做国标的花牌
+        if (is_guobiao_huapai() && typeof editFunction == 'function')
+            cnt[Constants.HUAPAI] = 8;
+    }
+    if (is_mingjing()) {
+        for (const tile of Constants.TILE_NO_AKA) {
+            cnt[tile] = 1;
+            cnt[tile + Constants.SPT_SUFFIX] = 3;
+        }
+        cnt['0m'] = cnt['0p'] = cnt['0s'] = 0;
+    }
+    // 万象修罗
+    if (is_wanxiangxiuluo())
+        cnt[Constants.TBD] = 4;
+
+    return cnt;
+};
+
+/**
+ * 解析牌, 会将简化后牌编码恢复成单个并列样子
+ * @example
+ * decompose('123m99p')
+ * // return '1m2m3m9p9p'
+ */
+export const decompose = (tiles: string): string => {
+    const x = tiles.replace(/\s*/g, '');
+    const random_tiles = '.HTYDMPS'; // 随机牌
+    const bd_tile_num = x.match(/b/g) ? x.match(/b/g).length : 0;
+    const matches = x.match(/\d+[mpsz]t?|\.|H|T|Y|D|M|P|S/g);
+
+    let ret = '';
+    for (let i = 0; i < bd_tile_num; i++)
+        ret += Constants.TBD; // 万象修罗百搭牌
+    for (const match of matches) {
+        if (match.length === 1 && random_tiles.includes(match)) {
+            ret += match + match;
+            continue;
+        }
+        const kind_index = match[match.length - 1] === Constants.SPT_SUFFIX ? match.length - 2 : match.length - 1;
+        let tile_kind = match[kind_index];
+        if (kind_index === match.length - 2)
+            tile_kind += Constants.SPT_SUFFIX;
+        for (let j = 0; j < kind_index; j++)
+            ret += match[j] + tile_kind;
+    }
+    return ret;
+};
+
 // 玩家的巡目所对应的操作位置
 export const calcXun = (): void => {
     for (let i = 0; i < base_info.player_cnt; i++)
         if (player_tiles[i].length % 3 === 2 && !huled[i])
-            xun[i].push(actions.length - 1);
+            xun[i].push(all_data.cur_actions.length - 1);
 };
 
 // 计算表指示牌
@@ -391,14 +490,14 @@ export const calcTianming = (seat: Seat, zimo: boolean): number => {
     let sum = 1;
     for (const [index, tile] of player_tiles[seat].entries()) { // 查手牌
         if (!zimo && index === player_tiles[seat].length - 1) // 不是自摸, 则最后一张牌不考虑
-            return;
+            break;
         if (tile.length >= 2 && tile[2] === Constants.SPT_SUFFIX)
             sum++;
     }
     for (const f of fulu[seat]) // 查副露
         for (const [index, tile] of f.tile.entries()) {
             if (f.type !== 3 && index === f.tile.length - 1) // 不是暗杠, 则最后一张牌不考虑
-                return;
+                break;
             if (tile.length > 2 && tile[2] === Constants.SPT_SUFFIX)
                 sum++;
         }
@@ -487,7 +586,7 @@ export const calcSudian = (x: CalcFanRet, type: number = 0): number => {
         return x.fu * Math.pow(2, val + 2);
 
     if (x.yiman)
-        return Constants.YIMAN_SUDIAN * val;
+        return Constants.YIMAN_SUDIAN * (!no_composite_yakuman() ? val : Math.max(...x.fans.map(fan => fan.val)));
 
     else if (val < fanfu)
         return Constants.ZHAHU_SUDIAN;

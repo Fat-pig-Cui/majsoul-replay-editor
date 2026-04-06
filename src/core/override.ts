@@ -142,8 +142,8 @@ export const editOffline = (): void => {
                         });
                 }
         }
-        for (let i = 0; i < base_info.player_cnt; i++)
-            all_data.player_datas[i] = player_datas[i] = ret[i];
+        for (let seat = 0; seat < base_info.player_cnt; seat++)
+            player_datas[seat] = ret[seat];
         player_datas.splice(base_info.player_cnt);
     };
 

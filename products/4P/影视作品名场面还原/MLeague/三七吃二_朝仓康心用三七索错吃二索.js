@@ -20,15 +20,15 @@ setConfig({
     mode: {
         mode: 2,
         detail_rule: {
-            _qieshangmanguan: true,
-            _toutiao: true,
+            have_qieshangmanguan: true,
+            have_toutiao: true,
             _sigangbaopai: true,
             _no_liujumanguan: true,
-            _no_lianfengsifu: true,
-            _dora_jifan: true,
-            _no_leijiyiman: true,
-            _no_wyakuman: true,
-            _no_guoshiangang: true,
+            disable_double_wind_four_fu: true,
+            ming_dora_immediately_open: true,
+            disable_leijiyiman: true,
+            disable_double_yakuman: true,
+            disable_angang_guoshi: true,
 
             _chang_ju_ben_num_: [0, 2, 5, 1], // 东3局5本场, 1根棒子
             _scores_: [13200, 49400, 18500, 17900],
