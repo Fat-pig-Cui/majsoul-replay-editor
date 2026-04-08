@@ -9,7 +9,7 @@ import {all_data, base_info, begin_tiles} from "./data";
 import {gameBegin, huangpai, hupai, liuju, mingpai, mopai, qiepai, randomPaishan, roundEnd, zimingpai} from "./core";
 import {moqieLiqi, normalMoqie} from "./simplifyFunction";
 import {isEqualTile, separate} from "./exportedUtils";
-import {errRoundInfo, randomCmp} from "./utils";
+import {errRoundInfo, randomCmp} from "./baseUtils";
 import {is_report_yakus} from "./misc";
 import {Constants} from "./constants";
 

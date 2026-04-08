@@ -17,6 +17,7 @@
         - [glue.ts](core/glue.ts): 胶水代码, 用于连接界面和核心逻辑
         - [misc.ts](core/misc.ts): 随机装扮相关的函数和一些比较简短的函数
         - [override.ts](core/override.ts): 重写游戏函数以实现编辑功能, 以及部分强化功能
+        - [baseUtils.ts](core/baseUtils.ts): 一些基础的辅助函数
         - [utils.ts](core/utils.ts): 一些内部的辅助函数
     - types: 类型文件
         - [data.d.ts](types/data.d.ts): 包含绝大部分自定义类型

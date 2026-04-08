@@ -90,7 +90,7 @@ export const editOffline = (): void => {
         const ret: PlayerDatas = [null, null];
         // 建议玩家随机的装扮: 立直棒(0), 和牌特效(1), 立直特效(2), 头像框(5), 桌布(6), 牌背(7), 称号(11), 牌面(13)
         const slots = [0, 1, 2, 5, 6, 7, 11, 13];
-        for (let seat: Seat = 0; seat < base_info.player_cnt; seat++) {
+        for (let seat = 0; seat < base_info.player_cnt; seat++) {
             ret[seat] = {
                 account_id: 100000 + seat, // 账号唯一id, 这里没什么用随便设的
                 seat: seat as Seat, // 座次

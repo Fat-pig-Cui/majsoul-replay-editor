@@ -7,7 +7,7 @@
 
 import {base_info, muyu, player_tiles, gaps, scores, paihe, chuanma_gangs, delta_scores} from "./data";
 import {separate, getLstAction} from "./exportedUtils";
-import {errRoundInfo, cmp, isValidSeat} from "./utils";
+import {errRoundInfo, cmp, isValidSeat} from "./baseUtils";
 import {addChangeTile, addGangResult, addGangResultEnd, addLockTile, addSelectGap, addUnveilTile} from "./glue";
 import {Constants} from "./constants";
 
@@ -31,7 +31,7 @@ export const huanpai = (tls: string[], type: HuanpaiType): void => {
         console.error(errRoundInfo() + `huanpai: 换牌的牌数必须为3, 但有玩家的牌数不为3, tls: ${tls}`);
 
     const ret: ChangeTileInfo = [null, null, null, null];
-    for (let seat: Seat = 0; seat < base_info.player_cnt; seat++) {
+    for (let seat = 0; seat < base_info.player_cnt; seat++) {
         for (const tile of tiles[seat]) {
             const index = player_tiles[seat].indexOf(tile);
             if (index === -1)

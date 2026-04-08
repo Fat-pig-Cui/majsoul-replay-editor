@@ -7,7 +7,7 @@
 
 import {mopai, qiepai, mingpai, zimingpai, hupai, huangpai} from "./core";
 import {separate, getLeftTileCnt} from "./exportedUtils"
-import {errRoundInfo} from "./utils";
+import {errRoundInfo} from "./baseUtils";
 
 /**
  * 便捷函数: 正常摸切

@@ -23,11 +23,14 @@ import {
     separate, separateWithParam, judgeTile, getLstAction, isEqualTile, calcHupai, calcTingpai, getLeftTileCnt
 } from "./exportedUtils";
 import {
-    allEqualTiles, calcDoras, calcSudian, calcSudianChuanma, cmp, eraseMingpai,
-    fulu2Ming, huazhu, inTiles, isAwaitingIndex, isBeishuiType, isDora, isTile,
-    isValidSeat, push2PlayerTiles, randomCmp, errRoundInfo, updateMuyu, prejudgeZhenting, judgeShezhangzt,
-    updateShoumoqie, updateZhenting, lstLiqi2Liqi, simplify, getTileNum
+    calcDoras, calcSudian, calcSudianChuanma, eraseMingpai,
+    fulu2Ming, isDora, push2PlayerTiles, updateMuyu, prejudgeZhenting, judgeShezhangzt,
+    updateShoumoqie, updateZhenting, lstLiqi2Liqi, getTileNum
 } from "./utils";
+import {
+    allEqualTiles, cmp, errRoundInfo, inTiles, isAwaitingIndex, isBeishuiType, isHuazhu,
+    isTile, isValidSeat, randomCmp, simplify
+} from "./baseUtils";
 import {
     addAnGangAddGang, addBaBei, addChiPengGang, addCuohu, endHule, addDealTile, addDiscardTile, addFillAwaitingTiles,
     addHuleXueLiuMid, addHuleXueZhanMid, addRevealTile, endHuleXueLiuEnd, endHuleXueZhanEnd, endLiuJu, endNoTile,
@@ -1201,7 +1204,7 @@ export const huangpai = (): void => {
         // 罚符, 川麻查大叫, 花猪
         if (ting_cnt !== 0 && no_ting_cnt !== 0 && !is_guobiao()) {
             if (!is_chuanma()) {
-                const fafu = get_fafu(ting_cnt, no_ting_cnt)
+                const fafu = get_fafu(ting_cnt, no_ting_cnt);
                 for (let seat = 0; seat < base_info.player_cnt; seat++) {
                     if (huled[seat])
                         continue;
@@ -1216,7 +1219,7 @@ export const huangpai = (): void => {
                         if (huled[seat] || huled[tmp_seat] || tmp_seat === seat)
                             continue;
                         let points = 0;
-                        if (huazhu(tmp_seat as Seat))
+                        if (isHuazhu(tmp_seat as Seat))
                             points = Math.max(calcSudianChuanma(calcFanChuanma(seat as Seat, false, true)), 8000);
                         else if (!ting_info[tmp_seat].tingpai && ting_info[seat].tingpai)
                             points = calcSudianChuanma(calcFanChuanma(seat as Seat, false, true));
@@ -1523,7 +1526,7 @@ export const roundBegin = (): void => {
         dora_indicator[1].push(paishan[paishan.length - (22 - 4 * base_info.player_cnt + 2 * i)]);
     }
 
-    let tiles = [separate(begin_tiles[0]), separate(begin_tiles[1]), separate(begin_tiles[2]), separate(begin_tiles[3])];
+    const tiles = [separate(begin_tiles[0]), separate(begin_tiles[1]), separate(begin_tiles[2]), separate(begin_tiles[3])];
     if (tiles[0].length === 0 && tiles[1].length === 0 && tiles[2].length === 0 && tiles[3].length === 0) { // 没有给定起手, 则模仿现实中摸牌
         for (let i = 0; i < 3; i++)
             for (let seat = 0; seat < base_info.player_cnt; seat++)
@@ -1533,7 +1536,7 @@ export const roundBegin = (): void => {
             tiles[seat].push(paishan.shift());
         tiles[0].push(paishan.shift());
 
-        tiles = tiles.slice(base_info.ju, base_info.player_cnt).concat(tiles.slice(0, base_info.ju));
+        tiles.push(...tiles.splice(0, base_info.ju));
     }
     for (let seat = 0; seat < base_info.player_cnt; seat++) {
         tiles[seat].sort(cmp);
@@ -1546,7 +1549,7 @@ export const roundBegin = (): void => {
     let opens: Opens = undefined;
     if (is_begin_open() || is_openhand()) {
         opens = [null, null];
-        for (let seat: Seat = 0; seat < base_info.player_cnt; seat++) {
+        for (let seat = 0; seat < base_info.player_cnt; seat++) {
             const ret: Open_Player = {seat: seat as Seat, tiles: [], count: []};
             const tiles = player_tiles[seat], cnt: TileNum = {};
             for (const tile of Constants.TILE)
@@ -1595,6 +1598,7 @@ export const roundBegin = (): void => {
                 qishou_tiles.push(random_tiles[j % base_info.player_cnt][12]);
         if (random_tiles[base_info.ju].length > 13)
             qishou_tiles.push(random_tiles[base_info.ju][13]);
+
         paishan.unshift(...qishou_tiles);
     }
 
@@ -1638,9 +1642,10 @@ export const roundEnd = (): void => {
         base_info.ju = 0;
     }
     base_info.chang %= base_info.player_cnt;
-    round_begin_once = true;
 
     gameEnd();
+
+    round_begin_once = true;
 };
 
 // 计算终局界面玩家的点数
@@ -1663,7 +1668,7 @@ export const gameEnd = (): void => {
     };
 
     const players: Players = [null, null];
-    for (let seat: Seat = 0; seat < base_info.player_cnt; seat++)
+    for (let seat = 0; seat < base_info.player_cnt; seat++)
         players[seat] = {
             seat: seat as Seat,
             gold: 0,

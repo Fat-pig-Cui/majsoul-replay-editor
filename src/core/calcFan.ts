@@ -14,9 +14,8 @@ import {
     is_sixifuhe, is_tiandichuangzao, is_wanwushengzhang, is_wanxiangxiuluo, is_xuezhandaodi, is_yifanjieguyi,
     is_yongchang, no_composite_yakuman, no_lianfengsifu, no_normalbaopai, no_shiduan, no_wyakuman, no_yifa
 } from "./misc";
-import {
-    calcSudian, calcSudianChuanma, calcSudianGuobiao, cmp, errRoundInfo, huazhu, simplify
-} from "./utils";
+import {calcSudian, calcSudianChuanma, calcSudianGuobiao} from "./utils";
+import {cmp, errRoundInfo, isHuazhu, simplify} from "./baseUtils";
 import {isEqualTile, judgeTile, calcHupai, calcTingpai, getLstAction} from "./exportedUtils";
 import {Constants} from "./constants";
 
@@ -1045,7 +1044,7 @@ export const calcFanChuanma = (seat: Seat, zimo: boolean, type: boolean = false)
             cnt2[simplify(tile)]++;
     }
 
-    if (huazhu(seat))
+    if (isHuazhu(seat))
         return ret;
 
     dfs(Constants.DFS_BEGIN_TILE, partition, cnt, lastile, zimo, updateRet, calc0);

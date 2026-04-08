@@ -14,9 +14,10 @@ import {
     is_wanxiangxiuluo, is_xiakeshang, is_xuezhandaodi, is_tianming, no_guoshiangang, scale_points, no_composite_yakuman
 } from "./misc";
 import {
-    calcDoras, calcSudian, calcSudianChuanma, calcSudianGuobiao, calcTianming, calcXiaKeShang, errRoundInfo, fulu2Ming,
-    huazhu, push2PlayerTiles
+    calcDoras, calcSudian, calcSudianChuanma, calcSudianGuobiao, calcTianming, calcXiaKeShang, fulu2Ming,
+    push2PlayerTiles
 } from "./utils";
+import {errRoundInfo, isHuazhu} from "./baseUtils";
 import {calcFan, calcFanChuanma, calcFanGuobiao} from "./calcFan";
 import {calcHupai, getLstAction} from "./exportedUtils";
 import {Constants} from "./constants";
@@ -330,7 +331,7 @@ export const huleOnePlayerChuanma = (seat: Seat): HuleInfo => {
     const sudian = calcSudianChuanma(points);
     const val = points.fans.reduce((sum, fan) => sum + fan.val, 0);
     // -------------------------------------------
-    const zhahu = calcHupai(player_tiles[seat]) === 0 || huazhu(seat) || lst_name === 'RecordAnGangAddGang' && lst_action.data.type === 3;
+    const zhahu = calcHupai(player_tiles[seat]) === 0 || isHuazhu(seat) || lst_name === 'RecordAnGangAddGang' && lst_action.data.type === 3;
     if (zhahu) {
         for (let tmp_seat = 0; tmp_seat < base_info.player_cnt; tmp_seat++) {
             if (tmp_seat === seat || huled[tmp_seat])
@@ -491,7 +492,7 @@ const dataInit = (seat: Seat) => {
     const zimo = ['RecordNewRound', 'RecordDealTile'].includes(lst_name);
     if (!zimo)
         push2PlayerTiles(seat);
-    const fangchong_seat: Seat = !zimo ? lst_action.data.seat : undefined;
+    const fangchong_seat = !zimo ? lst_action.data.seat : undefined;
     const hand = player_tiles[seat].slice();
     const hu_tile = hand.pop();
     return {lst_action, lst_name, zimo, fangchong_seat, hand, hu_tile};

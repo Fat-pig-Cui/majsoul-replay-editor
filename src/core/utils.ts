@@ -6,42 +6,17 @@
  */
 
 import {
-    dora_cnt, dora_indicator, fulu, gaps, huled, liqi_info, mingpais, paihe, scores, base_info, shoumoqie, xun,
+    dora_cnt, dora_indicator, fulu, huled, liqi_info, mingpais, paihe, scores, base_info, shoumoqie, xun,
     yongchang_data, muyu_info, muyu, player_tiles, all_data, lst_liqi, zhenting
 } from "./data";
 import {
-    get_aka_cnt,
-    get_fanfu, get_field_spell_mode, is_chuanma, is_fufenliqi, is_guobiao, is_guobiao_huapai, is_mingjing,
+    get_aka_cnt, get_fanfu, get_field_spell_mode, is_chuanma, is_fufenliqi, is_guobiao, is_guobiao_huapai, is_mingjing,
     is_qieshang, is_qingtianjing, is_wanxiangxiuluo, is_xiakeshang, no_composite_yakuman,
     no_dora, no_gangdora, no_ganglidora, no_leijiyiman, no_lidora, no_zhenting, scale_points
 } from "./misc";
 import {calcHupai, calcTingpai, getLstAction, isEqualTile} from "./exportedUtils";
+import {simplify} from "./baseUtils";
 import {Constants} from "./constants";
-
-/**
- * 将 tile 牌简化: 去掉最后的 SPT_SUFFIX, 并将红宝牌转换为普通牌
- */
-export const simplify = (tile: Tile): SimpleTile => {
-    if (tile[0] == '0')
-        return '5' + tile[1] as SimpleTile;
-    return tile[0] + tile[1] as SimpleTile;
-};
-
-/**
- * 返回和 tile 等效的所有牌, 优先把红宝牌和含有 SPT_SUFFIX 放到后面
- * @example
- * allEqualTiles('5m')
- * // return ['5m', '0m', '5mt', '0mt']
- */
-export const allEqualTiles = (tile: Tile): Tile[] => {
-    if (tile === Constants.TBD)
-        return [Constants.TBD];
-    tile = tile[0] + tile[1]; // 去掉可能存在的 SPT_SUFFIX
-    if (tile[0] === '0' || tile[0] === '5' && tile[1] !== 'z')
-        return ['5' + tile[1], '5' + tile[1] + Constants.SPT_SUFFIX, '0' + tile[1], '0' + tile[1] + Constants.SPT_SUFFIX] as Tile[];
-    else
-        return [tile, tile + Constants.SPT_SUFFIX] as Tile[];
-};
 
 /**
  * 获取当前模式各种牌的数量分布
@@ -110,36 +85,6 @@ export const getTileNum = (): TileNumAll => {
     return cnt;
 };
 
-/**
- * 解析牌, 会将简化后牌编码恢复成单个并列样子
- * @example
- * decompose('123m99p')
- * // return '1m2m3m9p9p'
- */
-export const decompose = (tiles: string): string => {
-    const x = tiles.replace(/\s*/g, '');
-    const random_tiles = '.HTYDMPS'; // 随机牌
-    const bd_tile_num = x.match(/b/g) ? x.match(/b/g).length : 0;
-    const matches = x.match(/\d+[mpsz]t?|\.|H|T|Y|D|M|P|S/g);
-
-    let ret = '';
-    for (let i = 0; i < bd_tile_num; i++)
-        ret += Constants.TBD; // 万象修罗百搭牌
-    for (const match of matches) {
-        if (match.length === 1 && random_tiles.includes(match)) {
-            ret += match + match;
-            continue;
-        }
-        const kind_index = match[match.length - 1] === Constants.SPT_SUFFIX ? match.length - 2 : match.length - 1;
-        let tile_kind = match[kind_index];
-        if (kind_index === match.length - 2)
-            tile_kind += Constants.SPT_SUFFIX;
-        for (let j = 0; j < kind_index; j++)
-            ret += match[j] + tile_kind;
-    }
-    return ret;
-};
-
 // 玩家的巡目所对应的操作位置
 export const calcXun = (): void => {
     for (let i = 0; i < base_info.player_cnt; i++)
@@ -167,53 +112,6 @@ export const calcDoras = (): Doras => {
     return doras0;
 };
 
-// 手牌理牌算法
-export const cmp = (x: Tile, y: Tile): number => {
-    x = simplify(x);
-    y = simplify(y);
-    if (x === y)
-        return 0;
-    if (x === Constants.TBD)
-        return -1;
-    if (y === Constants.TBD)
-        return 1;
-    const group = Constants.GROUP;
-    const group_index_x = group.indexOf(x[1]), group_index_y = group.indexOf(y[1]);
-    const num_x = parseInt(x), num_y = parseInt(y);
-    if (group_index_x > group_index_y)
-        return 1;
-    else if (group_index_x < group_index_y)
-        return -1;
-    else if (num_x > num_y)
-        return 1;
-    else if (num_x < num_y)
-        return -1;
-    return 0;
-};
-
-// 随机排序比较函数
-export const randomCmp = () => Math.random() - 0.5;
-
-// 判断第一个参数里面的所有牌是否为第二个参数里面的牌的子集, 考虑和赤宝牌和特殊牌
-export const inTiles = (x: Tile | Tile[], y: Tile[]): boolean => {
-    if (typeof x == 'string')
-        x = [x];
-    const cnt: TileNumAll = {};
-    for (const tile of y) {
-        if (cnt[tile] === undefined)
-            cnt[tile] = 0;
-        cnt[tile]++;
-    }
-    for (const tile of x) {
-        if (cnt[tile] === undefined)
-            return false;
-        cnt[tile]--;
-        if (cnt[tile] < 0)
-            return false;
-    }
-    return true;
-};
-
 // 更新 seat 号玩家的舍张振听状态
 export const judgeShezhangzt = (seat: Seat): void => {
     if (!is_chuanma() && !is_guobiao() && !no_zhenting()) {
@@ -237,7 +135,7 @@ export const judgeShezhangzt = (seat: Seat): void => {
 export const prejudgeZhenting = (seat: Seat, tile: Tile, is_angang: boolean = false): void => {
     if (!is_chuanma() && !is_guobiao() && !no_zhenting()) {
         // 同巡振听预判断
-        for (let i: Seat = 0; i < base_info.player_cnt; i++) {
+        for (let i = 0; i < base_info.player_cnt; i++) {
             if (i === seat)
                 continue;
             const tingpais = calcTingpai(i as Seat);
@@ -259,7 +157,7 @@ export const prejudgeZhenting = (seat: Seat, tile: Tile, is_angang: boolean = fa
                 }
         }
         // 立直振听预判断
-        for (let i: Seat = 0; i < base_info.player_cnt; i++) {
+        for (let i = 0; i < base_info.player_cnt; i++) {
             if (liqi_info[i].liqi === 0)
                 continue;
             const tingpais = calcTingpai(i as Seat);
@@ -289,56 +187,14 @@ export const updateZhenting = (): void => {
         zhenting.result[i] = zhenting.shezhang[i] || zhenting.tongxun[1][i] || zhenting.liqi[1][i];
 };
 
-/**
- * 判断 tile 字符串是否合法
- * @param tile - 输入的牌
- * @param type - 是否允许'.HTYDMPS'等随机牌, 默认不允许
- */
-export const isTile = (tile: string, type = false): tile is Tile => {
-    if (tile.length < 2 || tile.length > 3 || (tile.length === 3 && tile[2] !== Constants.SPT_SUFFIX))
-        return false;
-    if (tile === Constants.TBD)
-        return true;
-    if (type) {
-        const random_tiles = ['.', 'H', 'T', 'Y', 'D', 'M', 'P', 'S'];
-        for (const t of random_tiles) {
-            const tmp_random_tile = t.repeat(2);
-            if (tile === tmp_random_tile)
-                return true;
-        }
-    }
-    const honor_numbers = ['1', '2', '3', '4', '5', '6', '7'];
-    const ordinal_numbers = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
-    if (tile[1] === 'z')
-        return honor_numbers.includes(tile[0]);
-    else if (['m', 'p', 's'].includes(tile[1]))
-        return ordinal_numbers.includes(tile[0]);
-    return false;
-};
-
-// 判断 seat 参数是否为合法的 seat
-export const isValidSeat = (seat: number): seat is Seat => {
-    return seat >= 0 && seat < base_info.player_cnt && Math.floor(seat) === seat;
-};
-
-// 判断 awaiting_index 参数是否为 AwaitingIndex 类型
-export const isAwaitingIndex = (awaiting_index: number): awaiting_index is AwaitingIndex => {
-    return [0, 1, 2].includes(awaiting_index);
-};
-
-// 判断 beishui_type 参数是否为 BeishuiType 类型
-export const isBeishuiType = (beishui_type: number): beishui_type is BeishuiType => {
-    return [0, 1, 2].includes(beishui_type);
-};
-
 // 开局计算所有玩家的听牌, 亲家去掉最后一张牌后再计算, 但仍然不会显示
 export const getAllTingpai = (): { seat: number, tingpais1: { tile: string }[] }[] => {
     const tingpai: { seat: number, tingpais1: { tile: string }[] }[] = [];
     const lastile = player_tiles[base_info.ju].pop();
-    for (let i: Seat = 0; i < base_info.player_cnt; i++) {
-        const tingpais1 = calcTingpai(i as Seat);
+    for (let seat = 0; seat < base_info.player_cnt; seat++) {
+        const tingpais1 = calcTingpai(seat as Seat);
         if (tingpais1.length > 0)
-            tingpai.push({seat: i, tingpais1: tingpais1});
+            tingpai.push({seat: seat, tingpais1: tingpais1});
     }
     player_tiles[base_info.ju].push(lastile);
     return tingpai;
@@ -422,29 +278,6 @@ export const eraseMingpai = (seat: Seat, tile: Tile): boolean => {
     if (mingpais[seat][tile] > 0) {
         mingpais[seat][tile]--;
         return true;
-    }
-    return false;
-};
-
-// 川麻, 判断 seat 玩家是否花猪
-export const huazhu = (seat: Seat): boolean => {
-    // 注意 gaps 的 012 分别对应 pms, 而不是 mps
-    for (const tile of player_tiles[seat]) { // 查手牌
-        if (tile[1] === 'm' && gaps[seat] === 1)
-            return true;
-        if (tile[1] === 'p' && gaps[seat] === 0)
-            return true;
-        if (tile[1] === 's' && gaps[seat] === 2)
-            return true;
-    }
-    for (const f of fulu[seat]) { // 查副露
-        const tile = f.tile[0];
-        if (tile[1] === 'm' && gaps[seat] === 1)
-            return true;
-        if (tile[1] === 'p' && gaps[seat] === 0)
-            return true;
-        if (tile[1] === 's' && gaps[seat] === 2)
-            return true;
     }
     return false;
 };
@@ -633,12 +466,4 @@ export const calcSudianGuobiao = (x: CalcFanRet, no_huapai: boolean = false): nu
         if (!(no_huapai && fan.id >= 8091 && fan.id <= 8099))
             val += fan.val;
     return val * scale_points();
-};
-
-// 辅助函数, chang, ju, ben 转换为控制台输出的所在小局
-export const errRoundInfo = (): string => {
-    if (is_chuanma())
-        return `第${all_data.all_actions.length + 1}局: `;
-    const chang_word = [`东`, `南`, `西`, `北`];
-    return `第${all_data.all_actions.length + 1}局(${chang_word[base_info.chang]}${base_info.ju + 1}局${base_info.ben}本场): `;
 };

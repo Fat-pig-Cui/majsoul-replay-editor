@@ -7,7 +7,7 @@
 
 import {all_data, awaiting_tiles, base_info, paishan, player_tiles} from "./data";
 import {is_chuanma, is_guobiao, is_wanxiangxiuluo, is_yifanjieguyi, is_zhanxing} from "./misc";
-import {errRoundInfo, simplify, huazhu, isTile, decompose} from "./utils";
+import {errRoundInfo, simplify, isHuazhu, isTile, decompose} from "./baseUtils";
 import {Constants} from "./constants";
 
 /**
@@ -367,7 +367,7 @@ export const calcHupai = (tiles: Tile[], type: boolean = false): number => {
  * @param type - 是否考虑听第5张(无虚听), 默认不考虑
  */
 export const calcTingpai = (seat: Seat, type: boolean = false): { tile: Tile }[] => {
-    if (is_chuanma() && huazhu(seat))
+    if (is_chuanma() && isHuazhu(seat))
         return [];
     const tiles = player_tiles[seat];
     const cnt: TileNum = {};
