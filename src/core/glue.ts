@@ -227,7 +227,7 @@ export const addBaBei = (seat: Seat, tile: Tile, tile_states: boolean[]): void =
  * 胶水代码: 和牌
  * @param hule_info - 本次和牌所有的和牌信息
  * @param old_scores - 结算前分数
- * @param baopai_player - 包牌玩家, 注意和数值比 seat 大1
+ * @param baopai_player - 包牌玩家, 注意和数值比 seat 大1, 逐渐弃用
  */
 export const endHule = (hule_info: HuleInfo[], old_scores: Players_Number, baopai_player: BaopaiPlayer): void => {
     pushAction('RecordHule', {
@@ -301,7 +301,6 @@ export const endHuleXueLiuEnd = (hule_info: HuleInfo[], old_scores: Players_Numb
         baopai: 0,
     });
 };
-
 
 /**
  * 胶水代码: 荒牌流局

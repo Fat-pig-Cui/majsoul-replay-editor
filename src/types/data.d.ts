@@ -351,6 +351,7 @@ type HuleInfo = {
     title_id: number,
     yiman: boolean,
     zimo: boolean,
+    baopai_seats?: Seat[],
     dadian?: number,
     tianming_bonus?: number,
     xia_ke_shang_coefficient?: number,

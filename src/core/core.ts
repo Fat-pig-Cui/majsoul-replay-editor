@@ -1002,6 +1002,7 @@ export const hupai = (...args: unknown[]): void => {
     // 非血战到底, 血流成河模式
     if (!is_xuezhandaodi() && !is_wanxiangxiuluo() && !is_chuanma() && !is_xueliu()) {
         const ret: HuleInfo[] = [];
+        // 包牌的玩家+1, 逐渐弃用
         let baopai_player: BaopaiPlayer = 0;
         for (const seat of seats)
             ret.push(!is_guobiao() ? huleOnePlayer(seat) : huleOnePlayerGuobiao(seat));

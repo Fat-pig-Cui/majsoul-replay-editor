@@ -2210,7 +2210,7 @@
      * 胶水代码: 和牌
      * @param hule_info - 本次和牌所有的和牌信息
      * @param old_scores - 结算前分数
-     * @param baopai_player - 包牌玩家, 注意和数值比 seat 大1
+     * @param baopai_player - 包牌玩家, 注意和数值比 seat 大1, 逐渐弃用
      */
     const endHule = (hule_info, old_scores, baopai_player) => {
         pushAction('RecordHule', {
@@ -4761,6 +4761,7 @@
             title_id: title_id,
             yiman: points.yiman,
             zimo: zimo,
+            baopai_seats: baopai[seat].map(bao => bao.seat),
             tianming_bonus: is_tianming() ? tianming_bonus : undefined,
             xia_ke_shang_coefficient: is_xiakeshang() ? xia_ke_shang_coefficient : undefined,
             dadian: is_xuezhandaodi() || is_wanxiangxiuluo() || base_info.player_cnt === 2 ? dadian : undefined,
@@ -7006,6 +7007,7 @@
         // 非血战到底, 血流成河模式
         if (!is_xuezhandaodi() && !is_wanxiangxiuluo() && !is_chuanma() && !is_xueliu()) {
             const ret = [];
+            // 包牌的玩家+1, 逐渐弃用
             let baopai_player = 0;
             for (const seat of seats)
                 ret.push(!is_guobiao() ? huleOnePlayer(seat) : huleOnePlayerGuobiao(seat));

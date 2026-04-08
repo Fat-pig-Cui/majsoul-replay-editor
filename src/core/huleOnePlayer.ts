@@ -209,6 +209,7 @@ export const huleOnePlayer = (seat: Seat): HuleInfo => {
         title_id: title_id,
         yiman: points.yiman,
         zimo: zimo,
+        baopai_seats: baopai[seat].map(bao => bao.seat),
         tianming_bonus: is_tianming() ? tianming_bonus : undefined,
         xia_ke_shang_coefficient: is_xiakeshang() ? xia_ke_shang_coefficient : undefined,
         dadian: is_xuezhandaodi() || is_wanxiangxiuluo() || base_info.player_cnt === 2 ? dadian : undefined,
