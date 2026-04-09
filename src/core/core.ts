@@ -1482,7 +1482,6 @@ export const roundBegin = (): void => {
     if (!round_begin_once)
         return;
 
-    all_data.cur_actions.length = 0;
     for (let seat = 0; seat < base_info.player_cnt; seat++) {
         fulu[seat] = [];
         baopai[seat] = [];

@@ -99,10 +99,9 @@ export const kaipai = (seat: Seat): void => {
 
 /**
  * seat 号玩家开牌后锁定(暗夜之战)
- * @param seat
  */
 export const kaipaiLock = (seat: Seat): void => {
-    if (typeof seat != 'number')
+    if (!isValidSeat(seat))
         throw new Error(errRoundInfo() + `kaipaiLock: 暗夜之战开牌必须指定玩家, seat: ${seat}`);
     if (getLstAction().name === 'RecordRevealTile') {
         const tile_seat = getLstAction().data.seat;

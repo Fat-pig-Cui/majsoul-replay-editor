@@ -34,7 +34,6 @@ export const allEqualTiles = (tile: Tile): Tile[] => {
         return [tile, tile + Constants.SPT_SUFFIX] as Tile[];
 };
 
-
 /**
  * 解析牌, 会将简化后牌编码恢复成单个并列样子
  * @example
@@ -158,8 +157,8 @@ export const isBeishuiType = (beishui_type: number): beishui_type is BeishuiType
 export const errRoundInfo = (): string => {
     if (is_chuanma())
         return `第${all_data.all_actions.length + 1}局: `;
-    const chang_word = [`东`, `南`, `西`, `北`];
-    return `第${all_data.all_actions.length + 1}局(${chang_word[base_info.chang]}${base_info.ju + 1}局${base_info.ben}本场): `;
+    const words = [`东`, `南`, `西`, `北`];
+    return `第${all_data.all_actions.length + 1}局(${words[base_info.chang]}${base_info.ju + 1}局${base_info.ben}本场): `;
 };
 
 // 川麻, 判断 seat 玩家是否花猪

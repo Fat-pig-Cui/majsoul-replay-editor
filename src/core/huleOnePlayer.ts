@@ -113,13 +113,12 @@ export const huleOnePlayer = (seat: Seat): HuleInfo => {
             for (let tmp_seat = 0; tmp_seat < base_info.player_cnt; tmp_seat++) {
                 if (tmp_seat === seat || huled[tmp_seat])
                     continue;
-                let equal_seat = tmp_seat as Seat;
-                if (base_info.baogang_seat !== -1 && !huled[base_info.baogang_seat])
-                    equal_seat = base_info.baogang_seat;
                 if (tmp_seat === base_info.ju || seat === base_info.ju)
-                    delta_point = feibao_zimo_qin * muyu.times[tmp_seat] * muyu.times[seat] * extra_times;
+                    delta_point = feibao_zimo_qin * muyu.times[tmp_seat] * muyu.times[seat];
                 else
-                    delta_point = feibao_zimo_xian * muyu.times[tmp_seat] * muyu.times[seat] * extra_times;
+                    delta_point = feibao_zimo_xian * muyu.times[tmp_seat] * muyu.times[seat];
+                const equal_seat = base_info.baogang_seat !== -1 && !huled[base_info.baogang_seat] ?
+                    base_info.baogang_seat : tmp_seat as Seat;
                 movePoint(delta_point, equal_seat, seat);
             }
         } else { // 放铳
@@ -131,20 +130,8 @@ export const huleOnePlayer = (seat: Seat): HuleInfo => {
                 movePoint(delta_point, bao.seat, seat);
             }
             // 非包牌部分: 非包牌部分 + 包牌部分/2 => 非包牌部分 + (全部 - 非包牌部分)/2 => (全部 + 非包牌部分)/2
-            delta_point = (point_rong + feibao_rong) / 2 * muyu.times[fangchong_seat] * muyu.times[seat] * extra_times;
+            delta_point = (point_rong + feibao_rong) / 2 * muyu.times[fangchong_seat] * muyu.times[seat];
             movePoint(delta_point, fangchong_seat, seat);
-        }
-    }
-    // 无包牌情况下的包杠, 自摸全由包杠家负担
-    else if (base_info.baogang_seat !== -1 && !huled[base_info.baogang_seat] && zimo) {
-        for (let tmp_seat = 0; tmp_seat < base_info.player_cnt; tmp_seat++) {
-            if (tmp_seat === seat || huled[tmp_seat])
-                continue;
-            if (tmp_seat === base_info.ju || seat === base_info.ju)
-                delta_point = point_zimo_qin * muyu.times[tmp_seat] * muyu.times[seat];
-            else
-                delta_point = point_zimo_xian * muyu.times[tmp_seat] * muyu.times[seat];
-            movePoint(delta_point, base_info.baogang_seat, seat);
         }
     }
     // 一般情况
@@ -157,7 +144,10 @@ export const huleOnePlayer = (seat: Seat): HuleInfo => {
                     delta_point = point_zimo_qin * muyu.times[tmp_seat] * muyu.times[seat];
                 else
                     delta_point = point_zimo_xian * muyu.times[tmp_seat] * muyu.times[seat];
-                movePoint(delta_point, tmp_seat as Seat, seat);
+                // 若有包杠, 自摸全由包杠家负担, 否则各家承担各自的
+                const equal_seat = base_info.baogang_seat !== -1 && !huled[base_info.baogang_seat] ?
+                    base_info.baogang_seat : tmp_seat as Seat;
+                movePoint(delta_point, equal_seat, seat);
             }
         } else {
             delta_point = point_rong * muyu.times[fangchong_seat] * muyu.times[seat];
