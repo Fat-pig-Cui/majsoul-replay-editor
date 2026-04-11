@@ -44,6 +44,7 @@ export const calcFan = (seat: Seat, zimo: boolean, fangchong?: Seat): CalcFanRet
     const cnt: TileNum = {}, cnt2: TileNum = {};
     for (const tile of Constants.TILE)
         cnt[tile] = cnt2[tile] = 0;
+    cnt[Constants.TBD] = 0;
     for (const tile of tiles) {
         cnt[simplify(tile)]++;
         cnt2[simplify(tile)]++;

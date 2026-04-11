@@ -43,12 +43,12 @@ export const setPaishan = (ps: string): void => {
 
 /**
  * 跳转局数
- * @param c - 场 chang, 0,1,2,3 分别表示 东,南,西,北 场
- * @param j - 局 ju, seat 为 ju 坐庄
- * @param b - 本 ben, 本场数
+ * @param chang - 场, 0,1,2,3 分别表示 东,南,西,北 场
+ * @param ju - 局, seat 为 ju 坐庄
+ * @param ben - 本, 本场数
  */
-export const setRound = (c: Seat, j: Seat, b: number): void => {
-    [base_info.chang, base_info.ju, base_info.ben] = [c, j, b];
+export const setRound = (chang: Seat, ju: Seat, ben: number): void => {
+    [base_info.chang, base_info.ju, base_info.ben] = [chang, ju, ben];
 };
 
 /**

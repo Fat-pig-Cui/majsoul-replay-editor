@@ -2392,6 +2392,7 @@
         const cnt = {}, cnt2 = {};
         for (const tile of Constants.TILE)
             cnt[tile] = cnt2[tile] = 0;
+        cnt[Constants.TBD] = 0;
         for (const tile of tiles) {
             cnt[simplify(tile)]++;
             cnt2[simplify(tile)]++;
@@ -7626,12 +7627,12 @@
     };
     /**
      * 跳转局数
-     * @param c - 场 chang, 0,1,2,3 分别表示 东,南,西,北 场
-     * @param j - 局 ju, seat 为 ju 坐庄
-     * @param b - 本 ben, 本场数
+     * @param chang - 场, 0,1,2,3 分别表示 东,南,西,北 场
+     * @param ju - 局, seat 为 ju 坐庄
+     * @param ben - 本, 本场数
      */
-    const setRound = (c, j, b) => {
-        [base_info.chang, base_info.ju, base_info.ben] = [c, j, b];
+    const setRound = (chang, ju, ben) => {
+        [base_info.chang, base_info.ju, base_info.ben] = [chang, ju, ben];
     };
     /**
      * 设置玩家的实时点数
