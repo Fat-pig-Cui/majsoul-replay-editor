@@ -127,7 +127,7 @@
      *
      * 影响振听的因素
      * 1. 自家牌河中有听的牌(qiepai)
-     * 2. 其他家切牌(qiepai), 加杠(zimingpai), 拔北(zimingpai), 暗杠(国士, zimingpai)有听的牌
+     * 2. 其他家切牌(qiepai)有听的牌
      * 3. 只有切牌的时候会解除舍张振听
      * 4. 只有在摸牌和自家鸣牌的时候会解除同巡振听
      * 5. 同巡和立直振听在pass掉这张牌之后才会振听, 紧跟的操作可能是 mopai, mingpai (hupai 不影响)
@@ -880,7 +880,7 @@
         _[9710] = { id: 9710, name_chs: '金门桥', show_index: 0, sound: '' };
         _[9711] = { id: 9711, name_chs: '东北新干线', show_index: 0, sound: '' };
         _[9712] = { id: 9712, name_chs: '无发绿一色', show_index: 0, sound: 'fan_lvyise' };
-        const ids = [
+        [
             9000, 9001, 9002, 9003, 9004, 9005, 9006,
             9100, 9101, 9102, 9103, 9104, 9105, 9106, 9107, 9108,
             9200, 9201, 9202, 9203, 9204, 9205, 9206, 9207, 9208, 9209, 9210, 9211,
@@ -889,9 +889,9 @@
             9500, 9501, 9502, 9503, 9504, 9505, 9506, 9507, 9508, 9509, 9510, 9511, 9512, 9513, 9514, 9515, 9516, 9517, 9518, 9519, 9520,
             9600, 9601, 9602, 9603, 9604, 9605, 9606,
             9700, 9701, 9702, 9703, 9704, 9705, 9706, 9707, 9708, 9709, 9710, 9711, 9712
-        ];
-        for (const id of ids)
+        ].forEach(id => {
             _[id].name_chs_t = _[id].name_jp = _[id].name_en = '';
+        });
     };
     // 国标麻将番种
     const guobiaoFans = () => {
@@ -992,7 +992,7 @@
         _[8097] = { id: 8097, name_chs: '花牌', show_index: 8097, sound: 'fan_dora7' };
         _[8098] = { id: 8098, name_chs: '花牌', show_index: 8098, sound: 'fan_dora8' };
         _[8099] = { id: 8099, name_chs: '花牌', show_index: 8099, sound: 'fan_dora13' };
-        const ids = [
+        [
             8000, 8001, 8002, 8003, 8004, 8005, 8006,
             8007, 8008, 8009, 8010, 8011, 8012,
             8013, 8014,
@@ -1007,9 +1007,9 @@
             8070, 8071, 8072, 8073, 8074, 8075, 8076, 8077, 8078, 8079, 8080, 8081,
             8082, 8083, 8084, 8085,
             8091, 8092, 8093, 8094, 8095, 8096, 8097, 8098, 8099
-        ];
-        for (const id of ids)
+        ].forEach(id => {
             _[id].name_chs_t = _[id].name_jp = _[id].name_en = '';
+        });
     };
 
     /**
@@ -1155,8 +1155,8 @@
     const errRoundInfo = () => {
         if (is_chuanma())
             return `第${all_data.all_actions.length + 1}局: `;
-        const chang_word = [`东`, `南`, `西`, `北`];
-        return `第${all_data.all_actions.length + 1}局(${chang_word[base_info.chang]}${base_info.ju + 1}局${base_info.ben}本场): `;
+        const words = [`东`, `南`, `西`, `北`];
+        return `第${all_data.all_actions.length + 1}局(${words[base_info.chang]}${base_info.ju + 1}局${base_info.ben}本场): `;
     };
     // 川麻, 判断 seat 玩家是否花猪
     const isHuazhu = (seat) => {
@@ -1669,13 +1669,11 @@
         }
     };
     /**
-     * 更新同巡和立直预振听, zimingpai 不会造成舍张振听, 所以只有同巡和立直,
-     * 此外, 暗杠只有国士听牌才有可能导致其他玩家振听
+     * 更新同巡和立直预振听
      * @param seat - seat 号玩家
      * @param tile - 相关操作的牌
-     * @param is_angang - 是否为暗杠, 默认否
      */
-    const prejudgeZhenting = (seat, tile, is_angang = false) => {
+    const prejudgeZhenting = (seat, tile) => {
         if (!is_chuanma() && !is_guobiao() && !no_zhenting()) {
             // 同巡振听预判断
             for (let i = 0; i < base_info.player_cnt; i++) {
@@ -1684,20 +1682,8 @@
                 const tingpais = calcTingpai(i);
                 for (const tingpai of tingpais)
                     if (isEqualTile(tile, tingpai.tile)) {
-                        if (!is_angang) {
-                            zhenting.tongxun[0][i] = true;
-                            break;
-                        }
-                        else {
-                            const tiles = player_tiles[i];
-                            tiles.push(tile);
-                            if (calcHupai(tiles) === 3) {
-                                zhenting.tongxun[0][i] = true;
-                                tiles.pop();
-                                break;
-                            }
-                            tiles.pop();
-                        }
+                        zhenting.tongxun[0][i] = true;
+                        break;
                     }
             }
             // 立直振听预判断
@@ -1707,20 +1693,8 @@
                 const tingpais = calcTingpai(i);
                 for (const tingpai of tingpais)
                     if (isEqualTile(tile, tingpai.tile)) {
-                        if (!is_angang) {
-                            zhenting.liqi[0][i] = true;
-                            break;
-                        }
-                        else {
-                            const tiles = player_tiles[i];
-                            tiles.push(tile);
-                            if (calcHupai(tiles) === 3) {
-                                zhenting.liqi[0][i] = true;
-                                tiles.pop();
-                                break;
-                            }
-                            tiles.pop();
-                        }
+                        zhenting.liqi[0][i] = true;
+                        break;
                     }
             }
         }
@@ -4664,13 +4638,12 @@
                 for (let tmp_seat = 0; tmp_seat < base_info.player_cnt; tmp_seat++) {
                     if (tmp_seat === seat || huled[tmp_seat])
                         continue;
-                    let equal_seat = tmp_seat;
-                    if (base_info.baogang_seat !== -1 && !huled[base_info.baogang_seat])
-                        equal_seat = base_info.baogang_seat;
                     if (tmp_seat === base_info.ju || seat === base_info.ju)
-                        delta_point = feibao_zimo_qin * muyu.times[tmp_seat] * muyu.times[seat] * extra_times;
+                        delta_point = feibao_zimo_qin * muyu.times[tmp_seat] * muyu.times[seat];
                     else
-                        delta_point = feibao_zimo_xian * muyu.times[tmp_seat] * muyu.times[seat] * extra_times;
+                        delta_point = feibao_zimo_xian * muyu.times[tmp_seat] * muyu.times[seat];
+                    const equal_seat = base_info.baogang_seat !== -1 && !huled[base_info.baogang_seat] ?
+                        base_info.baogang_seat : tmp_seat;
                     movePoint(delta_point, equal_seat, seat);
                 }
             }
@@ -4683,20 +4656,8 @@
                     movePoint(delta_point, bao.seat, seat);
                 }
                 // 非包牌部分: 非包牌部分 + 包牌部分/2 => 非包牌部分 + (全部 - 非包牌部分)/2 => (全部 + 非包牌部分)/2
-                delta_point = (point_rong + feibao_rong) / 2 * muyu.times[fangchong_seat] * muyu.times[seat] * extra_times;
+                delta_point = (point_rong + feibao_rong) / 2 * muyu.times[fangchong_seat] * muyu.times[seat];
                 movePoint(delta_point, fangchong_seat, seat);
-            }
-        }
-        // 无包牌情况下的包杠, 自摸全由包杠家负担
-        else if (base_info.baogang_seat !== -1 && !huled[base_info.baogang_seat] && zimo) {
-            for (let tmp_seat = 0; tmp_seat < base_info.player_cnt; tmp_seat++) {
-                if (tmp_seat === seat || huled[tmp_seat])
-                    continue;
-                if (tmp_seat === base_info.ju || seat === base_info.ju)
-                    delta_point = point_zimo_qin * muyu.times[tmp_seat] * muyu.times[seat];
-                else
-                    delta_point = point_zimo_xian * muyu.times[tmp_seat] * muyu.times[seat];
-                movePoint(delta_point, base_info.baogang_seat, seat);
             }
         }
         // 一般情况
@@ -4709,7 +4670,10 @@
                         delta_point = point_zimo_qin * muyu.times[tmp_seat] * muyu.times[seat];
                     else
                         delta_point = point_zimo_xian * muyu.times[tmp_seat] * muyu.times[seat];
-                    movePoint(delta_point, tmp_seat, seat);
+                    // 若有包杠, 自摸全由包杠家负担, 否则各家承担各自的
+                    const equal_seat = base_info.baogang_seat !== -1 && !huled[base_info.baogang_seat] ?
+                        base_info.baogang_seat : tmp_seat;
+                    movePoint(delta_point, equal_seat, seat);
                 }
             }
             else {
@@ -5130,10 +5094,9 @@
     };
     /**
      * seat 号玩家开牌后锁定(暗夜之战)
-     * @param seat
      */
     const kaipaiLock = (seat) => {
-        if (typeof seat != 'number')
+        if (!isValidSeat(seat))
             throw new Error(errRoundInfo() + `kaipaiLock: 暗夜之战开牌必须指定玩家, seat: ${seat}`);
         if (getLstAction().name === 'RecordRevealTile') {
             const tile_seat = getLstAction().data.seat;
@@ -6790,7 +6753,7 @@
         is_babei || (is_babei = is_guobiao() && tile === Constants.HUAPAI && type === 'babei' && typeof editFunction == 'function');
         // 强制拔北, 需要载入 add_function.js
         is_babei || (is_babei = tile_cnt >= 1 && type === 'babei' && typeof editFunction == 'function');
-        let is_angang = tile_cnt >= 4 && (!type || type === 'angang');
+        const is_angang = tile_cnt >= 4 && (!type || type === 'angang');
         let is_jiagang = false;
         if (tile_cnt > 0 && (!type || type === 'jiagang') && player_tiles[seat].includes(tile))
             for (const f of fulu[seat])
@@ -6802,7 +6765,6 @@
         for (let seat = 0; seat < base_info.player_cnt; seat++)
             if (liqi_info[seat].yifa > 0)
                 liqi_info[seat].yifa = -1;
-        prejudgeZhenting(seat, tile, is_angang);
         // 鸣出去的牌明牌状态
         const tile_states = [];
         if (!is_chuanma())
@@ -7442,7 +7404,6 @@
         gameBegin();
         if (!round_begin_once)
             return;
-        all_data.cur_actions.length = 0;
         for (let seat = 0; seat < base_info.player_cnt; seat++) {
             fulu[seat] = [];
             baopai[seat] = [];

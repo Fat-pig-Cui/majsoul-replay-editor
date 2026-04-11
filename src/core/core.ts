@@ -770,7 +770,7 @@ export const zimingpai = (...args: unknown[]): void => {
     // 强制拔北, 需要载入 add_function.js
     is_babei ||= tile_cnt >= 1 && type === 'babei' && typeof editFunction == 'function';
 
-    let is_angang = tile_cnt >= 4 && (!type || type === 'angang');
+    const is_angang = tile_cnt >= 4 && (!type || type === 'angang');
 
     let is_jiagang = false;
     if (tile_cnt > 0 && (!type || type === 'jiagang') && player_tiles[seat].includes(tile))
@@ -784,7 +784,6 @@ export const zimingpai = (...args: unknown[]): void => {
     for (let seat = 0; seat < base_info.player_cnt; seat++)
         if (liqi_info[seat].yifa > 0)
             liqi_info[seat].yifa = -1;
-    prejudgeZhenting(seat, tile, is_angang);
 
     // 鸣出去的牌明牌状态
     const tile_states: boolean[] = [];

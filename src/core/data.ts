@@ -159,7 +159,7 @@ export const cuohu: Players_Boolean = [false, false];
  *
  * 影响振听的因素
  * 1. 自家牌河中有听的牌(qiepai)
- * 2. 其他家切牌(qiepai), 加杠(zimingpai), 拔北(zimingpai), 暗杠(国士, zimingpai)有听的牌
+ * 2. 其他家切牌(qiepai)有听的牌
  * 3. 只有切牌的时候会解除舍张振听
  * 4. 只有在摸牌和自家鸣牌的时候会解除同巡振听
  * 5. 同巡和立直振听在pass掉这张牌之后才会振听, 紧跟的操作可能是 mopai, mingpai (hupai 不影响)

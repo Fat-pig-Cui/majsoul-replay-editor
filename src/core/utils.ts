@@ -14,7 +14,7 @@ import {
     is_qieshang, is_qingtianjing, is_wanxiangxiuluo, is_xiakeshang, no_composite_yakuman,
     no_dora, no_gangdora, no_ganglidora, no_leijiyiman, no_lidora, no_zhenting, scale_points
 } from "./misc";
-import {calcHupai, calcTingpai, getLstAction, isEqualTile} from "./exportedUtils";
+import {calcTingpai, getLstAction, isEqualTile} from "./exportedUtils";
 import {simplify} from "./baseUtils";
 import {Constants} from "./constants";
 
@@ -126,13 +126,11 @@ export const judgeShezhangzt = (seat: Seat): void => {
 };
 
 /**
- * 更新同巡和立直预振听, zimingpai 不会造成舍张振听, 所以只有同巡和立直,
- * 此外, 暗杠只有国士听牌才有可能导致其他玩家振听
+ * 更新同巡和立直预振听
  * @param seat - seat 号玩家
  * @param tile - 相关操作的牌
- * @param is_angang - 是否为暗杠, 默认否
  */
-export const prejudgeZhenting = (seat: Seat, tile: Tile, is_angang: boolean = false): void => {
+export const prejudgeZhenting = (seat: Seat, tile: Tile): void => {
     if (!is_chuanma() && !is_guobiao() && !no_zhenting()) {
         // 同巡振听预判断
         for (let i = 0; i < base_info.player_cnt; i++) {
@@ -141,19 +139,8 @@ export const prejudgeZhenting = (seat: Seat, tile: Tile, is_angang: boolean = fa
             const tingpais = calcTingpai(i as Seat);
             for (const tingpai of tingpais)
                 if (isEqualTile(tile, tingpai.tile)) {
-                    if (!is_angang) {
-                        zhenting.tongxun[0][i] = true;
-                        break;
-                    } else {
-                        const tiles = player_tiles[i];
-                        tiles.push(tile);
-                        if (calcHupai(tiles) === 3) {
-                            zhenting.tongxun[0][i] = true;
-                            tiles.pop();
-                            break;
-                        }
-                        tiles.pop();
-                    }
+                    zhenting.tongxun[0][i] = true;
+                    break;
                 }
         }
         // 立直振听预判断
@@ -163,19 +150,8 @@ export const prejudgeZhenting = (seat: Seat, tile: Tile, is_angang: boolean = fa
             const tingpais = calcTingpai(i as Seat);
             for (const tingpai of tingpais)
                 if (isEqualTile(tile, tingpai.tile)) {
-                    if (!is_angang) {
-                        zhenting.liqi[0][i] = true;
-                        break;
-                    } else {
-                        const tiles = player_tiles[i];
-                        tiles.push(tile);
-                        if (calcHupai(tiles) === 3) {
-                            zhenting.liqi[0][i] = true;
-                            tiles.pop();
-                            break;
-                        }
-                        tiles.pop();
-                    }
+                    zhenting.liqi[0][i] = true;
+                    break;
                 }
         }
     }
