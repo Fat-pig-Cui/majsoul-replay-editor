@@ -8,7 +8,7 @@
 
 B站视频教程(偏过时): [【雀魂】如何自制牌谱回放](https://www.bilibili.com/video/BV1tJ6xY4E16)
 
-## 免责声明: 由于这属于第三方脚本, 猫粮可能发威封号, 使用时请用小号登录实验, 个人对任何因封号等导致的损失概不负责
+## 免责声明: 本仓库属于第三方脚本, 猫粮可能发威封号, 使用时请用小号登录实验, 个人对任何因封号导致的损失概不负责
 
 账号被封的话可以用账号邮箱发邮件给猫粮(中文服是 **cs@catfoodstudio.com** 或 **cs@maj-soul.com**), 申请注销账号,
 对面发了确认通知后回复一下, 15天之后就可以重新使用该邮箱注册了
@@ -49,13 +49,11 @@ B站视频教程(偏过时): [【雀魂】如何自制牌谱回放](https://www.
 
 [字典](doc/0_字典.md) 是用来查阅的, 建议编辑牌谱时使用, [字典_template](doc/字典_template.md) 是生成字典的模版, 无需阅读
 
-另外还可以阅读由 Copilot 生成的 [copilot_instructions](.github/copilot-instructions.md), 里面有一些关于代码结构和工作流的说明,
-以及一些常见问题的解答
+另外还可以参考由 Copilot 生成的 [copilot_instructions](.github/copilot-instructions.md), 对本仓库做一个快速的了解
 
 ---
 
-为了便于维护和封装, 最近正在用 TypeScript 重写项目, 目前的 `main.js` 由 [src](src) 文件夹下的 TypeScript 文件编译而来,
-这里暂存了老版本: [main_old.js](main_old.js)
+为了便于维护和封装, 目前的 `main.js` 由 [src](src) 文件夹下的 TypeScript 文件编译而来
 
 如何从ts编译为js:
 

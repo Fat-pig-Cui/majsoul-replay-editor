@@ -52,8 +52,6 @@ Recommended reading order:
 
 To make maintenance and encapsulation easier, the project is currently being rewritten in TypeScript. The current `main.js` is compiled from the TypeScript files under [src](src).
 
-An older version is kept here temporarily: [main_old.js](main_old.js)
-
 How to compile from TS to JS:
 
 1. Install Node.js and npm

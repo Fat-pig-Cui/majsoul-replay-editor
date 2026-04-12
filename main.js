@@ -6152,12 +6152,12 @@
      * // 以四个三索开头, 东风为第一张岭上牌的牌山, 可以简写, 中间的空格不影响
      * randomPaishan('33s3s 3s', '1z')
      * @param ps_head - 牌山开头
-     * @param ps_back - 牌山结尾
+     * @param ps_tail - 牌山结尾
      */
-    const randomPaishan = (ps_head = '', ps_back = '') => {
+    const randomPaishan = (ps_head = '', ps_tail = '') => {
         gameBegin();
         const tiles = [separateWithParam(begin_tiles[0]), separateWithParam(begin_tiles[1]), separateWithParam(begin_tiles[2]), separateWithParam(begin_tiles[3])];
-        const para_tiles = [separateWithParam(ps_head), separateWithParam(ps_back)];
+        const para_tiles = [separateWithParam(ps_head), separateWithParam(ps_tail)];
         // 检查手牌数量是否合规
         for (let seat = 0; seat < base_info.player_cnt; seat++) {
             const len = tiles[seat].length;
