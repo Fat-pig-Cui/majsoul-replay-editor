@@ -4,8 +4,8 @@
 """
 import os
 
-# _debug = False
-_debug = True
+# _using_local_data = False
+_using_local_data = True
 
 if os.name == 'posix':  # 类 Unix 系统
     python_exe = 'python3 '
@@ -38,7 +38,7 @@ paths_3P = [
     '最长菜名与最高番数',
 ]
 
-if not _debug:
+if not _using_local_data:
     os.system(python_exe + 'DatabaseToggle.py')
 
 for path in paths:

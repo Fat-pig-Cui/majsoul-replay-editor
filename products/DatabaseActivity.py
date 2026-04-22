@@ -11448,5 +11448,175 @@ CFG_ACTIVITY_ACTIVITY_MAP_ = {
         "name_kr": "",
         "need_popout": 0,
         "type": "chest_replace_up"
+    },
+    "260391": {
+        "id": 260391,
+        "name_chs": "",
+        "name_chs_t": "",
+        "name_en": "",
+        "name_jp": "",
+        "name_kr": "",
+        "need_popout": 1,
+        "type": "daily_sign"
+    },
+    "260401": {
+        "id": 260401,
+        "name_chs": "剑域誓约",
+        "name_chs_t": "劍域誓約",
+        "name_en": "Oath of the Sword",
+        "name_jp": "剣域の誓約",
+        "name_kr": "검역의 서약",
+        "need_popout": 1,
+        "type": "mmo"
+    },
+    "260402": {
+        "id": 260402,
+        "name_chs": "",
+        "name_chs_t": "",
+        "name_en": "",
+        "name_jp": "",
+        "name_kr": "",
+        "need_popout": 0,
+        "type": "period_task"
+    },
+    "260403": {
+        "id": 260403,
+        "name_chs": "",
+        "name_chs_t": "",
+        "name_en": "",
+        "name_jp": "",
+        "name_kr": "",
+        "need_popout": 0,
+        "type": "period_task"
+    },
+    "260404": {
+        "id": 260404,
+        "name_chs": "",
+        "name_chs_t": "",
+        "name_en": "",
+        "name_jp": "",
+        "name_kr": "",
+        "need_popout": 0,
+        "type": "activity_buff"
+    },
+    "260405": {
+        "id": 260405,
+        "name_chs": "",
+        "name_chs_t": "",
+        "name_en": "",
+        "name_jp": "",
+        "name_kr": "",
+        "need_popout": 0,
+        "type": "activity_buff"
+    },
+    "260406": {
+        "id": 260406,
+        "name_chs": "",
+        "name_chs_t": "",
+        "name_en": "",
+        "name_jp": "",
+        "name_kr": "",
+        "need_popout": 0,
+        "type": "game_task"
+    },
+    "260407": {
+        "id": 260407,
+        "name_chs": "",
+        "name_chs_t": "",
+        "name_en": "",
+        "name_jp": "",
+        "name_kr": "",
+        "need_popout": 0,
+        "type": "story"
+    },
+    "260410": {
+        "id": 260410,
+        "name_chs": "",
+        "name_chs_t": "",
+        "name_en": "",
+        "name_jp": "",
+        "name_kr": "",
+        "need_popout": 0,
+        "type": "shop"
+    },
+    "260411": {
+        "id": 260411,
+        "name_chs": "",
+        "name_chs_t": "",
+        "name_en": "",
+        "name_jp": "",
+        "name_kr": "",
+        "need_popout": 0,
+        "type": "event_cross_time"
+    },
+    "260412": {
+        "id": 260412,
+        "name_chs": "",
+        "name_chs_t": "",
+        "name_en": "",
+        "name_jp": "",
+        "name_kr": "",
+        "need_popout": 0,
+        "type": "item"
+    },
+    "260420": {
+        "id": 260420,
+        "name_chs": "",
+        "name_chs_t": "",
+        "name_en": "",
+        "name_jp": "",
+        "name_kr": "",
+        "need_popout": 0,
+        "type": "chest_up"
+    },
+    "260421": {
+        "id": 260421,
+        "name_chs": "",
+        "name_chs_t": "",
+        "name_en": "",
+        "name_jp": "",
+        "name_kr": "",
+        "need_popout": 0,
+        "type": "chest_up"
+    },
+    "260430": {
+        "id": 260430,
+        "name_chs": "",
+        "name_chs_t": "",
+        "name_en": "",
+        "name_jp": "",
+        "name_kr": "",
+        "need_popout": 0,
+        "type": "chest_replace_up"
+    },
+    "260431": {
+        "id": 260431,
+        "name_chs": "",
+        "name_chs_t": "",
+        "name_en": "",
+        "name_jp": "",
+        "name_kr": "",
+        "need_popout": 0,
+        "type": "chest_replace_up"
+    },
+    "260450": {
+        "id": 260450,
+        "name_chs": "",
+        "name_chs_t": "",
+        "name_en": "",
+        "name_jp": "",
+        "name_kr": "",
+        "need_popout": 0,
+        "type": "activity_match"
+    },
+    "260451": {
+        "id": 260451,
+        "name_chs": "",
+        "name_chs_t": "",
+        "name_en": "",
+        "name_jp": "",
+        "name_kr": "",
+        "need_popout": 0,
+        "type": "activity_room"
     }
 }
