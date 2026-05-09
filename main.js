@@ -1055,18 +1055,19 @@
         let ret = '';
         for (let i = 0; i < bd_tile_num; i++)
             ret += Constants.TBD; // 万象修罗百搭牌
-        for (const match of matches) {
-            if (match.length === 1 && random_tiles.includes(match)) {
-                ret += match + match;
-                continue;
+        if (matches)
+            for (const match of matches) {
+                if (match.length === 1 && random_tiles.includes(match)) {
+                    ret += match + match;
+                    continue;
+                }
+                const kind_index = match[match.length - 1] === Constants.SPT_SUFFIX ? match.length - 2 : match.length - 1;
+                let tile_kind = match[kind_index];
+                if (kind_index === match.length - 2)
+                    tile_kind += Constants.SPT_SUFFIX;
+                for (let j = 0; j < kind_index; j++)
+                    ret += match[j] + tile_kind;
             }
-            const kind_index = match[match.length - 1] === Constants.SPT_SUFFIX ? match.length - 2 : match.length - 1;
-            let tile_kind = match[kind_index];
-            if (kind_index === match.length - 2)
-                tile_kind += Constants.SPT_SUFFIX;
-            for (let j = 0; j < kind_index; j++)
-                ret += match[j] + tile_kind;
-        }
         return ret;
     };
     // 手牌理牌算法
@@ -2300,6 +2301,25 @@
             operations: [],
         });
     };
+    // /**
+    //  * 胶水代码: 强夺之战: 玩家交牌
+    //  * @param submits - 各个玩家交出的牌
+    //  */
+    // export const addSubmitTiles = (submits: Submits): void => {
+    //     pushAction('RecordSubmit', {
+    //         submits: submits
+    //     });
+    // };
+    //
+    // /**
+    //  * 胶水代码: 强夺之战: 玩家得牌
+    //  * @param takes - 各个玩家得到的牌
+    //  */
+    // export const addTakeTiles = (takes: Takes): void => {
+    //     pushAction('RecordSubmit', {
+    //         takes: takes
+    //     });
+    // };
     /**
      * 胶水代码: 川麻: 定缺
      * @param gap_types - 所有玩家的定缺
@@ -5132,6 +5152,66 @@
         for (let seat = 0; seat < base_info.player_cnt; seat++)
             delta_scores[seat] = 0;
     };
+    // export const submitTiles = (submit_tiles_info: {seat: Seat, tiles: Tile[]}[]) => {
+    //     const submits: Submits = [];
+    //     for (const {seat, tiles} of submit_tiles_info) {
+    //         if (!isValidSeat(seat))
+    //             throw new Error(errRoundInfo() + `submitTiles: 提交牌的玩家seat无效, seat: ${seat}`);
+    //
+    //         const temp_submit = {
+    //             submit_seat: seat,
+    //             groups: []
+    //         };
+    //         while (tiles.length > 3)
+    //             temp_submit.groups.push({
+    //                 count: 3,
+    //                 tiles: tiles.splice(0, 3)
+    //             });
+    //         temp_submit.groups.push({count: tiles.length, tiles: tiles});
+    //
+    //         submits.push(temp_submit);
+    //
+    //         for (const tile of tiles) {
+    //             const index = player_tiles[seat].indexOf(tile);
+    //             if (index === -1)
+    //                 console.error(errRoundInfo() + `submitTiles: seat: ${seat} 没有 ${tile} 这张牌`);
+    //             player_tiles[seat].splice(index, 1);
+    //         }
+    //     }
+    //
+    //     addSubmitTiles(submits);
+    // };
+    //
+    //
+    // export const takeTiles = (take_tiles_info: {seat: Seat, tiles: Tile[]}[]) => {
+    //     const submits: Submits = [];
+    //     for (const {seat, tiles} of submit_tiles_info) {
+    //         if (!isValidSeat(seat))
+    //             throw new Error(errRoundInfo() + `submitTiles: 提交牌的玩家seat无效, seat: ${seat}`);
+    //
+    //         const temp_submit = {
+    //             submit_seat: seat,
+    //             groups: []
+    //         };
+    //         while (tiles.length > 3)
+    //             temp_submit.groups.push({
+    //                 count: 3,
+    //                 tiles: tiles.splice(0, 3)
+    //             });
+    //         temp_submit.groups.push({count: tiles.length, tiles: tiles});
+    //
+    //         submits.push(temp_submit);
+    //
+    //         for (const tile of tiles) {
+    //             const index = player_tiles[seat].indexOf(tile);
+    //             if (index === -1)
+    //                 console.error(errRoundInfo() + `submitTiles: seat: ${seat} 没有 ${tile} 这张牌`);
+    //             player_tiles[seat].splice(index, 1);
+    //         }
+    //     }
+    //
+    //     addSubmitTiles(submits);
+    // };
 
     /**
      * @file: override.ts - 重写游戏函数以实现编辑功能, 以及部分强化功能
