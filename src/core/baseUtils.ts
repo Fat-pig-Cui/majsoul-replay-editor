@@ -49,18 +49,19 @@ export const decompose = (tiles: string): string => {
     let ret = '';
     for (let i = 0; i < bd_tile_num; i++)
         ret += Constants.TBD; // 万象修罗百搭牌
-    for (const match of matches) {
-        if (match.length === 1 && random_tiles.includes(match)) {
-            ret += match + match;
-            continue;
+    if (matches)
+        for (const match of matches) {
+            if (match.length === 1 && random_tiles.includes(match)) {
+                ret += match + match;
+                continue;
+            }
+            const kind_index = match[match.length - 1] === Constants.SPT_SUFFIX ? match.length - 2 : match.length - 1;
+            let tile_kind = match[kind_index];
+            if (kind_index === match.length - 2)
+                tile_kind += Constants.SPT_SUFFIX;
+            for (let j = 0; j < kind_index; j++)
+                ret += match[j] + tile_kind;
         }
-        const kind_index = match[match.length - 1] === Constants.SPT_SUFFIX ? match.length - 2 : match.length - 1;
-        let tile_kind = match[kind_index];
-        if (kind_index === match.length - 2)
-            tile_kind += Constants.SPT_SUFFIX;
-        for (let j = 0; j < kind_index; j++)
-            ret += match[j] + tile_kind;
-    }
     return ret;
 };
 
